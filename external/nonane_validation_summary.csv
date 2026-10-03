@@ -1,0 +1,7 @@
+property,analysis,n,budget,LO_better,paired_better,median_Q2_GM,median_Q2_LO,median_dQ2,dQ2_min,dQ2_max,prereg_verdict
+T_B,primary,35,200,58,57,+0.5766,+0.5856,+0.0337,-0.4920,+0.2496,MIXED
+T_B,primary,35,500,63,66,+0.5757,+0.6299,+0.0486,-0.3891,+0.2618,MIXED
+T_B,D4 sensitivity (TMP T_B = median 414.62 K of 8 points),35,200,60,55,+0.5679,+0.5932,+0.0413,-0.5038,+0.3186,MIXED
+T_B,D4 sensitivity (TMP T_B = median 414.62 K of 8 points),35,500,66,66,+0.5615,+0.6246,+0.0521,-0.4448,+0.2604,MIXED
+dHvap,primary,34,200,95,97,+0.8529,+0.8997,+0.0482,-0.0462,+0.1180,REPLICATES
+dHvap,primary,34,500,98,98,+0.8529,+0.9023,+0.0532,-0.0114,+0.0827,REPLICATES

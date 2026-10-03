@@ -111,3 +111,18 @@ reproduced by an independent re-implementation.
 - Delta<=4 scope restricted (hypervalent P/S counterexamples); identifiability
   remark clarified; Table 7 pointer corrected; bibliography alphabetical;
   Das et al. 2025 Suppl. 1; NIST re-check dates; v35 logs moved to history/.
+
+## v37 (pre-registered external validation and baselines)
+- external/PREREG_v37.md committed (964b127) before any nonane value existed;
+  deviations D1-D4 committed (6f55119) before any nonane analysis ran.
+- 35 nonane isomers, NIST WebBook values (T_B 35, dHvap 34), raw pages archived,
+  rebuild script byte-identical; 29/34 dHvap are compilation-grade.
+- Pre-registered verdicts: dHvap REPLICATES (LO>GM in 95/100, 98/100 seeds;
+  median dQ2 +0.048/+0.053); T_B MIXED (58/100, 63/100).
+- Baselines (fully nested): ridge on degree-pair counts beats every index
+  model on nonanes (dHvap 0.927, T_B 0.682); matches LO on octane dHvap.
+  Imbalance-free models 0.853-0.888 vs imbalance-containing 0.897-0.954 on dHvap.
+- New Section 5.4 + Table 6 (generated from CSVs by make_v37_table.py);
+  abstract (one clause), introduction (vi) and conclusion updated.
+- external/verify_external.py: structures, rebuild, baseline validation,
+  fresh re-runs and table rows; PASS.

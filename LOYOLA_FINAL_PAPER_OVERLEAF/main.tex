@@ -195,7 +195,9 @@
   out-of-sample prediction of the vaporization enthalpy in at least
   $93$ of $100$ seeds,
   usually degraded it on three properties and was mixed on the fifth
-  (a descriptive, not inferential, finding), so $\gamma$ is presented
+  (a descriptive, not inferential, finding); a pre-registered test on
+  the $35$ nonanes replicated the vaporization result, although ridge
+  regression on all degree-pair counts predicts better. Hence $\gamma$ is presented
   as a structurally interpretable
   and provably independent direction rather than a predictive
   upgrade;
@@ -417,7 +419,12 @@
   state is excluded,
   usually hurt on three of the other four properties, and was
   budget-dependent on the fifth; this describes optimizer variance
-  over candidate streams, not inferential evidence), together
+  over candidate streams, not inferential evidence); (vi) a
+  pre-registered external test on the $35$ nonane isomers, in which the
+  vaporization-enthalpy effect replicates ($95$--$98$ of $100$ seeds),
+  together with stronger baselines, including ridge regression on all
+  degree-pair counts, which predicts better than every index model
+  there (Section~\ref{sec:external}); together
   with the family's behaviour under the published
   structure-sensitivity protocol~\cite{FurtulaGutmanDehmer2013SS},
   validated against published decane-class
@@ -1752,6 +1759,81 @@ budget-dependent on $T_B$. Its established value lies in the
 structural properties of Section~\ref{sec:geometry} and the
 discrimination behaviour below, not in systematic predictive gains.
 
+\subsection{External validation on the nonane isomers and stronger
+baselines}\label{sec:external}
+
+Two limitations of the octane analysis are its size ($18$ molecules) and
+its restriction to index models. Both were addressed under a protocol
+pre-registered and time-stamped in the reproducibility package before
+any nonane value was collected: the identical nested design was applied
+to the $35$ constitutional nonane isomers, with boiling points ($35$
+values) and standard vaporization enthalpies ($34$ values; none listed
+for 3-ethyl-4-methylhexane) taken from the NIST
+WebBook~\cite{NISTWebBook} with every value traced to its archived
+source page. Most nonane vaporization enthalpies ($29$ of $34$) are
+compilation values rather than calorimetric determinations, and several
+boiling-point averages are quoted only to $1$\,K. The pre-registered
+decision rule called the $\gamma$ effect \emph{replicated} if the Loyola
+model beat the parent in at least $80$ of $100$ seeds at both budgets
+with positive median $\Delta Q^2$. Four baselines were added, each
+fitted entirely within the outer training fold: the training-fold mean;
+the best of the ten classical indices of Table~\ref{tab:lo_octane};
+the irregularity index $IRLA$; and ridge regression on the full
+edge-degree-pair count vector, with its penalty chosen by inner
+leave-one-out.
+
+\begin{table}[htbp]
+\centering
+\caption{Nested leave-one-out $Q^2$ on the octanes (oct., $n = 18$) and
+the external nonane set (non., $n = 35$ for $T_B$, $34$ for
+$\Delta H_{\mathrm{vap}}$). Mean: training-fold mean; Class.: best of the
+ten classical indices, selected inside each fold; IRLA: one-descriptor
+model on $IRLA$; Ridge: ridge regression on the edge-degree-pair counts;
+GM, LO: median over seeds $0$--$99$ at budget $200$; last column: seeds
+in which LO beat GM at budgets $200$/$500$. All values are full-precision
+results rounded once.}
+\label{tab:external}
+\small
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{lrrrrrrr}
+\toprule
+Set, property & Mean & Class. & IRLA & Ridge & GM & LO & LO$>$GM\\
+\midrule
+oct. $T_B$ & $-0.121$ & $0.593$ & $0.585$ & $0.344$ & $0.662$ & $0.652$ & $53/64$\\
+oct. $\Delta H_f$ & $-0.121$ & $0.746$ & $0.593$ & $0.654$ & $0.831$ & $0.689$ & $14/24$\\
+oct. $\Delta H_{\mathrm{vap}}$ & $-0.121$ & $0.884$ & $0.948$ & $0.954$ & $0.888$ & $0.953$ & $100/100$\\
+oct. $S$ & $-0.121$ & $0.920$ & $0.741$ & $0.744$ & $0.919$ & $0.905$ & $35/29$\\
+oct. $\omega$ & $-0.121$ & $0.971$ & $0.810$ & $0.851$ & $0.979$ & $0.970$ & $26/28$\\
+non. $T_B$ & $-0.060$ & $0.502$ & $0.400$ & $0.682$ & $0.577$ & $0.586$ & $58/63$\\
+non. $\Delta H_{\mathrm{vap}}$ & $-0.062$ & $0.857$ & $0.897$ & $0.927$ & $0.853$ & $0.900$ & $95/98$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+On the external set the pre-registered verdicts are: for
+$\Delta H_{\mathrm{vap}}$ the $\gamma$ effect \emph{replicates} (LO
+better than GM in $95/100$ and $98/100$ seeds, median
+$\Delta Q^2 = +0.048$ and $+0.053$), and for $T_B$ it is \emph{mixed}
+($58/100$ and $63/100$; unchanged in direction under the pre-registered
+sensitivity analysis of one disputed boiling point). The pattern behind
+the vaporization result is the same on both sets: models without the
+imbalance coordinate (the classical indices and GM) reach
+$Q^2 = 0.853$--$0.888$, every model containing it ($IRLA$, ridge, LO)
+reaches $Q^2 = 0.897$--$0.954$, and for $\Delta H_{\mathrm{vap}}$ the
+fixed pure-$\gamma$ point $LO(0,0,1)$ is the index selected in every
+fold on both sets when it is admitted to the fixed-index comparison. The baselines,
+however, also show the limit of the claim. Ridge regression on the full
+degree-pair count vector predicts the nonanes better than every index
+model, for both properties ($Q^2 = 0.927$ for
+$\Delta H_{\mathrm{vap}}$, $0.682$ for $T_B$); on the octanes it matches
+the Loyola model on $\Delta H_{\mathrm{vap}}$ and is weaker elsewhere.
+This is consistent with Proposition~\ref{prop:generic} and the remark
+following it: the imbalance coordinate re-weights degree-pair
+information rather than adding to it, and its value is that one
+interpretable descriptor recovers most of what a model on all ten
+degree-pair counts achieves for the vaporization enthalpy, not that it
+outperforms such a model.
+
 \subsection{Degeneracy across tree orders}\label{sec:degeneracy}
 
 Degeneracy measures an index's ability to discriminate
@@ -1964,7 +2046,14 @@ prediction of $\Delta H_{\mathrm{vap}}$ in every seed of the sweep
 usually degrades it on three other properties and is budget-dependent
 on the fifth (Table~\ref{tab:ablation}; a descriptive summary of
 optimizer variance on one fixed $18$-molecule dataset) --- it is not a systematic predictive
-upgrade over the optimized parent. Its measurable contribution is
+upgrade over the optimized parent. A pre-registered external test on
+the $35$ nonanes replicated the vaporization-enthalpy effect ($95$ and
+$98$ of $100$ seeds) and gave a mixed result for the boiling point, while
+ridge regression on the full degree-pair counts predicted the nonanes
+better than every index model (Section~\ref{sec:external}): the
+imbalance coordinate is a parsimonious, interpretable summary of
+degree-pair information, not a better predictor than a model that uses
+all of it. Its measurable contribution is
 structural: the pure-$\gamma$ points attain the degree-pair
 discrimination floor at every tree order $7$--$12$ tested (as does the
 Randi\'c index; attainment fails from order $13$, molecular trees from
@@ -1988,8 +2077,8 @@ Sombor index.
 \item Extremal-graph characterisations (not attempted in this paper) for
 several graph classes, including trees, unicyclic and bicyclic graphs.
 
-\item Chemometric extension to additional chemical compound classes such as benzene derivatives, alkane homologues beyond octane and
-decane and to compound-class-specific QSPR endpoints.
+\item Chemometric extension to additional chemical compound classes such as benzene derivatives, alkane homologues beyond the octanes, nonanes and
+decanes studied here and to compound-class-specific QSPR endpoints.
 \end{enumerate}
 
 \acknowledgment{The authors thank colleagues for helpful discussions.}
