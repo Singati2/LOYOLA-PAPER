@@ -31,7 +31,7 @@ historical `_v35` suffixes.
    verifier (hat-matrix PRESS selection; AHU canonical forms); provenance
    parser fixed, paper values must equal the dataset, PROV_TOL(ΔH_vap) = 0.04;
    the [N] re-run now covers seven scripts (including the 100-seed sweep and
-   the source-sensitivity script). `--selftest`: 111 tests, all rejected for
+   the source-sensitivity script). `--selftest`: 112 tests (incl. a stale-figure attack), all rejected for
    the intended reason.
 4. **Tuning pools.** tab:lo_tuning_bestfixed reuses the tab:lo_tuning pools
    (one `default_rng(42)` stream: M2, HM, mM2, LO(0,0,1), then LO(0,0,2)); the

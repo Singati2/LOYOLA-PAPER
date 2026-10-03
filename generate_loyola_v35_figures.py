@@ -25,22 +25,7 @@ IDX=[("M1",(0,1,0)),("M2",(1,0,0)),("HM",(0,2,0)),("mM2",(-1,0,0)),("R",(-0.5,0,
 ("chi",(0,-0.5,0)),("H/2",(0,-1,0)),("ISI",(1,-1,0)),("GA",(0.5,-1,0)),("AG",(-0.5,1,0)),
 ("LO(0,0,1)",(0,0,1)),("LO(0,0,2)",(0,0,2))]
 
-def pairs(smi):
-    adj={};prev=None;st=[];k=-1
-    for ch in smi:
-        if ch=='(':st.append(prev)
-        elif ch==')':prev=st.pop()
-        elif ch=='C':
-            k+=1;adj[k]=set()
-            if prev is not None:adj[k].add(prev);adj[prev].add(k)
-            prev=k
-    seen=set();out=[]
-    for u in adj:
-        for v in adj[u]:
-            e=(min(u,v),max(u,v))
-            if e in seen:continue
-            seen.add(e);out.append((len(adj[u]),len(adj[v])))
-    return out
+from octane_data import alkane_pairs as pairs  # single validated parser
 def loP(P,a,b,g):return sum((i*j)**a*(i+j)**b*math.exp(g*abs(i-j)/(i+j)) for i,j in P)
 def loG(G,a,b,g):return sum((G.degree(u)*G.degree(v))**a*(G.degree(u)+G.degree(v))**b
                             *math.exp(g*abs(G.degree(u)-G.degree(v))/(G.degree(u)+G.degree(v))) for u,v in G.edges())

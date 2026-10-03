@@ -76,3 +76,22 @@ reproduced by an independent re-implementation.
 - Entropy-source sensitivity added (data unchanged): 12/12 S correlations
   change at the 3rd decimal (max 0.034), winner HM unchanged. Possible copy
   error flagged: S(2,3,3-trimethylpentane) = S(2,2,3-trimethylpentane) = 101.31.
+
+## v36.1 follow-up (independent code review + author notes)
+- Degeneracy definition corrected: 100(1 - k/N) is the excess N - k as a
+  share of N, not the share of structures lacking a unique value
+  (counterexample: LO(0,0,1) on the 106 order-10 trees gives 25.5%, yet
+  45 trees = 42.5% share their value with another tree).
+- Reference year: Nyauli & Buragohain, MATCH 97 (2027), not 2026.
+- octane_data.alkane_adj: strict alkane-SMILES grammar; malformed input
+  (ring digits, valence > 4, leading/unclosed branches, other atoms) now
+  raises instead of silently returning a wrong graph. Figure and collision
+  scripts use this single parser. All outputs bit-identical.
+- Verifier: column headers and every table body line checked (injected or
+  unparsable rows rejected); appendix compared as fixed-precision strings;
+  --skip-analyses now reports PARTIAL (exit 2) instead of FULL PASS;
+  parser sanity tests the shipped parser; figure PDFs must be byte-identical
+  to a fresh regeneration (new selftest attack op:stale-figure). Selftest
+  112/112.
+- Tuning-table caption states the round-once convention; prose zero value
+  given as -0.0003.

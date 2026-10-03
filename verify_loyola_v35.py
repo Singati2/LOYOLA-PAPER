@@ -172,6 +172,16 @@ NUM_MED= re.compile(r"^\$([+-]\d\.\d{3})\\,\[([+-]\d\.\d{3}),\s*([+-]\d\.\d{3})\
 FGD_LABEL = {"M1":"$M_1$","M2":"$M_2$","HM":"$HM$","mM2":r"${}^{m}\!M_2$","R":"$R$","chi":r"$\chi$",
              "H/2":"$H/2$","ISI":"$ISI$","GA":"$GA$","AG":"$AG$","LO(0,0,1)":"$LO(0,0,1)$","LO(0,0,2)":"$LO(0,0,2)$"}
 
+HEADERS = {
+    'lo_octane': 'Index & $T_B$ & $\\Delta H_f$ & $\\Delta H_{\\mathrm{vap}}$ & $S$ & $\\omega$\\\\',
+    'collisions': 'Isomer & $T_B$ & $\\Delta H_f$ & $\\Delta H_{\\mathrm{vap}}$ & $S$ & $\\omega$\\\\',
+    'lo_tuning': 'Property & $|r|_0$ & $|r|_{50}$ & $\\Delta_{\\mathrm{in}}$ & $\\pm$boot & $\\mathrm{LOO}_0$ & $\\mathrm{LOO}_{50}$ & $\\Delta_{\\mathrm{out}}$\\\\',
+    'lo_tuning_bestfixed': 'Property & best fixed & $|r|_{\\mathrm{fix}}$ & $\\mathrm{LOO}_{\\mathrm{fix}}$ & $|r|_{\\mathrm{dec}}$ & $\\mathrm{LOO}_{\\mathrm{dec}}$\\\\',
+    'ablation': 'Property & $Q^2_{\\mathrm{GM}}$ & $Q^2_{LO}$ & $\\Delta Q^2$ & $\\mathrm{RMSE}_{\\mathrm{GM}}$ & $\\mathrm{RMSE}_{LO}$ & LO better\\\\',
+    'multiorder': '$n$ & set & $N$ & floor & $M_1$ & $M_2$ & $R$ & $LO(0,0,1)$ & $LO(0,0,2)$\\\\',
+    'fgdss': 'Index & $SS$ & $Abr$ & $SS/Abr$\\\\',
+    'octane-data': 'Isomer & $T_B$ & $\\Delta H_f$ & $\\Delta H_{\\mathrm{vap}}$ & $S$ & $\\omega$\\\\',
+}
 UNDEF_RESAMPLES = 0
 
 def r_signed(x,y):
@@ -255,6 +265,22 @@ def run_v35_analyses(here):
                         except ValueError:pass
                         bad+=1
                 if bad:msgs.append(f"{out}: {bad} cells differ from fresh recomputation beyond 1e-8")
+        # v36.1: the two manuscript figures must be byte-identical to a fresh,
+        # deterministic regeneration (guards against a stale figure).
+        gen="generate_loyola_v35_figures.py";_sh.copy(os.path.join(here,gen),td)
+        r=subprocess.run([sys.executable,gen,"--output-dir",td],cwd=td,capture_output=True,text=True,timeout=1200)
+        if r.returncode!=0:msgs.append(f"{gen}: fresh run failed exit {r.returncode}: {r.stderr.strip()[-140:]}")
+        else:
+            for fig in ("fig_lo_prediction_correlation_heatmap_v3.pdf","fig_lo_degeneracy_order10_trees_v2.pdf"):
+                try:
+                    if open(os.path.join(td,"figures",fig),"rb").read()!=open(os.path.join(here,"figures",fig),"rb").read():
+                        msgs.append(f"figures/{fig}: differs from fresh regeneration (stale figure)")
+                except OSError as e:msgs.append(f"figures/{fig}: {e}")
+            for out in (CSV_PRED,CSV_DEG,CSV_SS):
+                try:
+                    if open(os.path.join(td,out),newline="").read()!=open(os.path.join(here,out),newline="").read():
+                        msgs.append(f"{out}: differs from fresh figure-generator output")
+                except OSError as e:msgs.append(f"{out}: {e}")
     return (len(msgs)==0),msgs
 
 # ---------------------------------------------------------------- drift guard
@@ -302,10 +328,38 @@ def check_tex(texpath, CMP):
         try:
             b=tex[tex.index(r"\label{tab:%s}"%label):];return b[:b.index(r"\end{tabular}")]
         except ValueError:return None
+    def _vec(nm):
+        from collections import Counter
+        c=Counter(tuple(sorted(q)) for q in alkane_pairs(OCTANES[NAMES.index(nm)][0]))
+        return r",\,".join(f"{c[k]}({k[0]},{k[1]})" for k in sorted(c))
+    SUBHDRS={r"\multicolumn{8}{l}{\emph{near} "+t+"}\\\\" for t in
+             ("$M_2 = LO(1,0,0)$","$HM = LO(0,2,0)$",r"${}^{m}\!M_2 = LO(-1,0,0)$","$LO(0,0,1)$")}
+    for a,b in (("3-methylheptane","4-methylheptane"),("3,4-dimethylhexane","3-ethyl-2-methylpentane")):
+        if _vec(a)!=_vec(b):msgs.append(f"tab:collisions: {a} and {b} do not share a degree-pair vector")
+        SUBHDRS.add(r"\multicolumn{6}{l}{\emph{shared count vector} $"+_vec(a)+"$:}\\\\")
+    class _S:
+        @staticmethod
+        def match(t):return t in SUBHDRS
+    SUBHDR=_S
     def datarows(blk,amp=None):
-        body=blk[blk.index(r"\midrule"):] if r"\midrule" in blk else blk
-        return [l for l in body.splitlines() if l.rstrip().endswith(r"\\") and "&" in l
-                and r"\multicolumn" not in l and (amp is None or l.count("&")==amp)]
+        """v36.1: EVERY non-rule line of the body is a data row or a whitelisted
+        sub-header; rows ending in \\\\[..], \\tabularnewline, or carrying an
+        unexpected \\multicolumn are reported instead of silently skipped."""
+        body=blk[blk.index(r"\midrule")+len(r"\midrule"):] if r"\midrule" in blk else blk
+        out=[]
+        for l in body.splitlines():
+            t=l.strip()
+            if not t or re.fullmatch(r"\\(midrule|bottomrule|cmidrule(\(lr\))?\{[\d-]+\})+",t.replace(" ","")):continue
+            if r"\multicolumn" in t and SUBHDR.match(t):continue
+            if not t.endswith(r"\\") or r"\multicolumn" in t or r"\tabularnewline" in t:
+                msgs.append(f"unrecognised table line (not a plain data row): '{t[:60]}'");continue
+            if amp is None or t.count("&")==amp:out.append(t)
+        return out
+    def header_ok(blk,label,expected):
+        hdr=blk[:blk.index(r"\midrule")] if r"\midrule" in blk else ""
+        rows=[l.strip() for l in hdr.splitlines() if l.strip().endswith(r"\\") and "&" in l]
+        if not rows or rows[-1]!=expected:
+            msgs.append(f"tab:{label}: column header '{rows[-1][:70] if rows else None}' != expected '{expected[:70]}'")
     # ---- Table 2: 12 labeled rows x 5 SIGNED complete tokens ----
     blk=block("lo_octane")
     if blk is None:msgs.append("tab:lo_octane not found")
@@ -340,7 +394,7 @@ def check_tex(texpath, CMP):
         for l in body.splitlines():
             if r"\multicolumn" in l and "near" in l:
                 cur+=1
-                if cur<4 and not re.search(ANCHOR_PATS[cur],l):
+                if cur<4 and not (re.search(ANCHOR_PATS[cur],l) and l.strip() in SUBHDRS):
                     msgs.append(f"tab:lo_tuning block {cur}: anchor label mismatch, expected near {ANCHORS[cur]}, got '{l.strip()[:60]}'")
             elif l.rstrip().endswith(r"\\") and l.count("&")==7:
                 ndata+=1
@@ -511,8 +565,17 @@ def check_tex(texpath, CMP):
                 cs[1+ci]=tok
                 if not re.match(r"^-?\d+(\.\d+)?$",cs[1+ci]):
                     msgs.append(f"tab:octane-data {NAMES[ri]} col{ci+1}: malformed token '{cs[1+ci]}'");continue
-                if float(cs[1+ci])!=OCTANES[ri][1+ci]:
+                expd=("{:.1f}","{:.2f}","{:.2f}","{:.2f}","{:.3f}")[ci].format(OCTANES[ri][1+ci])
+                if cs[1+ci]!=expd:
                     msgs.append(f"tab:octane-data {NAMES[ri]}/{PROPS[ci]}: tex {cs[1+ci]} vs octane_data {OCTANES[ri][1+ci]}")
+    for lab,exp in HEADERS.items():
+        b=block(lab)
+        if b is not None:header_ok(b,lab,exp)
+    try:
+        k0=tex.index(r"\label{tab:ablation}");k1=tex.index(r"\end{tabular}",k0)
+        header_ok(tex[k1+len(r"\end{tabular}"):tex.index(r"\end{tabular}",k1+1)],"ablation(b)",
+                  r"Property & $B = 200$ & $B = 500$ & $B = 200$ & $B = 500$\\")
+    except ValueError:msgs.append("tab:ablation panel (b) header not found")
     return (len(msgs)==0),msgs
 
 # ------------------------------------------------------------ CSV schema check
@@ -744,15 +807,11 @@ def check_parser_sanity(HAVE_NX):
     be pairwise non-isomorphic. The parser is alkane-only by design."""
     msgs=[]
     hashes=[]
+    from octane_data import alkane_adj
     for smi,*_ in OCTANES:
-        adj={};prev=None;stack=[];k=-1
-        for ch in smi:
-            if ch=='(':stack.append(prev)
-            elif ch==')':prev=stack.pop()
-            elif ch=='C':
-                k+=1;adj[k]=set()
-                if prev is not None:adj[k].add(prev);adj[prev].add(k)
-                prev=k
+        adj=alkane_adj(smi)
+        P=sorted(tuple(sorted((len(adj[u]),len(adj[v])))) for u in adj for v in adj[u] if u<v)
+        if P!=sorted(tuple(sorted(p)) for p in alkane_pairs(smi)):msgs.append(f"{smi}: alkane_pairs disagrees with alkane_adj")
         n=len(adj);m=sum(len(v) for v in adj.values())//2
         if n!=8 or m!=7:msgs.append(f"{smi}: {n} atoms / {m} edges (expected 8/7)")
         seen={0};stk=[0]
@@ -1181,7 +1240,7 @@ def run_selftest(A, here, HAVE_NX):
     L_ABL_DV = line_with(r"$\Delta H_{\mathrm{vap}}$","+0.069")
     L_FGD_HM = line_with("$HM$ &","$0.1256$")
     L_APP_33 = line_with("3,3-dimethylhexane & 111.9")
-    L_APP_32 = line_with("3-ethyl-2-methylpentane & 115.6 & -50.48 & 9.21 & 106.06 & 0.33")
+    L_APP_32 = line_with("3-ethyl-2-methylpentane & 115.6 &")
     def wrap_outside(b):
         i=b.index(r"\label{tab:lo_octane}");j=b.index(r"\end{tabular}",i)+len(r"\end{tabular}")
         return b[:i]+"\\iffalse\n"+b[i:j]+"\n\\fi"+b[j:]
@@ -1371,6 +1430,9 @@ def run_selftest(A, here, HAVE_NX):
         for f in files:
             if f!=skip:shutil.copy(os.path.join(here,f),pkg)
         shutil.copy(script,os.path.join(pkg,os.path.basename(script)))
+        # v36.1: figure generator + figures/ are part of the verified package
+        shutil.copy(os.path.join(here,"generate_loyola_v35_figures.py"),pkg)
+        shutil.copytree(os.path.join(here,"figures"),os.path.join(pkg,"figures"))
         return pkg
     def run_pkg(pkg,args=None,cwd=None,env_extra=None):
         env=dict(os.environ)
@@ -1382,14 +1444,19 @@ def run_selftest(A, here, HAVE_NX):
         r=run_pkg(make_pkg(td))
         ops.append(("op:package-root",r.returncode==0 and "status: FULL PASS" in r.stdout,f"exit={r.returncode}"))
     with tempfile.TemporaryDirectory() as td:
+        pkg=make_pkg(td);fp=os.path.join(pkg,"figures","fig_lo_prediction_correlation_heatmap_v3.pdf")
+        open(fp,"ab").write(b"%stale\n")
+        r=run_pkg(pkg)
+        ops.append(("op:stale-figure",r.returncode==1 and "stale figure" in r.stdout,f"exit={r.returncode}"))
+    with tempfile.TemporaryDirectory() as td:
         pkg=make_pkg(td);other=os.path.join(td,"elsewhere");os.makedirs(other)
         r=run_pkg(pkg,args=["--skip-analyses"],cwd=other)
-        ops.append(("op:outside-cwd",r.returncode==0 and "status: FULL PASS" in r.stdout,f"exit={r.returncode}"))
+        ops.append(("op:outside-cwd",r.returncode==2 and "TOTAL failures: 0" in r.stdout,f"exit={r.returncode}"))  # --skip-analyses => PARTIAL
     with tempfile.TemporaryDirectory() as td:
         pkg=make_pkg(td);nested=os.path.join(td,"new","nested","outdir")
         r=run_pkg(pkg,args=["--skip-analyses","--output-dir",nested])
         made=os.path.exists(os.path.join(nested,"verify_loyola_v35_results.csv"))
-        ops.append(("op:new-nested-output-dir",r.returncode==0 and made,f"exit={r.returncode} created={made}"))
+        ops.append(("op:new-nested-output-dir",r.returncode==2 and made,f"exit={r.returncode} created={made}"))
     with tempfile.TemporaryDirectory() as td:
         pkg=make_pkg(td);ro=os.path.join(td,"ro");os.makedirs(ro);os.chmod(ro,0o500)
         r=run_pkg(pkg,args=["--skip-analyses","--output-dir",os.path.join(ro,"sub")])
@@ -1505,7 +1572,7 @@ def main():
     print(f"\nENV: Python {platform.python_version()}, NumPy {numpy.__version__}, SciPy {scipy.__version__}, networkx {nxv}, {platform.system()} {platform.release()}")
     print(f"undefined (zero-variance) bootstrap resamples encountered: {UNDEF_RESAMPLES}")
     if fails>0:status=1
-    elif io_fail or not HAVE_NX:status=2
+    elif io_fail or not HAVE_NX or A.skip_analyses:status=2  # skipped [N] => canonical CSVs unverified
     else:status=0
     print(f"TOTAL failures: {fails}  status: {'FULL PASS' if status==0 else ('PARTIAL' if status==2 else 'FAILURES')}")
     print("scope: FULL PASS covers the executed computations, all 8 numeric tables of main.tex (exact display strings), and canonical artifacts;")

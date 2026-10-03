@@ -74,19 +74,7 @@ def part1():
     print(f"effective rank (participation ratio): {pr:.4f}")
 
 # ------------------------------------------------- SMILES -> IUPAC verifier
-def smiles_adj(smi):
-    adj = {}; prev = None; stack = []; k = -1
-    for ch in smi:
-        if ch == '(':
-            stack.append(prev)
-        elif ch == ')':
-            prev = stack.pop()
-        elif ch == 'C':
-            k += 1; adj[k] = set()
-            if prev is not None:
-                adj[k].add(prev); adj[prev].add(k)
-            prev = k
-    return adj
+from octane_data import alkane_adj as smiles_adj  # single validated parser
 
 def all_longest_paths(adj):
     n = len(adj); best = []; bl = 0

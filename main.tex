@@ -362,7 +362,7 @@
   $IRLA(G) = 2\sum_{uv} q_{uv}$~\cite{RetiSharafdini2018IRLA}, of which
   the pure-$\gamma$ point $LO(G;0,0,\gamma) = \sum_{uv} e^{\gamma q_{uv}}$
   is the exponential index in the sense of~\cite{Rada2019ExpVDB};
-  degree-ratio indices~\cite{NyauliBuragohain2026DRSO,
+  degree-ratio indices~\cite{NyauliBuragohain2027DRSO,
   GutmanBuragohainNyauli2026}; and the parent family itself, since
   $1 - q_{uv}^2 = 4 d_u d_v/(d_u + d_v)^2$ gives
   $M_{\alpha,-2\alpha}(G) = 4^{-\alpha} \sum_{uv} (1 - q_{uv}^2)^{\alpha}$
@@ -1474,7 +1474,7 @@ rather than independent replications.
 
 \begin{table}[H]
 \centering
-\caption{Decimal parameter tuning near the four best-correlating anchors on the $18$ octane isomers ($50$ random triples within $\pm 0.3$ of each anchor). Columns: anchor correlation $|r|_0$; best-of-$50$ in sample $|r|_{50}$; in-sample gain $\Delta_{\mathrm{in}}$; percentile-bootstrap half-width $\pm$boot ($B = 10\,000$); leave-one-out correlation of the anchor $\mathrm{LOO}_0$; foldwise nested leave-one-out correlation of the tuned family, computed within the globally selected anchor pool, $\mathrm{LOO}_{50}$; out-of-sample gain $\Delta_{\mathrm{out}} = \mathrm{LOO}_{50} - \mathrm{LOO}_0$.}
+\caption{Decimal parameter tuning near the four best-correlating anchors on the $18$ octane isomers ($50$ random triples within $\pm 0.3$ of each anchor). Columns: anchor correlation $|r|_0$; best-of-$50$ in sample $|r|_{50}$; in-sample gain $\Delta_{\mathrm{in}}$; percentile-bootstrap half-width $\pm$boot ($B = 10\,000$); leave-one-out correlation of the anchor $\mathrm{LOO}_0$; foldwise nested leave-one-out correlation of the tuned family, computed within the globally selected anchor pool, $\mathrm{LOO}_{50}$; out-of-sample gain $\Delta_{\mathrm{out}} = \mathrm{LOO}_{50} - \mathrm{LOO}_0$. Gains are computed from full-precision values and rounded once, so a displayed gain may differ by one unit in the last place from the difference of the displayed operands.}
 \label{tab:lo_tuning}
 \scriptsize
 \setlength{\tabcolsep}{4pt}
@@ -1527,7 +1527,7 @@ reduction already attains (tuning near $M_2$ lifts $T_B$ to $0.46$,
 whereas ${}^{m}\!M_2$ already reaches $0.78$). Where the anchor is
 already the column winner --- $M_2$ on $\omega$, $HM$ on $S$,
 $LO(0, 0, 1)$ on $\Delta H_{\mathrm{vap}}$ --- the nested gain for
-this pool seed is $-0.000$, $-0.007$ and $-0.001$. These near-zero
+this pool seed is $-0.0003$, $-0.007$ and $-0.001$. These near-zero
 values are specific to the seed: re-drawing the pools with seeds
 $0$--$99$, the nested gain for $M_2$ on $\omega$ is small but
 positive in most seeds (median about $+0.003$, positive in $96\%$
@@ -1700,8 +1700,11 @@ trees of order $10$ we use the distinct-value convention
 \mathrm{Degeneracy}(\%) = 100\Bigl(1 - \tfrac{k}{N}\Bigr),
 \quad k = \#\{\text{distinct index values}\},\ N = 106,
 \]
-i.e.\ the fraction of the $N$ structures that fail to receive a
-unique value. The pure-$\gamma$ points $LO(0, 0, 1)$ and
+i.e.\ the number $N - k$ of structures in excess of the distinct
+values, as a percentage of $N$ (this is not the share of structures
+lacking a unique value, which is larger: for $LO(0,0,1)$ on this set
+$45$ of the $106$ trees, $42.5\%$, share their value with another
+tree). The pure-$\gamma$ points $LO(0, 0, 1)$ and
 $LO(0, 0, 2)$ attain degeneracy $25.5\%$ ($79$ distinct values),
 among the lowest of all compared indices and tied with $R$, $GA$,
 and $AG$; indeed the $106$ trees realise only $79$ distinct
@@ -2108,10 +2111,10 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   Chemistry WebBook, NIST Standard Reference Database Number 69}, National
   Institute of Standards and Technology, Gaithersburg MD,
   \href{https://doi.org/10.18434/T4D303}{doi:10.18434/T4D303} (retrieved January 2025).
-  \bibitem{NyauliBuragohain2026DRSO} G. G. Nyauli, J. Buragohain,
+  \bibitem{NyauliBuragohain2027DRSO} G. G. Nyauli, J. Buragohain,
   Geometric approach to degree-based topological indices: degree-ratio
   Sombor indices of graphs, \textit{MATCH Commun. Math. Comput. Chem.\/}
-  \textbf{97} (2026) 135--164.
+  \textbf{97} (2027) 135--164.
 
 
   \bibitem{MendezBermudezAguilarSanchez2022MeanSombor} J. A.

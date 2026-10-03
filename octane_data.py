@@ -53,28 +53,43 @@ NAMES = ["octane", "2-methylheptane", "3-methylheptane", "4-methylheptane",
 assert len(OCTANES) == len(NAMES) == 18
 
 
-def alkane_pairs(smi):
-    """Edge degree pairs (d_u, d_v) of a hydrogen-suppressed acyclic alkane
-    written as a carbon-only SMILES string (alkane-only parser)."""
-    adj = {}; prev = None; stack = []; k = -1
+def alkane_adj(smi):
+    """Adjacency of a hydrogen-suppressed acyclic alkane written as a carbon-only
+    SMILES string. Rejects (ValueError) anything outside that grammar: ring
+    digits, other atoms/bonds/brackets, empty or unbalanced branches, a leading
+    branch, valence > 4, or a result that is not a tree."""
+    import re
+    if not re.fullmatch(r"C[C()]*", smi or ""):
+        raise ValueError(f"not a carbon-only acyclic SMILES: {smi!r}")
+    adj = {}; prev = None; stack = []; k = -1; last = None
     for ch in smi:
         if ch == '(':
+            if prev is None or last == '(':
+                raise ValueError(f"empty/leading branch in {smi!r}")
             stack.append(prev)
         elif ch == ')':
+            if not stack or last == '(':
+                raise ValueError(f"unbalanced/empty branch in {smi!r}")
             prev = stack.pop()
-        elif ch == 'C':
+        else:
             k += 1; adj[k] = set()
             if prev is not None:
                 adj[k].add(prev); adj[prev].add(k)
             prev = k
-    seen = set(); out = []
-    for u in adj:
-        for v in adj[u]:
-            e = (min(u, v), max(u, v))
-            if e in seen:
-                continue
-            seen.add(e); out.append((len(adj[u]), len(adj[v])))
-    return out
+        last = ch
+    if stack:
+        raise ValueError(f"unclosed branch in {smi!r}")
+    if any(len(v) > 4 for v in adj.values()):
+        raise ValueError(f"carbon valence > 4 in {smi!r}")
+    if sum(len(v) for v in adj.values()) // 2 != len(adj) - 1:
+        raise ValueError(f"not a tree: {smi!r}")
+    return adj
+
+
+def alkane_pairs(smi):
+    """Edge degree pairs (d_u, d_v) of the alkane tree parsed by alkane_adj."""
+    adj = alkane_adj(smi)
+    return [(len(adj[u]), len(adj[v])) for u in adj for v in sorted(adj[u]) if u < v]
 
 
 def lo_pairs(P, a, b, g):
