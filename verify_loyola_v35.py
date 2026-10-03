@@ -232,6 +232,27 @@ def load_v35_expectations(here):
         E["EXPR"].setdefault((r["budget"],r["property"]),[]).append(float(r["dQ2"]))
     return E
 
+
+def _pdf_canonical(data):
+    """Compression-independent canonical form of a PDF: the list of indirect
+    objects with every FlateDecode stream decompressed and /Length entries
+    (which depend on the compressor) removed. Two PDFs whose decompressed
+    content is identical compare equal even if zlib emitted different bytes."""
+    import zlib
+    objs=[]
+    for m in re.finditer(rb"(\d+)\s+(\d+)\s+obj(.*?)endobj",data,re.S):
+        body=m.group(3)
+        sm=re.search(rb"stream\r?\n(.*?)\r?\nendstream",body,re.S)
+        head=body[:sm.start()] if sm else body
+        head=re.sub(rb"/Length\s+\d+(\s+\d+\s+R)?",b"",head)
+        content=b""
+        if sm:
+            raw=sm.group(1)
+            try:content=zlib.decompress(raw)
+            except zlib.error:content=raw
+        objs.append((m.group(1),re.sub(rb"\s+",b" ",head).strip(),content))
+    return objs
+
 def run_v35_analyses(here):
     """Re-run the four bundled analysis scripts in an isolated temp dir and
     compare every produced CSV against the bundled canonical copy
@@ -274,7 +295,7 @@ def run_v35_analyses(here):
         else:
             for fig in ("fig_lo_prediction_correlation_heatmap_v3.pdf","fig_lo_degeneracy_order10_trees_v2.pdf"):
                 try:
-                    if open(os.path.join(td,"figures",fig),"rb").read()!=open(os.path.join(here,"figures",fig),"rb").read():
+                    if _pdf_canonical(open(os.path.join(td,"figures",fig),"rb").read())!=_pdf_canonical(open(os.path.join(here,"figures",fig),"rb").read()):
                         msgs.append(f"figures/{fig}: differs from fresh regeneration (stale figure)")
                 except OSError as e:msgs.append(f"figures/{fig}: {e}")
             for out in (CSV_PRED,CSV_DEG,CSV_SS):
@@ -1448,7 +1469,16 @@ def run_selftest(A, here, HAVE_NX):
         ops.append(("op:package-root",r.returncode==0 and "status: FULL PASS" in r.stdout,f"exit={r.returncode}"))
     with tempfile.TemporaryDirectory() as td:
         pkg=make_pkg(td);fp=os.path.join(pkg,"figures","fig_lo_prediction_correlation_heatmap_v3.pdf")
-        open(fp,"ab").write(b"%stale\n")
+        import zlib as _z
+        _d=open(fp,"rb").read()
+        def _alter(m):  # change one drawn byte inside the first decompressible stream
+            try:c=bytearray(_z.decompress(m.group(2)))
+            except _z.error:return m.group(0)
+            c[len(c)//2]^=0x01
+            return m.group(1)+_z.compress(bytes(c))+m.group(3)
+        _d2=re.sub(rb"(stream\r?\n)(.*?)(\r?\nendstream)",_alter,_d,count=1,flags=re.S)
+        assert _d2!=_d
+        open(fp,"wb").write(_d2)
         r=run_pkg(pkg)
         ops.append(("op:stale-figure",r.returncode==1 and "stale figure" in r.stdout,f"exit={r.returncode}"))
     with tempfile.TemporaryDirectory() as td:

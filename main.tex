@@ -196,8 +196,9 @@
   $93$ of $100$ seeds,
   usually degraded it on three properties and was mixed on the fifth
   (a descriptive, not inferential, finding); a pre-registered test on
-  the $35$ nonanes replicated the vaporization result, although ridge
-  regression on all degree-pair counts predicts better. Hence $\gamma$ is presented
+  the $35$ nonanes reproduced the vaporization result against compilation
+  values, although ridge regression on all degree-pair counts predicts
+  better. Hence $\gamma$ is presented
   as a structurally interpretable
   and provably independent direction rather than a predictive
   upgrade;
@@ -421,7 +422,9 @@
   budget-dependent on the fifth; this describes optimizer variance
   over candidate streams, not inferential evidence); (vi) a
   pre-registered external test on the $35$ nonane isomers, in which the
-  vaporization-enthalpy effect replicates ($95$--$98$ of $100$ seeds),
+  vaporization-enthalpy effect replicates against compilation values
+  ($95$--$98$ of $100$ seeds) and the experimentally grounded
+  boiling-point test is mixed,
   together with stronger baselines, including ridge regression on all
   degree-pair counts, which predicts better than every index model
   there (Section~\ref{sec:external}); together
@@ -1770,9 +1773,20 @@ to the $35$ constitutional nonane isomers, with boiling points ($35$
 values) and standard vaporization enthalpies ($34$ values; none listed
 for 3-ethyl-4-methylhexane) taken from the NIST
 WebBook~\cite{NISTWebBook} with every value traced to its archived
-source page. Most nonane vaporization enthalpies ($29$ of $34$) are
-compilation values rather than calorimetric determinations, and several
-boiling-point averages are quoted only to $1$\,K. The pre-registered
+source page. The two properties differ in evidential status. The
+boiling points are NIST averages of experimental determinations (several
+quoted only to $1$\,K), so the $T_B$ test is experimentally grounded.
+Of the vaporization enthalpies, only $5$ of $34$ are calorimetric
+determinations; $29$ come from two compilations, the 1961 tabulation of
+Labauf, Greenshields and Rossini~\cite{LabaufGreenshieldsRossini1961},
+which covers all $35$ nonanes and $75$ decanes and is not a set of
+individual calorimetric measurements, and a 1971 vapour-pressure
+handbook~\cite{WilhoitZwolinski1971}. Because such tabulations may rest
+partly on structural-increment estimates, agreement with them measures
+consistency with the compiled values rather than independent
+experimental validation, and a degree-pair-based predictor may be
+favoured if the compiled values were themselves derived from structural
+increments. The pre-registered
 decision rule called the $\gamma$ effect \emph{replicated} if the Loyola
 model beat the parent in at least $80$ of $100$ seeds at both budgets
 with positive median $\Delta Q^2$. Four baselines were added, each
@@ -1811,7 +1825,8 @@ non. $\Delta H_{\mathrm{vap}}$ & $-0.062$ & $0.857$ & $0.897$ & $0.927$ & $0.853
 \end{table}
 
 On the external set the pre-registered verdicts are: for
-$\Delta H_{\mathrm{vap}}$ the $\gamma$ effect \emph{replicates} (LO
+$\Delta H_{\mathrm{vap}}$ (compilation values) the $\gamma$ effect
+\emph{replicates} (LO
 better than GM in $95/100$ and $98/100$ seeds, median
 $\Delta Q^2 = +0.048$ and $+0.053$), and for $T_B$ it is \emph{mixed}
 ($58/100$ and $63/100$; unchanged in direction under the pre-registered
@@ -1832,7 +1847,24 @@ following it: the imbalance coordinate re-weights degree-pair
 information rather than adding to it, and its value is that one
 interpretable descriptor recovers most of what a model on all ten
 degree-pair counts achieves for the vaporization enthalpy, not that it
-outperforms such a model.
+outperforms such a model. Nor is the specific exponential form
+essential: the parameter-free aggregate $IRLA$ comes within $0.003$ of
+the median Loyola model on the nonanes ($0.897$ against $0.900$), so the
+gain over the parent is carried by the imbalance information itself.
+
+Finally, the nested design refits every model on the nonanes, which
+tests whether the \emph{procedure} replicates, not whether an
+octane-trained model transfers. In an exploratory analysis added after
+review (not pre-registered), the parameters selected on all $18$
+octanes were frozen and applied to the nonanes. With the parameters
+frozen and only the linear calibration refitted, the Loyola model
+beat the parent for $\Delta H_{\mathrm{vap}}$ in $100/100$ seeds at both
+budgets (median $Q^2 = 0.910$ and $0.916$ against $0.864$ and $0.865$)
+and for $T_B$ in $65/100$ and $82/100$. With the octane calibration
+frozen as well, both models extrapolate poorly from $C_8$ to $C_9$ and
+the Loyola model is worse than the parent (median $Q^2$ between $-2.22$
+and $-0.72$ for LO against $0.06$ to $0.44$ for GM): the transferable
+object is the parameter direction, not a fitted octane model.
 
 \subsection{Degeneracy across tree orders}\label{sec:degeneracy}
 
@@ -2047,8 +2079,11 @@ usually degrades it on three other properties and is budget-dependent
 on the fifth (Table~\ref{tab:ablation}; a descriptive summary of
 optimizer variance on one fixed $18$-molecule dataset) --- it is not a systematic predictive
 upgrade over the optimized parent. A pre-registered external test on
-the $35$ nonanes replicated the vaporization-enthalpy effect ($95$ and
-$98$ of $100$ seeds) and gave a mixed result for the boiling point, while
+the $35$ nonanes replicated the vaporization-enthalpy effect against
+compilation values ($95$ and $98$ of $100$ seeds; mostly not calorimetric
+determinations) and gave a mixed result for the experimentally grounded
+boiling point; octane-selected parameters transfer to the nonanes after
+recalibration, but a frozen octane model does not; and
 ridge regression on the full degree-pair counts predicted the nonanes
 better than every index model (Section~\ref{sec:external}): the
 imbalance coordinate is a parsimonious, interpretable summary of
@@ -2269,6 +2304,11 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   Lower bound on the KG-Sombor index, \textit{Commun. Comb. Optim.\/}
   \textbf{8} (2023) 751--757.
 
+  \bibitem{LabaufGreenshieldsRossini1961} A. Labauf, J. B. Greenshields,
+  F. D. Rossini, Heats of formation, combustion, and vaporization of the
+  35 nonanes and 75 decanes, \textit{J. Chem. Eng. Data\/} \textbf{6}
+  (1961) 261--263.
+
   \bibitem{NISTWebBook} P. J. Linstrom, W. G. Mallard (Eds.), \textit{NIST
   Chemistry WebBook, NIST Standard Reference Database Number 69}, National
   Institute of Standards and Technology, Gaithersburg MD,
@@ -2349,6 +2389,11 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
 
   \bibitem{Wiener1947} H. Wiener, Structural determination of paraffin
   boiling points, \textit{J. Am. Chem. Soc.\/} \textbf{69} (1947) 17--20.
+
+  \bibitem{WilhoitZwolinski1971} R. C. Wilhoit, B. J. Zwolinski,
+  \textit{Handbook of Vapor Pressures and Heats of Vaporization of
+  Hydrocarbons and Related Compounds\/}, Texas A\&M Research Foundation,
+  College Station, 1971.
 
   \bibitem{ZhouTrinajstic2009sumconn}
   B. Zhou, N. Trinajsti\'c, On a novel connectivity index, \textit{J. Math.

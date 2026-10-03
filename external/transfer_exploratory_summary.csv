@@ -1,0 +1,5 @@
+property,budget,median_Q2_refit_GM,median_Q2_refit_LO,LO_better_refit,median_Q2_frozen_GM,median_Q2_frozen_LO
+T_B,200,+0.6246,+0.6525,65,+0.0567,-1.5549
+T_B,500,+0.6309,+0.6828,82,+0.4377,-0.9551
+dHvap,200,+0.8635,+0.9102,100,+0.3203,-2.2242
+dHvap,500,+0.8651,+0.9161,100,+0.3217,-0.7171

@@ -126,3 +126,16 @@ reproduced by an independent re-implementation.
   abstract (one clause), introduction (vi) and conclusion updated.
 - external/verify_external.py: structures, rebuild, baseline validation,
   fresh re-runs and table rows; PASS.
+
+## v37.1 (second external review)
+- Data origin: 29/34 nonane dHvap values come from compilations (Labauf,
+  Greenshields & Rossini 1961, covering all 35 nonanes + 75 decanes; Wilhoit &
+  Zwolinski 1971 handbook), not calorimetric determinations; the dHvap test is
+  now described as consistency with compilation values, with a possible
+  structural-increment circularity; T_B is the experimentally grounded test.
+- IRLA (parameter-free) within 0.003 of median LO on nonanes: stated.
+- Exploratory transfer test (not pre-registered): octane-selected parameters
+  frozen + recalibration -> LO beats GM for dHvap 100/100 seeds both budgets;
+  fully frozen octane model -> LO worse than GM (size extrapolation).
+- Verifier: figure check compares decompressed PDF content (compression-
+  library independent); stale-figure attack now alters real drawn content.
