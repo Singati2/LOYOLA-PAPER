@@ -1,0 +1,36 @@
+name,cas,HM,secondary_codes,secondary_dHvap_kJ,secondary_dHvap_kcal,primary_dHvap_kcal,abs_diff_kcal,flag_gt_0p05,note
+nonane,111-84-2,114,C9:1,46.44,11.10,11.11,0.01,no,
+2-methyloctane,3221-61-2,130,C9:2,44.65,10.67,10.73,0.06,YES,
+3-methyloctane,2216-33-3,132,C9:3;C9:4,44.75;44.75,,10.73,,,HM tie in secondary table: isomer assignment of C9:k codes ambiguous; not compared
+4-methyloctane,2216-34-4,132,C9:3;C9:4,44.75;44.75,,10.64,,,HM tie in secondary table: isomer assignment of C9:k codes ambiguous; not compared
+3-ethylheptane,15869-80-4,134,C9:14;C9:15,44.81;44.81,,10.64,,,HM tie in secondary table: isomer assignment of C9:k codes ambiguous; not compared
+4-ethylheptane,2216-32-2,134,C9:14;C9:15,44.81;44.81,,10.54,,,HM tie in secondary table: isomer assignment of C9:k codes ambiguous; not compared
+"2,2-dimethylheptane",1071-26-7,168,C9:5,42.28,10.11,10.11,0.00,no,
+"2,3-dimethylheptane",3074-71-3,150,C9:6;C9:25;C9:12,43.79;42.98;42.98,,10.42,,,HM tie in secondary table: isomer assignment of C9:k codes ambiguous; not compared
+"2,4-dimethylheptane",2213-23-2,148,C9:7;C9:8,42.87;42.87,,10.25,,,HM tie in secondary table: isomer assignment of C9:k codes ambiguous; not compared
+"2,5-dimethylheptane",2216-30-0,148,C9:7;C9:8,42.87;42.87,,10.35,,,HM tie in secondary table: isomer assignment of C9:k codes ambiguous; not compared
+"2,6-dimethylheptane",1072-05-5,146,C9:9,42.82,10.23,10.35,0.12,YES,
+"3,3-dimethylheptane",4032-86-4,172,C9:10;C9:13,42.66;42.66,,10.18,,,HM tie in secondary table: isomer assignment of C9:k codes ambiguous; not compared
+"3,4-dimethylheptane",922-28-1,152,C9:24;C9:11,43.84;43.84,,10.42,,,HM tie in secondary table: isomer assignment of C9:k codes ambiguous; not compared
+"3,5-dimethylheptane",926-82-9,150,C9:6;C9:25;C9:12,43.79;42.98;42.98,,10.35,,,HM tie in secondary table: isomer assignment of C9:k codes ambiguous; not compared
+"4,4-dimethylheptane",1068-19-5,172,C9:10;C9:13,42.66;42.66,,10.09,,,HM tie in secondary table: isomer assignment of C9:k codes ambiguous; not compared
+3-ethyl-2-methylhexane,16789-46-1,152,C9:24;C9:11,43.84;43.84,,10.33,,,HM tie in secondary table: isomer assignment of C9:k codes ambiguous; not compared
+3-ethyl-3-methylhexane,3074-76-8,176,C9:26,43.04,10.29,10.25,0.04,no,
+4-ethyl-2-methylhexane,3074-75-7,150,C9:6;C9:25;C9:12,43.79;42.98;42.98,,10.25,,,HM tie in secondary table: isomer assignment of C9:k codes ambiguous; not compared
+3-ethyl-4-methylhexane,3074-77-9,154,C9:27,43.95,10.50,,,,primary MISSING; secondary value NOT used
+"2,2,3-trimethylhexane",16747-25-4,190,C9:16,41.91,10.02,9.97,0.05,no,
+"2,2,4-trimethylhexane",16747-26-5,186,C9:17,40.57,9.70,9.73,0.03,no,
+"2,2,5-trimethylhexane",3522-94-9,184,C9:18,40.17,9.60,9.60,0.00,no,
+"2,3,3-trimethylhexane",16747-28-7,192,C9:19;C9:32,42.23;42.02,,10.06,,,HM tie in secondary table: isomer assignment of C9:k codes ambiguous; not compared
+"2,3,4-trimethylhexane",921-47-1,170,C9:20;C9:34,42.93;42.93,,10.21,,,HM tie in secondary table: isomer assignment of C9:k codes ambiguous; not compared
+"2,3,5-trimethylhexane",1069-53-0,166,C9:21,41.42,9.90,9.90,0.00,no,
+"2,4,4-trimethylhexane",16747-30-1,188,C9:22,40.84,9.76,9.82,0.06,YES,
+"3,3,4-trimethylhexane",16747-31-2,194,C9:23,42.28,10.11,10.09,0.02,no,
+"3,3-diethylpentane",1067-20-5,180,C9:35,43.36,10.36,10.18,0.18,YES,
+"3-ethyl-2,2-dimethylpentane",16747-32-3,192,C9:19;C9:32,42.23;42.02,,9.97,,,HM tie in secondary table: isomer assignment of C9:k codes ambiguous; not compared
+"3-ethyl-2,3-dimethylpentane",16747-33-4,196,C9:33,42.55,10.17,10.21,0.04,no,
+"3-ethyl-2,4-dimethylpentane",1068-87-7,170,C9:20;C9:34,42.93;42.93,,10.11,,,HM tie in secondary table: isomer assignment of C9:k codes ambiguous; not compared
+"2,2,3,3-tetramethylpentane",7154-79-2,234,C9:28,41,9.80,9.85,0.05,no,
+"2,2,3,4-tetramethylpentane",1186-53-4,208,C9:29,41,9.80,9.75,0.05,no,
+"2,2,4,4-tetramethylpentane",1070-87-7,222,C9:30,38.1,9.11,9.20,0.09,YES,
+"2,3,3,4-tetramethylpentane",16747-38-9,212,C9:31,41.75,9.98,9.99,0.01,no,

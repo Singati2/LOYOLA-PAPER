@@ -53,3 +53,23 @@ to this plan must be recorded as deviations, not silent edits.
   index beats both GM and LO, the manuscript says so.
 - All counts are optimizer-variance summaries on fixed datasets, not
   inferential tests; the manuscript keeps that wording.
+
+## Deviations / clarifications (recorded 2026-10-03 after data collection, BEFORE any nonane analysis was run)
+The data agent reported four situations the plan did not cover. Decisions
+are fixed here before any nonane model was fitted:
+- **D1 (T_B, 10 isomers without a NIST average):** the "most recent
+  calorimetric" fallback does not apply to boiling points. Rule adopted: the
+  most recent primary measurement listed by NIST, excluding handbook
+  compilations (Weast & Grasselli 1989). All listed values are preserved in
+  nonane_provenance.csv.
+- **D2 (dHvap, 29 of 34 values):** the only NIST entry is from a compilation
+  (Reid 1972: 25; Labbauf, Greenshields & Rossini 1961: 4), not a calorimetric
+  determination. The dHvap analysis is run as pre-registered on the
+  NIST-listed values, and the manuscript states that 29 of 34 values are
+  compilation-grade. No sub-analysis is added.
+- **D3 (precision):** 13 NIST T_B averages are quoted to whole kelvins; values
+  are used as given and the reduced precision is stated.
+- **D4 (2,3,3,4-tetramethylpentane T_B):** primary analysis uses the NIST
+  average (413 +/- 6 K) as pre-registered; one sensitivity run replaces it by
+  the median of the individual NIST points. Both are reported.
+- dHvap is missing for 3-ethyl-4-methylhexane (no NIST entry): n = 34 for dHvap.
