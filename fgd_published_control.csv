@@ -1,0 +1,15 @@
+index,quantity,published_BarmanDas2026_Table10_decane,ours,abs_diff,agreement
+M1,SS,0.0566,0.05663,0.00003,exact_at_4dp
+M1,Abr,0.1336,0.13362,0.00002,exact_at_4dp
+mM2,SS,0.0516,0.05159,0.00001,exact_at_4dp
+mM2,Abr,0.1177,0.11768,0.00002,exact_at_4dp
+R,SS,0.0263,0.02636,0.00006,within_1_unit_4th_dp
+R,Abr,0.0588,0.05882,0.00002,exact_at_4dp
+chi,SS,0.0264,0.02638,0.00002,exact_at_4dp
+chi,Abr,0.0591,0.05911,0.00001,exact_at_4dp
+H/2,SS,0.0515,0.05159,0.00009,within_1_unit_4th_dp
+H/2,Abr,0.1143,0.11429,0.00001,exact_at_4dp
+GA,SS,0.0241,0.02413,0.00003,exact_at_4dp
+GA,Abr,0.0535,0.05355,0.00005,within_1_unit_4th_dp
+AG,SS,0.0255,0.02557,0.00007,within_1_unit_4th_dp
+AG,Abr,0.0579,0.05791,0.00001,exact_at_4dp

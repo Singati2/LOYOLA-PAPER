@@ -1,0 +1,6 @@
+# minimum declared versions (see requirements-lock.txt for the exact
+# versions used for the recorded byte-level reproducibility results)
+numpy>=1.26
+scipy>=1.11
+networkx>=3.0
+matplotlib>=3.8

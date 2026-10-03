@@ -1,0 +1,13 @@
+index,r_omega_original,r_omega_alternative,displayed_original,displayed_alternative,displayed_changes,winner_changes
+M1,-0.970209,-0.969910,-0.970,-0.970,False,False
+M2,-0.987602,-0.985664,-0.988,-0.986,True,False
+HM,-0.982250,-0.981123,-0.982,-0.981,True,False
+mM2,+0.793706,+0.793363,+0.794,+0.793,True,False
+R,+0.897784,+0.897887,+0.898,+0.898,False,False
+chi,+0.924013,+0.924336,+0.924,+0.924,False,False
+H/2,+0.900126,+0.900531,+0.900,+0.901,True,False
+ISI,-0.737701,-0.735535,-0.738,-0.736,True,False
+GA,+0.906256,+0.906784,+0.906,+0.907,True,False
+AG,-0.899748,-0.899601,-0.900,-0.900,False,False
+"LO(0,0,1)",-0.929381,-0.932599,-0.929,-0.933,True,False
+"LO(0,0,2)",-0.925029,-0.927179,-0.925,-0.927,True,False
