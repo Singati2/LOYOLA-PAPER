@@ -1762,7 +1762,7 @@ budget-dependent on $T_B$. Its established value lies in the
 structural properties of Section~\ref{sec:geometry} and the
 discrimination behaviour below, not in systematic predictive gains.
 
-\subsection{External validation on the nonane isomers and stronger
+\subsection{External test on the nonane isomers and stronger
 baselines}\label{sec:external}
 
 Two limitations of the octane analysis are its size ($18$ molecules) and
@@ -1865,6 +1865,22 @@ frozen as well, both models extrapolate poorly from $C_8$ to $C_9$ and
 the Loyola model is worse than the parent (median $Q^2$ between $-2.22$
 and $-0.72$ for LO against $0.06$ to $0.44$ for GM): the transferable
 object is the parameter direction, not a fitted octane model.
+
+The seed counts above measure optimizer variance only. To indicate
+molecule-level uncertainty we also computed, post hoc, a paired
+bootstrap over molecules ($2000$ resamples) of the median-over-seeds
+$\Delta Q^2$, conditional on the fitted outer predictions (selection is
+not repeated within resamples, so the intervals understate total
+uncertainty). The $95\%$ intervals for LO minus GM on
+$\Delta H_{\mathrm{vap}}$ are $[+0.014, +0.111]$ on the octanes but
+$[-0.006, +0.113]$ on the nonanes at budget $200$ ($[-0.005, +0.119]$ at
+$500$): the external gain met the pre-registered criterion, yet its
+interval narrowly includes zero. The interval for LO minus ridge on the
+nonanes, $[-0.101, +0.032]$, includes zero as well, and the $T_B$
+intervals are wide ($[-0.212, +0.222]$ for LO minus GM on the
+nonanes). The external evidence is therefore suggestive rather than
+conclusive; establishing the effect would require a larger, measured
+dataset evaluated under a protocol fixed in advance.
 
 \subsection{Degeneracy across tree orders}\label{sec:degeneracy}
 
@@ -2083,7 +2099,9 @@ the $35$ nonanes replicated the vaporization-enthalpy effect against
 compilation values ($95$ and $98$ of $100$ seeds; mostly not calorimetric
 determinations) and gave a mixed result for the experimentally grounded
 boiling point; octane-selected parameters transfer to the nonanes after
-recalibration, but a frozen octane model does not; and
+recalibration, but a frozen octane model does not; the molecule-level
+bootstrap interval for the external vaporization gain narrowly includes
+zero, so this evidence is suggestive rather than conclusive; and
 ridge regression on the full degree-pair counts predicted the nonanes
 better than every index model (Section~\ref{sec:external}): the
 imbalance coordinate is a parsimonious, interpretable summary of

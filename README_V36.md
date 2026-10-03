@@ -69,3 +69,15 @@ Regeneration (each writes next to itself): `ablation_gm_vs_lo.py`,
 6 NIST-absent gas entropies; the tetramethylbutane 298 K vaporization case;
 paywalled AKCE 2020 / Portilla JMC full texts; InChIKeys. Coauthor sign-off
 and the authors' own Overleaf compile remain the gating steps.
+
+## Integrity manifest
+`python3 manifest.py --write` regenerates SHA256SUMS.txt (one SHA-256 per
+git-tracked file); `python3 manifest.py` checks it and fails on duplicate
+paths, untracked/missing files or hash mismatches.
+
+## External test (v37)
+`python3 external/verify_external.py` regenerates the nonane data, the
+pre-registered analysis, baselines, the exploratory transfer and
+molecule-bootstrap analyses, and Table 6, and checks them against the
+committed files. See external/PREREG_v37.md (and the template for a future
+measured-data test, external/PREREG_TEMPLATE_measured_dHvap.md).

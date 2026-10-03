@@ -17,7 +17,8 @@ def run(args, cwd):
 OUTS = ["nonane_data.csv", "nonane_provenance.csv", "nonane_validation_seeds.csv",
         "nonane_validation_summary.csv", "baselines_octane.csv", "baselines_nonane.csv",
         "v37_classical_fixed.csv", "v37_table_rows.tex",
-        "transfer_exploratory.csv", "transfer_exploratory_summary.csv"]
+        "transfer_exploratory.csv", "transfer_exploratory_summary.csv",
+        "uncertainty_exploratory.csv"]
 with tempfile.TemporaryDirectory() as td:
     ext = os.path.join(td, "external"); shutil.copytree(HERE, ext)
     for f in os.listdir(ROOT):
@@ -33,6 +34,7 @@ with tempfile.TemporaryDirectory() as td:
     run(["baselines.py", "--dataset", "nonane"], ext)
     run(["make_v37_table.py"], ext)
     run(["transfer_exploratory.py"], ext)
+    run(["uncertainty_exploratory.py"], ext)
     for f in OUTS:
         a, b = os.path.join(ext, f), os.path.join(HERE, f)
         if not os.path.exists(a): fails.append(f"{f}: not regenerated")

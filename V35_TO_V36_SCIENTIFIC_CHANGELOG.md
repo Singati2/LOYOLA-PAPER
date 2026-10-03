@@ -139,3 +139,14 @@ reproduced by an independent re-implementation.
   fully frozen octane model -> LO worse than GM (size extrapolation).
 - Verifier: figure check compares decompressed PDF content (compression-
   library independent); stale-figure attack now alters real drawn content.
+
+## v37.2
+- manifest.py: single source of truth for SHA256SUMS.txt (one hash per tracked
+  path; check mode fails on duplicates/missing/untracked/mismatch).
+- Section 5.4 renamed 'External test' (not 'validation').
+- Exploratory molecule-level paired bootstrap: nonane dHvap LO-GM
+  +0.048 [-0.006, +0.113] (narrowly includes 0); LO-ridge includes 0;
+  octane dHvap LO-GM [+0.014, +0.111]. Text: external evidence suggestive,
+  not conclusive.
+- PREREG template for a future measured dHvap test (protocol, baselines,
+  full nested bootstrap, confirmation rule).
