@@ -46,8 +46,8 @@ counts are enforced by the verifier ([N2]).
 | Class | Count |
 |---|---|
 | VERIFIED EXACT (exact at reported precision, no conversion) | 3 |
-| VERIFIED AFTER UNIT CONVERSION (exact at reported precision after K/kJ/J conversion) | 34 |
-| AGREEMENT WITHIN TOLERANCE (within audit tolerance / source uncertainty, not exact at reported precision) | 32 |
+| VERIFIED AFTER UNIT CONVERSION (matches one recorded determination at reported precision after K/kJ/J conversion) | 29 |
+| AGREEMENT WITHIN TOLERANCE (within audit tolerance / source uncertainty / span of determinations, matching none at reported precision) | 37 |
 | SOURCE VARIATION / EXPLAINED | 13 |
 | CANNOT VERIFY | 7 |
 | CONFLICT | 1 |
@@ -104,3 +104,22 @@ environment) — declared.
 Unchanged from v33 (39/39 verified references; AKCE 2020 original
 formulation and Portilla JMC 2025 full text remain paywalled; LaTeX compile
 remains the author's Overleaf step).
+
+
+## v36.1 update (strict 'verified' rule; tetramethylbutane)
+
+- VERIFIED now requires matching one specific recorded determination at the
+  reported precision; a value lying between two determinations is
+  AGREEMENT WITHIN TOLERANCE. Five rows reclassified (2,2-dimethylhexane dHvap,
+  2,2,3-trimethylpentane dHvap, 2,3,3-trimethylpentane dHf and dHvap,
+  2,3,4-trimethylpentane T_B). Counts: 3 / 29 / 37 / 13 / 7 / 1. The table
+  above is updated; the per-version notes above it are historical.
+- 2,2,3,3-tetramethylbutane dHvap: the earlier statement that NIST tabulates
+  only sublimation data was wrong. NIST lists standard vaporization enthalpies
+  42.94 and 42.91 kJ/mol (about 10.26 kcal/mol) as well as sublimation
+  enthalpies; the paper value 8.41 kcal/mol (35.19 kJ/mol) is the octane
+  benchmark compilation value and matches no listed determination. Its
+  reference state is unresolved (solid at 298 K, triple point 373.97 K). The
+  full nested dHvap comparison was repeated without this isomer
+  (tmb_exclusion_sensitivity.py): LO better in 93/100 (B=200) and 96/100
+  (B=500) seeds, paired 95/100 and 96/100, median dQ2 +0.046 / +0.051.

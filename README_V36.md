@@ -43,7 +43,7 @@ historical `_v35` suffixes.
    (b); "2-methyl-3-ethylpentane" → "3-ethyl-2-methylpentane"; Figure 2
    dashed line explained.
 6. **Provenance.** Misclassified rows corrected (see
-   `LOYOLA_V35_DATA_PROVENANCE.md`, v36 section); recount 3/34/32/13/7/1
+   `LOYOLA_V35_DATA_PROVENANCE.md`, v36 section); recount 3/34/32/13/7/1 (v36.1 strict rule: 3/29/37/13/7/1)
    (same totals, different composition); "one marginal conflict" sentence
    fixed; the false ω "cannot alter a correlation" claim corrected.
 7. **Entropy-source sensitivity** (disclosure only, data unchanged):

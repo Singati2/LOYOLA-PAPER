@@ -124,8 +124,8 @@ CSV_OMEG = "omega_source_sensitivity_v35.csv"
 CSV_SSEN = "entropy_source_sensitivity_v36.csv"
 PROV_HALF = {"T_B":0.05,"dHf":0.005,"dHvap":0.005,"S":0.005,"omega":0.0005}
 PROV_TOL  = {"T_B":0.15,"dHf":0.15,"dHvap":0.04,"S":0.3,"omega":0.003}  # v36: dHvap tightened so a >=0.05 kcal/mol gap cannot pass
-PROV_EXPECT = {"VERIFIED EXACT":3,"VERIFIED AFTER UNIT CONVERSION":34,
- "AGREEMENT WITHIN TOLERANCE":32,"SOURCE VARIATION / EXPLAINED":13,
+PROV_EXPECT = {"VERIFIED EXACT":3,"VERIFIED AFTER UNIT CONVERSION":29,
+ "AGREEMENT WITHIN TOLERANCE":37,"SOURCE VARIATION / EXPLAINED":13,
  "CANNOT VERIFY":7,"CONFLICT":1}
 EXPR_SIGNS = {  # (budget, property): (LO better, LO worse) over seeds 0..99 -- manuscript claims
  ("200","T_B"):(53,47),("200","dHf"):(14,86),("200","dHvap"):(100,0),("200","S"):(35,65),("200","omega"):(26,74),
@@ -144,6 +144,7 @@ ANALYSIS_SCRIPTS = {
     "expanded_robustness_v35.py": [CSV_EXPR, CSV_EXPS],
     "source_sensitivity.py": [CSV_OMEG, CSV_SSEN],
     "ablation_robustness.py": [CSV_ROB],
+    "tmb_exclusion_sensitivity.py": ["dhvap_tmb_exclusion_v36.csv","dhvap_tmb_exclusion_summary_v36.csv"],
 }
 COLL_ROWS = [("3-methylheptane",2),("4-methylheptane",3),
              ("3,4-dimethylhexane",9),("3-ethyl-2-methylpentane",10)]
@@ -672,8 +673,9 @@ def prov_expected_class(prop,paper,cands):
     """Strict taxonomy: matched at reported precision (|diff| <= half a unit of
     the last reported digit, or inside the span of the recorded determinations)
     -> VERIFIED; else within PROV_TOL -> AGREEMENT WITHIN TOLERANCE; else CONFLICT."""
-    lo_,hi_=min(cands),max(cands)
-    d=0.0 if lo_<=paper<=hi_ else min(abs(paper-lo_),abs(paper-hi_))
+    # v36.1: VERIFIED requires matching a specific recorded determination at
+    # the reported precision; lying between two determinations is not a match.
+    d=min(abs(paper-x) for x in cands)
     if d<=PROV_HALF[prop]+1e-9:return {"VERIFIED EXACT","VERIFIED AFTER UNIT CONVERSION"},d
     if d<=PROV_TOL[prop]+1e-9:return {"AGREEMENT WITHIN TOLERANCE"},d
     return {"CONFLICT"},d
@@ -1426,7 +1428,8 @@ def run_selftest(A, here, HAVE_NX):
     def make_pkg(td, skip=None):
         pkg=os.path.join(td,"pkg");os.makedirs(pkg)
         files=["main.tex",CSV_PRED,CSV_DEG,CSV_SS,CSV_ABL,CSV_ABLF,CSV_MO,CSV_FGD,
-               CSV_COLL,CSV_CORR,CSV_PCA,CSV_ROB,CSV_CTRL,CSV_PROV,CSV_EXPR,CSV_EXPS,CSV_OMEG,CSV_SSEN,"octane_data.py"]+list(ANALYSIS_SCRIPTS)
+               CSV_COLL,CSV_CORR,CSV_PCA,CSV_ROB,CSV_CTRL,CSV_PROV,CSV_EXPR,CSV_EXPS,CSV_OMEG,CSV_SSEN,"octane_data.py",
+               "dhvap_tmb_exclusion_v36.csv","dhvap_tmb_exclusion_summary_v36.csv"]+list(ANALYSIS_SCRIPTS)
         for f in files:
             if f!=skip:shutil.copy(os.path.join(here,f),pkg)
         shutil.copy(script,os.path.join(pkg,os.path.basename(script)))

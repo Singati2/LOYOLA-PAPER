@@ -95,3 +95,19 @@ reproduced by an independent re-implementation.
   112/112.
 - Tuning-table caption states the round-once convention; prose zero value
   given as -0.0003.
+
+## v36.1 (external review response)
+- Generic discrimination (prop:generic) stated to hold already for the parent
+  family (proof uses only injectivity of (ln ij, ln(i+j))); q adds no graph
+  information beyond degree-pair counts; gamma adds a functional direction.
+- prop:indep proof made exact: the witness equations force 3^8 = 2^13 (false).
+- Tetramethylbutane dHvap: corrected explanation (NIST lists vaporization
+  enthalpies 42.94/42.91 kJ/mol; benchmark 8.41 kcal/mol unresolved) and full
+  nested exclusion sensitivity: dHvap gain 93/100 and 96/100 seeds without it,
+  so 'every seed' holds only with the isomer included; text updated.
+- Provenance: strict 'verified' rule; 5 rows reclassified; counts 3/29/37/13/7/1;
+  corrected-value wording distinguishes exact NIST conversions (8.97, 9.08)
+  from within-span/API-44 values (8.83, 8.90).
+- Delta<=4 scope restricted (hypervalent P/S counterexamples); identifiability
+  remark clarified; Table 7 pointer corrected; bibliography alphabetical;
+  Das et al. 2025 Suppl. 1; NIST re-check dates; v35 logs moved to history/.

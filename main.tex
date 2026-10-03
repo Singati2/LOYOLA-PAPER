@@ -192,7 +192,8 @@
   comparison against the optimized parent family on five octane
   properties, repeated over one hundred random-search seeds at two
   budgets, finds that the free imbalance parameter improved
-  out-of-sample prediction of the vaporization enthalpy in every seed,
+  out-of-sample prediction of the vaporization enthalpy in at least
+  $93$ of $100$ seeds,
   usually degraded it on three properties and was mixed on the fifth
   (a descriptive, not inferential, finding), so $\gamma$ is presented
   as a structurally interpretable
@@ -410,7 +411,9 @@
   honest matched-budget nested assessment of whether $\gamma$ adds
   out-of-sample predictive information beyond the optimized parent
   (in a $100$-seed analysis on one fixed $18$-molecule dataset it
-  improved prediction of $\Delta H_{\mathrm{vap}}$ in every seed,
+  improved prediction of $\Delta H_{\mathrm{vap}}$ in every seed, and in
+  $93$--$96$ of $100$ when the one isomer with an unresolved reference
+  state is excluded,
   usually hurt on three of the other four properties, and was
   budget-dependent on the fifth; this describes optimizer variance
   over candidate streams, not inferential evidence), together
@@ -435,8 +438,10 @@ $d_v = d_G(v)$ counts the edges incident to $v$. The maximum and
 minimum degrees are denoted $\Delta = \Delta(G)$ and
 $\delta = \delta(G)$. In the chemometric sections we work with
 hydrogen-suppressed molecular graphs, where the assumption
-$\Delta \le 4$ is natural for organic molecules built from
-$\{$C, N, O, S, P, halogens$\}$.
+$\Delta \le 4$ holds for alkane carbon skeletons (all graphs analysed
+here) and for most organic molecules, but not universally: hypervalent
+centres such as phosphorus in $\mathrm{PCl}_5$ (degree $5$) or sulfur in
+pentafluorosulfanyl groups (degree $6$) exceed it.
 
 The classical graph families used throughout are: the complete
 graph $K_n$, the cycle $C_n$, the path $P_n$, the star $S_n$, the complete
@@ -595,12 +600,13 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   $q_{ij} = a + b \ln(ij) + c \ln(i+j)$ on these pairs. From
   $(1,1)$ and $(2,2)$, where $q = 0$: $a + c \ln 2 = 0$ and
   $a + (2b + 2c) \ln 2 = 0$, giving $a = -c \ln 2$ and $b = -c/2$.
-  Substituting into the $(1,2)$ equation
-  $\tfrac13 = a + b \ln 2 + c \ln 3$ yields
-  $c = \tfrac13 \bigl(\ln 3 - \tfrac32 \ln 2\bigr)^{-1}$, and then the
-  $(1,3)$ equation would require
-  $\tfrac12 = c\,(\ln 2 - \tfrac12 \ln 3) \approx 0.814$, a
-  contradiction. Hence the augmented vectors have rank $4$. If
+  Substituting into the $(1,2)$ and $(1,3)$ equations gives
+  $\tfrac13 = c\,(\ln 3 - \tfrac32 \ln 2)$ and
+  $\tfrac12 = c\,(\ln 2 - \tfrac12 \ln 3)$; in particular $c \neq 0$.
+  Three times the first minus twice the second gives
+  $0 = c\,(4 \ln 3 - \tfrac{13}{2} \ln 2)$, hence $8 \ln 3 = 13 \ln 2$,
+  i.e.\ $3^{8} = 2^{13}$, which is false ($6561 \neq 8192$). Hence the
+  augmented vectors have rank $4$. If
   $e^{\theta^{\top} z} = c\, e^{\theta'^{\top} z}$ on $P_{\Delta}$,
   then $(\theta - \theta')^{\top} z_{ij} = \ln c$ for all admissible
   pairs, i.e.\ $(\ln c, \theta' - \theta)$ is orthogonal to every
@@ -615,7 +621,9 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   Proposition~\ref{prop:indep} is a statement about the edge-weight
   \emph{function} on the full admissible pair set, not about every
   individual graph: on a single graph $G$, the parameters are
-  identifiable (up to the scaling noted above) only when the degree
+  identifiable from the \emph{function} $\theta \mapsto LO(G;\theta)$
+  (never from a single value of it, which is one scalar)
+  up to the scaling noted above only when the degree
   pairs actually realised by $G$ carry four affinely independent
   augmented feature vectors. On a regular graph nothing about
   $\theta$ is identifiable beyond one linear functional; on a graph
@@ -744,6 +752,20 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   function has Lebesgue measure zero.
   \end{proof}
 
+  The proof uses only the injectivity of
+  $(i,j) \mapsto (\ln(ij), \ln(i+j))$, so the same conclusion already
+  holds for the parent family $M_{\alpha,\beta}$ on the
+  $(\alpha,\beta)$-plane. Proposition~\ref{prop:generic} is therefore
+  a property the Loyola family inherits, not an advantage conferred by
+  $\gamma$. Likewise, since
+  $q_{ij} = \sqrt{1 - 4ij/(i+j)^{2}}$ is a function of the pair, the
+  imbalance coordinate adds no graph information beyond the
+  edge-degree-pair counts (every vertex-degree-based index is a
+  functional of those counts~\cite{Rada2026LinearVDB}); what $\gamma$
+  adds is the new functional direction of
+  Proposition~\ref{prop:indep}, i.e.\ a different weighting of the
+  same information.
+
   \section{Bounds for the Loyola family}\label{sec:bounds}
   % =====================================================================
 
@@ -757,7 +779,16 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   a uniform ratio-bound theorem, and bounds via the generalised
   Randi\'c, sum-connectivity, and Sombor indices. Throughout, $G$
   is a simple connected graph with $\delta \le d_v \le \Delta$ for
-  every $v \in V(G)$.
+  every $v \in V(G)$. The inequalities of
+  Propositions~\ref{thm:upper_Delta} and~\ref{thm:lower_delta} and of
+  Theorems~\ref{thm:cs} and~\ref{thm:ratio_bound}, the convexity part of
+  Theorem~\ref{thm:logconvex}, the rank-$4$ statement of
+  Proposition~\ref{prop:indep} for $\Delta \ge 3$, and the order-$13$
+  profile collision of Section~\ref{sec:degeneracy} have additionally been
+  machine-checked in Lean~4 with Mathlib (graphs modelled by their
+  multisets of edge degree pairs; equality characterizations not
+  formalized); the formalization accompanies the reproducibility
+  package.
 
   \begin{remark}[Attribution at $\gamma = 0$]\label{rem:gmattr}
   At $\gamma = 0$ the family coincides with $M_{\alpha,\beta}$, for
@@ -1281,7 +1312,8 @@ each index and each of the five physicochemical properties of the
 $18$ octane isomers (boiling point $T_B$, enthalpy of formation
 $\Delta H_f$, enthalpy of vaporization $\Delta H_{\mathrm{vap}}$,
 entropy $S$, acentric factor $\omega$; property data traced to the NIST
-WebBook~\cite{NISTWebBook} (retrieved January 2025), except the acentric
+WebBook~\cite{NISTWebBook} (dataset compiled January 2025; individual values
+re-checked August--October 2026), except the acentric
 factors, which NIST does not list and which were taken from KDB-derived
 compilations; the same five properties form the octane benchmark used
 in~\cite{MovahediGutmanRedzepovicFurtula2026}). Units are: $T_B$ in
@@ -1296,16 +1328,24 @@ molecule-level values were traced against authoritative sources
 (NIST WebBook first; KDB-derived compilations for the acentric
 factor, which NIST does not list), and classified under a strict
 taxonomy in which ``verified'' requires agreement at the value's
-reported precision: $3$ match exactly, $34$ match at reported
-precision after unit conversion (gas phase confirmed for formation
-enthalpies and entropies), $32$ agree within the audit tolerances or
-the source's stated uncertainty without matching at reported
+reported precision: $3$ match exactly, $29$ match a specific recorded
+determination at reported precision after unit conversion (gas phase
+confirmed for formation enthalpies and entropies), $37$ agree within
+the audit tolerances, the source's stated uncertainty or the span of
+several determinations without matching any one of them at reported
 precision, $13$ lie within explained variation among authoritative
 determinations, $7$ could not be verified against a reachable
 authoritative value (six gas-phase entropies absent from
 the NIST WebBook, and the $298$\,K vaporization enthalpy of
-2,2,3,3-tetramethylbutane, which is solid at room temperature so
-that sublimation rather than vaporization data are tabulated), and
+2,2,3,3-tetramethylbutane: this compound is a solid at $298$\,K
+(triple point $374$\,K); the NIST WebBook lists standard vaporization
+enthalpies of $42.94$ and $42.91$\,kJ\,mol$^{-1}$ (about
+$10.26$\,kcal\,mol$^{-1}$) together with sublimation enthalpies, whereas
+the benchmark value used here, $8.41$\,kcal\,mol$^{-1}$
+($35.19$\,kJ\,mol$^{-1}$), is that of the standard octane benchmark
+compilation and matches no listed determination, so its physical
+reference state is unresolved; Section~\ref{sec:ablation} reports the
+$\Delta H_{\mathrm{vap}}$ analysis with this isomer excluded), and
 one value is a marginal conflict: the acentric factor of
 2,2,3,3-tetramethylbutane ($0.247$ vs.\ compiled $0.251$); the
 acentric factor of 2,2,4-trimethylpentane ($0.305$ vs.\ compiled
@@ -1320,7 +1360,11 @@ package. Four $\Delta H_{\mathrm{vap}}$ values used in earlier versions
 of this study (3,3-dimethylhexane, 3-ethyl-3-methylpentane,
 2,2,3-trimethylpentane and 2,3,3-trimethylpentane) disagreed with the
 NIST WebBook by $0.05$--$0.13$\,kcal\,mol$^{-1}$; they have been
-corrected to the NIST values (Appendix~\ref{app:data}), and every
+corrected (Appendix~\ref{app:data}) --- two to exact conversions of NIST
+determinations ($8.97$, $9.08$) and two to values that lie within the
+span or stated uncertainty of the NIST determinations and equal the
+API Project~44 compilation at the displayed precision ($8.83$, $8.90$)
+--- and every
 result reported here uses the corrected data. Four entropies
 ($n$-octane, 2,2-dimethylhexane, 2,2,4- and 2,3,3-trimethylpentane)
 could not be matched to a primary source and differ from those of a
@@ -1682,9 +1726,19 @@ counts describe optimizer variance over random candidate streams on
 one fixed set of $18$ molecules; the molecules are never resampled,
 so the counts carry no inferential weight --- in particular, $100/100$
 does not establish that $\gamma$ improves $\Delta H_{\mathrm{vap}}$
-prediction for other molecules or data sets. The honest summary is
+prediction for other molecules or data sets. The result is also
+sensitive to a single data cell: the $\Delta H_{\mathrm{vap}}$ value of
+2,2,3,3-tetramethylbutane, whose physical reference state is unresolved
+(Section~\ref{sec:octanes}). Repeating the complete nested comparison
+with that isomer excluded ($17$ molecules, same seeds, budgets and
+candidate streams), freeing $\gamma$ improved $\Delta H_{\mathrm{vap}}$
+in $93/100$ seeds at budget $200$ and $96/100$ at budget $500$ (paired
+control $95/100$ and $96/100$; median $\Delta Q^2 = +0.046$ and $+0.051$,
+range $-0.048$ to $+0.098$), so the gain survives the exclusion but is
+no longer sign-invariant. The honest summary is
 therefore: at matched budget on this dataset, the imbalance parameter
-improved $\Delta H_{\mathrm{vap}}$ in every seed of the sweep, tends
+improved $\Delta H_{\mathrm{vap}}$ in every seed of the sweep ($93$--$96$
+of $100$ without tetramethylbutane), tends
 to hurt on three properties ($\Delta H_f$, $S$, $\omega$), and is
 budget-dependent on $T_B$. Its established value lies in the
 structural properties of Section~\ref{sec:geometry} and the
@@ -1813,8 +1867,10 @@ Das~\cite{BarmanDas2026HSO} for the seven indices common to both
 studies ($M_1$, ${}^{m}\!M_2$, $R$, $\chi$, $H$, $GA$, $AG$;
 fourteen tabulated $SS$/$Abr$ values): eleven agree exactly at the four
 displayed decimals and the remaining three differ by one unit in the
-fourth decimal. The full comparison is given in
-Table~\ref{tab:fgdss}. Under the published desideratum ($SS$ large,
+fourth decimal (the cell-by-cell comparison is in the file
+\texttt{fgd\_published\_control.csv} of the reproducibility package;
+our values for all twelve compared indices are in
+Table~\ref{tab:fgdss}). Under the published desideratum ($SS$ large,
 $Abr$ small~\cite{FurtulaGutmanDehmer2013SS}), the pure-$\gamma$
 point $LO(0,0,2)$ attains the largest structure sensitivity in our
 comparison set (the forgotten index $F$ and the elliptic Sombor index,
@@ -1891,7 +1947,8 @@ is effectively two-dimensional, so third-decimal correlation
 differences carry no ranking information; and at matched search
 budget, across one hundred random-search seeds and two budgets, the
 free imbalance parameter improved nested out-of-sample
-prediction of $\Delta H_{\mathrm{vap}}$ in every seed of the sweep,
+prediction of $\Delta H_{\mathrm{vap}}$ in every seed of the sweep
+($93$--$96$ of $100$ when tetramethylbutane is excluded),
 usually degrades it on three other properties and is budget-dependent
 on the fifth (Table~\ref{tab:ablation}; a descriptive summary of
 optimizer variance on one fixed $18$-molecule dataset) --- it is not a systematic predictive
@@ -1936,8 +1993,12 @@ kcal\,mol$^{-1}$ ($\Delta H_{\mathrm{vap}}$ at $298$~K); $S$ in
 cal\,mol$^{-1}$K$^{-1}$; $\omega$ dimensionless. The
 $\Delta H_{\mathrm{vap}}$ values of 3,3-dimethylhexane ($8.97$),
 3-ethyl-3-methylpentane ($9.08$), 2,2,3-trimethylpentane ($8.83$) and
-2,3,3-trimethylpentane ($8.90$) were corrected in this version to the
-NIST WebBook values (previously $9.04$, $9.21$, $8.88$ and $9.02$).
+2,3,3-trimethylpentane ($8.90$) were corrected in this version to values consistent with the NIST
+WebBook determinations (previously $9.04$, $9.21$, $8.88$ and $9.02$;
+see Section~\ref{sec:octanes} for the exact-versus-within-uncertainty
+status of each). The $\Delta H_{\mathrm{vap}}$ entry of
+2,2,3,3-tetramethylbutane is a benchmark-compilation value whose
+physical reference state is unresolved (Section~\ref{sec:octanes}).
 
 \begin{table}[H]
 \centering\small
@@ -1980,19 +2041,19 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   S. Ahmad, R. Farooq, K. C. Das, The general Sombor index of extremal
   trees with a given maximum degree, \textit{MATCH Commun. Math. Comput.
   Chem.\/} \textbf{94} (2025) 825--853.
-  \bibitem{AliGutmanFurtulaAlbalahiHamza2025} A. Ali, I. Gutman,
-  B. Furtula, A. M. Albalahi, A. E. Hamza, On chemical and mathematical
-  characteristics of generalized degree-based molecular descriptors,
-  \textit{AIMS Math.\/} \textbf{10} (2025) 6788--6804.
+
+  \bibitem{Albertson1997}
+  M. O. Albertson, The irregularity of a graph, \textit{Ars Combin.\/}
+  \textbf{46} (1997) 219--225.
 
   \bibitem{AliGutmanFurtula2026BID} A. Ali, I. Gutman, B. Furtula,
   Extremal results on bond incident degree indices of graphs: a survey,
   \textit{Aequationes Math.\/} \textbf{100} (2026) \#66.
 
-
-  \bibitem{Albertson1997}
-  M. O. Albertson, The irregularity of a graph, \textit{Ars Combin.\/}
-  \textbf{46} (1997) 219--225.
+  \bibitem{AliGutmanFurtulaAlbalahiHamza2025} A. Ali, I. Gutman,
+  B. Furtula, A. M. Albalahi, A. E. Hamza, On chemical and mathematical
+  characteristics of generalized degree-based molecular descriptors,
+  \textit{AIMS Math.\/} \textbf{10} (2025) 6788--6804.
 
   \bibitem{ArockiarajPaulClement2023Hybrid} M. Arockiaraj, D. Paul, J.
   Clement, S. Tigga, K. Jacob, K. Balasubramanian, Novel molecular hybrid
@@ -2016,21 +2077,21 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   Cangul, Y. Shang, On Sombor index, \textit{Symmetry\/} \textbf{13}
   (2021) \#140.
 
-  \bibitem{DasGutman2022SomborTrees} K. C. Das, I. Gutman, On Sombor index
-  of trees, \textit{Appl. Math. Comput.\/} \textbf{412} (2022) \#126575.
   \bibitem{DasElumalaiBalachandran2021} K. C. Das, S. Elumalai,
   S. Balachandran, Open problems on the exponential vertex-degree-based
   topological indices of graphs, \textit{Discrete Appl. Math.\/}
   \textbf{293} (2021) 38--49.
+
+  \bibitem{DasGutman2022SomborTrees} K. C. Das, I. Gutman, On Sombor index
+  of trees, \textit{Appl. Math. Comput.\/} \textbf{412} (2022) \#126575.
+
   \bibitem{DasMondal2024ExpGA} K. C. Das, S. Mondal, On exponential
   geometric-arithmetic index of graphs, \textit{J. Math. Chem.\/}
   \textbf{62} (2024) 2740--2760.
+
   \bibitem{DasMondalRazaPal2025ExpISDD} P. Das, S. Mondal, Z. Raza,
   A. Pal, On exponential inverse symmetric division deg index of graphs,
-  \textit{J. Appl. Math. Comput.\/} \textbf{71} (2025) 537--561.
-
-
-
+  \textit{J. Appl. Math. Comput.\/} \textbf{71} (Suppl.~1) (2025) 537--561.
 
   \bibitem{FurtulaGutman2015F} B. Furtula, I. Gutman, A forgotten
   topological index, \textit{J. Math. Chem.\/} \textbf{53} (2015)
@@ -2053,22 +2114,6 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   (coindex) and Lanzhou index (coindex) of some graphs, \textit{Axioms\/}
   \textbf{14} (2025) \#164.
 
-  \bibitem{GutmanBuragohainNyauli2026} I. Gutman, J. Buragohain,
-  G. G. Nyauli, Concealed relations between vertex-degree-based
-  topological indices, \textit{J. Math. Chem.\/} \textbf{64} (2026) \#39.
-
-  \bibitem{GutmanMilovanovic2020AKCE} I. Gutman, E. Milovanovi\'c,
-  I. Milovanovi\'c, Beyond the Zagreb indices, \textit{AKCE Int. J.
-  Graphs Comb.\/} \textbf{17} (2020) 74--85.
-
-  \bibitem{GutmanToganYurttasCevikCangul2018Sigma} I. Gutman, M. Togan, A.
-  Yurtta\c{s}, A. S. \c{C}evik, I. N. Cangul, Inverse problem for sigma index,
-  \textit{MATCH Commun. Math. Comput. Chem.\/} \textbf{79} (2018) 491--508.
-  \bibitem{GutmanTrinajstic1972} I. Gutman, N. Trinajsti\'c, Graph theory
-  and molecular orbitals. Total $\pi$-electron energy of alternant
-  hydrocarbons, \textit{Chem. Phys. Lett.\/} \textbf{17} (1972) 535--538.
-
-
   \bibitem{Gutman2021Sombor} I. Gutman, Geometric approach to degree-based
   topological indices: Sombor indices, \textit{MATCH Commun. Math. Comput.
   Chem.\/} \textbf{86} (2021) 11--16.
@@ -2077,14 +2122,30 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   Sombor indices, \textit{Open J. Discr. Appl. Math.\/} \textbf{4} (2021)
   1--3.
 
+  \bibitem{Gutman2026SomborSurvey} I. Gutman, Survey of Sombor-type
+  degree-based topological indices, \textit{MATCH Commun. Math. Comput.
+  Chem.\/} \textbf{96} (2026) 819--837.
+
+  \bibitem{GutmanBuragohainNyauli2026} I. Gutman, J. Buragohain,
+  G. G. Nyauli, Concealed relations between vertex-degree-based
+  topological indices, \textit{J. Math. Chem.\/} \textbf{64} (2026) \#39.
+
   \bibitem{GutmanFurtulaOz2024Elliptic} I. Gutman, B. Furtula, M. S. Oz,
   Geometric approach to vertex-degree-based topological indices: Elliptic
   Sombor index, theory and application, \textit{Int. J. Quantum Chem.\/}
   \textbf{124} (2024) \#e27346.
 
-  \bibitem{Gutman2026SomborSurvey} I. Gutman, Survey of Sombor-type
-  degree-based topological indices, \textit{MATCH Commun. Math. Comput.
-  Chem.\/} \textbf{96} (2026) 819--837.
+  \bibitem{GutmanMilovanovic2020AKCE} I. Gutman, E. Milovanovi\'c,
+  I. Milovanovi\'c, Beyond the Zagreb indices, \textit{AKCE Int. J.
+  Graphs Comb.\/} \textbf{17} (2020) 74--85.
+
+  \bibitem{GutmanToganYurttasCevikCangul2018Sigma} I. Gutman, M. Togan, A.
+  Yurtta\c{s}, A. S. \c{C}evik, I. N. Cangul, Inverse problem for sigma index,
+  \textit{MATCH Commun. Math. Comput. Chem.\/} \textbf{79} (2018) 491--508.
+
+  \bibitem{GutmanTrinajstic1972} I. Gutman, N. Trinajsti\'c, Graph theory
+  and molecular orbitals. Total $\pi$-electron energy of alternant
+  hydrocarbons, \textit{Chem. Phys. Lett.\/} \textbf{17} (1972) 535--538.
 
   \bibitem{HuMATCH2022} Z. Hu, L. Li, X. Li, D. Peng, Extremal graphs
   for topological index defined by a degree-based edge-weight
@@ -2106,16 +2167,10 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   Lower bound on the KG-Sombor index, \textit{Commun. Comb. Optim.\/}
   \textbf{8} (2023) 751--757.
 
-
   \bibitem{NISTWebBook} P. J. Linstrom, W. G. Mallard (Eds.), \textit{NIST
   Chemistry WebBook, NIST Standard Reference Database Number 69}, National
   Institute of Standards and Technology, Gaithersburg MD,
-  \href{https://doi.org/10.18434/T4D303}{doi:10.18434/T4D303} (retrieved January 2025).
-  \bibitem{NyauliBuragohain2027DRSO} G. G. Nyauli, J. Buragohain,
-  Geometric approach to degree-based topological indices: degree-ratio
-  Sombor indices of graphs, \textit{MATCH Commun. Math. Comput. Chem.\/}
-  \textbf{97} (2027) 135--164.
-
+  \href{https://doi.org/10.18434/T4D303}{doi:10.18434/T4D303} (retrieved January 2025; re-checked August--October 2026).
 
   \bibitem{MendezBermudezAguilarSanchez2022MeanSombor} J. A.
   M\'endez-Berm\'udez, R. Aguilar-S\'anchez, E. D. Molina, J. M. Rodr\'iguez, Mean
@@ -2139,6 +2194,11 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   Red\v{z}epovi\'c, B. Furtula, Diminished Sombor index, \textit{MATCH Commun.
   Math. Comput. Chem.\/} \textbf{95} (2026) 141--162.
 
+  \bibitem{NyauliBuragohain2027DRSO} G. G. Nyauli, J. Buragohain,
+  Geometric approach to degree-based topological indices: degree-ratio
+  Sombor indices of graphs, \textit{MATCH Commun. Math. Comput. Chem.\/}
+  \textbf{97} (2027) 135--164.
+
   \bibitem{PortillaJMC2025GM} A. Portilla, J. M. Rodr\'iguez,
   I. Salas Lorenzo, J. M. Sigarreta, The Gutman--Milovanovi\'c index
   in mathematical chemistry, \textit{J. Math. Chem.\/} \textbf{63}
@@ -2155,22 +2215,22 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   \bibitem{RakicFurtula2019SS} M. Raki\'c, B. Furtula, A novel method for
   measuring the structure sensitivity of molecular descriptors, \textit{J.
   Chemometrics\/} \textbf{33} (2019) \#e3138.
+
   \bibitem{Randic1975} M. Randi\'c, Characterization of molecular
   branching, \textit{J. Am. Chem. Soc.\/} \textbf{97} (1975) 6609--6615.
+
   \bibitem{RetiSharafdini2018IRLA} T. R\'eti, R. Sharafdini,
   \'A. Dr\'egelyi-Kiss, H. Haghbin, Graph irregularity indices used as
   molecular descriptors in QSPR studies, \textit{MATCH Commun. Math.
   Comput. Chem.\/} \textbf{79} (2018) 509--524.
 
-
-
   \bibitem{Shang2022Simplicial}
   Y. Shang, Sombor index and degree-related properties of simplicial
   networks, \textit{Appl. Math. Comput.\/} \textbf{419} (2022) \#126881.
+
   \bibitem{ShirdelRezapourSayadi2013HM} G. H. Shirdel, H. Rezapour,
   A. M. Sayadi, The hyper-Zagreb index of graph operations,
   \textit{Iranian J. Math. Chem.\/} \textbf{4} (2013) 213--220.
-
 
   \bibitem{Sigarreta2022ExpVDB} J. M. Sigarreta, Extremal problems on
   exponential vertex-degree-based topological indices, \textit{Math.
@@ -2184,9 +2244,9 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   \bibitem{WangMaoLiFurtula2022SomborRelations} Z. Wang, Y. Mao, Y. Li, B.
   Furtula, On relations between Sombor and other degree-based indices,
   \textit{J. Appl. Math. Comput.\/} \textbf{68} (2022) 1--17.
+
   \bibitem{Wiener1947} H. Wiener, Structural determination of paraffin
   boiling points, \textit{J. Am. Chem. Soc.\/} \textbf{69} (1947) 17--20.
-
 
   \bibitem{ZhouTrinajstic2009sumconn}
   B. Zhou, N. Trinajsti\'c, On a novel connectivity index, \textit{J. Math.
@@ -2201,6 +2261,6 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   defined via the modified Sombor matrix, \textit{Molecules\/} \textbf{27}
   (2022) \#6772.
 
-  \end{thebibliography}
+\end{thebibliography}
 
 \end{document}
