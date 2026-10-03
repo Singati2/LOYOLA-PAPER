@@ -7,7 +7,9 @@ Runtime ~3-5 minutes.
 """
 import csv, math, os
 import numpy as np
-from verify_loyola_v35 import OCTANES, alkane_pairs, lo_pairs, PROPS
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from octane_data import OCTANES, alkane_pairs, lo_pairs, PROPS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 N = 18
@@ -51,7 +53,7 @@ def main():
             gm_c = [(a, b, 0.0) for a, b in np.round(rng.uniform(-2, 2, (budget, 2)), 3)]
             for p in PROPS:
                 qg = nested_q2(p, gm_c); ql = nested_q2(p, lo_c)
-                rows.append([seed, budget, p, f"{qg:.4f}", f"{ql:.4f}", f"{ql-qg:+.4f}"])
+                rows.append([seed, budget, p, f"{qg:.10f}", f"{ql:.10f}", f"{ql-qg:+.10f}"])
     with open(os.path.join(HERE, "ablation_robustness.csv"), "w", newline="") as f:
         w = csv.writer(f); w.writerow(["seed", "budget", "property", "Q2_GM", "Q2_LO", "dQ2"])
         for r in rows: w.writerow(r)

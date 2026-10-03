@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Redundancy (PART 1) and BID-collision (PART 2) analysis for the 18 octanes.
 
-Imports OCTANES, alkane_pairs, lo_pairs from verify_loyola_v32.py.
+Imports OCTANES, NAMES, alkane_pairs, lo_pairs from octane_data.py.
 Outputs:
   descriptor_correlations.csv  (12x12 signed Pearson matrix)
   pca_spectrum.csv             (component, eigenvalue, cumvar)
@@ -11,18 +11,12 @@ import csv, itertools, os, sys
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from verify_loyola_v35 import OCTANES, alkane_pairs, lo_pairs
+from octane_data import OCTANES, NAMES, alkane_pairs, lo_pairs
 
 WORK = os.path.dirname(os.path.abspath(__file__))
 PROPS = ["T_B", "dHf", "dHvap", "S", "omega"]
 
-NAMES = ["octane", "2-methylheptane", "3-methylheptane", "4-methylheptane",
-         "2,2-dimethylhexane", "2,3-dimethylhexane", "2,4-dimethylhexane",
-         "2,5-dimethylhexane", "3,3-dimethylhexane", "3,4-dimethylhexane",
-         "2-methyl-3-ethylpentane", "3-ethyl-3-methylpentane", "3-ethylhexane",
-         "2,2,3-trimethylpentane", "2,2,4-trimethylpentane",
-         "2,3,3-trimethylpentane", "2,3,4-trimethylpentane",
-         "2,2,3,3-tetramethylbutane"]
+# NAMES (IUPAC, same order as OCTANES) come from octane_data.py
 
 INDICES = [("M1", (0, 1, 0)), ("M2", (1, 0, 0)), ("HM", (0, 2, 0)),
            ("mM2", (-1, 0, 0)), ("R", (-0.5, 0, 0)), ("chi", (0, -0.5, 0)),
@@ -42,7 +36,7 @@ def part1():
         w = csv.writer(f)
         w.writerow([""] + labels)
         for i, lab in enumerate(labels):
-            w.writerow([lab] + [f"{C[i, j]:.6f}" for j in range(12)])
+            w.writerow([lab] + [f"{C[i, j]:.10f}" for j in range(12)])
 
     pairs99, pairs999 = [], []
     for i, j in itertools.combinations(range(12), 2):
@@ -179,7 +173,7 @@ def norm_name(name):
 def part2():
     print("\n=== PART 2: name verification ===")
     focus = {"3-methylheptane", "4-methylheptane", "3,4-dimethylhexane",
-             "2-methyl-3-ethylpentane"}
+             "3-ethyl-2-methylpentane"}
     all_ok, focus_ok = True, True
     for name, row in zip(NAMES, OCTANES):
         smi = row[0]

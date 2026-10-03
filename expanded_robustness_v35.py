@@ -18,7 +18,9 @@ Runtime ~2-4 minutes.
 """
 import csv, math, os
 import numpy as np
-from verify_loyola_v35 import OCTANES, alkane_pairs, lo_pairs, PROPS
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from octane_data import OCTANES, alkane_pairs, lo_pairs, PROPS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 N = 18
@@ -79,8 +81,8 @@ def main():
             for p in PROPS:
                 y = Y[p]
                 q_gm, q_lo, q_lz = nested_q2(X_gm, y), nested_q2(X_lo, y), nested_q2(X_lz, y)
-                rows.append([seed, budget, p, f"{q_gm:.7f}", f"{q_lo:.7f}",
-                             f"{q_lo-q_gm:+.7f}", f"{q_lz:.7f}", f"{q_lo-q_lz:+.7f}"])
+                rows.append([seed, budget, p, f"{q_gm:.10f}", f"{q_lo:.10f}",
+                             f"{q_lo-q_gm:+.10f}", f"{q_lz:.10f}", f"{q_lo-q_lz:+.10f}"])
     with open(os.path.join(HERE, "expanded_robustness_v35.csv"), "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["seed", "budget", "property", "Q2_GM", "Q2_LO", "dQ2",
@@ -97,7 +99,7 @@ def main():
                 w.writerow([budget, p, len(d),
                             sum(1 for x in d if x > 0), sum(1 for x in d if x < 0),
                             sum(1 for x in dp if x > 0), sum(1 for x in dp if x < 0),
-                            f"{min(d):+.4f}", f"{float(np.median(d)):+.4f}", f"{max(d):+.4f}"])
+                            f"{min(d):+.10f}", f"{float(np.median(d)):+.10f}", f"{max(d):+.10f}"])
     print("wrote expanded_robustness_v35.csv (1000 rows) + summary")
 
 if __name__ == "__main__":

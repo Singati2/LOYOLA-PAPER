@@ -1,5 +1,14 @@
 #!/usr/bin/env python3
-"""UNIFIED v35 verifier for LOYOLA_v35/main.tex.
+r"""UNIFIED verifier for the LOYOLA manuscript package (v36; filename kept).
+
+v36 changes: data imported from octane_data.py (single source; four corrected
+dH_vap values); every numeric table cell is compared as the EXACT display
+string of the full-precision recomputed value (no tolerances); tab:ablation,
+tab:fgdss and tab:multiorder are recomputed from first principles in this run
+([H], [G2], [G3]) and tab:octane-data is checked against octane_data.OCTANES;
+tab:lo_tuning_bestfixed reuses the tab:lo_tuning pools (single default_rng(42)
+stream); provenance classes are re-derived with a parenthetical-aware parser,
+paper values must equal the dataset, and PROV_TOL[dHvap] = 0.04 kcal/mol.
 
 v35 additions: section [N] re-runs the four bundled analysis scripts
 (matched-budget nested GM-vs-LO ablation, multi-order degeneracy n=7..12,
@@ -45,7 +54,7 @@ v35 hardening over v29 (all v29 false negatives confirmed by execution first):
   equality, so no prefix or suffix survives. The guard validates raw source
   under conventional catcodes with no conditionals; it does not execute TeX.
 - (round-10 repair): TeX comments are stripped before table parsing
-  (escaped \% preserved), so a %-commented row/label/anchor line is invisible
+  (escaped backslash-percent preserved), so a %-commented row/label/anchor line is invisible
   to both LaTeX and the verifier and is caught by the row/label/count checks;
   TeX conditionals (\if.../\else/\fi) inside a guarded table region are
   rejected outright. Scope: FULL PASS covers the executed computations, the
@@ -55,45 +64,46 @@ v35 hardening over v29 (all v29 false negatives confirmed by execution first):
 import argparse, csv, io, math, os, re, shutil, subprocess, sys, tempfile
 import numpy as np
 
-OCTANES = [
-('CCCCCCCC',125.6,-49.82,9.92,111.55,0.398),('CC(C)CCCCC',117.6,-51.50,9.48,109.84,0.378),
-('CCC(C)CCCC',118.9,-50.82,9.52,111.26,0.371),('CCCC(C)CCC',117.7,-50.69,9.48,109.32,0.372),
-('CC(C)(C)CCCC',106.8,-53.71,8.92,103.13,0.339),('CC(C)C(C)CCC',115.6,-51.13,9.27,108.02,0.348),
-('CC(C)CC(C)CC',109.4,-52.44,9.03,106.98,0.344),('CC(C)CCC(C)C',109.1,-53.21,9.05,105.72,0.357),
-('CCCC(C)(C)CC',111.9,-52.61,9.04,104.74,0.322),('CCC(C)C(C)CC',117.7,-50.91,9.32,106.59,0.340),
-('CCC(CC)C(C)C',115.6,-50.48,9.21,106.06,0.330),('CCC(C)(CC)CC',118.3,-51.38,9.21,101.48,0.302),
-('CCC(CC)CCC',118.5,-50.40,9.48,109.43,0.362),('CCC(C)C(C)(C)C',109.8,-52.61,8.88,101.31,0.300),
-('CC(C)CC(C)(C)C',99.2,-53.57,8.40,101.81,0.305),('CCC(C)(C)C(C)C',114.8,-51.73,9.02,101.31,0.291),
-('CC(C)C(C)C(C)C',113.5,-51.97,9.01,102.39,0.317),('CC(C)(C)C(C)(C)C',106.5,-53.99,8.41,93.06,0.247)]
-PROPS = ["T_B","dHf","dHvap","S","omega"]
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from octane_data import OCTANES, NAMES, PROPS, alkane_pairs, lo_pairs  # single data source (v36)
 ROWLABELS = ["M1","M2","HM","mM2","R","chi","H/2","ISI","GA","AG","LO(0,0,1)","LO(0,0,2)"]
 RED = {"M1":(0,1,0),"M2":(1,0,0),"HM":(0,2,0),"mM2":(-1,0,0),"R":(-0.5,0,0),
  "chi":(0,-0.5,0),"H/2":(0,-1,0),"ISI":(1,-1,0),"GA":(0.5,-1,0),"AG":(-0.5,1,0),
  "LO(0,0,1)":(0,0,1),"LO(0,0,2)":(0,0,2)}
 # manuscript-claim tables (audited against computation in sections A-F; the tex
 # drift guard [T] does NOT use these -- it uses the computed CMP values):
-MS_T2 = {"M1":(-0.718,-0.762,-0.912,-0.973,-0.970),"M2":(-0.497,-0.542,-0.772,-0.940,-0.988),
-"HM":(-0.654,-0.710,-0.873,-0.975,-0.982),"mM2":(0.855,0.891,0.937,0.863,0.794),
-"R":(0.819,0.850,0.954,0.933,0.898),"chi":(0.800,0.832,0.951,0.949,0.924),
-"H/2":(0.821,0.849,0.956,0.933,0.900),"ISI":(-0.005,-0.000,-0.331,-0.601,-0.738),
-"GA":(0.822,0.858,0.957,0.941,0.906),"AG":(-0.816,-0.859,-0.950,-0.939,-0.900),
-"LO(0,0,1)":(-0.828,-0.832,-0.966,-0.931,-0.929),"LO(0,0,2)":(-0.829,-0.846,-0.967,-0.939,-0.925)}
-BOLD = [("mM2","T_B"),("mM2","dHf"),("LO(0,0,2)","dHvap"),("HM","S"),("M2","omega")]
-MS_E2 = {("M2","T_B"):(0.497,0.598,0.353,0.331,0.458),("M2","dHf"):(0.542,0.635,0.358,0.395,0.540),
-("M2","dHvap"):(0.772,0.839,0.231,0.714,0.786),("M2","S"):(0.940,0.960,0.067,0.919,0.943),
+MS_T2 = {"M1":(-0.718,-0.762,-0.935,-0.973,-0.970),"M2":(-0.497,-0.542,-0.811,-0.940,-0.988),
+"HM":(-0.654,-0.710,-0.903,-0.975,-0.982),"mM2":(0.855,0.891,0.925,0.863,0.794),
+"R":(0.819,0.850,0.958,0.933,0.898),"chi":(0.800,0.832,0.961,0.949,0.924),
+"H/2":(0.821,0.849,0.961,0.933,0.900),"ISI":(-0.005,-0.000,-0.383,-0.601,-0.738),
+"GA":(0.822,0.858,0.965,0.941,0.906),"AG":(-0.816,-0.859,-0.957,-0.939,-0.900),
+"LO(0,0,1)":(-0.828,-0.832,-0.984,-0.931,-0.929),"LO(0,0,2)":(-0.829,-0.846,-0.981,-0.939,-0.925)}
+BOLD = [("mM2","T_B"),("mM2","dHf"),("LO(0,0,1)","dHvap"),("HM","S"),("M2","omega")]
+MS_E2 = {("M2","T_B"):(0.497,0.598,0.353,0.331,0.458),
+("M2","dHf"):(0.542,0.635,0.358,0.395,0.540),
+("M2","dHvap"):(0.811,0.876,0.185,0.768,0.838),
+("M2","S"):(0.940,0.960,0.067,0.919,0.943),
 ("M2","omega"):(0.988,0.995,0.018,0.985,0.985),
-("HM","T_B"):(0.654,0.740,0.257,0.545,0.647),("HM","dHf"):(0.710,0.786,0.255,0.645,0.741),
-("HM","dHvap"):(0.873,0.920,0.122,0.837,0.894),("HM","S"):(0.975,0.976,0.027,0.967,0.960),
+("HM","T_B"):(0.654,0.740,0.257,0.545,0.647),
+("HM","dHf"):(0.710,0.786,0.255,0.645,0.741),
+("HM","dHvap"):(0.903,0.944,0.082,0.871,0.921),
+("HM","S"):(0.975,0.976,0.027,0.967,0.960),
 ("HM","omega"):(0.982,0.989,0.025,0.979,0.982),
-("mM2","T_B"):(0.855,0.864,0.096,0.781,0.759),("mM2","dHf"):(0.891,0.897,0.087,0.865,0.837),
-("mM2","dHvap"):(0.937,0.966,0.051,0.914,0.953),("mM2","S"):(0.863,0.918,0.188,0.812,0.881),
+("mM2","T_B"):(0.855,0.864,0.096,0.781,0.759),
+("mM2","dHf"):(0.891,0.897,0.087,0.865,0.837),
+("mM2","dHvap"):(0.925,0.966,0.068,0.900,0.953),
+("mM2","S"):(0.863,0.918,0.188,0.812,0.881),
 ("mM2","omega"):(0.794,0.881,0.246,0.730,0.853),
-("LO(0,0,1)","T_B"):(0.828,0.835,0.161,0.771,0.764),("LO(0,0,1)","dHf"):(0.832,0.842,0.152,0.800,0.807),
-("LO(0,0,1)","dHvap"):(0.966,0.969,0.042,0.956,0.957),("LO(0,0,1)","S"):(0.931,0.948,0.045,0.892,0.920),
+("LO(0,0,1)","T_B"):(0.828,0.835,0.161,0.771,0.764),
+("LO(0,0,1)","dHf"):(0.832,0.842,0.152,0.800,0.807),
+("LO(0,0,1)","dHvap"):(0.984,0.985,0.016,0.978,0.978),
+("LO(0,0,1)","S"):(0.931,0.948,0.045,0.892,0.920),
 ("LO(0,0,1)","omega"):(0.929,0.945,0.074,0.907,0.926)}
-MS_F = {"T_B":("mM2",0.855,0.781,0.834,0.763),"dHf":("mM2",0.891,0.865,0.850,0.809),
-"dHvap":("LO(0,0,2)",0.967,0.956,0.969,0.959),"S":("HM",0.975,0.967,0.949,0.921),
-"omega":("M2",0.988,0.985,0.946,0.929)}
+MS_F = {"T_B":("mM2",0.855,0.781,0.835,0.764),
+"dHf":("mM2",0.891,0.865,0.850,0.815),
+"dHvap":("LO(0,0,1)",0.984,0.978,0.985,0.978),
+"S":("HM",0.975,0.967,0.948,0.920),
+"omega":("M2",0.988,0.985,0.945,0.926)}
 
 CSV_PRED = "lo_sensitivity_prediction_correlations.csv"
 CSV_DEG  = "lo_sensitivity_degeneracy_order10_trees.csv"
@@ -111,11 +121,18 @@ CSV_PROV = "octane_property_provenance_v35.csv"
 CSV_EXPR = "expanded_robustness_v35.csv"
 CSV_EXPS = "expanded_robustness_summary_v35.csv"
 CSV_OMEG = "omega_source_sensitivity_v35.csv"
+CSV_SSEN = "entropy_source_sensitivity_v36.csv"
 PROV_HALF = {"T_B":0.05,"dHf":0.005,"dHvap":0.005,"S":0.005,"omega":0.0005}
-PROV_TOL  = {"T_B":0.15,"dHf":0.15,"dHvap":0.15,"S":0.3,"omega":0.003}
+PROV_TOL  = {"T_B":0.15,"dHf":0.15,"dHvap":0.04,"S":0.3,"omega":0.003}  # v36: dHvap tightened so a >=0.05 kcal/mol gap cannot pass
 PROV_EXPECT = {"VERIFIED EXACT":3,"VERIFIED AFTER UNIT CONVERSION":34,
  "AGREEMENT WITHIN TOLERANCE":32,"SOURCE VARIATION / EXPLAINED":13,
  "CANNOT VERIFY":7,"CONFLICT":1}
+EXPR_SIGNS = {  # (budget, property): (LO better, LO worse) over seeds 0..99 -- manuscript claims
+ ("200","T_B"):(53,47),("200","dHf"):(14,86),("200","dHvap"):(100,0),("200","S"):(35,65),("200","omega"):(26,74),
+ ("500","T_B"):(64,36),("500","dHf"):(24,76),("500","dHvap"):(100,0),("500","S"):(29,71),("500","omega"):(28,72)}
+EXPR_PAIRED = {("200","dHvap"):(100,0),("500","dHvap"):(100,0)}
+OMEGA_ALT = {"2,2,4-trimethylpentane":0.303,"2,2,3,3-tetramethylbutane":0.251}
+S_ALT = {"octane":111.70,"2,2-dimethylhexane":103.40,"2,2,4-trimethylpentane":104.10,"2,3,3-trimethylpentane":102.10}
 FGD_PUBLISHED = {  # Barman & Das, MATCH 95 (2026) 63-94, Table 10, decane column
  "M1":(0.0566,0.1336),"mM2":(0.0516,0.1177),"R":(0.0263,0.0588),"chi":(0.0264,0.0591),
  "H/2":(0.0515,0.1143),"GA":(0.0241,0.0535),"AG":(0.0255,0.0579)}
@@ -123,10 +140,13 @@ ANALYSIS_SCRIPTS = {
     "ablation_gm_vs_lo.py": [CSV_ABLF, CSV_ABL],
     "multi_order_degeneracy.py": [CSV_MO],
     "redundancy_collisions.py": [CSV_CORR, CSV_PCA, CSV_COLL],
-    "fgd_structure_sensitivity.py": [CSV_FGD],
+    "fgd_structure_sensitivity.py": [CSV_FGD, CSV_CTRL],
+    "expanded_robustness_v35.py": [CSV_EXPR, CSV_EXPS],
+    "source_sensitivity.py": [CSV_OMEG, CSV_SSEN],
+    "ablation_robustness.py": [CSV_ROB],
 }
 COLL_ROWS = [("3-methylheptane",2),("4-methylheptane",3),
-             ("3,4-dimethylhexane",9),("2-methyl-3-ethylpentane",10)]
+             ("3,4-dimethylhexane",9),("3-ethyl-2-methylpentane",10)]
 NUM_ANY = re.compile(r"^\$([+-]?\d+\.\d+)\$$")
 NUM_INT = re.compile(r"^\$(\d+)\$$")
 NUM_FRAC= re.compile(r"^\$(\d+)/18\$$")
@@ -146,28 +166,13 @@ NUM_S  = re.compile(r"^\$([+-]\d\.\d{3})\$$")
 NUM_SB = re.compile(r"^\$\\mathbf\{([+-]\d\.\d{3})\}\$$")
 NUM_U  = re.compile(r"^\$(\d\.\d{3})\$$")
 NUM_PH = re.compile(r"^\$\\phantom\{\+\}(0\.000)\$$")
-TOL_TEX = 1.6e-3
+NUM_4  = re.compile(r"^\$(\d\.\d{4})\$$")
+NUM_C100=re.compile(r"^\$(\d+)/100\$$")
+NUM_MED= re.compile(r"^\$([+-]\d\.\d{3})\\,\[([+-]\d\.\d{3}),\s*([+-]\d\.\d{3})\]\$$")
+FGD_LABEL = {"M1":"$M_1$","M2":"$M_2$","HM":"$HM$","mM2":r"${}^{m}\!M_2$","R":"$R$","chi":r"$\chi$",
+             "H/2":"$H/2$","ISI":"$ISI$","GA":"$GA$","AG":"$AG$","LO(0,0,1)":"$LO(0,0,1)$","LO(0,0,2)":"$LO(0,0,2)$"}
 
 UNDEF_RESAMPLES = 0
-
-def alkane_pairs(smi):
-    adj={};prev=None;stack=[];k=-1
-    for ch in smi:
-        if ch=='(':stack.append(prev)
-        elif ch==')':prev=stack.pop()
-        elif ch=='C':
-            k+=1;adj[k]=set()
-            if prev is not None:adj[k].add(prev);adj[prev].add(k)
-            prev=k
-    seen=set();out=[]
-    for u in adj:
-        for v in adj[u]:
-            e=(min(u,v),max(u,v))
-            if e in seen:continue
-            seen.add(e);out.append((len(adj[u]),len(adj[v])))
-    return out
-
-def lo_pairs(P,a,b,g):return sum((i*j)**a*(i+j)**b*math.exp(g*abs(i-j)/(i+j)) for i,j in P)
 
 def r_signed(x,y):
     xc=x-x.mean();yc=y-y.mean();s=np.linalg.norm(xc)*np.linalg.norm(yc)
@@ -194,7 +199,7 @@ def boot_hw(x,y,B=10000,seed=0):
     lo_,hi=np.percentile(v,[2.5,97.5]);return (hi-lo_)/2
 
 def decomment_tex(s):
-    """Strip TeX comments (unescaped % to end of line), preserving escaped \%."""
+    """Strip TeX comments (unescaped % to end of line), preserving escaped backslash-percent."""
     out=[]
     for line in s.split("\n"):
         i=0;res=[]
@@ -207,15 +212,13 @@ def decomment_tex(s):
     return "\n".join(out)
 
 def load_v35_expectations(here):
-    """Load the v35 canonical analysis CSVs (already cross-checked against a
-    fresh recomputation by section [N]) as drift-guard expectations."""
-    E={}
-    abl={}
-    for r in csv.DictReader(open(os.path.join(here,CSV_ABL),newline="")):
-        abl[(r["property"],r["model"])]=r
-    E["abl"]=abl
-    E["mo"]=list(csv.DictReader(open(os.path.join(here,CSV_MO),newline="")))
-    E["fgd"]={r["index"]:r for r in csv.DictReader(open(os.path.join(here,CSV_FGD),newline=""))}
+    """v36: tables are guarded against first-principles recomputations made in
+    this run (CMP["ABL"], CMP["FGD"], CMP["MO"]); the only CSV-derived
+    expectation is the 100-seed sweep (expanded_robustness_v35.csv), which
+    section [N] regenerates from scratch and compares with the canonical copy."""
+    E={"EXPR":{}}
+    for r in csv.DictReader(open(os.path.join(here,CSV_EXPR),newline="")):
+        E["EXPR"].setdefault((r["budget"],r["property"]),[]).append(float(r["dQ2"]))
     return E
 
 def run_v35_analyses(here):
@@ -226,6 +229,7 @@ def run_v35_analyses(here):
     msgs=[]
     with tempfile.TemporaryDirectory() as td:
         for sc in ANALYSIS_SCRIPTS: _sh.copy(os.path.join(here,sc),td)
+        _sh.copy(os.path.join(here,"octane_data.py"),td)
         _sh.copy(os.path.abspath(__file__),os.path.join(td,"verify_loyola_v35.py"))
         for sc,outs in ANALYSIS_SCRIPTS.items():
             r=subprocess.run([sys.executable,sc],cwd=td,capture_output=True,text=True,timeout=1200)
@@ -256,22 +260,37 @@ def run_v35_analyses(here):
 # ---------------------------------------------------------------- drift guard
 def _cells(row):
     return [c.strip() for c in row.rstrip().rstrip("\\").split("&")]
+def fs3(x):
+    """Signed 3-dp display string of a FULL-PRECISION value."""
+    return f"{x:+.3f}"
+def fu3(x):
+    """Unsigned 3-dp display string of a FULL-PRECISION value."""
+    return f"{x:.3f}"
 def _num(cell, signed, allow_phantom=False, computed=None, allow_bold=False):
-    """Parse a complete numeric tex token; return (value, is_bold, err)."""
+    """Parse a complete numeric tex token; return (string, is_bold, err).
+    v36: the caller compares the returned STRING with the exact formatted
+    full-precision value (no numeric tolerance)."""
     m = NUM_S.match(cell) if signed else NUM_U.match(cell)
-    if m: return float(m.group(1)), False, None
+    if m: return m.group(1), False, None
     if allow_bold and signed:
         m = NUM_SB.match(cell)
-        if m: return float(m.group(1)), True, None
+        if m: return m.group(1), True, None
     if allow_phantom and NUM_PH.match(cell):
-        if computed is not None and abs(round(computed,3))>1e-9:
-            return 0.0, False, f"phantom-zero token but computed value {computed:+.3f} does not round to 0.000"
-        return 0.0, False, None
+        if computed is not None and fs3(computed) not in ("+0.000","-0.000"):
+            return None, False, f"phantom-zero token but computed value {computed:+.3f} does not round to 0.000"
+        return "PHANTOM0", False, None
     return None, False, f"cell '{cell}' is not a complete {'signed' if signed else 'unsigned'} 3-decimal token"
+def _disp_ok(tok, exp, signed):
+    """Exact display check: tok must equal the rounding of the full-precision exp."""
+    if tok=="PHANTOM0":return fs3(exp) in ("+0.000","-0.000")
+    return tok==(fs3(exp) if signed else fu3(abs(exp)))
 
 def check_tex(texpath, CMP):
-    """Drift guard: validate ALL cells of the three section-4 tables against the
-    executed computation (CMP). Returns (ok, msgs)."""
+    """Drift guard (v36): every numeric cell of every numeric table in main.tex
+    must be the EXACT display string of the full-precision value recomputed in
+    this run (no tolerances). Tables: lo_octane, lo_tuning, lo_tuning_bestfixed,
+    ablation (+ 100-seed median columns), multiorder, fgdss, collisions,
+    octane-data. Returns (ok, msgs)."""
     msgs=[]
     try:tex=decomment_tex(open(texpath).read())
     except Exception as e:return False,[f"cannot read {texpath}: {e}"]
@@ -283,27 +302,30 @@ def check_tex(texpath, CMP):
         try:
             b=tex[tex.index(r"\label{tab:%s}"%label):];return b[:b.index(r"\end{tabular}")]
         except ValueError:return None
+    def datarows(blk,amp=None):
+        body=blk[blk.index(r"\midrule"):] if r"\midrule" in blk else blk
+        return [l for l in body.splitlines() if l.rstrip().endswith(r"\\") and "&" in l
+                and r"\multicolumn" not in l and (amp is None or l.count("&")==amp)]
     # ---- Table 2: 12 labeled rows x 5 SIGNED complete tokens ----
     blk=block("lo_octane")
     if blk is None:msgs.append("tab:lo_octane not found")
     else:
-        body=blk[blk.index(r"\midrule"):] if r"\midrule" in blk else blk
-        rowsl=[l for l in body.splitlines() if l.rstrip().endswith(r"\\") and "&" in l]
+        rowsl=datarows(blk)
         if len(rowsl)!=12:msgs.append(f"tab:lo_octane: expected 12 data rows, found {len(rowsl)}")
         seen=set()
         for k,row in enumerate(rowsl[:12]):
             cs=_cells(row)
             if len(cs)!=6:
                 msgs.append(f"tab:lo_octane row {k}: expected 6 cells, found {len(cs)}");continue
-            if k<len(T2_CELL0) and cs[0]!=T2_CELL0[k]:
+            if cs[0]!=T2_CELL0[k]:
                 msgs.append(f"tab:lo_octane row {k}: label mismatch, expected {ROWLABELS[k]} cell exactly '{T2_CELL0[k]}', got '{cs[0][:40]}'")
-            nm=ROWLABELS[k] if k<12 else None
+            nm=ROWLABELS[k]
             for j,p in enumerate(PROPS):
-                val,bold,err=_num(cs[1+j],signed=True,allow_bold=True)
+                tok,bold,err=_num(cs[1+j],signed=True,allow_bold=True)
                 if err:msgs.append(f"tab:lo_octane {nm}/{p}: {err}");continue
                 exp=CMP["T2f"][nm][j]
-                if abs(val-exp)>TOL_TEX:
-                    msgs.append(f"tab:lo_octane {nm}/{p}: tex {val:+.3f} vs computed {exp:+.4f} (signed)")
+                if not _disp_ok(tok,exp,True):
+                    msgs.append(f"tab:lo_octane {nm}/{p}: tex {tok} vs computed {exp:+.6f} (display {fs3(exp)})")
                 bestrow=max(range(12),key=lambda i:abs(CMP["T2f"][ROWLABELS[i]][j]))
                 if bold!=(k==bestrow):
                     msgs.append(f"tab:lo_octane {nm}/{p}: bolding mismatch (column best is {ROWLABELS[bestrow]})")
@@ -314,18 +336,18 @@ def check_tex(texpath, CMP):
     if blk is None:msgs.append("tab:lo_tuning not found")
     else:
         body=blk[blk.index(r"\midrule"):] if r"\midrule" in blk else blk
-        cur=-1;perblock=[[] for _ in ANCHORS];datarows=0
+        cur=-1;perblock=[[] for _ in ANCHORS];ndata=0
         for l in body.splitlines():
             if r"\multicolumn" in l and "near" in l:
                 cur+=1
                 if cur<4 and not re.search(ANCHOR_PATS[cur],l):
                     msgs.append(f"tab:lo_tuning block {cur}: anchor label mismatch, expected near {ANCHORS[cur]}, got '{l.strip()[:60]}'")
             elif l.rstrip().endswith(r"\\") and l.count("&")==7:
-                datarows+=1
+                ndata+=1
                 if 0<=cur<4:perblock[cur].append(l)
                 else:msgs.append(f"tab:lo_tuning: data row before first anchor block: '{l.strip()[:40]}'")
         if cur+1!=4:msgs.append(f"tab:lo_tuning: expected 4 anchor blocks, found {cur+1}")
-        if datarows!=20:msgs.append(f"tab:lo_tuning: expected 20 data rows, found {datarows}")
+        if ndata!=20:msgs.append(f"tab:lo_tuning: expected 20 data rows, found {ndata}")
         for bi,anm in enumerate(ANCHORS):
             if bi>cur:break
             if len(perblock[bi])!=5:
@@ -342,16 +364,15 @@ def check_tex(texpath, CMP):
                       (cs[5],False,abs(l0f),"LOO0"),(cs[6],False,abs(l50f),"LOO50"),
                       (cs[7],True,l50f-l0f,"gain_LOO")]
                 for cell,sgn,exp,tag in spec:
-                    val,_,err=_num(cell,signed=sgn,allow_phantom=sgn,computed=exp)
+                    tok,_,err=_num(cell,signed=sgn,allow_phantom=sgn,computed=exp)
                     if err:msgs.append(f"tab:lo_tuning {anm}/{p}/{tag}: {err}");continue
-                    if abs(val-exp)>TOL_TEX:
-                        msgs.append(f"tab:lo_tuning {anm}/{p}/{tag}: tex {val:+.3f} vs computed {exp:+.4f}")
+                    if not _disp_ok(tok,exp,sgn):
+                        msgs.append(f"tab:lo_tuning {anm}/{p}/{tag}: tex {tok} vs computed {exp:+.6f} (display {fs3(exp) if sgn else fu3(exp)})")
     # ---- best-fixed table: 5 rows x (property, index, 4 unsigned tokens) ----
     blk=block("lo_tuning_bestfixed")
     if blk is None:msgs.append("tab:lo_tuning_bestfixed not found")
     else:
-        body=blk[blk.index(r"\midrule"):] if r"\midrule" in blk else blk
-        rowsl=[l for l in body.splitlines() if l.rstrip().endswith(r"\\") and "&" in l]
+        rowsl=datarows(blk)
         if len(rowsl)!=5:msgs.append(f"bestfixed: expected 5 data rows, found {len(rowsl)}")
         seen=set()
         for ri,row in enumerate(rowsl[:5]):
@@ -365,46 +386,74 @@ def check_tex(texpath, CMP):
                 msgs.append(f"bestfixed {p}: best-fixed index label mismatch, expected {IDX_TEX[fnm]}, got '{cs[1]}'")
             for cell,exp,tag in [(cs[2],fixrf,"fix_r"),(cs[3],fixloof,"fix_LOO"),
                                  (cs[4],decrf,"dec_r"),(cs[5],decloof,"dec_LOO")]:
-                val,_,err=_num(cell,signed=False)
+                tok,_,err=_num(cell,signed=False)
                 if err:msgs.append(f"bestfixed {p}/{tag}: {err}");continue
-                if abs(val-exp)>TOL_TEX:
-                    msgs.append(f"bestfixed {p}/{tag}: tex {val:.3f} vs computed {exp:.4f}")
+                if not _disp_ok(tok,exp,False):
+                    msgs.append(f"bestfixed {p}/{tag}: tex {tok} vs computed {exp:.6f} (display {fu3(exp)})")
             if row in seen:msgs.append(f"bestfixed duplicated row: {row.strip()[:40]}")
             seen.add(row)
-    # ---- v35 tables (expectations from canonical analysis CSVs in CMP) ----
-    if "abl" in CMP:
+    # ---- tab:ablation: panel (a) first-principles single-seed cells; panel (b) 100-seed sweep ----
+    if "ABL" in CMP:
         blk=block("ablation")
         if blk is None:msgs.append("tab:ablation not found")
         else:
-            body=blk[blk.index(r"\midrule"):] if r"\midrule" in blk else blk
-            rowsl=[l for l in body.splitlines() if l.rstrip().endswith(r"\\") and "&" in l]
+            rowsl=datarows(blk)
             if len(rowsl)!=5:msgs.append(f"tab:ablation: expected 5 data rows, found {len(rowsl)}")
             for ri,row in enumerate(rowsl[:5]):
                 p=PROPS[ri];cs=_cells(row)
                 if len(cs)!=7:msgs.append(f"tab:ablation {p}: expected 7 cells, found {len(cs)}");continue
                 if cs[0]!=PROP_TEX[p]:msgs.append(f"tab:ablation row {ri}: property label mismatch, got '{cs[0]}'")
-                gm=CMP["abl"][(p,"GM")];lo=CMP["abl"][(p,"LO")]
-                exp=[float(gm["Q2"]),float(lo["Q2"]),float(lo["Q2"])-float(gm["Q2"]),
-                     float(gm["RMSE"]),float(lo["RMSE"])]
-                for ci,(cell,e) in enumerate(zip(cs[1:6],exp)):
-                    m=NUM_ANY.match(cell)
-                    if not m:msgs.append(f"tab:ablation {p} col{ci+1}: malformed token '{cell}'");continue
-                    if abs(float(m.group(1))-e)>1.1e-3:
-                        msgs.append(f"tab:ablation {p} col{ci+1}: tex {m.group(1)} vs computed {e:+.4f}")
+                a=CMP["ABL"][p]
+                spec=[(cs[1],a["q2g"],True,"Q2_GM"),(cs[2],a["q2l"],True,"Q2_LO"),
+                      (cs[3],a["q2l"]-a["q2g"],True,"dQ2"),(cs[4],a["rg"],False,"RMSE_GM"),
+                      (cs[5],a["rl"],False,"RMSE_LO")]
+                for cell,e,sgn,tag in spec:
+                    tok,_,err=_num(cell,signed=sgn)
+                    if err:msgs.append(f"tab:ablation {p}/{tag}: {err}");continue
+                    if not _disp_ok(tok,e,sgn):
+                        msgs.append(f"tab:ablation {p}/{tag}: tex {tok} vs computed {e:+.6f} (display {fs3(e) if sgn else fu3(e)})")
                 m=NUM_FRAC.match(cs[6])
                 if not m:msgs.append(f"tab:ablation {p}: LO-better cell malformed '{cs[6]}'")
-                elif int(m.group(1))!=int(lo["n_LO_better"]):
-                    msgs.append(f"tab:ablation {p}: LO-better {m.group(1)} vs computed {lo['n_LO_better']}")
-    if "mo" in CMP:
+                elif int(m.group(1))!=a["better"]:
+                    msgs.append(f"tab:ablation {p}: LO-better {m.group(1)} vs computed {a['better']}")
+            # panel (b): the second tabular inside the same table float
+            try:
+                k0=tex.index(r"\label{tab:ablation}");k1=tex.index(r"\end{tabular}",k0)+len(r"\end{tabular}")
+                kend=tex.index(r"\end{table}",k1);seg=tex[k1:kend]
+                blk2=seg[:seg.index(r"\end{tabular}")] if r"\begin{tabular}" in seg else None
+            except ValueError:blk2=None
+            if blk2 is None:msgs.append("tab:ablation panel (b) (100-seed sweep) not found")
+            elif "EXPR" in CMP:
+                rows2=datarows(blk2)
+                if len(rows2)!=5:msgs.append(f"tab:ablation panel (b): expected 5 data rows, found {len(rows2)}")
+                for ri,row in enumerate(rows2[:5]):
+                    p=PROPS[ri];cs=_cells(row)
+                    if len(cs)!=5:msgs.append(f"tab:ablation panel (b) {p}: expected 5 cells, found {len(cs)}");continue
+                    if cs[0]!=PROP_TEX[p]:msgs.append(f"tab:ablation panel (b) row {ri}: property label mismatch, got '{cs[0]}'")
+                    for ci,b in ((1,"200"),(2,"500")):
+                        d=CMP["EXPR"].get((b,p),[])
+                        if len(d)!=100:msgs.append(f"tab:ablation {p}: expanded sweep has {len(d)} seeds at budget {b}");continue
+                        m=NUM_MED.match(cs[ci])
+                        if not m:msgs.append(f"tab:ablation {p}: 100-seed median cell (budget {b}) malformed '{cs[ci]}'")
+                        else:
+                            exp=(fs3(float(np.median(d))),fs3(min(d)),fs3(max(d)))
+                            if m.groups()!=exp:
+                                msgs.append(f"tab:ablation {p}: 100-seed median [min,max] at budget {b}: tex {m.groups()} vs computed {exp}")
+                        m=NUM_C100.match(cs[ci+2])
+                        npos=sum(1 for x in d if x>0)
+                        if not m:msgs.append(f"tab:ablation {p}: seed-count cell (budget {b}) malformed '{cs[ci+2]}'")
+                        elif int(m.group(1))!=npos:
+                            msgs.append(f"tab:ablation {p}: seeds with dQ2>0 at budget {b}: tex {m.group(1)} vs computed {npos}")
+    # ---- tab:multiorder (first principles) ----
+    if "MO" in CMP:
         blk=block("multiorder")
         if blk is None:msgs.append("tab:multiorder not found")
         else:
-            body=blk[blk.index(r"\midrule"):] if r"\midrule" in blk else blk
-            rowsl=[l for l in body.splitlines() if l.rstrip().endswith(r"\\") and "&" in l]
+            rowsl=datarows(blk)
             if len(rowsl)!=12:msgs.append(f"tab:multiorder: expected 12 data rows, found {len(rowsl)}")
             for ri,row in enumerate(rowsl[:12]):
-                if ri>=len(CMP["mo"]):break
-                e=CMP["mo"][ri];cs=_cells(row)
+                if ri>=len(CMP["MO"]):break
+                e=CMP["MO"][ri];cs=_cells(row)
                 if len(cs)!=9:msgs.append(f"tab:multiorder row {ri}: expected 9 cells, found {len(cs)}");continue
                 mset="all" if e["graph_set"]=="all_trees" else "mol."
                 if cs[0]!=f"${e['n']}$" or cs[1]!=mset:
@@ -414,28 +463,27 @@ def check_tex(texpath, CMP):
                     if not m:msgs.append(f"tab:multiorder row {ri} col{ci+2}: malformed token '{cs[2+ci]}'");continue
                     if m.group(1)!=e[key]:
                         msgs.append(f"tab:multiorder row {ri} ({key}): tex {m.group(1)} vs computed {e[key]}")
-    if "fgd" in CMP:
+    # ---- tab:fgdss (first principles, exact 4-dp display) ----
+    if "FGD" in CMP:
         blk=block("fgdss")
         if blk is None:msgs.append("tab:fgdss not found")
         else:
-            body=blk[blk.index(r"\midrule"):] if r"\midrule" in blk else blk
-            rowsl=[l for l in body.splitlines() if l.rstrip().endswith(r"\\") and "&" in l]
+            rowsl=datarows(blk)
             if len(rowsl)!=12:msgs.append(f"tab:fgdss: expected 12 data rows, found {len(rowsl)}")
             for ri,row in enumerate(rowsl[:12]):
                 nm=ROWLABELS[ri];cs=_cells(row)
                 if len(cs)!=4:msgs.append(f"tab:fgdss {nm}: expected 4 cells, found {len(cs)}");continue
-                e=CMP["fgd"].get(nm if nm!="H/2" else "H/2")
-                if e is None:msgs.append(f"tab:fgdss: no canonical row for {nm}");continue
-                for ci,key in enumerate(["SS_fgd","Abr_fgd","ratio"]):
-                    m=NUM_ANY.match(cs[1+ci])
+                if cs[0]!=FGD_LABEL[nm]:msgs.append(f"tab:fgdss row {ri}: label '{cs[0]}' vs expected '{FGD_LABEL[nm]}'")
+                for ci,(key,val) in enumerate(zip(["SS","Abr","ratio"],CMP["FGD"][nm])):
+                    m=NUM_4.match(cs[1+ci])
                     if not m:msgs.append(f"tab:fgdss {nm} col{ci+1}: malformed token '{cs[1+ci]}'");continue
-                    if abs(float(m.group(1))-float(e[key]))>6e-5:
-                        msgs.append(f"tab:fgdss {nm}/{key}: tex {m.group(1)} vs computed {e[key]}")
+                    if m.group(1)!=f"{val:.4f}":
+                        msgs.append(f"tab:fgdss {nm}/{key}: tex {m.group(1)} vs computed {val:.7f} (display {val:.4f})")
+    # ---- tab:collisions (octane data) ----
     blk=block("collisions")
     if blk is None:msgs.append("tab:collisions not found")
     else:
-        body=blk[blk.index(r"\midrule"):] if r"\midrule" in blk else blk
-        rowsl=[l for l in body.splitlines() if l.rstrip().endswith(r"\\") and l.count("&")==5]
+        rowsl=datarows(blk,amp=5)
         if len(rowsl)!=4:msgs.append(f"tab:collisions: expected 4 molecule rows, found {len(rowsl)}")
         fmt=[("{:.1f}",1),("{:.2f}",2),("{:.2f}",3),("{:.2f}",4),("{:.3f}",5)]
         for ri,row in enumerate(rowsl[:4]):
@@ -445,8 +493,26 @@ def check_tex(texpath, CMP):
                 m=NUM_ANY.match(cs[1+ci])
                 if not m:msgs.append(f"tab:collisions {nm} col{ci+1}: malformed token '{cs[1+ci]}'");continue
                 exp=f.format(OCTANES[oi][col])
-                if float(m.group(1))!=float(exp):
+                if m.group(1)!=exp:
                     msgs.append(f"tab:collisions {nm} col{ci+1}: tex {m.group(1)} vs data {exp}")
+    # ---- tab:octane-data (appendix): must reproduce octane_data.OCTANES exactly ----
+    blk=block("octane-data")
+    if blk is None:msgs.append("tab:octane-data not found")
+    else:
+        rowsl=datarows(blk)
+        if len(rowsl)!=18:msgs.append(f"tab:octane-data: expected 18 rows, found {len(rowsl)}")
+        for ri,row in enumerate(rowsl[:18]):
+            cs=_cells(row);expname="$n$-octane" if NAMES[ri]=="octane" else NAMES[ri]
+            if len(cs)!=6:msgs.append(f"tab:octane-data row {ri}: expected 6 cells, found {len(cs)}");continue
+            if cs[0]!=expname:msgs.append(f"tab:octane-data row {ri}: name '{cs[0]}' vs expected '{expname}'")
+            for ci in range(5):
+                tok=cs[1+ci]
+                if tok.startswith("$") and tok.endswith("$"):tok=tok[1:-1]
+                cs[1+ci]=tok
+                if not re.match(r"^-?\d+(\.\d+)?$",cs[1+ci]):
+                    msgs.append(f"tab:octane-data {NAMES[ri]} col{ci+1}: malformed token '{cs[1+ci]}'");continue
+                if float(cs[1+ci])!=OCTANES[ri][1+ci]:
+                    msgs.append(f"tab:octane-data {NAMES[ri]}/{PROPS[ci]}: tex {cs[1+ci]} vs octane_data {OCTANES[ri][1+ci]}")
     return (len(msgs)==0),msgs
 
 # ------------------------------------------------------------ CSV schema check
@@ -459,7 +525,7 @@ def expected_csv_texts(CMP):
     s=io.StringIO();w=csv.writer(s)
     w.writerow(["index"]+PROPS+["best_in"])
     for i,nm in enumerate(ROWLABELS):
-        row=[nm]+[f"{R[i,j]:+.4f}"+("*" if best[j]==i else "") for j in range(5)]
+        row=[nm]+[f"{R[i,j]:+.10f}"+("*" if best[j]==i else "") for j in range(5)]
         row.append("; ".join(PROPS[j] for j in range(5) if best[j]==i));w.writerow(row)
     out[CSV_PRED]=s.getvalue()
     s=io.StringIO();w=csv.writer(s)
@@ -471,7 +537,7 @@ def expected_csv_texts(CMP):
     w.writerow(["index","SS","Abr","SA"])
     for nm in ROWLABELS:
         ss,ab=CMP["ss"][nm],CMP["ab"][nm]
-        w.writerow([nm,f"{ss:.5f}",f"{ab:.5f}",f"{ss/ab:.5f}"])
+        w.writerow([nm,f"{ss:.10f}",f"{ab:.10f}",f"{ss/ab:.10f}"])
     out[CSV_SS]=s.getvalue()
     return out
 
@@ -521,18 +587,44 @@ def check_csvs(dirpath, CMP):
                 ss,ab,sa=float(r["SS"]),float(r["Abr"]),float(r["SA"])
                 if not(math.isfinite(ss) and math.isfinite(ab) and math.isfinite(sa)):
                     msgs.append(f"{CSV_SS} {r['index']}: non-finite cell")
-                elif abs(sa-ss/ab)>2e-4:
-                    msgs.append(f"{CSV_SS} {r['index']}: SA {sa} inconsistent with SS/Abr {ss/ab:.5f}")
+                elif abs(sa-ss/ab)>1e-9:
+                    msgs.append(f"{CSV_SS} {r['index']}: SA {sa} inconsistent with SS/Abr {ss/ab:.10f}")
         except Exception as e:msgs.append(f"{CSV_SS}: derived-field check failed: {e}")
     return (len(msgs)==0),msgs
 
+def _strip_paren(t):
+    prev=None
+    while prev!=t:prev=t;t=re.sub(r"\([^()]*\)","",t)
+    return t
+_PNUM=re.compile(r"(?<![\d.])[-+]?\d+\.\d+")
+def prov_values(t):
+    """Numeric source values of a provenance cell: parenthetical working
+    (e.g. '(427.2/4.184)', '(no conversion; rounds to 0.34)') is removed first,
+    and a hyphen between two numbers is a range separator, not a sign."""
+    return [float(x) for x in _PNUM.findall(_strip_paren(t or ""))]
+def prov_paper(t):
+    m=_PNUM.search(t or "") or re.search(r"[-+]?\d+",t or "")
+    return float(m.group(0)) if m else None
+def prov_expected_class(prop,paper,cands):
+    """Strict taxonomy: matched at reported precision (|diff| <= half a unit of
+    the last reported digit, or inside the span of the recorded determinations)
+    -> VERIFIED; else within PROV_TOL -> AGREEMENT WITHIN TOLERANCE; else CONFLICT."""
+    lo_,hi_=min(cands),max(cands)
+    d=0.0 if lo_<=paper<=hi_ else min(abs(paper-lo_),abs(paper-hi_))
+    if d<=PROV_HALF[prop]+1e-9:return {"VERIFIED EXACT","VERIFIED AFTER UNIT CONVERSION"},d
+    if d<=PROV_TOL[prop]+1e-9:return {"AGREEMENT WITHIN TOLERANCE"},d
+    return {"CONFLICT"},d
+
 def check_v35_extras(dirpath):
-    """v35 checks: (a) FGD published-control CSV consistent with the canonical
-    FGD CSV and the hardcoded Barman-Das Table 10 decane values (10 exact at
-    4dp + 4 within one unit of the 4th decimal, none worse); (b) robustness
-    CSV: canonical config row (seed 12345, budget 200) agrees with
-    ablation_summary, dHvap consistently positive, dHf consistently negative,
-    T_B sign not consistent. Returns (ok, msgs)."""
+    """v36 checks: (a) FGD published-control CSV consistent with the canonical
+    full-precision FGD CSV and the hard-coded Barman-Das Table 10 decane values
+    (agreement class from the 4-dp ROUNDING of the full-precision value: 11 exact,
+    3 within one unit of the 4th decimal, none worse); (b) robustness CSVs
+    (3-seed and 100-seed) consistent with the ablation summary and with the
+    sign counts stated in the manuscript; (c) provenance CSV: schema, paper
+    values identical to octane_data.OCTANES, value-aware classification and
+    counts; (d) omega / S source-sensitivity CSVs vs live recomputation.
+    Returns (ok, msgs)."""
     msgs=[]
     try:
         fgd={r["index"]:(float(r["SS_fgd"]),float(r["Abr_fgd"]))
@@ -544,17 +636,19 @@ def check_v35_extras(dirpath):
             k=r["index"];qty=r["quantity"];seen.add((k,qty))
             pv=FGD_PUBLISHED[k][0 if qty=="SS" else 1]
             mv=fgd[k][0 if qty=="SS" else 1]
-            if abs(float(r["published_BarmanDas2026_Table10_decane"])-pv)>1e-9:
+            if abs(float(r["published_BarmanDas2026_Table10_decane"])-pv)>1e-12:
                 msgs.append(f"{CSV_CTRL} {k}/{qty}: published value differs from primary-source constant")
-            if abs(float(r["ours"])-mv)>1e-9:
+            if abs(float(r["ours"])-mv)>1e-12:
                 msgs.append(f"{CSV_CTRL} {k}/{qty}: 'ours' differs from canonical FGD CSV")
-            d=abs(mv-pv)
-            if d<5e-5:exact+=1
-            elif d<=1.05e-4:ulp+=1
-            else:msgs.append(f"{CSV_CTRL} {k}/{qty}: |diff|={d:.5f} exceeds 1 unit of 4th decimal")
+            units=round(abs(round(mv,4)-pv)*1e4)
+            cls="exact_at_4dp" if units==0 else ("within_1_unit_4th_dp" if units==1 else "worse")
+            if cls=="exact_at_4dp":exact+=1
+            elif cls=="within_1_unit_4th_dp":ulp+=1
+            else:msgs.append(f"{CSV_CTRL} {k}/{qty}: rounded value {mv:.4f} differs from published {pv} by {units} units")
+            if r["agreement"]!=cls:msgs.append(f"{CSV_CTRL} {k}/{qty}: agreement '{r['agreement']}' != derived '{cls}'")
         if len(seen)!=14:msgs.append(f"{CSV_CTRL}: expected 14 comparisons, found {len(seen)}")
-        if not(exact==10 and ulp==4):
-            msgs.append(f"{CSV_CTRL}: agreement counts exact={exact}, 1ulp={ulp}, expected 10/4")
+        if not(exact==11 and ulp==3):
+            msgs.append(f"{CSV_CTRL}: agreement counts exact={exact}, 1unit={ulp}, expected 11/3")
         rob=list(csv.DictReader(open(os.path.join(dirpath,CSV_ROB),newline="")))
         if len(rob)!=30:msgs.append(f"{CSV_ROB}: expected 30 rows, found {len(rob)}")
         abl={}
@@ -565,38 +659,33 @@ def check_v35_extras(dirpath):
             by.setdefault(r["property"],[]).append(float(r["dQ2"]))
             if r["seed"]=="12345" and r["budget"]=="200":
                 dref=abl[(r["property"],"LO")]-abl[(r["property"],"GM")]
-                if abs(float(r["dQ2"])-dref)>1.1e-3:
-                    msgs.append(f"{CSV_ROB} {r['property']}: canonical-config dQ2 {r['dQ2']} vs ablation_summary {dref:+.4f}")
+                if abs(float(r["dQ2"])-dref)>1e-8:
+                    msgs.append(f"{CSV_ROB} {r['property']}: canonical-config dQ2 {r['dQ2']} vs ablation_summary {dref:+.10f}")
         if not all(x>0 for x in by.get("dHvap",[])):msgs.append(f"{CSV_ROB}: dHvap dQ2 not consistently positive")
         if not all(x<0 for x in by.get("dHf",[])):msgs.append(f"{CSV_ROB}: dHf dQ2 not consistently negative")
         tb=by.get("T_B",[])
         if tb and not(min(tb)<0<max(tb)):msgs.append(f"{CSV_ROB}: T_B dQ2 unexpectedly consistent in sign")
-        # provenance CSV: schema + VALUE-AWARE classification rules + counts
+        # provenance CSV: schema + data identity + VALUE-AWARE classification rules + counts
         prov=list(csv.DictReader(open(os.path.join(dirpath,CSV_PROV),newline="")))
         if len(prov)!=90:msgs.append(f"{CSV_PROV}: expected 90 rows, found {len(prov)}")
         permol={};clscnt={}
-        def pf(t):
-            mm=re.search(r"[-+]?\d+\.\d+|[-+]?\d+",t or "")
-            return float(mm.group(0)) if mm else None
         for r in prov:
             permol[r["molecule"]]=permol.get(r["molecule"],0)+1
-            c=r["classification"]
+            c=r["classification"];prop=r["property"]
             if c not in PROV_EXPECT:msgs.append(f"{CSV_PROV}: illegal classification '{c}'")
             clscnt[c]=clscnt.get(c,0)+1
+            paper=prov_paper(r["paper_value"])
+            if r["molecule"] not in NAMES or prop not in PROPS:
+                msgs.append(f"{CSV_PROV}: unknown molecule/property {r['molecule']}/{prop}");continue
+            dv=OCTANES[NAMES.index(r["molecule"])][1+PROPS.index(prop)]
+            if paper is None or abs(paper-dv)>1e-12:
+                msgs.append(f"{CSV_PROV} {r['molecule']}/{prop}: paper_value '{r['paper_value']}' != octane_data value {dv}")
             if c in ("VERIFIED EXACT","VERIFIED AFTER UNIT CONVERSION","AGREEMENT WITHIN TOLERANCE"):
-                prop=r["property"];paper=pf(r["paper_value"])
-                conv=pf(r["converted_value"]) if r["converted_value"] not in ("n/a","") else None
-                cand=conv if conv is not None else (pf(r["source_value"]) if prop=="omega" else None)
-                if paper is None or cand is None:continue
-                d=abs(paper-cand)
-                rg=[float(x) for x in re.findall(r"[-+]?\d+\.\d+",r["converted_value"] or "")]
-                inrange=len(rg)>=2 and min(rg)-PROV_HALF[prop]<=paper<=max(rg)+PROV_HALF[prop]
-                if d<=PROV_HALF[prop]+1e-12 or inrange:
-                    want={"VERIFIED EXACT","VERIFIED AFTER UNIT CONVERSION"}
-                elif d<=PROV_TOL[prop]+1e-12:
-                    want={"AGREEMENT WITHIN TOLERANCE"}
-                else:
-                    want={"CONFLICT"}
+                cands=prov_values(r["converted_value"])
+                if not cands and prop=="omega":cands=prov_values(r["source_value"])[:1]
+                if paper is None or not cands:
+                    msgs.append(f"{CSV_PROV} {r['molecule']}/{prop}: class '{c}' but no numeric source value to check");continue
+                want,d=prov_expected_class(prop,paper,cands)
                 if c not in want:
                     msgs.append(f"{CSV_PROV} {r['molecule']}/{prop}: class '{c}' inconsistent with |paper-source|={d:.4g} (rule says {sorted(want)})")
         if len(permol)!=18 or any(v!=5 for v in permol.values()):
@@ -606,35 +695,42 @@ def check_v35_extras(dirpath):
                 msgs.append(f"{CSV_PROV}: {k} count {clscnt.get(k,0)} != manuscript claim {v}")
         ex=list(csv.DictReader(open(os.path.join(dirpath,CSV_EXPR),newline="")))
         if len(ex)!=1000:msgs.append(f"{CSV_EXPR}: expected 1000 rows, found {len(ex)}")
-        cnt={}
+        cnt={};pcnt={}
         for r in ex:
-            k=(r["budget"],r["property"]);d=float(r["dQ2"])
+            k=(r["budget"],r["property"]);d=float(r["dQ2"]);dp=float(r["dQ2_paired"])
             a,b=cnt.get(k,(0,0));cnt[k]=(a+(d>0),b+(d<0))
-        for k,exp in [(("200","dHvap"),(91,9)),(("500","dHvap"),(93,7)),(("200","dHf"),(14,86)),(("500","dHf"),(24,76))]:
+            a,b=pcnt.get(k,(0,0));pcnt[k]=(a+(dp>0),b+(dp<0))
+            if abs(float(r["Q2_LO"])-float(r["Q2_GM"])-d)>1e-9 or abs(float(r["Q2_LO"])-float(r["Q2_LOzero"])-dp)>1e-9:
+                msgs.append(f"{CSV_EXPR} {k} seed {r['seed']}: dQ2 columns inconsistent with Q2 columns")
+        for k,exp in EXPR_SIGNS.items():
             if cnt.get(k)!=exp:
                 msgs.append(f"{CSV_EXPR}: sign counts for {k} = {cnt.get(k)} != expected {exp} (manuscript claim)")
-        ce=[r for r in ex if r["seed"]=="2" and r["budget"]=="200" and r["property"]=="dHvap"]
-        if not ce or abs(float(ce[0]["Q2_GM"])-0.8707455)>1e-6 or abs(float(ce[0]["Q2_LO"])-0.8611587)>1e-6:
-            msgs.append(f"{CSV_EXPR}: seed-2/budget-200/dHvap counterexample row missing or drifted")
+        for k,exp in EXPR_PAIRED.items():
+            if pcnt.get(k)!=exp:
+                msgs.append(f"{CSV_EXPR}: paired sign counts for {k} = {pcnt.get(k)} != expected {exp} (manuscript claim)")
         smry=list(csv.DictReader(open(os.path.join(dirpath,CSV_EXPS),newline="")))
         if len(smry)!=10:msgs.append(f"{CSV_EXPS}: expected 10 rows, found {len(smry)}")
         for r in smry:
             k=(r["budget"],r["property"])
             if k in cnt and (int(r["LO_better"]),int(r["LO_worse"]))!=cnt[k]:
                 msgs.append(f"{CSV_EXPS} {k}: summary counts disagree with detail rows")
-        y0=np.array([r_[5] for r_ in OCTANES]);y1=y0.copy();y1[14]=0.303;y1[17]=0.251
+            if k in pcnt and (int(r["paired_better"]),int(r["paired_worse"]))!=pcnt[k]:
+                msgs.append(f"{CSV_EXPS} {k}: paired summary counts disagree with detail rows")
         OPl=[alkane_pairs(r_[0]) for r_ in OCTANES]
-        om=list(csv.DictReader(open(os.path.join(dirpath,CSV_OMEG),newline="")))
-        if len(om)!=12:msgs.append(f"{CSV_OMEG}: expected 12 rows, found {len(om)}")
-        for r in om:
-            t=RED.get(r["index"])
-            if t is None:msgs.append(f"{CSV_OMEG}: unknown index {r['index']}");continue
-            x=np.array([lo_pairs(P,*t) for P in OPl])
-            def rr(yv):
-                xc=x-x.mean();yc=yv-yv.mean()
-                return float(xc@yc/(np.linalg.norm(xc)*np.linalg.norm(yc)))
-            if abs(float(r["r_omega_original"])-rr(y0))>1e-5 or abs(float(r["r_omega_alternative"])-rr(y1))>1e-5:
-                msgs.append(f"{CSV_OMEG} {r['index']}: values differ from live recomputation")
+        for fn,j,alt,pre in ((CSV_OMEG,5,OMEGA_ALT,"omega"),(CSV_SSEN,4,S_ALT,"S")):
+            y0=np.array([r_[j] for r_ in OCTANES]);y1=y0.copy()
+            for nm_,v_ in alt.items():y1[NAMES.index(nm_)]=v_
+            om=list(csv.DictReader(open(os.path.join(dirpath,fn),newline="")))
+            if len(om)!=12:msgs.append(f"{fn}: expected 12 rows, found {len(om)}")
+            for r in om:
+                t=RED.get(r["index"])
+                if t is None:msgs.append(f"{fn}: unknown index {r['index']}");continue
+                x=np.array([lo_pairs(P,*t) for P in OPl])
+                def rr(yv):
+                    xc=x-x.mean();yc=yv-yv.mean()
+                    return float(xc@yc/(np.linalg.norm(xc)*np.linalg.norm(yc)))
+                if abs(float(r[f"r_{pre}_original"])-rr(y0))>1e-9 or abs(float(r[f"r_{pre}_alternative"])-rr(y1))>1e-9:
+                    msgs.append(f"{fn} {r['index']}: values differ from live recomputation")
         mt=os.path.join(dirpath,"main.tex")
         if os.path.exists(mt) and "fig_lo_structure_sensitivity" in open(mt).read():
             msgs.append("main.tex references the retired sigma/mu proxy figure fig_lo_structure_sensitivity_*")
@@ -681,6 +777,118 @@ def check_parser_sanity(HAVE_NX):
         rk=int(np.linalg.matrix_rank(Z))
         if rk!=expect:msgs.append(f"prop:indep rank check Delta={Dm}: rank {rk} != {expect}")
     return (len(msgs)==0),msgs
+
+# ------------------------------------------- first-principles table recomputations
+def ablation_first_principles(OP,Y,seed,budget):
+    """Matched-budget nested LOO (GM = LO(a,b,0) vs LO = LO(a,b,g)), recomputed
+    independently of ablation_gm_vs_lo.py: candidate descriptors by vectorised
+    edge sums, inner selection by hat-matrix PRESS RMSE (argmin, first on ties),
+    OLS refit on the 17 training isomers, outer prediction of the held-out one.
+    Candidate stream: default_rng(seed); LO triples U(-2,2)^(budget x 3) rounded
+    to 3 dp drawn FIRST, then GM pairs U(-2,2)^(budget x 2) rounded to 3 dp."""
+    rng=np.random.default_rng(seed)
+    lo=np.round(rng.uniform(-2,2,(budget,3)),3)
+    gm=np.column_stack([np.round(rng.uniform(-2,2,(budget,2)),3),np.zeros(budget)])
+    def desc(T):
+        X=np.zeros((len(T),len(OP)))
+        for m,Pp in enumerate(OP):
+            for i,j in Pp:
+                X[:,m]+=(i*j)**T[:,0]*(i+j)**T[:,1]*np.exp(T[:,2]*abs(i-j)/(i+j))
+        return X
+    def press(Xt,yt):
+        n=Xt.shape[1];xc=Xt-Xt.mean(1,keepdims=True);Sxx=(xc**2).sum(1,keepdims=True)
+        const=Sxx<=1e-12*np.maximum(1.0,(Xt**2).sum(1,keepdims=True))
+        Ss=np.where(const,1.0,Sxx);yc=yt-yt.mean()
+        b=np.where(const,0.0,(xc*yc).sum(1,keepdims=True)/Ss)
+        e=yc-b*xc;h=1.0/n+np.where(const,0.0,xc**2/Ss)
+        return np.sqrt(((e/(1-h))**2).mean(1))
+    def nested(X,y,C):
+        n=len(y);pred=np.empty(n);sel=[]
+        for i in range(n):
+            m=np.arange(n)!=i;k=int(np.argmin(press(X[:,m],y[m])));x=X[k];xt=x[m];yt=y[m]
+            if np.ptp(xt)<=1e-12*max(1.0,float(np.abs(xt).max())):pred[i]=yt.mean()
+            else:
+                b=((xt-xt.mean())*(yt-yt.mean())).sum()/((xt-xt.mean())**2).sum()
+                pred[i]=yt.mean()+b*(x[i]-xt.mean())
+            sel.append(tuple(float(v) for v in C[k]))
+        return pred,sel
+    Xl,Xg=desc(lo),desc(gm);out={}
+    for p in PROPS:
+        y=Y[p];pg,sg=nested(Xg,y,gm);pl,sl=nested(Xl,y,lo)
+        ss=((y-y.mean())**2).sum()
+        out[p]=dict(q2g=1-((y-pg)**2).sum()/ss,q2l=1-((y-pl)**2).sum()/ss,
+                    rg=float(np.sqrt(((pg-y)**2).mean())),rl=float(np.sqrt(((pl-y)**2).mean())),
+                    better=int((np.abs(pl-y)<np.abs(pg-y)-1e-9).sum()),sel_lo=sl,sel_gm=sg)
+    return out
+
+def _ahu(adj):
+    """Canonical string of an unrooted tree (centre-rooted AHU encoding)."""
+    deg={u:len(adj[u]) for u in adj};leaves=[u for u in adj if deg[u]<=1]
+    rem=len(adj);gone=set()
+    while rem>2:
+        nl=[]
+        for u in leaves:
+            gone.add(u);rem-=1
+            for v in adj[u]:
+                if v not in gone:
+                    deg[v]-=1
+                    if deg[v]==1:nl.append(v)
+        leaves=nl
+    cs=[u for u in adj if u not in gone]
+    def enc(u,par):return "("+"".join(sorted(enc(v,u) for v in adj[u] if v!=par))+")"
+    return min(enc(c,None) for c in cs)
+
+def fgd_first_principles(dec,RED):
+    """FGD (2013) SS/Abr on the decane class, independent of
+    fgd_structure_sensitivity.py: neighbours by single-edge relocation within
+    Delta<=4, identified by AHU canonical forms (not WL hashes); index values
+    by exact edge-degree-pair sums with math.fsum."""
+    A=[{u:set(T.neighbors(u)) for u in T} for T in dec]
+    cid={_ahu(a):i for i,a in enumerate(A)}
+    assert len(cid)==len(A)
+    nb=[set() for _ in A]
+    for gi,a in enumerate(A):
+        for u in a:
+            for v in a[u]:
+                if u>v:continue
+                b={k:set(w) for k,w in a.items()};b[u].discard(v);b[v].discard(u)
+                comp={u};st=[u]
+                while st:
+                    x=st.pop()
+                    for y in b[x]:
+                        if y not in comp:comp.add(y);st.append(y)
+                other=set(b)-comp
+                for x in comp:
+                    for y in other:
+                        if {x,y}=={u,v} or len(b[x])>=4 or len(b[y])>=4:continue
+                        c={k:set(w) for k,w in b.items()};c[x].add(y);c[y].add(x)
+                        j=cid[_ahu(c)]
+                        if j!=gi:nb[gi].add(j)
+    out={}
+    for nm,(al,be,ga) in RED.items():
+        v=[math.fsum((len(a[x])*len(a[y]))**al*(len(a[x])+len(a[y]))**be
+                     *math.exp(ga*abs(len(a[x])-len(a[y]))/(len(a[x])+len(a[y])))
+                     for x in a for y in a[x] if x<y) for a in A]
+        ss=[];ab=[]
+        for i in range(len(A)):
+            d=[abs(v[j]-v[i])/v[i] for j in nb[i]];ss.append(math.fsum(d)/len(d));ab.append(max(d))
+        SS=math.fsum(ss)/len(A);AB=math.fsum(ab)/len(A);out[nm]=(SS,AB,SS/AB)
+    return out
+
+def multiorder_first_principles(nx,logr):
+    """tab:multiorder rows: N trees, distinct edge-degree-pair profiles and
+    distinct values (rounded to 9 dp) of M1, M2, R, LO(0,0,1), LO(0,0,2)."""
+    from collections import Counter
+    rows=[]
+    for n in range(7,13):
+        T=list(nx.nonisomorphic_trees(n))
+        for gs,S in (("all_trees",T),("molecular",[t for t in T if max(d for _,d in t.degree())<=4])):
+            prof=set(tuple(sorted(Counter(tuple(sorted((t.degree(u),t.degree(v)))) for u,v in t.edges()).items())) for t in S)
+            r={"n":str(n),"graph_set":gs,"N_trees":str(len(S)),"distinct_BID_profiles":str(len(prof))}
+            for key,tr in (("M1",(0,1,0)),("M2",(1,0,0)),("R",(-0.5,0,0)),("LO001",(0,0,1)),("LO002",(0,0,2))):
+                r[key]=str(len(set(round(logr(t,*tr),9) for t in S)))
+            rows.append(r)
+    return rows
 
 # ------------------------------------------------------------------ computation
 def run_computation(HAVE_NX, quiet=False):
@@ -736,12 +944,20 @@ def run_computation(HAVE_NX, quiet=False):
 
     P("[E] E2 tuning (r0, r50, +-boot, LOO0, LOO50 x 20) + per-cell metrics + fold export")
     ANCH=[("M2",(1.,0.,0.)),("HM",(0.,2.,0.)),("mM2",(-1.,0.,0.)),("LO(0,0,1)",(0.,0.,1.))]
-    rng=np.random.default_rng(42)
-    for anm,(a0,b0,g0) in ANCH:
+    # v36: ONE random stream, default_rng(42), draws the five 50-triple pools in
+    # a fixed order -- M2, HM, mM2, LO(0,0,1) (tab:lo_tuning) and then LO(0,0,2).
+    # tab:lo_tuning_bestfixed [F] REUSES the LO(0,0,1) pool of tab:lo_tuning
+    # (it no longer re-seeds), so the two tables are drawn from identical pools.
+    rng=np.random.default_rng(42);POOLS={}
+    for anm,(a0,b0,g0) in ANCH+[("LO(0,0,2)",(0.,0.,2.))]:
         perts=[]
         for _ in range(50):
             da,db,dg=(round(float(rng.uniform(-0.3,0.3)),2) for _ in range(3))
             perts.append((round(a0+da,2),round(b0+db,2),round(g0+dg,2)))
+        POOLS[anm]=perts
+    CMP["POOLS"]=POOLS
+    for anm,(a0,b0,g0) in ANCH:
+        perts=POOLS[anm]
         pc=[col(t) for t in perts];xb=col((a0,b0,g0))
         for p in PROPS:
             y=Y[p];e=MS_E2[(anm,p)]
@@ -779,13 +995,7 @@ def run_computation(HAVE_NX, quiet=False):
     P(f"    constant control: signed r={sr:+.3f}, Q2={q2:+.3f} (pathology exhibited; screened)")
 
     P("[F] best-fixed table (20 values); best-fixed index DERIVED by ranking, not assumed")
-    rng=np.random.default_rng(42);pools={}
-    for anm,(a0,b0,g0) in [("LO(0,0,1)",(0.,0.,1.)),("LO(0,0,2)",(0.,0.,2.))]:
-        Pl=[]
-        for _ in range(50):
-            da,db,dg=(round(float(rng.uniform(-0.3,0.3)),2) for _ in range(3))
-            Pl.append((round(a0+da,2),round(b0+db,2),round(g0+dg,2)))
-        pools[anm]=[col(t) for t in Pl]
+    pools={a:[col(t) for t in POOLS[a]] for a in ("LO(0,0,1)","LO(0,0,2)")}  # same pools as [E]
     for p in PROPS:
         y=Y[p];fnm_ms,fr,floo,rdec,ldec=MS_F[p]
         fnm=max(RED,key=lambda nm:absr(col(RED[nm]),y))
@@ -810,7 +1020,23 @@ def run_computation(HAVE_NX, quiet=False):
             best=max(best,absr(pred,y))
         rec("F",f"{p}/dec_LOO",round(best,3),ldec,0.0015)
         CMP["Ff"][p]=(fnm,fixrf,fixloof,decrf,best)
+        r50_lo1=CMP["E2f"][("LO(0,0,1)",p)][1]
+        rec("F",f"{p}/dec_r>=tuning_LO001_r50",f"{decrf:.6f}>={r50_lo1:.6f}","consistent pools",0,ok=decrf>=r50_lo1-1e-15)
     P("  done")
+
+    P("[H] matched-budget nested GM-vs-LO ablation recomputed from first principles (seed 12345, budget 200)")
+    CMP["ABL"]=ablation_first_principles(OP,Y,12345,200)
+    for p in PROPS:
+        a=CMP["ABL"][p]
+        P(f"    {p}: Q2_GM={a['q2g']:+.7f} Q2_LO={a['q2l']:+.7f} dQ2={a['q2l']-a['q2g']:+.7f} "
+          f"RMSE_GM={a['rg']:.7f} RMSE_LO={a['rl']:.7f} LO better {a['better']}/18 max|g|={max(abs(t[2]) for t in a['sel_lo']):.3f}")
+        rows.append(dict(section="H",item=f"{p}/Q2_GM|Q2_LO|dQ2|RMSE_GM|RMSE_LO|better",
+            computed=f"{a['q2g']:.10f}|{a['q2l']:.10f}|{a['q2l']-a['q2g']:+.10f}|{a['rg']:.10f}|{a['rl']:.10f}|{a['better']}",
+            manuscript="(guarded in [T])",ok=True))
+    gmax=max(abs(t[2]) for p in PROPS for t in CMP["ABL"][p]["sel_lo"])
+    rec("H","max_abs_selected_gamma",f"{gmax:.3f}","0.480",0,ok=f"{gmax:.3f}"=="0.480")
+    dsel=set(CMP["ABL"]["dHvap"]["sel_lo"])
+    rec("H","dHvap_identical_triple_all_folds",str(sorted(dsel)),"[(-0.27, 0.271, 0.239)]",0,ok=dsel=={(-0.27,0.271,0.239)})
 
     if HAVE_NX:
         import networkx as nx
@@ -842,6 +1068,16 @@ def run_computation(HAVE_NX, quiet=False):
         rec("G","SS_LO002",round(CMP["ss"]["LO(0,0,2)"],3),0.165,0.0006)
         rec("G","LO002_max_SS",max(CMP["ss"],key=CMP["ss"].get),"LO(0,0,2)",0,ok=max(CMP["ss"],key=CMP["ss"].get)=="LO(0,0,2)")
         rec("G","LO002_max_Abr",max(CMP["ab"],key=CMP["ab"].get),"LO(0,0,2)",0,ok=max(CMP["ab"],key=CMP["ab"].get)=="LO(0,0,2)")
+        P("  done")
+
+        P("[G2] Furtula-Gutman-Dehmer SS/Abr on the 75 decanes, first principles (own AHU canonical forms)")
+        CMP["FGD"]=fgd_first_principles(dec,RED)
+        for nm in RED:
+            ss_,ab_,ra_=CMP["FGD"][nm]
+            rows.append(dict(section="G2_FGD",item=nm,computed=f"SS={ss_:.10f},Abr={ab_:.10f},ratio={ra_:.10f}",
+                             manuscript="(guarded in [T])",ok=True))
+        P("[G3] multi-order degeneracy n=7..12 (all trees / Delta<=4), first principles")
+        CMP["MO"]=multiorder_first_principles(nx,logr)
         P("  done")
 
         P("[M] mathematics: 9 closed forms; 10 bounds x 200 graphs; equality; asymptotics")
@@ -941,6 +1177,11 @@ def run_selftest(A, here, HAVE_NX):
     L_FGD_M1 = line_with("$M_1$ &","$0.0566$")
     L_MO_12M = line_with("$12$ & mol.")
     L_COLL_3MH=line_with("3-methylheptane &","$118.9$")
+    L_ABL_OM = line_with(r"$\omega$","$+0.979$","$5/18$")
+    L_ABL_DV = line_with(r"$\Delta H_{\mathrm{vap}}$","+0.069")
+    L_FGD_HM = line_with("$HM$ &","$0.1256$")
+    L_APP_33 = line_with("3,3-dimethylhexane & 111.9")
+    L_APP_32 = line_with("3-ethyl-2-methylpentane & 115.6 & -50.48 & 9.21 & 106.06 & 0.33")
     def wrap_outside(b):
         i=b.index(r"\label{tab:lo_octane}");j=b.index(r"\end{tabular}",i)+len(r"\end{tabular}")
         return b[:i]+"\\iffalse\n"+b[i:j]+"\n\\fi"+b[j:]
@@ -978,9 +1219,10 @@ def run_selftest(A, here, HAVE_NX):
      ("tuning-junk-token",      rep_line(L_TUNLAST,"$0.929$","$0.929e0$"),       "token"),
      ("bestfixed-val-fix-r",    rep_line(L_BF_TB,"$0.855$","$0.755$"),           "bestfixed T_B/fix_r"),
      ("bestfixed-val-fix-LOO",  rep_line(L_BF_TB,"$0.781$","$0.681$"),           "bestfixed T_B/fix_LOO"),
-     ("bestfixed-val-dec-r",    rep_line(L_BF_OM,"$0.946$","$0.846$"),           "bestfixed omega/dec_r"),
-     ("bestfixed-val-dec-LOO",  rep_line(L_BF_OM,"$0.929$","$0.829$"),           "bestfixed omega/dec_LOO"),
-     ("bestfixed-inserted-minus",rep_line(L_BF_OM,"$0.929$","$-0.929$"),         "token"),
+     ("bestfixed-val-dec-r",    rep_line(L_BF_OM,"$0.945$","$0.845$"),           "bestfixed omega/dec_r"),
+     ("bestfixed-val-dec-LOO",  rep_line(L_BF_OM,"$0.926$","$0.826$"),           "bestfixed omega/dec_LOO"),
+     ("bestfixed-inserted-minus",rep_line(L_BF_OM,"$0.926$","$-0.926$"),         "token"),
+     ("bestfixed-v35-reseeded-pool",rep_line(L_BF_TB,"$0.835$","$0.834$"),       "bestfixed T_B/dec_r"),
      ("bestfixed-over-precision",rep_line(L_BF_TB,"$0.855$","$0.8555$"),         "token"),
      ("bestfixed-wrong-labels", rep_line(L_BF_OM,r"$\omega$ & $M_2$",r"$\Omega$ & $HM$"),"label mismatch"),
      ("bestfixed-missing-row",  base.replace(L_BF_TB+"\n","",1),                 "5 data rows"),
@@ -1000,6 +1242,19 @@ def run_selftest(A, here, HAVE_NX):
      ("fgdss-value-corrupt",    rep_line(L_FGD_M1,"$0.0566$","$0.0666$"),        "tab:fgdss"),
      ("multiorder-floor-corrupt",rep_line(L_MO_12M,"$137$","$138$",),            "tab:multiorder"),
      ("collision-value-corrupt",rep_line(L_COLL_3MH,"$118.9$","$119.9$"),        "tab:collisions"),
+     ("t2-one-unit-display",    base.replace(r"$\mathbf{-0.984}$",r"$\mathbf{-0.983}$",1),"tab:lo_octane LO(0,0,1)/dHvap"),
+     ("t2-v35-dhvap-winner",    base.replace(r"$\mathbf{-0.984}$","$-0.984$",1).replace("$-0.981$",r"$\mathbf{-0.981}$",1),"bolding mismatch"),
+     ("tuning-one-unit",        rep_line(L_TUNLAST,"$0.929$","$0.930$"),         "LO(0,0,1)/omega/r0"),
+     ("ablation-one-unit-dQ2",  rep_line(L_ABL_TB,"$+0.136$","$+0.135$"),        "tab:ablation T_B/dQ2"),
+     ("ablation-one-unit-rmse", rep_line(L_ABL_OM,"$0.008$","$0.007$"),          "tab:ablation omega/RMSE_LO"),
+     ("ablation-one-unit-q2",   rep_line(L_ABL_OM,"$+0.956$","$+0.957$"),        "tab:ablation omega/Q2_LO"),
+     ("ablation-median-corrupt",rep_line(L_ABL_DV,"+0.069","+0.070"),            "100-seed median"),
+     ("ablation-seedcount-v35", rep_line(L_ABL_DV,"$100/100$ & $100/100$","$91/100$ & $100/100$"),"seeds with dQ2>0 at budget 200"),
+     ("ablation-panelb-missing",base.replace(L_ABL_DV+"\n","",1),               "panel (b): expected 5 data rows"),
+     ("fgdss-one-unit",         rep_line(L_FGD_HM,"$0.1256$","$0.1255$"),        "tab:fgdss HM/SS"),
+     ("appendix-dhvap-revert",  rep_line(L_APP_33,"& 8.97 &","& 9.04 &"),        "tab:octane-data 3,3-dimethylhexane/dHvap"),
+     ("appendix-name-revert",   rep_line(L_APP_32,"3-ethyl-2-methylpentane","2-methyl-3-ethylpentane"),"tab:octane-data row 10: name"),
+     ("appendix-missing-row",   base.replace(L_APP_33+"\n","",1),                 "tab:octane-data: expected 18 rows"),
     ]
     with tempfile.TemporaryDirectory() as td:
         for name,content,expect in tex_attacks:
@@ -1032,13 +1287,15 @@ def run_selftest(A, here, HAVE_NX):
                 results.append((f"csv:{name}",behaved,note))
         except Exception as e:
             results.append((f"csv:{name}",False,f"attack-harness exception: {e!r}"))
-    csv_attack("pred-value",CSV_PRED,lambda s:s.replace("-0.7181","-0.7182",1),CSV_PRED)
-    csv_attack("pred-star-removed",CSV_PRED,lambda s:s.replace("-0.9876*","-0.9876",1),CSV_PRED)
-    csv_attack("pred-bestin-wrong",CSV_PRED,lambda s:s.replace("-0.9876*,omega","-0.9876*,S",1),CSV_PRED)
-    csv_attack("pred-duplicated-row",CSV_PRED,lambda s:s.replace("M1,-0.7181","M1,-0.7181,-0.7623,-0.9120,-0.9730,-0.9702,\r\nM1,-0.7181",1),"rows")
+    csv_attack("pred-value",CSV_PRED,lambda s:s.replace("-0.7180987560","-0.7180987561",1),CSV_PRED)
+    csv_attack("pred-4dp-truncation",CSV_PRED,lambda s:s.replace("-0.7180987560","-0.7181",1),CSV_PRED)
+    csv_attack("pred-star-removed",CSV_PRED,lambda s:s.replace("-0.9876015088*","-0.9876015088",1),CSV_PRED)
+    csv_attack("pred-bestin-wrong",CSV_PRED,lambda s:s.replace("-0.9876015088*,omega","-0.9876015088*,S",1),CSV_PRED)
+    csv_attack("pred-dhvap-star-moved",CSV_PRED,lambda s:s.replace("-0.9838407051*","-0.9838407051",1).replace("-0.9812526655,","-0.9812526655*,",1),CSV_PRED)
+    csv_attack("pred-duplicated-row",CSV_PRED,lambda s:s.replace("M1,-0.7180987560","M1,-0.7180987560,-0.7623221006,-0.9353729341,-0.9729602386,-0.9702085527,\r\nM1,-0.7180987560",1),"rows")
     csv_attack("pred-deleted-row",CSV_PRED,lambda s:re.sub(r"M1,[^\r\n]*\r?\n","",s,count=1),"rows")
     csv_attack("pred-extra-row",CSV_PRED,lambda s:s+"ZZ,+0.1000,+0.1000,+0.1000,+0.1000,+0.1000,\r\n","rows")
-    csv_attack("pred-reordered-rows",CSV_PRED,lambda s:s.replace("M1,-0.7181","@@",1).replace("M2,-0.4973","M1,-0.7181",1).replace("@@","M2,-0.4973",1),"index key")
+    csv_attack("pred-reordered-rows",CSV_PRED,lambda s:s.replace("M1,-0.7180987560","@@",1).replace("M2,-0.4972511299","M1,-0.7180987560",1).replace("@@","M2,-0.4972511299",1),"index key")
     csv_attack("pred-renamed-key",CSV_PRED,lambda s:s.replace("M1,","MX,",1),"index key")
     csv_attack("deg-N-trees",CSV_DEG,lambda s:s.replace("M1,106,18","M1,105,18",1),CSV_DEG)
     csv_attack("deg-distinct",CSV_DEG,lambda s:s.replace("M1,106,18","M1,106,19",1),CSV_DEG)
@@ -1046,18 +1303,19 @@ def run_selftest(A, here, HAVE_NX):
     csv_attack("deg-deleted-row",CSV_DEG,lambda s:re.sub(r"M1,[^\r\n]*\r?\n","",s,count=1),"rows")
     csv_attack("deg-header-renamed",CSV_DEG,lambda s:s.replace("degeneracy_pct","deg_pct",1),"header")
     csv_attack("deg-column-deleted",CSV_DEG,lambda s:"\r\n".join(",".join(l.split(",")[:-1]) for l in s.splitlines())+"\r\n","header")
-    csv_attack("ss-SS-cell",CSV_SS,lambda s:s.replace("0.07503,","0.07504,",1),CSV_SS)
-    csv_attack("ss-Abr-cell",CSV_SS,lambda s:s.replace("0.34449","0.34450",1),CSV_SS)
-    csv_attack("ss-SA-cell",CSV_SS,lambda s:s.replace("0.21779","0.99999",1),CSV_SS)
-    csv_attack("ss-blank-cell",CSV_SS,lambda s:s.replace("0.21779","",1),CSV_SS)
-    csv_attack("ss-inf-cell",CSV_SS,lambda s:s.replace("0.21779","inf",1),CSV_SS)
-    csv_attack("ss-over-precision",CSV_SS,lambda s:s.replace("0.07503,","0.075030,",1),CSV_SS)
-    csv_attack("ss-reordered-rows",CSV_SS,lambda s:s.replace("M1,0.07503","@@",1).replace("M2,0.10983","M1,0.07503",1).replace("@@","M2,0.10983",1),"index key")
+    csv_attack("ss-SS-cell",CSV_SS,lambda s:s.replace("0.0750272923,","0.0750272924,",1),CSV_SS)
+    csv_attack("ss-Abr-cell",CSV_SS,lambda s:s.replace("0.3444881890","0.3444881891",1),CSV_SS)
+    csv_attack("ss-SA-cell",CSV_SS,lambda s:s.replace("0.2177935114","0.9999999999",1),CSV_SS)
+    csv_attack("ss-blank-cell",CSV_SS,lambda s:s.replace("0.2177935114","",1),CSV_SS)
+    csv_attack("ss-inf-cell",CSV_SS,lambda s:s.replace("0.2177935114","inf",1),CSV_SS)
+    csv_attack("ss-over-precision",CSV_SS,lambda s:s.replace("0.0750272923,","0.07502729230,",1),CSV_SS)
+    csv_attack("ss-5dp-truncation",CSV_SS,lambda s:s.replace("0.0750272923,","0.07503,",1),CSV_SS)
+    csv_attack("ss-reordered-rows",CSV_SS,lambda s:s.replace("M1,0.0750272923","@@",1).replace("M2,0.1098330069","M1,0.0750272923",1).replace("@@","M2,0.1098330069",1),"index key")
     csv_attack("pred-file-missing",CSV_PRED,None,"missing")
     def extras_attack(name,fn,mutate,expect):
         try:
             with tempfile.TemporaryDirectory() as td2:
-                for f in (CSV_FGD,CSV_CTRL,CSV_ROB,CSV_ABL,CSV_PROV,CSV_EXPR,CSV_EXPS,CSV_OMEG,"main.tex"):
+                for f in (CSV_FGD,CSV_CTRL,CSV_ROB,CSV_ABL,CSV_PROV,CSV_EXPR,CSV_EXPS,CSV_OMEG,CSV_SSEN,"main.tex"):
                     shutil.copy(os.path.join(here,f),td2)
                 p=os.path.join(td2,fn);t=open(p,newline="").read();t2=mutate(t)
                 assert t2!=t
@@ -1069,11 +1327,25 @@ def run_selftest(A, here, HAVE_NX):
         except Exception as e:
             results.append((f"csv:{name}",False,f"attack-harness exception: {e!r}"))
     extras_attack("fgd-control-corrupt",CSV_CTRL,lambda t:t.replace("0.0566","0.0567",1),CSV_CTRL)
-    extras_attack("robustness-corrupt",CSV_ROB,lambda t:t.replace("+0.0756","+0.1756",1),CSV_ROB)
+    extras_attack("robustness-corrupt",CSV_ROB,lambda t:t.replace("+0.0864474634","+0.0874474634",1),CSV_ROB)
+    extras_attack("fgd-control-class-corrupt",CSV_CTRL,lambda t:t.replace("within_1_unit_4th_dp","exact_at_4dp",1),"agreement")
+    extras_attack("entropy-sensitivity-corrupt",CSV_SSEN,lambda t:t.replace("-0.9541284205","-0.9551284205",1),CSV_SSEN)
+    def prov_line(t,mol,prop,f):
+        L=t.split("\r\n")
+        for k,l in enumerate(L):
+            fl=next(csv.reader([l])) if l else []
+            if len(fl)>1 and fl[0]==mol and fl[1]==prop:
+                L[k]=f(l);return "\r\n".join(L)
+        raise KeyError((mol,prop))
+    extras_attack("prov-dhvap-revert-to-v35-value",CSV_PROV,lambda t:prov_line(t,"3,3-dimethylhexane","dHvap",lambda l:l.replace(",8.97,",",9.04,",1)),"octane_data value")
+    extras_attack("prov-dhvap-0.05-gap-as-tolerance",CSV_PROV,lambda t:prov_line(t,"3-ethyl-3-methylpentane","dHvap",
+        lambda l:l.replace("9.08-9.10 kcal/mol","9.13 kcal/mol",1).replace("VERIFIED AFTER UNIT CONVERSION","AGREEMENT WITHIN TOLERANCE",1)),"rule says ['CONFLICT']")
+    extras_attack("prov-reverify-234TMP-S",CSV_PROV,lambda t:prov_line(t,"2,3,4-trimethylpentane","S",lambda l:l.replace("AGREEMENT WITHIN TOLERANCE","VERIFIED AFTER UNIT CONVERSION",1)),"2,3,4-trimethylpentane/S: class")
+    extras_attack("prov-reverify-34DMH-omega",CSV_PROV,lambda t:prov_line(t,"3,4-dimethylhexane","omega",lambda l:l.replace("AGREEMENT WITHIN TOLERANCE","VERIFIED AFTER UNIT CONVERSION",1)),"3,4-dimethylhexane/omega: class")
     def extras_attack2(name,mutate,expect):
         try:
             with tempfile.TemporaryDirectory() as td2:
-                for f in (CSV_FGD,CSV_CTRL,CSV_ROB,CSV_ABL,CSV_PROV,CSV_EXPR,CSV_EXPS,CSV_OMEG,"main.tex"):
+                for f in (CSV_FGD,CSV_CTRL,CSV_ROB,CSV_ABL,CSV_PROV,CSV_EXPR,CSV_EXPS,CSV_OMEG,CSV_SSEN,"main.tex"):
                     shutil.copy(os.path.join(here,f),td2)
                 p=os.path.join(td2,CSV_PROV);t=open(p,newline="").read();t2=mutate(t)
                 assert t2!=t
@@ -1085,8 +1357,9 @@ def run_selftest(A, here, HAVE_NX):
         except Exception as e:
             results.append((f"csv:{name}",False,f"attack-harness exception: {e!r}"))
     extras_attack2("provenance-class-corrupt",lambda t:t.replace("CONFLICT","VERIFIED EXACT",1),CSV_PROV)
-    extras_attack("expanded-robustness-corrupt",CSV_EXPR,lambda t:t.replace("0.8611587","0.8711587",1),CSV_EXPR)
-    extras_attack("omega-sensitivity-corrupt",CSV_OMEG,lambda t:t.replace("-0.985664","-0.995664",1),CSV_OMEG)
+    extras_attack("expanded-robustness-corrupt",CSV_EXPR,lambda t:t.replace("0.6780862951,-0.0278575844","0.6780862951,-0.0378575844",1),CSV_EXPR)
+    extras_attack("expanded-sign-flip",CSV_EXPR,lambda t:re.sub(r"(\n\d+,200,dHvap,[0-9.]+,)([0-9.]+),\+([0-9.]+)",lambda m:m.group(1)+m.group(2)+",-"+m.group(3),t,count=1),CSV_EXPR)
+    extras_attack("omega-sensitivity-corrupt",CSV_OMEG,lambda t:t.replace("-0.9856641032","-0.9956641032",1),CSV_OMEG)
     extras_attack("provenance-value-inconsistent",CSV_PROV,lambda t:t.replace("AGREEMENT WITHIN TOLERANCE","VERIFIED AFTER UNIT CONVERSION",1),CSV_PROV)
     extras_attack("proxy-figure-reintroduced","main.tex",lambda t:t.replace("\\end{document}","\\safefig{fig_lo_structure_sensitivity_decanes_v3.pdf}{0.9}\n\\end{document}",1),"retired sigma/mu proxy")
     # operational subprocess attacks (isolated package copies)
@@ -1094,7 +1367,7 @@ def run_selftest(A, here, HAVE_NX):
     def make_pkg(td, skip=None):
         pkg=os.path.join(td,"pkg");os.makedirs(pkg)
         files=["main.tex",CSV_PRED,CSV_DEG,CSV_SS,CSV_ABL,CSV_ABLF,CSV_MO,CSV_FGD,
-               CSV_COLL,CSV_CORR,CSV_PCA,CSV_ROB,CSV_CTRL,CSV_PROV,CSV_EXPR,CSV_EXPS,CSV_OMEG]+list(ANALYSIS_SCRIPTS)
+               CSV_COLL,CSV_CORR,CSV_PCA,CSV_ROB,CSV_CTRL,CSV_PROV,CSV_EXPR,CSV_EXPS,CSV_OMEG,CSV_SSEN,"octane_data.py"]+list(ANALYSIS_SCRIPTS)
         for f in files:
             if f!=skip:shutil.copy(os.path.join(here,f),pkg)
         shutil.copy(script,os.path.join(pkg,os.path.basename(script)))
@@ -1156,7 +1429,7 @@ def main():
     A=ap.parse_args()
     here=os.path.dirname(os.path.abspath(__file__))
     REQUIRED=[A.tex]+[os.path.join(here,f) for f in (CSV_PRED,CSV_DEG,CSV_SS,
-        CSV_ABL,CSV_ABLF,CSV_MO,CSV_FGD,CSV_COLL,CSV_CORR,CSV_PCA,CSV_ROB,CSV_CTRL,CSV_PROV,CSV_EXPR,CSV_EXPS,CSV_OMEG)]+\
+        CSV_ABL,CSV_ABLF,CSV_MO,CSV_FGD,CSV_COLL,CSV_CORR,CSV_PCA,CSV_ROB,CSV_CTRL,CSV_PROV,CSV_EXPR,CSV_EXPS,CSV_OMEG,CSV_SSEN,"octane_data.py")]+\
         [os.path.join(here,sc) for sc in ANALYSIS_SCRIPTS]
     missing=[f for f in REQUIRED if not os.path.exists(f)]
     try:
@@ -1180,7 +1453,7 @@ def main():
         print("[N] v35 analyses: SKIPPED (--skip-analyses); tables validated against bundled canonical CSVs only")
         okN,msgsN=True,[]
     else:
-        print("[N] v35 analyses: fresh re-run of the 4 bundled analysis scripts vs canonical CSVs")
+        print(f"[N] analyses: fresh re-run of the {len(ANALYSIS_SCRIPTS)} bundled analysis scripts vs canonical CSVs")
         okN,msgsN=run_v35_analyses(here)
     if not okN:fails+=len(msgsN)
     rows.append(dict(section="N",item="v35_analyses_recompute",computed=f"{len(msgsN)} mismatches",manuscript="0",ok=okN))
@@ -1235,7 +1508,7 @@ def main():
     elif io_fail or not HAVE_NX:status=2
     else:status=0
     print(f"TOTAL failures: {fails}  status: {'FULL PASS' if status==0 else ('PARTIAL' if status==2 else 'FAILURES')}")
-    print("scope: FULL PASS covers the executed computations, the 3 guarded tables, and canonical artifacts;")
+    print("scope: FULL PASS covers the executed computations, all 8 numeric tables of main.tex (exact display strings), and canonical artifacts;")
     print("       prose outside the guarded tables and verifier self-integrity are OUT OF SCOPE (see README/SHA256SUMS.txt).")
     print(f"results: {out} (+ verify_loyola_v35_folds.csv)")
     return status

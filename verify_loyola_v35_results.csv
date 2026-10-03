@@ -1,77 +1,77 @@
 section,item,computed,manuscript,ok
 A,M1/T_B,-0.718,-0.718,True
 A,M1/dHf,-0.762,-0.762,True
-A,M1/dHvap,-0.912,-0.912,True
+A,M1/dHvap,-0.935,-0.935,True
 A,M1/S,-0.973,-0.973,True
 A,M1/omega,-0.97,-0.97,True
 A,M2/T_B,-0.497,-0.497,True
 A,M2/dHf,-0.542,-0.542,True
-A,M2/dHvap,-0.772,-0.772,True
+A,M2/dHvap,-0.811,-0.811,True
 A,M2/S,-0.94,-0.94,True
 A,M2/omega,-0.988,-0.988,True
 A,HM/T_B,-0.654,-0.654,True
 A,HM/dHf,-0.71,-0.71,True
-A,HM/dHvap,-0.873,-0.873,True
+A,HM/dHvap,-0.903,-0.903,True
 A,HM/S,-0.975,-0.975,True
 A,HM/omega,-0.982,-0.982,True
 A,mM2/T_B,0.855,0.855,True
 A,mM2/dHf,0.891,0.891,True
-A,mM2/dHvap,0.937,0.937,True
+A,mM2/dHvap,0.925,0.925,True
 A,mM2/S,0.863,0.863,True
 A,mM2/omega,0.794,0.794,True
 A,R/T_B,0.819,0.819,True
 A,R/dHf,0.85,0.85,True
-A,R/dHvap,0.954,0.954,True
+A,R/dHvap,0.958,0.958,True
 A,R/S,0.933,0.933,True
 A,R/omega,0.898,0.898,True
 A,chi/T_B,0.8,0.8,True
 A,chi/dHf,0.832,0.832,True
-A,chi/dHvap,0.951,0.951,True
+A,chi/dHvap,0.961,0.961,True
 A,chi/S,0.949,0.949,True
 A,chi/omega,0.924,0.924,True
 A,H/2/T_B,0.821,0.821,True
 A,H/2/dHf,0.849,0.849,True
-A,H/2/dHvap,0.956,0.956,True
+A,H/2/dHvap,0.961,0.961,True
 A,H/2/S,0.933,0.933,True
 A,H/2/omega,0.9,0.9,True
 A,ISI/T_B,-0.005,-0.005,True
 A,ISI/dHf,-0.0,-0.0,True
-A,ISI/dHvap,-0.331,-0.331,True
+A,ISI/dHvap,-0.383,-0.383,True
 A,ISI/S,-0.601,-0.601,True
 A,ISI/omega,-0.738,-0.738,True
 A,GA/T_B,0.822,0.822,True
 A,GA/dHf,0.858,0.858,True
-A,GA/dHvap,0.957,0.957,True
+A,GA/dHvap,0.965,0.965,True
 A,GA/S,0.941,0.941,True
 A,GA/omega,0.906,0.906,True
 A,AG/T_B,-0.816,-0.816,True
 A,AG/dHf,-0.859,-0.859,True
-A,AG/dHvap,-0.95,-0.95,True
+A,AG/dHvap,-0.957,-0.957,True
 A,AG/S,-0.939,-0.939,True
 A,AG/omega,-0.9,-0.9,True
 A,"LO(0,0,1)/T_B",-0.828,-0.828,True
 A,"LO(0,0,1)/dHf",-0.832,-0.832,True
-A,"LO(0,0,1)/dHvap",-0.966,-0.966,True
+A,"LO(0,0,1)/dHvap",-0.984,-0.984,True
 A,"LO(0,0,1)/S",-0.931,-0.931,True
 A,"LO(0,0,1)/omega",-0.929,-0.929,True
 A,"LO(0,0,2)/T_B",-0.829,-0.829,True
 A,"LO(0,0,2)/dHf",-0.846,-0.846,True
-A,"LO(0,0,2)/dHvap",-0.967,-0.967,True
+A,"LO(0,0,2)/dHvap",-0.981,-0.981,True
 A,"LO(0,0,2)/S",-0.939,-0.939,True
 A,"LO(0,0,2)/omega",-0.925,-0.925,True
 B,mM2/T_B,0.096,0.02-0.10,True
 B,mM2/dHf,0.087,0.02-0.10,True
-B,"LO(0,0,2)/dHvap",0.036,0.02-0.10,True
+B,"LO(0,0,1)/dHvap",0.016,0.02-0.10,True
 B,HM/S,0.027,0.02-0.10,True
 B,M2/omega,0.018,0.02-0.10,True
 C,mM2/T_B,0.0267,<=0.0275,True
 C,mM2/dHf,0.0179,<=0.0275,True
-C,"LO(0,0,2)/dHvap",0.0108,<=0.0275,True
+C,"LO(0,0,1)/dHvap",0.0058,<=0.0275,True
 C,HM/S,0.0153,<=0.0275,True
 C,M2/omega,0.007,<=0.0275,True
 D,T_B,"[-0.042,+0.157]",contains 0,True
 D,dHf,"[-0.019,+0.108]",contains 0,True
-D,dHvap,"[-0.007,+0.015]",contains 0,True
+D,dHvap,"[-0.005,+0.007]",contains 0,True
 D,S,"[-0.015,+0.017]",contains 0,True
 D,omega,"[-0.018,+0.037]",contains 0,True
 E,M2/T_B/r0,0.497,0.497,True
@@ -92,15 +92,15 @@ E_metrics,M2/dHf/signed_r,0.5398,(exported),True
 E_metrics,M2/dHf/Q2,0.2853,(exported),True
 E_metrics,M2/dHf/MAE,0.8812,(exported),True
 E_metrics,M2/dHf/RMSE,1.0282,(exported),True
-E,M2/dHvap/r0,0.772,0.772,True
-E,M2/dHvap/r50,0.839,0.839,True
-E,M2/dHvap/boot,0.231,0.231,True
-E,M2/dHvap/LOO0,0.714,0.714,True
-E,M2/dHvap/LOO50,0.786,0.786,True
-E_metrics,M2/dHvap/signed_r,0.7865,(exported),True
-E_metrics,M2/dHvap/Q2,0.6175,(exported),True
-E_metrics,M2/dHvap/MAE,0.1704,(exported),True
-E_metrics,M2/dHvap/RMSE,0.2266,(exported),True
+E,M2/dHvap/r0,0.811,0.811,True
+E,M2/dHvap/r50,0.876,0.876,True
+E,M2/dHvap/boot,0.185,0.185,True
+E,M2/dHvap/LOO0,0.768,0.768,True
+E,M2/dHvap/LOO50,0.838,0.838,True
+E_metrics,M2/dHvap/signed_r,0.8384,(exported),True
+E_metrics,M2/dHvap/Q2,0.7023,(exported),True
+E_metrics,M2/dHvap/MAE,0.1568,(exported),True
+E_metrics,M2/dHvap/RMSE,0.2035,(exported),True
 E,M2/S/r0,0.94,0.94,True
 E,M2/S/r50,0.96,0.96,True
 E,M2/S/boot,0.067,0.067,True
@@ -137,15 +137,15 @@ E_metrics,HM/dHf/signed_r,0.7415,(exported),True
 E_metrics,HM/dHf/Q2,0.5467,(exported),True
 E_metrics,HM/dHf/MAE,0.6731,(exported),True
 E_metrics,HM/dHf/RMSE,0.8189,(exported),True
-E,HM/dHvap/r0,0.873,0.873,True
-E,HM/dHvap/r50,0.92,0.92,True
-E,HM/dHvap/boot,0.122,0.122,True
-E,HM/dHvap/LOO0,0.837,0.837,True
-E,HM/dHvap/LOO50,0.894,0.894,True
-E_metrics,HM/dHvap/signed_r,0.8939,(exported),True
-E_metrics,HM/dHvap/Q2,0.7976,(exported),True
-E_metrics,HM/dHvap/MAE,0.1216,(exported),True
-E_metrics,HM/dHvap/RMSE,0.1648,(exported),True
+E,HM/dHvap/r0,0.903,0.903,True
+E,HM/dHvap/r50,0.944,0.944,True
+E,HM/dHvap/boot,0.082,0.082,True
+E,HM/dHvap/LOO0,0.871,0.871,True
+E,HM/dHvap/LOO50,0.921,0.921,True
+E_metrics,HM/dHvap/signed_r,0.9205,(exported),True
+E_metrics,HM/dHvap/Q2,0.8449,(exported),True
+E_metrics,HM/dHvap/MAE,0.1047,(exported),True
+E_metrics,HM/dHvap/RMSE,0.1468,(exported),True
 E,HM/S/r0,0.975,0.975,True
 E,HM/S/r50,0.976,0.976,True
 E,HM/S/boot,0.027,0.027,True
@@ -182,15 +182,15 @@ E_metrics,mM2/dHf/signed_r,0.8375,(exported),True
 E_metrics,mM2/dHf/Q2,0.6931,(exported),True
 E_metrics,mM2/dHf/MAE,0.5479,(exported),True
 E_metrics,mM2/dHf/RMSE,0.6737,(exported),True
-E,mM2/dHvap/r0,0.937,0.937,True
+E,mM2/dHvap/r0,0.925,0.925,True
 E,mM2/dHvap/r50,0.966,0.966,True
-E,mM2/dHvap/boot,0.051,0.051,True
-E,mM2/dHvap/LOO0,0.914,0.914,True
+E,mM2/dHvap/boot,0.068,0.068,True
+E,mM2/dHvap/LOO0,0.9,0.9,True
 E,mM2/dHvap/LOO50,0.953,0.953,True
-E_metrics,mM2/dHvap/signed_r,0.9525,(exported),True
-E_metrics,mM2/dHvap/Q2,0.9071,(exported),True
-E_metrics,mM2/dHvap/MAE,0.0927,(exported),True
-E_metrics,mM2/dHvap/RMSE,0.1117,(exported),True
+E_metrics,mM2/dHvap/signed_r,0.9528,(exported),True
+E_metrics,mM2/dHvap/Q2,0.9073,(exported),True
+E_metrics,mM2/dHvap/MAE,0.0981,(exported),True
+E_metrics,mM2/dHvap/RMSE,0.1135,(exported),True
 E,mM2/S/r0,0.863,0.863,True
 E,mM2/S/r50,0.918,0.918,True
 E,mM2/S/boot,0.188,0.188,True
@@ -227,15 +227,15 @@ E_metrics,"LO(0,0,1)/dHf/signed_r",0.8065,(exported),True
 E_metrics,"LO(0,0,1)/dHf/Q2",0.6489,(exported),True
 E_metrics,"LO(0,0,1)/dHf/MAE",0.5576,(exported),True
 E_metrics,"LO(0,0,1)/dHf/RMSE",0.7207,(exported),True
-E,"LO(0,0,1)/dHvap/r0",0.966,0.966,True
-E,"LO(0,0,1)/dHvap/r50",0.969,0.969,True
-E,"LO(0,0,1)/dHvap/boot",0.042,0.042,True
-E,"LO(0,0,1)/dHvap/LOO0",0.956,0.956,True
-E,"LO(0,0,1)/dHvap/LOO50",0.957,0.957,True
-E_metrics,"LO(0,0,1)/dHvap/signed_r",0.9571,(exported),True
-E_metrics,"LO(0,0,1)/dHvap/Q2",0.9161,(exported),True
-E_metrics,"LO(0,0,1)/dHvap/MAE",0.0743,(exported),True
-E_metrics,"LO(0,0,1)/dHvap/RMSE",0.1061,(exported),True
+E,"LO(0,0,1)/dHvap/r0",0.984,0.984,True
+E,"LO(0,0,1)/dHvap/r50",0.985,0.985,True
+E,"LO(0,0,1)/dHvap/boot",0.016,0.016,True
+E,"LO(0,0,1)/dHvap/LOO0",0.978,0.978,True
+E,"LO(0,0,1)/dHvap/LOO50",0.978,0.978,True
+E_metrics,"LO(0,0,1)/dHvap/signed_r",0.9775,(exported),True
+E_metrics,"LO(0,0,1)/dHvap/Q2",0.9555,(exported),True
+E_metrics,"LO(0,0,1)/dHvap/MAE",0.0619,(exported),True
+E_metrics,"LO(0,0,1)/dHvap/RMSE",0.0787,(exported),True
 E,"LO(0,0,1)/S/r0",0.931,0.931,True
 E,"LO(0,0,1)/S/r50",0.948,0.948,True
 E,"LO(0,0,1)/S/boot",0.045,0.045,True
@@ -259,28 +259,40 @@ E,constant_control_Q2,-0.121,-0.121,True
 F,T_B/fix_index_derived,mM2,mM2,True
 F,T_B/fix_r,0.855,0.855,True
 F,T_B/fix_LOO,0.781,0.781,True
-F,T_B/dec_r,0.834,0.834,True
-F,T_B/dec_LOO,0.763,0.763,True
+F,T_B/dec_r,0.835,0.835,True
+F,T_B/dec_LOO,0.764,0.764,True
+F,T_B/dec_r>=tuning_LO001_r50,0.835012>=0.835012,consistent pools,True
 F,dHf/fix_index_derived,mM2,mM2,True
 F,dHf/fix_r,0.891,0.891,True
 F,dHf/fix_LOO,0.865,0.865,True
 F,dHf/dec_r,0.85,0.85,True
-F,dHf/dec_LOO,0.809,0.809,True
-F,dHvap/fix_index_derived,"LO(0,0,2)","LO(0,0,2)",True
-F,dHvap/fix_r,0.967,0.967,True
-F,dHvap/fix_LOO,0.956,0.956,True
-F,dHvap/dec_r,0.969,0.969,True
-F,dHvap/dec_LOO,0.959,0.959,True
+F,dHf/dec_LOO,0.815,0.815,True
+F,dHf/dec_r>=tuning_LO001_r50,0.850042>=0.841762,consistent pools,True
+F,dHvap/fix_index_derived,"LO(0,0,1)","LO(0,0,1)",True
+F,dHvap/fix_r,0.984,0.984,True
+F,dHvap/fix_LOO,0.978,0.978,True
+F,dHvap/dec_r,0.985,0.985,True
+F,dHvap/dec_LOO,0.978,0.978,True
+F,dHvap/dec_r>=tuning_LO001_r50,0.984678>=0.984678,consistent pools,True
 F,S/fix_index_derived,HM,HM,True
 F,S/fix_r,0.975,0.975,True
 F,S/fix_LOO,0.967,0.967,True
-F,S/dec_r,0.949,0.949,True
-F,S/dec_LOO,0.921,0.921,True
+F,S/dec_r,0.948,0.948,True
+F,S/dec_LOO,0.92,0.92,True
+F,S/dec_r>=tuning_LO001_r50,0.947754>=0.947754,consistent pools,True
 F,omega/fix_index_derived,M2,M2,True
 F,omega/fix_r,0.988,0.988,True
 F,omega/fix_LOO,0.985,0.985,True
-F,omega/dec_r,0.946,0.946,True
-F,omega/dec_LOO,0.929,0.929,True
+F,omega/dec_r,0.945,0.945,True
+F,omega/dec_LOO,0.926,0.926,True
+F,omega/dec_r>=tuning_LO001_r50,0.945391>=0.945391,consistent pools,True
+H,T_B/Q2_GM|Q2_LO|dQ2|RMSE_GM|RMSE_LO|better,0.6127572851|0.7483343215|+0.1355770364|3.6999545164|2.9827493038|10,(guarded in [T]),True
+H,dHf/Q2_GM|Q2_LO|dQ2|RMSE_GM|RMSE_LO|better,0.8552447401|0.5494468225|-0.3057979176|0.4627318598|0.8163666489|4,(guarded in [T]),True
+H,dHvap/Q2_GM|Q2_LO|dQ2|RMSE_GM|RMSE_LO|better,0.8843978414|0.9708453048|+0.0864474634|0.1267826405|0.0636694463|13,(guarded in [T]),True
+H,S/Q2_GM|Q2_LO|dQ2|RMSE_GM|RMSE_LO|better,0.9149250759|0.8772429487|-0.0376821273|1.3095932295|1.5731091607|4,(guarded in [T]),True
+H,omega/Q2_GM|Q2_LO|dQ2|RMSE_GM|RMSE_LO|better,0.9785677958|0.9564802060|-0.0220875897|0.0052780142|0.0075210859|5,(guarded in [T]),True
+H,max_abs_selected_gamma,0.480,0.480,True
+H,dHvap_identical_triple_all_folds,"[(-0.27, 0.271, 0.239)]","[(-0.27, 0.271, 0.239)]",True
 G,trees,106,106,True
 G_degeneracy,M1,18,(all 12 exported),True
 G_degeneracy,M2,35,(all 12 exported),True
@@ -320,6 +332,18 @@ G_SS,"LO(0,0,2)","SS=0.16538,Abr=0.79014,SA=0.20930",(all 12 exported),True
 G,SS_LO002,0.165,0.165,True
 G,LO002_max_SS,"LO(0,0,2)","LO(0,0,2)",True
 G,LO002_max_Abr,"LO(0,0,2)","LO(0,0,2)",True
+G2_FGD,M1,"SS=0.0566307365,Abr=0.1336157424,ratio=0.4238328174",(guarded in [T]),True
+G2_FGD,M2,"SS=0.0922343110,Abr=0.2442750961,ratio=0.3775837671",(guarded in [T]),True
+G2_FGD,HM,"SS=0.1255507560,Abr=0.3125834125,ratio=0.4016552094",(guarded in [T]),True
+G2_FGD,mM2,"SS=0.0515899896,Abr=0.1176807298,ratio=0.4383894430",(guarded in [T]),True
+G2_FGD,R,"SS=0.0263554627,Abr=0.0588202900,ratio=0.4480675404",(guarded in [T]),True
+G2_FGD,chi,"SS=0.0263776149,Abr=0.0591056634,ratio=0.4462789754",(guarded in [T]),True
+G2_FGD,H/2,"SS=0.0515911293,Abr=0.1142936585,ratio=0.4513910043",(guarded in [T]),True
+G2_FGD,ISI,"SS=0.0226474972,Abr=0.0596752684,ratio=0.3795122808",(guarded in [T]),True
+G2_FGD,GA,"SS=0.0241308879,Abr=0.0535450839,ratio=0.4506648630",(guarded in [T]),True
+G2_FGD,AG,"SS=0.0255662075,Abr=0.0579110839,ratio=0.4414734753",(guarded in [T]),True
+G2_FGD,"LO(0,0,1)","SS=0.0624196553,Abr=0.1367486897,ratio=0.4564552353",(guarded in [T]),True
+G2_FGD,"LO(0,0,2)","SS=0.1256729332,Abr=0.2744700180,ratio=0.4578749043",(guarded in [T]),True
 M,closedforms+bounds+equality+asymptotics_failures,0,0,True
 N,v35_analyses_recompute,0 mismatches,0,True
 P,parser_sanity,0 issues,0,True
