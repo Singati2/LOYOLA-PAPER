@@ -9,8 +9,8 @@ over seeds of dQ2(LO - GM); dQ2(LO - ridge) uses the median-over-seeds LO Q^2.
 Reported: point value and 95% percentile interval.
 
 Caveat: the bootstrap is conditional on the fitted outer predictions (model
-selection is not repeated inside each resample), so it understates total
-uncertainty; it captures which-molecules variability, which the seed sweep
+selection is not repeated inside each resample), so it does not account for
+uncertainty from refitting and model selection; it captures which-molecules variability, which the seed sweep
 does not.
 Output: uncertainty_exploratory.csv
 """

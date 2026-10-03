@@ -1870,8 +1870,8 @@ The seed counts above measure optimizer variance only. To indicate
 molecule-level uncertainty we also computed, post hoc, a paired
 bootstrap over molecules ($2000$ resamples) of the median-over-seeds
 $\Delta Q^2$, conditional on the fitted outer predictions (selection is
-not repeated within resamples, so the intervals understate total
-uncertainty). The $95\%$ intervals for LO minus GM on
+not repeated within resamples, so the intervals do not account for uncertainty
+from refitting and model selection). The $95\%$ intervals for LO minus GM on
 $\Delta H_{\mathrm{vap}}$ are $[+0.014, +0.111]$ on the octanes but
 $[-0.006, +0.113]$ on the nonanes at budget $200$ ($[-0.005, +0.119]$ at
 $500$): the external gain met the pre-registered criterion, yet its

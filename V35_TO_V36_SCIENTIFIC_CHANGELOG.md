@@ -150,3 +150,8 @@ reproduced by an independent re-implementation.
   not conclusive.
 - PREREG template for a future measured dHvap test (protocol, baselines,
   full nested bootstrap, confirmation rule).
+
+## v37.3
+- Bootstrap caveat reworded: the intervals do not account for uncertainty
+  from refitting and model selection (previously: "understate total
+  uncertainty").
