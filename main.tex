@@ -401,7 +401,8 @@
   Gutman--Milovanovi\'c directions on the admissible degree-pair set
   for $\Delta \ge 3$ (Proposition~\ref{prop:indep}); (ii) global log-convexity of the
   family with exact mean/covariance formulas for its parameter
-  derivatives (Theorem~\ref{thm:logconvex}); (iii) two-sided bounds
+  derivatives (Theorem~\ref{thm:logconvex}, a specialization of the
+  standard convexity of log-sum-exp functions); (iii) two-sided bounds
   extending parent-family inequalities to $\gamma \neq 0$, several
   sharp; (iv) an exact quantification of the information ceiling of
   the whole vertex-degree-based class on molecular graphs, including
@@ -635,6 +636,13 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   parameters as a family of descriptors, even though particular
   graphs may not.
   \end{remark}
+
+  The next result is the standard convexity of a log-sum-exp
+  (log-partition) function, whose gradient and Hessian are the mean and
+  covariance of the exponent's feature vector under the induced
+  weights; we state it for $LO$ because these moments have a direct
+  interpretation here and because strictness depends on the degree
+  pairs that $G$ realises.
 
   \begin{theorem}[Global log-convexity]\label{thm:logconvex}
   Fix a graph $G$ with $m \ge 1$ edges and define
@@ -1937,7 +1945,11 @@ logarithm whose $\gamma$-derivatives are the mean and variance of the
 edge imbalance under an induced edge measure
 (Theorem~\ref{thm:logconvex}); and the two-sided bounds of
 Section~\ref{sec:bounds} extend inequalities known for the parent to
-the $\gamma \neq 0$ regime, several of them sharp.
+the $\gamma \neq 0$ regime, several of them sharp. The generic
+discrimination of distinct degree-pair profiles
+(Proposition~\ref{prop:generic}) is inherited from the parent rather
+than created by $\gamma$, and the imbalance coordinate re-weights the
+degree-pair information without adding to it.
 
 Chemometrically the conclusions are deliberately honest. Every
 vertex-degree-based index on the octane benchmark operates above an
@@ -1954,7 +1966,9 @@ on the fifth (Table~\ref{tab:ablation}; a descriptive summary of
 optimizer variance on one fixed $18$-molecule dataset) --- it is not a systematic predictive
 upgrade over the optimized parent. Its measurable contribution is
 structural: the pure-$\gamma$ points attain the degree-pair
-discrimination floor at every tree order $7$--$12$ tested, and under
+discrimination floor at every tree order $7$--$12$ tested (as does the
+Randi\'c index; attainment fails from order $13$, molecular trees from
+order $16$), and under
 the published structure-sensitivity protocol they combine
 hyper-Zagreb-level sensitivity with smaller abruptness and the
 largest sensitivity-to-abruptness ratios in the comparison set. The
@@ -1978,8 +1992,7 @@ bicyclic graphs.
 decane and to compound-class-specific QSPR endpoints.
 \end{enumerate}
 
-\acknowledgment{The authors thank colleagues for helpful discussions
-of the computational extremal-graph search.}
+\acknowledgment{The authors thank colleagues for helpful discussions.}
 
 \appendix
 
