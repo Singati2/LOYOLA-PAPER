@@ -177,7 +177,8 @@
   with $LO(G;\alpha,\beta,0) = M_{\alpha,\beta}(G)$ identically.
 
   We prove that the imbalance direction is affinely independent of the
-  two parent directions on graphs with maximum degree at least $3$, that
+  two parent directions on the admissible degree-pair set of graphs with
+  maximum degree at least $3$ (a class-level, not per-graph, statement), that
   $\log LO$ is globally convex in $(\alpha,\beta,\gamma)$ with gradient
   and Hessian given by the mean and covariance of the edge-feature
   vector under an induced edge measure, and we extend two-sided bounds
@@ -191,8 +192,8 @@
   comparison against the optimized parent family on five octane
   properties, repeated over one hundred random-search seeds at two
   budgets, finds that the free imbalance parameter usually improves
-  out-of-sample prediction on one property and usually degrades it
-  elsewhere, with neither tendency sign-invariant across candidate
+  out-of-sample prediction on one property, usually degrades it on
+  three, and is mixed on the fifth, with neither tendency sign-invariant across candidate
   streams, so $\gamma$ is presented as a structurally interpretable
   and provably independent direction rather than a predictive
   upgrade;
@@ -304,8 +305,10 @@
   Gutman--Milovanovi\'c parent?
 
   On the mathematical side, we prove that the answer to independence
-  is affirmative for graphs of maximum degree at least three
-  (Proposition~\ref{prop:indep}), establish global log-convexity of
+  is affirmative on the admissible degree-pair set of graphs of maximum
+  degree at least three (Proposition~\ref{prop:indep}; on an individual
+  graph $\gamma$ can be absorbed by the parent parameters,
+  Remark~\ref{rem:ident}), establish global log-convexity of
   the family in $(\alpha,\beta,\gamma)$ with an exact
   mean/covariance interpretation of its derivatives
   (Theorem~\ref{thm:logconvex}), give closed-form values on standard
@@ -369,8 +372,8 @@
 
   In sum, the contributions of this paper are: (i) the affine
   independence of the imbalance direction from the two
-  Gutman--Milovanovi\'c directions on graphs with $\Delta \ge 3$
-  (Proposition~\ref{prop:indep}); (ii) global log-convexity of the
+  Gutman--Milovanovi\'c directions on the admissible degree-pair set
+  for $\Delta \ge 3$ (Proposition~\ref{prop:indep}); (ii) global log-convexity of the
   family with exact mean/covariance formulas for its parameter
   derivatives (Theorem~\ref{thm:logconvex}); (iii) two-sided bounds
   extending parent-family inequalities to $\gamma \neq 0$, several
@@ -382,7 +385,8 @@
   honest matched-budget nested assessment of whether $\gamma$ adds
   out-of-sample predictive information beyond the optimized parent
   (in a $100$-seed analysis it usually helps on one of five octane
-  properties and usually does not elsewhere, with neither tendency
+  properties, usually hurts on three, and is mixed on the fifth, with
+  neither tendency
   sign-invariant across candidate streams), together
   with the family's behaviour under the published
   structure-sensitivity protocol~\cite{FurtulaGutmanDehmer2013SS},
@@ -449,7 +453,8 @@ LO(G;\alpha,\beta,0) \;=\; M_{\alpha,\beta}(G)
 \;=\; \sum_{uv \in E(G)} (d_u d_v)^{\alpha} (d_u + d_v)^{\beta},
 \end{equation*}
 whose classical special cases are catalogued in the Introduction.
-Throughout, $q_{uv} = |d_u - d_v|/(d_u + d_v)$ denotes the
+Throughout, $q_{uv} = \mathrm{imb}(d_u, d_v)$, where
+$\mathrm{imb}(x, y) = |x - y|/(x + y)$, denotes the
 normalized degree imbalance of the edge $uv$; positive $\gamma$
 exponentially upweights degree-imbalanced edges, negative $\gamma$
 downweights them, and on regular graphs every $q_{uv} = 0$ so that
@@ -545,7 +550,7 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   admissible degree pairs. Then the augmented feature vectors
   $\bigl(1, \ln(ij), \ln(i+j), q_{ij}\bigr)$, $(i,j) \in P_{\Delta}$,
   span $\mathbb{R}^4$. Consequently, if two parameter triples
-  $\theta \neq \theta'$ satisfy
+  $\theta, \theta'$ satisfy
   $e^{\theta^{\top} z} = c\, e^{\theta'^{\top} z}$ for some constant
   $c > 0$ and all $(i,j) \in P_{\Delta}$, then $\theta = \theta'$ and
   $c = 1$; in particular no choice of $(\alpha', \beta')$ and scaling
@@ -742,6 +747,11 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   is their extension to $\gamma \neq 0$, where the imbalance factor
   $e^{\gamma q_{uv}}$ enters every edge weight, and the tracking of
   how $\gamma$ deforms the equality cases.
+  Theorems~\ref{thm:m1_bound}--\ref{thm:m2_alpha} and
+  Propositions~\ref{thm:R_chi}--\ref{thm:sombor} are stated at
+  $\gamma = 0$ only; they are standard Jensen and Cauchy--Schwarz
+  consequences for $M_{\alpha,\beta}$, included to make the
+  comparison set self-contained, and are not claimed as new.
   \end{remark}
 
   The summand in~\eqref{eq:wuzi} depends only on the unordered
@@ -891,7 +901,7 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   \end{proof}
 
   \begin{proposition}\label{thm:upper_Delta}
-  Let $G$ be a graph of size $m$ and maximum degree $\Delta$. For
+  Let $G$ be a connected graph of size $m$ and maximum degree $\Delta$. For
   $\alpha, \beta \ge 0$ and $\gamma \ge 0$,
   \begin{equation}\label{eq:upper_Delta}
   \Wuzi \;\le\; m \cdot \Delta^{2\alpha} \cdot (2\Delta)^{\beta}
@@ -922,13 +932,16 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   edge. Because $\gamma \ge 0$ and $\exp$ is non-decreasing,
   $\exp(\gamma\,|d_u - d_v|/(d_u + d_v)) \le \exp(\gamma(\Delta - 1)/(\Delta + 1))$.
   Multiplying the three factor-wise bounds and summing over the
-  $m$ edges of $G$ yields~\eqref{eq:upper_Delta}. We note that the
-  three per-factor maxima are not simultaneously attainable for
-  $\gamma > 0$, so the bound, while valid, is not sharp in that range.
+  $m$ edges of $G$ yields~\eqref{eq:upper_Delta}. For $\gamma > 0$
+  and $\Delta \ge 2$ the bound is attained if and only if
+  $\alpha = \beta = 0$ and every edge has degree pair $(1, \Delta)$
+  (for connected $G$, $G \cong K_{1,\Delta}$); if $\alpha > 0$ or
+  $\beta > 0$ the three factor-wise maxima are not simultaneously
+  attainable and the inequality is strict.
   \end{proof}
 
   \begin{proposition}\label{thm:lower_delta}
-  Let $G$ be a graph of size $m$ and minimum degree $\delta$. For
+  Let $G$ be a connected graph of size $m$ and minimum degree $\delta$. For
   $\alpha, \beta \ge 0$ and $\gamma \ge 0$,
   \begin{equation}\label{eq:lower_delta}
   \Wuzi \;\ge\; m \cdot \delta^{2\alpha} \cdot (2\delta)^{\beta},
@@ -1134,6 +1147,22 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   attains the corresponding extremum of $\psi/h$.
   \end{theorem}
 
+  \begin{proof}
+  Fix an edge $uv \in E(G)$ and define
+  \[
+  r_{uv} := \psi(d_u, d_v; \alpha, \beta, \gamma)/h(d_u, d_v) > 0.
+  \]
+  By definition $c_{\min}^{h} \le r_{uv} \le c_{\max}^{h}$, so
+  multiplying by $h(d_u, d_v) > 0$ gives the per-edge bounds
+  $c_{\min}^{h} h(d_u, d_v) \le \psi(d_u, d_v; \alpha, \beta, \gamma)$
+  and $\psi(d_u, d_v; \alpha, \beta, \gamma)
+  \le c_{\max}^{h} h(d_u, d_v)$. Summing over $E(G)$ and using
+  $\sum_{uv} h(d_u, d_v) = I_h(G)$ and $\sum_{uv} \psi = \Wuzi$
+  gives~\eqref{eq:ratio_bound}; the equality conditions are that
+  every edge attains the corresponding extremum of $\psi/h$ over the
+  appearing pairs.
+  \end{proof}
+
   Theorem~\ref{thm:ratio_bound} is a \emph{sharp graph-specific}
   comparison: its constants depend on the degree pairs that actually
   appear in $G$. A uniform version follows immediately by enlarging
@@ -1153,19 +1182,6 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   extrema are taken over a superset.
   \end{corollary}
 
-  \begin{proof}
-  Fix an edge $uv \in E(G)$ and define
-  $r_{uv} := \psi(d_u, d_v; \alpha, \beta, \gamma)/h(d_u, d_v) > 0$.
-  By definition $c_{\min}^{h} \le r_{uv} \le c_{\max}^{h}$, so
-  multiplying by $h(d_u, d_v) > 0$ gives the per-edge bounds
-  $c_{\min}^{h} h(d_u, d_v) \le \psi(d_u, d_v; \alpha, \beta, \gamma)$
-  and $\psi(d_u, d_v; \alpha, \beta, \gamma)
-  \le c_{\max}^{h} h(d_u, d_v)$. Summing over $E(G)$ and using
-  $\sum_{uv} h(d_u, d_v) = I_h(G)$ and $\sum_{uv} \psi = \Wuzi$
-  gives~\eqref{eq:ratio_bound}; the equality conditions are that
-  every edge attains the corresponding extremum of $\psi/h$ over the
-  appearing pairs.
-  \end{proof}
 
   \begin{proposition}\label{prop:gamma_eq_0_or_inf}
   At $\gamma = 0$, $LO(G; \alpha, \beta, 0)$ coincides with the
@@ -1188,9 +1204,9 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
 
   \begin{proof}
   At $\gamma = 0$ the exponential factor is $1$ on every edge.
-  For the asymptotics, write $M(G) := \mathrm{imb}_{\max}(G)$ and
-  $\varepsilon_{uv} := M(G) - \mathrm{imb}(d_u, d_v) \ge 0$, so that
-  $\Wuzi / e^{\gamma M(G)} = \sum_{uv} (d_u d_v)^{\alpha}(d_u +
+  For the asymptotics, write $\mu(G) := \mathrm{imb}_{\max}(G)$ and
+  $\varepsilon_{uv} := \mu(G) - \mathrm{imb}(d_u, d_v) \ge 0$, so that
+  $\Wuzi / e^{\gamma \mu(G)} = \sum_{uv} (d_u d_v)^{\alpha}(d_u +
   d_v)^{\beta} e^{-\gamma \varepsilon_{uv}}$. For $uv \in E_{\max}(G)$,
   $\varepsilon_{uv} = 0$ and the summand is $\gamma$-independent; for
   $uv \notin E_{\max}(G)$, $\varepsilon_{uv} > 0$ and $e^{-\gamma \varepsilon_{uv}}
@@ -1570,13 +1586,15 @@ $\Delta H_{\mathrm{vap}}$ ($91/100$ seeds at budget $200$, $93/100$
 at budget $500$; the paired control gives $93/100$ at both budgets)
 and \emph{usually} degraded it for $\Delta H_f$ ($86/100$ and
 $76/100$ seeds), but neither direction is sign-invariant across
-random candidate streams; $T_B$ is close to an even split and $S$
-and $\omega$ usually degrade slightly. These are descriptive
+random candidate streams; $T_B$ is close to an even split at
+budget $200$ ($53/100$) but leans towards improvement at budget $500$
+($64/100$), and $S$ and $\omega$ usually degrade slightly. These are descriptive
 tendencies under the tested random-search procedure, not inferential
 evidence of predictive superiority or degradation. The honest
 summary is therefore: at matched budget, the imbalance parameter
-tends to help on one property ($\Delta H_{\mathrm{vap}}$) and tends
-to be unhelpful elsewhere, with no sign-invariant effect in either
+tends to help on one property ($\Delta H_{\mathrm{vap}}$), tends to
+hurt on three ($\Delta H_f$, $S$, $\omega$), and is budget-dependent on
+$T_B$, with no sign-invariant effect in either
 direction. Its value lies in the structural properties established
 in Section~\ref{sec:geometry} and the discrimination behaviour
 below, not in systematic predictive gains.
@@ -1604,7 +1622,10 @@ Rada~\cite{Rada2019ExpVDB} proved that the exponential index
 $e^{\varphi}$ discriminates the equivalence classes of the
 corresponding $\widehat{m}_{\varphi}$-structure relation; the
 pure-$\gamma$ imbalance weights used here are rational, hence
-algebraic, so that theorem applies, and attainment of the
+algebraic, so that theorem separates the classes of graphs with
+different $q$-value histograms (not the degree-pair profiles
+themselves, since $q$ is not injective on pairs: $q_{12} = q_{24}$
+and $q_{ii} = 0$), and attainment of the
 $79$-profile floor on this particular order-$10$ tree set is the
 separate computational observation reported here; the first Zagreb index $LO(0, 1, 0)$ ($83.0\%$) and the
 second Zagreb index $LO(1, 0, 0)$ ($67.0\%$) are the most degenerate
@@ -1630,7 +1651,18 @@ pure-$\gamma$ points from the most degenerate classical indices
 imbalance weights lose nothing, not that they are unique in this
 respect. Attainment on orders $7$--$12$ is a computational
 observation, not a proof of injectivity on degree-pair profiles for
-all orders.
+all orders. Indeed attainment fails at larger orders: because
+$LO(\cdot\,; 0, 0, \gamma)$ depends only on the histogram of
+$q$-values, two trees with distinct degree-pair profiles but equal
+$q$-histograms receive equal values for every $\gamma$. Among the
+trees of order $13$ the profiles
+$\{(1,2)^{1}, (1,3)^{2}, (1,6)^{5}, (2,3)^{2}, (2,6)^{1}, (3,3)^{1}\}$
+and $\{(1,3)^{3}, (1,6)^{5}, (2,2)^{1}, (2,3)^{2}, (3,6)^{1}\}$
+(exponents are edge multiplicities) share the $q$-histogram
+$\{0^{1}, \tfrac15^{2}, \tfrac13^{1}, \tfrac12^{3}, \tfrac57^{5}\}$,
+and the pure-$\gamma$ points realise $566$ distinct values against
+$570$ profiles; among molecular trees ($\Delta \le 4$) the first
+failure occurs at order $16$ ($809$ values against $810$ profiles).
 
 \begin{table}[H]
 \centering
@@ -1685,13 +1717,13 @@ throughout, as it must. As an external control, the implementation
 reproduces the published decane-class values of Barman and
 Das~\cite{BarmanDas2026HSO} for the seven indices common to both
 studies ($M_1$, ${}^{m}\!M_2$, $R$, $\chi$, $H$, $GA$, $AG$;
-fourteen tabulated $SS$/$Abr$ values): ten agree exactly at the four
-displayed decimals and the remaining four differ by one unit in the
+fourteen tabulated $SS$/$Abr$ values): eleven agree exactly at the four
+displayed decimals and the remaining three differ by one unit in the
 fourth decimal. Under the published desideratum ($SS$ large,
 $Abr$ small~\cite{FurtulaGutmanDehmer2013SS}), the pure-$\gamma$
 point $LO(0,0,2)$ attains the largest structure sensitivity in the
 comparison set ($SS = 0.1257$, marginally above the hyper-Zagreb
-index at $0.1255$) with a markedly smaller abruptness than
+index at $0.1256$) with a markedly smaller abruptness than
 hyper-Zagreb ($0.274$ versus $0.313$), and the two pure-$\gamma$
 points have the two largest sensitivity-to-abruptness ratios
 ($0.4579$ and $0.4565$). Given the redundancy analysis of
@@ -1713,15 +1745,15 @@ Index & $SS$ & $Abr$ & $SS/Abr$\\
 \midrule
 $M_1$ & $0.0566$ & $0.1336$ & $0.4238$\\
 $M_2$ & $0.0922$ & $0.2443$ & $0.3776$\\
-$HM$ & $0.1255$ & $0.3126$ & $0.4017$\\
+$HM$ & $0.1256$ & $0.3126$ & $0.4017$\\
 ${}^{m}\!M_2$ & $0.0516$ & $0.1177$ & $0.4384$\\
 $R$ & $0.0264$ & $0.0588$ & $0.4481$\\
 $\chi$ & $0.0264$ & $0.0591$ & $0.4463$\\
 $H/2$ & $0.0516$ & $0.1143$ & $0.4514$\\
 $ISI$ & $0.0226$ & $0.0597$ & $0.3795$\\
-$GA$ & $0.0241$ & $0.0536$ & $0.4507$\\
+$GA$ & $0.0241$ & $0.0535$ & $0.4507$\\
 $AG$ & $0.0256$ & $0.0579$ & $0.4415$\\
-$LO(0,0,1)$ & $0.0624$ & $0.1368$ & $0.4565$\\
+$LO(0,0,1)$ & $0.0624$ & $0.1367$ & $0.4565$\\
 $LO(0,0,2)$ & $0.1257$ & $0.2745$ & $0.4579$\\
 \bottomrule
 \end{tabular}
@@ -1745,8 +1777,9 @@ $M_{\alpha,\beta}$~\cite{GutmanMilovanovic2020AKCE,
 MolinaSigarreta2025GM}, to which it reduces identically at
 $\gamma = 0$. What the third parameter contributes is now stated
 precisely: the imbalance direction is affinely independent of the two
-parent directions on graphs with $\Delta \ge 3$
-(Proposition~\ref{prop:indep}); the family has a globally convex
+parent directions on the admissible degree-pair set for $\Delta \ge 3$
+(Proposition~\ref{prop:indep}; a class-level statement, see
+Remark~\ref{rem:ident}); the family has a globally convex
 logarithm whose $\gamma$-derivatives are the mean and variance of the
 edge imbalance under an induced edge measure
 (Theorem~\ref{thm:logconvex}); and the two-sided bounds of
@@ -1761,8 +1794,8 @@ is effectively two-dimensional, so third-decimal correlation
 differences carry no ranking information; and at matched search
 budget, across one hundred random-search seeds and two budgets, the
 free imbalance parameter usually improves nested out-of-sample
-prediction on one of five properties and usually does not elsewhere,
-with neither tendency sign-invariant across candidate streams
+prediction on one of five properties, usually degrades it on three,
+and is mixed on the fifth, with neither tendency sign-invariant across candidate streams
 (Table~\ref{tab:ablation}) --- it is not a systematic predictive
 upgrade over the optimized parent. Its measurable contribution is
 structural: the pure-$\gamma$ points attain the degree-pair
