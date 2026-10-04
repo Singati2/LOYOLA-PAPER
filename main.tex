@@ -382,9 +382,12 @@
   for $\gamma > 0$, equals $1$ for $\gamma = 0$, and lies in
   $(e^{\gamma}, 1]$ for $\gamma < 0$; it reduces to $1$ on regular
   graphs. The exponential
-  form is a structural choice rather than one derived from a physical
-  model: it lets $\gamma$ act multiplicatively and only on irregularity,
-  vanishing on regular graphs.
+  form is not derived from a physical model; it is chosen because it
+  makes the family log-linear in its parameters, so that $\gamma$ acts
+  multiplicatively and only on irregularity, and the whole family is an
+  exponential family in $(\alpha,\beta,\gamma)$, which is what makes
+  the convexity, identifiability and discrimination results of
+  Section~\ref{sec:geometry} available.
 
   Also, it is useful to demonstrate the descriptor-space ceiling in
   which the entire family lives. On hydrogen-suppressed molecular
@@ -398,6 +401,44 @@
   lies inside a fixed ten-dimensional descriptor
   space, no matter how
   its three real parameters are chosen.
+
+  \emph{Scope of the contribution.} Four questions should be answered
+  at the outset. First, is the family sufficiently novel, given $IRLA$
+  and the existing exponential vertex-degree-based indices? The edge
+  invariant $q_{uv}$ is classical, and the pure-$\gamma$ point
+  $LO(0,0,\gamma)$ is simply the exponential index, in the sense
+  of~\cite{Rada2019ExpVDB}, of the $IRLA$ edge weights. What is new is
+  not a new edge invariant but its embedding as a free, log-linear
+  coordinate inside the Gutman--Milovanovi\'c family, and the exact
+  description of the resulting three-parameter structure: a size--shape
+  factorisation, a ratio plane on which discrimination is characterised
+  exactly, and per-graph identifiability. Second, several of the
+  mathematical results are applications of standard tools: the
+  convexity of log-sum-exp functions, Laguerre's rule of signs, the
+  Lindemann--Weierstrass theorem and the minimality theory of
+  exponential families. We claim no novelty for these tools; the
+  contribution is their application to this family and the structural
+  characterisation that results (the exact $q$-histogram ceiling of the
+  pure-$\gamma$ line, colliding tree families at every order from $13$,
+  a bound on $\gamma$-crossings, and the classification of
+  scale-invariant directions). Third, why use a three-parameter family
+  if $IRLA$ performs similarly? Not for predictive superiority, which
+  we do not find. The reasons are interpretability within the parent
+  family (every member is a deformation of a classical
+  Gutman--Milovanovi\'c index, recovered at $\gamma = 0$); continuous
+  structural deformation (size and shape are controlled separately, and
+  $\gamma$ moves continuously from the parent towards imbalance-weighted
+  indices); ratio-plane geometry (the pure-$\gamma$ line, $GA$ and $AG$
+  lie in one plane on which their discriminating power is described
+  exactly); and analytic tractability (log-linearity gives convexity,
+  closed-form derivatives such as
+  $\partial_{\gamma}\log LO = \mathbb{E}_{\theta}[q]$, and an exact
+  identifiability theory). $IRLA$ is, to first order in $\gamma$, a
+  single slice of this structure. Fourth, the QSPR datasets are small:
+  $18$ octanes and $35$ nonanes. We therefore present the chemometric
+  component as diagnostic evidence about what imbalance information
+  does and does not add to the parent family, not as proof of chemical
+  predictive utility.
 
   In sum, the contributions of this paper are: (i) the affine
   independence of the imbalance direction from the two
@@ -1343,7 +1384,7 @@ We benchmark the Loyola family against the classical indices it
 reduces to, on three standard testbeds, following the chemometric
 benchmark of the diminished Sombor
 study~\cite{MovahediGutmanRedzepovicFurtula2026}: the $18$ octane
-isomers (five NIST physicochemical properties), the $106$
+isomers (five physicochemical properties), the $106$
 non-isomorphic trees of order $10$, and the $75$ decane isomers. The comparison set
 is restricted to the exact reductions of Section~\ref{sec:intro} ---
 $M_1, M_2, HM, {}^{m}\!M_2, R, \chi, H/2, ISI, GA, AG$ --- together
@@ -1353,8 +1394,11 @@ is tuned against the property data --- the effect of data-driven
 tuning is examined separately, as an exploratory check, in
 Section~\ref{sec:tuning}; the edge count $m = LO(0, 0, 0)$ is omitted
 as it is constant on the octanes. All comparisons in this section are
-descriptive; given the number of properties, indices, and tuning
-candidates examined, no confirmatory inference is claimed. All
+descriptive and diagnostic: on these small benchmark sets they show what
+imbalance information does and does not add to the parent family, not
+chemical predictive utility, and given the number of properties,
+indices, and tuning candidates examined, no confirmatory inference is
+claimed. All
 quantities are computed in double precision and rounded \emph{once}
 for display (three decimals for correlations, $Q^2$ and RMSE, four
 for structure sensitivity); tabulated gains and differences are
@@ -2203,7 +2247,8 @@ discrimination of distinct degree-pair profiles
 than created by $\gamma$, and the imbalance coordinate re-weights the
 degree-pair information without adding to it.
 
-Chemometrically the conclusions are deliberately honest. Every
+Chemometrically, the evidence is diagnostic rather than a demonstration
+of predictive utility. Every
 vertex-degree-based index on the octane benchmark operates above an
 irreducible floor set by two degree-pair collision pairs
 (Proposition~\ref{prop:collision}); the twelve-index comparison set
