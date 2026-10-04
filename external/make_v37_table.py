@@ -15,6 +15,12 @@ TEX = {"T_B": r"$T_B$", "dHf": r"$\Delta H_f$", "dHvap": r"$\Delta H_{\mathrm{va
        "S": r"$S$", "omega": r"$\omega$"}
 
 
+def fixed_lo1_q2(P, y):
+    x = B.descriptor_matrix(P, [(0.0, 0.0, 1.0)])[0]
+    preds = np.array([B.fit_predict(np.delete(x, i), np.delete(y, i), x[i]) for i in range(len(y))])
+    return B.scores(preds, y)[0]
+
+
 def classical_q2(P, y):
     X = B.descriptor_matrix(P, [t for _, t in CLASSICAL])
     preds, _ = B.outer_loo(B.fold_select_ols, X, y)
@@ -39,14 +45,17 @@ def main():
         if r["analysis"] == "primary":
             cnt[("nonane", r["property"], int(r["budget"]))] = int(r["LO_better"])
     # classical-only fixed baseline
-    cls = {}
+    cls = {}; lo1 = {}
     P8 = [alkane_pairs(r[0]) for r in OCTANES]
     for k, p in enumerate(PROPS):
         cls[("octane", p)] = classical_q2(P8, np.array([r[1 + k] for r in OCTANES]))
+        lo1[("octane", p)] = fixed_lo1_q2(P8, np.array([r[1 + k] for r in OCTANES]))
     rows9 = list(csv.DictReader(open(os.path.join(HERE, "nonane_data.csv"))))
     for p, col in (("T_B", "T_B_C"), ("dHvap", "dHvap_kcal")):
         keep = [r for r in rows9 if r[col].strip()]
         cls[("nonane", p)] = classical_q2([alkane_pairs(r["smiles"]) for r in keep],
+                                          np.array([float(r[col]) for r in keep]))
+        lo1[("nonane", p)] = fixed_lo1_q2([alkane_pairs(r["smiles"]) for r in keep],
                                           np.array([float(r[col]) for r in keep]))
     with open(os.path.join(HERE, "v37_classical_fixed.csv"), "w", newline="") as f:
         w = csv.writer(f); w.writerow(["dataset", "property", "Q2_classical_fixed_best"])
@@ -58,7 +67,7 @@ def main():
         q = lambda m: base[(ds, p, m)]
         cells = [("oct." if ds == "octane" else "non.") + " " + TEX[p],
                  f"${q('mean'):+.3f}$", f"${cls[(ds, p)]:.3f}$", f"${q('IRLA'):.3f}$",
-                 f"${q('ridge_counts'):.3f}$",
+                 f"${q('ridge_counts'):.3f}$", f"${lo1[(ds, p)]:.3f}$",
                  f"${q('GM_b200'):.3f}$", f"${q('LO_b200'):.3f}$",
                  f"${cnt[(ds, p, 200)]}/{cnt[(ds, p, 500)]}$"]
         lines.append(" & ".join(cells) + r"\\")

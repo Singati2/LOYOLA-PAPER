@@ -76,3 +76,12 @@ hyper-Zagreb index HM but no names. Isomers were matched only where HM is unique
 2,2,4,4-tetramethylpentane 0.09. No accessible secondary compilation of all-35 T_B
 was found (Wiley QSPR paper 10.1155/jom/9300802: HTTP 403; Wikipedia rate-limited
 and is tertiary), so T_B was not cross-checked.
+
+## Source label mapping
+NIST WebBook labels 25 of the nonane dHvap entries "Reid, 1972". That entry is
+R. C. Reid's review (AIChE J. 18 (1972) 1278) of the handbook by R. C. Wilhoit
+and B. J. Zwolinski, *Handbook of Vapor Pressures and Heats of Vaporization of
+Hydrocarbons and Related Compounds* (Texas A&M Research Foundation, 1971); the
+manuscript cites the handbook (WilhoitZwolinski1971). The other 4 compilation
+entries are Labauf (NIST: "Labbauf"), Greenshields & Rossini, J. Chem. Eng.
+Data 6 (1961) 261-263.

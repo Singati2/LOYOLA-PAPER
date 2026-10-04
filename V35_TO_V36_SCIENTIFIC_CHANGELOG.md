@@ -155,3 +155,39 @@ reproduced by an independent re-implementation.
 - Bootstrap caveat reworded: the intervals do not account for uncertainty
   from refitting and model selection (previously: "understate total
   uncertainty").
+
+## v38 (multi-agent expert panel + Feynman review)
+Panel: graph theory, QSPR data, statistics, literature, MATCH referee; 3
+adversarial theorem verifiers; Feynman review; synthesis.
+- BLOCKING ERROR FOUND AND CORRECTED: the U(-2,2) search box binds the parent
+  GM (dHvap selections on the boundary in 17/18 octane and 34/34 nonane
+  folds). With a non-binding box (half-width 12, 2000 candidates, seeds 0-49)
+  freeing gamma never improves prediction on any property (dHvap median dQ2
+  -0.011 octane, -0.016 nonane). New box_sensitivity.py, Table tab:box; the
+  dHvap gain is reframed as a box artefact, gamma's value as parsimony; the
+  pre-registered 'replicates' verdict is reported with this deviation.
+- New theory (adversarially verified, corrected): size-shape factorisation;
+  Theorem ratio plane (pure-gamma line separates exactly q-histograms; colliding
+  trees at every order >= 13, >= 16 for Delta<=4; GA merges histograms first at
+  order 17); Proposition gamma-crossings (Laguerre; <= 5 for Delta<=4, gamma
+  axis only); Proposition per-graph identifiability (rank <= min(|R|-1, r, 3);
+  equality for Delta<=6).
+- Removed the gamma=0 Jensen/Cauchy-Schwarz results admitted not new.
+- Table tab:external: fixed untuned LO(0,0,1) column (0.957 / 0.903);
+  LO(0,0,gamma) = m + (gamma/2) IRLA + O(gamma^2), corr 0.996.
+- Structure sensitivity: IRLA has a higher SS/Abr (0.4625) than the pure-gamma
+  points; SS scales with gamma; 'largest ratio' headline removed.
+- Randic floor failure at order 14 stated; remark/corollary numbering fixed;
+  revision-history wording removed; GA recognised as an imbalance index.
+- Data expert: NIST has calorimetric 298 K dHvap for only 25 new alkane
+  skeletons (15 branched; 1 of 75 decanes) -> no >= 40 measured dHvap set exists.
+- Second Feynman review applied: hybrid box control (alpha,beta wide, gamma in
+  (-2,2)) added — dHvap median dQ2 +0.004 octane (28/50), -0.002 nonane
+  (24/50); no property has an advantage consistent across boxes. Section 5.3
+  opens with the conclusion; leftover old-story sentences removed (transfer
+  conclusion, 'suggestive rather than conclusive', 'largest SS/Abr',
+  'weakest discriminator in the family', Laguerre 'attained' wording);
+  Corollary/Proposition labels for Cauchy-Schwarz and ratio bound;
+  order-16 witness displayed; dataset-level identifiability (octane pair union
+  spans R^3); abstract/intro scope qualifiers ('for this property', 'on the
+  nonanes'); prereg described as a git-commit record.

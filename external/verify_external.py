@@ -18,7 +18,8 @@ OUTS = ["nonane_data.csv", "nonane_provenance.csv", "nonane_validation_seeds.csv
         "nonane_validation_summary.csv", "baselines_octane.csv", "baselines_nonane.csv",
         "v37_classical_fixed.csv", "v37_table_rows.tex",
         "transfer_exploratory.csv", "transfer_exploratory_summary.csv",
-        "uncertainty_exploratory.csv"]
+        "uncertainty_exploratory.csv", "box_sensitivity.csv", "box_sensitivity_summary.csv",
+        "box_table_rows.tex"]
 with tempfile.TemporaryDirectory() as td:
     ext = os.path.join(td, "external"); shutil.copytree(HERE, ext)
     for f in os.listdir(ROOT):
@@ -35,6 +36,8 @@ with tempfile.TemporaryDirectory() as td:
     run(["make_v37_table.py"], ext)
     run(["transfer_exploratory.py"], ext)
     run(["uncertainty_exploratory.py"], ext)
+    run(["box_sensitivity.py"], ext)
+    run(["make_box_table.py"], ext)
     for f in OUTS:
         a, b = os.path.join(ext, f), os.path.join(HERE, f)
         if not os.path.exists(a): fails.append(f"{f}: not regenerated")
@@ -44,5 +47,9 @@ tex = open(os.path.join(ROOT, "main.tex")).read()
 i = tex.index(r"\label{tab:external}"); blk = tex[tex.index(r"\midrule", i):tex.index(r"\bottomrule", i)]
 body = [l.strip() for l in blk.splitlines()[1:] if l.strip()]
 if body != rows: fails.append("tab:external in main.tex differs from generated rows")
+brows = [l.strip() for l in open(os.path.join(HERE, "box_table_rows.tex")) if l.strip()]
+i = tex.index(r"\label{tab:box}"); blk = tex[tex.index(r"\midrule", i):tex.index(r"\bottomrule", i)]
+bbody = [l.strip() for l in blk.splitlines()[1:] if l.strip()]
+if bbody != brows: fails.append("tab:box in main.tex differs from generated rows")
 print("\n".join(fails) if fails else "external verification: PASS (structures, rebuild, baseline validation, fresh re-runs, table)")
 sys.exit(1 if fails else 0)
