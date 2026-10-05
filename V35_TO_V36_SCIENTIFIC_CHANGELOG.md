@@ -278,3 +278,21 @@ All five testable audit claims reproduced; fixes:
 - Diagnostics scripted: external/wide_box_diagnostics.py (solver reference,
   selected-candidate precision, dense parent grids) with output committed.
 - README page counts; crossing count described as a grid search.
+
+## v40.4 (audit follow-ups on v40.3)
+- baselines.is_constant: resolution-based (range <= 16 eps x magnitude) instead
+  of a 1e-12 relative range, which wrongly declared x = 1e13 + {1..10}
+  constant (prediction 15.2 instead of 30.2). Claim narrowed: invariance to
+  rescaling and translation holds up to double-precision representation of
+  the inputs (e.g. 1e-10 increments on a 1e3 offset are not representable).
+  Package reproduction unchanged (test_baselines.py 0 failures).
+- formal/verify.sh: expected theorem list is now a COMMITTED file
+  (expected_axiom_theorems.txt, hard-coded count 36) checked against the
+  source declarations; AxiomCheck.lean is generated from that list. Deleting
+  a #print query no longer shrinks the check; dropping a listed name or listing
+  a non-existent theorem fails.
+- verify_external.csv_equal: tolerance applies only to floating-point RESULT
+  cells; integer literals (seeds, budgets, counts, folds), text cells and every
+  identity/selection/parameter column (seed, budget, n, better, worse, fold,
+  name, cas, smiles, model, property, alpha, beta, gamma, sel_*, status, ...)
+  compare exactly; header must match exactly.

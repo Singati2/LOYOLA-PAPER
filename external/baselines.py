@@ -91,18 +91,24 @@ def candidate_triples(seed, budget):
 # one-descriptor OLS machinery (copied verbatim in logic from v35)
 # --------------------------------------------------------------------------
 def is_constant(x):
-    """Scale-free test: the descriptor is constant on the training fold if its
-    range is at most 1e-12 of its magnitude (v40.2; previously an absolute floor
-    made descriptors with values near 1e-9 look constant)."""
+    """The descriptor is constant on the training fold if its range is within
+    floating-point resolution of its magnitude (16 machine epsilons, i.e. about
+    3.6e-15 relative). This is invariant to rescaling and to translation as far
+    as double precision can represent the values: x = 1e13 + {1,...,10} is
+    correctly non-constant, while a constant vector carrying rounding noise is
+    constant. (v40.3; the v40.2 relative threshold of 1e-12 wrongly flagged
+    large-offset descriptors as constant.)"""
     x = np.asarray(x, float)
-    return (x.max() - x.min()) <= 1e-12 * max(float(np.abs(x).max()), np.finfo(float).tiny)
+    scale = max(float(np.abs(x).max()), np.finfo(float).tiny)
+    return (x.max() - x.min()) <= 16 * np.finfo(float).eps * scale
 
 
 def _standardize_rows(Xt):
     """Affine rescaling of each candidate row by its training-fold mean and SD;
     OLS with an intercept is invariant to it, so selections and predictions are
     unchanged, but the arithmetic no longer depends on the descriptor's units
-    (values span 1e-14..1e+24 in wide search boxes)."""
+    or offset (values span 1e-14..1e+24 in wide search boxes). The invariance
+    holds up to double-precision representation of the inputs themselves."""
     mu = Xt.mean(axis=1, keepdims=True); sd = Xt.std(axis=1, keepdims=True)
     return (Xt - mu) / np.where(sd > 0, sd, 1.0)
 
