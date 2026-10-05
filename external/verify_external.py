@@ -5,7 +5,8 @@
 3. baselines reproduce the octane package values (test_baselines.py);
 4. fresh re-runs of nonane_validation.py, baselines (octane + nonane) and
    make_v37_table.py reproduce the committed CSVs byte-for-byte;
-5. every row of tab:external in ../main.tex equals the generated row.
+5. every row of tab:external and tab:box (looked up in ../main.tex, then
+   ../supplement.tex) equals the generated row.
 Exit 0 only if all pass."""
 import os, subprocess, sys, shutil, tempfile, filecmp
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
@@ -43,13 +44,17 @@ with tempfile.TemporaryDirectory() as td:
         if not os.path.exists(a): fails.append(f"{f}: not regenerated")
         elif not filecmp.cmp(a, b, shallow=False): fails.append(f"{f}: fresh run differs from committed file")
 rows = [l.strip() for l in open(os.path.join(HERE, "v37_table_rows.tex")) if l.strip()]
+# tables are looked up by label in main.tex followed by supplement.tex, so a
+# guarded table may live in either document
 tex = open(os.path.join(ROOT, "main.tex")).read()
+if os.path.exists(os.path.join(ROOT, "supplement.tex")):
+    tex += "\n" + open(os.path.join(ROOT, "supplement.tex")).read()
 i = tex.index(r"\label{tab:external}"); blk = tex[tex.index(r"\midrule", i):tex.index(r"\bottomrule", i)]
 body = [l.strip() for l in blk.splitlines()[1:] if l.strip()]
-if body != rows: fails.append("tab:external in main.tex differs from generated rows")
+if body != rows: fails.append("tab:external in main.tex/supplement.tex differs from generated rows")
 brows = [l.strip() for l in open(os.path.join(HERE, "box_table_rows.tex")) if l.strip()]
 i = tex.index(r"\label{tab:box}"); blk = tex[tex.index(r"\midrule", i):tex.index(r"\bottomrule", i)]
 bbody = [l.strip() for l in blk.splitlines()[1:] if l.strip()]
-if bbody != brows: fails.append("tab:box in main.tex differs from generated rows")
+if bbody != brows: fails.append("tab:box in main.tex/supplement.tex differs from generated rows")
 print("\n".join(fails) if fails else "external verification: PASS (structures, rebuild, baseline validation, fresh re-runs, table)")
 sys.exit(1 if fails else 0)

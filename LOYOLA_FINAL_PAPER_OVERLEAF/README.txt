@@ -1,11 +1,18 @@
 LOYOLA final paper -- Overleaf project
 ======================================
 Upload: Overleaf > New Project > Upload Project > choose LOYOLA_FINAL_PAPER_OVERLEAF.zip
-Compiler: pdfLaTeX (Overleaf default). Main document: main.tex
-Contents: main.tex (manuscript, bibliography embedded) and figures/ (the two figure PDFs).
-Figures:  Figure 1 = figures/fig_lo_prediction_correlation_heatmap_v3.pdf  (label fig:octanes)
-          Figure 2 = figures/fig_lo_degeneracy_order10_trees_v2.pdf      (label fig:degeneracy)
-Tables:   1 tab:lo_octane, 2 tab:collisions, 3 tab:lo_tuning, 4 tab:lo_tuning_bestfixed,
-          5 tab:ablation, 6 tab:external, 7 tab:multiorder, 8 tab:fgdss,
-          9 tab:octane-data (appendix)
-This folder is a copy of ../main.tex and ../figures/; edit the root files and re-copy.
+Compiler: pdfLaTeX (Overleaf default).
+Documents (compile each as the main document in turn):
+  main.tex        -- the paper (35 A5 pages), bibliography embedded
+  supplement.tex  -- Supplementary Material (19 A5 pages), own bibliography
+figures/          -- figure PDFs (used by supplement.tex)
+
+Main paper tables:
+  1 tab:collisions   2 tab:firstfail   3 tab:fgdss   4 tab:lo_octane
+  5 tab:box (search-box sensitivity)   6 tab:external (nonane test, baselines)
+  7 tab:octane-data (appendix)
+Supplement:
+  Figure S1 fig:octanes (correlation heatmap)   Figure S2 fig:degeneracy
+  Table S1 tab:lo_tuning   S2 tab:lo_tuning_bestfixed   S3 tab:ablation
+  S4 tab:multiorder
+This folder is a copy of ../main.tex, ../supplement.tex and ../figures/.

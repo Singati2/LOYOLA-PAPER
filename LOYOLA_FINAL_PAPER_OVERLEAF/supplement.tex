@@ -1,0 +1,863 @@
+\documentclass[a5paper, 10pt]{article}
+
+
+\usepackage{cite, amsmath, amssymb, booktabs, lastpage, graphicx, float}
+\usepackage[hidelinks]{hyperref}
+
+\usepackage{geometry}
+\geometry{margin=1.5cm,a5paper,twoside,inner=2cm}
+
+\usepackage{setspace}
+
+
+\usepackage{amsthm}
+
+\theoremstyle{plain}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{conjecture}{Conjecture}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\renewcommand{\qedsymbol}{\rule{.7em}{.7em}}
+
+\theoremstyle{remark}
+\newtheorem{remark}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+
+%% Changing the title, author, etc.
+\usepackage{graphicx}
+\makeatletter
+\renewcommand{\maketitle}{
+    \begin{center}
+    \rule[.2em]{\textwidth}{0.353mm}
+        \begin{minipage}[m]{0.35\textwidth}
+            {\scriptsize
+                \begin{center}
+                    \textsf{\textbf{\huge MATCH}\\
+                        \textit{Communications in Mathematical\\
+                            and in Computer Chemistry}
+                    }
+            \end{center}}
+        \end{minipage}\hfill
+        \begin{minipage}[m]{0.65\textwidth}
+            \begin{flushright}
+                \baselineskip=10pt
+                {\scriptsize\sffamily{\itshape  MATCH Commun. Math. Comput. Chem.}
+                \textbf{\vol{}}
+                (\pubyear)
+                    \thepage--\pageref{LastPage}}\\
+                {\scriptsize\sffamily {\bfseries ISSN:} 0340--6253}\\
+                {\scriptsize\sffamily \textbf{doi:} \doi{10.46793/match.\vol-\num.\id}}
+            \end{flushright}
+        \end{minipage}
+        \rule[1em]{\textwidth}{.353mm}
+        \baselineskip=0.30in
+        {\Large\bfseries \@title} \par
+        \vspace{5mm}
+        \baselineskip=0.2in
+        {\large\bfseries \@author}\par
+        \vspace{1mm}
+        {\it \@address} \par
+        {\small\tt \@email} \par
+        \vspace{3mm}
+        {\small (Received \@date)} \par
+    \end{center}
+    \vspace{3mm}
+}
+\newcommand{\address}[1]{\def\@address{#1}}
+\newcommand{\email}[1]{\def\@email{#1}}
+\newcommand{\doi}[1]{\href{https://doi.org/#1}{#1}}
+
+\newcommand{\vol}{00}
+\newcommand{\num}{00}
+\newcommand{\pubyear}{0000}
+\newcommand{\id}{xxxxx}
+%%setting page-number
+\setcounter{page}{1}
+
+
+\thispagestyle{empty}
+\makeatother
+
+%% Making << \acknowledgment >> command
+\newcommand{\acknowledgment}[1]{\vspace{5mm}\singlespacing
+    {\noindent\textbf{\textit{Acknowledgment\/}:} #1}
+}
+
+%% Setting page numbers
+\usepackage{fancyhdr}
+
+%% now reset the headers and footers
+\fancyhead{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{.3pt}
+\voffset = 18pt
+\headsep = 3pt
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+\usepackage[margin=1cm,%
+            font=footnotesize,%
+            format=hang,%
+            labelsep=period,%
+            labelfont=bf]{caption}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PLACE ADDITIONAL PACKAGES HERE (if it is needed):
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{mathtools}
+\usepackage{array}
+\usepackage{enumitem}
+\setlist[itemize]{topsep=2pt,itemsep=2pt}
+\setlist[enumerate]{topsep=2pt,itemsep=2pt}
+\emergencystretch=3em
+\hbadness=2000
+\setlength{\marginparwidth}{2cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% make the odd pages have the section name on the top right
+\fancyhead[RO]{\footnotesize \thepage}
+%% make the even pages have the chapter name on the top left
+\fancyhead[LE]{\footnotesize \thepage}
+
+%% making page-numbers visible
+\pagestyle{fancy}
+
+% Custom macros for the Loyola index family
+    \newcommand{\Wuzi}{LO(G;\alpha,\beta,\gamma)}
+  \newcommand{\edgepsi}{\psi(x,y;\alpha,\beta,\gamma)}
+  \newcommand{\bid}{\mathcal{F}_{\mathrm{BID}}}
+% Path to figures
+\graphicspath{{figures/}{./}{../figures/}}
+
+% robust figure inclusion: render if present (root or figures/), else a small note
+\newcommand{\safefig}[2]{%
+  \IfFileExists{#1}{\includegraphics[width=#2\linewidth]{#1}}{%
+   \IfFileExists{figures/#1}{\includegraphics[width=#2\linewidth]{#1}}{%
+    \fbox{\parbox[c][3cm][c]{0.8\linewidth}{\centering Figure not in project --- upload \texttt{\detokenize{#1}}.}}}}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Supplementary Material for: The Loyola Index Family: Bounds, Parameter Geometry and Sensitivity Analysis}
+
+\author{Advik Natarajan$^{a}$, Ganesh Shiwakoti$^{b}$, Michael Arockiaraj$^{a}$\footnote{Corresponding author.}}
+
+\address{$^a$Department of Mathematics, Loyola College, Chennai, India\\
+    $^b$Department of Mathematics and Statistics, Florida Atlantic University, USA
+    }
+
+\email{marockiaraj@gmail.com}
+
+\date{\today}
+
+% !TeX program = pdflatex
+
+\begin{document}
+
+\maketitle
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thetable}{S\arabic{table}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\renewcommand{\theequation}{S\arabic{equation}}
+
+\onehalfspacing
+
+\noindent This supplement accompanies the paper ``The Loyola Index
+Family: Bounds, Parameter Geometry and Sensitivity Analysis''. Section,
+table, figure, equation and proposition numbers without the prefix S
+refer to the main paper. Data, scripts and the verifier are available at
+\url{https://github.com/Singati2/LOYOLA-PAPER}.
+
+\section{Octane property data: provenance audit and correlation heatmap}\label{sec:s-prov}
+
+Table~4 of the main paper reports the Pearson correlation $r$ between
+each index and each of the five physicochemical properties of the
+$18$ octane isomers (boiling point $T_B$, enthalpy of formation
+$\Delta H_f$, enthalpy of vaporization $\Delta H_{\mathrm{vap}}$,
+entropy $S$, acentric factor $\omega$; property data traced to the NIST
+WebBook~\cite{NISTWebBook} (each value traced to the WebBook entry listed in
+the provenance file), except the acentric
+factors, which NIST does not list and which were taken from KDB-derived
+compilations; the same five properties form the octane benchmark used
+in~\cite{MovahediGutmanRedzepovicFurtula2026}). Units are: $T_B$ in
+$^{\circ}$C; $\Delta H_f$ and $\Delta H_{\mathrm{vap}}$ in
+kcal\,mol$^{-1}$ (the latter at $298$~K); $S$ in
+cal\,mol$^{-1}$K$^{-1}$; and $\omega$ dimensionless. Values for
+$\Delta H_{\mathrm{vap}}$ and entropy $S$ vary slightly across
+compilations; all comparisons here are made within this single,
+internally consistent dataset. Calculations use this author-compiled
+property table attributed to the NIST WebBook. All $90$
+molecule-level values were traced against authoritative sources
+(NIST WebBook first; KDB-derived compilations for the acentric
+factor, which NIST does not list), and classified under a strict
+taxonomy in which ``verified'' requires agreement at the value's
+reported precision: $3$ match exactly, $29$ match a specific recorded
+determination at reported precision after unit conversion (gas phase
+confirmed for formation enthalpies and entropies), $37$ agree within
+the audit tolerances, the source's stated uncertainty or the span of
+several determinations without matching any one of them at reported
+precision, $13$ lie within explained variation among authoritative
+determinations, $7$ could not be verified against a reachable
+authoritative value (six gas-phase entropies absent from
+the NIST WebBook, and the $298$\,K vaporization enthalpy of
+2,2,3,3-tetramethylbutane: this compound is a solid at $298$\,K
+(triple point $374$\,K); the NIST WebBook lists standard vaporization
+enthalpies of $42.94$ and $42.91$\,kJ\,mol$^{-1}$ (about
+$10.26$\,kcal\,mol$^{-1}$) together with sublimation enthalpies, whereas
+the benchmark value used here, $8.41$\,kcal\,mol$^{-1}$
+($35.19$\,kJ\,mol$^{-1}$), is that of the standard octane benchmark
+compilation and matches no listed determination, so its physical
+reference state is unresolved; Section~S3 reports the
+$\Delta H_{\mathrm{vap}}$ analysis with this isomer excluded), and
+one value is a marginal conflict: the acentric factor of
+2,2,3,3-tetramethylbutane ($0.247$ vs.\ compiled $0.251$); the
+acentric factor of 2,2,4-trimethylpentane ($0.305$ vs.\ compiled
+$0.303$) agrees only within tolerance. Substituting the
+alternative compiled acentric factors changes several of the
+$\omega$ correlations in Table~4 of the main paper at the third
+decimal (e.g.\ $M_2$ moves from $-0.988$ to $-0.986$) but does not
+change the property-wise winning descriptor or any substantive
+interpretation; the full sensitivity computation and the
+machine-readable provenance trace accompany the reproducibility
+package. For 3,3-dimethylhexane, 3-ethyl-3-methylpentane,
+2,2,3-trimethylpentane and 2,3,3-trimethylpentane, values of
+$\Delta H_{\mathrm{vap}}$ that differ from the NIST WebBook by
+$0.05$--$0.13$\,kcal\,mol$^{-1}$ circulate in octane benchmark tables;
+we use values consistent with NIST (Appendix~A of the main paper): two exact
+conversions of NIST determinations ($8.97$, $9.08$) and two values that
+lie within the span or stated uncertainty of the NIST determinations
+and equal the API Project~44 compilation at the displayed precision
+($8.83$, $8.90$). Four entropies
+($n$-octane, 2,2-dimethylhexane, 2,2,4- and 2,3,3-trimethylpentane)
+could not be matched to a primary source and differ from those of a
+widely used octane QSPR compilation by $0.15$--$2.29$ units
+(the $2,3,3$-trimethylpentane value coincides with that of
+2,2,3-trimethylpentane); substituting the compilation values changes
+all twelve $S$ correlations in Table~4 of the main paper (by up to
+$0.034$ in $|r|$) but not the winning descriptor
+($HM$). Apart from the four corrected vaporization enthalpies, the
+benchmark values are preserved as supplied for comparability.
+\paragraph{Correlation details for Table~4 of the main paper.}
+The best correlation per property is split among the reductions and
+the pure-$\gamma$ points: the modified second Zagreb index
+$LO(-1, 0, 0)$ is strongest on $T_B$ and $\Delta H_f$, the
+hyper-Zagreb index $LO(0, 2, 0)$ on $S$, the second Zagreb index
+$LO(1, 0, 0)$ on $\omega$, and the fixed pure-$\gamma$ benchmark point
+$LO(0, 0, 1)$ on $\Delta H_{\mathrm{vap}}$ ($|r| = 0.984$, with
+$LO(0, 0, 2)$ second at $0.981$). At the
+exact-reduction triples the Loyola correlations coincide with the
+corresponding classical indices to floating-point precision, as they
+must. For each property, a descriptive post-selection paired bootstrap
+interval for the observed top-two $|r|$ difference ($B = 10\,000$,
+resampling the $18$ isomers jointly, \texttt{default\_rng(1)}) included zero; these intervals
+were not multiplicity-adjusted across the five properties and do not
+establish equality or equivalence. Individual bootstrap half-widths
+range from $0.016$ to $0.096$ across the headline cells (percentile bootstrap, $B = 10\,000$, \texttt{default\_rng(0)}). The value of $LO(0, 0, 1)$ on $\Delta H_{\mathrm{vap}}$
+is a fixed benchmark point, not a tuned result. Recomputing each bolded correlation with single isomers deleted
+shifts $|r|$ by at most $0.027$, indicating that no single isomer
+drives the leading correlations.
+
+\paragraph{Descriptor redundancy.} The redundancy is in fact
+systemic, and it caps how much meaning any small $|r|$ difference in
+Table~4 of the main paper can carry. Across the twelve compared
+descriptors on the $18$ isomers, fourteen descriptor pairs have
+$|r| \ge 0.99$ (the extreme being $R$ versus $H/2$ at $r = 0.9997$),
+and a principal component analysis of the standardized $18 \times 12$
+descriptor matrix places $90.3\%$ of the variance on the first
+component and $99.05\%$ on the first two, with an effective rank
+(participation ratio of the eigenvalue spectrum) of $1.2$. The
+twelve-index comparison set is thus essentially a two-dimensional
+descriptor space, and differences in the third decimal of $|r|$
+between near-collinear descriptors should not be read as meaningful
+rankings.
+Figure~\ref{fig:octanes} shows the signed-$r$ heatmap of the
+compared indices against the five properties; it displays the values of
+Table~4 of the main paper.
+
+\begin{figure}[H]
+\centering
+\safefig{fig_lo_prediction_correlation_heatmap_v3.pdf}{0.9}
+\caption{Signed Pearson $r$ between the Loyola reductions, the fixed pure-$\gamma$ benchmark points and the five octane physicochemical properties on the $18$ isomers.}
+\label{fig:octanes}
+\end{figure}
+\section{Effect of parameter tuning near the best indices}\label{sec:tuning}
+
+The benchmark of Section~6.1 of the main paper tunes no parameters: it
+compares only the exact reductions and the two fixed pure-$\gamma$
+benchmark points. It is nonetheless natural to ask whether small,
+data-driven adjustments of $(\alpha, \beta, \gamma)$ near the
+best-correlating indices could improve the fit. We probe this directly
+as an exploratory check. For each of the four anchors carrying the
+strongest column correlations in Table~4 of the main paper ---
+$M_2 = LO(1, 0, 0)$, $HM = LO(0, 2, 0)$, ${}^{m}\!M_2 = LO(-1, 0, 0)$,
+and the pure-$\gamma$ point $LO(0, 0, 1)$ --- we draw $50$ random
+parameter triples within $\pm 0.3$ (to two decimal places) of the
+anchor and correlate each against the five octane properties. The
+four pools are drawn, in the order listed, from one pseudo-random
+stream (NumPy \texttt{default\_rng(42)}; each coordinate offset is
+a uniform draw on $[-0.3, 0.3]$ rounded to two decimals); the
+percentile bootstrap uses \texttt{default\_rng(0)}.
+Table~\ref{tab:lo_tuning} reports, for every anchor--property cell, the
+anchor correlation $|r|_0$, the best of the $50$ perturbations in
+sample $|r|_{50}$, the in-sample gain $\Delta_{\mathrm{in}}$, the
+percentile-bootstrap half-width ($B = 10\,000$), the leave-one-out
+correlation of the anchor $\mathrm{LOO}_0$, and a \emph{nested}
+leave-one-out correlation $\mathrm{LOO}_{50}$ in which, within each of
+the four globally selected anchor pools, the best of the $50$
+candidates is selected using the $17$ training isomers of each fold
+only and evaluated on the held-out one, with the resulting
+out-of-sample gain $\Delta_{\mathrm{out}}$. The anchors themselves
+were chosen from the complete-data correlations of
+Table~4 of the main paper, and the $18$ pooled fold predictions share
+heavily overlapping training sets, so these values are descriptive
+rather than independent replications.
+
+\begin{table}[H]
+\centering
+\caption{Decimal parameter tuning near the four best-correlating anchors on the $18$ octane isomers ($50$ random triples within $\pm 0.3$ of each anchor). Columns: anchor correlation $|r|_0$; best-of-$50$ in sample $|r|_{50}$; in-sample gain $\Delta_{\mathrm{in}}$; percentile-bootstrap half-width $\pm$boot ($B = 10\,000$); leave-one-out correlation of the anchor $\mathrm{LOO}_0$; foldwise nested leave-one-out correlation of the tuned family, computed within the globally selected anchor pool, $\mathrm{LOO}_{50}$; out-of-sample gain $\Delta_{\mathrm{out}} = \mathrm{LOO}_{50} - \mathrm{LOO}_0$. Gains are computed from full-precision values and rounded once, so a displayed gain may differ by one unit in the last place from the difference of the displayed operands.}
+\label{tab:lo_tuning}
+\scriptsize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrrrrr}
+\toprule
+Property & $|r|_0$ & $|r|_{50}$ & $\Delta_{\mathrm{in}}$ & $\pm$boot & $\mathrm{LOO}_0$ & $\mathrm{LOO}_{50}$ & $\Delta_{\mathrm{out}}$\\
+\midrule
+\multicolumn{8}{l}{\emph{near} $M_2 = LO(1,0,0)$}\\
+$T_B$ & $0.497$ & $0.598$ & $+0.100$ & $0.353$ & $0.331$ & $0.458$ & $+0.127$\\
+$\Delta H_f$ & $0.542$ & $0.635$ & $+0.093$ & $0.358$ & $0.395$ & $0.540$ & $+0.145$\\
+$\Delta H_{\mathrm{vap}}$ & $0.811$ & $0.876$ & $+0.066$ & $0.185$ & $0.768$ & $0.838$ & $+0.071$\\
+$S$ & $0.940$ & $0.960$ & $+0.021$ & $0.067$ & $0.919$ & $0.943$ & $+0.024$\\
+$\omega$ & $0.988$ & $0.995$ & $+0.007$ & $0.018$ & $0.985$ & $0.985$ & $\phantom{+}0.000$\\
+\midrule
+\multicolumn{8}{l}{\emph{near} $HM = LO(0,2,0)$}\\
+$T_B$ & $0.654$ & $0.740$ & $+0.085$ & $0.257$ & $0.545$ & $0.647$ & $+0.102$\\
+$\Delta H_f$ & $0.710$ & $0.786$ & $+0.076$ & $0.255$ & $0.645$ & $0.741$ & $+0.097$\\
+$\Delta H_{\mathrm{vap}}$ & $0.903$ & $0.944$ & $+0.041$ & $0.082$ & $0.871$ & $0.921$ & $+0.049$\\
+$S$ & $0.975$ & $0.976$ & $+0.002$ & $0.027$ & $0.967$ & $0.960$ & $-0.007$\\
+$\omega$ & $0.982$ & $0.989$ & $+0.007$ & $0.025$ & $0.979$ & $0.982$ & $+0.003$\\
+\midrule
+\multicolumn{8}{l}{\emph{near} ${}^{m}\!M_2 = LO(-1,0,0)$}\\
+$T_B$ & $0.855$ & $0.864$ & $+0.009$ & $0.096$ & $0.781$ & $0.759$ & $-0.021$\\
+$\Delta H_f$ & $0.891$ & $0.897$ & $+0.006$ & $0.087$ & $0.865$ & $0.837$ & $-0.028$\\
+$\Delta H_{\mathrm{vap}}$ & $0.925$ & $0.966$ & $+0.041$ & $0.068$ & $0.900$ & $0.953$ & $+0.053$\\
+$S$ & $0.863$ & $0.918$ & $+0.055$ & $0.188$ & $0.812$ & $0.881$ & $+0.069$\\
+$\omega$ & $0.794$ & $0.881$ & $+0.088$ & $0.246$ & $0.730$ & $0.853$ & $+0.123$\\
+\midrule
+\multicolumn{8}{l}{\emph{near} $LO(0,0,1)$}\\
+$T_B$ & $0.828$ & $0.835$ & $+0.007$ & $0.161$ & $0.771$ & $0.764$ & $-0.007$\\
+$\Delta H_f$ & $0.832$ & $0.842$ & $+0.010$ & $0.152$ & $0.800$ & $0.807$ & $+0.006$\\
+$\Delta H_{\mathrm{vap}}$ & $0.984$ & $0.985$ & $+0.001$ & $0.016$ & $0.978$ & $0.978$ & $-0.001$\\
+$S$ & $0.931$ & $0.948$ & $+0.017$ & $0.045$ & $0.892$ & $0.920$ & $+0.028$\\
+$\omega$ & $0.929$ & $0.945$ & $+0.016$ & $0.074$ & $0.907$ & $0.926$ & $+0.019$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Three patterns emerge. First, every in-sample gain
+$\Delta_{\mathrm{in}}$ is smaller than the corresponding
+single-descriptor bootstrap uncertainty scale; this comparison is
+descriptive and is not a formal paired or post-selection test of the
+gain. Second, under the foldwise nested evaluation (within the globally
+selected anchor pools) these descriptive point-estimate gains do not vanish --- tuning near $M_2$ raises the out-of-sample
+correlation for $T_B$ and $\Delta H_f$ by $+0.13$ and $+0.15$, and
+tuning near ${}^{m}\!M_2$ raises $\omega$ by $+0.12$ --- but in every
+such case the anchor was a \emph{weak} descriptor for that property, and
+the tuned correlation only climbs part way toward the level a strong
+reduction already attains (tuning near $M_2$ lifts $T_B$ to $0.46$,
+whereas ${}^{m}\!M_2$ already reaches $0.78$). Where the anchor is
+already the column winner --- $M_2$ on $\omega$, $HM$ on $S$,
+$LO(0, 0, 1)$ on $\Delta H_{\mathrm{vap}}$ --- the nested gain for
+this pool seed is $-0.0003$, $-0.007$ and $-0.001$. These near-zero
+values are specific to the seed: re-drawing the pools with seeds
+$0$--$99$, the nested gain for $M_2$ on $\omega$ is small but
+positive in most seeds (median about $+0.003$, positive in $96\%$
+of seeds), so the defensible statement is that tuning a column
+winner changes its nested correlation by at most a few thousandths.
+Third, tuning near the pure-$\gamma$ points $LO(0, 0, 1)$ and
+$LO(0, 0, 2)$ does not exceed the best fixed index under nested
+leave-one-out on any of the five properties
+(Table~\ref{tab:lo_tuning_bestfixed}). On $\Delta H_{\mathrm{vap}}$,
+where the best fixed index is the pure-$\gamma$ point $LO(0, 0, 1)$
+itself, the tuned value exceeds it by $0.001$ in sample ($0.985$ vs
+$0.984$) and falls $0.001$ below it under leave-one-out (both $0.978$
+at three decimals; differences of full-precision values); these
+post-selection differences are negligible. On $T_B$, $\Delta H_f$,
+$S$, and $\omega$ the best fixed reduction is higher both in and out
+of sample.
+
+\begin{table}[H]
+\centering
+\caption{Decimal tuning near the pure-$\gamma$ points $LO(0,0,1)$ and $LO(0,0,2)$ versus the best fixed index in the tested comparison set for each octane property. The best fixed index is ranked by in-sample $|r|$ (its leave-one-out value in parentheses); the decimal columns give the best over two pools of $50$ random triples within $\pm 0.3$ of $LO(0,0,1)$ and of $LO(0,0,2)$, in sample and under foldwise nested leave-one-out within the globally selected pools; the $LO(0,0,1)$ pool is exactly the pool of Table~\ref{tab:lo_tuning}, and the $LO(0,0,2)$ pool is the next $50$ triples of the same \texttt{default\_rng(42)} stream. Indices are ranked by in-sample $|r|$ rather than $\mathrm{LOO}$, as the latter is inflated by degenerate fits for near-zero-correlation indices. Tuning does not exceed the best fixed index under LOO on any property; in sample it exceeds it only on $\Delta H_{\mathrm{vap}}$, by $0.001$, a negligible post-selection difference that does not establish superiority.}
+\label{tab:lo_tuning_bestfixed}
+\small
+\begin{tabular}{lcrrrr}
+\toprule
+Property & best fixed & $|r|_{\mathrm{fix}}$ & $\mathrm{LOO}_{\mathrm{fix}}$ & $|r|_{\mathrm{dec}}$ & $\mathrm{LOO}_{\mathrm{dec}}$\\
+\midrule
+$T_B$ & ${}^{m}\!M_2$ & $0.855$ & $0.781$ & $0.835$ & $0.764$\\
+$\Delta H_f$ & ${}^{m}\!M_2$ & $0.891$ & $0.865$ & $0.850$ & $0.815$\\
+$\Delta H_{\mathrm{vap}}$ & $LO(0,0,1)$ & $0.984$ & $0.978$ & $0.985$ & $0.978$\\
+$S$ & $HM$ & $0.975$ & $0.967$ & $0.948$ & $0.920$\\
+$\omega$ & $M_2$ & $0.988$ & $0.985$ & $0.945$ & $0.926$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+In short, local tuning raised several nested leave-one-out point
+estimates for weak anchors, and except for the $0.001$ in-sample
+$\Delta H_{\mathrm{vap}}$ margin noted above did not exceed the best
+fixed benchmark in the tested comparison set; no formal superiority
+claim is made. All
+tabled nested values correspond to positive signed
+prediction--observation correlations with positive predictive $Q^{2}$,
+and a constant-descriptor control confirms that absolute pooled
+correlation alone can be inflated for degenerate descriptors (cf.\ the
+caveat in the caption of Table~\ref{tab:lo_tuning_bestfixed}).
+\section{Matched-budget comparison in the search box $(-2,2)$}\label{sec:s-ablation}
+
+The analyses above tune around fixed anchors and are descriptive.
+The sharper question raised by the Gutman--Milovanovi\'c framing is
+direct: given identical search budgets, does freeing $\gamma$ improve
+out-of-sample prediction beyond an optimized parent
+$M_{\alpha,\beta}$? We answer it with a fully nested leave-one-out
+design. For each property and each outer fold (one isomer held out),
+$200$ candidate parameter vectors are drawn once from
+$\mathrm{Uniform}(-2,2)$ per coordinate (triples
+$(\alpha,\beta,\gamma)$ for the Loyola model, pairs $(\alpha,\beta)$
+with $\gamma = 0$ for the parent; identical budget; candidates
+rounded to three decimals, drawn from NumPy \texttt{default\_rng(12345)}
+for Table~\ref{tab:ablation}, Loyola triples first); on the $17$ training isomers only, every candidate is scored
+by \emph{inner} leave-one-out root-mean-square error of the
+one-descriptor linear regression, the best candidate is selected, the
+regression is refit on all $17$, and the held-out isomer is
+predicted. No quantity computed on the held-out isomer enters
+selection or fitting at any point.
+
+\begin{table}[tbp]
+\centering
+\caption{Matched-budget nested leave-one-out comparison of the
+optimized parent $M_{\alpha,\beta}$ (GM) and the optimized Loyola
+family ($\gamma$ free) on the five octane properties. Panel (a) is a
+\emph{single illustrative candidate stream} (seed $12345$, budget
+$200$): $Q^2$ is the outer predictive coefficient, RMSE the
+outer root-mean-square error, and ``LO better'' counts outer folds
+(of $18$) in which the Loyola model had the strictly smaller absolute
+error. Panel (b) summarizes the $100$-seed sweep (seeds $0$--$99$):
+median $\Delta Q^2$ with its [minimum, maximum], and the number of
+seeds in which $\Delta Q^2 > 0$, at budgets $B = 200$ and $B = 500$.
+All selection is repeated inside every outer
+fold; all values are full-precision results rounded once.}
+\label{tab:ablation}
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{lrrrrrr}
+\toprule
+\multicolumn{7}{l}{\emph{(a) single candidate stream: seed $12345$, budget $200$}}\\
+Property & $Q^2_{\mathrm{GM}}$ & $Q^2_{LO}$ & $\Delta Q^2$ & $\mathrm{RMSE}_{\mathrm{GM}}$ & $\mathrm{RMSE}_{LO}$ & LO better\\
+\midrule
+$T_B$ & $+0.613$ & $+0.748$ & $+0.136$ & $3.700$ & $2.983$ & $10/18$\\
+$\Delta H_f$ & $+0.855$ & $+0.549$ & $-0.306$ & $0.463$ & $0.816$ & $4/18$\\
+$\Delta H_{\mathrm{vap}}$ & $+0.884$ & $+0.971$ & $+0.086$ & $0.127$ & $0.064$ & $13/18$\\
+$S$ & $+0.915$ & $+0.877$ & $-0.038$ & $1.310$ & $1.573$ & $4/18$\\
+$\omega$ & $+0.979$ & $+0.956$ & $-0.022$ & $0.005$ & $0.008$ & $5/18$\\
+\bottomrule
+\end{tabular}
+
+\medskip
+\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{lrrrr}
+\toprule
+\multicolumn{5}{l}{\emph{(b) $100$ candidate streams: seeds $0$--$99$}}\\
+& \multicolumn{2}{c}{median $\Delta Q^2$ [min, max]} & \multicolumn{2}{c}{seeds with $\Delta Q^2 > 0$}\\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}
+Property & $B = 200$ & $B = 500$ & $B = 200$ & $B = 500$\\
+\midrule
+$T_B$ & $+0.010\,[-0.524,+0.373]$ & $+0.066\,[-0.307,+0.231]$ & $53/100$ & $64/100$\\
+$\Delta H_f$ & $-0.120\,[-0.408,+0.206]$ & $-0.095\,[-0.373,+0.118]$ & $14/100$ & $24/100$\\
+$\Delta H_{\mathrm{vap}}$ & $+0.069\,[+0.034,+0.102]$ & $+0.068\,[+0.024,+0.102]$ & $100/100$ & $100/100$\\
+$S$ & $-0.010\,[-0.139,+0.037]$ & $-0.011\,[-0.099,+0.027]$ & $35/100$ & $29/100$\\
+$\omega$ & $-0.010\,[-0.074,+0.016]$ & $-0.006\,[-0.052,+0.012]$ & $26/100$ & $28/100$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The short answer is no: once the parent is searched over a box that
+does not truncate it, freeing $\gamma$ gives no consistent gain
+(Table~5 and Section~6.2 of the main paper). We first report
+the comparison in the box $(-2,2)$, because it shows how the apparent
+gain arose. In that box the answer is mixed
+(Table~\ref{tab:ablation}): for the illustrative
+seed, freeing $\gamma$ improves nested predictive performance on two
+of the five properties ($T_B$, $\Delta Q^2 = +0.136$, and
+$\Delta H_{\mathrm{vap}}$, $\Delta Q^2 = +0.086$) and degrades it on
+three ($\Delta H_f$, $S$,
+$\omega$), with the $\Delta H_f$ degradation driven by
+selection instability: the parent model selected the same
+$(\alpha,\beta)$ in all $18$ folds there, while the three-parameter
+search selected widely varying triples (fold-to-fold standard
+deviation above $1.2$ in both $\alpha$ and $\beta$). The selected
+$\gamma$ values are interior to the search box (maximum
+$|\gamma| = 0.48$), but the parent's selections are not: for
+$\Delta H_{\mathrm{vap}}$ the parent chose $(\alpha,\beta) =
+(1.021, -1.993)$, on the boundary of the box, in $17$ of the $18$
+folds. The consequences of this are examined in Section~6.2
+of the main paper. On the one property where
+$\gamma$ helps most stably, $\Delta H_{\mathrm{vap}}$, the identical
+triple $(-0.27, +0.27, +0.24)$ was selected in every fold. With
+$n = 18$ molecules these $Q^2$ differences carry substantial
+selection noise and we attach no inferential claim to them.
+
+Because the comparison depends on a random candidate stream, the full
+nested design was repeated for one hundred seeds ($0$--$99$) at both
+budgets ($200$ and $500$ candidates per model; $1000$ configurations
+in all), together with a paired control in which the Loyola
+candidates are compared against the \emph{same}
+$(\alpha,\beta)$ coordinates with $\gamma$ set to zero, isolating the
+effect of $\gamma$ from the independent candidate streams. Freeing
+$\gamma$ improved nested predictive performance for
+$\Delta H_{\mathrm{vap}}$ in every seed of this sweep ($100/100$ at
+both budgets, and $100/100$ in the paired control; median
+$\Delta Q^2 = +0.069$ and $+0.068$, range $+0.024$ to $+0.102$) and
+\emph{usually} degraded it for $\Delta H_f$ ($86/100$ and $76/100$
+seeds); $T_B$ is close to an even split at
+budget $200$ ($53/100$) but leans towards improvement at budget $500$
+($64/100$), and $S$ and $\omega$ usually degrade slightly. These
+counts describe optimizer variance over random candidate streams on
+one fixed set of $18$ molecules; the molecules are never resampled,
+so the counts carry no inferential weight --- in particular, $100/100$
+does not establish that $\gamma$ improves $\Delta H_{\mathrm{vap}}$
+prediction for other molecules or data sets. The result is also
+sensitive to a single data cell: the $\Delta H_{\mathrm{vap}}$ value of
+2,2,3,3-tetramethylbutane, whose physical reference state is unresolved
+(Section~S1). Repeating the complete nested comparison
+with that isomer excluded ($17$ molecules, same seeds, budgets and
+candidate streams), freeing $\gamma$ improved $\Delta H_{\mathrm{vap}}$
+in $93/100$ seeds at budget $200$ and $96/100$ at budget $500$ (paired
+control $95/100$ and $96/100$; median $\Delta Q^2 = +0.046$ and $+0.051$,
+range $-0.048$ to $+0.098$), so the gain survives the exclusion but is
+no longer sign-invariant.
+These comparisons share the box $(-2,2)$, which truncates the parent
+along the direction $\beta \approx -2\alpha$; Section~6.2
+and Table~5 of the main paper show that the
+vaporization-enthalpy gain shrinks to about zero once the parent is
+searched over a box that does not truncate it.
+
+\section{External nonane test: protocol, exploratory transfer and
+molecule bootstrap}\label{sec:s-external}
+
+Two limitations of the octane analysis are its size ($18$ molecules) and
+its restriction to index models. Both were addressed under a protocol
+recorded in a git commit of the reproducibility package before any
+nonane value was collected: the identical nested design was applied
+to the $35$ constitutional nonane isomers, with boiling points ($35$
+values) and standard vaporization enthalpies ($34$ values; none listed
+for 3-ethyl-4-methylhexane) taken from the NIST
+WebBook~\cite{NISTWebBook} with every value traced to its archived
+source page. The two properties differ in evidential status. The
+boiling points are NIST averages of experimental determinations (several
+quoted only to $1$\,K), so the $T_B$ test is experimentally grounded.
+Of the vaporization enthalpies, only $5$ of $34$ are calorimetric
+determinations; $29$ come from two compilations, the 1961 tabulation of
+Labauf, Greenshields and Rossini~\cite{LabaufGreenshieldsRossini1961},
+which covers all $35$ nonanes and $75$ decanes and is not a set of
+individual calorimetric measurements, and a 1971 vapour-pressure
+handbook~\cite{WilhoitZwolinski1971}. Because such tabulations may rest
+partly on structural-increment estimates, agreement with them measures
+consistency with the compiled values rather than independent
+experimental validation, and a degree-pair-based predictor may be
+favoured if the compiled values were themselves derived from structural
+increments. The pre-registered
+decision rule called the $\gamma$ effect \emph{replicated} if the Loyola
+model beat the parent in at least $80$ of $100$ seeds at both budgets
+with positive median $\Delta Q^2$. Four baselines were added, each
+fitted entirely within the outer training fold: the training-fold mean;
+the best of the ten classical indices of Table~4 of the main paper;
+the irregularity index $IRLA$; and ridge regression on the full
+edge-degree-pair count vector, with its penalty chosen by inner
+leave-one-out. The resulting $Q^2$ values are in Table~6
+of the main paper.
+
+On the external set the pre-registered verdicts are: for
+$\Delta H_{\mathrm{vap}}$ (compilation values) the $\gamma$ effect met
+the pre-registered optimizer-stability criterion (\emph{replicates}:
+LO better than GM in $95/100$ and $98/100$ seeds, median
+$\Delta Q^2 = +0.048$ and $+0.053$), and for $T_B$ it is \emph{mixed}
+($58/100$ and $63/100$; unchanged in direction under the pre-registered
+sensitivity analysis of one disputed boiling point). The pre-registered
+protocol fixed the box of half-width $2$, which, as
+Table~5 of the main paper shows, binds the parent; in a box that does not,
+the nonane gain disappears (median $\Delta Q^2 = -0.002$ under the
+hybrid control). The
+pre-registered verdict is reported as obtained, with this deviation
+recorded. The pattern behind the vaporization result is the same on
+both sets: models whose edge weight depends on imbalance only through
+$q^2$ inside the box of half-width $2$ (the classical indices,
+including $GA = \sum_{uv}\sqrt{1-q_{uv}^2}$, and GM) reach
+$Q^2 = 0.853$--$0.888$, while models with a term linear in $q$ or with
+unrestricted counts ($IRLA$, ridge, $LO(0,0,1)$, LO) reach
+$Q^2 = 0.897$--$0.957$. The fixed point $LO(0,0,1)$, which involves no
+tuning at all, matches or beats the tuned Loyola model on both sets
+($0.957$ and $0.903$ against medians $0.953$ and $0.900$), and it is
+the index selected in every fold for $\Delta H_{\mathrm{vap}}$ when
+admitted to the fixed-index comparison. It is essentially $IRLA$:
+$LO(G;0,0,\gamma) = m + \tfrac{\gamma}{2}\,IRLA(G) + O(\gamma^2)$, and
+on both sets the correlation between $LO(0,0,1)$ and $IRLA$ is
+$0.996$. The baselines,
+however, also show the limit of the claim. Ridge regression on the full
+degree-pair count vector predicts the nonanes better than every index
+model, for both properties ($Q^2 = 0.927$ for
+$\Delta H_{\mathrm{vap}}$, $0.682$ for $T_B$); on the octanes it matches
+the Loyola model on $\Delta H_{\mathrm{vap}}$ and is weaker elsewhere.
+This is consistent with Proposition~15 of the main paper and the remark
+following it: the imbalance coordinate re-weights degree-pair
+information rather than adding to it, and its value is that one
+interpretable descriptor recovers most of what a model on all ten
+degree-pair counts achieves for the vaporization enthalpy, not that it
+outperforms such a model. Nor is the specific exponential form
+essential: the parameter-free aggregate $IRLA$ comes within $0.003$ of
+the median Loyola model on the nonanes ($0.897$ against $0.900$), so
+what matters for this property is a term linear in the imbalance, not
+the tuned exponential.
+
+Finally, the nested design refits every model on the nonanes, which
+tests whether the \emph{procedure} replicates, not whether an
+octane-trained model transfers. In an exploratory analysis (not
+pre-registered, and run in the box of half-width $2$, so that it
+inherits the truncation of the parent), the parameters selected on all
+$18$ octanes were frozen and applied to the nonanes. With the parameters
+frozen and only the linear calibration refitted, the Loyola model
+beat the parent for $\Delta H_{\mathrm{vap}}$ in $100/100$ seeds at both
+budgets (median $Q^2 = 0.910$ and $0.916$ against $0.864$ and $0.865$)
+and for $T_B$ in $65/100$ and $82/100$. With the octane calibration
+frozen as well, both models extrapolate poorly from $C_8$ to $C_9$ and
+the Loyola model is worse than the parent (median $Q^2$ between $-2.22$
+and $-0.72$ for LO against $0.06$ to $0.44$ for GM). Because both
+comparisons inherit the truncated box, they do not bear on whether
+$\gamma$ adds predictive information.
+
+The seed counts above measure optimizer variance only. To indicate
+molecule-level uncertainty we also computed, post hoc, a paired
+bootstrap over molecules ($2000$ resamples) of the median-over-seeds
+$\Delta Q^2$, conditional on the fitted outer predictions (selection is
+not repeated within resamples, so the intervals do not account for uncertainty
+from refitting and model selection). The $95\%$ intervals for LO minus GM on
+$\Delta H_{\mathrm{vap}}$ are $[+0.014, +0.111]$ on the octanes but
+$[-0.006, +0.113]$ on the nonanes at budget $200$ ($[-0.005, +0.119]$ at
+$500$): the external gain met the pre-registered criterion, yet its
+interval narrowly includes zero. The interval for LO minus ridge on the
+nonanes, $[-0.101, +0.032]$, includes zero as well, and the $T_B$
+intervals are wide ($[-0.212, +0.222]$ for LO minus GM on the
+nonanes). The one octane interval that excludes zero in the other
+direction is that for $\Delta H_f$, where freeing $\gamma$ is worse
+($[-0.281, -0.044]$). All these intervals refer to the box of
+half-width $2$. Given Table~5 of the main paper, no $\gamma$ effect remains to be
+established; the intervals are reported for completeness.
+\section{Degeneracy across tree orders}\label{sec:s-degeneracy}
+
+Degeneracy measures an index's ability to discriminate
+non-isomorphic graphs~\cite{Konstantinova1996Degeneracy}; lower is
+better. On the $106$ non-isomorphic
+trees of order $10$ we use the distinct-value convention
+\[
+\mathrm{Degeneracy}(\%) = 100\Bigl(1 - \tfrac{k}{N}\Bigr),
+\quad k = \#\{\text{distinct index values}\},\ N = 106,
+\]
+i.e.\ the number $N - k$ of structures in excess of the distinct
+values, as a percentage of $N$ (this is not the share of structures
+lacking a unique value, which is larger: for $LO(0,0,1)$ on this set
+$45$ of the $106$ trees, $42.5\%$, share their value with another
+tree). The pure-$\gamma$ points $LO(0, 0, 1)$ and
+$LO(0, 0, 2)$ attain degeneracy $25.5\%$ ($79$ distinct values),
+among the lowest of all compared indices and tied with $R$, $GA$,
+and $AG$; indeed the $106$ trees realise only $79$ distinct
+edge-degree-pair count vectors, so $25.5\%$ is the minimum degeneracy
+attainable by \emph{any} degree-pair-based index on this set, and the
+pure-$\gamma$ points attain this floor; the reason, and the order at
+which this stops, are given by Theorem~4 of the main paper; the first Zagreb index $LO(0, 1, 0)$ ($83.0\%$) and the
+second Zagreb index $LO(1, 0, 0)$ ($67.0\%$) are the most degenerate
+(Figure~\ref{fig:degeneracy}).
+
+\begin{figure}[H]
+\centering
+\safefig{fig_lo_degeneracy_order10_trees_v2.pdf}{0.9}
+\caption{Degeneracy percentage of the compared indices on the $106$ non-isomorphic trees of order $10$. The dashed line marks the degree-pair-profile floor, $25.5\% = 100(1 - 79/106)$: the $106$ trees realise only $79$ distinct edge-degree-pair count vectors, so no vertex-degree-based index can fall below it.}
+\label{fig:degeneracy}
+\end{figure}
+
+To test whether this floor attainment is peculiar to order $10$, the
+same computation was repeated for all non-isomorphic trees of orders
+$7$ through $12$ and, separately, for the molecular subsets with
+$\Delta \le 4$ (Table~\ref{tab:multiorder}). The pure-$\gamma$ points
+attain the degree-pair-profile floor at \emph{every} order in both
+sets. Honesty requires noting that the Randi\'c index also attains
+the floor at every order in this range (while $\chi$ falls off the
+floor from order $10$), so floor attainment distinguishes the
+pure-$\gamma$ points from the most degenerate classical indices
+($M_1$, $M_2$) but not from $R$; the observation is that the
+imbalance weights lose nothing, not that they are unique in this
+respect. Theorem~4 of the main paper turns this into an exact
+statement: the pure-$\gamma$ points separate precisely the
+$q$-histograms, which coincide with the degree-pair profiles up to
+order $12$ (order $15$ for $\Delta \le 4$) and not beyond. Among the
+trees of order $13$ the profiles
+$\{(1,2)^{1}, (1,3)^{2}, (1,6)^{5}, (2,3)^{2}, (2,6)^{1}, (3,3)^{1}\}$
+and $\{(1,3)^{3}, (1,6)^{5}, (2,2)^{1}, (2,3)^{2}, (3,6)^{1}\}$
+(exponents are edge multiplicities) share the $q$-histogram
+$\{0^{1}, \tfrac15^{2}, \tfrac13^{1}, \tfrac12^{3}, \tfrac57^{5}\}$,
+and the pure-$\gamma$ points realise $566$ distinct values against
+$570$ profiles; among molecular trees ($\Delta \le 4$) the first
+failure occurs at order $16$ ($809$ values against $810$ profiles).
+The Randi\'c index still attains the floor at order $13$ ($570$ values)
+and falls below it at order $14$ ($1095$ values against $1100$
+profiles, where the pure-$\gamma$ points give $1090$).
+
+\begin{table}[H]
+\centering
+\caption{Discrimination across tree orders $n = 7$--$12$: number of
+trees $N$, number of distinct edge-degree-pair profiles (the floor
+attainable by any vertex-degree-based index), and distinct-value
+counts for representative indices. ``mol.''\ denotes the molecular
+subset $\Delta \le 4$.}
+\label{tab:multiorder}
+\small
+\begin{tabular}{llrrrrrrr}
+\toprule
+$n$ & set & $N$ & floor & $M_1$ & $M_2$ & $R$ & $LO(0,0,1)$ & $LO(0,0,2)$\\
+\midrule
+$7$ & all & $11$ & $11$ & $7$ & $9$ & $11$ & $11$ & $11$\\
+$7$ & mol. & $9$ & $9$ & $5$ & $7$ & $9$ & $9$ & $9$\\
+$8$ & all & $23$ & $21$ & $9$ & $17$ & $21$ & $21$ & $21$\\
+$8$ & mol. & $18$ & $16$ & $6$ & $13$ & $16$ & $16$ & $16$\\
+$9$ & all & $47$ & $40$ & $13$ & $22$ & $40$ & $40$ & $40$\\
+$9$ & mol. & $35$ & $28$ & $7$ & $16$ & $28$ & $28$ & $28$\\
+$10$ & all & $106$ & $79$ & $18$ & $35$ & $79$ & $79$ & $79$\\
+$10$ & mol. & $75$ & $49$ & $8$ & $21$ & $49$ & $49$ & $49$\\
+$11$ & all & $235$ & $152$ & $21$ & $43$ & $152$ & $152$ & $152$\\
+$11$ & mol. & $159$ & $83$ & $9$ & $25$ & $83$ & $83$ & $83$\\
+$12$ & all & $551$ & $294$ & $27$ & $57$ & $294$ & $294$ & $294$\\
+$12$ & mol. & $355$ & $137$ & $10$ & $28$ & $137$ & $137$ & $137$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Structure sensitivity: protocol and published control}\label{sec:s-ss}
+
+The structure-sensitivity criterion for descriptor quality was
+introduced by Furtula, Gutman and
+Dehmer~\cite{FurtulaGutmanDehmer2013SS}, with a fingerprint-based
+variant due to Raki\'c and Furtula~\cite{RakicFurtula2019SS}. We
+implement the published protocol on the $75$ decane isomer trees
+$\Psi$: for each tree $G$, the similar-structure set
+$S(G) \subset \Psi$ consists of the non-isomorphic trees obtainable
+from $G$ by relocating a single edge within the molecular class
+(graph edit distance two, $\Delta \le 4$ preserved); then
+\begin{gather*}
+SS(TI, G) = \frac{1}{|S(G)|} \sum_{\Omega \in S(G)}
+\frac{|TI(\Omega) - TI(G)|}{TI(G)},\\
+Abr(TI, G) = \max_{\Omega \in S(G)}
+\frac{|TI(\Omega) - TI(G)|}{TI(G)},
+\end{gather*}
+and the class-level $SS(TI)$ and $Abr(TI)$ are the means over all
+$75$ trees. On this class every $S(G)$ is nonempty (sizes $7$ to
+$43$), the neighbour relation is symmetric, and $Abr \ge SS$ holds
+throughout, as it must. As an external control, the implementation
+reproduces the published decane-class values of Barman and
+Das~\cite{BarmanDas2026HSO} for the seven indices common to both
+studies ($M_1$, ${}^{m}\!M_2$, $R$, $\chi$, $H$, $GA$, $AG$;
+fourteen tabulated $SS$/$Abr$ values): eleven agree exactly at the four
+displayed decimals and the remaining three differ by one unit in the
+fourth decimal (the cell-by-cell comparison is in the file
+\texttt{fgd\_published\_control.csv} of the reproducibility package;
+our values for all twelve compared indices are in
+Table~3 of the main paper). Under the published desideratum ($SS$ large,
+$Abr$ small~\cite{FurtulaGutmanDehmer2013SS}), the pure-$\gamma$
+point $LO(0,0,2)$ has a structure sensitivity equal to that of the
+hyper-Zagreb index ($0.1257$ against $0.1256$) at a markedly smaller
+abruptness ($0.274$ against $0.313$), and the sensitivity-to-abruptness
+ratios of the pure-$\gamma$ points ($0.4579$ and $0.4565$) are comparable
+to those of $H/2$, $GA$ and $R$ ($0.448$--$0.451$); in view of the
+redundancy analysis of Section~6.1 of the main paper and Section~S1, these third-decimal
+differences are not a ranking. Two
+qualifications limit this. First, $SS$ is not a fixed property of the
+family: along the pure-$\gamma$ line it grows with $\gamma$ ($0.031$,
+$0.062$, $0.126$, $0.319$ at $\gamma = 0.5, 1, 2, 5$) while the ratio
+peaks near $\gamma = 2$ and then falls ($0.427$ at $\gamma = 5$).
+Second, the parameter-free aggregate $IRLA$, which the pure-$\gamma$
+points approximate to first order in $\gamma$, has a higher ratio
+($SS = 0.2343$, $Abr = 0.5066$, ratio $0.4625$). The favourable sensitivity--abruptness balance is therefore
+a property of linear imbalance weighting rather than of the tuned
+exponential, and the $SS$ margin over hyper-Zagreb is a tie, not a
+ranking.
+
+\section{Further directions}\label{sec:s-further}
+
+Building on the Loyola index, the following open problems indicate natural directions for further work:
+\begin{enumerate}
+\item Sharp two-sided bounds for $\Wuzi$ via degree-based indices
+lying outside the family, such as the atom-bond-connectivity index $ABC$ and the
+Sombor index.
+
+
+\item Extremal-graph characterisations (not attempted in this paper) for
+several graph classes, including trees, unicyclic and bicyclic graphs.
+
+\item Chemometric extension to additional chemical compound classes such as benzene derivatives, alkane homologues beyond the octanes, nonanes and
+decanes studied here and to compound-class-specific QSPR endpoints.
+\end{enumerate}
+
+The first orders at which the pure-$\gamma$ points, the Randi\'c index
+and $GA$ lose discrimination are summarised in Table~2
+of the main paper.
+
+\singlespacing
+
+\begin{thebibliography}{9}
+
+  \bibitem{BarmanDas2026HSO} J. Barman, S. Das, Geometric approach to
+  degree-based topological index: Hyperbolic Sombor index, \textit{MATCH
+  Commun. Math. Comput. Chem.\/} \textbf{95} (2026) 63--94.
+
+  \bibitem{FurtulaGutmanDehmer2013SS} B. Furtula, I. Gutman, M. Dehmer, On
+  structure-sensitivity of degree-based topological indices, \textit{Appl.
+  Math. Comput.\/} \textbf{219} (2013) 8973--8978.
+
+  \bibitem{Konstantinova1996Degeneracy} E. V. Konstantinova, The
+  discrimination ability of some topological and information distance indices
+  for graphs of unbranched hexagonal systems, \textit{J. Chem. Inf. Comput.
+  Sci.\/} \textbf{36} (1996) 54--57.
+
+  \bibitem{LabaufGreenshieldsRossini1961} A. Labauf, J. B. Greenshields,
+  F. D. Rossini, Heats of formation, combustion, and vaporization of the
+  35 nonanes and 75 decanes, \textit{J. Chem. Eng. Data\/} \textbf{6}
+  (1961) 261--263.
+
+  \bibitem{NISTWebBook} P. J. Linstrom, W. G. Mallard (Eds.), \textit{NIST
+  Chemistry WebBook, NIST Standard Reference Database Number 69}, National
+  Institute of Standards and Technology, Gaithersburg MD,
+  \href{https://doi.org/10.18434/T4D303}{doi:10.18434/T4D303} (accessed 2025--2026).
+
+  \bibitem{MovahediGutmanRedzepovicFurtula2026} F. Movahedi, I. Gutman, I.
+  Red\v{z}epovi\'c, B. Furtula, Diminished Sombor index, \textit{MATCH Commun.
+  Math. Comput. Chem.\/} \textbf{95} (2026) 141--162.
+
+  \bibitem{RakicFurtula2019SS} M. Raki\'c, B. Furtula, A novel method for
+  measuring the structure sensitivity of molecular descriptors, \textit{J.
+  Chemometrics\/} \textbf{33} (2019) \#e3138.
+
+  \bibitem{WilhoitZwolinski1971} R. C. Wilhoit, B. J. Zwolinski,
+  \textit{Handbook of Vapor Pressures and Heats of Vaporization of
+  Hydrocarbons and Related Compounds\/}, Texas A\&M Research Foundation,
+  College Station, 1971.
+
+\end{thebibliography}
+
+\end{document}
+

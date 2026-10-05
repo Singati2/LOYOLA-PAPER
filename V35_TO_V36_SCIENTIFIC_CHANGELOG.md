@@ -191,3 +191,18 @@ adversarial theorem verifiers; Feynman review; synthesis.
   order-16 witness displayed; dataset-level identifiability (octane pair union
   spans R^3); abstract/intro scope qualifiers ('for this property', 'on the
   nonanes'); prereg described as a git-commit record.
+
+## v39 (cropped main paper + supplement)
+- Main paper 50 -> 35 A5 pages; new supplement.tex (19 pages) holds the
+  provenance audit and heatmap, local tuning (Tables S1-S2), the box-(-2,2)
+  ablation and 100-seed robustness (Table S3), nonane protocol details,
+  transfer and bootstrap, the tree-order discussion (Table S4, Figure S2),
+  structure-sensitivity protocol and further directions.
+- Main paper order: Introduction -> Preliminaries -> Parameter geometry
+  (ratio plane, crossings, identifiability) -> Bounds -> Discrimination
+  (ceiling, compact first-failure table tab:firstfail, structure sensitivity)
+  -> concise QSPR diagnostic (correlations, search-box result tab:box,
+  external test tab:external) -> Conclusion -> Appendix data.
+- No number lost: every decimal and every integer >= 10 in the previous
+  main.tex appears in main.tex or supplement.tex (scripted check).
+- Verifiers read tables from main.tex + supplement.tex; selftest 113/113.

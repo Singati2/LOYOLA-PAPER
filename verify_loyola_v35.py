@@ -333,14 +333,31 @@ def _disp_ok(tok, exp, signed):
     if tok=="PHANTOM0":return fs3(exp) in ("+0.000","-0.000")
     return tok==(fs3(exp) if signed else fu3(abs(exp)))
 
+SUPP_TEX = "supplement.tex"   # tables moved to the supplement keep their labels
+TEX_SPLIT = "\n%%@@LOYOLA-SUPPLEMENT-SPLIT@@%%\n"  # selftest-only separator
+
+def supp_path(texpath):
+    """The supplement is the file supplement.tex next to the main .tex file."""
+    return os.path.join(os.path.dirname(os.path.abspath(texpath)), SUPP_TEX)
+
+def read_tex_bundle(texpath):
+    """Main manuscript text followed by the supplement text (if present); table
+    blocks are looked up by label in the concatenation, so a guarded table may
+    live in either file."""
+    t = open(texpath).read()
+    sp = supp_path(texpath)
+    if os.path.exists(sp):
+        t += "\n" + open(sp).read()
+    return t
+
 def check_tex(texpath, CMP):
     """Drift guard (v36): every numeric cell of every numeric table in main.tex
-    must be the EXACT display string of the full-precision value recomputed in
+    or supplement.tex (looked up by label in their concatenation) must be the EXACT display string of the full-precision value recomputed in
     this run (no tolerances). Tables: lo_octane, lo_tuning, lo_tuning_bestfixed,
     ablation (+ 100-seed median columns), multiorder, fgdss, collisions,
     octane-data. Returns (ok, msgs)."""
     msgs=[]
-    try:tex=decomment_tex(open(texpath).read())
+    try:tex=decomment_tex(read_tex_bundle(texpath))
     except Exception as e:return False,[f"cannot read {texpath}: {e}"]
     if re.search(r"\\(iffalse|iftrue|ifnum|ifdim|ifcase|ifx|else|fi)(?![a-zA-Z])",tex):
         msgs.append("TeX conditional (\\if.../\\else/\\fi) present in decommented source: raw-source parsing cannot guarantee rendered table semantics; rejected")
@@ -817,9 +834,10 @@ def check_v35_extras(dirpath):
                     return float(xc@yc/(np.linalg.norm(xc)*np.linalg.norm(yc)))
                 if abs(float(r[f"r_{pre}_original"])-rr(y0))>1e-9 or abs(float(r[f"r_{pre}_alternative"])-rr(y1))>1e-9:
                     msgs.append(f"{fn} {r['index']}: values differ from live recomputation")
-        mt=os.path.join(dirpath,"main.tex")
-        if os.path.exists(mt) and "fig_lo_structure_sensitivity" in open(mt).read():
-            msgs.append("main.tex references the retired sigma/mu proxy figure fig_lo_structure_sensitivity_*")
+        for _tf in ("main.tex",SUPP_TEX):
+            mt=os.path.join(dirpath,_tf)
+            if os.path.exists(mt) and "fig_lo_structure_sensitivity" in open(mt).read():
+                msgs.append(f"{_tf} references the retired sigma/mu proxy figure fig_lo_structure_sensitivity_*")
     except (OSError,KeyError,ValueError) as e:
         msgs.append(f"v35 extras check failed: {e!r}")
     return (len(msgs)==0),msgs
@@ -1231,7 +1249,8 @@ def run_selftest(A, here, HAVE_NX):
     fails,_,_,CMP=run_computation(HAVE_NX,quiet=True)
     if fails or not HAVE_NX:
         print(f"  cannot self-test: baseline computation fails={fails}, networkx={HAVE_NX}");return 1
-    base=open(A.tex).read()
+    _sp=supp_path(A.tex)
+    base=open(A.tex).read()+TEX_SPLIT+(open(_sp).read() if os.path.exists(_sp) else "")
     results=[]  # (name, behaved_correctly, note)
     def line_with(*subs):
         for l in base.splitlines():
@@ -1249,7 +1268,7 @@ def run_selftest(A, here, HAVE_NX):
 
     L_T2M1   = line_with("$M_1 = LO(0,1,0)$")
     L_T2M2   = line_with("$M_2 = LO(1,0,0)$")
-    L_T2LAST = line_with("$LO(0,0,2)$ &")
+    L_T2LAST = line_with("$LO(0,0,2)$ &","$-0.925$")  # Table 1 row (tab:fgdss also has an LO(0,0,2) row)
     L_TUNLAST= line_with(r"$\omega$","$0.929$","$0.945$")
     L_TUN_S  = line_with("$S$","$0.931$","$0.948$")
     L_BF_TB  = line_with("$T_B$",r"${}^{m}\!M_2$","$0.855$")
@@ -1341,7 +1360,10 @@ def run_selftest(A, here, HAVE_NX):
     with tempfile.TemporaryDirectory() as td:
         for name,content,expect in tex_attacks:
             try:
-                fp=os.path.join(td,"c.tex");open(fp,"w").write(content)
+                assert content.count(TEX_SPLIT)==1, "main/supplement separator lost"
+                mpart,spart=content.split(TEX_SPLIT)
+                fp=os.path.join(td,"c.tex");open(fp,"w").write(mpart)
+                open(os.path.join(td,SUPP_TEX),"w").write(spart)
                 okx,msgs=check_tex(fp,CMP)
                 joined="\n".join(msgs)
                 behaved=(not okx) and (expect in joined)
@@ -1397,7 +1419,7 @@ def run_selftest(A, here, HAVE_NX):
     def extras_attack(name,fn,mutate,expect):
         try:
             with tempfile.TemporaryDirectory() as td2:
-                for f in (CSV_FGD,CSV_CTRL,CSV_ROB,CSV_ABL,CSV_PROV,CSV_EXPR,CSV_EXPS,CSV_OMEG,CSV_SSEN,"main.tex"):
+                for f in (CSV_FGD,CSV_CTRL,CSV_ROB,CSV_ABL,CSV_PROV,CSV_EXPR,CSV_EXPS,CSV_OMEG,CSV_SSEN,"main.tex",SUPP_TEX):
                     shutil.copy(os.path.join(here,f),td2)
                 p=os.path.join(td2,fn);t=open(p,newline="").read();t2=mutate(t)
                 assert t2!=t
@@ -1427,7 +1449,7 @@ def run_selftest(A, here, HAVE_NX):
     def extras_attack2(name,mutate,expect):
         try:
             with tempfile.TemporaryDirectory() as td2:
-                for f in (CSV_FGD,CSV_CTRL,CSV_ROB,CSV_ABL,CSV_PROV,CSV_EXPR,CSV_EXPS,CSV_OMEG,CSV_SSEN,"main.tex"):
+                for f in (CSV_FGD,CSV_CTRL,CSV_ROB,CSV_ABL,CSV_PROV,CSV_EXPR,CSV_EXPS,CSV_OMEG,CSV_SSEN,"main.tex",SUPP_TEX):
                     shutil.copy(os.path.join(here,f),td2)
                 p=os.path.join(td2,CSV_PROV);t=open(p,newline="").read();t2=mutate(t)
                 assert t2!=t
@@ -1444,11 +1466,12 @@ def run_selftest(A, here, HAVE_NX):
     extras_attack("omega-sensitivity-corrupt",CSV_OMEG,lambda t:t.replace("-0.9856641032","-0.9956641032",1),CSV_OMEG)
     extras_attack("provenance-value-inconsistent",CSV_PROV,lambda t:t.replace("AGREEMENT WITHIN TOLERANCE","VERIFIED AFTER UNIT CONVERSION",1),CSV_PROV)
     extras_attack("proxy-figure-reintroduced","main.tex",lambda t:t.replace("\\end{document}","\\safefig{fig_lo_structure_sensitivity_decanes_v3.pdf}{0.9}\n\\end{document}",1),"retired sigma/mu proxy")
+    extras_attack("proxy-figure-in-supplement",SUPP_TEX,lambda t:t.replace("\\end{document}","\\safefig{fig_lo_structure_sensitivity_decanes_v3.pdf}{0.9}\n\\end{document}",1),"retired sigma/mu proxy")
     # operational subprocess attacks (isolated package copies)
     script=os.path.abspath(__file__)
     def make_pkg(td, skip=None):
         pkg=os.path.join(td,"pkg");os.makedirs(pkg)
-        files=["main.tex",CSV_PRED,CSV_DEG,CSV_SS,CSV_ABL,CSV_ABLF,CSV_MO,CSV_FGD,
+        files=["main.tex",SUPP_TEX,CSV_PRED,CSV_DEG,CSV_SS,CSV_ABL,CSV_ABLF,CSV_MO,CSV_FGD,
                CSV_COLL,CSV_CORR,CSV_PCA,CSV_ROB,CSV_CTRL,CSV_PROV,CSV_EXPR,CSV_EXPS,CSV_OMEG,CSV_SSEN,"octane_data.py",
                "dhvap_tmb_exclusion_v36.csv","dhvap_tmb_exclusion_summary_v36.csv"]+list(ANALYSIS_SCRIPTS)
         for f in files:
@@ -1528,7 +1551,7 @@ def main():
     ap.add_argument("--skip-analyses",action="store_true",help="skip the [N] analysis re-run (used by the operational selftest for runtime; the drift guard still validates all tables against the bundled canonical CSVs)")
     A=ap.parse_args()
     here=os.path.dirname(os.path.abspath(__file__))
-    REQUIRED=[A.tex]+[os.path.join(here,f) for f in (CSV_PRED,CSV_DEG,CSV_SS,
+    REQUIRED=[A.tex,supp_path(A.tex)]+[os.path.join(here,f) for f in (CSV_PRED,CSV_DEG,CSV_SS,
         CSV_ABL,CSV_ABLF,CSV_MO,CSV_FGD,CSV_COLL,CSV_CORR,CSV_PCA,CSV_ROB,CSV_CTRL,CSV_PROV,CSV_EXPR,CSV_EXPS,CSV_OMEG,CSV_SSEN,"octane_data.py")]+\
         [os.path.join(here,sc) for sc in ANALYSIS_SCRIPTS]
     missing=[f for f in REQUIRED if not os.path.exists(f)]
@@ -1572,7 +1595,7 @@ def main():
     for msg in msgsX[:8]:print("    ",msg)
     print(f"    v35 extras: {'PASS' if okX else 'FAIL'}")
     CMP.update(load_v35_expectations(here))
-    print("[T] drift guard: complete-token, label-validated, COMPUTATION-DERIVED parse of main.tex tables")
+    print("[T] drift guard: complete-token, label-validated, COMPUTATION-DERIVED parse of main.tex + supplement.tex tables")
     okT,msgs=check_tex(A.tex,CMP)
     if not okT:fails+=len(msgs)
     rows.append(dict(section="T",item="main_tex_tables",computed=f"{len(msgs)} mismatches",manuscript="0",ok=okT))
@@ -1608,7 +1631,7 @@ def main():
     elif io_fail or not HAVE_NX or A.skip_analyses:status=2  # skipped [N] => canonical CSVs unverified
     else:status=0
     print(f"TOTAL failures: {fails}  status: {'FULL PASS' if status==0 else ('PARTIAL' if status==2 else 'FAILURES')}")
-    print("scope: FULL PASS covers the executed computations, all 8 numeric tables of main.tex (exact display strings), and canonical artifacts;")
+    print("scope: FULL PASS covers the executed computations, all 8 numeric tables of main.tex/supplement.tex (exact display strings), and canonical artifacts;")
     print("       prose outside the guarded tables and verifier self-integrity are OUT OF SCOPE (see README/SHA256SUMS.txt).")
     print(f"results: {out} (+ verify_loyola_v35_folds.csv)")
     return status
