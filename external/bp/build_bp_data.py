@@ -6,6 +6,10 @@ archived NIST WebBook pages in nist_raw/, applying the rule fixed in
   2. else median of non-compilation determinations if their spread <= 3 K;
   3. else EXCLUDED (reason recorded).
 Compilations excluded from rule 2: Weast & Grasselli 1989; Majer & Svoboda 1985.
+Grouped records: when several NIST entries share one InChI skeleton, all
+their pages are pooled before the rule is applied (policy added in v40.2
+after an audit found a second page for 3-ethyl-4-methylhexane had been
+skipped; the earlier single-page behaviour is recorded in the changelog).
 Structures come from the NIST InChI skeleton (connection layer), parsed by a
 strict alkane parser and checked by isomorphism against the enumerated trees
 (each tree matched at most once, max degree <= 4).
@@ -82,24 +86,31 @@ def main():
         if len(idx) != 1:
             raise SystemExit(f"structure match failed for {a['names']}")
         used[(n, idx[0])] += 1
-        rec = None
+        # Grouped-record policy (v40.2): a skeleton may have several NIST
+        # entries with the same InChI (e.g. a racemic and an optically active
+        # entry). ALL their pages are read and their boiling-point rows pooled
+        # before the pre-registered rule is applied; every page is recorded.
+        tb, cids = [], []
         for cid in a["ids"].split():
             p = os.path.join(HERE, "nist_raw", cid + ".html")
             if os.path.exists(p):
-                tb = tboil(p)
-                if tb:
-                    rec = (cid, tb); break
+                rows_ = tboil(p)
+                if rows_:
+                    tb += [r + [cid] for r in rows_]; cids.append(cid)
         name = a["names"].split(";")[0].strip()
         pairs = sorted(tuple(sorted((G.degree(u), G.degree(v)))) for u, v in G.edges())
         pairs_s = " ".join(f"{i}-{j}" for i, j in pairs)
-        if rec is None:
+        if not tb:
             prov.append([n, name, a["ids"], "", "EXCLUDED", "no NIST boiling point", ""]); continue
-        cid, tb = rec
-        dets = " ; ".join(f"{r[1]} K ({r[4]}; {r[3]})" for r in tb)
+        cid = " ".join(cids)
+        dets = " ; ".join(f"{r[1]} K ({r[4]}; {r[3]}; {r[-1]})" for r in tb)
         avg = [r for r in tb if r[3] == "AVG"]
         prim = [val(r[1]) for r in tb if r[3] != "AVG" and r[4] not in COMP]
         if avg:
-            T = val(avg[0][1]); rule = "AVG"
+            av = [val(r[1]) for r in avg]
+            if max(av) - min(av) > 3.0:
+                prov.append([n, name, cid, "", "EXCLUDED", f"NIST averages on grouped pages differ by {max(av)-min(av):.2f} K > 3 K", dets]); continue
+            T = statistics.mean(av); rule = "AVG" if len(av) == 1 else f"mean of {len(av)} NIST averages (agreeing within 3 K)"
         elif prim and max(prim) - min(prim) <= 3.0:
             T = statistics.median(prim); rule = f"median of {len(prim)} non-compilation determination(s), spread {max(prim)-min(prim):.2f} K"
         else:

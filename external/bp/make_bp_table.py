@@ -11,8 +11,8 @@ SEED = {}
 for r in csv.DictReader(open(os.path.join(HERE, "bp_results_seeds.csv"))):
     SEED.setdefault(r["test"][0], []).append(float(r["Q2_LOh"]) - float(r["Q2_GM12"]))
 rows = []
-for t, lab, base in (("A", "decanes ($n = 34$)", ["mean", "classical best", "IRLA", "LO(0,0,1) fixed"]),
-                     ("B", "C6--C10, with $n_C$ ($n = 101$)", ["size only", "size + classical best", "size + IRLA", "size + LO(0,0,1) fixed"])):
+for t, lab, base in (("A", f"decanes ($n = {S['A']['n']}$)", ["mean", "classical best", "IRLA", "LO(0,0,1) fixed"]),
+                     ("B", f"C6--C10, with $n_C$ ($n = {S['B']['n']}$)", ["size only", "size + classical best", "size + IRLA", "size + LO(0,0,1) fixed"])):
     s = S[t]
     cells = [lab] + [f"${Bm[(t, b)]:.3f}$" for b in base] + [f"${Bm[(t, 'ridge on degree-pair counts')]:.3f}$",
              f"${float(s['median_Q2_GM12']):.3f}$", f"${float(s['median_Q2_LOh']):.3f}$",

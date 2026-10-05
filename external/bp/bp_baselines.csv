@@ -4,8 +4,8 @@ A: decane T_B,classical best,34,0.1763,7.118
 A: decane T_B,IRLA,34,0.1669,7.159
 A: decane T_B,"LO(0,0,1) fixed",34,0.1493,7.234
 A: decane T_B,ridge on degree-pair counts,34,0.8599,2.936
-B: pooled C6-C10 T_B (size-adjusted),size only,101,0.9382,6.968
-B: pooled C6-C10 T_B (size-adjusted),size + classical best,101,0.9667,5.113
-B: pooled C6-C10 T_B (size-adjusted),size + IRLA,101,0.9626,5.419
-B: pooled C6-C10 T_B (size-adjusted),"size + LO(0,0,1) fixed",101,0.9627,5.416
-B: pooled C6-C10 T_B (size-adjusted),ridge on degree-pair counts,101,0.9911,2.643
+B: pooled C6-C10 T_B (size-adjusted),size only,100,0.9384,6.988
+B: pooled C6-C10 T_B (size-adjusted),size + classical best,100,0.9667,5.136
+B: pooled C6-C10 T_B (size-adjusted),size + IRLA,100,0.9626,5.443
+B: pooled C6-C10 T_B (size-adjusted),"size + LO(0,0,1) fixed",100,0.9627,5.441
+B: pooled C6-C10 T_B (size-adjusted),ridge on degree-pair counts,100,0.9911,2.658

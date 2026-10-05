@@ -91,20 +91,36 @@ def candidate_triples(seed, budget):
 # one-descriptor OLS machinery (copied verbatim in logic from v35)
 # --------------------------------------------------------------------------
 def is_constant(x):
-    return (x.max() - x.min()) <= 1e-9 * max(1.0, float(np.abs(x).max()))
+    """Scale-free test: the descriptor is constant on the training fold if its
+    range is at most 1e-12 of its magnitude (v40.2; previously an absolute floor
+    made descriptors with values near 1e-9 look constant)."""
+    x = np.asarray(x, float)
+    return (x.max() - x.min()) <= 1e-12 * max(float(np.abs(x).max()), np.finfo(float).tiny)
+
+
+def _standardize_rows(Xt):
+    """Affine rescaling of each candidate row by its training-fold mean and SD;
+    OLS with an intercept is invariant to it, so selections and predictions are
+    unchanged, but the arithmetic no longer depends on the descriptor's units
+    (values span 1e-14..1e+24 in wide search boxes)."""
+    mu = Xt.mean(axis=1, keepdims=True); sd = Xt.std(axis=1, keepdims=True)
+    return (Xt - mu) / np.where(sd > 0, sd, 1.0)
 
 
 def inner_loo_rmse_all(Xt, yt):
+    """Inner leave-one-out RMSE of the one-descriptor OLS for every candidate
+    row of Xt (C x n), computed on standardized rows (v40.2)."""
+    Xt = _standardize_rows(np.asarray(Xt, float))
     C, n = Xt.shape
     m = n - 1
-    Sx = Xt.sum(axis=1, keepdims=True)
+    Sx  = Xt.sum(axis=1, keepdims=True)
     Sxx = (Xt**2).sum(axis=1, keepdims=True)
     Sxy = (Xt * yt).sum(axis=1, keepdims=True)
-    Sy = yt.sum()
+    Sy  = yt.sum()
     Sx_j, Sxx_j, Sxy_j = Sx - Xt, Sxx - Xt**2, Sxy - Xt * yt
     Sy_j = Sy - yt
     denom = m * Sxx_j - Sx_j**2
-    degen = denom <= 1e-12 * np.maximum(1.0, Sxx_j)
+    degen = denom <= 1e-12 * np.maximum(m * Sxx_j, np.finfo(float).tiny)
     slope = (m * Sxy_j - Sx_j * Sy_j) / np.where(degen, 1.0, denom)
     pred = Sy_j / m + slope * (Xt - Sx_j / m)
     pred = np.where(degen, Sy_j / m, pred)
@@ -112,18 +128,16 @@ def inner_loo_rmse_all(Xt, yt):
 
 
 def fit_predict(xt, yt, xnew):
+    xt = np.asarray(xt, float)
     if is_constant(xt):
         return float(yt.mean())
-    xm, ym = xt.mean(), yt.mean()
-    b = ((xt - xm) * (yt - ym)).sum() / ((xt - xm) ** 2).sum()
-    return float(ym + b * (xnew - xm))
+    mu, sd = xt.mean(), xt.std()
+    xs, xn = (xt - mu) / sd, (xnew - mu) / sd
+    ym = yt.mean()
+    b = ((xs) * (yt - ym)).sum() / ((xs) ** 2).sum()
+    return float(ym + b * xn)
 
 
-# --------------------------------------------------------------------------
-# per-fold fitters: each takes (features, y, i) and may use y only at j != i.
-# They return (prediction for i, selection record). The leakage test calls
-# them with y[i] perturbed and checks both outputs are unchanged.
-# --------------------------------------------------------------------------
 def _mask(n, i):
     m = np.ones(n, bool); m[i] = False
     return m

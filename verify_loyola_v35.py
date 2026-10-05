@@ -240,8 +240,13 @@ def _pdf_canonical(data):
     content is identical compare equal even if zlib emitted different bytes."""
     import zlib
     objs=[]
+    # v40.2: indirect objects that only hold a stream's /Length are
+    # compression-dependent scalars; skip them (the stream content itself is
+    # still compared after decompression).
+    lenrefs=set(re.findall(rb"/Length\s+(\d+)\s+0\s+R",data))
     for m in re.finditer(rb"(\d+)\s+(\d+)\s+obj(.*?)endobj",data,re.S):
         body=m.group(3)
+        if m.group(1) in lenrefs and re.fullmatch(rb"\s*\d+\s*",body):continue
         sm=re.search(rb"stream\r?\n(.*?)\r?\nendstream",body,re.S)
         head=body[:sm.start()] if sm else body
         head=re.sub(rb"/Length\s+\d+(\s+\d+\s+R)?",b"",head)

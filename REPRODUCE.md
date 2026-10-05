@@ -41,6 +41,7 @@ networkx, matplotlib, sympy, mpmath). Lean: `formal/verify.sh` (elan/lake).
 | pre-registered nonane test | external/nonane_validation.py (PREREG_v37.md) | verify_external.py |
 | pre-registered boiling-point tests | external/bp/bp_tests.py (PREREG_v40.md) | verify_external.py |
 | decane coverage-bias check (included vs excluded) | external/bp/coverage_bias.py | verify_external.py |
+| wide-box solver/selection/dense-grid diagnostics | external/wide_box_diagnostics.py | output committed (wide_box_diagnostics_out.txt) |
 | structural counts and witnesses | structural/structural_checks.py | itself (output committed) |
 | fixed fractional exponents, gamma=0 vs 1 (exploratory) | structural/fractional_points.py | output committed (fractional_points_out.txt) |
 | chi floor (orders 7-12) | structural/chi_floor.py | output committed (chi_floor_out.txt) |
@@ -50,4 +51,4 @@ networkx, matplotlib, sympy, mpmath). Lean: `formal/verify.sh` (elan/lake).
 |---|---|---|
 | 18 octanes (octane_data.py) | NIST WebBook / KDB; per-value provenance in octane_property_provenance_v35.csv | verify_loyola_v35.py (values = appendix = provenance; class rules) |
 | 35 nonanes (external/nonane_data.csv) | archived NIST pages external/nonane_raw_nist/ | external/build_nonane_data.py via verify_external.py |
-| 101 alkanes C6-C10 boiling points (external/bp/bp_data.csv) | archived NIST pages external/bp/nist_raw/ | external/bp/build_bp_data.py via verify_external.py |
+| 100 alkanes C6-C10 boiling points (external/bp/bp_data.csv) | archived NIST pages external/bp/nist_raw/ | external/bp/build_bp_data.py via verify_external.py |

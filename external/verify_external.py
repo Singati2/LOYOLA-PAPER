@@ -8,7 +8,30 @@
 5. every row of tab:external and tab:box (looked up in ../main.tex, then
    ../supplement.tex) equals the generated row.
 Exit 0 only if all pass."""
-import os, subprocess, sys, shutil, tempfile, filecmp
+import os, subprocess, sys, shutil, tempfile, filecmp, csv, math
+
+
+def csv_equal(a, b, rel=1e-8, abs_=1e-9):
+    """Exact byte equality, or (v40.2) identical structure and text cells with
+    numeric cells agreeing within a narrow tolerance -- floating-point replays
+    on other platforms were observed to differ at the 1e-10 level while every
+    selection, parameter and identity cell was identical."""
+    if filecmp.cmp(a, b, shallow=False):
+        return True
+    ra, rb = list(csv.reader(open(a, newline=""))), list(csv.reader(open(b, newline="")))
+    if len(ra) != len(rb) or any(len(x) != len(y) for x, y in zip(ra, rb)):
+        return False
+    for x, y in zip(ra, rb):
+        for u, v in zip(x, y):
+            if u == v:
+                continue
+            try:
+                fu, fv = float(u), float(v)
+            except ValueError:
+                return False
+            if not math.isclose(fu, fv, rel_tol=rel, abs_tol=abs_):
+                return False
+    return True
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(HERE)
 fails = []
 def run(args, cwd):
@@ -42,7 +65,7 @@ with tempfile.TemporaryDirectory() as td:
     for f in OUTS:
         a, b = os.path.join(ext, f), os.path.join(HERE, f)
         if not os.path.exists(a): fails.append(f"{f}: not regenerated")
-        elif not filecmp.cmp(a, b, shallow=False): fails.append(f"{f}: fresh run differs from committed file")
+        elif not csv_equal(a, b) if f.endswith(".csv") else not filecmp.cmp(a, b, shallow=False): fails.append(f"{f}: fresh run differs from committed file")
 # v40 boiling-point tests: rebuild data, re-run analysis, compare outputs and table
 with tempfile.TemporaryDirectory() as td2:
     bp = os.path.join(td2, "external", "bp"); shutil.copytree(os.path.join(HERE, "bp"), bp)
@@ -55,7 +78,7 @@ with tempfile.TemporaryDirectory() as td2:
     for f in BPO:
         a_, b_ = os.path.join(bp, f), os.path.join(HERE, "bp", f)
         if not os.path.exists(a_): fails.append(f"bp/{f}: not regenerated")
-        elif not filecmp.cmp(a_, b_, shallow=False): fails.append(f"bp/{f}: fresh run differs from committed file")
+        elif (not csv_equal(a_, b_)) if f.endswith(".csv") else (not filecmp.cmp(a_, b_, shallow=False)): fails.append(f"bp/{f}: fresh run differs from committed file")
 rows = [l.strip() for l in open(os.path.join(HERE, "v37_table_rows.tex")) if l.strip()]
 # tables are looked up by label in main.tex followed by supplement.tex, so a
 # guarded table may live in either document

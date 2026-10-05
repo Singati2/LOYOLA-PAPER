@@ -1,0 +1,10 @@
+D1 Test-B solver: rejected 0 of 3000 candidates, max rel error 6.93e-13, argmin agreement 10/10
+D3 octane dHvap dense parent grid half-width 2: nested Q2 0.8873, folds on boundary 18/18
+D3 octane dHvap dense parent grid half-width 4: nested Q2 0.6996, folds on boundary 17/18
+D3 octane dHvap dense parent grid half-width 8: nested Q2 0.9525, folds on boundary 2/18
+D3 octane dHvap dense parent grid half-width 12: nested Q2 0.9383, folds on boundary 0/18
+D3 nonane dHvap dense parent grid half-width 2: nested Q2 0.8532, folds on boundary 34/34
+D3 nonane dHvap dense parent grid half-width 4: nested Q2 0.8779, folds on boundary 32/34
+D3 nonane dHvap dense parent grid half-width 8: nested Q2 0.8997, folds on boundary 3/34
+D3 nonane dHvap dense parent grid half-width 12: nested Q2 0.8837, folds on boundary 0/34
+D2 one-descriptor path: 1158 selected candidates checked; max rel error of inner RMSE 1.40e-14, of prediction 1.17e-15

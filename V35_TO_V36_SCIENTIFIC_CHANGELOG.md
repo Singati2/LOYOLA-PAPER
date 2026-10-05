@@ -250,3 +250,31 @@ adversarial theorem verifiers; Feynman review; synthesis.
   differences disclosed; narrow-box q^2/linear-q split caveat added (S4).
 - Coverage-bias check for the decane cohort (external/bp/coverage_bias.py).
 - Lean build re-confirmed independently (36 theorems, standard axioms only).
+
+## v40.3 (external code/experiment audit of 0844d6b)
+All five testable audit claims reproduced; fixes:
+- Dataset (Deviation D5 in PREREG_v40.md): build_bp_data.py now pools all
+  NIST pages sharing one InChI before the rule. 3-ethyl-4-methylhexane
+  (413.55 vs 407.15 K, spread 6.40 K) excluded; 3-methylhexane 91.9 -> 91.7 C.
+  Pooled cohort 101 -> 100. Test B rerun: GM12 0.9771, LOh 0.9766, median
+  dQ2 -0.0001, LOh ahead 25/50, CI [-0.0026,+0.0019] (n=101: 0.9768, 0.9767,
+  -0.0001, 24/50, [-0.0027,+0.0021]); verdict unchanged; baselines unchanged
+  at display precision. Test A unaffected.
+- baselines.py: inner_loo_rmse_all / fit_predict / is_constant made exactly
+  affine-invariant (training-fold standardization; relative constancy test).
+  Invariance verified across 30 orders of magnitude; package values
+  reproduce (test_baselines.py 0 failures); Table 5 / Test A selections
+  unchanged (wide_box_diagnostics.py D2: max rel error 1.4e-14 at every
+  selected candidate; audit: 1050 wide-box cases, max Q2 diff 7e-15).
+- formal/verify.sh fails closed: generates AxiomCheck.lean from the sources,
+  compiles it for fresh reports, requires the exact expected name set (36),
+  rejects missing/duplicate reports.
+- verify_loyola_v35.py: _pdf_canonical skips indirect objects that only hold
+  a stream /Length (compression-dependent); recompressed figure accepted,
+  stale/altered content still rejected; selftest 113/113.
+- verify_external.py: CSV replays compared with a narrow numeric tolerance
+  (rel 1e-8, abs 1e-9) after structure/text equality (cross-platform 2e-10
+  float differences); .tex rows remain exact.
+- Diagnostics scripted: external/wide_box_diagnostics.py (solver reference,
+  selected-candidate precision, dense parent grids) with output committed.
+- README page counts; crossing count described as a grid search.

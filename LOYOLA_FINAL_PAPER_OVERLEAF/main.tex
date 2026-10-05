@@ -193,7 +193,7 @@
   octanes and nonanes vanishes once the parent family is searched over a
   box that does not truncate it (a post hoc analysis), and pre-registered
   tests on measured
-  boiling points (34 decanes; 101 alkanes C6--C10, adjusted for size)
+  boiling points (34 decanes; 100 alkanes C6--C10, adjusted for size)
   find no demonstrated benefit from $\gamma$ under these protocols,
   while ridge regression on the
   degree-pair counts predicts far better than any single index on these
@@ -383,7 +383,7 @@
   identifiability theory). $IRLA$ is, to first order in $\gamma$, a
   single slice of this structure. Fourth, the QSPR datasets are small:
   $18$ octanes, $35$ nonanes, $34$ decanes with usable measured boiling
-  points, and $101$ alkanes C6--C10 in a pooled size-adjusted set. We
+  points, and $100$ alkanes C6--C10 in a pooled size-adjusted set. We
   therefore present the chemometric
   component as diagnostic evidence about what imbalance information
   does and does not add to the parent family, not as proof of chemical
@@ -808,9 +808,11 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   equal degree-pair profiles, which are tied for every $\gamma$. The
   sign-change bound $V$ can be attained: two trees of order $12$ with
   maximum degree $6$ and eight distinct imbalances, with $V = 5$, cross
-  five times at $(\alpha,\beta) = (-1,0)$ (the only such pair among the
-  order-$12$ trees); whether five crossings are attained for
-  $\Delta \le 4$ is open. The proposition concerns the $\gamma$ axis
+  five times at $(\alpha,\beta) = (-1,0)$ (crossings counted as sign
+  changes of $D$ on a fine $\gamma$ grid; in that numerical search they are
+  the only such pair among the order-$12$ trees, whereas the bound itself
+  is analytic); whether five crossings are attained for $\Delta \le 4$ is
+  open. The proposition concerns the $\gamma$ axis
   only: along other directions the exponents are not the $q_k$ and the
   constant five does not apply.
 
@@ -1685,10 +1687,10 @@ NIST pages had been archived two days earlier during a
 data-availability audit, which counted available values only). Boiling points were taken from the NIST
 WebBook~\cite{NISTWebBook} by a fixed rule (the NIST average, or else
 the median of non-compilation determinations if they agree within
-$3$\,K; otherwise the molecule is excluded), giving all hexanes,
-heptanes, octanes and nonanes and $34$ of the $75$ decanes ($31$ have no
-NIST boiling point and $10$ have determinations more than $3$\,K
-apart; for $14$ of the $34$ included decanes NIST lists a single
+$3$\,K; otherwise the molecule is excluded), giving all hexanes, heptanes and octanes, $34$ of the $35$ nonanes
+(one has two NIST entries with the same InChI whose boiling points differ
+by $6.4$\,K) and $34$ of the $75$ decanes ($31$ have no NIST boiling point
+and $10$ have determinations more than $3$\,K apart; for $14$ of the $34$ included decanes NIST lists a single
 non-compilation determination, so the agreement rule does not apply to
 them). Because the same rule is applied to every molecule, the octane
 boiling points in the pooled set can differ from those of
@@ -1701,7 +1703,7 @@ permutation tests, all $p \ge 0.10$), although with $34$ and $41$
 molecules such tests can rule out only large differences. Test~A evaluates the models on the decanes as a new cohort, refitting
 and reselecting inside each leave-one-out fold (it is not a frozen
 octane-trained model applied to decanes); Test~B pools all
-$101$ molecules and adds the carbon number $n_C$ as a covariate, so
+$100$ molecules and adds the carbon number $n_C$ as a covariate, so
 that each descriptor is judged on branching beyond size. Both use the
 non-truncating design of Section~\ref{sec:ablation}: the parent is searched
 over $(\alpha,\beta) \in (-12,12)^2$ and the Loyola model over the same
@@ -1730,7 +1732,7 @@ which LO beats GM.}
 Test & Base & Class. & $IRLA$ & LO$_1$ & Ridge & GM & LO & $\Delta Q^2$ & $>$\\
 \midrule
 decanes ($n = 34$) & $-0.061$ & $0.176$ & $0.167$ & $0.149$ & $0.860$ & $0.514$ & $0.406$ & $-0.072$ & $15$\\
-C6--C10, with $n_C$ ($n = 101$) & $0.938$ & $0.967$ & $0.963$ & $0.963$ & $0.991$ & $0.977$ & $0.977$ & $-0.000$ & $24$\\
+C6--C10, with $n_C$ ($n = 100$) & $0.938$ & $0.967$ & $0.963$ & $0.963$ & $0.991$ & $0.977$ & $0.977$ & $-0.000$ & $25$\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1739,7 +1741,12 @@ Both pre-registered verdicts are negative: under these protocols,
 freeing $\gamma$ shows no demonstrated advantage for boiling points,
 either on the decane cohort (median $\Delta Q^2 = -0.072$, LO ahead
 in $15$ of $50$ seeds, $95\%$ interval $[-0.156, +0.002]$) or in the
-pooled size-adjusted set ($-0.000$, $24$ of $50$, $[-0.003, +0.002]$).
+pooled size-adjusted set ($-0.000$, $25$ of $50$, $[-0.003, +0.002]$).
+The pooled cohort was corrected after an external audit found that one
+nonane's second NIST entry had been skipped (Deviation D5 in the
+repository); on the uncorrected cohort of $101$ molecules the same test
+gave $-0.000$, $24$ of $50$, $[-0.003, +0.002]$, so the correction
+changes no conclusion.
 The seed counts measure the variability of the random search on fixed
 data, not independent replications, and the intervals come from a
 bootstrap over molecules conditional on the fitted predictions, so they
@@ -1794,7 +1801,7 @@ tuned models, and ridge regression on all degree-pair counts predicts
 the nonanes better than every index model. Pre-registered tests on
 measured boiling points complement this on larger data: no demonstrated
 benefit from
-$\gamma$ on the $34$ decanes or the $101$ pooled C6--C10 alkanes
+$\gamma$ on the $34$ decanes or the $100$ pooled C6--C10 alkanes
 adjusted for size, with ridge on the degree-pair counts far ahead of
 every single index (Table~\ref{tab:bp}). The compactness of
 $LO(0,0,1)$ belongs to linear imbalance weighting and is shared by the

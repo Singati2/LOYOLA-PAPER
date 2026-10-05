@@ -6,8 +6,8 @@ data, code and machine-checked proofs.
 ## Current documents
 | File | Content |
 |---|---|
-| `main.tex`, `LOYOLA_paper.pdf` | the paper (37 A5 pages, MATCH template) |
-| `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (20 pages) |
+| `main.tex`, `LOYOLA_paper.pdf` | the paper (38 A5 pages, MATCH template) |
+| `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (21 pages) |
 | `LOYOLA_FINAL_PAPER_OVERLEAF.zip` | Overleaf upload (both documents + figures) |
 
 ## What the paper shows
@@ -18,7 +18,7 @@ extends the Gutman–Milovanović family (γ = 0).
   every order ≥ 13; a bound on γ-crossings; per-graph identifiability.
 - **Prediction (negative, under the stated protocols):** an apparent vaporization-enthalpy
   gain was an artefact of a search box that truncated the parent family; pre-registered
-  tests on measured boiling points (34 decanes; 101 alkanes C6–C10) show no demonstrated
+  tests on measured boiling points (34 decanes; 100 alkanes C6–C10) show no demonstrated
   benefit from γ; ridge regression on the degree-pair counts is far stronger than any
   single index.
 

@@ -50,3 +50,19 @@ All results reported whatever they show; deviations recorded with date and
 reason before the affected analysis runs. Counts are optimizer-variance
 summaries; bootstrap intervals do not account for refitting/selection
 uncertainty.
+
+## Deviation D5 (recorded 2026-10-05, AFTER the v40/v40.2 results had been seen)
+An external audit of commit 0844d6b found that `build_bp_data.py` read only the
+first NIST page of a skeleton with several entries sharing one InChI. For
+3-ethyl-4-methylhexane the second entry (C500006531, Lukes & Langthaler 1957,
+407.15 K) was therefore not seen; together with the first (C3074779, Fenske
+et al. 1947, 413.55 K) the spread is 6.40 K > 3 K, so under the rule above the
+molecule must be EXCLUDED. Policy now fixed: all pages of a grouped skeleton
+are pooled before the rule is applied (NIST averages on grouped pages must
+agree within 3 K and are averaged). Effect on the dataset: 3-ethyl-4-
+methylhexane excluded (pooled n = 100), 3-methylhexane 91.9 -> 91.7 degC
+(second page pooled); 3-methylheptane and 2,4-dimethylhexane gain a second
+page without a change of value. Test B was rerun on the corrected cohort; the
+v40.2 results on the original cohort are preserved in git history (commit
+0844d6b) and in the changelog, and both are reported. Test A (decanes) is
+unaffected by the policy.
