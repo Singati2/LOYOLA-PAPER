@@ -145,7 +145,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{The Loyola Index Family: Bounds, Parameter Geometry and Sensitivity Analysis}
+\title{The Loyola Index Family: What a Degree-Imbalance Coordinate Can and Cannot Resolve}
 \author{Advik Natarajan$^{a}$, Ganesh Shiwakoti$^{b}$, Michael Arockiaraj$^{a}$\footnote{Corresponding author.}}
 
 \address{$^a$Department of Mathematics, Loyola College, Chennai, India\\
@@ -176,31 +176,26 @@
   \end{equation*}
   with $LO(G;\alpha,\beta,0) = M_{\alpha,\beta}(G)$ identically.
 
-  We prove that the imbalance direction is affinely independent of the
-  two parent directions on the degree-pair set of graphs with maximum
-  degree at least $3$, that
-  $\log LO$ is globally convex in $(\alpha,\beta,\gamma)$ with gradient
-  and Hessian given by the mean and covariance of the edge-feature
-  vector under an induced edge measure (the standard log-sum-exp
-  property), that the family factorises into
-  a size coordinate and a shape (degree-ratio) coordinate, and that on
-  the resulting ratio plane the pure-$\gamma$ points separate exactly
-  the histograms of edge imbalances (for algebraic $\gamma \neq 0$); we also bound the number of
-  $\gamma$-crossings of two graphs and characterise per-graph
-  identifiability. On molecular graphs the entire family is confined
-  to the finite-dimensional space of edge-degree-pair counts; the
-  pure-$\gamma$ points attain this ceiling on trees up to order $12$
-  (order $15$ for $\Delta \le 4$) and provably not beyond. In nested
-  leave-one-out comparisons on five octane properties and a
-  pre-registered test on the $35$ nonanes, freeing $\gamma$ appeared to
-  improve prediction of the vaporization enthalpy, but this gain
-  vanishes once the parent family is searched over a box that does not
-  truncate it; for this property the untuned point $LO(0,0,1)$,
-  essentially the irregularity index $IRLA$, matches the tuned models,
-  and on the nonanes ridge regression on all degree-pair counts
-  predicts better. Hence $\gamma$
-  is presented as a structurally interpretable, parsimonious direction
-  rather than a predictive upgrade.
+  We characterise exactly what the imbalance coordinate can and cannot
+  resolve. The family factorises into a size coordinate and a shape
+  (degree-ratio) coordinate; on the resulting ratio plane the
+  pure-$\gamma$ points separate exactly the histograms of edge
+  imbalances (for algebraic $\gamma \neq 0$), so they attain the
+  degree-pair ceiling of the whole vertex-degree-based class on trees up
+  to order $12$ (order $15$ for $\Delta \le 4$) and provably lose
+  information beyond it. We also bound the number of $\gamma$-crossings
+  of two graphs, characterise per-graph identifiability, extend
+  two-sided bounds to $\gamma \neq 0$, and record that $\log LO$ is
+  convex (the standard log-sum-exp property). The predictive result is
+  negative: an apparent gain for the vaporization enthalpy of the
+  octanes and nonanes vanishes once the parent family is searched over a
+  box that does not truncate it, and pre-registered tests on measured
+  boiling points (34 decanes; 101 alkanes C6--C10, adjusted for size)
+  find no benefit from $\gamma$, while ridge regression on the
+  degree-pair counts predicts far better than any single index. The
+  untuned point $LO(0,0,1)$ is essentially the irregularity index
+  $IRLA$. Hence $\gamma$ is presented as an interpretable,
+  analytically tractable direction, not a predictive upgrade.
   \end{abstract}
 
 \onehalfspacing
@@ -326,7 +321,7 @@
   therefore not blind to imbalance; what is new is a coordinate
   \emph{linear} in $q_{uv}$ in the exponent, which, unlike
   $\ln(1 - q_{uv}^2)$, is not an affine function of $\ln(d_u d_v)$ and
-  $\ln(d_u + d_v)$ (Proposition~\ref{prop:indep}). To our knowledge, and
+  $\ln(d_u + d_v)$ (Lemma~\ref{prop:indep}). To our knowledge, and
   within the scope of the literature search documented in the
   reproducibility package, no published index couples it
   multiplicatively, with its own parameter, to the Gutman--Milovanovi\'c
@@ -382,27 +377,32 @@
   $\partial_{\gamma}\log LO = \mathbb{E}_{\theta}[q]$, and an exact
   identifiability theory). $IRLA$ is, to first order in $\gamma$, a
   single slice of this structure. Fourth, the QSPR datasets are small:
-  $18$ octanes and $35$ nonanes. We therefore present the chemometric
+  $18$ octanes, $35$ nonanes, $34$ decanes with usable measured boiling
+  points, and $101$ alkanes C6--C10 in a pooled size-adjusted set. We
+  therefore present the chemometric
   component as diagnostic evidence about what imbalance information
   does and does not add to the parent family, not as proof of chemical
   predictive utility.
 
-  In sum, the contributions are: (i) independence and per-graph
-  identifiability of the imbalance direction
-  (Propositions~\ref{prop:indep}, \ref{prop:identrank}); (ii)
-  log-convexity with mean/covariance derivatives
-  (Theorem~\ref{thm:logconvex}); (iii) the ratio-plane theorem
-  (Theorem~\ref{thm:ratioplane}), with tree collisions at every order
-  from $13$ (from $16$ for $\Delta \le 4$), and the crossing bound
-  (Proposition~\ref{prop:laguerre}); (iv) closed forms,
-  $\gamma \neq 0$ bounds, the degree-pair ceiling
+  In sum, the contributions are: (i) the size--shape factorisation and
+  the ratio-plane theorem (Theorem~\ref{thm:ratioplane}), which
+  characterises exactly what the pure-$\gamma$ line can discriminate and
+  is in large part a limitation result (tree collisions at every order
+  from $13$, from $16$ for $\Delta \le 4$); (ii) the crossing bound
+  (Proposition~\ref{prop:laguerre}) and per-graph identifiability
+  (Proposition~\ref{prop:identrank}), resting on an elementary
+  independence lemma (Lemma~\ref{prop:indep}); (iii) log-convexity with
+  mean/covariance derivatives (Theorem~\ref{thm:logconvex}, standard),
+  closed forms and $\gamma \neq 0$ bounds; (iv) the degree-pair ceiling
   (Proposition~\ref{prop:collision}) and structure sensitivity; and
-  (v) a QSPR diagnostic (Section~\ref{sec:sensitivity}) in which freeing
-  $\gamma$ gives no consistent gain once the parent search box does not
-  truncate the parent. No universal ranking or predictive-superiority
-  claim is made; the family is offered as an analytically transparent,
-  parsimonious third direction on the Gutman--Milovanovi\'c parameter
-  space.
+  (v) a negative, reproducible QSPR diagnostic: freeing $\gamma$ gives no
+  consistent gain once the parent's search box does not truncate it,
+  confirmed by pre-registered tests on measured boiling points of
+  decanes and of pooled C6--C10 alkanes (Section~\ref{sec:bp}), where
+  ridge regression on the degree-pair counts is far ahead of every
+  single index. The family is offered as an analytically transparent,
+  interpretable third direction on the Gutman--Milovanovi\'c parameter
+  space, not as a better predictor.
 
 
 % =====================================================================
@@ -547,7 +547,7 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   test).
 
 
-  \begin{proposition}[Affine independence of the imbalance
+  \begin{lemma}[Affine independence of the imbalance
   direction]\label{prop:indep}
   Let $\Delta \ge 3$ and let
   $P_{\Delta} = \{(i,j) : 1 \le i \le j \le \Delta\}$ be the
@@ -563,7 +563,7 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   $\Delta = 1$ (the single pair $(1,1)$, augmented vector
   $(1, 0, \ln 2, 0)$) it has dimension $1$; in both cases the
   conclusion fails.
-  \end{proposition}
+  \end{lemma}
 
   \begin{proof}
   It suffices to show that $q_{ij}$ is not an affine function of
@@ -591,7 +591,7 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
 
   \begin{remark}[Independence versus per-graph
   identifiability]\label{rem:ident}
-  Proposition~\ref{prop:indep} concerns the edge-weight
+  Lemma~\ref{prop:indep} concerns the edge-weight
   \emph{function} on the full admissible pair set, not every individual
   graph: on a single graph $G$ the parameters are identifiable from the
   \emph{function} $\theta \mapsto LO(G;\theta)$ (never from a single
@@ -601,7 +601,7 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   is identifiable beyond one linear functional; if the edges of $G$
   realise at most three affinely independent augmented vectors, some
   direction of $\theta$ --- possibly the $\gamma$ direction --- is
-  unidentifiable from $LO(G;\cdot)$ alone. The proposition guarantees
+  unidentifiable from $LO(G;\cdot)$ alone. The lemma guarantees
   that no such degeneracy is forced on the whole molecular class
   $\Delta \ge 3$: the family separates parameters as a family of
   descriptors, even though particular graphs may not.
@@ -742,7 +742,8 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   larger order.
   \end{proof}
 
-  By exhaustive enumeration, $q$-histograms coincide with degree-pair
+  Theorem~\ref{thm:ratioplane} is as much a limitation result as a
+  characterisation. By exhaustive enumeration, $q$-histograms coincide with degree-pair
   profiles for all trees of order at most $12$ and for trees with
   $\Delta \le 4$ of order at most $15$, so the pure-$\gamma$ points
   attain the degree-pair floor exactly up to those orders and,
@@ -790,14 +791,16 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   number of positive zeros, with multiplicity, is at most $V$ and has
   its parity. The parity statement also follows from the signs of $D$
   as $\gamma \to \mp\infty$, which are those of the first and last nonzero $c_k$
-  (Proposition~\ref{prop:gamma_eq_0_or_inf}).
+  (by the termwise argument of Proposition~\ref{prop:gamma_eq_0_or_inf},
+  applied to $D$).
   \end{proof}
 
   The hypothesis $D \not\equiv 0$ excludes in particular graphs with
   equal degree-pair profiles, which are tied for every $\gamma$. The
-  sign-change bound can be attained: two trees of order $12$ with
-  maximum degree $5$ and seven distinct imbalances (bound $6$) cross five
-  times at $(\alpha,\beta) = (-1,0)$; for $\Delta \le 4$ the
+  sign-change bound $V$ can be attained: two trees of order $12$ with
+  maximum degree $6$ and eight distinct imbalances, with $V = 5$, cross
+  five times at $(\alpha,\beta) = (-1,0)$ (the only such pair among the
+  order-$12$ trees); for $\Delta \le 4$ the
   largest number of crossings we found is four, so whether five is
   attained there is open. The proposition concerns the $\gamma$ axis
   only: along other directions the exponents are not the $q_k$ and the
@@ -1024,7 +1027,7 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   has degree pair $(\delta, \delta)$ and equality holds.
   \end{proof}
 
-  The next theorem gives a single uniform template for bounding
+  The next proposition gives a single uniform template for bounding
   $\Wuzi$ both above and below in terms of any classical
   bond-incident-degree index whose edge contribution is strictly
   positive on the admissible degree pairs of the graph.
@@ -1194,7 +1197,7 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   edge-degree-pair counts (every vertex-degree-based index is a
   functional of those counts~\cite{Rada2026LinearVDB}); what $\gamma$
   adds is the new functional direction of
-  Proposition~\ref{prop:indep}, i.e.\ a different weighting of the
+  Lemma~\ref{prop:indep}, i.e.\ a different weighting of the
   same information.
 
 \begin{table}[htbp]
@@ -1271,7 +1274,7 @@ $7$ not examined; ``---'': not determined.}
 Index & below floor & merges & below floor & merges\\
 \midrule
 $LO(0,0,\gamma)$ & $13$ ($566/570$) & never$^{a}$ & $16$ ($809/810$) & never$^{a}$\\
-$R$ & $14$ ($1095/1100$) & n/a$^{b}$ & $> 12^{c}$ & n/a$^{b}$\\
+$R$ & $14$ ($1095/1100$) & n/a$^{b}$ & $> 16^{c}$ & n/a$^{b}$\\
 $GA$ & $13$ ($566/570$)$^{d}$ & $17^{e}$ & $16$ ($809/810$)$^{d}$ & ---$^{e}$\\
 \bottomrule
 \end{tabular}
@@ -1280,13 +1283,35 @@ $GA$ & $13$ ($566/570$)$^{d}$ & $17^{e}$ & $16$ ($809/810$)$^{d}$ & ---$^{e}$\\
 \begin{minipage}{0.95\linewidth}\footnotesize
 $^{a}$~All $q$-histograms are separated for every nonzero algebraic
 $\gamma$ (Theorem~\ref{thm:ratioplane}(ii)). $^{b}$~$R$ is not on $\Pi$.
-$^{c}$~$R$ attains the floor for $n \le 12$ in both sets; larger
-molecular trees were not tabulated for $R$. $^{d}$~$GA$ lies on $\Pi$
+$^{c}$~$R$ attains the floor for trees with $\Delta \le 4$ at every
+order up to $16$, the largest examined. $^{d}$~$GA$ lies on $\Pi$
 and merges no $q$-histograms below order $17$, so there it ties the
 pure-$\gamma$ points. $^{e}$~The witness (Section~\ref{sec:ratioplane})
 has maximum degree $5$.
 \end{minipage}
 \end{table}
+
+Off the ratio plane the imbalance factor has a visible effect at fixed
+classical exponents. A point $(0,\beta,0)$ weights an edge by its degree
+sum only, so two degree pairs with the same sum receive the same
+weight; with $\gamma \neq 0$ they are separated, because their
+imbalances differ. Computationally, on all trees of order $16$
+($4069$ profiles), $LO(0,\tfrac12,0)$ and $LO(0,\tfrac13,0)$ take only
+$3475$ and $3476$ distinct values, whereas $LO(0,\tfrac12,1)$ and
+$LO(0,\tfrac13,1)$ separate all $4069$ profiles; likewise
+$LO(\tfrac12,0,\cdot)$ rises from $3940$ to $4067$ and the Randi\'c point
+$LO(-\tfrac12,0,\cdot)$ from $4007$ to $4068$ when $\gamma$ goes from $0$
+to $1$, while points on $\Pi$ such as $GA$ are unaffected ($3996$ in
+both cases), as Theorem~\ref{thm:ratioplane} requires. The effect is
+one of repairing particular classical exponents, not of making
+discrimination possible at all: generic parent points such as
+$LO(\tfrac1{11},\tfrac1{11},0)$ or $LO(0.3,0.2,0)$ already separate all
+$4069$ profiles (Proposition~\ref{prop:generic}). It is established by
+enumeration for orders $12$--$16$ rather than proved; it does not translate into a
+predictive gain over a tuned parent (Section~\ref{sec:sensitivity}),
+although at the same fixed fractional exponents $\gamma = 1$ improves
+the leave-one-out $Q^2$ of $\gamma = 0$ in $52$ of $81$
+point--dataset combinations (exploratory; Supplementary Section~S5).
 
 \subsection{Structure sensitivity on decane isomers}\label{sec:ss}
 
@@ -1394,8 +1419,9 @@ $374$\,K), is the benchmark-compilation value $8.41$\,kcal\,mol$^{-1}$
 ($35.19$\,kJ\,mol$^{-1}$), matching neither NIST standard vaporization
 enthalpy ($42.94$ and $42.91$\,kJ\,mol$^{-1}$, about
 $10.26$\,kcal\,mol$^{-1}$), so its physical reference state is
-unresolved. Four entropies could not be matched to a primary source;
-substituting the values of a widely used compilation changes all twelve
+unresolved. Six gas-phase entropies could not be verified against a
+primary source, and four entropies differ from a widely used
+compilation; substituting the compilation values changes all twelve
 $S$ correlations (by up to $0.034$ in $|r|$) but not the winning
 descriptor ($HM$). Alternative compiled acentric factors change several
 $\omega$ correlations at the third decimal (e.g.\ $M_2$ from $-0.988$ to
@@ -1456,9 +1482,9 @@ the $18$ isomers realise only $16$ distinct edge-degree-pair count
 vectors, and the two collision pairs of Table~\ref{tab:collisions}
 are indistinguishable by \emph{every} vertex-degree-based index at
 \emph{every} parameter choice, while their measured properties
-differ (by up to $1.2\,^{\circ}$C in $T_B$ and $1.94$ units in $S$
-within the first pair, and $2.1\,^{\circ}$C in $T_B$ within the
-second). Every correlation in Table~\ref{tab:lo_octane}, and every
+differ (by up to $1.2\,^{\circ}$C in $T_B$ within the first pair and
+$2.1\,^{\circ}$C within the second; the entropy differences rest partly
+on values that could not be verified against a primary source). Every correlation in Table~\ref{tab:lo_octane}, and every
 tuned variant in the sections below, operates above this
 irreducible floor.
 
@@ -1511,10 +1537,11 @@ seeds) and nonane $T_B$ ($31$ of $50$), but behind for octane $T_B$,
 $\Delta H_f$ and $\omega$, and the wide box itself lowers the parent's
 $Q^2$ for $S$ and $T_B$. The vaporization-enthalpy gains reported above
 therefore reflect the truncated box rather than information that the
-parent lacks; what the third coordinate offers is economy, since an
-exponent near $1$ approaches what the parent reaches only near
-$(\alpha,\beta) \approx (4.5, -9)$ ($Q^2 = 0.949$ there against
-$0.957$ for $LO(0,0,1)$ on the octanes).
+parent lacks. The economy that remains belongs to linear imbalance
+weighting rather than to $\gamma$: the fixed point $LO(0,0,1)$ and the
+parameter-free $IRLA$ approach what the parent reaches only near
+$(\alpha,\beta) \approx (4.5, -9)$ ($Q^2 = 0.957$ and $0.948$ against
+$0.949$ there, on the octanes).
 
 \begin{table}[htbp]
 \centering
@@ -1550,7 +1577,8 @@ non. $\Delta H_{\mathrm{vap}}$ & $93\%$ & $0.855$ & $0.895$ & $49$ & $10\%$ & $0
 The honest summary is therefore that tuning $\gamma$ yields no
 consistent predictive advantage over a parent model that is allowed to
 reach its own optimum. Its value lies in the structural results of
-Section~\ref{sec:geometry} and in the parsimony documented in
+Section~\ref{sec:geometry} and in the comparison with linear imbalance
+weighting documented in
 Section~\ref{sec:external}.
 
 \subsection{External test on the nonane isomers and stronger
@@ -1622,6 +1650,72 @@ non. $\Delta H_{\mathrm{vap}}$ & $-0.062$ & $0.857$ & $0.897$ & $0.927$ & $0.903
 \end{tabular}
 \end{table}
 
+\subsection{Measured boiling points: decanes and pooled C6--C10}\label{sec:bp}
+
+Because measured vaporization enthalpies are too scarce for a larger
+test (NIST lists calorimetric $298$\,K values for only $25$ acyclic
+alkane skeletons outside $C_8$ and $C_9$, and for one of the $75$
+decanes), two further tests used measured boiling points, under a
+protocol committed to the repository before any model was fitted (the
+NIST pages had been archived two days earlier during a
+data-availability audit, which counted available values only). Boiling points were taken from the NIST
+WebBook~\cite{NISTWebBook} by a fixed rule (the NIST average, or else
+the median of non-compilation determinations if they agree within
+$3$\,K; otherwise the molecule is excluded), giving all hexanes,
+heptanes, octanes and nonanes and $34$ of the $75$ decanes ($31$ have no
+NIST boiling point and $10$ have determinations more than $3$\,K
+apart; for $14$ of the $34$ included decanes NIST lists a single
+non-compilation determination, so the agreement rule does not apply to
+them). Test~A is an external test on the decanes; Test~B pools all
+$101$ molecules and adds the carbon number $n_C$ as a covariate, so
+that each descriptor is judged on branching beyond size. Both use the
+non-truncating design of Section~\ref{sec:ablation}: the parent is searched
+over $(\alpha,\beta) \in (-12,12)^2$ and the Loyola model over the same
+box with $\gamma \in (-2,2)$, with $2000$ candidates and seeds
+$0$--$49$, and the pre-registered criterion for a $\gamma$ effect
+required at least $40$ wins in $50$ seeds and a molecule-bootstrap
+interval excluding zero (Table~\ref{tab:bp}).
+
+\begin{table}[htbp]
+\centering
+\caption{Measured boiling points (nested leave-one-out $Q^2$). Test A:
+external decane set; Test B: pooled C6--C10 with the carbon number
+$n_C$ in every model (Class., $IRLA$,
+LO$_1$: $n_C$ plus that descriptor). Base: training-fold mean (Test A)
+or $n_C$ alone (Test B);
+Class.: best classical index chosen in each fold; LO$_1$: fixed
+$LO(0,0,1)$; Ridge: ridge regression on the degree-pair counts; GM,
+LO: medians over seeds $0$--$49$ in the non-truncating boxes;
+$\Delta Q^2$: median of LO minus GM; last column: seeds (of $50$) in
+which LO beats GM.}
+\label{tab:bp}
+\scriptsize
+\setlength{\tabcolsep}{1.5pt}
+\begin{tabular}{lrrrrrrrrr}
+\toprule
+Test & Base & Class. & $IRLA$ & LO$_1$ & Ridge & GM & LO & $\Delta Q^2$ & $>$\\
+\midrule
+decanes ($n = 34$) & $-0.061$ & $0.176$ & $0.167$ & $0.149$ & $0.860$ & $0.514$ & $0.406$ & $-0.072$ & $15$\\
+C6--C10, with $n_C$ ($n = 101$) & $0.938$ & $0.967$ & $0.963$ & $0.963$ & $0.991$ & $0.977$ & $0.977$ & $-0.000$ & $23$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Both pre-registered verdicts are negative: freeing $\gamma$ does not
+improve the prediction of boiling points, either on the external
+decanes (median $\Delta Q^2 = -0.072$, LO ahead in $15$ of $50$ seeds,
+$95\%$ interval $[-0.156, +0.002]$) or in the pooled size-adjusted set
+($-0.000$, $23$ of $50$, $[-0.003, +0.002]$). The baselines show where
+the information is. Ridge regression on the ten degree-pair counts
+reaches $Q^2 = 0.860$ on the decanes, where every single index stays
+between $0.15$ and $0.51$, and $0.991$ on the pooled set; a permutation
+check ($200$ random permutations of the boiling points) gives it a
+median $Q^2$ of $-0.09$, so the gap is not leakage. Branching effects on the
+boiling point are thus spread over several degree-pair counts in a way
+that no one-dimensional summary of the family, with or without
+$\gamma$, recovers. Data, rule, exclusions and scripts are in the
+repository.
+
 % =====================================================================
 \section{Conclusion}\label{sec:conclusion}
 % =====================================================================
@@ -1645,29 +1739,38 @@ Chemometrically, the evidence is diagnostic: every vertex-degree-based
 index on the octanes operates above an irreducible floor set by two
 degree-pair collision pairs, and the apparent vaporization-enthalpy
 gain from freeing $\gamma$ --- seen in every seed of the octane sweep
-and meeting the pre-registered criterion on the $35$ nonanes (mostly
-compilation values) --- disappears once the parent family is searched
+and meeting the pre-registered criterion on the $34$ nonanes with values
+(mostly compilation values) --- disappears once the parent family is searched
 over a box that does not truncate it (Table~\ref{tab:box}). Tuning
 $\gamma$ thus yields no consistent predictive advantage; the untuned point $LO(0,0,1)$, essentially $IRLA$, matches the
 tuned models, and ridge regression on all degree-pair counts predicts
-the nonanes better than every index model. What the third coordinate
-offers is parsimony (an exponent near $1$ approaches what the parent
-reaches only at large exponents, as does $IRLA$) and an exact account of
-what the imbalance direction can and cannot resolve; open problems are
-listed in Supplementary Section~S7.
+the nonanes better than every index model. Pre-registered tests on
+measured boiling points confirm this on larger data: no benefit from
+$\gamma$ on the $34$ external decanes or the $101$ pooled C6--C10 alkanes
+adjusted for size, with ridge on the degree-pair counts far ahead of
+every single index (Table~\ref{tab:bp}). The compactness of
+$LO(0,0,1)$ belongs to linear imbalance weighting and is shared by the
+parameter-free $IRLA$; what the third coordinate itself offers is an
+interpretable, analytically tractable direction and an exact account
+of what the imbalance direction can and cannot resolve; open problems are
+listed in Supplementary Section~S8.
 
-\paragraph{Reproducibility.} Data, scripts and a unified verifier that
-recomputes every tabulated value are at
-\url{https://github.com/Singati2/LOYOLA-PAPER}, where the nonane protocol
-was pre-registered before data collection. The inequalities of
+\paragraph{Reproducibility.} Data, scripts and verifiers that recompute
+every tabulated value are at
+\url{https://github.com/Singati2/LOYOLA-PAPER}; the nonane and
+boiling-point protocols were committed there before the corresponding
+models were fitted, and a separate script reproduces the structural
+counts (tree orders up to $17$, the crossing and $GA$ witnesses, the
+identifiability check) and the auxiliary values quoted in the text. The inequalities of
 Propositions~\ref{thm:upper_Delta} and~\ref{thm:lower_delta}, of
 Corollary~\ref{thm:cs} and Proposition~\ref{thm:ratio_bound}, the
 convexity part of Theorem~\ref{thm:logconvex}, the rank-$4$ statement
-of Proposition~\ref{prop:indep} for $\Delta \ge 3$, and the order-$13$
+of Lemma~\ref{prop:indep} for $\Delta \ge 3$, and the order-$13$
 profile collision of Section~\ref{sec:degeneracy} have additionally been
 machine-checked in Lean~4 with Mathlib (graphs modelled by their
 multisets of edge degree pairs; equality characterizations not
-formalized); the formalization is in the repository.
+formalized); its scope and encoding are described in Supplementary
+Section~S7, and the formalization is in the repository.
 
 \acknowledgment{The authors thank colleagues for helpful discussions.}
 

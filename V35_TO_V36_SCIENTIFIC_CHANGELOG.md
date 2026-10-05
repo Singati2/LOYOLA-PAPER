@@ -206,3 +206,26 @@ adversarial theorem verifiers; Feynman review; synthesis.
 - No number lost: every decimal and every integer >= 10 in the previous
   main.tex appears in main.tex or supplement.tex (scripted check).
 - Verifiers read tables from main.tex + supplement.tex; selftest 113/113.
+
+## v40 (pre-registered boiling-point tests, reframing, final review)
+- PREREG_v40 (a5cf378) committed before any model was fitted; data
+  (154 archived NIST pages, build script, 101 molecules, provenance)
+  committed before results (d3d832e).
+- Test A (34 decanes) and Test B (101 alkanes C6-C10, size-adjusted):
+  both 'no evidence that gamma adds value' (median dQ2 -0.072, 15/50;
+  -0.000, 23/50); ridge on degree-pair counts Q2 0.860 / 0.991 (not
+  leakage: permutation median -0.09). New Section 6.4 and Table tab:bp.
+- Reframed as structural + negative-result paper: new title 'What a
+  Degree-Imbalance Coordinate Can and Cannot Resolve'; abstract and
+  contributions lead with the ratio-plane theorem and ceiling;
+  independence demoted to a lemma; ratio plane labelled a limitation result.
+- Final referee review (verdict: minor revision) fixes: supplement theorem
+  numbers and title; crossing witness corrected (max degree 6, eight
+  imbalances); entropy provenance (six unverifiable, four differ from a
+  compilation); 'parsimony' attributed to linear imbalance weighting, not
+  gamma; dataset-size sentence; prereg timing wording; 14 single-
+  determination decanes disclosed; Table 2 R footnote (floor attained for
+  Delta<=4 up to order 16).
+- structural/structural_checks.py (+ output) scripts every structural and
+  auxiliary claim previously unscripted. Supplement section S7 describes
+  the Lean formalization scope and encoding.

@@ -145,7 +145,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{Supplementary Material for: The Loyola Index Family: Bounds, Parameter Geometry and Sensitivity Analysis}
+\title{Supplementary Material for: The Loyola Index Family: What a Degree-Imbalance Coordinate Can and Cannot Resolve}
 
 \author{Advik Natarajan$^{a}$, Ganesh Shiwakoti$^{b}$, Michael Arockiaraj$^{a}$\footnote{Corresponding author.}}
 
@@ -170,7 +170,7 @@
 \onehalfspacing
 
 \noindent This supplement accompanies the paper ``The Loyola Index
-Family: Bounds, Parameter Geometry and Sensitivity Analysis''. Section,
+Family: What a Degree-Imbalance Coordinate Can and Cannot Resolve''. Section,
 table, figure, equation and proposition numbers without the prefix S
 refer to the main paper. Data, scripts and the verifier are available at
 \url{https://github.com/Singati2/LOYOLA-PAPER}.
@@ -234,10 +234,10 @@ we use values consistent with NIST (Appendix~A of the main paper): two exact
 conversions of NIST determinations ($8.97$, $9.08$) and two values that
 lie within the span or stated uncertainty of the NIST determinations
 and equal the API Project~44 compilation at the displayed precision
-($8.83$, $8.90$). Four entropies
+($8.83$, $8.90$). Six gas-phase entropies could not be verified
+against a primary source (see above); four entropies
 ($n$-octane, 2,2-dimethylhexane, 2,2,4- and 2,3,3-trimethylpentane)
-could not be matched to a primary source and differ from those of a
-widely used octane QSPR compilation by $0.15$--$2.29$ units
+differ from those of a widely used octane QSPR compilation by $0.15$--$2.29$ units
 (the $2,3,3$-trimethylpentane value coincides with that of
 2,2,3-trimethylpentane); substituting the compilation values changes
 all twelve $S$ correlations in Table~4 of the main paper (by up to
@@ -616,7 +616,7 @@ degree-pair count vector predicts the nonanes better than every index
 model, for both properties ($Q^2 = 0.927$ for
 $\Delta H_{\mathrm{vap}}$, $0.682$ for $T_B$); on the octanes it matches
 the Loyola model on $\Delta H_{\mathrm{vap}}$ and is weaker elsewhere.
-This is consistent with Proposition~15 of the main paper and the remark
+This is consistent with Proposition~14 of the main paper and the remark
 following it: the imbalance coordinate re-weights degree-pair
 information rather than adding to it, and its value is that one
 interpretable descriptor recovers most of what a model on all ten
@@ -681,7 +681,7 @@ and $AG$; indeed the $106$ trees realise only $79$ distinct
 edge-degree-pair count vectors, so $25.5\%$ is the minimum degeneracy
 attainable by \emph{any} degree-pair-based index on this set, and the
 pure-$\gamma$ points attain this floor; the reason, and the order at
-which this stops, are given by Theorem~4 of the main paper; the first Zagreb index $LO(0, 1, 0)$ ($83.0\%$) and the
+which this stops, are given by Theorem~3 of the main paper; the first Zagreb index $LO(0, 1, 0)$ ($83.0\%$) and the
 second Zagreb index $LO(1, 0, 0)$ ($67.0\%$) are the most degenerate
 (Figure~\ref{fig:degeneracy}).
 
@@ -703,7 +703,7 @@ floor from order $10$), so floor attainment distinguishes the
 pure-$\gamma$ points from the most degenerate classical indices
 ($M_1$, $M_2$) but not from $R$; the observation is that the
 imbalance weights lose nothing, not that they are unique in this
-respect. Theorem~4 of the main paper turns this into an exact
+respect. Theorem~3 of the main paper turns this into an exact
 statement: the pure-$\gamma$ points separate precisely the
 $q$-histograms, which coincide with the degree-pair profiles up to
 order $12$ (order $15$ for $\Delta \le 4$) and not beyond. Among the
@@ -747,6 +747,29 @@ $12$ & mol. & $355$ & $137$ & $10$ & $28$ & $137$ & $137$ & $137$\\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\paragraph{Fixed fractional exponents (exploratory).} A script in the
+repository (directory \texttt{structural}) evaluates the nine fixed
+points
+\begin{multline*}
+(\alpha,\beta) \in \bigl\{(0,\tfrac12), (\tfrac12,0), (0,-\tfrac12),
+(-\tfrac12,0), (\tfrac12,-1),\\
+(-\tfrac12,1), (\tfrac13,0), (0,\tfrac13), (\tfrac16,0)\bigr\}
+\end{multline*}
+with $\gamma = 0$ and $\gamma = 1$. For discrimination on
+all trees of orders $12$--$16$, every point off the ratio plane with
+$\gamma = 1$ reaches or nearly reaches the profile floor (e.g.\ order
+$16$: $4069$, $4067$, $4069$, $4068$, $4069$ and $4069$ of $4069$ for
+$(0,\tfrac12)$, $(\tfrac12,0)$, $(0,-\tfrac12)$, $(-\tfrac12,0)$,
+$(\tfrac13,0)$, $(0,\tfrac13)$), whereas with $\gamma = 0$ the same points
+give $3475$, $3940$, $3476$, $4007$, $4009$ and $3476$; the two points on
+the ratio plane give $3996$ for both values of $\gamma$. For prediction
+(fixed points, leave-one-out $Q^2$, no tuning) $\gamma = 1$ beats
+$\gamma = 0$ in $52$ of $81$ point--dataset combinations: it helps on the
+vaporization enthalpy and on decane boiling points, where the base
+point ignores imbalance, and hurts on the octane entropy and acentric
+factor; every single-index $Q^2$ on the decanes stays at most
+$0.21$. The full output is committed with the script.
 
 \section{Structure sensitivity: protocol and published control}\label{sec:s-ss}
 
@@ -796,6 +819,41 @@ points approximate to first order in $\gamma$, has a higher ratio
 a property of linear imbalance weighting rather than of the tuned
 exponential, and the $SS$ margin over hyper-Zagreb is a tie, not a
 ranking.
+
+\section{Lean 4 formalization: scope and encoding}\label{sec:s-lean}
+
+The directory \texttt{formal/} of the repository contains a Lean~4
+formalization (Lean v4.34.1, Mathlib v4.34.1) of the following
+statements of the main paper; \texttt{formal/verify.sh} builds it and
+checks that no \texttt{sorry}, \texttt{axiom} or \texttt{native\_decide}
+occurs and that every theorem depends only on the standard axioms
+(\texttt{propext}, \texttt{Classical.choice}, \texttt{Quot.sound}).
+
+\emph{Encoding.} Graphs are not formalized as Mathlib graphs; an edge
+set is a finite family of edges with a map to (positive real) degree
+pairs, or a multiset of degree pairs. Hypotheses such as ``maximum degree
+$\Delta$'' are stated as bounds on these pairs, so the link ``these are
+the vertex degrees of a graph'' is not formalized, except for the two
+order-$13$ trees below, which are realised by explicit parent arrays.
+
+\emph{Formalized} (inequalities and identities, with their hypotheses):
+the upper and lower $(\Delta,\delta)$ bounds; the Cauchy--Schwarz
+interpolation bound; the ratio bound (and the bracket form);
+the convexity of $\theta \mapsto \log LO(G;\theta)$ for any nonempty
+edge set (via H\"older); the spanning statement of the independence
+lemma for every $\Delta \ge 3$ (via $\det W = \tfrac16\ln 2\,(8\ln 3 - 13\ln 2)
+\neq 0$, using $3^8 \neq 2^{13}$); the identity
+$1 - q^2 = 4xy/(x+y)^2$; and the order-$13$ profile pair with equal
+$q$-histograms and hence equal pure-$\gamma$ values for every real
+$\gamma$, together with explicit $13$-vertex trees realising both
+profiles.
+
+\emph{Not formalized}: the equality characterizations; the gradient and
+Hessian formulas and strict convexity; the ratio-plane theorem, the
+$\gamma$-crossing bound and the identifiability proposition (which rely
+on the Lindemann--Weierstrass theorem, Laguerre's rule and the theory of
+exponential families, not available in Mathlib); and all statistical and chemometric results. A theorem-by-theorem
+map is in \texttt{formal/README.md}.
 
 \section{Further directions}\label{sec:s-further}
 
