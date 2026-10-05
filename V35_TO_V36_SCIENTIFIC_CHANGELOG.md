@@ -229,3 +229,24 @@ adversarial theorem verifiers; Feynman review; synthesis.
 - structural/structural_checks.py (+ output) scripts every structural and
   auxiliary claim previously unscripted. Supplement section S7 describes
   the Lean formalization scope and encoding.
+
+## v40.2 (final Feynman review; pooled-regression solver fix)
+- Test B solver (external/bp/bp_tests.py): the normal-equation inner-LOO
+  for T_B = a + b n_C + c x rejected 75% of wide-box candidates as singular
+  because descriptor values span 1e-14..1e+24; the descriptor is now
+  standardized with training-fold statistics (model-invariant). Validated
+  against a stable lstsq reference (0 rejections of 3000, max rel. error
+  3.6e-14, identical selections). Rerun: Test B median dQ2 -0.0004 -> -0.0001,
+  LO ahead 23 -> 24 of 50, CI [-0.0027,+0.0021]; verdict unchanged. Test A
+  (one-descriptor path) unaffected: at every selected candidate the raw
+  closed form agrees with the stable reference to 1e-12 (1158 checks).
+- Third Feynman review applied: abstract scoped (ridge 'on these boiling-point
+  sets', box analysis 'post hoc', bounds 'routine termwise, gamma >= 0');
+  'complemented by' not 'confirmed by'; nonane section renamed
+  'Replication'; ceiling/floor reconciled; Remark 1 restated via Prop. 5;
+  crossing search sentence removed (no script); LO(1/11,1/11,0) example
+  dropped (numerically fragile); tolerance (11 significant digits) stated;
+  chi floor scripted (structural/chi_floor.py); pooled-set octane T_B
+  differences disclosed; narrow-box q^2/linear-q split caveat added (S4).
+- Coverage-bias check for the decane cohort (external/bp/coverage_bias.py).
+- Lean build re-confirmed independently (36 theorems, standard axioms only).

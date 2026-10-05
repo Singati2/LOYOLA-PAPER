@@ -40,8 +40,10 @@ networkx, matplotlib, sympy, mpmath). Lean: `formal/verify.sh` (elan/lake).
 | molecule bootstrap intervals | external/uncertainty_exploratory.py | verify_external.py |
 | pre-registered nonane test | external/nonane_validation.py (PREREG_v37.md) | verify_external.py |
 | pre-registered boiling-point tests | external/bp/bp_tests.py (PREREG_v40.md) | verify_external.py |
+| decane coverage-bias check (included vs excluded) | external/bp/coverage_bias.py | verify_external.py |
 | structural counts and witnesses | structural/structural_checks.py | itself (output committed) |
 | fixed fractional exponents, gamma=0 vs 1 (exploratory) | structural/fractional_points.py | output committed (fractional_points_out.txt) |
+| chi floor (orders 7-12) | structural/chi_floor.py | output committed (chi_floor_out.txt) |
 
 ## Datasets
 | Dataset | Source | Rebuilt / checked by |

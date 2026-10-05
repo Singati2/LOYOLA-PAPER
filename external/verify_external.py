@@ -49,9 +49,9 @@ with tempfile.TemporaryDirectory() as td2:
     shutil.copy(os.path.join(HERE, "baselines.py"), os.path.join(td2, "external"))
     for f in os.listdir(ROOT):
         if f.endswith(".py"): shutil.copy(os.path.join(ROOT, f), td2)
-    BPO = ["bp_data.csv", "bp_provenance.csv", "bp_results_seeds.csv", "bp_results_summary.csv", "bp_baselines.csv", "bp_table_rows.tex"]
+    BPO = ["bp_data.csv", "bp_provenance.csv", "bp_results_seeds.csv", "bp_results_summary.csv", "bp_baselines.csv", "bp_table_rows.tex", "coverage_bias.csv"]
     for f in BPO: os.remove(os.path.join(bp, f))
-    for sc in ("build_bp_data.py", "bp_tests.py", "make_bp_table.py"): run([sc], bp)
+    for sc in ("build_bp_data.py", "bp_tests.py", "make_bp_table.py", "coverage_bias.py"): run([sc], bp)
     for f in BPO:
         a_, b_ = os.path.join(bp, f), os.path.join(HERE, "bp", f)
         if not os.path.exists(a_): fails.append(f"bp/{f}: not regenerated")

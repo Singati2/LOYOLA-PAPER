@@ -585,7 +585,7 @@ edge-degree-pair count vector, with its penalty chosen by inner
 leave-one-out. The resulting $Q^2$ values are in Table~6
 of the main paper.
 
-On the external set the pre-registered verdicts are: for
+On the nonane replication set the pre-registered verdicts are: for
 $\Delta H_{\mathrm{vap}}$ (compilation values) the $\gamma$ effect met
 the pre-registered optimizer-stability criterion (\emph{replicates}:
 LO better than GM in $95/100$ and $98/100$ seeds, median
@@ -603,7 +603,9 @@ $q^2$ inside the box of half-width $2$ (the classical indices,
 including $GA = \sum_{uv}\sqrt{1-q_{uv}^2}$, and GM) reach
 $Q^2 = 0.853$--$0.888$, while models with a term linear in $q$ or with
 unrestricted counts ($IRLA$, ridge, $LO(0,0,1)$, LO) reach
-$Q^2 = 0.897$--$0.957$. The fixed point $LO(0,0,1)$, which involves no
+$Q^2 = 0.897$--$0.957$. This split holds only inside the narrow box: in
+the box of half-width $12$ the parent alone reaches $0.942$ and $0.892$
+(main paper, Table~5). The fixed point $LO(0,0,1)$, which involves no
 tuning at all, matches or beats the tuned Loyola model on both sets
 ($0.957$ and $0.903$ against medians $0.953$ and $0.900$), and it is
 the index selected in every fold for $\Delta H_{\mathrm{vap}}$ when
@@ -616,8 +618,8 @@ degree-pair count vector predicts the nonanes better than every index
 model, for both properties ($Q^2 = 0.927$ for
 $\Delta H_{\mathrm{vap}}$, $0.682$ for $T_B$); on the octanes it matches
 the Loyola model on $\Delta H_{\mathrm{vap}}$ and is weaker elsewhere.
-This is consistent with Proposition~14 of the main paper and the remark
-following it: the imbalance coordinate re-weights degree-pair
+This is consistent with Proposition~13 of the main paper and the remark
+after Proposition~14: the imbalance coordinate re-weights degree-pair
 information rather than adding to it, and its value is that one
 interpretable descriptor recovers most of what a model on all ten
 degree-pair counts achieves for the vaporization enthalpy, not that it
@@ -765,11 +767,10 @@ $(\tfrac13,0)$, $(0,\tfrac13)$), whereas with $\gamma = 0$ the same points
 give $3475$, $3940$, $3476$, $4007$, $4009$ and $3476$; the two points on
 the ratio plane give $3996$ for both values of $\gamma$. For prediction
 (fixed points, leave-one-out $Q^2$, no tuning) $\gamma = 1$ beats
-$\gamma = 0$ in $52$ of $81$ point--dataset combinations: it helps on the
-vaporization enthalpy and on decane boiling points, where the base
-point ignores imbalance, and hurts on the octane entropy and acentric
-factor; every single-index $Q^2$ on the decanes stays at most
-$0.21$. The full output is committed with the script.
+$\gamma = 0$ in $52$ of $81$ point--dataset combinations, mostly for the
+vaporization enthalpy and decane boiling points, and loses mostly on the
+octane entropy and acentric factor; every fixed fractional point stays at $Q^2 \le 0.21$ on the
+decanes. The full output is committed with the script.
 
 \section{Structure sensitivity: protocol and published control}\label{sec:s-ss}
 
@@ -816,8 +817,8 @@ peaks near $\gamma = 2$ and then falls ($0.427$ at $\gamma = 5$).
 Second, the parameter-free aggregate $IRLA$, which the pure-$\gamma$
 points approximate to first order in $\gamma$, has a higher ratio
 ($SS = 0.2343$, $Abr = 0.5066$, ratio $0.4625$). The favourable sensitivity--abruptness balance is therefore
-a property of linear imbalance weighting rather than of the tuned
-exponential, and the $SS$ margin over hyper-Zagreb is a tie, not a
+a property of linear imbalance weighting rather than of the
+exponential form, and the $SS$ margin over hyper-Zagreb is a tie, not a
 ranking.
 
 \section{Lean 4 formalization: scope and encoding}\label{sec:s-lean}

@@ -1,6 +1,6 @@
 # LOYOLA v36 — data correction, full-precision rounding, verifier hardening
 
-Authoritative manuscript: `main.tex`. Compiled copy: `LOYOLA_v36_compiled.pdf`.
+Authoritative manuscript: `main.tex`. Compiled copy: `LOYOLA_paper.pdf`.
 v36 repairs the defects listed below; each was reproduced before repair and
 every regenerated table cell was cross-checked with an independent
 re-implementation (no package code imported). Script filenames keep their

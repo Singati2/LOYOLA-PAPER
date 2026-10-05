@@ -3,7 +3,9 @@
 
 Test A (external decane T_B): one-descriptor models, fully nested LOO.
 Test B (pooled C6-C10 T_B, size-adjusted): T_B = a + b n_C + c x, fully nested
-LOO; for GM/LO the candidate is chosen by inner-LOO RMSE of this model.
+LOO; for GM/LO the candidate is chosen by inner-LOO RMSE of this model. The
+descriptor is standardized with training-fold statistics before solving
+(model-invariant; needed for conditioning in the wide search boxes).
 Candidate streams per seed s (rng = default_rng(s)), 2000 per model, in order:
   LO2  ~ U(-2,2)^3;  GM2 ~ U(-2,2)^2 (gamma=0);
   GM12 ~ U(-12,12)^2 (gamma=0);  LOh ~ (U(-12,12)^2, U(-2,2)).
@@ -43,9 +45,21 @@ def q2(p, y):
 
 
 # ---------- two-predictor (size + descriptor) machinery ----------
+def _standardize(Xt):
+    """Affine rescaling of each candidate descriptor by its training-fold mean
+    and SD. OLS with an intercept is invariant to this, so the fitted model and
+    its leave-one-out residuals are unchanged, but the normal equations stay
+    well conditioned for descriptors spanning many orders of magnitude (wide
+    search boxes give values from 1e-14 to 1e+24)."""
+    mu = Xt.mean(axis=1, keepdims=True); sd = Xt.std(axis=1, keepdims=True)
+    sd = np.where(sd > 0, sd, 1.0)
+    return (Xt - mu) / sd
+
+
 def press_size(Xt, zt, yt):
     """Inner-LOO RMSE of y ~ 1 + z + x for every candidate row of Xt (C x n)."""
     C, n = Xt.shape
+    Xt = _standardize(Xt)
     A = np.stack([np.ones((C, n)), np.broadcast_to(zt, (C, n)), Xt], axis=2)      # C x n x 3
     S = np.einsum("cni,cnj->cij", A, A)
     ok = np.abs(np.linalg.det(S)) > 1e-9 * np.abs(S).max(axis=(1, 2)) ** 3
@@ -60,9 +74,11 @@ def press_size(Xt, zt, yt):
 
 
 def fit_pred_size(xt, zt, yt, xn, zn):
-    A = np.column_stack([np.ones_like(zt), zt, xt])
+    mu, sd = xt.mean(), xt.std()
+    sd = sd if sd > 0 else 1.0
+    A = np.column_stack([np.ones_like(zt), zt, (xt - mu) / sd])
     coef, *_ = np.linalg.lstsq(A, yt, rcond=None)
-    return coef[0] + coef[1] * zn + coef[2] * xn
+    return coef[0] + coef[1] * zn + coef[2] * (xn - mu) / sd
 
 
 def nested_size(X, z, y):

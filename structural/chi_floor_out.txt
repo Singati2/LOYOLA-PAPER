@@ -1,0 +1,6 @@
+n=7 profiles=11 chi_distinct=11
+n=8 profiles=21 chi_distinct=21
+n=9 profiles=40 chi_distinct=40
+n=10 profiles=79 chi_distinct=77
+n=11 profiles=152 chi_distinct=147
+n=12 profiles=294 chi_distinct=281
