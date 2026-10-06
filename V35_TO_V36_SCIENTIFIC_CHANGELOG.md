@@ -523,3 +523,11 @@ documents recompiled; logs in verification_logs/v40.8/.
   workflow and the v40.9 logs) because manifest.py hashes tracked files only
   and they were staged after the manifest was written; regenerated (436
   files).  REPRODUCE.md now says to stage new files before writing it.
+
+## v40.10 (no citation of unpublished work)
+- The reference to the authors' in-preparation companion manuscript is
+  removed from Section 6.1 and from the bibliography; the span-certificate
+  corollary is stated on its own (it follows from Lemma 1 and the degree-pair
+  counts) and the paragraph now reads "The present paper is a case study of
+  this statement".  No number changes; prose check 723/0; the paper is 42
+  pages.
