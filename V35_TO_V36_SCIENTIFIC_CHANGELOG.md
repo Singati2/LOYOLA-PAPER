@@ -518,3 +518,8 @@ documents recompiled; logs in verification_logs/v40.8/.
   that the paper quotes sublimation enthalpies it does not have was
   checked and rejected: the provenance row lists NIST sublimation values
   42.9-43.4 kJ/mol (about 10.3 kcal/mol).
+- v40.9.1: the CI workflow file was invalid YAML (a colon inside an unquoted
+  step name); fixed.  The v40.9 manifest omitted eight files (verify.py, the
+  workflow and the v40.9 logs) because manifest.py hashes tracked files only
+  and they were staged after the manifest was written; regenerated (436
+  files).  REPRODUCE.md now says to stage new files before writing it.
