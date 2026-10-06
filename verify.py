@@ -7,6 +7,7 @@
                                external/test_regressions.py
                                external/test_baselines.py
                                constancy_test_check.py
+                               audit/check_exploratory_outputs.py, check_source_identities.py, check_mathematics.py
                                manifest.py               SHA-256 of every tracked file
   python3 verify.py --full   also (about one hour):
                                external/verify_external.py
@@ -27,6 +28,9 @@ FAST = [
     ("external regression tests", [PY, "test_regressions.py"], os.path.join(HERE, "external")),
     ("baseline tests", [PY, "test_baselines.py"], os.path.join(HERE, "external")),
     ("constancy test check", [PY, "constancy_test_check.py"], HERE),
+    ("auxiliary outputs", [PY, os.path.join("audit", "check_exploratory_outputs.py")], HERE),
+    ("archived-source identities", [PY, os.path.join("audit", "check_source_identities.py")], HERE),
+    ("interval certificates", [PY, os.path.join("audit", "check_mathematics.py")], HERE),
     ("manifest", [PY, "manifest.py"], HERE),
 ]
 

@@ -93,10 +93,11 @@ def main():
         tb, cids = [], []
         for cid in a["ids"].split():
             p = os.path.join(HERE, "nist_raw", cid + ".html")
-            if os.path.exists(p):
-                rows_ = tboil(p)
-                if rows_:
-                    tb += [r + [cid] for r in rows_]; cids.append(cid)
+            if not os.path.isfile(p):   # v40.11: a missing archived page must stop the build (silently skipping it changed the cohort from 100 to 101)
+                raise FileNotFoundError(f"missing required archived NIST page: {p}")
+            rows_ = tboil(p)
+            if rows_:
+                tb += [r + [cid] for r in rows_]; cids.append(cid)
         name = a["names"].split(";")[0].strip()
         pairs = sorted(tuple(sorted((G.degree(u), G.degree(v)))) for u, v in G.edges())
         pairs_s = " ".join(f"{i}-{j}" for i, j in pairs)

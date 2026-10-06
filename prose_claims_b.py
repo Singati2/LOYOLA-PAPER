@@ -739,7 +739,7 @@ _add(E("id_dps60", "main", r"pairs\s+in \$(?P<v>\d+)\$-digit arithmetic", "sc_s4
 _add(E("id_delta7", "main", r"It fails from \$\\Delta = (?P<v>\d+)\$: the single violating set", "s4_first_fail()", 0, "S4 Delta=7: 1 violation"))  # 1
 _add(E("id_fail_set", "main", r"of at most four pairs there is \$\\\{(?P<v>[0-9(),]+)\\\}\$, whose", "s4_fail_set_str()", 0, "S4 Delta=7 violating set"))  # 1
 _add(E("id_degree_sum8", "main", r"whose\s+degree sums all equal \$(?P<v>\d+)\$", "(lambda s: s.pop() if len(s) == 1 else None)({i + j for i, j in s4_fail_set()})", 0, "sum of each pair in the S4 set"))  # 1
-_add(E("id_nine_pairs", "main", r"this union contains (?P<v>[a-z]+) of the ten admissible pairs", "word(len(oct_union_pairs()))", 0, "octane_data: union of realised degree pairs"))  # 1
+_add(E("id_nine_pairs", "main", r"on the octanes this union contains (?P<v>nine) of the ten\s+admissible pairs", "word(len(oct_union_pairs()))", 0, "octane_data: union of realised degree pairs"))  # 1
 _add(E("id_affdim3", "main", r"admissible pairs and its\s+affine dimension is \$(?P<v>\d+)\$, so", "oct_affine_dim()", 0, "rank of z_ij differences over the octane pair union"))  # 1
 
 # ----- Section 5 Discrimination (main) -----

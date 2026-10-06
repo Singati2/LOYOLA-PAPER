@@ -37,9 +37,10 @@ AX=$(mktemp); lake env lean AxiomCheck.lean > "$AX" 2>&1 || { echo "FAIL: AxiomC
 expected=$EXPECTED_COUNT
 n=$(grep -c "depends on axioms" "$AX" || true)
 echo "theorems expected: $expected, reports: $n"
-reported=$(grep "depends on axioms" "$AX" | sed "s/^'\([^']*\)'.*/\1/" | sort)
+reported=$(grep "depends on axioms" "$AX" | sed "s/^'\([^']*\)'.*/\1/" | LC_ALL=C sort)
+expected_names=$(LC_ALL=C sort expected_axiom_theorems.txt)
 if [ "$n" -ne "$expected" ] || [ "$expected" -eq 0 ]; then echo "FAIL: report count mismatch"; status=1; fi
-if [ "$reported" != "$(cat expected_axiom_theorems.txt)" ]; then echo "FAIL: reported theorem names differ from expected list"; diff <(echo "$reported") expected_axiom_theorems.txt; status=1; fi
+if [ "$reported" != "$expected_names" ]; then echo "FAIL: reported theorem names differ from expected list"; diff <(echo "$reported") <(echo "$expected_names"); status=1; fi
 if [ "$(echo "$reported" | sort | uniq -d | wc -l | tr -d ' ')" != "0" ]; then echo "FAIL: duplicate reports"; status=1; fi
 bad=$(grep "depends on axioms" "$AX" | sed 's/.*depends on axioms: \[\(.*\)\]/\1/' \
       | tr ',' '\n' | sed 's/ //g' | grep -vE '^(propext|Classical.choice|Quot.sound)$' || true)

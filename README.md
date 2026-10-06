@@ -3,7 +3,7 @@
 Advik Natarajan, Ganesh Shiwakoti, Michael Arockiaraj — manuscript, supplement,
 data, code and machine-checked proofs.
 
-**v40.5 (2026-10-05):** 2,3,3-trimethylpentane entropy corrected from a duplicated entry (101.31→102.06); S-dependent tables regenerated; consolidated data-quality appendix; companion-paper citation; full verification suite re-run (`verification_logs/v40.5/`). See `V35_TO_V36_SCIENTIFIC_CHANGELOG.md`.
+**v40.11 (2026-10-06):** fail-closed data build and structural checks, scoped identifiability wording, single verification entry point with continuous integration; no citation of unpublished work. See `V35_TO_V36_SCIENTIFIC_CHANGELOG.md`.
 
 ## Current documents
 | File | Content |

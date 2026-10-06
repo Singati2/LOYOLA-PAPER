@@ -531,3 +531,59 @@ documents recompiled; logs in verification_logs/v40.8/.
   counts) and the paragraph now reads "The present paper is a case study of
   this statement".  No number changes; prose check 723/0; the paper is 42
   pages.
+
+## v40.11 (response to draft pull request #2, an audit of v40.8)
+Taken after verification (the request was based on v40.8 and would have
+reverted the v40.9 fixes, so hunks were applied by hand):
+- external/bp/build_bp_data.py: a listed archived NIST page that is missing
+  now stops the build.  Confirmed: deleting nist_raw/C500006531.html on the
+  old code silently returned to the 101-molecule cohort (3-ethyl-4-
+  methylhexane admitted); regression test added.  Committed data unchanged.
+- external/bp/build_calorimetric_set.py: input and output paths anchored to
+  the script directory (it only worked from external/bp); output unchanged.
+- structural/structural_checks.py now fails closed: the S2 exact GA
+  collision, a non-empty and certified S3 witness set, and the exact S4
+  exception set are asserted; a regression test covers the empty-witness
+  case.
+- structural/fractional_points_out.txt was stale: it predated the v40.5
+  entropy correction (octane S rows and two pooled-cohort cells differed at
+  the third decimal).  Regenerated; no manuscript number depends on the
+  changed cells (the paper quotes only the order-16 counts and the 52-of-81
+  summary, both unchanged).  audit/check_exploratory_outputs.py now
+  rebuilds the three auxiliary outputs in an isolated copy and compares
+  bytes, closing this gap in the verification map.
+- formal/verify.sh compares theorem names sorted under LC_ALL=C on both
+  sides (the committed list was in the local sort order, which made the
+  check fail under other locales although all 36 reports were present).
+- The self-test's provenance attacks split rows on whichever terminator
+  the file uses (the CRLF convention remains and is still checked).
+- audit/check_source_identities.py (archived boiling-point pages: formulas
+  and carbon skeletons match the 154 records) and audit/check_mathematics.py
+  (50-digit interval certificates of the finite-rank exceptions and the
+  five-crossing witness, independent of structural_checks.py) added.
+- external/bp/bp_tests.py: the size-adjusted inner-LOO scorer (press_size)
+  rejects a candidate whose deletion makes the design rank-deficient (its
+  leave-one-out prediction is undefined and the residual/(1-h) identity is
+  invalid there; the request's synthetic example gives 13.1 by the identity
+  against 2.05 by explicit refits), consistently with the singular-design
+  filter rather than by the request's explicit-refit fallback, which would
+  have turned such a candidate into a selectable score; extreme scales are
+  rescaled as in baselines.py.  Never triggered on the package data: seeds
+  0-1 of Test B bit-identical, full external replay on the final tree.
+  Two regression tests added (10 in total); the verify_external.py and
+  REPRODUCE.md wording now says "result floats within tolerance", which is
+  what the comparator does.
+- Manuscript: the identifiability paragraph after Proposition 4 no longer
+  claims that only a common rescaling leaves correlations unchanged
+  (translations do too); it now says that a common-rescaling direction is
+  invisible to any correlation or regression and that the statement
+  concerns identifiability of theta from the index values on the given
+  graphs, not of a fitted regression model.  Independent review confirmed
+  that every other use of "identifiability" in the paper is in that
+  parameter-map sense.
+- README version line updated (it still said v40.5).
+Two of the request's nine findings were already closed on main (the
+self-test's provenance attacks, fixed with the CRLF convention in v40.9;
+the manifest omission, fixed in v40.9.1); its bundles, manifest, logs,
+audit document and the hunks that would have reverted v40.9 were not
+taken.

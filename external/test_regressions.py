@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 """Fast regression checks: python3 external/test_regressions.py."""
+import contextlib
+import io
+import shutil
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -7,6 +11,11 @@ from pathlib import Path
 import numpy as np
 import baselines as B
 from verify_external import csv_equal
+sys.path.insert(0, str(Path(__file__).resolve().parent / "bp"))
+import build_bp_data as BD
+import bp_tests as BP
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "structural"))
+import structural_checks as SC
 
 
 class RegressionTests(unittest.TestCase):
@@ -26,6 +35,56 @@ class RegressionTests(unittest.TestCase):
         y = 2 * x + 3
         self.assertFalse(B.is_constant(x + 1e13))
         self.assertAlmostEqual(B.fit_predict(x + 1e13, y, 11 + 1e13), 25.)
+
+    def test_size_adjusted_press_rank_loss(self):
+        """A candidate whose deletion makes the design rank-deficient (leverage 1)
+        is rejected rather than scored by the residual/(1-h) identity, which is
+        invalid there; an ordinary candidate keeps its closed-form score."""
+        z = np.arange(6.) + 6
+        y = np.array([0., 1., 2., 4., 3., 9.])
+        x = np.array([0., 0., 0., 0., 0., 1.])
+        self.assertTrue(np.isinf(BP.press_size(x[None, :], z, y)[0]))
+        for x in (z.copy(), np.ones(6)):      # collinear with n_C or constant: rejected
+            self.assertTrue(np.isinf(BP.press_size(x[None, :], z, y)[0]))
+        x = np.array([0., 1., 4., 2., 8., 3.])
+        pred = []
+        for i in range(len(y)):
+            m = np.arange(len(y)) != i
+            pred.append(BP.fit_pred_size(x[m], z[m], y[m], x[i], z[i]))
+        self.assertAlmostEqual(BP.press_size(x[None, :], z, y)[0], np.sqrt(np.mean((y - pred) ** 2)))
+
+    def test_size_adjusted_extreme_scales(self):
+        x = np.array([0., 1., 4., 2., 8., 3.])
+        z = np.arange(6.) + 6
+        y = np.array([0., 1., 2., 4., 3., 9.])
+        score = BP.press_size(x[None, :], z, y)[0]
+        prediction = BP.fit_pred_size(x, z, y, 5., 12.)
+        for scale in (1e-200, 1e200):
+            self.assertAlmostEqual(BP.press_size((x * scale)[None, :], z, y)[0], score)
+            self.assertAlmostEqual(BP.fit_pred_size(x * scale, z, y, 5. * scale, 12.), prediction)
+
+    def test_missing_grouped_archive_fails(self):
+        """A missing archived NIST page must stop the boiling-point data build
+        (skipping it silently admitted 3-ethyl-4-methylhexane: 101 molecules)."""
+        original = BD.HERE
+        with tempfile.TemporaryDirectory() as td:
+            shutil.copytree(original, Path(td) / "bp")
+            BD.HERE = str(Path(td) / "bp")
+            (Path(BD.HERE) / "nist_raw" / "C500006531.html").unlink()
+            try:
+                with self.assertRaisesRegex(FileNotFoundError, "C500006531"), contextlib.redirect_stdout(io.StringIO()):
+                    BD.main()
+            finally:
+                BD.HERE = original
+
+    def test_empty_structural_certificate_fails(self):
+        original = SC.RES
+        SC.RES = {}
+        try:
+            with self.assertRaisesRegex(AssertionError, "at least one"):
+                SC.s3_certify()
+        finally:
+            SC.RES = original
 
     def equal(self, a, b):
         with tempfile.TemporaryDirectory() as td:

@@ -1446,11 +1446,12 @@ def run_selftest(A, here, HAVE_NX):
     extras_attack("fgd-control-class-corrupt",CSV_CTRL,lambda t:t.replace("within_1_unit_4th_dp","exact_at_4dp",1),"agreement")
     extras_attack("entropy-sensitivity-corrupt",CSV_SSEN,lambda t:t.replace("-0.9541284205","-0.9551284205",1),CSV_SSEN)
     def prov_line(t,mol,prop,f):
-        L=t.split("\r\n")
+        sep="\r\n" if "\r\n" in t else "\n"   # v40.11: rows are CRLF by convention; an LF file must not disable these attacks
+        L=t.split(sep)
         for k,l in enumerate(L):
             fl=next(csv.reader([l])) if l else []
             if len(fl)>1 and fl[0]==mol and fl[1]==prop:
-                L[k]=f(l);return "\r\n".join(L)
+                L[k]=f(l);return sep.join(L)
         raise KeyError((mol,prop))
     extras_attack("prov-dhvap-revert-to-v35-value",CSV_PROV,lambda t:prov_line(t,"3,3-dimethylhexane","dHvap",lambda l:l.replace(",8.97,",",9.04,",1)),"octane_data value")
     extras_attack("prov-dhvap-0.05-gap-as-tolerance",CSV_PROV,lambda t:prov_line(t,"3-ethyl-3-methylpentane","dHvap",
