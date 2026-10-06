@@ -12,6 +12,10 @@ networkx, matplotlib, sympy, mpmath). Lean: `formal/verify.sh` (elan/lake).
 | `python3 structural/structural_checks.py` | tree orders 7-17, GA and crossing witnesses, identifiability (Delta<=6), structure sensitivity of IRLA and the gamma sweep, auxiliary Q2 values, ridge permutation check; Table tab:firstfail entry by entry | ~20 min |
 | `formal/verify.sh` | Lean 4 proofs (36 theorems; no sorry/axioms) | ~1 min after first build |
 | `python3 manifest.py` | SHA-256 of every tracked file, one hash per path | seconds |
+| `python3 external/test_regressions.py` | unit checks of the shared regression core (extreme descriptor scales, large-offset constancy) and of the fail-closed CSV comparator, without running the external suite | seconds |
+| `python3 constancy_test_check.py` | shows that the constancy test is inert: no candidate descriptor of the octane analyses is flagged under the old or the new definition | ~1 min |
+
+`verify_loyola_v35.py` establishes agreement between the manuscript tables, the canonical CSVs and a fresh recomputation from `octane_data.py`; it does not re-derive the octane values from primary sources (those are checked against `octane_property_provenance_v35.csv` by class rules), and a few checks assert previously observed outcomes (sign patterns of dQ2, provenance agreement counts) as regression guards.
 
 ## Every table and figure
 | Item | Document | Produced by | Checked by |
@@ -44,6 +48,7 @@ networkx, matplotlib, sympy, mpmath). Lean: `formal/verify.sh` (elan/lake).
 | calorimetric dHvap availability (25 outside C8/C9; 1 decane) | external/bp/build_calorimetric_set.py | output committed (calorimetric_dHvap298_alkanes.csv) |
 | wide-box solver/selection/dense-grid diagnostics | external/wide_box_diagnostics.py | output committed (wide_box_diagnostics_out.txt) |
 | structural counts and witnesses | structural/structural_checks.py | itself (output committed) |
+| 32-digit recount of the distinct-value counts (orders 7-17); pure-gamma counts = q-histogram counts | structural/hp_counts.py | itself (hp_counts_out.txt committed) |
 | fixed fractional exponents, gamma=0 vs 1 (exploratory) | structural/fractional_points.py | output committed (fractional_points_out.txt) |
 | chi floor (orders 7-12) | structural/chi_floor.py | output committed (chi_floor_out.txt) |
 

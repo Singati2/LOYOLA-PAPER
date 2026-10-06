@@ -103,10 +103,49 @@ def s3():
                 maxz, best = zc, []
             if zc == maxz:
                 best.append((zc, V, trees[i][0], trees[j][0], len(set(trees[i][1]) | set(trees[j][1])), trees[i][2], trees[j][2]))
+    RES["s3_best"] = best
     log(f"S3 order-12 trees at (alpha,beta)=(-1,0): max crossings {maxz}, attained by {len(best)} pair(s)")
     for o in best:
         log("   crossings", o[0], "V", o[1], "maxdeg", o[2], o[3], "distinct imbalances", o[4])
         log("   G", Counter(o[5]), "| H", Counter(o[6]))
+
+
+def s3_certify():
+    """Exact certificate for the S3 witness pair(s): at (alpha,beta)=(-1,0) the
+    coefficients c_k of D(gamma) = sum_k c_k exp(gamma q_k) are rational, so the
+    Laguerre bound V is exact arithmetic; D is then evaluated in 50-digit
+    arithmetic on a 24001-point grid over [-60, 60] plus a log-spaced tail
+    and its sign changes counted.  Sign changes give at least that many
+    zeros, V gives at most V, so equality certifies the exact number of
+    crossings (the grid only has to bracket them); the certificate also
+    requires every bracket sign to be far above the working precision."""
+    import mpmath as mp
+    mp.mp.dps = 50
+    g = np.unique(np.concatenate([np.linspace(-60, 60, 24001), np.sign(np.linspace(-1, 1, 4001)) * np.logspace(-3, 3.5, 4001)]))
+    for o in RES.get("s3_best", []):
+        c = defaultdict(Fraction)
+        for P, sgn in ((o[5], 1), (o[6], -1)):
+            for i, j in P:
+                c[Fraction(j - i, i + j)] += sgn * Fraction(1, i * j)
+        c = {q: v for q, v in c.items() if v != 0}; qs = sorted(c); cf = [c[q] for q in qs]
+        V = sum(1 for x, y in zip(cf, cf[1:]) if (x > 0) != (y > 0))
+        D = lambda x: sum(mp.mpf(v.numerator) / v.denominator * mp.exp(mp.mpf(x) * q.numerator / q.denominator) for q, v in c.items())
+        sg = [mp.sign(D(x)) for x in g]
+        br = [(g[k], g[k + 1]) for k in range(len(g) - 1) if sg[k] * sg[k + 1] < 0]
+        roots = []
+        for a, b in br:
+            a, b = mp.mpf(a), mp.mpf(b)
+            for _ in range(120):
+                m = (a + b) / 2
+                if mp.sign(D(m)) == mp.sign(D(a)): a = m
+                else: b = m
+            roots.append(mp.nstr((a + b) / 2, 8))
+        rel = min(abs(D(x)) / sum(abs(mp.mpf(v.numerator) / v.denominator * mp.exp(mp.mpf(x) * q.numerator / q.denominator)) for q, v in c.items()) for a, b in br for x in (a, b))
+        log(f"S3 certificate: exponents {[str(q) for q in qs]} coefficients {[str(x) for x in cf]}")
+        log(f"   Laguerre V = {V}; sign changes of D in 50-digit arithmetic = {len(br)} at gamma = {roots}; "
+            f"min relative |D| at brackets {mp.nstr(rel, 3)}; zero grid signs {sum(1 for x in sg if x == 0)}")
+        ok = len(br) == V and all(x != 0 for x in sg) and rel > mp.mpf(10) ** (-40)
+        log(f"   => exactly {len(br)} crossings: {'CERTIFIED' if ok else 'NOT certified (lower bound only)'}")
 
 
 def s4():
@@ -204,6 +243,6 @@ def check_tab_firstfail():
 
 
 if __name__ == "__main__":
-    for f in (s2, s4, s6, s7, s5, s3, s1, check_tab_firstfail):
+    for f in (s2, s4, s6, s7, s5, s3, s3_certify, s1, check_tab_firstfail):
         f()
     open(os.path.join(HERE, "structural_checks_out.txt"), "w").write("\n".join(OUT) + "\n")

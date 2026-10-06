@@ -156,7 +156,7 @@ reproduced by an independent re-implementation.
   from refitting and model selection (previously: "understate total
   uncertainty").
 
-## v38 (multi-agent expert panel + Feynman review)
+## v38 (expert-panel review + Feynman review)
 Panel: graph theory, QSPR data, statistics, literature, MATCH referee; 3
 adversarial theorem verifiers; Feynman review; synthesis.
 - BLOCKING ERROR FOUND AND CORRECTED: the U(-2,2) search box binds the parent
@@ -347,3 +347,90 @@ All five testable audit claims reproduced; fixes:
   0.04-2.29 units).
 - Old version notes moved under history/; Overleaf bundles, PDFs and
   README page counts (40/21) refreshed.
+
+## v40.7 (response to an external weakness audit; multi-reviewer verification)
+Code:
+- ablation_gm_vs_lo.py: the summary column mean_abs_err duplicated MAE and
+  the per-fold column fold duplicated heldout_index; both removed, CSVs
+  regenerated (all remaining values identical).
+- The constancy test of ablation_gm_vs_lo.py, expanded_robustness_v35.py
+  and tmb_exclusion_sensitivity.py is now the resolution-based test of
+  external/baselines.py (16 ulp of the largest magnitude).  Checked before
+  the change: over all 140,262 distinct candidate triples used by these
+  scripts and every training fold, neither definition flags any descriptor,
+  so no number can change (constancy_test_check.py, output committed);
+  the four output CSVs of the latter two scripts regenerate byte-identically
+  and the ablation CSVs differ only by the removed columns.
+- external/nonane_validation.py d4_median reads the archived NIST points
+  page (nonane_raw_nist/pts_C16747389_TBOIL.html) with the data-table
+  parser instead of a regex over free text, and stops on any mismatch with
+  nonane_provenance.csv; same 8 points, same median 414.62 K, outputs
+  byte-identical.
+Structural claims:
+- structural/structural_checks.py s3_certify(): the order-12 crossing
+  witness is certified exactly.  At (alpha,beta)=(-1,0) the coefficients of
+  D(gamma) are rational with V=5 sign changes (Laguerre upper bound), and D
+  changes sign five times in 50-digit arithmetic (near gamma = -17.17,
+  -11.96, -2.03, 2.73, 31.13), hence exactly five crossings.  The paper's
+  sentence no longer rests on a grid count.
+- structural/hp_counts.py: every distinct-value count of Table 2 and
+  Section 5 (orders 7-17, all trees and molecular trees) is unchanged when
+  recomputed in 40-digit arithmetic and counted at 32 significant digits;
+  the pure-gamma counts equal the numbers of distinct q-histograms exactly
+  at every order, as the ratio-plane theorem requires.  Stated in the
+  Table 2 caption.
+Manuscript:
+- Identifiability paragraph: the assertion that no connected graph realises
+  a constant degree sum with several pairs is now proved in one line
+  (neighbours of a degree-d vertex have degree s-d; connectivity).
+- Section 6: the bolded Table 4 maxima are stated to be selected from
+  twelve correlated candidates and hence biased upward (selection effect);
+  descriptive rankings, not tests.
+Notes: provenance-search wording in the changelog and the v35 provenance
+audit and the provenance CSV notes made neutral (search campaigns,
+  sources consulted); the same wording change in PREREG_v37.md line 58 (wording
+  only; no rule changed).
+Verification by independent reviewers (seven parallel reviews: code, statistics,
+data, mathematics, the draft pull request, this round's fixes, Feynman) led to
+the following further changes:
+- Manuscript: the Conclusion's "every seed of the octane sweep" now carries the
+  tetramethylbutane qualifier (93-96 of 100 without it) and the "post hoc" label
+  of the box analysis; the Section 6.2 truncation explanation is hedged and
+  quantified (parent 0.887 -> 0.942; hybrid control 0.957 -> 0.946); the
+  pre-registered secondary report of the (-2,2) box for Tests A and B is added
+  to Section 6.4 (decanes 0.469/0.465; pooled 0.976/0.980) with a dated note in
+  PREREG_v40.md; the molecule bootstrap is described as conditional on the
+  fitted predictions; fold-to-fold selection variability is stated (dHf: three
+  triples over 18 folds; dHvap: one); the three seed-count table captions say
+  the counts are not replications; winner identity is no longer used as a
+  robustness criterion where the margin is 0.001 (S: HM vs M1); Table 4's
+  caption gives the runner-up margins (0.001-0.032); the abstract notes that
+  the octane gain met the pre-registered nonane criterion before vanishing;
+  Appendix A.1 names the Ediz compilation, states that the TMB exclusion
+  leaves every conclusion intact, corrects "Sections~\ref" and no longer calls
+  the authors' own transcription error a benchmark limitation; the Conclusion's
+  "matches the tuned models" is scoped to vaporization enthalpy with numbers;
+  Lemma 1 defines W; the identifiability check states the subset-size
+  reduction and the constant-degree-sum mechanism; the enumeration scope says
+  orders below 7 are trivial; Supplementary S4 reports the D4 numbers
+  (60/100, 66/100; +0.041, +0.052; median of all 8 listed points, 414.62 K).
+- Code: verify_loyola_v35.py's first-principles ablation uses the same
+  constancy test (self-test 113/113 after the change); redundancy_collisions.py
+  exits non-zero on a name mismatch so the verifier's fresh run would fail;
+  from draft pull request #1: external/verify_external.py now compares CSVs
+  with an explicit result-column allowlist and fails closed on malformed
+  input, external/test_regressions.py (6 unit tests) is added, and
+  external/baselines.py guards scales beyond 1e150 (a numerical-robustness
+  guard that no descriptor in the paper reaches: measured range 4.4e-18 to
+  1.8e25; no result changes).  The pull request's Overleaf bundles were stale
+  relative to v40.6 and were not taken.
+- Spelling of the 1961 J. Chem. Eng. Data author checked on Crossref:
+  "Labauf" (as in the paper); NIST writes "Labbauf".
+- OPEN (author check needed): octane_property_provenance_v35.csv quotes the
+  API Project 44 ideal-gas entropy 101.62 for both 2,2,3- and
+  2,2,4-trimethylpentane; one of the two source cells is probably a copy error
+  and should be re-read from NBS Circular 461, Table 3p.  The six "CANNOT
+  VERIFY" entropies could also be checked against that table.
+Verification on the final tree: core verifier, self-test, external verifier
+(new comparator), structural suite with certificate, 32-digit recount; logs
+in verification_logs/v40.7/.

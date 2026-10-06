@@ -36,10 +36,17 @@ def descriptor_matrix(triples):
 
 
 def is_constant(x):
-    return (x.max() - x.min()) <= 1e-9 * max(1.0, float(np.abs(x).max()))
+    """Constant at double precision: range within 16 ulp of the largest
+    magnitude (same resolution-based test as external/baselines.py)."""
+    x = np.asarray(x, float)
+    scale = max(float(np.abs(x).max()), np.finfo(float).tiny)
+    return (x.max() - x.min()) <= 16 * np.finfo(float).eps * scale
 
 
 def inner_loo_rmse_all(Xt, yt):
+    # Degeneracy threshold (denom <= 1e-12 * max(1, Sxx)) is inert on these data:
+    # no training-fold descriptor of any candidate stream has relative range
+    # below 2.4e-4 (constancy_test_check.py, output committed).
     m = Xt.shape[1] - 1
     Sx = Xt.sum(axis=1, keepdims=True); Sxx = (Xt**2).sum(axis=1, keepdims=True)
     Sxy = (Xt * yt).sum(axis=1, keepdims=True); Sy = yt.sum()

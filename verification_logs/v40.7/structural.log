@@ -4,6 +4,8 @@ S4 Delta=7: pair sets violating A = min(|S|-1, r, 3): 1 [((1, 7), (2, 6), (3, 5)
 S6 octane dHvap LOO Q2 of fixed (4.5, -9.0, 0.0): 0.9494
 S6 octane dHvap LOO Q2 of fixed (0.0, 0.0, 1.0): 0.9572
 S7 decane ridge Q2 0.8599; permuted (200): median -0.0882, 95th pct -0.0087, max 0.1952
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/networkx/algorithms/graph_hashing.py:211: UserWarning: The hashes produced for graphs without node or edge attributes changed in v3.5 due to a bugfix (see documentation).
+  node_labels = _init_node_labels(G, edge_attr, node_attr)
 S5 IRLA SS=0.2343 Abr=0.5066 ratio=0.4625
    LO(0,0,0.5) SS=0.0312 Abr=0.0688 ratio=0.4537
    LO(0,0,1) SS=0.0624 Abr=0.1367 ratio=0.4565
@@ -42,3 +44,4 @@ S1 tree orders: n subset N profiles qhist R GA LO(0,0,1) LO(0,0,2) GA_qmerges
 TAB firstfail LO row: OK
 TAB firstfail R row: OK
 TAB firstfail GA row: OK
+exit=0

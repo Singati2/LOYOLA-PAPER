@@ -33,16 +33,28 @@ def load():
 
 
 def d4_median():
-    """Median of the individual NIST T_B points for 2,3,3,4-tetramethylpentane (K)."""
-    vals = []
+    """Median of the individual NIST T_B points for 2,3,3,4-tetramethylpentane (K).
+
+    The points are read from the archived NIST data-points page
+    (nonane_raw_nist/pts_C16747389_TBOIL.html) with the same table parser as
+    the boiling-point dataset build, and cross-checked against the values
+    quoted in nonane_provenance.csv; a mismatch stops the run."""
+    import html as _html, re
+    page = os.path.join(HERE, "nonane_raw_nist", "pts_C16747389_TBOIL.html")
+    t = open(page, errors="replace").read()
+    m = re.search(r'<table class="data"[^>]*>(.*?)</table>', t, re.S)
+    if not m:
+        raise SystemExit("D4: no data table in the archived NIST points page")
+    clean = lambda x: re.sub(r"\s+", " ", _html.unescape(re.sub(r"<[^>]+>", "", x))).strip()
+    rows = [[clean(x) for x in re.findall(r"<td[^>]*>(.*?)</td>", r, re.S)]
+            for r in re.findall(r"<tr[^>]*>(.*?)</tr>", m.group(1), re.S)]
+    vals = [float(r[0].rstrip(".")) for r in rows if len(r) >= 2 and re.fullmatch(r"\d{3}\.\d*", r[0])]
+    quoted = []
     for r in csv.DictReader(open(os.path.join(HERE, "nonane_provenance.csv"))):
         if r["name"].endswith("2,3,3,4-tetramethylpentane") and r["property"] == "T_B":
-            txt = r["all_determinations"]
-            import re
-            vals = [float(x) for x in re.findall(r"(\d{3}\.\d+|\d{3}\.)\s*K?", txt)
-                    if 380 < float(x) < 450]
-    if not vals:
-        raise SystemExit("D4: could not parse individual T_B points")
+            quoted = [float(x.rstrip(".")) for x in re.findall(r"(\d{3}\.\d*) K \(", r["all_determinations"])]
+    if not vals or sorted(vals) != sorted(quoted):
+        raise SystemExit(f"D4: archived page points {vals} do not match provenance {quoted}")
     return float(np.median(vals)), vals
 
 

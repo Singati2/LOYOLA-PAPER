@@ -99,8 +99,21 @@ def is_constant(x):
     constant. (v40.3; the v40.2 relative threshold of 1e-12 wrongly flagged
     large-offset descriptors as constant.)"""
     x = np.asarray(x, float)
-    scale = max(float(np.abs(x).max()), np.finfo(float).tiny)
+    scale = float(np.abs(x).max())
+    if scale == 0:
+        return True
+    if scale < 1e-150 or scale > 1e150:
+        # Avoid underflow in the tolerance and overflow in the range.
+        x = x / scale
+        return (x.max() - x.min()) <= 16 * np.finfo(float).eps
     return (x.max() - x.min()) <= 16 * np.finfo(float).eps * scale
+
+
+def _rescale_extreme_rows(Xt):
+    """Keep variance calculations representable without changing ordinary rows."""
+    scale = np.abs(Xt).max(axis=1, keepdims=True)
+    extreme = (scale > 0) & ((scale < 1e-150) | (scale > 1e150))
+    return Xt / np.where(extreme, scale, 1.0)
 
 
 def _standardize_rows(Xt):
@@ -109,6 +122,7 @@ def _standardize_rows(Xt):
     unchanged, but the arithmetic no longer depends on the descriptor's units
     or offset (values span 1e-14..1e+24 in wide search boxes). The invariance
     holds up to double-precision representation of the inputs themselves."""
+    Xt = _rescale_extreme_rows(Xt)
     mu = Xt.mean(axis=1, keepdims=True); sd = Xt.std(axis=1, keepdims=True)
     return (Xt - mu) / np.where(sd > 0, sd, 1.0)
 
@@ -137,6 +151,9 @@ def fit_predict(xt, yt, xnew):
     xt = np.asarray(xt, float)
     if is_constant(xt):
         return float(yt.mean())
+    scale = float(np.abs(xt).max())
+    if scale < 1e-150 or scale > 1e150:
+        xt, xnew = xt / scale, xnew / scale
     mu, sd = xt.mean(), xt.std()
     xs, xn = (xt - mu) / sd, (xnew - mu) / sd
     ym = yt.mean()

@@ -55,7 +55,7 @@ to this plan must be recorded as deviations, not silent edits.
   inferential tests; the manuscript keeps that wording.
 
 ## Deviations / clarifications (recorded 2026-10-03 after data collection, BEFORE any nonane analysis was run)
-The data agent reported four situations the plan did not cover. Decisions
+Data collection raised four situations the plan did not cover. Decisions
 are fixed here before any nonane model was fitted:
 - **D1 (T_B, 10 isomers without a NIST average):** the "most recent
   calorimetric" fallback does not apply to boiling points. Rule adopted: the

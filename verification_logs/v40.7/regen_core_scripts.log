@@ -1,0 +1,10 @@
+expanded_robustness_v35.csv IDENTICAL
+expanded_robustness_summary_v35.csv IDENTICAL
+dhvap_tmb_exclusion_v36.csv IDENTICAL
+dhvap_tmb_exclusion_summary_v36.csv IDENTICAL
+T_B    primary                                  n=35  verdict: MIXED  B=200: LO better 58/100, median dQ2 +0.0337  B=500: LO better 63/100, median dQ2 +0.0486
+T_B    D4 sensitivity (TMP T_B = median 414.62  n=35  verdict: MIXED  B=200: LO better 60/100, median dQ2 +0.0413  B=500: LO better 66/100, median dQ2 +0.0521
+dHvap  primary                                  n=34  verdict: REPLICATES  B=200: LO better 95/100, median dQ2 +0.0482  B=500: LO better 98/100, median dQ2 +0.0532
+exit=0
+nonane_validation_seeds.csv IDENTICAL
+nonane_validation_summary.csv IDENTICAL

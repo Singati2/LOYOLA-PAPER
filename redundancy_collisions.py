@@ -105,7 +105,9 @@ def branch_size(adj, root, avoid):
     return cnt
 
 def derive_name(smi):
-    """Derive IUPAC name (methyl/ethyl substituents only) from an alkane SMILES."""
+    """Derive the IUPAC name of an alkane whose substituents are all methyl or
+    ethyl (sufficient for every C8 isomer); returns None otherwise, which the
+    caller counts as FAIL."""
     adj = smiles_adj(smi)
     parents = {4: "butane", 5: "pentane", 6: "hexane", 7: "heptane", 8: "octane"}
     cands = []
@@ -178,6 +180,8 @@ def part2():
             focus_ok &= ok
     print(f"focus-4 verification: {'PASS' if focus_ok else 'FAIL'}; "
           f"all-18 verification: {'PASS' if all_ok else 'FAIL'}")
+    global NAMES_OK
+    NAMES_OK = all_ok
 
     print("\n=== PART 2: BID collisions ===")
     profiles = []
@@ -222,6 +226,10 @@ def part2():
                               for k, p in enumerate(PROPS))
             print(f"  {a} vs {b}: {diffs}")
 
+NAMES_OK = False
+
 if __name__ == "__main__":
     part1()
     part2()
+    if not NAMES_OK:
+        sys.exit(1)   # a wrong name in octane_data.NAMES fails the fresh run of the verifier

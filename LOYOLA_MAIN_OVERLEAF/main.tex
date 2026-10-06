@@ -190,7 +190,8 @@
   and note that $\log LO$ is
   convex (the standard log-sum-exp property). The predictive result is
   negative: an apparent gain for the vaporization enthalpy of the
-  octanes and nonanes vanishes once the parent family is searched over a
+  octanes, which met a pre-registered replication criterion on the
+  nonanes, vanishes once the parent family is searched over a
   box that does not truncate it (a post hoc analysis), and pre-registered
   tests on measured
   boiling points (34 decanes; 100 alkanes C6--C10, adjusted for size)
@@ -589,7 +590,9 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   three vectors $(1, \ln(ij), \ln(i+j))$ on these four pairs already have
   rank $3$ (after subtracting the $(1,1)$ row, the minor
   $\ln 2 \cdot \ln(9/8)$ is nonzero), the augmented vectors have rank $4$;
-  equivalently $\det W = \tfrac16 \ln 2\,(8\ln 3 - 13 \ln 2) \neq 0$. If
+  equivalently, the $4 \times 4$ matrix $W$ whose rows are the augmented
+  vectors of $(1,1)$, $(2,2)$, $(1,2)$, $(1,3)$ has
+  $\det W = \tfrac16 \ln 2\,(8\ln 3 - 13 \ln 2) \neq 0$. If
   $e^{\theta^{\top} z} = c\, e^{\theta'^{\top} z}$ on $P_{\Delta}$,
   then $(\theta - \theta')^{\top} z_{ij} = \ln c$ for all admissible
   pairs, i.e.\ $(\ln c, \theta' - \theta)$ is orthogonal to every
@@ -754,7 +757,8 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   \end{proof}
 
   Theorem~\ref{thm:ratioplane} is as much a limitation result as a
-  characterisation. By exhaustive enumeration, $q$-histograms coincide with degree-pair
+  characterisation. By exhaustive enumeration (orders $7$--$17$; orders
+  below $7$ are trivial), $q$-histograms coincide with degree-pair
   profiles for all trees of order at most $12$ and for trees with
   $\Delta \le 4$ of order at most $15$, so the pure-$\gamma$ points
   attain the degree-pair floor exactly up to those orders and,
@@ -811,11 +815,13 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   equal degree-pair profiles, which are tied for every $\gamma$. The
   sign-change bound $V$ can be attained: two trees of order $12$ with
   maximum degree $6$ and eight distinct imbalances, with $V = 5$, cross
-  five times at $(\alpha,\beta) = (-1,0)$ (crossings counted as sign
-  changes of $D$ on a fine $\gamma$ grid; in that numerical search they are
-  the only such pair among the order-$12$ trees, whereas the bound itself
-  is analytic); whether five crossings are attained for $\Delta \le 4$ is
-  open. The proposition concerns the $\gamma$ axis
+  five times at $(\alpha,\beta) = (-1,0)$: there the coefficients $c_k$
+  are rational with $V = 5$ sign changes, and $D$ changes sign five times
+  on $\gamma \in (-60, 60)$ in $50$-digit arithmetic (near $-17.17$,
+  $-11.96$, $-2.03$, $2.73$ and $31.13$), so by the bound it has exactly
+  five zeros; in a grid search over the order-$12$ trees they are the only
+  pair with five sign changes of $D$. Whether five crossings are attained
+  for $\Delta \le 4$ is open. The proposition concerns the $\gamma$ axis
   only: along other directions the exponents are not the $q_k$ and the
   constant five does not apply.
 
@@ -854,11 +860,18 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   \end{proof}
 
   Equality holds in~(ii) for every set of admissible pairs with
-  $\Delta \le 6$ (exhaustive check in $60$-digit arithmetic), hence for
-  all molecular graphs; it fails for some pair sets from $\Delta = 7$,
-  e.g.\ $\{(1,7),(2,6),(3,5),(4,4)\}$; every failing set we found has a
-  constant degree sum, which no connected graph realises with four
-  distinct pairs.
+  $\Delta \le 6$ (checked exhaustively for all sets of at most four pairs
+  in $60$-digit arithmetic, which suffices because affine dimension is
+  monotone under inclusion and the upper bound is proven), hence for all
+  molecular graphs. It fails from $\Delta = 7$: the single violating set
+  of at most four pairs there is $\{(1,7),(2,6),(3,5),(4,4)\}$, whose
+  degree sums all equal $8$ (a constant degree sum makes $\ln(i+j)$
+  constant on the set, so $A \le 2$ for any such set with at least three
+  imbalances); a
+  connected graph cannot realise more than one pair with a common degree
+  sum $s$ (each neighbour of a vertex of degree $d$ then has degree
+  $s - d$, so by connectivity only the pair $\{d, s-d\}$ occurs), and no
+  connected graph has this set as its pair set.
   For example, the spider with four legs of length three realises the
   pairs $(2,4)$, $(2,2)$ and $(1,2)$, which have only two imbalances
   ($\tfrac13$ and $0$); on it, $\gamma$ is confounded with
@@ -1291,7 +1304,10 @@ values, and $R$ still attains the floor at order $13$ ($570$ values).
 \begin{table}[htbp]
 \centering
 \caption{First tree order at which discrimination is lost (values
-counted as distinct at $11$ significant digits, as throughout). ``Below
+counted as distinct at $11$ significant digits, as throughout; all counts
+are unchanged at $32$ significant digits, and the pure-$\gamma$ counts
+equal the numbers of distinct $q$-histograms exactly, as
+Theorem~\ref{thm:ratioplane}(ii) requires). ``Below
 floor'': first order with fewer distinct values than distinct
 edge-degree-pair profiles (the floor for every vertex-degree-based
 index), with (values/profiles) at that order. ``Merges'': first order at
@@ -1459,13 +1475,15 @@ primary source (the 2,3,3-trimethylpentane value is a compiled-dataset
 value; Appendix~\ref{app:quality}), and four entropies
 differ from a widely used compilation; substituting the compilation
 values changes all twelve $S$ correlations (by up to $0.043$ in $|r|$)
-but not the winning descriptor ($HM$). Alternative compiled acentric factors change several
-$\omega$ correlations at the third decimal (e.g.\ $M_2$ from $-0.988$ to
-$-0.986$) but not the property-wise winning descriptor.
+and leaves $HM$ and $M_1$ within $0.001$ of each other at the top, a
+margin that is not meaningful at this resolution. Alternative compiled
+acentric factors change several $\omega$ correlations at the third
+decimal (e.g.\ $M_2$ from $-0.988$ to $-0.986$) and leave the $\omega$
+ranking unchanged.
 
 \begin{table}[htbp]
 \centering
-\caption{Pearson correlation $r$ between the Loyola reductions, the fixed pure-$\gamma$ benchmark points and the five physicochemical properties of the $18$ octane isomers. Bold flags the best $|r|$ per column.}
+\caption{Pearson correlation $r$ between the Loyola reductions, the fixed pure-$\gamma$ benchmark points and the five physicochemical properties of the $18$ octane isomers. Bold flags the largest $|r|$ per column (descriptive; margins to the runner-up are $0.001$--$0.032$ and their paired bootstrap intervals include zero, see the text).}
 \label{tab:lo_octane}
 \small
 \begin{tabular}{lrrrrr}
@@ -1500,7 +1518,12 @@ descriptive post-selection paired bootstrap interval for the observed
 top-two $|r|$ difference included zero (not multiplicity-adjusted; such
 intervals do not establish equality or equivalence), and recomputing
 each bolded correlation with single isomers deleted shifts $|r|$ by at
-most $0.027$; bootstrap details are in Supplementary Section~S1.
+most $0.027$; bootstrap details are in Supplementary Section~S1. The
+bolded entries are the largest of twelve highly correlated sample
+correlations on $18$ molecules; picking the maximum makes them
+optimistic estimates of the correlation the selected descriptor would
+show on new molecules (a winner's-curse selection effect). They are
+descriptive rankings, not tests.
 
 On the octanes the pure-$\gamma$ points are highly collinear with
 the classical reductions (maximum $|r|$ with a reduction equal to
@@ -1544,9 +1567,15 @@ nested predictive performance for $\Delta H_{\mathrm{vap}}$ in every
 seed ($100/100$ at budgets $200$ and $500$; median
 $\Delta Q^2 = +0.069$ and $+0.068$), while it usually degraded
 $\Delta H_f$ and gave mixed or slightly negative results for the other
-properties (Supplementary Section~S3 also reports the analysis with
-2,2,3,3-tetramethylbutane excluded). These counts describe optimizer variance on one fixed set of $18$ molecules
-and carry no inferential weight, and they hide a boundary effect: for
+properties (with 2,2,3,3-tetramethylbutane excluded the count falls to
+$93/100$ and $96/100$; Supplementary Section~S3). These counts describe
+optimizer variance on one fixed set of $18$ molecules and carry no
+inferential weight. Selection also varies across folds: for $\Delta H_f$
+the three-parameter search chose three distinct triples over the $18$
+folds, whereas for $\Delta H_{\mathrm{vap}}$ it chose the same triple
+in every fold (Supplementary Section~S3), so the nested $Q^2$ evaluates
+the selection-plus-fit procedure, not one fitted model. The counts also
+hide a boundary effect: for
 $\Delta H_{\mathrm{vap}}$ the parent chose
 $(\alpha,\beta) = (1.021, -1.993)$, on the boundary of the box, in $16$
 of the $18$ folds.
@@ -1571,9 +1600,12 @@ other properties no advantage is consistent across boxes: under the
 hybrid control the Loyola model is ahead for octane $S$ ($38$ of $50$
 seeds) and nonane $T_B$ ($31$ of $50$), but behind for octane $T_B$,
 $\Delta H_f$ and $\omega$, and the wide box itself lowers the parent's
-$Q^2$ for $S$ and $T_B$. The vaporization-enthalpy gains reported above
-therefore reflect the truncated box rather than information that the
-parent lacks. The economy that remains belongs to linear imbalance
+$Q^2$ for $S$ and $T_B$. The vaporization-enthalpy gains reported above are therefore
+consistent with a truncation effect rather than with information that
+the parent lacks: most of the change comes from the parent improving in
+the wide box ($0.887 \to 0.942$ on the octanes), the rest from the
+three-dimensional search being slightly less efficient there ($0.957
+\to 0.946$ for the hybrid control). The economy that remains belongs to linear imbalance
 weighting rather than to $\gamma$: the fixed point $LO(0,0,1)$ and the
 parameter-free $IRLA$ approach what the parent reaches only near
 $(\alpha,\beta) \approx (4.5, -9)$ ($Q^2 = 0.957$ and $0.948$ against
@@ -1589,7 +1621,7 @@ candidates per model, and the number of seeds (of $50$) in which LO
 beats GM (half-width $2$) or LO$_h$ beats GM (half-width $12$). LO$_h$ is
 a hybrid control with $(\alpha,\beta)$ in the wide box and $\gamma$ in
 $(-2,2)$, which avoids diluting the Loyola search over a wide $\gamma$
-range.}
+range. Seed counts summarise the variability of the random search on fixed data and are not replications.}
 \label{tab:box}
 \small
 \setlength{\tabcolsep}{1.6pt}
@@ -1659,7 +1691,8 @@ Proposition~\ref{prop:generic}: every index in the family is a
 one-dimensional reweighting of the degree-pair counts, and the imbalance
 coordinate re-weights that information rather than adding to it. Protocol
 details, an exploratory transfer analysis and a post hoc molecule
-bootstrap (its $95\%$ interval for LO minus GM on nonane
+bootstrap conditional on the fitted predictions, which therefore omits
+refitting and selection uncertainty (its $95\%$ interval for LO minus GM on nonane
 $\Delta H_{\mathrm{vap}}$, $[-0.006, +0.113]$ at budget $200$, includes
 zero) are in Supplementary Section~S4.
 
@@ -1675,7 +1708,7 @@ over seeds $0$--$99$ at budget $200$ in the box of half-width $2$
 (see Table~\ref{tab:box} for wider boxes); last column: seeds in which
 LO beat GM at budgets $200$/$500$. A median of differences, quoted in
 the text, need not equal the difference of the medians shown. All
-values are full-precision results rounded once.}
+values are full-precision results rounded once. Seed counts summarise the variability of the random search on fixed data and are not replications.}
 \label{tab:external}
 \small
 \setlength{\tabcolsep}{2pt}
@@ -1744,7 +1777,7 @@ Class.: best classical index chosen in each fold; LO$_1$: fixed
 $LO(0,0,1)$; Ridge: ridge regression on the degree-pair counts; GM,
 LO: medians over seeds $0$--$49$ in the non-truncating boxes;
 $\Delta Q^2$: median of LO minus GM; last column: seeds (of $50$) in
-which LO beats GM.}
+which LO beats GM. Seed counts summarise the variability of the random search on fixed data and are not replications.}
 \label{tab:bp}
 \scriptsize
 \setlength{\tabcolsep}{1.5pt}
@@ -1763,6 +1796,13 @@ freeing $\gamma$ shows no demonstrated advantage for boiling points,
 either on the decane cohort (median $\Delta Q^2 = -0.072$, LO ahead
 in $15$ of $50$ seeds, $95\%$ interval $[-0.156, +0.002]$) or in the
 pooled size-adjusted set ($-0.000$, $25$ of $50$, $[-0.003, +0.002]$).
+In the original box of half-width $2$, reported as the pre-registration
+requires, the two tuned models are level on the decanes (medians $0.469$
+and $0.465$) and the Loyola model is marginally ahead on the pooled set
+($0.980$ against $0.976$), so the decane verdict does not depend on the
+box; the lower decane $Q^2$ of the hybrid control ($0.406$ against
+$0.465$ in the narrow box) reflects the cost of a three-dimensional
+search over a wide box rather than a penalty for $\gamma$.
 The pooled cohort was corrected after an external audit found that one
 nonane's second NIST entry had been skipped (Deviation D5 in the
 repository; pooling grouped pages also moved one heptane value by
@@ -1812,15 +1852,20 @@ information without adding to it.
 Chemometrically, the evidence is diagnostic: every vertex-degree-based
 index on the octanes operates above an irreducible floor set by two
 degree-pair collision pairs, and the apparent vaporization-enthalpy
-gain from freeing $\gamma$ --- seen in every seed of the octane sweep
-and meeting the pre-registered criterion on the $34$ nonanes with values
-(mostly compilation values) --- disappears once the parent family is searched
-over a box that does not truncate it (Table~\ref{tab:box}). Tuning
+gain from freeing $\gamma$ --- seen in every candidate stream of the
+octane sweep ($93$--$96$ of $100$ without 2,2,3,3-tetramethylbutane) and
+meeting the pre-registered optimizer-stability criterion on the $34$
+nonanes (mostly compilation values) --- disappears once the parent family
+is searched over a box that does not truncate it (a post hoc analysis,
+Table~\ref{tab:box}). Tuning
 $\gamma$ thus yields no demonstrated predictive advantage under the
 protocols used here, which does not exclude benefits on other
-properties, compound classes or search designs; the untuned point $LO(0,0,1)$, essentially $IRLA$, matches the
-tuned models, and ridge regression on all degree-pair counts predicts
-the nonanes better than every index model. Pre-registered tests on
+properties, compound classes or search designs; on vaporization
+enthalpy the untuned point $LO(0,0,1)$, essentially $IRLA$, matches the
+tuned models (nested $Q^2$ $0.903$ against medians $0.900$--$0.902$ on
+the nonanes), and ridge regression on all degree-pair counts predicts
+both nonane properties better than every fixed index and than the
+median tuned GM and LO models. Pre-registered tests on
 measured boiling points complement this on larger data: no demonstrated
 benefit from
 $\gamma$ on the $34$ decanes or the $100$ pooled C6--C10 alkanes
@@ -1838,8 +1883,11 @@ every tabulated value are at
 \url{https://github.com/Singati2/LOYOLA-PAPER}; the nonane and
 boiling-point protocols were committed there before the corresponding
 models were fitted, and a separate script reproduces the structural
-counts (tree orders up to $17$, the crossing and $GA$ witnesses, the
-identifiability check) and the auxiliary values quoted in the text. The inequalities of
+counts (tree orders up to $17$, the crossing and $GA$ witnesses with the
+exact crossing certificate, the identifiability check) and the auxiliary
+values quoted in the text; companion scripts recount every structural
+count at $32$ significant digits and produce the fractional-exponent
+counts of Section~\ref{sec:discrimination}. The inequalities of
 Propositions~\ref{thm:upper_Delta} and~\ref{thm:lower_delta}, of
 Corollary~\ref{thm:cs} and Proposition~\ref{thm:ratio_bound}, the
 convexity part of Theorem~\ref{thm:logconvex}, the rank-$4$ statement
@@ -1890,30 +1938,39 @@ open are collected here so that they can be read in one place.
   not used. The value used, $102.06$, is that of the compiled
   $18$-octane dataset reproduced by Mondal et al.~\cite{MondalDePal2019QSPR}
   (the one-decimal compilation of Ediz~\cite{Ediz2017Octane} gives
-  $102.10$). The change moves the $S$ correlations at the third decimal
-  and leaves the property-wise winner unchanged; it is still a secondary
-  value (item~(i)).
-\item \emph{Four entropies differ from a widely used compilation}
-  (octane $111.55$ vs $111.70$; 2,2-dimethylhexane $103.13$ vs $103.40$;
-  2,2,4-trimethylpentane $101.81$ vs $104.10$; 2,3,3-trimethylpentane
-  $102.06$ vs $102.10$). Substituting the compilation values changes all
-  twelve $S$ correlations, by up to $0.043$ in $|r|$, but not the winner
-  (repository file \texttt{entropy\_source\_sensitivity\_v36.csv}).
+  $102.10$). The change moves the $S$ correlations by at most $0.006$;
+  it is still a secondary value (item~(i)).
+\item \emph{Four entropies differ from the compiled octane dataset of
+  Ediz~\cite{Ediz2017Octane}} (octane $111.55$ vs $111.70$;
+  2,2-dimethylhexane $103.13$ vs $103.40$; 2,2,4-trimethylpentane $101.81$
+  vs $104.10$; 2,3,3-trimethylpentane $102.06$ vs $102.10$); for octane
+  the value used agrees with the NIST WebBook ($111.63$). Substituting the
+  compilation values changes all twelve $S$ correlations, by up to $0.043$
+  in $|r|$, and leaves $HM$ and $M_1$ within $0.001$ of each other at the
+  top (repository file \texttt{entropy\_source\_sensitivity\_v36.csv}).
 \item \emph{2,2,3,3-tetramethylbutane $\Delta H_{\mathrm{vap}}$} is a
   benchmark-compilation value ($8.41$) whose reference state is unresolved
   (the compound is a solid at $298$~K; NIST lists sublimation and standard
-  vaporization enthalpies near $10.3$~kcal\,mol$^{-1}$). The exclusion
-  sweep of Supplementary Section~S3 shows which conclusions depend on it.
+  vaporization enthalpies near $10.3$~kcal\,mol$^{-1}$). Repeating the
+  matched-budget comparison of Supplementary Section~S3 without this
+  isomer, the vaporization-enthalpy gain in the $(-2,2)$ box persists
+  ($93/100$ and $96/100$ seeds instead of $100/100$) and the
+  $\Delta H_{\mathrm{vap}}$ column winner of Table~\ref{tab:lo_octane} is
+  unchanged; no conclusion of the paper rests on this value.
 \item \emph{Acentric factors} of 2,2,4-trimethyl\-pentane and
   2,2,3,3-tetra\-methyl\-butane differ from an alternative compilation by
   $0.002$--$0.004$; the alternative values change several $\omega$
-  correlations at the third decimal and no winner.
+  correlations at the third decimal and leave the $\omega$ ranking
+  unchanged.
 \end{enumerate}
-None of these items changes which entry of Table~\ref{tab:lo_octane} is
-bolded
-or any pre-registered conclusion of Sections~\ref{sec:sensitivity}; all
-of them are limitations of the compiled octane benchmark rather than of
-the analysis.
+None of these items moves a correlation of Table~\ref{tab:lo_octane} by
+more than $0.043$ or changes which entry is bolded (for $S$ the margin
+between $HM$ and $M_1$ is $0.001$, so that this is not a meaningful
+criterion there), and none enters the pre-registered nonane and
+boiling-point tests of Sections~\ref{sec:external} and~\ref{sec:bp},
+which use no octane value. Item~(ii) was a transcription error in our
+earlier data file, corrected here; the remaining items are limitations
+of the compiled octane benchmark rather than of the analysis.
 
 \begin{table}[H]
 \centering\small

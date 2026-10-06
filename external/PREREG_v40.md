@@ -66,3 +66,9 @@ page without a change of value. Test B was rerun on the corrected cohort; the
 v40.2 results on the original cohort are preserved in git history (commit
 0844d6b) and in the changelog, and both are reported. Test A (decanes) is
 unaffected by the policy.
+
+## Reporting note (recorded 2026-10-05, after the results)
+The "also reported" GM and LO results in the box (-2,2) (Tests A and B) are in
+external/bp/bp_results_summary.csv (columns median_Q2_GM2, median_Q2_LO2) and
+are now quoted in Section 6.4 of the manuscript (decanes 0.469 / 0.465; pooled
+0.976 / 0.980). No analysis was changed.

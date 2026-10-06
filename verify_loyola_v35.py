@@ -902,7 +902,7 @@ def ablation_first_principles(OP,Y,seed,budget):
         return X
     def press(Xt,yt):
         n=Xt.shape[1];xc=Xt-Xt.mean(1,keepdims=True);Sxx=(xc**2).sum(1,keepdims=True)
-        const=Sxx<=1e-12*np.maximum(1.0,(Xt**2).sum(1,keepdims=True))
+        const=(Xt.max(1,keepdims=True)-Xt.min(1,keepdims=True))<=16*np.finfo(float).eps*np.maximum(np.abs(Xt).max(1,keepdims=True),np.finfo(float).tiny)  # same resolution-based constancy test as the analysis scripts
         Ss=np.where(const,1.0,Sxx);yc=yt-yt.mean()
         b=np.where(const,0.0,(xc*yc).sum(1,keepdims=True)/Ss)
         e=yc-b*xc;h=1.0/n+np.where(const,0.0,xc**2/Ss)
@@ -911,7 +911,7 @@ def ablation_first_principles(OP,Y,seed,budget):
         n=len(y);pred=np.empty(n);sel=[]
         for i in range(n):
             m=np.arange(n)!=i;k=int(np.argmin(press(X[:,m],y[m])));x=X[k];xt=x[m];yt=y[m]
-            if np.ptp(xt)<=1e-12*max(1.0,float(np.abs(xt).max())):pred[i]=yt.mean()
+            if np.ptp(xt)<=16*np.finfo(float).eps*max(float(np.abs(xt).max()),np.finfo(float).tiny):pred[i]=yt.mean()
             else:
                 b=((xt-xt.mean())*(yt-yt.mean())).sum()/((xt-xt.mean())**2).sum()
                 pred[i]=yt.mean()+b*(x[i]-xt.mean())

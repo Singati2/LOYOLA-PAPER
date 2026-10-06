@@ -47,13 +47,19 @@ X_GM = descriptor_matrix(GM_TRIPLES)
 assert np.all(np.isfinite(X_LO)) and np.all(np.isfinite(X_GM))
 
 def is_constant(x):
-    """Constant-on-subset guard (relative tolerance)."""
-    return (x.max() - x.min()) <= 1e-9 * max(1.0, float(np.abs(x).max()))
+    """Constant at double precision: range within 16 ulp of the largest
+    magnitude (same resolution-based test as external/baselines.py)."""
+    x = np.asarray(x, float)
+    scale = max(float(np.abs(x).max()), np.finfo(float).tiny)
+    return (x.max() - x.min()) <= 16 * np.finfo(float).eps * scale
 
 def inner_loo_rmse_all(Xt, yt):
-    """Vectorized inner-LOO RMSE for every candidate row of Xt on the training
+    """Inner-LOO RMSE of simple linear regression for every candidate on a training
     set (Xt: (C, n), yt: (n,)). Closed-form leave-one-out sums; degenerate
-    (constant) leave-one-out subsets predict the subset mean."""
+    (constant) leave-one-out subsets predict the subset mean.  The degeneracy
+    threshold (denom <= 1e-12 * max(1, Sxx)) is inert on these data: no training-
+    fold descriptor of any candidate stream has relative range below 2.4e-4
+    (constancy_test_check.py, output committed)."""
     C, n = Xt.shape
     m = n - 1
     Sx  = Xt.sum(axis=1, keepdims=True)          # (C,1)
@@ -121,7 +127,7 @@ for p in PROPS:
         res[model] = dict(q2=q2, rmse=rmse, mae=mae, rs=rs,
                           abserr=np.abs(pred - y), pred=pred, sel=sel)
         for i in range(N):
-            perfold_rows.append([p, model, i, i,
+            perfold_rows.append([p, model, i,
                 f"{sel[i,0]:.3f}", f"{sel[i,1]:.3f}", f"{sel[i,2]:.3f}",
                 F(pred[i]), F(y[i]), F(abs(pred[i]-y[i]))])
     d = res["LO"]["abserr"] - res["GM"]["abserr"]     # LO minus GM
@@ -133,8 +139,7 @@ for p in PROPS:
         bm, bsd, bmin, bmax = stab(sel[:, 1])
         gm_, gsd, gmin, gmax = stab(sel[:, 2])
         gfrac = float((np.abs(sel[:, 2]) > 1.5).mean())
-        row = [p, model, F(r['q2']), F(r['rmse']), F(r['mae']),
-               F(r['rs']), F(r['mae'])]
+        row = [p, model, F(r['q2']), F(r['rmse']), F(r['mae']), F(r['rs'])]
         if model == "LO":
             row += [F(d.mean()), F(np.median(d)), nb, nw, nt]
         else:
@@ -158,13 +163,13 @@ for p in PROPS:
 
 with open(os.path.join(HERE, "ablation_perfold.csv"), "w", newline="") as f:
     w = csv.writer(f)
-    w.writerow(["property","model","fold","heldout_index","sel_a","sel_b","sel_g",
+    w.writerow(["property","model","heldout_index","sel_a","sel_b","sel_g",
                 "pred","actual","abs_err"])
     w.writerows(perfold_rows)
 
 with open(os.path.join(HERE, "ablation_summary.csv"), "w", newline="") as f:
     w = csv.writer(f)
-    w.writerow(["property","model","Q2","RMSE","MAE","r_signed","mean_abs_err",
+    w.writerow(["property","model","Q2","RMSE","MAE","r_signed",
                 "paired_diff_mean_LOminusGM","paired_diff_median_LOminusGM",
                 "n_LO_better","n_LO_worse","n_tied",
                 "sel_a_mean","sel_a_sd","sel_a_min","sel_a_max",

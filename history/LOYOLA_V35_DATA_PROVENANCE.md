@@ -74,11 +74,13 @@ enthalpies kJ→kcal at 4.184.
 - **6 × gas-phase entropy S** (4-methylheptane, 2,2-dimethylhexane,
   3,4-dimethylhexane, 3-ethyl-2-methylpentane, 3-ethyl-3-methylpentane,
   2,3,3-trimethylpentane): the NIST WebBook gas-thermochemistry pages for
-  these isomers list no S°(gas); no authoritative alternative was reachable
-  within the agents' fetch budgets. CANNOT VERIFY, not contradicted.
+  these isomers list no S°(gas); no authoritative alternative was found
+  within the search budget of the provenance campaign. CANNOT VERIFY, not contradicted.
 - **ΔH_vap(298 K) of 2,2,3,3-tetramethylbutane**: the compound is a solid at
   room temperature (m.p. ≈ 100 °C); NIST tabulates a sublimation enthalpy
-  (~42.9 kJ/mol), not a 298 K liquid-vaporization value. CANNOT VERIFY as a
+  (~42.9 kJ/mol) [v36.1 correction: NIST also lists standard vaporization
+  enthalpies 42.94 and 42.91 kJ/mol; see the supplement], not a value
+  consistent with 8.41 kcal/mol. CANNOT VERIFY as a
   vaporization datum; flagged in-text.
 - **ω of 2,2,3,3-tetramethylbutane**: paper 0.247 vs KDB 0.251 (diff 0.004,
   marginally outside the 0.003 tolerance). CONFLICT (marginal); flagged
@@ -88,8 +90,9 @@ enthalpies kJ→kcal at 4.184.
   the winning descriptor is unchanged.]
 
 ## Method
-Two multi-agent campaigns (6 agents × 3 molecules; 3 stalled groups retried
-as 9 single-molecule agents with a strict 4-fetch budget). Sources: NIST
+Two provenance search campaigns (molecules searched in groups of three; three
+stalled groups re-searched one molecule at a time with a strict budget of four
+page fetches each). Sources: NIST
 WebBook phase-change (Mask=4) and gas-phase thermochemistry (Mask=1) pages
 under the CAS-confirmed compound entries; Chemeo (KDB compilation) for
 acentric factors, which NIST does not list. Every CAS→name mapping was
