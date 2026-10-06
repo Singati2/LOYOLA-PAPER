@@ -1,0 +1,15 @@
+name: Regression and package checks
+on: [push, pull_request]
+jobs:
+  regressions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install numpy==2.4.4
+      - run: python external/test_regressions.py
+      - run: python external/test_baselines.py
+      - run: python package_overleaf.py --check
+      - run: python manifest.py
