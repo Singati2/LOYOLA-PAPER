@@ -16,6 +16,16 @@ standard octane QSPR dataset, arXiv:1701.02859 Table 1, to 2 dp):
   2,2,3-trimethylpentane   dH_vap 8.88 -> 8.83
   2,3,3-trimethylpentane   dH_vap 9.02 -> 8.90
 (3-ethyl-2-methylpentane dH_vap 9.21 is correct and unchanged.)
+
+v40.5 data correction (gas-phase entropy S, cal/(mol K), 298 K):
+  2,3,3-trimethylpentane   S 101.31 -> 102.06
+The v35 value duplicated the 2,2,3-trimethylpentane entry (a copy error
+flagged in LOYOLA_V35_DATA_PROVENANCE.md).  102.06 is the value of the
+compiled 18-octane dataset reproduced by Mondal, De & Pal (2019,
+arXiv:1906.06660, Table 2); the one-decimal compilation of Ediz (2017,
+arXiv:1701.02859, Table 1) gives 102.10.  Neither is a primary source; NIST
+lists no S(gas) for this isomer, so the value remains CANNOT VERIFY against
+a primary source but is no longer a duplicate.
 """
 import math
 
@@ -37,7 +47,7 @@ OCTANES = [
     ('CCC(CC)CCC',       118.5, -50.40, 9.48, 109.43, 0.362),
     ('CCC(C)C(C)(C)C',   109.8, -52.61, 8.83, 101.31, 0.300),
     ('CC(C)CC(C)(C)C',    99.2, -53.57, 8.40, 101.81, 0.305),
-    ('CCC(C)(C)C(C)C',   114.8, -51.73, 8.90, 101.31, 0.291),
+    ('CCC(C)(C)C(C)C',   114.8, -51.73, 8.90, 102.06, 0.291),
     ('CC(C)C(C)C(C)C',   113.5, -51.97, 9.01, 102.39, 0.317),
     ('CC(C)(C)C(C)(C)C', 106.5, -53.99, 8.41,  93.06, 0.247),
 ]

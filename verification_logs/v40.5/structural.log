@@ -1,0 +1,44 @@
+S2 GA witness: GA(A)-GA(B) = 0 | q-histograms equal: False | edges 16 16
+S4 Delta=6: pair sets violating A = min(|S|-1, r, 3): 0 []
+S4 Delta=7: pair sets violating A = min(|S|-1, r, 3): 1 [((1, 7), (2, 6), (3, 5), (4, 4))]
+S6 octane dHvap LOO Q2 of fixed (4.5, -9.0, 0.0): 0.9494
+S6 octane dHvap LOO Q2 of fixed (0.0, 0.0, 1.0): 0.9572
+S7 decane ridge Q2 0.8599; permuted (200): median -0.0882, 95th pct -0.0087, max 0.1952
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/networkx/algorithms/graph_hashing.py:211: UserWarning: The hashes produced for graphs without node or edge attributes changed in v3.5 due to a bugfix (see documentation).
+  node_labels = _init_node_labels(G, edge_attr, node_attr)
+S5 IRLA SS=0.2343 Abr=0.5066 ratio=0.4625
+   LO(0,0,0.5) SS=0.0312 Abr=0.0688 ratio=0.4537
+   LO(0,0,1) SS=0.0624 Abr=0.1367 ratio=0.4565
+   LO(0,0,2) SS=0.1257 Abr=0.2745 ratio=0.4579
+   LO(0,0,3) SS=0.1894 Abr=0.4193 ratio=0.4517
+   LO(0,0,5) SS=0.3192 Abr=0.7478 ratio=0.4269
+   LO(0,0,10) SS=0.6983 Abr=1.9898 ratio=0.3510
+S3 order-12 trees at (alpha,beta)=(-1,0): max crossings 5, attained by 1 pair(s)
+   crossings 5 V 5 maxdeg 6 6 distinct imbalances 8
+   G Counter({(1, 6): 5, (1, 3): 2, (1, 4): 2, (3, 4): 1, (4, 6): 1}) | H Counter({(1, 5): 4, (1, 6): 4, (1, 2): 1, (2, 6): 1, (5, 6): 1})
+S1 tree orders: n subset N profiles qhist R GA LO(0,0,1) LO(0,0,2) GA_qmerges
+  7 all 11 11 11 11 11 11 11 0
+  7 mol 9 9 9 9 9 9 9 0
+  8 all 23 21 21 21 21 21 21 0
+  8 mol 18 16 16 16 16 16 16 0
+  9 all 47 40 40 40 40 40 40 0
+  9 mol 35 28 28 28 28 28 28 0
+  10 all 106 79 79 79 79 79 79 0
+  10 mol 75 49 49 49 49 49 49 0
+  11 all 235 152 152 152 152 152 152 0
+  11 mol 159 83 83 83 83 83 83 0
+  12 all 551 294 294 294 294 294 294 0
+  12 mol 355 137 137 137 137 137 137 0
+  13 all 1301 570 566 570 566 566 566 0
+  13 mol 802 223 223 223 223 223 223 0
+  14 all 3159 1100 1090 1095 1090 1090 1090 0
+  14 mol 1858 350 350 350 350 350 350 0
+  15 all 7741 2119 2093 2100 2093 2093 2093 0
+  15 mol 4347 538 538 538 538 538 538 0
+  16 all 19320 4069 3996 4007 3996 3996 3996 0
+  16 mol 10359 810 809 810 809 809 809 0
+  17 all 48629 7778 7582 7604 7581 7582 7582 1
+TAB firstfail LO row: OK
+TAB firstfail R row: OK
+TAB firstfail GA row: OK
+structural exit 0

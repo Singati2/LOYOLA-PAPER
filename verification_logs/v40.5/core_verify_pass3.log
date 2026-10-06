@@ -1,0 +1,54 @@
+/Library/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/networkx/algorithms/graph_hashing.py:211: UserWarning: The hashes produced for graphs without node or edge attributes changed in v3.5 due to a bugfix (see documentation).
+  node_labels = _init_node_labels(G, edge_attr, node_attr)
+[A] Table 2 (60 cells)
+  done
+[B] bolded-cell bootstrap half-widths (B=10000, seed 0); manuscript range 'about 0.02-0.10'
+    mM2/T_B: 0.096
+    mM2/dHf: 0.087
+    LO(0,0,1)/dHvap: 0.016
+    HM/S: 0.030
+    M2/omega: 0.018
+[C] deletion influence (bolded cells); manuscript 'at most 0.027'
+    overall max = 0.0267
+[D] descriptive post-selection paired bootstrap (top-2 per property, B=10000, seed 1)
+    T_B: [-0.042,+0.157] (mM2 vs LO(0,0,2))
+    dHf: [-0.019,+0.108] (mM2 vs AG)
+    dHvap: [-0.005,+0.007] (LO(0,0,1) vs LO(0,0,2))
+    S: [-0.018,+0.017] (HM vs M1)
+    omega: [-0.018,+0.037] (M2 vs HM)
+[E] E2 tuning (r0, r50, +-boot, LOO0, LOO50 x 20) + per-cell metrics + fold export
+    constant control: signed r=-1.000, Q2=-0.121 (pathology exhibited; screened)
+[F] best-fixed table (20 values); best-fixed index DERIVED by ranking, not assumed
+  done
+[H] matched-budget nested GM-vs-LO ablation recomputed from first principles (seed 12345, budget 200)
+    T_B: Q2_GM=+0.6127573 Q2_LO=+0.7483343 dQ2=+0.1355770 RMSE_GM=3.6999545 RMSE_LO=2.9827493 LO better 10/18 max|g|=0.474
+    dHf: Q2_GM=+0.8552447 Q2_LO=+0.5494468 dQ2=-0.3057979 RMSE_GM=0.4627319 RMSE_LO=0.8163666 LO better 4/18 max|g|=0.474
+    dHvap: Q2_GM=+0.8843978 Q2_LO=+0.9708453 dQ2=+0.0864475 RMSE_GM=0.1267826 RMSE_LO=0.0636694 LO better 13/18 max|g|=0.239
+    S: Q2_GM=+0.9064410 Q2_LO=+0.8777313 dQ2=-0.0287097 RMSE_GM=1.3632042 RMSE_LO=1.5583884 LO better 7/18 max|g|=0.431
+    omega: Q2_GM=+0.9785678 Q2_LO=+0.9564802 dQ2=-0.0220876 RMSE_GM=0.0052780 RMSE_LO=0.0075211 LO better 5/18 max|g|=0.480
+[G] 106 trees / 75 decanes: ALL 12 degeneracy + SS/Abr/SA values
+    min gap 8.12e-04; distinct-count stable 6-12dp: True
+  done
+[G2] Furtula-Gutman-Dehmer SS/Abr on the 75 decanes, first principles (own AHU canonical forms)
+[G3] multi-order degeneracy n=7..12 (all trees / Delta<=4), first principles
+  done
+[M] mathematics: 9 closed forms; 10 bounds x 200 graphs; equality; asymptotics
+    math failures: 0
+[N] analyses: fresh re-run of the 8 bundled analysis scripts vs canonical CSVs
+    analysis recompute: PASS (0 diagnostics)
+[P] SMILES-parser sanity (alkane-only parser; 18 structures)
+    parser sanity: PASS
+[N2] FGD published control (Barman-Das Table 10) + ablation robustness consistency
+    v35 extras: PASS
+[T] drift guard: complete-token, label-validated, COMPUTATION-DERIVED parse of main.tex + supplement.tex tables
+    tex table check: PASS (0 diagnostics)
+[T2] canonical figure-data CSVs: schema + exact-cell + byte comparison vs computation
+    canonical CSV check: PASS (0 diagnostics)
+
+ENV: Python 3.13.0, NumPy 2.4.4, SciPy 1.17.1, networkx 3.6.1, Darwin 24.6.0
+undefined (zero-variance) bootstrap resamples encountered: 0
+TOTAL failures: 0  status: FULL PASS
+scope: FULL PASS covers the executed computations, all 8 numeric tables of main.tex/supplement.tex (exact display strings), and canonical artifacts;
+       prose outside the guarded tables and verifier self-integrity are OUT OF SCOPE (see README/SHA256SUMS.txt).
+results: /Users/ganeshshiwakoti/LOYOLA-PAPER/verify_loyola_v35_results.csv (+ verify_loyola_v35_folds.csv)
+exit 0

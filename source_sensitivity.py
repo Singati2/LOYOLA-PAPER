@@ -9,7 +9,8 @@ S: the four gas-phase entropies that could not be matched to a primary
 source and differ from the standard octane QSPR dataset (arXiv:1701.02859,
 Table 1) are replaced by the dataset values:
   octane 111.55 -> 111.70; 2,2-dimethylhexane 103.13 -> 103.40;
-  2,2,4-trimethylpentane 101.81 -> 104.10; 2,3,3-trimethylpentane 101.31 -> 102.10.
+  2,2,4-trimethylpentane 101.81 -> 104.10; 2,3,3-trimethylpentane 102.06 -> 102.10
+  (v40.5: base value corrected from the duplicated 101.31).
 (The primary data are NOT changed; this is a disclosure-only sensitivity.)
 
 Outputs (next to this script): omega_source_sensitivity_v35.csv,

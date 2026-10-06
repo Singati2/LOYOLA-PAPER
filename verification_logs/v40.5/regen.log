@@ -1,0 +1,285 @@
+=== redundancy_collisions.py 20:03:03
+=== PART 1: redundancy ===
+pairs with |r| >= 0.99  : 14
+  R      H2     r = +0.999724
+  GA     AG     r = -0.998923
+  chi    H2     r = +0.997913
+  R      chi    r = +0.997712
+  chi    GA     r = +0.997640
+  R      GA     r = +0.997534
+  LO001  LO002  r = +0.996979
+  H2     GA     r = +0.996854
+  R      AG     r = -0.996115
+  chi    AG     r = -0.995172
+  M1     HM     r = +0.995114
+  H2     AG     r = -0.994358
+  chi    LO002  r = -0.992948
+  GA     LO002  r = -0.992490
+pairs with |r| >= 0.999 : 1
+  R      H2     r = +0.999724
+eigenvalues: [10.83412  1.05244  0.06092  0.05133  0.00098  0.00019  0.00001  0.
+  0.       0.       0.       0.     ]
+cumvar PC1=0.902844  PC1-2=0.990547  PC1-3=0.995623
+components for 95% var: 2;  for 99% var: 2
+effective rank (participation ratio): 1.2153
+
+=== PART 2: name verification ===
+  [OK ] CCCCCCCC         claimed=octane                     derived=octane
+  [OK ] CC(C)CCCCC       claimed=2-methylheptane            derived=2-methylheptane
+  [OK ] CCC(C)CCCC       claimed=3-methylheptane            derived=3-methylheptane *
+  [OK ] CCCC(C)CCC       claimed=4-methylheptane            derived=4-methylheptane *
+  [OK ] CC(C)(C)CCCC     claimed=2,2-dimethylhexane         derived=2,2-dimethylhexane
+  [OK ] CC(C)C(C)CCC     claimed=2,3-dimethylhexane         derived=2,3-dimethylhexane
+  [OK ] CC(C)CC(C)CC     claimed=2,4-dimethylhexane         derived=2,4-dimethylhexane
+  [OK ] CC(C)CCC(C)C     claimed=2,5-dimethylhexane         derived=2,5-dimethylhexane
+  [OK ] CCCC(C)(C)CC     claimed=3,3-dimethylhexane         derived=3,3-dimethylhexane
+  [OK ] CCC(C)C(C)CC     claimed=3,4-dimethylhexane         derived=3,4-dimethylhexane *
+  [OK ] CCC(CC)C(C)C     claimed=3-ethyl-2-methylpentane    derived=3-ethyl-2-methylpentane *
+  [OK ] CCC(C)(CC)CC     claimed=3-ethyl-3-methylpentane    derived=3-ethyl-3-methylpentane
+  [OK ] CCC(CC)CCC       claimed=3-ethylhexane              derived=3-ethylhexane
+  [OK ] CCC(C)C(C)(C)C   claimed=2,2,3-trimethylpentane     derived=2,2,3-trimethylpentane
+  [OK ] CC(C)CC(C)(C)C   claimed=2,2,4-trimethylpentane     derived=2,2,4-trimethylpentane
+  [OK ] CCC(C)(C)C(C)C   claimed=2,3,3-trimethylpentane     derived=2,3,3-trimethylpentane
+  [OK ] CC(C)C(C)C(C)C   claimed=2,3,4-trimethylpentane     derived=2,3,4-trimethylpentane
+  [OK ] CC(C)(C)C(C)(C)C claimed=2,2,3,3-tetramethylbutane  derived=2,2,3,3-tetramethylbutane
+focus-4 verification: PASS; all-18 verification: PASS
+
+=== PART 2: BID collisions ===
+unique BID profiles: 16 / 18
+collision class P03 [2x(1,2);1x(1,3);2x(2,2);2x(2,3)]: ['3-methylheptane', '4-methylheptane']
+  3-methylheptane vs 4-methylheptane: dT_B=+1.200, ddHf=-0.130, ddHvap=+0.040, dS=+1.940, domega=-0.001
+collision class P09 [2x(1,2);2x(1,3);2x(2,3);1x(3,3)]: ['3,4-dimethylhexane', '3-ethyl-2-methylpentane']
+  3,4-dimethylhexane vs 3-ethyl-2-methylpentane: dT_B=+2.100, ddHf=-0.430, ddHvap=+0.110, dS=+0.530, domega=+0.010
+--- ok redundancy_collisions.py
+=== ablation_gm_vs_lo.py 20:03:03
+[T_B] GM Q2=+0.6128 RMSE=3.7000 MAE=2.6223 r=+0.7898
+[T_B] LO Q2=+0.7483 RMSE=2.9827 MAE=2.4317 r=+0.8660
+[T_B] paired |err| diff (LO-GM): mean=-0.1906 median=-0.1402 LO better/worse/tied = 10/8/0
+[T_B] GM sel a mean/sd=+0.853/0.015  b mean/sd=-1.175/0.005
+[T_B] LO sel a mean/sd=+1.397/0.227  b mean/sd=-1.694/0.327  g mean/sd=-0.461/0.055  frac|g|>1.5=0.000
+
+[dHf] GM Q2=+0.8552 RMSE=0.4627 MAE=0.3744 r=+0.9259
+[dHf] LO Q2=+0.5494 RMSE=0.8164 MAE=0.6651 r=+0.7521
+[dHf] paired |err| diff (LO-GM): mean=+0.2907 median=+0.2778 LO better/worse/tied = 4/14/0
+[dHf] GM sel a mean/sd=+0.849/0.000  b mean/sd=-1.176/0.000
+[dHf] LO sel a mean/sd=-1.022/1.228  b mean/sd=+0.790/1.328  g mean/sd=-0.256/0.160  frac|g|>1.5=0.000
+
+[dHvap] GM Q2=+0.8844 RMSE=0.1268 MAE=0.0944 r=+0.9409
+[dHvap] LO Q2=+0.9708 RMSE=0.0637 MAE=0.0475 r=+0.9853
+[dHvap] paired |err| diff (LO-GM): mean=-0.0469 median=-0.0196 LO better/worse/tied = 13/5/0
+[dHvap] GM sel a mean/sd=+0.991/0.084  b mean/sd=-1.939/0.182
+[dHvap] LO sel a mean/sd=-0.270/0.000  b mean/sd=+0.271/0.000  g mean/sd=+0.239/0.000  frac|g|>1.5=0.000
+
+[S] GM Q2=+0.9064 RMSE=1.3632 MAE=1.1444 r=+0.9523
+[S] LO Q2=+0.8777 RMSE=1.5584 MAE=1.2025 r=+0.9377
+[S] paired |err| diff (LO-GM): mean=+0.0581 median=+0.1536 LO better/worse/tied = 7/11/0
+[S] GM sel a mean/sd=-0.068/0.122  b mean/sd=+1.597/0.247
+[S] LO sel a mean/sd=-0.341/0.265  b mean/sd=+1.850/0.225  g mean/sd=-0.269/0.199  frac|g|>1.5=0.000
+
+[omega] GM Q2=+0.9786 RMSE=0.0053 MAE=0.0039 r=+0.9893
+[omega] LO Q2=+0.9565 RMSE=0.0075 MAE=0.0062 r=+0.9782
+[omega] paired |err| diff (LO-GM): mean=+0.0023 median=+0.0016 LO better/worse/tied = 5/13/0
+[omega] GM sel a mean/sd=+0.632/0.056  b mean/sd=+0.368/0.064
+[omega] LO sel a mean/sd=+0.890/0.184  b mean/sd=+0.693/0.585  g mean/sd=+0.156/0.174  frac|g|>1.5=0.000
+
+HEADLINE (property: GM Q2 vs LO Q2, LO-GM mean|err|diff, better/worse/tied):
+  T_B     GM +0.6128  LO +0.7483  dQ2=+0.1356  d|err| mean=-0.1906 med=-0.1402  10/8/0
+  dHf     GM +0.8552  LO +0.5494  dQ2=-0.3058  d|err| mean=+0.2907 med=+0.2778  4/14/0
+  dHvap   GM +0.8844  LO +0.9708  dQ2=+0.0864  d|err| mean=-0.0469 med=-0.0196  13/5/0
+  S       GM +0.9064  LO +0.8777  dQ2=-0.0287  d|err| mean=+0.0581 med=+0.1536  7/11/0
+  omega   GM +0.9786  LO +0.9565  dQ2=-0.0221  d|err| mean=+0.0023 med=+0.0016  5/13/0
+--- ok ablation_gm_vs_lo.py
+=== ablation_robustness.py 20:03:04
+wrote ablation_robustness.csv, 30 rows
+--- ok ablation_robustness.py
+=== expanded_robustness_v35.py 20:04:49
+wrote expanded_robustness_v35.csv (1000 rows) + summary
+--- ok expanded_robustness_v35.py
+=== tmb_exclusion_sensitivity.py 20:05:03
+wrote dhvap_tmb_exclusion_v36.csv and dhvap_tmb_exclusion_summary_v36.csv
+--- ok tmb_exclusion_sensitivity.py
+=== source_sensitivity.py 20:05:13
+omega: 8/12 displayed correlations change; winner M2 -> M2; max |shift| = 0.0032
+S: 12/12 displayed correlations change; winner HM -> HM; max |shift| = 0.0431
+--- ok source_sensitivity.py
+=== generate_loyola_v35_figures.py 20:05:13
+wrote 3 CSVs -> /Users/ganeshshiwakoti/LOYOLA-PAPER and 2 manuscript PDFs -> /Users/ganeshshiwakoti/LOYOLA-PAPER/figures
+--- ok generate_loyola_v35_figures.py
+=== external/box_sensitivity.py 20:05:14
+octane T_B L=2 done
+octane T_B L=12 done
+octane dHf L=2 done
+octane dHf L=12 done
+octane dHvap L=2 done
+octane dHvap L=12 done
+octane S L=2 done
+octane S L=12 done
+octane omega L=2 done
+octane omega L=12 done
+nonane T_B L=2 done
+nonane T_B L=12 done
+nonane dHvap L=2 done
+nonane dHvap L=12 done
+['octane', 'T_B', 18, 2, 50, '0.6652', '0.7303', '+0.0620', 36, '0.692', '0.138', '', '', '']
+['octane', 'T_B', 18, 12, 50, '0.6060', '0.4952', '-0.0861', 13, '0.024', '0.058', '0.5435', '-0.0495', 21]
+['octane', 'dHf', 18, 2, 50, '0.8206', '0.7688', '-0.0418', 11, '0.516', '0.228', '', '', '']
+['octane', 'dHf', 18, 12, 50, '0.8200', '0.6702', '-0.1548', 6, '0.000', '0.128', '0.7614', '-0.0656', 10]
+['octane', 'dHvap', 18, 2, 50, '0.8872', '0.9565', '+0.0679', 50, '0.970', '0.070', '', '', '']
+['octane', 'dHvap', 18, 12, 50, '0.9418', '0.9343', '-0.0105', 17, '0.033', '0.019', '0.9458', '+0.0036', 28]
+['octane', 'S', 18, 2, 50, '0.9041', '0.8910', '-0.0140', 11, '0.850', '0.399', '', '', '']
+['octane', 'S', 18, 12, 50, '0.8422', '0.8377', '-0.0018', 24, '0.037', '0.019', '0.8671', '+0.0211', 38]
+['octane', 'omega', 18, 2, 50, '0.9790', '0.9743', '-0.0045', 10, '0.000', '0.000', '', '', '']
+['octane', 'omega', 18, 12, 50, '0.9786', '0.9376', '-0.0375', 2, '0.001', '0.084', '0.9510', '-0.0227', 7]
+['nonane', 'T_B', 35, 2, 50, '0.5759', '0.6014', '+0.0235', 30, '0.611', '0.075', '', '', '']
+['nonane', 'T_B', 35, 12, 50, '0.5236', '0.3916', '-0.1131', 9, '0.002', '0.129', '0.5773', '+0.0478', 31]
+['nonane', 'dHvap', 34, 2, 50, '0.8545', '0.8954', '+0.0432', 49, '0.926', '0.066', '', '', '']
+['nonane', 'dHvap', 34, 12, 50, '0.8924', '0.8809', '-0.0159', 15, '0.095', '0.019', '0.8889', '-0.0016', 24]
+--- ok external/box_sensitivity.py
+=== external/make_box_table.py 20:09:13
+oct. $T_B$ & $69\%$ & $0.665$ & $0.730$ & $36$ & $2\%$ & $0.606$ & $0.495$ & $0.543$ & $21$\\
+oct. $\Delta H_f$ & $52\%$ & $0.821$ & $0.769$ & $11$ & $0\%$ & $0.820$ & $0.670$ & $0.761$ & $10$\\
+oct. $\Delta H_{\mathrm{vap}}$ & $97\%$ & $0.887$ & $0.957$ & $50$ & $3\%$ & $0.942$ & $0.934$ & $0.946$ & $28$\\
+oct. $S$ & $85\%$ & $0.904$ & $0.891$ & $11$ & $4\%$ & $0.842$ & $0.838$ & $0.867$ & $38$\\
+oct. $\omega$ & $0\%$ & $0.979$ & $0.974$ & $10$ & $0\%$ & $0.979$ & $0.938$ & $0.951$ & $7$\\
+non. $T_B$ & $61\%$ & $0.576$ & $0.601$ & $30$ & $0\%$ & $0.524$ & $0.392$ & $0.577$ & $31$\\
+non. $\Delta H_{\mathrm{vap}}$ & $93\%$ & $0.855$ & $0.895$ & $49$ & $10\%$ & $0.892$ & $0.881$ & $0.889$ & $24$\\
+--- ok external/make_box_table.py
+=== external/baselines.py 20:09:13
+dataset octane: 18 molecules, properties ['T_B', 'dHf', 'dHvap', 'S', 'omega']
+  T_B: done (7.4s)
+  dHf: done (8.6s)
+  dHvap: done (9.9s)
+  S: done (11.1s)
+  omega: done (12.3s)
+
+property method                    Q2      RMSE   r_pred   seed range Q2 / RMSE
+T_B      mean                 -0.1211    6.2955  -1.0000
+T_B      fixed_best           +0.4463    4.4241  +0.6927
+T_B      IRLA                 +0.5846    3.8322  +0.7662
+T_B      ridge_counts         +0.3439    4.8160  +0.7368
+T_B      GM_b200              +0.6615    3.4592  +0.8214   [+0.3257,+0.7265] / [3.1095,4.8823]
+T_B      GM_b500              +0.6505    3.5152  +0.8154   [+0.5800,+0.7128] / [3.1863,3.8533]
+T_B      GM_s12345_b200       +0.6128    3.7000  +0.7898
+T_B      LO_b200              +0.6517    3.5091  +0.8197   [+0.1991,+0.8568] / [2.2502,5.3209]
+T_B      LO_b500              +0.7070    3.2185  +0.8441   [+0.3373,+0.8794] / [2.0647,4.8403]
+T_B      LO_s12345_b200       +0.7483    2.9827  +0.8660
+
+dHf      mean                 -0.1211    1.2878  -1.0000
+dHf      fixed_best           +0.7457    0.6134  +0.8652
+dHf      IRLA                 +0.5934    0.7756  +0.7717
+dHf      ridge_counts         +0.6542    0.7152  +0.8254
+dHf      GM_b200              +0.8307    0.5004  +0.9140   [+0.6558,+0.8625] / [0.4509,0.7135]
+dHf      GM_b500              +0.8206    0.5151  +0.9097   [+0.7242,+0.8634] / [0.4495,0.6387]
+dHf      GM_s12345_b200       +0.8552    0.4627  +0.9259
+dHf      LO_b200              +0.6894    0.6778  +0.8346   [+0.4418,+0.8690] / [0.4403,0.9087]
+dHf      LO_b500              +0.7221    0.6411  +0.8564   [+0.4418,+0.8738] / [0.4320,0.9087]
+dHf      LO_s12345_b200       +0.5494    0.8164  +0.7521
+
+dHvap    mean                 -0.1211    0.3948  -1.0000
+dHvap    fixed_best           +0.9572    0.0772  +0.9784
+dHvap    IRLA                 +0.9475    0.0854  +0.9734
+dHvap    ridge_counts         +0.9541    0.0799  +0.9823
+dHvap    GM_b200              +0.8876    0.1250  +0.9425   [+0.8572,+0.9057] / [0.1145,0.1409]
+dHvap    GM_b500              +0.8852    0.1263  +0.9414   [+0.8560,+0.8994] / [0.1183,0.1415]
+dHvap    GM_s12345_b200       +0.8844    0.1268  +0.9409
+dHvap    LO_b200              +0.9526    0.0812  +0.9764   [+0.9195,+0.9760] / [0.0578,0.1058]
+dHvap    LO_b500              +0.9537    0.0802  +0.9771   [+0.9110,+0.9760] / [0.0578,0.1113]
+dHvap    LO_s12345_b200       +0.9708    0.0637  +0.9853
+
+S        mean                 -0.1211    4.7189  -1.0000
+S        fixed_best           +0.9047    1.3761  +0.9512
+S        IRLA                 +0.7326    2.3045  +0.8597
+S        ridge_counts         +0.7212    2.3532  +0.8678
+S        GM_b200              +0.9041    1.3805  +0.9512   [+0.8856,+0.9199] / [1.2613,1.5076]
+S        GM_b500              +0.9044    1.3779  +0.9512   [+0.8969,+0.9162] / [1.2901,1.4312]
+S        GM_s12345_b200       +0.9064    1.3632  +0.9523
+S        LO_b200              +0.8890    1.4848  +0.9446   [+0.7652,+0.9338] / [1.1463,2.1595]
+S        LO_b500              +0.8968    1.4320  +0.9473   [+0.8060,+0.9349] / [1.1373,1.9629]
+S        LO_s12345_b200       +0.8777    1.5584  +0.9377
+
+omega    mean                 -0.1211    0.0382  -1.0000
+omega    fixed_best           +0.9712    0.0061  +0.9855
+omega    IRLA                 +0.8099    0.0157  +0.9009
+omega    ridge_counts         +0.8507    0.0139  +0.9312
+omega    GM_b200              +0.9785    0.0053  +0.9893   [+0.9645,+0.9856] / [0.0043,0.0068]
+omega    GM_b500              +0.9787    0.0053  +0.9894   [+0.9651,+0.9840] / [0.0046,0.0067]
+omega    GM_s12345_b200       +0.9786    0.0053  +0.9893
+omega    LO_b200              +0.9701    0.0062  +0.9857   [+0.9072,+0.9874] / [0.0041,0.0110]
+omega    LO_b500              +0.9727    0.0060  +0.9868   [+0.9289,+0.9874] / [0.0041,0.0096]
+omega    LO_s12345_b200       +0.9565    0.0075  +0.9782
+
+wrote /Users/ganeshshiwakoti/LOYOLA-PAPER/external/baselines_octane.csv  (12.3s)
+--- ok external/baselines.py
+=== external/nonane_validation.py 20:09:26
+T_B    primary                                  n=35  verdict: MIXED  B=200: LO better 58/100, median dQ2 +0.0337  B=500: LO better 63/100, median dQ2 +0.0486
+T_B    D4 sensitivity (TMP T_B = median 414.62  n=35  verdict: MIXED  B=200: LO better 60/100, median dQ2 +0.0413  B=500: LO better 66/100, median dQ2 +0.0521
+dHvap  primary                                  n=34  verdict: REPLICATES  B=200: LO better 95/100, median dQ2 +0.0482  B=500: LO better 98/100, median dQ2 +0.0532
+--- ok external/nonane_validation.py
+=== external/make_v37_table.py 20:10:40
+oct. $T_B$ & $-0.121$ & $0.593$ & $0.585$ & $0.344$ & $0.591$ & $0.662$ & $0.652$ & $53/64$\\
+oct. $\Delta H_f$ & $-0.121$ & $0.746$ & $0.593$ & $0.654$ & $0.639$ & $0.831$ & $0.689$ & $14/24$\\
+oct. $\Delta H_{\mathrm{vap}}$ & $-0.121$ & $0.884$ & $0.948$ & $0.954$ & $0.957$ & $0.888$ & $0.953$ & $100/100$\\
+oct. $S$ & $-0.121$ & $0.905$ & $0.733$ & $0.721$ & $0.785$ & $0.904$ & $0.889$ & $34/31$\\
+oct. $\omega$ & $-0.121$ & $0.971$ & $0.810$ & $0.851$ & $0.823$ & $0.979$ & $0.970$ & $26/28$\\
+non. $T_B$ & $-0.060$ & $0.502$ & $0.400$ & $0.682$ & $0.409$ & $0.577$ & $0.586$ & $58/63$\\
+non. $\Delta H_{\mathrm{vap}}$ & $-0.062$ & $0.857$ & $0.897$ & $0.927$ & $0.903$ & $0.853$ & $0.900$ & $95/98$\\
+--- ok external/make_v37_table.py
+=== external/wide_box_diagnostics.py 20:10:40
+D1 Test-B solver: rejected 0 of 3000 candidates, max rel error 6.93e-13, argmin agreement 10/10
+D3 octane dHvap dense parent grid half-width 2: nested Q2 0.8873, folds on boundary 18/18
+D3 octane dHvap dense parent grid half-width 4: nested Q2 0.6996, folds on boundary 17/18
+D3 octane dHvap dense parent grid half-width 8: nested Q2 0.9525, folds on boundary 2/18
+D3 octane dHvap dense parent grid half-width 12: nested Q2 0.9383, folds on boundary 0/18
+D3 nonane dHvap dense parent grid half-width 2: nested Q2 0.8532, folds on boundary 34/34
+D3 nonane dHvap dense parent grid half-width 4: nested Q2 0.8779, folds on boundary 32/34
+D3 nonane dHvap dense parent grid half-width 8: nested Q2 0.8997, folds on boundary 3/34
+D3 nonane dHvap dense parent grid half-width 12: nested Q2 0.8837, folds on boundary 0/34
+D2 one-descriptor path: 1158 selected candidates checked; max rel error of inner RMSE 1.40e-14, of prediction 1.17e-15
+--- ok external/wide_box_diagnostics.py
+=== external/transfer_exploratory.py 20:10:56
+T_B    B=200: refit Q2 median GM +0.6246 LO +0.6525 (LO better 65/100) | frozen Q2 median GM +0.0567 LO -1.5549
+T_B    B=500: refit Q2 median GM +0.6309 LO +0.6828 (LO better 82/100) | frozen Q2 median GM +0.4377 LO -0.9551
+dHvap  B=200: refit Q2 median GM +0.8635 LO +0.9102 (LO better 100/100) | frozen Q2 median GM +0.3203 LO -2.2242
+dHvap  B=500: refit Q2 median GM +0.8651 LO +0.9161 (LO better 100/100) | frozen Q2 median GM +0.3217 LO -0.7171
+--- ok external/transfer_exploratory.py
+=== external/uncertainty_exploratory.py 20:11:11
+octane T_B    n=18 B=200: dQ2(LO-GM) +0.010 [-0.439,+0.260]  P(>0)=0.56 | dQ2(LO-ridge) +0.308 [-0.323,+1.499]
+octane T_B    n=18 B=500: dQ2(LO-GM) +0.066 [-0.325,+0.320]  P(>0)=0.69 | dQ2(LO-ridge) +0.363 [-0.255,+1.682]
+octane dHf    n=18 B=200: dQ2(LO-GM) -0.120 [-0.281,-0.044]  P(>0)=0.00 | dQ2(LO-ridge) +0.035 [-0.053,+0.127]
+octane dHf    n=18 B=500: dQ2(LO-GM) -0.095 [-0.203,-0.029]  P(>0)=0.00 | dQ2(LO-ridge) +0.068 [-0.003,+0.169]
+octane dHvap  n=18 B=200: dQ2(LO-GM) +0.069 [+0.014,+0.111]  P(>0)=0.99 | dQ2(LO-ridge) -0.002 [-0.079,+0.067]
+octane dHvap  n=18 B=500: dQ2(LO-GM) +0.068 [+0.016,+0.109]  P(>0)=0.99 | dQ2(LO-ridge) -0.000 [-0.073,+0.076]
+octane S      n=18 B=200: dQ2(LO-GM) -0.012 [-0.064,+0.014]  P(>0)=0.14 | dQ2(LO-ridge) +0.168 [+0.023,+0.297]
+octane S      n=18 B=500: dQ2(LO-GM) -0.010 [-0.097,+0.028]  P(>0)=0.33 | dQ2(LO-ridge) +0.176 [+0.036,+0.301]
+octane omega  n=18 B=200: dQ2(LO-GM) -0.010 [-0.018,+0.001]  P(>0)=0.04 | dQ2(LO-ridge) +0.119 [-0.023,+0.271]
+octane omega  n=18 B=500: dQ2(LO-GM) -0.006 [-0.012,+0.003]  P(>0)=0.09 | dQ2(LO-ridge) +0.122 [-0.017,+0.283]
+nonane T_B    n=35 B=200: dQ2(LO-GM) +0.034 [-0.212,+0.222]  P(>0)=0.64 | dQ2(LO-ridge) -0.096 [-0.398,+0.325]
+nonane T_B    n=35 B=500: dQ2(LO-GM) +0.049 [-0.170,+0.266]  P(>0)=0.71 | dQ2(LO-ridge) -0.052 [-0.357,+0.435]
+nonane dHvap  n=34 B=200: dQ2(LO-GM) +0.048 [-0.006,+0.113]  P(>0)=0.96 | dQ2(LO-ridge) -0.027 [-0.101,+0.032]
+nonane dHvap  n=34 B=500: dQ2(LO-GM) +0.053 [-0.005,+0.119]  P(>0)=0.96 | dQ2(LO-ridge) -0.025 [-0.103,+0.042]
+--- ok external/uncertainty_exploratory.py
+=== git diff --stat 20:12:25
+ LOYOLA_V35_DATA_PROVENANCE.md                      |  11 +-
+ ablation_perfold.csv                               |  72 ++--
+ ablation_robustness.csv                            |  12 +-
+ ablation_summary.csv                               |   4 +-
+ bid_collision_table.csv                            |   2 +-
+ entropy_source_sensitivity_v36.csv                 |  24 +-
+ expanded_robustness_summary_v35.csv                |   4 +-
+ expanded_robustness_v35.csv                        | 400 ++++++++++-----------
+ external/baselines_octane.csv                      |  20 +-
+ external/box_sensitivity.csv                       | 200 +++++------
+ external/box_sensitivity_summary.csv               |   4 +-
+ external/box_table_rows.tex                        |   2 +-
+ external/uncertainty_exploratory.csv               |   4 +-
+ external/v37_classical_fixed.csv                   |   2 +-
+ external/v37_table_rows.tex                        |   2 +-
+ .../fig_lo_prediction_correlation_heatmap_v3.pdf   | Bin 31246 -> 31214 bytes
+ lo_sensitivity_prediction_correlations.csv         |  24 +-
+ main.tex                                           |  92 ++++-
+ octane_data.py                                     |  12 +-
+ octane_property_provenance_v35.csv                 |   2 +-
+ source_sensitivity.py                              |   3 +-
+ verify_loyola_v35_folds.csv                        | 144 ++++----
+ verify_loyola_v35_results.csv                      | 114 +++---
+ 23 files changed, 623 insertions(+), 531 deletions(-)

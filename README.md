@@ -3,10 +3,12 @@
 Advik Natarajan, Ganesh Shiwakoti, Michael Arockiaraj — manuscript, supplement,
 data, code and machine-checked proofs.
 
+**v40.5 (2026-10-05):** 2,3,3-trimethylpentane entropy corrected from a duplicated entry (101.31→102.06); S-dependent tables regenerated; consolidated data-quality appendix; companion-paper citation; full verification suite re-run (`verification_logs/v40.5/`). See `V35_TO_V36_SCIENTIFIC_CHANGELOG.md`.
+
 ## Current documents
 | File | Content |
 |---|---|
-| `main.tex`, `LOYOLA_paper.pdf` | the paper (38 A5 pages, MATCH template) |
+| `main.tex`, `LOYOLA_paper.pdf` | the paper (40 A5 pages, MATCH template) |
 | `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (21 pages) |
 | `LOYOLA_FINAL_PAPER_OVERLEAF.zip` | Overleaf upload (both documents + figures) |
 

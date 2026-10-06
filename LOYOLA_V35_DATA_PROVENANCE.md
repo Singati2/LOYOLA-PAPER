@@ -38,9 +38,14 @@ counts are enforced by the verifier ([N2]).
   102.10). Substituting them changes all 12 S correlations at the third
   decimal (max |Δr| = 0.034); the winner (HM) is unchanged
   (`entropy_source_sensitivity_v36.csv`, `source_sensitivity.py`).
-  **Flag for the authors:** the 2,3,3-trimethylpentane S value 101.31 is
-  identical to the 2,2,3-trimethylpentane value — a possible copy error in
-  the compiled table that should be checked against the original source.
+  **Resolved in v40.5:** the 2,3,3-trimethylpentane S value 101.31 was
+  identical to the 2,2,3-trimethylpentane value, a copy error in the compiled
+  table. It is now 102.06, the value of the compiled 18-octane dataset
+  (Mondal, De & Pal 2019, arXiv:1906.06660, Table 2; Ediz 2017,
+  arXiv:1701.02859, gives 102.10 at one decimal). No primary source lists
+  S(gas) for this isomer, so it remains CANNOT VERIFY against a primary
+  source. The entropy-sensitivity table was regenerated from the corrected
+  base value.
 
 ## Final classification counts (claimed identically in manuscript §5.1)
 | Class | Count |

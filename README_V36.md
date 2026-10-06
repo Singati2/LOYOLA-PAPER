@@ -66,7 +66,7 @@ Regeneration (each writes next to itself): `ablation_gm_vs_lo.py`,
 `generate_loyola_v35_figures.py`.
 
 ## Standing CANNOT VERIFY
-6 NIST-absent gas entropies; the tetramethylbutane 298 K vaporization case;
+6 NIST-absent gas entropies (the 2,3,3-trimethylpentane value, which duplicated the 2,2,3-trimethylpentane entry until v40.4, carries the compiled-dataset value 102.06 since v40.5 and remains unverified against a primary source); the tetramethylbutane 298 K vaporization case;
 paywalled AKCE 2020 / Portilla JMC full texts; InChIKeys. Coauthor sign-off
 and the authors' own Overleaf compile remain the gating steps.
 
