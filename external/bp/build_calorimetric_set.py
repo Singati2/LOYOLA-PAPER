@@ -22,7 +22,7 @@ for a in sk:
     if cal:
         n=int(a['n']); first=a['names'].split(' / ')[0]
         rows.append(dict(n=n,name=first,dev_set_octane=(n==8),already_used_nonane_test=(n==9),
-            linear=first.lower() in ('pentane','n-hexane','heptane','octane','nonane','decane','undecane','dodecane','tridecane','tetradecane','pentadecane','hexadecane'),
+            linear=first.lower().lstrip('n-') in ('butane','pentane','hexane','heptane','octane','nonane','decane','undecane','dodecane','tridecane','tetradecane','pentadecane','hexadecane'),
             calorimetric_determinations=' ; '.join(dict.fromkeys(cal)),urls=a['urls']))
 w=csv.DictWriter(open(os.path.join(HERE, 'calorimetric_dHvap298_alkanes.csv'),'w',newline=''),list(rows[0].keys())); w.writeheader(); w.writerows(rows)
 tot=len(rows); new=[r for r in rows if not r['dev_set_octane'] and not r['already_used_nonane_test']]

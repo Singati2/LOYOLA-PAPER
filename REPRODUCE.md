@@ -6,7 +6,7 @@ networkx, matplotlib, sympy, mpmath). Lean: `formal/verify.sh` (elan/lake).
 ## Checks to run
 | Command | What it verifies | Runtime |
 |---|---|---|
-| `python3 verify.py` (`--full` for everything below) | single entry point: runs the core verifier, the prose-number check, the external regression and baseline tests, the constancy check and the manifest, and exits non-zero on any failure; `--full` adds the external verifier, the structural suite, the 32-digit recount, the self-test and (if a Lean toolchain is present) the Lean proofs | ~6 min / ~1 h |
+| `python3 verify.py` (`--full` for the long suites, `--everything` to also replay every script) | single entry point: runs the core verifier, the prose-number check, the external regression and baseline tests, the constancy check and the manifest, and exits non-zero on any failure; `--full` adds the external verifier, the structural suite, the 32-digit recount, the self-test and (if a Lean toolchain is present) the Lean proofs | ~6 min / ~1 h |
 | `python3 verify_loyola_v35.py` | octane data, closed forms, bounds, all 8 core tables (exact display strings), figures (canonical PDF content), every core analysis re-run byte-for-byte | ~5 min |
 | `python3 verify_loyola_v35.py --selftest` | 114 adversarial attacks on the verifier itself | ~10 min |
 | `python3 external/verify_external.py` | nonane data rebuilt from archived NIST pages; boiling-point data rebuilt; every external analysis re-run (result floats within 1e-8, every other cell exact); Tables tab:external, tab:box, tab:bp row by row | ~25 min |
@@ -15,6 +15,8 @@ networkx, matplotlib, sympy, mpmath). Lean: `formal/verify.sh` (elan/lake).
 | `python3 manifest.py` | SHA-256 of every tracked file, one hash per path (`--write` regenerates it; stage new files with `git add` first, since untracked files are not hashed) | seconds |
 | `python3 external/test_regressions.py` | unit checks of the shared regression core (extreme descriptor scales, large-offset constancy), the fail-closed CSV comparator, the fail-closed data build (missing archived page) and the structural certificate (empty witness set), without running the external suite | seconds |
 | `python3 prose_numbers_check.py` | every registered numeral of the running prose of both documents (735 entries in prose_claims_a.py and prose_claims_b.py; 16 cited values listed as uncheckable) recomputed from the canonical files | seconds |
+| `python3 audit/attack_checks.py` | 13 counter-attacks on the checkers outside the core verifier's self-test (corrupted outputs, data, manuscript numerals, archived records, disabled guards): each must be rejected | ~3 min |
+| `python3 audit/run_all_scripts.py` | every script of the repository re-run in an isolated copy of the tracked tree; every file it writes compared with the committed one (PDFs by canonical form); `python3 verify.py --everything` runs it after the full suite | ~2 h |
 | `python3 audit/check_exploratory_outputs.py` | fractional-point, chi-floor and calorimetric-availability outputs rebuilt in an isolated copy and compared byte-for-byte | seconds |
 | `python3 audit/check_source_identities.py` | archived boiling-point pages: molecular formulas and carbon skeletons match the 154 source records | seconds |
 | `python3 audit/check_mathematics.py` | 50-digit interval certificates of the finite-rank exception set (Delta 6, 7) and of the five-crossing witness, independent of structural_checks.py | seconds |

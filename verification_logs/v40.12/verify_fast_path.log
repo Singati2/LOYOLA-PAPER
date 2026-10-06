@@ -1,0 +1,11 @@
+[PASS] core verifier (145 s): scope: FULL PASS covers the executed computations, all 8 numeric tables of main.tex/supplement.tex (exact display strings), and canonical ar
+[PASS] prose numbers (5 s): prose numbers: 723 checked, 0 failures, 16 uncheckable (cited values; see UNCHECKABLE in the registries)
+[PASS] external regression tests (0 s): OK
+[PASS] baseline tests (40 s): 0 failures; 40.3s
+[PASS] constancy test check (8 s): RESULT: the two constancy tests never disagree on these inputs; no fold is affected
+[PASS] auxiliary outputs (3 s): Auxiliary output reproduction PASS
+[PASS] archived-source identities (0 s): Archived source formula/skeleton checks PASS: 154 pages
+[PASS] interval certificates (1 s): Mathematics interval checks PASS
+[PASS] manifest (0 s): manifest OK: 451 files, one hash per path, all match
+[PASS] provenance CSV convention: 91 CRLF rows, field counts [12]
+ALL PASS

@@ -15,9 +15,13 @@ def sha(p):
     with open(os.path.join(ROOT, p), "rb") as f:
         for b in iter(lambda: f.read(1 << 20), b""): h.update(b)
     return h.hexdigest()
-tracked = sorted(set(subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True, text=True,
-                                    check=True).stdout.splitlines()) - {"SHA256SUMS.txt"})
+try:
+    tracked = sorted(set(subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True, text=True,
+                                        check=True).stdout.splitlines()) - {"SHA256SUMS.txt"})
+except (subprocess.CalledProcessError, FileNotFoundError):
+    tracked = None   # not a git checkout (e.g. a downloaded archive): check the listed files only
 if "--write" in sys.argv:
+    if tracked is None: sys.exit("manifest.py --write needs a git checkout (git ls-files)")
     with open(MAN, "w") as f:
         for p in tracked: f.write(f"{sha(p)}  {p}\n")
     print(f"wrote {len(tracked)} entries"); sys.exit(0)
@@ -27,10 +31,11 @@ for ln, line in enumerate(open(MAN), 1):
     h, _, p = line.rstrip("\n").partition("  ")
     if p in seen: errs.append(f"duplicate path {p} (lines {seen[p]} and {ln})"); continue
     seen[p] = ln
-    if p not in tracked: errs.append(f"{p}: in manifest but not git-tracked")
+    if tracked is not None and p not in tracked: errs.append(f"{p}: in manifest but not git-tracked")
     elif not os.path.exists(os.path.join(ROOT, p)): errs.append(f"{p}: missing on disk")
     elif sha(p) != h: errs.append(f"{p}: hash mismatch")
-for p in tracked:
+for p in (tracked or []):
     if p not in seen: errs.append(f"{p}: tracked but not in manifest")
-print("\n".join(errs) if errs else f"manifest OK: {len(seen)} files, one hash per path, all match")
+note = "" if tracked is not None else " (no git checkout: listed files verified, untracked files not detected)"
+print("\n".join(errs) if errs else f"manifest OK: {len(seen)} files, one hash per path, all match{note}")
 sys.exit(1 if errs else 0)

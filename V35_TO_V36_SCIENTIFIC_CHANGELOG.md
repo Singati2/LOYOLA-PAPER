@@ -587,3 +587,41 @@ self-test's provenance attacks, fixed with the CRLF convention in v40.9;
 the manifest omission, fixed in v40.9.1); its bundles, manifest, logs,
 audit document and the hunks that would have reverted v40.9 were not
 taken.
+
+## v40.12 (code-surface review: two logic bugs, two latent crashes, fragilities)
+- constancy_test_check.py: the "17-molecule" fold set tested the name on the
+  SMILES string and therefore excluded nothing (the check ran on 18 + 18
+  identical folds).  Fixed (NAMES); re-run: 35 folds, still no descriptor
+  flagged under either definition, smallest relative range 2.4e-4.
+- external/bp/coverage_bias.py keyed provenance rows inconsistently with
+  build_bp_data.py (grouped records are keyed by the pages carrying a boiling
+  point); on the committed data no decane was misclassified (checked for all
+  75), but the lookup now indexes every page id and stops if a skeleton has
+  no unique status.  coverage_bias.csv unchanged.
+- external/build_nonane_data.py: two undefined-rule cases (all boiling-point
+  entries compilations; several non-calorimetric dvapH entries without an
+  average) now stop with an explicit message instead of a bare exception.
+  Outputs unchanged.
+- external/bp/build_calorimetric_set.py: the linear-alkane list includes
+  butane and accepts an "n-" prefix (no row was affected; the committed CSV
+  is unchanged).
+- verify.py derives the provenance-CSV row count from a proper CSV parse
+  instead of a hard-coded 91; manifest.py checks the listed files when run
+  outside a git checkout (downloaded archive) and says so.
+- Not changed: distinct-value counting at 11 significant digits is the
+  stated convention and is cross-checked at 32 digits (hp_counts.py); the
+  three inner-LOO degeneracy formulas are documented as inert
+  (constancy_test_check.py).
+- Two harnesses added so that the class of defect found by the last reviews
+  (auxiliary scripts never re-run, checkers never attacked) is closed:
+  audit/run_all_scripts.py re-runs every script of the repository in an
+  isolated copy of the tracked tree and compares every file it writes with
+  the committed one (`verify.py --everything`); audit/attack_checks.py
+  mutates outputs, data, manuscript numerals, archived records and guards
+  and requires each checker to reject the mutation (13 attacks, all
+  rejected; `verify.py --full`).  Developing the attacks exposed two weak
+  attacks (an InChI relabelling that is isomorphic; disabling a raise that
+  open() would have raised anyway), not weak checkers.
+- The full isolated replay of every script (audit/run_all_scripts.py) was
+  still running when v40.12 was committed; its committed output follows in
+  v40.12.1.

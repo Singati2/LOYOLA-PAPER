@@ -13,7 +13,11 @@
                                external/verify_external.py
                                structural/structural_checks.py, structural/hp_counts.py
                                verify_loyola_v35.py --selftest
+                               audit/attack_checks.py      (13 counter-attacks on the newer checkers)
                                formal/verify.sh (if a Lean toolchain is installed)
+  python3 verify.py --everything   also audit/run_all_scripts.py: every script of the
+                               repository re-run in an isolated copy and every file it
+                               writes compared with the committed one (about two hours)
 
 Each step is run as a subprocess; the exit status is 0 iff every step exits 0.
 See REPRODUCE.md for what each suite covers.
@@ -48,7 +52,9 @@ def check_csv_conventions():
     except csv.Error:
         parsed = []
     n_fields = {len(r) for r in parsed}; n_crlf = raw.count(b"\r\n")
-    ok = n_crlf == len(rows_crlf) == 91 and n_fields == {12}
+    with open(p, newline="") as f:
+        n_rows = sum(1 for _ in csv.reader(f))          # header + records, parsed properly
+    ok = n_crlf == len(rows_crlf) == n_rows >= 2 and n_fields == {12}
     print(f"[{'PASS' if ok else 'FAIL'}] provenance CSV convention: {n_crlf} CRLF rows, field counts {sorted(n_fields)}", flush=True)
     return ok
 FULL = [
@@ -56,6 +62,10 @@ FULL = [
     ("structural checks", [PY, "structural_checks.py"], os.path.join(HERE, "structural")),
     ("32-digit recount", [PY, "hp_counts.py"], os.path.join(HERE, "structural")),
     ("verifier self-test", [PY, "verify_loyola_v35.py", "--selftest"], HERE),
+    ("counter-attacks on the checkers", [PY, os.path.join("audit", "attack_checks.py")], HERE),
+]
+EVERYTHING = [
+    ("every script replayed in isolation", [PY, os.path.join("audit", "run_all_scripts.py")], HERE),
 ]
 
 
@@ -69,9 +79,13 @@ def run(name, cmd, cwd):
 
 
 def main():
+    if "--convention-only" in sys.argv:          # used by audit/attack_checks.py
+        return 0 if check_csv_conventions() else 1
     steps = list(FAST)
-    if "--full" in sys.argv:
+    if "--full" in sys.argv or "--everything" in sys.argv:
         steps += FULL
+    if "--everything" in sys.argv:
+        steps += EVERYTHING
         if shutil.which("lake"):
             steps.append(("Lean proofs", ["bash", "verify.sh"], os.path.join(HERE, "formal")))
         else:

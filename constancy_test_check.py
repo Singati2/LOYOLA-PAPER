@@ -11,7 +11,7 @@ constancy_test_check_out.txt (committed).  Runtime about one minute."""
 import os, sys
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__)); sys.path.insert(0, HERE)
-from octane_data import OCTANES, alkane_pairs, lo_pairs
+from octane_data import OCTANES, NAMES, alkane_pairs, lo_pairs
 
 OP = [alkane_pairs(r[0]) for r in OCTANES]; N = len(OP)
 streams = []
@@ -27,7 +27,8 @@ T = np.unique(np.vstack(streams), axis=0)
 X = np.array([[lo_pairs(P, a, b, g) for P in OP] for a, b, g in T])
 eps, tiny = np.finfo(float).eps, np.finfo(float).tiny
 folds = [[k for k in range(N) if k != i] for i in range(N)]
-idx = [k for k, r in enumerate(OCTANES) if "tetramethylbutane" not in r[0]]
+idx = [k for k, nm in enumerate(NAMES) if nm != "2,2,3,3-tetramethylbutane"]   # v40.12: was tested on the SMILES string, so it excluded nothing
+assert len(idx) == 17
 folds += [[k for j, k in enumerate(idx) if j != i] for i in range(len(idx))]
 old = new = degen = 0; minrel = np.inf
 for m in folds:

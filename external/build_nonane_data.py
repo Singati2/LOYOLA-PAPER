@@ -94,6 +94,7 @@ for name,smi in iso:
         prim=[r for r in tb if r[4] not in COMPILATIONS]
         if len(tb)==1: r=tb[0]; rule='single NIST Tboil determination (no AVG given)'
         else:
+            if not prim: raise SystemExit(f"{name}: several T_B entries but none is a primary determination; rule undefined")
             r=max(prim,key=lambda r:year(r[4])); rule='no NIST AVG; most recent primary experimental determination (compilations e.g. Weast & Grasselli 1989 CRC excluded) — PREREG GAP: calorimetric fallback inapplicable to Tboil; interpretation needs author ratification'
         K=num(r[1]); alld='; '.join(f'{x[1]} K ({refs.get(x[4],x[4])}; {x[5]})' for x in tb); snip=' | '.join(r); src_url=url
     else: K=None
@@ -113,8 +114,8 @@ for name,smi in iso:
         rule='no NIST AVG; most recent calorimetric (method C) determination — prereg fallback rule'+(f' (same study listed {len(cands)}x; most precisely reported entry used)' if len(cands)>1 else ''); src_url=url
         alld='; '.join(f'{x[1]} kJ/mol (method {x[3]}; {refs.get(x[4],x[4])}; {x[5]})' for x in hv)
     elif hv:
-        r=hv[0] if len(hv)==1 else None
-        assert r is not None, name
+        if len(hv)!=1: raise SystemExit(f"{name}: {len(hv)} non-calorimetric dvapH entries and no AVG; rule undefined")
+        r=hv[0]
         rule='only one NIST ΔvapH° entry, non-calorimetric (method N/A); prereg rules (AVG / calorimetric) not met — used as sole available NIST value; FLAG' ; src_url=url
         alld='; '.join(f'{x[1]} kJ/mol (method {x[3]}; {refs.get(x[4],x[4])}; {x[5]})' for x in hv)
     else: r=None

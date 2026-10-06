@@ -26,18 +26,22 @@ def feats(G):
 
 
 def main():
-    prov = {r["nist_id"]: r for r in csv.DictReader(open(os.path.join(HERE, "bp_provenance.csv")))}
+    # bp_provenance.csv keys a record by the page ids that carried a boiling
+    # point (or by all its ids when none did); index every individual id so a
+    # grouped record is found whichever subset of its pages was recorded, and
+    # stop if a skeleton has no provenance row at all (v40.12).
+    prov = {}
+    for r in csv.DictReader(open(os.path.join(HERE, "bp_provenance.csv"))):
+        for cid in r["nist_id"].split():
+            prov[cid] = r
     sk = [a for a in csv.DictReader(open(os.path.join(HERE, "nist_alkanes_skeletons_audit.csv"))) if a["n"] == "10"]
     inc, exc = [], []
     for a in sk:
         G = bb.inchi_tree(a["skel"], 10)
-        status = None
-        for cid in a["ids"].split():
-            if cid in prov:
-                status = prov[cid]["status"]; break
-        if status is None:  # provenance keyed by first id for excluded entries
-            status = next((r["status"] for r in prov.values() if r["n_C"] == "10" and r["nist_id"] == a["ids"]), "EXCLUDED")
-        (inc if status == "INCLUDED" else exc).append(feats(G))
+        statuses = {prov[cid]["status"] for cid in a["ids"].split() if cid in prov}
+        if len(statuses) != 1:
+            raise SystemExit(f"coverage_bias: no unique provenance status for {a['names'][:40]} ({a['ids']}): {statuses}")
+        (inc if statuses == {"INCLUDED"} else exc).append(feats(G))
     rng = np.random.default_rng(20261005); rows = []
     for k in inc[0]:
         x = np.array([f[k] for f in inc], float); y = np.array([f[k] for f in exc], float)
