@@ -1,0 +1,4 @@
+PASS: structural/fractional_points_out.txt
+PASS: structural/chi_floor_out.txt
+PASS: external/bp/calorimetric_dHvap298_alkanes.csv
+Auxiliary output reproduction PASS

@@ -8,11 +8,14 @@ networkx, matplotlib, sympy, mpmath). Lean: `formal/verify.sh` (elan/lake).
 |---|---|---|
 | `python3 verify_loyola_v35.py` | octane data, closed forms, bounds, all 8 core tables (exact display strings), figures (canonical PDF content), every core analysis re-run byte-for-byte | ~5 min |
 | `python3 verify_loyola_v35.py --selftest` | 113 adversarial attacks on the verifier itself | ~10 min |
-| `python3 external/verify_external.py` | nonane data rebuilt from archived NIST pages; boiling-point data rebuilt; every external analysis re-run byte-for-byte; Tables tab:external, tab:box, tab:bp row by row | ~25 min |
+| `python3 external/verify_external.py` | nonane data rebuilt from archived NIST pages; boiling-point data rebuilt; every external analysis regenerated; recognized floating result cells compared with tolerance, other cells exact; Tables tab:external, tab:box, tab:bp row by row | ~25 min |
 | `python3 structural/structural_checks.py` | tree orders 7-17, GA and crossing witnesses, identifiability (Delta<=6), structure sensitivity of IRLA and the gamma sweep, auxiliary Q2 values, ridge permutation check; Table tab:firstfail entry by entry | ~20 min |
-| `formal/verify.sh` | Lean 4 proofs (36 theorems; no sorry/axioms) | ~1 min after first build |
+| `formal/verify.sh` | Lean 4 proofs (36 theorems; no sorry or extra axioms) | ~1 min after first build |
 | `python3 manifest.py` | SHA-256 of every tracked file, one hash per path | seconds |
-| `python3 external/test_regressions.py` | unit checks of the shared regression core (extreme descriptor scales, large-offset constancy) and of the fail-closed CSV comparator, without running the external suite | seconds |
+| `python3 external/test_regressions.py` | 10 regression checks covering shared and size-adjusted OLS, deletion-induced rank loss, missing grouped source archives, empty structural certificates, and the fail-closed CSV comparator, without running the external suite | seconds |
+| `python3 audit/check_exploratory_outputs.py` | fractional-point, chi-floor and calorimetric availability outputs freshly rebuilt and compared byte-for-byte in an isolated copy | seconds |
+| `python3 audit/check_source_identities.py` | archived boiling-point page formulas and carbon skeletons match the 154 relevant source records | seconds |
+| `python3 audit/check_mathematics.py` | independent interval checks of finite degree-pair ranks and the five-crossing witness | seconds |
 | `python3 prose_numbers_check.py` | every registered numeral of the running prose of both documents (735 entries in prose_claims_a.py and prose_claims_b.py; 16 cited values listed as uncheckable) recomputed from the canonical files | seconds |
 | `python3 constancy_test_check.py` | shows that the constancy test is inert: no candidate descriptor of the octane analyses is flagged under the old or the new definition | ~1 min |
 
@@ -46,12 +49,12 @@ networkx, matplotlib, sympy, mpmath). Lean: `formal/verify.sh` (elan/lake).
 | pre-registered nonane test | external/nonane_validation.py (PREREG_v37.md) | verify_external.py |
 | pre-registered boiling-point tests | external/bp/bp_tests.py (PREREG_v40.md) | verify_external.py |
 | decane coverage-bias check (included vs excluded) | external/bp/coverage_bias.py | verify_external.py |
-| calorimetric dHvap availability (25 outside C8/C9; 1 decane) | external/bp/build_calorimetric_set.py | output committed (calorimetric_dHvap298_alkanes.csv) |
+| calorimetric dHvap availability (25 outside C8/C9; 1 decane) | external/bp/build_calorimetric_set.py | audit/check_exploratory_outputs.py |
 | wide-box solver/selection/dense-grid diagnostics | external/wide_box_diagnostics.py | output committed (wide_box_diagnostics_out.txt) |
 | structural counts and witnesses | structural/structural_checks.py | itself (output committed) |
 | 32-digit recount of the distinct-value counts (orders 7-17); pure-gamma counts = q-histogram counts | structural/hp_counts.py | itself (hp_counts_out.txt committed) |
-| fixed fractional exponents, gamma=0 vs 1 (exploratory) | structural/fractional_points.py | output committed (fractional_points_out.txt) |
-| chi floor (orders 7-12) | structural/chi_floor.py | output committed (chi_floor_out.txt) |
+| fixed fractional exponents, gamma=0 vs 1 (exploratory) | structural/fractional_points.py | audit/check_exploratory_outputs.py |
+| chi floor (orders 7-12) | structural/chi_floor.py | audit/check_exploratory_outputs.py |
 
 ## Datasets
 | Dataset | Source | Rebuilt / checked by |

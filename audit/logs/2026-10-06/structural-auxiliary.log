@@ -1,0 +1,15 @@
+S2 GA witness: GA(A)-GA(B) = 0 | q-histograms equal: False | edges 16 16
+S4 Delta=6: pair sets violating A = min(|S|-1, r, 3): 0 []
+S4 Delta=7: pair sets violating A = min(|S|-1, r, 3): 1 [((1, 7), (2, 6), (3, 5), (4, 4))]
+/root/.local/lib/python3.12/site-packages/networkx/algorithms/graph_hashing.py:211: UserWarning: The hashes produced for graphs without node or edge attributes changed in v3.5 due to a bugfix (see documentation).
+  node_labels = _init_node_labels(G, edge_attr, node_attr)
+S5 IRLA SS=0.2343 Abr=0.5066 ratio=0.4625
+   LO(0,0,0.5) SS=0.0312 Abr=0.0688 ratio=0.4537
+   LO(0,0,1) SS=0.0624 Abr=0.1367 ratio=0.4565
+   LO(0,0,2) SS=0.1257 Abr=0.2745 ratio=0.4579
+   LO(0,0,3) SS=0.1894 Abr=0.4193 ratio=0.4517
+   LO(0,0,5) SS=0.3192 Abr=0.7478 ratio=0.4269
+   LO(0,0,10) SS=0.6983 Abr=1.9898 ratio=0.3510
+S6 octane dHvap LOO Q2 of fixed (4.5, -9.0, 0.0): 0.9494
+S6 octane dHvap LOO Q2 of fixed (0.0, 0.0, 1.0): 0.9572
+S7 decane ridge Q2 0.8599; permuted (200): median -0.0882, 95th pct -0.0087, max 0.1952

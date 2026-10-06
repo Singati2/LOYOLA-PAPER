@@ -1440,7 +1440,7 @@ def run_selftest(A, here, HAVE_NX):
     extras_attack("fgd-control-class-corrupt",CSV_CTRL,lambda t:t.replace("within_1_unit_4th_dp","exact_at_4dp",1),"agreement")
     extras_attack("entropy-sensitivity-corrupt",CSV_SSEN,lambda t:t.replace("-0.9541284205","-0.9551284205",1),CSV_SSEN)
     def prov_line(t,mol,prop,f):
-        L=t.split("\r\n")
+        L=t.splitlines()
         for k,l in enumerate(L):
             fl=next(csv.reader([l])) if l else []
             if len(fl)>1 and fl[0]==mol and fl[1]==prop:

@@ -51,6 +51,7 @@ def _standardize(Xt):
     its leave-one-out residuals are unchanged, but the normal equations stay
     well conditioned for descriptors spanning many orders of magnitude (wide
     search boxes give values from 1e-14 to 1e+24)."""
+    Xt = B._rescale_extreme_rows(np.asarray(Xt, float))
     mu = Xt.mean(axis=1, keepdims=True); sd = Xt.std(axis=1, keepdims=True)
     sd = np.where(sd > 0, sd, 1.0)
     return (Xt - mu) / sd
@@ -58,8 +59,9 @@ def _standardize(Xt):
 
 def press_size(Xt, zt, yt):
     """Inner-LOO RMSE of y ~ 1 + z + x for every candidate row of Xt (C x n)."""
-    C, n = Xt.shape
-    Xt = _standardize(Xt)
+    Xt_raw = np.asarray(Xt, float)
+    C, n = Xt_raw.shape
+    Xt = _standardize(Xt_raw)
     A = np.stack([np.ones((C, n)), np.broadcast_to(zt, (C, n)), Xt], axis=2)      # C x n x 3
     S = np.einsum("cni,cnj->cij", A, A)
     ok = np.abs(np.linalg.det(S)) > 1e-9 * np.abs(S).max(axis=(1, 2)) ** 3
@@ -68,12 +70,26 @@ def press_size(Xt, zt, yt):
     beta = np.einsum("cij,cnj,n->ci", Si, A, yt)
     res = yt - np.einsum("cni,ci->cn", A, beta)
     h = np.einsum("cni,cij,cnj->cn", A, Si, A)
-    r = np.sqrt(((res / (1 - h)) ** 2).mean(axis=1))
-    r[~ok] = np.inf
+    regular = ok & np.all(np.abs(1 - h) > 1e-10, axis=1)
+    r = np.full(C, np.inf)
+    r[regular] = np.sqrt(((res[regular] / (1 - h[regular])) ** 2).mean(axis=1))
+    # The PRESS identity requires every deletion to preserve model rank.
+    # Preserve the existing full-design eligibility filter. Explicit refits
+    # handle deletion-induced rank loss for otherwise eligible candidates.
+    for k in np.flatnonzero(ok & ~regular):
+        pred = []
+        for j in range(n):
+            mask = np.arange(n) != j
+            pred.append(fit_pred_size(Xt_raw[k, mask], zt[mask], yt[mask], Xt_raw[k, j], zt[j]))
+        r[k] = np.sqrt(np.mean((np.asarray(pred) - yt) ** 2))
     return r
 
 
 def fit_pred_size(xt, zt, yt, xn, zn):
+    xt = np.asarray(xt, float)
+    scale = float(np.abs(xt).max())
+    if scale > 0 and (scale < 1e-150 or scale > 1e150):
+        xt, xn = xt / scale, xn / scale
     mu, sd = xt.mean(), xt.std()
     sd = sd if sd > 0 else 1.0
     A = np.column_stack([np.ones_like(zt), zt, (xt - mu) / sd])

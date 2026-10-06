@@ -60,7 +60,8 @@ def inchi_tree(inchi, n_expected):
 
 
 def tboil(page):
-    t = open(page, errors="replace").read()
+    with open(page, errors="replace") as source:
+        t = source.read()
     m = re.search(r'<table class="data" aria-label="One dimensional data">(.*?)</table>', t, re.S)
     if not m:
         return []
@@ -74,8 +75,8 @@ def val(s):
 
 
 def main():
-    sk = [a for a in csv.DictReader(open(os.path.join(HERE, "nist_alkanes_skeletons_audit.csv")))
-          if a["n"] in ("6", "7", "8", "9", "10")]
+    with open(os.path.join(HERE, "nist_alkanes_skeletons_audit.csv"), newline="") as source:
+        sk = [a for a in csv.DictReader(source) if a["n"] in ("6", "7", "8", "9", "10")]
     trees = {n: [T for T in nx.nonisomorphic_trees(n) if max(d for _, d in T.degree()) <= 4] for n in range(6, 11)}
     used = Counter()
     data, prov = [], []
@@ -93,10 +94,11 @@ def main():
         tb, cids = [], []
         for cid in a["ids"].split():
             p = os.path.join(HERE, "nist_raw", cid + ".html")
-            if os.path.exists(p):
-                rows_ = tboil(p)
-                if rows_:
-                    tb += [r + [cid] for r in rows_]; cids.append(cid)
+            if not os.path.isfile(p):
+                raise FileNotFoundError(f"missing required archived NIST page: {p}")
+            rows_ = tboil(p)
+            if rows_:
+                tb += [r + [cid] for r in rows_]; cids.append(cid)
         name = a["names"].split(";")[0].strip()
         pairs = sorted(tuple(sorted((G.degree(u), G.degree(v)))) for u, v in G.edges())
         pairs_s = " ".join(f"{i}-{j}" for i, j in pairs)

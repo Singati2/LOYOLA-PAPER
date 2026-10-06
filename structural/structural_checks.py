@@ -74,7 +74,9 @@ def s2():
     ga = lambda P: sum(c * 2 * sp.sqrt(i * j) / (i + j) for (i, j), c in P.items())
     hq = lambda P: Counter({Fraction(abs(i - j), i + j): 0 for (i, j) in P}) and \
         {k: sum(c for (i, j), c in P.items() if Fraction(abs(i - j), i + j) == k) for k in {Fraction(abs(i - j), i + j) for (i, j) in P}}
-    log("S2 GA witness: GA(A)-GA(B) =", sp.simplify(ga(A) - ga(Bp)), "| q-histograms equal:", hq(A) == hq(Bp),
+    difference = sp.simplify(ga(A) - ga(Bp))
+    assert difference == 0 and hq(A) != hq(Bp), "S2 GA collision witness failed"
+    log("S2 GA witness: GA(A)-GA(B) =", difference, "| q-histograms equal:", hq(A) == hq(Bp),
         "| edges", sum(A.values()), sum(Bp.values()))
 
 
@@ -122,7 +124,10 @@ def s3_certify():
     import mpmath as mp
     mp.mp.dps = 50
     g = np.unique(np.concatenate([np.linspace(-60, 60, 24001), np.sign(np.linspace(-1, 1, 4001)) * np.logspace(-3, 3.5, 4001)]))
-    for o in RES.get("s3_best", []):
+    witnesses = RES.get("s3_best", [])
+    if not witnesses:
+        raise AssertionError("S3 certificate requires at least one crossing witness")
+    for o in witnesses:
         c = defaultdict(Fraction)
         for P, sgn in ((o[5], 1), (o[6], -1)):
             for i, j in P:
@@ -146,6 +151,8 @@ def s3_certify():
             f"min relative |D| at brackets {mp.nstr(rel, 3)}; zero grid signs {sum(1 for x in sg if x == 0)}")
         ok = len(br) == V and all(x != 0 for x in sg) and rel > mp.mpf(10) ** (-40)
         log(f"   => exactly {len(br)} crossings: {'CERTIFIED' if ok else 'NOT certified (lower bound only)'}")
+        if not ok:
+            raise AssertionError("S3 witness failed crossing certification")
 
 
 def s4():
@@ -164,6 +171,8 @@ def s4():
                 if Aff(S) < min(k - 1, r, 3):
                     bad.append(S)
         log(f"S4 Delta={D}: pair sets violating A = min(|S|-1, r, 3): {len(bad)} {bad[:3]}")
+        expected = [] if D == 6 else [((1, 7), (2, 6), (3, 5), (4, 4))]
+        assert bad == expected, f"S4 Delta={D} rank exceptions changed"
 
 
 def s5():

@@ -1,0 +1,38 @@
+info: LoyolaFormal/Counterexamples.lean:92:0: 'Loyola.K2K3_lower_attained' depends on axioms: [propext, Classical.choice, Quot.sound]
+✔ [8931/8932] Built LoyolaFormal (24s)
+Build completed successfully (8932 jobs).
+--- sorry check (source) ---
+OK: no sorry
+--- axiom declarations (source) ---
+OK: no axiom declarations, no native_decide
+--- #print axioms output (fresh, fail-closed) ---
+theorems expected: 36, reports: 36
+FAIL: reported theorem names differ from expected list
+0a1,3
+> Loyola.det_W
+> Loyola.det_W_ne_zero
+> Loyola.features_span
+8a12
+> Loyola.logSumExp_convex
+10,12c14,17
+< Loyola.P1_P2_same_pure_gamma
+< Loyola.P1_P2_same_q
+< Loyola.P1_P2_same_qN
+---
+> Loyola.lower_le_LO
+> Loyola.lower_le_LOm
+> Loyola.lower_le_psi
+> Loyola.one_sub_q_sq
+16a22,24
+> Loyola.P1_P2_same_pure_gamma
+> Loyola.P1_P2_same_q
+> Loyola.P1_P2_same_qN
+19,26d26
+< Loyola.det_W
+< Loyola.det_W_ne_zero
+< Loyola.features_span
+< Loyola.logSumExp_convex
+< Loyola.lower_le_LO
+< Loyola.lower_le_LOm
+< Loyola.lower_le_psi
+< Loyola.one_sub_q_sq

@@ -1,0 +1,9 @@
+Delta=6: 7525 subsets; exceptions []
+Delta=7: 24129 subsets; exceptions [((1, 7), (2, 6), (3, 5), (4, 4))]
+Opposite interval signs: [-17.18, -17.16]
+Opposite interval signs: [-11.97, -11.95]
+Opposite interval signs: [-2.04, -2.02]
+Opposite interval signs: [2.72, 2.74]
+Opposite interval signs: [31.12, 31.14]
+Five distinct crossings certified, conditional on the stated Laguerre bound.
+Mathematics interval checks PASS

@@ -4,7 +4,8 @@
 2. nonane dataset rebuilds byte-identically from the archived NIST pages;
 3. baselines reproduce the octane package values (test_baselines.py);
 4. fresh re-runs of nonane_validation.py, baselines (octane + nonane) and
-   make_v37_table.py reproduce the committed CSVs byte-for-byte;
+   make_v37_table.py reproduce committed CSVs (recognized result floats
+   within tolerance; other cells exact; TeX files byte-identical);
 5. every row of tab:external and tab:box (looked up in ../main.tex, then
    ../supplement.tex) equals the generated row.
 Exit 0 only if all pass."""
