@@ -318,3 +318,32 @@ All five testable audit claims reproduced; fixes:
 - New Appendix subsection "Data quality and open provenance items" (app:quality) collecting the six CANNOT VERIFY entropies, the corrected 2,3,3-trimethylpentane value, the four compilation discrepancies, the tetramethylbutane ΔH_vap reference state and the acentric-factor discrepancies in one place.
 - Section 6.1: paragraph relating the degree-pair ceiling to the companion paper's span certificate (Shiwakoti, Natarajan, Chalise, Arockiaraj 2026, in preparation; cited).
 - verify_loyola_v35.py: manuscript-stated expectation tables (MS_T2, MS_E2, MS_F, 100-seed S sign counts) updated to the regenerated values; selftest and external suites re-run (logs in verification_logs/v40.5/).
+
+## v40.6 (independent review of v40.5 + fourth Feynman review)
+- v40.5 verified independently: core verifier FULL PASS, external verifier
+  PASS, both documents compile and match the committed PDFs, new references
+  resolve (Crossref/arXiv).
+- Factual corrections: parent on the box boundary in 16 (not 17) of 18
+  dHvap folds (ablation_perfold.csv); acentric-factor differences 0.002-0.004;
+  nonane dHvap: 4 calorimetric determinations + 1 NIST average (not 5
+  calorimetric); A.1 item (iv) cross-reference -> Supplementary S3; "affects
+  a bolded entry" -> "changes which entry is bolded"; D5 note mentions the
+  pooled heptane value; permutation check scoped to the decanes.
+- Evidence committed for the NIST availability sentence (25 skeletons
+  outside C8/C9, 1 decane): external/bp/calorimetric_dHvap298_alkanes.csv,
+  build_calorimetric_set.py, nist_hvap_pts/ (regenerates byte-identically).
+- Companion-paper paragraph: span certificate stated as a corollary;
+  "partial correlation zero" (ill-posed for an exact linear combination)
+  replaced by "adds no linear information"; unverifiable "thirteen
+  MoleculeNet datasets" claim removed; citation kept as a companion
+  manuscript.  NOTE for submission: MATCH may not accept an
+  "in preparation" reference; deposit a preprint or cite as "submitted".
+- Removed revision-history narration about the entropy value (kept one
+  factual sentence in A.1); 52/81 "improves" clause removed from the main
+  text (sign depends on the property); "far ahead" scoped to the decanes
+  ("ahead" on the pooled set); Lemma 1 proof completes the rank-4 step;
+  negatives bounded to the sets and protocols used; supplement S4 renamed
+  "Nonane replication test"; stale "coincides" sentence fixed (differences
+  0.04-2.29 units).
+- Old version notes moved under history/; Overleaf bundles, PDFs and
+  README page counts (40/21) refreshed.

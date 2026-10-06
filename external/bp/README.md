@@ -16,3 +16,9 @@
   point; 10 decanes and 1 nonane have determinations spreading > 3 K).
 - `bp_tests.py`: the pre-registered Test A (decane) and Test B (pooled,
   size-adjusted) analyses.
+- `calorimetric_dHvap298_alkanes.csv` / `build_calorimetric_set.py` /
+  `nist_hvap_pts/`: data-availability audit behind the statement that NIST
+  lists a calorimetric standard-state (298 K) vaporization enthalpy for only
+  25 acyclic alkane skeletons outside C8/C9 and for one of the 75 decanes
+  (NIST averaged entries resolved against their individual-measurement pages,
+  archived in `nist_hvap_pts/`).

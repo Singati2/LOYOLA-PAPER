@@ -41,6 +41,7 @@ networkx, matplotlib, sympy, mpmath). Lean: `formal/verify.sh` (elan/lake).
 | pre-registered nonane test | external/nonane_validation.py (PREREG_v37.md) | verify_external.py |
 | pre-registered boiling-point tests | external/bp/bp_tests.py (PREREG_v40.md) | verify_external.py |
 | decane coverage-bias check (included vs excluded) | external/bp/coverage_bias.py | verify_external.py |
+| calorimetric dHvap availability (25 outside C8/C9; 1 decane) | external/bp/build_calorimetric_set.py | output committed (calorimetric_dHvap298_alkanes.csv) |
 | wide-box solver/selection/dense-grid diagnostics | external/wide_box_diagnostics.py | output committed (wide_box_diagnostics_out.txt) |
 | structural counts and witnesses | structural/structural_checks.py | itself (output committed) |
 | fixed fractional exponents, gamma=0 vs 1 (exploratory) | structural/fractional_points.py | output committed (fractional_points_out.txt) |

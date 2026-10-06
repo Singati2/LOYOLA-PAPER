@@ -196,8 +196,8 @@
   boiling points (34 decanes; 100 alkanes C6--C10, adjusted for size)
   find no demonstrated benefit from $\gamma$ under these protocols,
   while ridge regression on the
-  degree-pair counts predicts far better than any single index on these
-  boiling-point sets. The
+  degree-pair counts is far ahead of every single index on the decanes
+  and ahead on the pooled set. The
   untuned point $LO(0,0,1)$ is essentially the irregularity index
   $IRLA$. Hence $\gamma$ is presented as an interpretable,
   analytically tractable direction, not a predictive upgrade.
@@ -367,10 +367,10 @@
   contribution is their application to this family and the structural
   characterisation that results (the exact $q$-histogram ceiling of the
   pure-$\gamma$ line, colliding tree families at every order from $13$,
-  a bound on $\gamma$-crossings, and the classification of
+  a bound on $\gamma$-crossings, and the characterisation of
   scale-invariant directions). Third, why use a three-parameter family
   if $IRLA$ performs similarly? Not for predictive superiority, which
-  we do not find. The reasons are interpretability within the parent
+  we do not find on the sets and protocols of Section~\ref{sec:sensitivity}. The reasons are interpretability within the parent
   family (every member is a deformation of a classical
   Gutman--Milovanovi\'c index, recovered at $\gamma = 0$); continuous
   structural deformation (size and shape are controlled separately, and
@@ -407,7 +407,7 @@
   complemented by pre-registered tests on measured boiling points of
   decanes and of pooled C6--C10 alkanes (Section~\ref{sec:bp}), where
   ridge regression on the degree-pair counts is far ahead of every
-  single index. The family is offered as an analytically transparent,
+  single index on the decanes and ahead on the pooled set. The family is offered as an analytically transparent,
   interpretable third direction on the Gutman--Milovanovi\'c parameter
   space, not as a better predictor.
 
@@ -585,8 +585,11 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   $\tfrac12 = c\,(\ln 2 - \tfrac12 \ln 3)$; in particular $c \neq 0$.
   Three times the first minus twice the second gives
   $0 = c\,(4 \ln 3 - \tfrac{13}{2} \ln 2)$, hence $8 \ln 3 = 13 \ln 2$,
-  i.e.\ $3^{8} = 2^{13}$, which is false ($6561 \neq 8192$). Hence the
-  augmented vectors have rank $4$. If
+  i.e.\ $3^{8} = 2^{13}$, which is false ($6561 \neq 8192$). Since the
+  three vectors $(1, \ln(ij), \ln(i+j))$ on these four pairs already have
+  rank $3$ (after subtracting the $(1,1)$ row, the minor
+  $\ln 2 \cdot \ln(9/8)$ is nonzero), the augmented vectors have rank $4$;
+  equivalently $\det W = \tfrac16 \ln 2\,(8\ln 3 - 13 \ln 2) \neq 0$. If
   $e^{\theta^{\top} z} = c\, e^{\theta'^{\top} z}$ on $P_{\Delta}$,
   then $(\theta - \theta')^{\top} z_{ij} = \ln c$ for all admissible
   pairs, i.e.\ $(\ln c, \theta' - \theta)$ is orthogonal to every
@@ -1216,17 +1219,18 @@ of distinct degree-pair profiles bounds the number of distinct values
   Lemma~\ref{prop:indep}, i.e.\ a different weighting of the
   same information.
 
-  The companion paper~\cite{ShiwakotiNatarajanChaliseArockiaraj2026Span}
-  turns this observation into a checkable \emph{span certificate}: on
-  graphs of maximum degree four, a baseline of ten generic classical
-  degree-based indices spans all ten counts, so every bond-incident-degree
-  index --- the Loyola family at every parameter value included --- is an
-  exact linear combination of the baseline, with partial correlation zero
-  with any target; the certificate is verified there on thirteen
-  MoleculeNet datasets. The present paper is the case study of that
-  statement: it asks what a parametric family can still offer when it
-  cannot add linear information, and finds parsimony and interpretability
-  (Section~\ref{sec:sensitivity}), not prediction.
+  A corollary is a \emph{span certificate}: on graphs of maximum degree
+  four, any ten linearly independent degree-based indices span the
+  ten-dimensional count space, so every bond-incident-degree index ---
+  the Loyola family at every parameter value included --- is an exact
+  linear combination of such a baseline and adds no linear information
+  beyond it for any target. A companion
+  manuscript~\cite{ShiwakotiNatarajanChaliseArockiaraj2026Span} develops
+  this certificate empirically on benchmark datasets. The present paper
+  is the case study of the statement: it asks what a parametric family
+  can still offer when it cannot add linear information, and finds
+  interpretability and analytic structure (Section~\ref{sec:sensitivity}),
+  not prediction.
 
 \begin{table}[htbp]
 \centering
@@ -1338,10 +1342,10 @@ discrimination possible at all: generic parent points such as
 $LO(0.3,0.2,0)$ already separate all
 $4069$ profiles (Proposition~\ref{prop:generic}). It is established by
 enumeration for orders $12$--$16$ rather than proved; it does not translate into a
-predictive gain over a tuned parent (Section~\ref{sec:sensitivity}),
-although at the same fixed fractional exponents $\gamma = 1$ improves
-the leave-one-out $Q^2$ of $\gamma = 0$ in $52$ of $81$
-point--dataset combinations (exploratory; Supplementary Section~S5).
+predictive gain over a tuned parent on the sets and protocols of
+Section~\ref{sec:sensitivity} (the sign of the change at fixed
+fractional exponents depends on the property; exploratory,
+Supplementary Section~S5).
 
 \subsection{Structure sensitivity on decane isomers}\label{sec:ss}
 
@@ -1451,9 +1455,8 @@ $374$\,K), is the benchmark-compilation value $8.41$\,kcal\,mol$^{-1}$
 enthalpy ($42.94$ and $42.91$\,kJ\,mol$^{-1}$, about
 $10.26$\,kcal\,mol$^{-1}$), so its physical reference state is
 unresolved. Six gas-phase entropies could not be verified against a
-primary source (the 2,3,3-trimethylpentane value, which in earlier
-versions duplicated the 2,2,3-trimethylpentane entry, now carries the
-compiled-dataset value; Appendix~\ref{app:quality}), and four entropies
+primary source (the 2,3,3-trimethylpentane value is a compiled-dataset
+value; Appendix~\ref{app:quality}), and four entropies
 differ from a widely used compilation; substituting the compilation
 values changes all twelve $S$ correlations (by up to $0.043$ in $|r|$)
 but not the winning descriptor ($HM$). Alternative compiled acentric factors change several
@@ -1545,7 +1548,7 @@ properties (Supplementary Section~S3 also reports the analysis with
 2,2,3,3-tetramethylbutane excluded). These counts describe optimizer variance on one fixed set of $18$ molecules
 and carry no inferential weight, and they hide a boundary effect: for
 $\Delta H_{\mathrm{vap}}$ the parent chose
-$(\alpha,\beta) = (1.021, -1.993)$, on the boundary of the box, in $17$
+$(\alpha,\beta) = (1.021, -1.993)$, on the boundary of the box, in $16$
 of the $18$ folds.
 
 These comparisons share one design choice that is decisive: the box
@@ -1626,8 +1629,9 @@ Under a protocol committed to the reproducibility package before any
 nonane value was collected, the identical nested design was applied to
 the $35$ constitutional nonane isomers, with boiling points ($35$ NIST
 averages of experimental determinations) and standard vaporization
-enthalpies ($34$ values) from the NIST WebBook~\cite{NISTWebBook}; only $5$ of the $34$ vaporization
-enthalpies are calorimetric determinations and $29$ come from two
+enthalpies ($34$ values) from the NIST WebBook~\cite{NISTWebBook}; only $4$ of the $34$ vaporization
+enthalpies are calorimetric determinations (one more is a NIST average)
+and $29$ come from two
 compilations~\cite{LabaufGreenshieldsRossini1961, WilhoitZwolinski1971},
 so agreement with them measures consistency with the compiled values
 rather than independent experimental validation; within-fold
@@ -1693,9 +1697,12 @@ non. $\Delta H_{\mathrm{vap}}$ & $-0.062$ & $0.857$ & $0.897$ & $0.927$ & $0.903
 \subsection{Measured boiling points: decanes and pooled C6--C10}\label{sec:bp}
 
 Because measured vaporization enthalpies are too scarce for a larger
-test (NIST lists calorimetric $298$\,K values for only $25$ acyclic
-alkane skeletons outside $C_8$ and $C_9$, and for one of the $75$
-decanes), two further tests used measured boiling points, under a
+test (counting carbon skeletons with at least one calorimetric
+standard-state $298$\,K determination, after resolving NIST averaged
+entries against their individual measurements, NIST lists only $25$
+acyclic alkane skeletons outside $C_8$ and $C_9$, and one of the $75$
+decanes; file \texttt{calorimetric\_dHvap298\_alkanes.csv} in the
+repository), two further tests used measured boiling points, under a
 protocol committed to the repository before any model was fitted (the
 NIST pages had been archived two days earlier during a
 data-availability audit, which counted available values only). Boiling points were taken from the NIST
@@ -1758,7 +1765,8 @@ in $15$ of $50$ seeds, $95\%$ interval $[-0.156, +0.002]$) or in the
 pooled size-adjusted set ($-0.000$, $25$ of $50$, $[-0.003, +0.002]$).
 The pooled cohort was corrected after an external audit found that one
 nonane's second NIST entry had been skipped (Deviation D5 in the
-repository); on the uncorrected cohort of $101$ molecules the same test
+repository; pooling grouped pages also moved one heptane value by
+$0.2\,^{\circ}$C); on the uncorrected cohort of $101$ molecules the same test
 gave $-0.000$, $24$ of $50$, $[-0.003, +0.002]$, so the correction
 changes no conclusion.
 The seed counts measure the variability of the random search on fixed
@@ -1768,8 +1776,8 @@ do not include the uncertainty of refitting and model selection. The baselines s
 the information is. Ridge regression on the ten degree-pair counts
 reaches $Q^2 = 0.860$ on the decanes, where every single index stays
 between $0.15$ and $0.51$, and $0.991$ on the pooled set; a permutation
-check ($200$ random permutations of the boiling points) gives it a
-median $Q^2$ of $-0.09$, so the gap is not an artefact of the
+check on the decanes ($200$ random permutations of the boiling points)
+gives it a median $Q^2$ of $-0.09$, so the gap is not an artefact of the
 cross-validation procedure itself, although a permutation test cannot
 exclude every possible form of leakage. Branching effects on the
 boiling point are thus spread over several degree-pair counts in a way
@@ -1817,7 +1825,8 @@ measured boiling points complement this on larger data: no demonstrated
 benefit from
 $\gamma$ on the $34$ decanes or the $100$ pooled C6--C10 alkanes
 adjusted for size, with ridge on the degree-pair counts far ahead of
-every single index (Table~\ref{tab:bp}). The compactness of
+every single index on the decanes and ahead on the pooled set
+(Table~\ref{tab:bp}). The compactness of
 $LO(0,0,1)$ belongs to linear imbalance weighting and is shared by the
 parameter-free $IRLA$; what the third coordinate itself offers is an
 interpretable, analytically tractable direction and an exact account
@@ -1860,8 +1869,8 @@ WebBook determinations (see Supplementary Section~S1 for the
 exact-versus-within-uncertainty status of each). The $\Delta H_{\mathrm{vap}}$ entry of
 2,2,3,3-tetramethylbutane is a benchmark-compilation value whose
 physical reference state is unresolved (Section~\ref{sec:octanes}). The
-$S$ value of 2,3,3-trimethylpentane ($102.06$) replaces an earlier entry
-that duplicated the 2,2,3-trimethylpentane value (Appendix~\ref{app:quality}).
+$S$ value of 2,3,3-trimethylpentane ($102.06$) is a compiled-dataset
+value (Appendix~\ref{app:quality}).
 
 \subsection{Data quality and open provenance items}\label{app:quality}
 
@@ -1876,9 +1885,9 @@ open are collected here so that they can be read in one place.
   entry in the NIST WebBook and could not be matched to another primary
   source. They are compiled-dataset values, not contradicted by any source
   we could reach.
-\item \emph{2,3,3-trimethylpentane $S$} was $101.31$ in earlier versions,
-  identical to the 2,2,3-trimethylpentane entry --- a copy error in the
-  compiled table. It is now $102.06$, the value of the compiled
+\item \emph{2,3,3-trimethylpentane $S$.} The value $101.31$ found in our
+  earlier compilation is a copy of the 2,2,3-trimethylpentane entry and is
+  not used. The value used, $102.06$, is that of the compiled
   $18$-octane dataset reproduced by Mondal et al.~\cite{MondalDePal2019QSPR}
   (the one-decimal compilation of Ediz~\cite{Ediz2017Octane} gives
   $102.10$). The change moves the $S$ correlations at the third decimal
@@ -1894,13 +1903,14 @@ open are collected here so that they can be read in one place.
   benchmark-compilation value ($8.41$) whose reference state is unresolved
   (the compound is a solid at $298$~K; NIST lists sublimation and standard
   vaporization enthalpies near $10.3$~kcal\,mol$^{-1}$). The exclusion
-  sweep of Section~\ref{sec:octanes} shows which conclusions depend on it.
+  sweep of Supplementary Section~S3 shows which conclusions depend on it.
 \item \emph{Acentric factors} of 2,2,4-trimethyl\-pentane and
   2,2,3,3-tetra\-methyl\-butane differ from an alternative compilation by
-  $0.003$--$0.004$; the alternative values change several $\omega$
+  $0.002$--$0.004$; the alternative values change several $\omega$
   correlations at the third decimal and no winner.
 \end{enumerate}
-None of these items affects a bolded entry of Table~\ref{tab:lo_octane}
+None of these items changes which entry of Table~\ref{tab:lo_octane} is
+bolded
 or any pre-registered conclusion of Sections~\ref{sec:sensitivity}; all
 of them are limitations of the compiled octane benchmark rather than of
 the analysis.

@@ -237,9 +237,9 @@ and equal the API Project~44 compilation at the displayed precision
 ($8.83$, $8.90$). Six gas-phase entropies could not be verified
 against a primary source (see above); four entropies
 ($n$-octane, 2,2-dimethylhexane, 2,2,4- and 2,3,3-trimethylpentane)
-differ from those of a widely used octane QSPR compilation by $0.15$--$2.29$ units
-(the $2,3,3$-trimethylpentane value coincides with that of
-2,2,3-trimethylpentane); substituting the compilation values changes
+differ from those of a widely used octane QSPR compilation by
+$0.04$--$2.29$ units (the $2,3,3$-trimethylpentane value $102.06$ is a compiled-dataset
+value; see the data-quality appendix of the main paper); substituting the compilation values changes
 all twelve $S$ correlations in Table~4 of the main paper (by up to
 $0.043$ in $|r|$) but not the winning descriptor
 ($HM$). Apart from the four corrected vaporization enthalpies, the
@@ -507,7 +507,7 @@ deviation above $1.2$ in both $\alpha$ and $\beta$). The selected
 $\gamma$ values are interior to the search box (maximum
 $|\gamma| = 0.48$), but the parent's selections are not: for
 $\Delta H_{\mathrm{vap}}$ the parent chose $(\alpha,\beta) =
-(1.021, -1.993)$, on the boundary of the box, in $17$ of the $18$
+(1.021, -1.993)$, on the boundary of the box, in $16$ of the $18$
 folds. The consequences of this are examined in Section~6.2
 of the main paper. On the one property where
 $\gamma$ helps most stably, $\Delta H_{\mathrm{vap}}$, the identical
@@ -550,7 +550,7 @@ and Table~5 of the main paper show that the
 vaporization-enthalpy gain shrinks to about zero once the parent is
 searched over a box that does not truncate it.
 
-\section{External nonane test: protocol, exploratory transfer and
+\section{Nonane replication test: protocol, exploratory transfer and
 molecule bootstrap}\label{sec:s-external}
 
 Two limitations of the octane analysis are its size ($18$ molecules) and
@@ -564,8 +564,8 @@ WebBook~\cite{NISTWebBook} with every value traced to its archived
 source page. The two properties differ in evidential status. The
 boiling points are NIST averages of experimental determinations (several
 quoted only to $1$\,K), so the $T_B$ test is experimentally grounded.
-Of the vaporization enthalpies, only $5$ of $34$ are calorimetric
-determinations; $29$ come from two compilations, the 1961 tabulation of
+Of the vaporization enthalpies, only $4$ of $34$ are calorimetric
+determinations and one is a NIST average; $29$ come from two compilations, the 1961 tabulation of
 Labauf, Greenshields and Rossini~\cite{LabaufGreenshieldsRossini1961},
 which covers all $35$ nonanes and $75$ decanes and is not a set of
 individual calorimetric measurements, and a 1971 vapour-pressure
@@ -653,7 +653,7 @@ not repeated within resamples, so the intervals do not account for uncertainty
 from refitting and model selection). The $95\%$ intervals for LO minus GM on
 $\Delta H_{\mathrm{vap}}$ are $[+0.014, +0.111]$ on the octanes but
 $[-0.006, +0.113]$ on the nonanes at budget $200$ ($[-0.005, +0.119]$ at
-$500$): the external gain met the pre-registered criterion, yet its
+$500$): the nonane gain met the pre-registered criterion, yet its
 interval narrowly includes zero. The interval for LO minus ridge on the
 nonanes, $[-0.101, +0.032]$, includes zero as well, and the $T_B$
 intervals are wide ($[-0.212, +0.222]$ for LO minus GM on the
