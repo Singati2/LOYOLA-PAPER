@@ -1233,14 +1233,15 @@ of distinct degree-pair profiles bounds the number of distinct values
   same information.
 
   A corollary is a \emph{span certificate}: on graphs of maximum degree
-  four, any ten linearly independent degree-based indices span the
+  four, any ten degree-based indices whose weight vectors
+  $(f(i,j))_{i \le j \le 4}$ are linearly independent span the
   ten-dimensional count space, so every bond-incident-degree index ---
   the Loyola family at every parameter value included --- is an exact
   linear combination of such a baseline and adds no linear information
   beyond it for any target. A companion
   manuscript~\cite{ShiwakotiNatarajanChaliseArockiaraj2026Span} develops
   this certificate empirically on benchmark datasets. The present paper
-  is the case study of the statement: it asks what a parametric family
+  is a case study of the statement: it asks what a parametric family
   can still offer when it cannot add linear information, and finds
   interpretability and analytic structure (Section~\ref{sec:sensitivity}),
   not prediction.
@@ -1622,7 +1623,7 @@ candidates per model, and the number of seeds (of $50$) in which LO
 beats GM (half-width $2$) or LO$_h$ beats GM (half-width $12$). LO$_h$ is
 a hybrid control with $(\alpha,\beta)$ in the wide box and $\gamma$ in
 $(-2,2)$, which avoids diluting the Loyola search over a wide $\gamma$
-range. Seed counts summarise the variability of the random search on fixed data and are not replications.}
+range. The streams of the two boxes use the same underlying uniform variates scaled by the half-width, so the comparison across boxes is paired. Seed counts summarise the variability of the random search on fixed data and are not replications.}
 \label{tab:box}
 \small
 \setlength{\tabcolsep}{1.6pt}
@@ -1766,7 +1767,9 @@ over $(\alpha,\beta) \in (-12,12)^2$ and the Loyola model over the same
 box with $\gamma \in (-2,2)$, with $2000$ candidates and seeds
 $0$--$49$, and the pre-registered criterion for a $\gamma$ effect
 required at least $40$ wins in $50$ seeds and a molecule-bootstrap
-interval excluding zero (Table~\ref{tab:bp}).
+interval excluding zero (Table~\ref{tab:bp}). The rule is one-sided:
+a negative difference also returns ``no evidence'', so the verdict
+never reads as evidence that $\gamma$ hurts.
 
 \begin{table}[htbp]
 \centering
@@ -1973,10 +1976,11 @@ open are collected here so that they can be read in one place.
   unchanged.
 \end{enumerate}
 None of these items moves a correlation of Table~\ref{tab:lo_octane} by
-more than $0.043$ or changes which entry is bolded (for $S$ the margin
-between $HM$ and $M_1$ is $0.001$, so that this is not a meaningful
-criterion there), and none enters the pre-registered nonane and
-boiling-point tests of Sections~\ref{sec:external} and~\ref{sec:bp},
+more than $0.043$. The only bolded entry at stake is the $S$ winner,
+where $HM$ leads $M_1$ by $0.001$ with the values used; the 1947
+substitution of item~(i) reverses that order by $0.004$, a margin
+without meaning at this resolution. None of the items enters the
+pre-registered nonane and boiling-point tests of Sections~\ref{sec:external} and~\ref{sec:bp},
 which use no octane value. Item~(ii) was a transcription error in our
 earlier data file, corrected here; the remaining items are limitations
 of the compiled octane benchmark rather than of the analysis.
@@ -2082,16 +2086,11 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   A. Pal, On exponential inverse symmetric division deg index of graphs,
   \textit{J. Appl. Math. Comput.\/} \textbf{71} (Suppl.~1) (2025) 537--561.
 
-    \bibitem{Ediz2017Octane}
+  \bibitem{Ediz2017Octane}
   S. Ediz, Predicting some physicochemical properties of octane isomers:
   a topological approach using ev-degree and ve-degree Zagreb indices,
   arXiv:1701.02859 (2017), \url{https://arxiv.org/abs/1701.02859}.
 
-    \bibitem{APIProject44Circ461}
-  F. D. Rossini, K. S. Pitzer, W. J. Taylor, J. P. Ebert, J. E. Kilpatrick,
-  C. W. Beckett, M. G. Williams, H. G. Werner, Selected Values of
-  Properties of Hydrocarbons, National Bureau of Standards Circular C461,
-  U.S. Government Printing Office, Washington, 1947, Table~3p.
 
 \bibitem{FurtulaGutman2015F} B. Furtula, I. Gutman, A forgotten
   topological index, \textit{J. Math. Chem.\/} \textbf{53} (2015)
@@ -2195,10 +2194,10 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   Gutman--Milovanovi\'c index and chemical applications, \textit{AIMS
   Math.\/} \textbf{10} (2025) 1998--2020.
 
-    \bibitem{MondalDePal2019QSPR}
+  \bibitem{MondalDePal2019QSPR}
   S. Mondal, A. Dey, N. De, A. Pal, QSPR analysis of some novel
-  neighbourhood degree-based topological descriptors, Complex Intell.
-  Syst. \textbf{7} (2021) 977--996,
+  neighbourhood degree-based topological descriptors, \textit{Complex
+  Intell. Syst.\/} \textbf{7} (2021) 977--996,
   \url{https://doi.org/10.1007/s40747-020-00262-0} (arXiv:1906.06660).
 
 \bibitem{Movahedi2025DSO} F. Movahedi, Diminished Sombor index and its
@@ -2238,6 +2237,11 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   \'A. Dr\'egelyi-Kiss, H. Haghbin, Graph irregularity indices used as
   molecular descriptors in QSPR studies, \textit{MATCH Commun. Math.
   Comput. Chem.\/} \textbf{79} (2018) 509--524.
+  \bibitem{APIProject44Circ461}
+  F. D. Rossini, K. S. Pitzer, W. J. Taylor, J. P. Ebert, J. E. Kilpatrick,
+  C. W. Beckett, M. G. Williams, H. G. Werner, Selected Values of
+  Properties of Hydrocarbons, National Bureau of Standards Circular C461,
+  U.S. Government Printing Office, Washington, 1947, Table~3p.
 
   \bibitem{Shang2022Simplicial}
   Y. Shang, Sombor index and degree-related properties of simplicial
@@ -2247,7 +2251,7 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   A. M. Sayadi, The hyper-Zagreb index of graph operations,
   \textit{Iranian J. Math. Chem.\/} \textbf{4} (2013) 213--220.
 
-    \bibitem{ShiwakotiNatarajanChaliseArockiaraj2026Span}
+  \bibitem{ShiwakotiNatarajanChaliseArockiaraj2026Span}
   G. Shiwakoti, A. Natarajan, P. Chalise, M. Arockiaraj, Ten edge-degree
   counts are all a degree-based topological index can see: an exact
   redundancy certificate and what it leaves for new molecular

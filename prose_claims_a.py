@@ -677,7 +677,24 @@ def non_tb_rule(prefix):
         return sum(1 for r in csv.DictReader(f) if r["property"] == "T_B" and r["selection_rule"].startswith(prefix))
 
 
+def api44_margin_m1_over_hm():
+    """|r_alt(M1)| - |r_alt(HM)| on S after substituting the 1947 API-44 entropies."""
+    r = {x["index"]: float(x["r_S_alternative"]) for x in rows("entropy_api44_sensitivity_v41.csv")}
+    return abs(r["M1"]) - abs(r["HM"])
+
+
+def tuning_dout(anchor, prop):
+    """Nested gain LOO_50 - LOO_0 of Table S2 (rows of section E of
+    verify_loyola_v35_results.csv, displayed at 3 decimals; the prose quotes
+    some of these to 4 decimals, hence the wider tolerances)."""
+    r = {x["item"]: float(x["computed"]) for x in rows("verify_loyola_v35_results.csv") if x["section"] == "E"}
+    return r[f"{anchor}/{prop}/LOO50"] - r[f"{anchor}/{prop}/LOO0"]
+
+
 REGISTRY = [
+    E("s2_dout_m2_omega", "supp", r"this pool seed is \$(?P<v>-?[\d.]+)\$, \$-?[\d.]+\$ and \$-?[\d.]+\$\.", "tuning_dout('M2', 'omega')", 0.0011, "verify_loyola_v35_results.csv E rows (3 dp)"),
+    E("s2_dout_hm_s", "supp", r"this pool seed is \$-?[\d.]+\$, \$(?P<v>-?[\d.]+)\$ and \$-?[\d.]+\$\.", "tuning_dout('HM', 'S')", 0.0015, "verify_loyola_v35_results.csv E rows (3 dp): HM on S"),
+    E("s2_dout_lo1_dhvap", "supp", r"this pool seed is \$-?[\d.]+\$, \$-?[\d.]+\$ and \$(?P<v>-?[\d.]+)\$\.", "tuning_dout('LO(0,0,1)', 'dHvap')", 0.0011, "verify_loyola_v35_results.csv E rows (3 dp)"),
     # ======================= main.tex : abstract =======================
     E("abs_order12", "main", r"degree-pair profiles on trees up to order \$(?P<v>\d+)\$ \(order",
       "last_order_profiles_eq_qhist('all')", 0, "structural_checks_out.txt S1: last n with profiles == q-histograms, all trees"),
@@ -945,8 +962,9 @@ REGISTRY = [
     E("aq_100b", "main", r"instead of \$100/(?P<v>\d+)\$\)", "exp(200,'dHvap','n_seeds')", 0, "n_seeds"),
     E("aq_omega_002", "main", r"differ from an alternative compilation by\s+\$(?P<v>[\d.]+)\$--\$0\.004\$", "min(OMEGA_DIFFS)", 0.0005, "|0.305-0.303| (OMEGA_ALT vs octane_data)"),
     E("aq_omega_004", "main", r"by\s+\$0\.002\$--\$(?P<v>[\d.]+)\$; the alternative values", "max(OMEGA_DIFFS)", 0.0005, "|0.247-0.251|"),
-    E("aq_final043", "main", r"moves a correlation of Table~\\ref\{tab:lo_octane\} by\s+more than \$(?P<v>[\d.]+)\$ or changes", "max_abs_change(S_SENS)", 0.0005, "entropy_source_sensitivity_v36.csv (largest of all items)"),
-    E("aq_final001", "main", r"between \$HM\$ and \$M_1\$ is \$(?P<v>[\d.]+)\$, so that this is not", "s_margin()", 0.0005, "original-data HM/M1 margin"),
+    E("aq_final043", "main", r"moves a correlation of Table~\\ref\{tab:lo_octane\} by\s+more than \$(?P<v>[\d.]+)\$\. The only", "max_abs_change(S_SENS)", 0.0005, "entropy_source_sensitivity_v36.csv (largest of all items)"),
+    E("aq_final_margin001", "main", r"where \$HM\$ leads \$M_1\$ by \$(?P<v>[\d.]+)\$ with the values used", "s_margin()", 0.0005, "octane_data: |r(HM,S)|-|r(M1,S)|"),
+    E("aq_final_api44_004", "main", r"substitution of item~\(i\) reverses that order by \$(?P<v>[\d.]+)\$", "api44_margin_m1_over_hm()", 0.0005, "entropy_api44_sensitivity_v41.csv: |r_alt(M1)|-|r_alt(HM)|"),
 
     # ======================= supplement.tex : S1 =======================
     E("s1_n18", "supp", r"properties of the\s+\$(?P<v>\d+)\$ octane isomers \(boiling point \$T_B\$, enthalpy of formation\s+\$\\Delta H_f\$, enthalpy of vaporization \$\\Delta H_\{\\mathrm\{vap\}\}\$,\s+entropy \$S\$, acentric factor \$\\omega\$; property data", "N_OCT", 0, "octane_data"),

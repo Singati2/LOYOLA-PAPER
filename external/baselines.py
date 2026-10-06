@@ -175,7 +175,10 @@ def fold_select_ols(X, y, i):
     """X: (C x n) candidate matrix. Inner-LOO selection, refit, predict."""
     m = _mask(len(y), i)
     Xt, yt = X[:, m], y[m]
-    k = int(np.argmin(inner_loo_rmse_all(Xt, yt)))
+    rmse = inner_loo_rmse_all(Xt, yt)
+    if not np.isfinite(rmse).any():      # never reached on the package data; argmin over all-inf would silently pick 0
+        raise RuntimeError(f"fold {i}: every candidate descriptor is degenerate on the training set")
+    k = int(np.argmin(rmse))
     return fit_predict(Xt[k], yt, X[k, i]), k
 
 
@@ -213,7 +216,10 @@ def ridge_inner_rmse(Ft, yt):
 def fold_ridge(F, y, i):
     m = _mask(len(y), i)
     Ft, yt = F[m], y[m]
-    li = int(np.argmin(ridge_inner_rmse(Ft, yt)))
+    rr = ridge_inner_rmse(Ft, yt)
+    if not np.isfinite(rr).any():
+        raise RuntimeError(f"fold {i}: ridge inner-LOO error not finite for any lambda")
+    li = int(np.argmin(rr))
     return float(ridge_fit_predict(Ft, yt, F[i:i + 1], LAMBDA_GRID[li])[0]), li
 
 

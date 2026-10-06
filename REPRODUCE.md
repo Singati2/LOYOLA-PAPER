@@ -6,8 +6,9 @@ networkx, matplotlib, sympy, mpmath). Lean: `formal/verify.sh` (elan/lake).
 ## Checks to run
 | Command | What it verifies | Runtime |
 |---|---|---|
+| `python3 verify.py` (`--full` for everything below) | single entry point: runs the core verifier, the prose-number check, the external regression and baseline tests, the constancy check and the manifest, and exits non-zero on any failure; `--full` adds the external verifier, the structural suite, the 32-digit recount, the self-test and (if a Lean toolchain is present) the Lean proofs | ~6 min / ~1 h |
 | `python3 verify_loyola_v35.py` | octane data, closed forms, bounds, all 8 core tables (exact display strings), figures (canonical PDF content), every core analysis re-run byte-for-byte | ~5 min |
-| `python3 verify_loyola_v35.py --selftest` | 113 adversarial attacks on the verifier itself | ~10 min |
+| `python3 verify_loyola_v35.py --selftest` | 114 adversarial attacks on the verifier itself | ~10 min |
 | `python3 external/verify_external.py` | nonane data rebuilt from archived NIST pages; boiling-point data rebuilt; every external analysis re-run byte-for-byte; Tables tab:external, tab:box, tab:bp row by row | ~25 min |
 | `python3 structural/structural_checks.py` | tree orders 7-17, GA and crossing witnesses, identifiability (Delta<=6), structure sensitivity of IRLA and the gamma sweep, auxiliary Q2 values, ridge permutation check; Table tab:firstfail entry by entry | ~20 min |
 | `formal/verify.sh` | Lean 4 proofs (36 theorems; no sorry/axioms) | ~1 min after first build |

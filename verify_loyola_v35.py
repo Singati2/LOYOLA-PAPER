@@ -302,7 +302,10 @@ def run_v35_analyses(here):
                 try:
                     if _pdf_canonical(open(os.path.join(td,"figures",fig),"rb").read())!=_pdf_canonical(open(os.path.join(here,"figures",fig),"rb").read()):
                         msgs.append(f"figures/{fig}: differs from fresh regeneration (stale figure)")
-                except OSError as e:msgs.append(f"figures/{fig}: {e}")
+                except OSError as e:
+                    if not os.path.exists(os.path.join(here,"figures",fig)):  # v40.9: an absent committed figure (e.g. a checkout without the binaries) is reported, not counted as a numeric failure
+                        print(f"  [WARN] figures/{fig} is absent from this checkout; figure comparison skipped (all numeric checks unaffected)")
+                    else:msgs.append(f"figures/{fig}: {e}")
             for out in (CSV_PRED,CSV_DEG,CSV_SS):
                 try:
                     if open(os.path.join(td,out),newline="").read()!=open(os.path.join(here,out),newline="").read():
@@ -444,6 +447,8 @@ def check_tex(texpath, CMP):
                 ndata+=1
                 if 0<=cur<4:perblock[cur].append(l)
                 else:msgs.append(f"tab:lo_tuning: data row before first anchor block: '{l.strip()[:40]}'")
+            elif l.strip() and not re.fullmatch(r"(\\(midrule|bottomrule|toprule)|\\end\{tabular\})+",l.strip().replace(" ","")):
+                msgs.append(f"tab:lo_tuning: unrecognised table line (neither anchor subheader nor 8-column data row): '{l.strip()[:60]}'")  # v40.9
         if cur+1!=4:msgs.append(f"tab:lo_tuning: expected 4 anchor blocks, found {cur+1}")
         if ndata!=20:msgs.append(f"tab:lo_tuning: expected 20 data rows, found {ndata}")
         for bi,anm in enumerate(ANCHORS):
@@ -1319,6 +1324,7 @@ def run_selftest(A, here, HAVE_NX):
      ("tuning-sign-flip",       rep_line(L_TUNLAST,"$+0.019$","$-0.019$"),       "LO(0,0,1)/omega/gain_LOO"),
      ("tuning-wrong-property",  rep_line(L_TUNLAST,r"$\omega$",r"$\Omega$"),     "property label"),
      ("tuning-wrong-anchor",    base.replace(r"near} $HM = LO(0,2,0)$",r"near} $H\Sigma = LO(0,2,0)$",1),"anchor label"),
+     ("tuning-extra-multicolumn-line",base.replace(r"\multicolumn{8}{l}{\emph{near} $HM = LO(0,2,0)$}\\",r"\multicolumn{8}{l}{added note}\\"+"\n"+r"\multicolumn{8}{l}{\emph{near} $HM = LO(0,2,0)$}\\",1),"unrecognised table line"),
      ("tuning-missing-row",     base.replace(L_TUNLAST+"\n","",1),               "row"),
      ("tuning-duplicated-row",  base.replace(L_TUNLAST,L_TUNLAST+"\n"+L_TUNLAST,1),"row"),
      ("tuning-swap-rows",       base.replace(L_TUN_S,"@@X@@",1).replace(L_TUNLAST,L_TUN_S,1).replace("@@X@@",L_TUNLAST,1),"property label"),
@@ -1626,11 +1632,14 @@ def main():
     except OSError as e:
         io_fail=True;out="(not written)"
         print(f"CANNOT WRITE OUTPUT to {A.output_dir}: {e} -- results not persisted (controlled diagnostic).")
-    import platform,numpy,scipy
-    nxv="absent"
+    import platform,numpy
+    nxv="absent";spv="absent"
     if HAVE_NX:
         import networkx;nxv=networkx.__version__
-    print(f"\nENV: Python {platform.python_version()}, NumPy {numpy.__version__}, SciPy {scipy.__version__}, networkx {nxv}, {platform.system()} {platform.release()}")
+    try:
+        import scipy;spv=scipy.__version__   # v40.9: informational only; a missing SciPy must not turn a pass into a traceback
+    except ImportError:pass
+    print(f"\nENV: Python {platform.python_version()}, NumPy {numpy.__version__}, SciPy {spv}, networkx {nxv}, {platform.system()} {platform.release()}")
     print(f"undefined (zero-variance) bootstrap resamples encountered: {UNDEF_RESAMPLES}")
     if fails>0:status=1
     elif io_fail or not HAVE_NX or A.skip_analyses:status=2  # skipped [N] => canonical CSVs unverified

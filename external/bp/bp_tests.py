@@ -85,14 +85,24 @@ def nested_size(X, z, y):
     n = len(y); preds = np.empty(n)
     for i in range(n):
         m = np.ones(n, bool); m[i] = False
-        k = int(np.argmin(press_size(X[:, m], z[m], y[m])))
+        r = press_size(X[:, m], z[m], y[m])
+        if not np.isfinite(r).any():     # never reached (design determinant has ~7000x headroom); argmin over all-inf would silently pick 0
+            raise RuntimeError(f"fold {i}: every candidate rejected by the singular-design guard")
+        k = int(np.argmin(r))
         preds[i] = fit_pred_size(X[k, m], z[m], y[m], X[k, i], z[i])
     return preds
 
 
 def size_only(z, y):
-    n = len(y)
-    return np.array([np.polyval(np.polyfit(np.delete(z, i), np.delete(y, i), 1), z[i]) for i in range(n)])
+    """Leave-one-out predictions of y ~ 1 + z by ordinary least squares (the
+    same solver as fit_pred_size, without a descriptor)."""
+    n = len(y); preds = np.empty(n)
+    for i in range(n):
+        m = np.arange(n) != i
+        A = np.column_stack([np.ones(m.sum()), z[m]])
+        coef, *_ = np.linalg.lstsq(A, y[m], rcond=None)
+        preds[i] = coef[0] + coef[1] * z[i]
+    return preds
 
 
 # ---------- tests ----------

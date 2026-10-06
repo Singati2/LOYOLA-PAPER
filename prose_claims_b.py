@@ -921,8 +921,8 @@ _add(E("app_nseeds", "main", r"\(\$93/(?P<v>\d+)\$ and", "tmb_nseeds()", 0, "dhv
 _add(E("app_100of100", "main", r"seeds instead of \$(?P<v>\d+)/100\$\)", "expanded_lo_better('dHvap')", 0, "expanded_robustness_summary_v35.csv dHvap LO_better (both budgets)"))  # 1
 _add(E("app_omega_lo", "main", r"compilation by\s+\$(?P<v>[\d.]+)\$--\$0\.004\$", "min(prov_omega_diffs())", 0.0005, "provenance notes for 2,2,4-TMP and TMB omega"))  # 1
 _add(E("app_omega_hi", "main", r"\$0\.002\$--\$(?P<v>[\d.]+)\$; the alternative", "max(prov_omega_diffs())", 0.0005, "provenance notes"))  # 1
-_add(E("app_overall_0043", "main", r"by\s+more than \$(?P<v>[\d.]+)\$ or changes which entry is bolded", "sens_overall_max()", 0.0005, "max |Delta|r|| over the three sensitivity CSVs"))  # 1
-_add(E("app_margin_0001", "main", r"the margin\s+between \$HM\$ and \$M_1\$ is \$(?P<v>[\d.]+)\$", "oct_S_margin('HM', 'M1')", 0.0005, "recomputed |r(HM,S)| - |r(M1,S)| on octane_data"))  # 1
+_add(E("app_overall_0043", "main", r"by\s+more than \$(?P<v>[\d.]+)\$\. The only bolded entry", "sens_overall_max()", 0.0005, "max |Delta|r|| over the three sensitivity CSVs"))  # 1
+_add(E("app_margin_0001", "main", r"where \$HM\$ leads \$M_1\$ by \$(?P<v>[\d.]+)\$ with the values used", "oct_S_margin('HM', 'M1')", 0.0005, "recomputed |r(HM,S)| - |r(M1,S)| on octane_data"))  # 1
 
 # ----- Supplement S5 -----
 _add(E("sup_106", "supp", r"On the \$(?P<v>\d+)\$ non-isomorphic\s+trees of order \$10\$ we use", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1

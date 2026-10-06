@@ -473,3 +473,48 @@ in verification_logs/v40.7/.
 Verification on the final tree: core verifier FULL PASS, prose check 0
 failures, external/ unchanged since v40.7 (its v40.7 log remains valid),
 documents recompiled; logs in verification_logs/v40.8/.
+
+## v40.9 (cosmetic items from the referee-style review; no result changes)
+- external/bp/bp_tests.py size_only: explicit least-squares fit of y ~ 1 + n_C
+  (the solver used elsewhere) instead of np.polyfit; predictions agree to
+  3e-13, the three output CSVs regenerate identically at their precision.
+- verify_loyola_v35.py: a committed figure PDF absent from the checkout is
+  reported as a warning and the comparison skipped (numeric checks are
+  unaffected); a figure that is present but differs from a fresh
+  regeneration still fails.
+- verify.py: single entry point (fast path about 6 minutes; --full about an
+  hour), and a GitHub Actions workflow (.github/workflows/verify.yml) that
+  runs the fast path on every push with pinned library versions.
+- Correction of a verification-process error in v40.7/v40.8: the provenance
+  CSV (octane_property_provenance_v35.csv) is written with CRLF row
+  terminators and LF inside quoted fields; the v40.7 wording edit rewrote it
+  with LF rows.  The core verifier reads the file correctly and passed, but
+  four provenance attacks of the self-test split rows on CRLF and would have
+  raised a harness exception; the self-test logs committed with v40.7 and
+  v40.8 were produced BEFORE that edit and therefore did not catch it.  The
+  CRLF convention is restored (values unchanged), the self-test is re-run on
+  the final tree, and verify.py now checks the convention in its fast path.
+- Further items from two independent code/Feynman reviews of the working
+  tree (all verified before applying): (i) Supplementary S2 quoted a
+  pre-v40.5 nested gain for HM on S (-0.007; the regenerated table gives
+  -0.004) -- the sentence was not in the prose registry, which is why the
+  checker missed it; corrected and the three S2 numbers registered against
+  the verifier's results CSV.  (ii) The Appendix A.1 closing sentence
+  claimed no item changes a bolded entry while item (i) reports that the
+  1947 entropies put M1 ahead of HM; now stated consistently.
+  (iii) Companion paragraph: "ten indices whose weight vectors are linearly
+  independent"; "a case study".  (iv) Circular 461 filed under R in the
+  bibliography; Mondal journal italicised; octane_data.py docstring names
+  Mondal, Dey, De & Pal (2021).  (v) Section 6.4 states that the decision
+  rule is one-sided (a negative difference also returns "no evidence").
+  (vi) Table 5 caption notes that the narrow- and wide-box streams share the
+  same underlying uniform variates, so the comparison across boxes is
+  paired.  (vii) Hardening: argmin over an all-non-finite inner-LOO vector
+  now raises instead of silently selecting candidate 0 (external/baselines.py,
+  external/bp/bp_tests.py; unreachable on the package data); the verifier's
+  tuning-table parser reports any line that is neither an anchor subheader
+  nor an 8-column data row, with a new self-test attack (114 attacks); a
+  missing SciPy no longer turns a verifier pass into a traceback.  A claim
+  that the paper quotes sublimation enthalpies it does not have was
+  checked and rejected: the provenance row lists NIST sublimation values
+  42.9-43.4 kJ/mol (about 10.3 kcal/mol).

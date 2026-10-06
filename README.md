@@ -30,6 +30,7 @@ mapped to the script that produces it and the check that verifies it.
 Quick start:
 ```bash
 python3 -m pip install -r requirements-lock.txt
+python3 verify.py                       # single entry point: all fast checks (--full for the long suites); run by CI on every push
 python3 verify_loyola_v35.py            # core tables, figures, analyses
 python3 external/verify_external.py     # nonane and boiling-point tests, rebuilt from raw NIST pages
 python3 structural/structural_checks.py # structural counts and witnesses
