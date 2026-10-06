@@ -434,3 +434,42 @@ the following further changes:
 Verification on the final tree: core verifier, self-test, external verifier
 (new comparator), structural suite with certificate, 32-digit recount; logs
 in verification_logs/v40.7/.
+
+## v40.8 (primary-source check of the six entropies; prose-number checker)
+- NBS Circular 461 (API Research Project 44, 1947), Table 3p, p. 159, was
+  retrieved and read.  (a) It lists S(gas, 25 C) = 101.62 cal/(mol K) for
+  BOTH 2,2,3- and 2,2,4-trimethylpentane, so the identical source value in
+  the two provenance rows is faithful to the source, not a copy error.
+  (b) It lists gas-phase entropies for all six isomers that had no located
+  primary value; they differ from the values used by 0.07-2.21 cal/(mol K),
+  as this 1947 edition does for isomers whose later TRC revisions were
+  confirmed (e.g. 2,5-dimethylhexane 104.93 -> 105.72).  No later primary
+  determination was located, so the six remain "cannot verify" with the 1947
+  value recorded in the provenance notes.  Sensitivity: substituting the six
+  1947 values changes the S correlations by at most 0.018 in |r| and puts
+  M1 0.004 ahead of HM (entropy_api44_sensitivity_v41.csv, produced by
+  source_sensitivity.py; the two earlier outputs are byte-identical).
+  Appendix A.1(i), Section 6 and Supplementary S1 now say this; Circular
+  461 is cited.
+- prose_numbers_check.py + prose_claims.py: every registered numeral in the
+  running prose of both documents is recomputed from the canonical files
+  (the tables were already guarded; prose numerals were not, which is how
+  stale numbers survived earlier revisions).
+- The prose check (two registries built independently for Sections 6 /
+  abstract / conclusion / A.1 / S1,S3,S4 and for Sections 1-5 / A / S5-S7,
+  735 entries, 719 checkable) found three stale statements, all corrected:
+  (i) A.1(ii) said the 101.31 -> 102.06 entropy correction moved the S
+  correlations "by at most 0.006"; the maximum is 0.009 (ISI; 0.006 only
+  without ISI).  (ii) Section 6 and A.1(iii) said substituting the compiled
+  entropies "leaves HM and M1 within 0.001 of each other"; 0.001 is the
+  margin with the values used, the substitution moves it to 0.007 (HM still
+  ahead); now stated as such.  (iii) Section 6.3 called the 35 nonane
+  boiling points "35 NIST averages"; they are 20 NIST averages, 5 single
+  determinations and 10 most recent determinations (Deviation D1).  Both
+  registries flagged (i) and (ii) independently.
+- prose_numbers_check.py exits non-zero on any mismatch or on a pattern that
+  no longer matches exactly once, so a reworded sentence has to be
+  re-registered; this is the mechanism that was missing in v35-v40.7.
+Verification on the final tree: core verifier FULL PASS, prose check 0
+failures, external/ unchanged since v40.7 (its v40.7 log remains valid),
+documents recompiled; logs in verification_logs/v40.8/.

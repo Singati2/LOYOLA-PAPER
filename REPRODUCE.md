@@ -13,6 +13,7 @@ networkx, matplotlib, sympy, mpmath). Lean: `formal/verify.sh` (elan/lake).
 | `formal/verify.sh` | Lean 4 proofs (36 theorems; no sorry/axioms) | ~1 min after first build |
 | `python3 manifest.py` | SHA-256 of every tracked file, one hash per path | seconds |
 | `python3 external/test_regressions.py` | unit checks of the shared regression core (extreme descriptor scales, large-offset constancy) and of the fail-closed CSV comparator, without running the external suite | seconds |
+| `python3 prose_numbers_check.py` | every registered numeral of the running prose of both documents (735 entries in prose_claims_a.py and prose_claims_b.py; 16 cited values listed as uncheckable) recomputed from the canonical files | seconds |
 | `python3 constancy_test_check.py` | shows that the constancy test is inert: no candidate descriptor of the octane analyses is flagged under the old or the new definition | ~1 min |
 
 `verify_loyola_v35.py` establishes agreement between the manuscript tables, the canonical CSVs and a fresh recomputation from `octane_data.py`; it does not re-derive the octane values from primary sources (those are checked against `octane_property_provenance_v35.csv` by class rules), and a few checks assert previously observed outcomes (sign patterns of dQ2, provenance agreement counts) as regression guards.
@@ -39,7 +40,7 @@ networkx, matplotlib, sympy, mpmath). Lean: `formal/verify.sh` (elan/lake).
 |---|---|---|
 | 100-seed robustness, paired control | expanded_robustness_v35.py | verify_loyola_v35.py |
 | tetramethylbutane exclusion sweep | tmb_exclusion_sensitivity.py | verify_loyola_v35.py |
-| omega- and entropy-source sensitivity | source_sensitivity.py | verify_loyola_v35.py |
+| omega- and entropy-source sensitivity (compiled alternatives; 1947 API-44 edition for the six unverified entropies, entropy_api44_sensitivity_v41.csv) | source_sensitivity.py | verify_loyola_v35.py (the two original outputs); the 1947-edition output by re-running the script |
 | exploratory transfer (octane -> nonane) | external/transfer_exploratory.py | verify_external.py |
 | molecule bootstrap intervals | external/uncertainty_exploratory.py | verify_external.py |
 | pre-registered nonane test | external/nonane_validation.py (PREREG_v37.md) | verify_external.py |

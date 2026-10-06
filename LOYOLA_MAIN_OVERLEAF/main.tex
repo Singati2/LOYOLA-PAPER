@@ -1471,12 +1471,13 @@ $374$\,K), is the benchmark-compilation value $8.41$\,kcal\,mol$^{-1}$
 enthalpy ($42.94$ and $42.91$\,kJ\,mol$^{-1}$, about
 $10.26$\,kcal\,mol$^{-1}$), so its physical reference state is
 unresolved. Six gas-phase entropies could not be verified against a
-primary source (the 2,3,3-trimethylpentane value is a compiled-dataset
+primary source (the 1947 API Project 44 values differ from them by up to
+$2.2$ units; the 2,3,3-trimethylpentane value is a compiled-dataset
 value; Appendix~\ref{app:quality}), and four entropies
 differ from a widely used compilation; substituting the compilation
 values changes all twelve $S$ correlations (by up to $0.043$ in $|r|$)
-and leaves $HM$ and $M_1$ within $0.001$ of each other at the top, a
-margin that is not meaningful at this resolution. Alternative compiled
+and moves the margin between $HM$ and $M_1$ at the top from $0.001$ to
+$0.007$, margins that are not meaningful at this resolution. Alternative compiled
 acentric factors change several $\omega$ correlations at the third
 decimal (e.g.\ $M_2$ from $-0.988$ to $-0.986$) and leave the $\omega$
 ranking unchanged.
@@ -1659,8 +1660,9 @@ baselines}\label{sec:external}
 
 Under a protocol committed to the reproducibility package before any
 nonane value was collected, the identical nested design was applied to
-the $35$ constitutional nonane isomers, with boiling points ($35$ NIST
-averages of experimental determinations) and standard vaporization
+the $35$ constitutional nonane isomers, with boiling points ($35$ values:
+$20$ NIST averages, $5$ single determinations and $10$ most recent
+determinations selected under the protocol's Deviation D1) and standard vaporization
 enthalpies ($34$ values) from the NIST WebBook~\cite{NISTWebBook}; only $4$ of the $34$ vaporization
 enthalpies are calorimetric determinations (one more is a NIST average)
 and $29$ come from two
@@ -1930,15 +1932,21 @@ open are collected here so that they can be read in one place.
 \item \emph{Six gas-phase entropies} (4-methylheptane,
   2,2-dimethylhexane, 3,4-dimethylhexane, 3-ethyl-2-methylpentane,
   3-ethyl-3-methylpentane, 2,3,3-trimethylpentane) have no $S^{\circ}$(gas)
-  entry in the NIST WebBook and could not be matched to another primary
-  source. They are compiled-dataset values, not contradicted by any source
-  we could reach.
+  entry in the NIST WebBook. The 1947 API Research Project 44
+  tables~\cite{APIProject44Circ461} list gas-phase entropies for all six
+  that differ from the values used by $0.07$--$2.2$\,cal\,mol$^{-1}$\,K$^{-1}$,
+  as that edition does for isomers whose later revisions we could
+  confirm; no later primary determination was located, so the values used
+  are compiled-dataset values. Substituting the 1947 values changes the
+  $S$ correlations by at most $0.018$ in $|r|$ and puts $M_1$ ahead of
+  $HM$ by $0.004$ (repository file
+  \texttt{entropy\_api44\_sensitivity\_v41.csv}).
 \item \emph{2,3,3-trimethylpentane $S$.} The value $101.31$ found in our
   earlier compilation is a copy of the 2,2,3-trimethylpentane entry and is
   not used. The value used, $102.06$, is that of the compiled
   $18$-octane dataset reproduced by Mondal et al.~\cite{MondalDePal2019QSPR}
   (the one-decimal compilation of Ediz~\cite{Ediz2017Octane} gives
-  $102.10$). The change moves the $S$ correlations by at most $0.006$;
+  $102.10$). The change moves the $S$ correlations by at most $0.009$;
   it is still a secondary value (item~(i)).
 \item \emph{Four entropies differ from the compiled octane dataset of
   Ediz~\cite{Ediz2017Octane}} (octane $111.55$ vs $111.70$;
@@ -1946,8 +1954,9 @@ open are collected here so that they can be read in one place.
   vs $104.10$; 2,3,3-trimethylpentane $102.06$ vs $102.10$); for octane
   the value used agrees with the NIST WebBook ($111.63$). Substituting the
   compilation values changes all twelve $S$ correlations, by up to $0.043$
-  in $|r|$, and leaves $HM$ and $M_1$ within $0.001$ of each other at the
-  top (repository file \texttt{entropy\_source\_sensitivity\_v36.csv}).
+  in $|r|$, and moves the margin between $HM$ and $M_1$ at the top from
+  $0.001$ to $0.007$ (repository file
+  \texttt{entropy\_source\_sensitivity\_v36.csv}).
 \item \emph{2,2,3,3-tetramethylbutane $\Delta H_{\mathrm{vap}}$} is a
   benchmark-compilation value ($8.41$) whose reference state is unresolved
   (the compound is a solid at $298$~K; NIST lists sublimation and standard
@@ -2077,6 +2086,12 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   S. Ediz, Predicting some physicochemical properties of octane isomers:
   a topological approach using ev-degree and ve-degree Zagreb indices,
   arXiv:1701.02859 (2017), \url{https://arxiv.org/abs/1701.02859}.
+
+    \bibitem{APIProject44Circ461}
+  F. D. Rossini, K. S. Pitzer, W. J. Taylor, J. P. Ebert, J. E. Kilpatrick,
+  C. W. Beckett, M. G. Williams, H. G. Werner, Selected Values of
+  Properties of Hydrocarbons, National Bureau of Standards Circular C461,
+  U.S. Government Printing Office, Washington, 1947, Table~3p.
 
 \bibitem{FurtulaGutman2015F} B. Furtula, I. Gutman, A forgotten
   topological index, \textit{J. Math. Chem.\/} \textbf{53} (2015)

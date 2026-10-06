@@ -11,10 +11,16 @@ Table 1) are replaced by the dataset values:
   octane 111.55 -> 111.70; 2,2-dimethylhexane 103.13 -> 103.40;
   2,2,4-trimethylpentane 101.81 -> 104.10; 2,3,3-trimethylpentane 102.06 -> 102.10
   (v40.5: base value corrected from the duplicated 101.31).
+S (1947 edition): the six entropies without a located later primary
+determination are replaced by the API Research Project 44 values (NBS
+Circular 461, 1947, Table 3p):
+  4-methylheptane 109.32 -> 108.35; 2,2-dimethylhexane 103.13 -> 103.06;
+  3,4-dimethylhexane 106.59 -> 104.38; 3-ethyl-2-methylpentane 106.06 -> 105.43;
+  3-ethyl-3-methylpentane 101.48 -> 103.48; 2,3,3-trimethylpentane 102.06 -> 103.14.
 (The primary data are NOT changed; this is a disclosure-only sensitivity.)
 
 Outputs (next to this script): omega_source_sensitivity_v35.csv,
-entropy_source_sensitivity_v36.csv. Columns: index, r_original,
+entropy_source_sensitivity_v36.csv, entropy_api44_sensitivity_v41.csv. Columns: index, r_original,
 r_alternative (full precision), displayed values (3 dp), whether the
 displayed value changes, and whether the column winner changes.
 """
@@ -32,6 +38,8 @@ IDX = [("M1", (0, 1, 0)), ("M2", (1, 0, 0)), ("HM", (0, 2, 0)), ("mM2", (-1, 0, 
 OMEGA_ALT = {"2,2,4-trimethylpentane": 0.303, "2,2,3,3-tetramethylbutane": 0.251}
 S_ALT = {"octane": 111.70, "2,2-dimethylhexane": 103.40,
          "2,2,4-trimethylpentane": 104.10, "2,3,3-trimethylpentane": 102.10}
+S_API44 = {"4-methylheptane": 108.35, "2,2-dimethylhexane": 103.06, "3,4-dimethylhexane": 104.38,
+           "3-ethyl-2-methylpentane": 105.43, "3-ethyl-3-methylpentane": 103.48, "2,3,3-trimethylpentane": 103.14}
 
 
 def r_signed(x, y):
@@ -65,3 +73,4 @@ def sensitivity(prop, alt, fname, prefix):
 if __name__ == "__main__":
     sensitivity("omega", OMEGA_ALT, "omega_source_sensitivity_v35.csv", "omega")
     sensitivity("S", S_ALT, "entropy_source_sensitivity_v36.csv", "S")
+    sensitivity("S", S_API44, "entropy_api44_sensitivity_v41.csv", "S")
