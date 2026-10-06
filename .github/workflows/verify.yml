@@ -14,9 +14,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-      - name: Install pinned dependencies (requirements-lock.txt: the versions that produced the committed outputs)
+      - name: "Install pinned dependencies from requirements-lock.txt (the versions that produced the committed outputs)"
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r requirements-lock.txt
-      - name: Fast verification path (core verifier, prose numbers, regression and baseline tests, constancy check, manifest)
+      - name: "Fast verification path (core verifier, prose numbers, regression and baseline tests, constancy check, manifest)"
         run: python verify.py
