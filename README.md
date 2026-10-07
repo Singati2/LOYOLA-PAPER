@@ -3,7 +3,7 @@
 Advik Natarajan, Ganesh Shiwakoti, Michael Arockiaraj — manuscript, supplement,
 data, code and machine-checked proofs.
 
-**v40.11 (2026-10-06):** fail-closed data build and structural checks, scoped identifiability wording, single verification entry point with continuous integration; no citation of unpublished work. See `V35_TO_V36_SCIENTIFIC_CHANGELOG.md`.
+**v40.19 (2026-10-07):** both documents rewritten into the journal's plain register with every number held fixed, MATCH template conformance, octane data table in Section 5.1 (tables 4-8), new prose-style and label checkers; see V35_TO_V36_SCIENTIFIC_CHANGELOG.md.
 
 ## Current documents
 | File | Content |

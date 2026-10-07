@@ -1,1 +1,0 @@
-v40.16 verification logs: core FULL PASS, self-test 114/114, counter-attacks 13/13, Lean 36/36, external PASS, isolated replay of every script: every script exits 0 and reproduces its committed outputs (audit/run_all_scripts_out.txt), prose 708/0; paper 37 pp, supplement 27 pp.

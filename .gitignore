@@ -1,3 +1,7 @@
 __pycache__/
 *.pyc
 .DS_Store
+*.aux
+*.out
+/main.pdf
+/supplement.pdf
