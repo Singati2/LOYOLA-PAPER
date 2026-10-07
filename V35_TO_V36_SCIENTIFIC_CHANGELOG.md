@@ -820,3 +820,9 @@ replay snapshots the tree and includes tracked formal/ files.
 - Trims carried over from the uncommitted v40.18 work: Section 4 bounds
   and closed forms in the supplement (S9), graph-family list moved to
   S9, Preliminaries 276 words, 31 condensation edits in Sections 3-5.
+- Full suite re-run on v40.19 (verification_logs/v40.19/verify_everything.log):
+  all steps PASS; the isolated replay flagged only audit/attack_checks_out.txt,
+  whose committed copy carried runtimes and the pre-trim registry size.  The
+  counter-attack record is now written without runtimes and the replay re-run
+  clean (38 scripts).  Superseded log folders v40.16 and v40.17 removed; build
+  artefacts git-ignored; bundle READMEs updated to the new table numbering.

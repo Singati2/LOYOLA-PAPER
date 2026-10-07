@@ -112,7 +112,9 @@ def main():
             rejected, info = False, f"harness exception: {e!r}"
         bad += not rejected
         line = f"[{'REJECTED' if rejected else 'NOT REJECTED (false negative)'}] {name}: {info}"
-        lines.append(line); print(line, flush=True)
+        print(line, flush=True)
+        # the committed record carries no runtimes, so it is reproducible byte for byte
+        lines.append(re.sub(r"\s*\(\d+ s\)", "", re.sub(r": \d+ s; exit", ": exit", line)))
     lines.append(f"RESULT: {len(ATTACKS)} attacks, {len(ATTACKS) - bad} rejected, {bad} false negatives")
     print(lines[-1])
     open(os.path.join(ROOT, "audit", "attack_checks_out.txt"), "w").write("\n".join(lines) + "\n")
