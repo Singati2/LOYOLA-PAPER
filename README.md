@@ -8,7 +8,7 @@ data, code and machine-checked proofs.
 ## Current documents
 | File | Content |
 |---|---|
-| `main.tex`, `LOYOLA_paper.pdf` | the paper (37 A5 pages, MATCH template) |
+| `main.tex`, `LOYOLA_paper.pdf` | the paper (33 A5 pages, MATCH template) |
 | `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (21 pages) |
 | `LOYOLA_FINAL_PAPER_OVERLEAF.zip` | Overleaf upload (both documents + figures) |
 
@@ -43,7 +43,7 @@ python3 manifest.py                     # checksums
 tests), each committed before the corresponding models were fitted.
 
 ## History
-`V35_TO_V36_SCIENTIFIC_CHANGELOG.md` records every revision; `history/` keeps
-earlier version notes and the v35 provenance audit.
+`V35_TO_V36_SCIENTIFIC_CHANGELOG.md` records every revision; earlier
+version notes and logs are kept only in the git history.
 
 License: MIT (see `LICENSE`).

@@ -201,54 +201,25 @@
 \section{Introduction}\label{sec:intro}
   % =====================================================================
 
-  The literature on degree-based topological indices in chemical
-  graph theory has grown substantially since the seminal Wiener
-  index~\cite{Wiener1947}, the Randi\'c index~\cite{Randic1975},
-  and the Zagreb indices of Gutman and
-  Trinajsti\'c~\cite{GutmanTrinajstic1972}.
-  Among the many parametric extensions are the general Randi\'c
-  index $R_{\alpha}$~\cite{BollobasErdos1998}, the general
-  sum-connectivity index
-  $\chi_{\alpha}$~\cite{ZhouTrinajstic2010}, the forgotten
-  index $F$ revisited by Furtula and
-  Gutman~\cite{FurtulaGutman2015F}, the geometric--arithmetic index
-  $GA$~\cite{VukicevicFurtula2009GA}, the Albertson irregularity
-  index~\cite{Albertson1997} and the inverse $\sigma$-index
-  problem~\cite{GutmanToganYurttasCevikCangul2018Sigma}.
+  Degree-based topological indices form one of the most developed
+  descriptor classes of chemical graph theory, from the Randi\'c and
+  Zagreb indices~\cite{Randic1975, GutmanTrinajstic1972} and their
+  parametric extensions, the general Randi\'c and sum-connectivity
+  families~\cite{BollobasErdos1998, ZhouTrinajstic2010}, to the Sombor
+  family and its many variants (see the
+  survey~\cite{Gutman2026SomborSurvey}). Extremal results on
+  bond-incident-degree (BID) indices are surveyed
+  in~\cite{AliGutmanFurtula2026BID}, and a finite-dimensional linear
+  framework for such indices is developed in~\cite{Rada2026LinearVDB}.
 
-  A geometric strand was opened by the Sombor index
-  family~\cite{Gutman2021Sombor, Gutman2021SomborBasic}, followed by work
-  on its bounds~\cite{MilovanovicMilovanovicMatejic2021Sombor}, its
-  relations to classical degree-based
-  indices~\cite{WangMaoLiFurtula2022SomborRelations}, and its extremal
-  values over molecular trees and related
-  classes~\cite{DasCevikCangulShang2021Sombor, DasGutman2022SomborTrees,
-  AhmadFarooqDas2025Extremal}. Its variants include the
-  mean~\cite{MendezBermudezAguilarSanchez2022MeanSombor},
-  elliptic~\cite{GutmanFurtulaOz2024Elliptic},
-  hyperbolic~\cite{BarmanDas2026HSO},
-  diminished~\cite{Movahedi2025DSO, MovahediGutmanRedzepovicFurtula2026}
-  and KG-Sombor~\cite{KosariDehgardiKhan2023Lower} indices (see the
-  survey~\cite{Gutman2026SomborSurvey}). Such descriptors are
-  increasingly used in quantitative structure-property relationship
-  (QSPR) and spectral studies~\cite{ArockiarajPaulClement2023Hybrid,
-  KalaamGreeniArockiaraj2024}, and in matrix, coindex and simplicial
-  formulations~\cite{ZuoRatherImranAli2022Modified,
-  GujiWali2025Lanzhou, Shang2022Simplicial} and finite-dimensional
-  linear frameworks~\cite{Rada2026LinearVDB}; extremal results on
-  bond-incident-degree (BID) indices in general are surveyed
-  in~\cite{AliGutmanFurtula2026BID}.
-
-
-  The natural two-parameter unification of the product-based and
-  sum-based degree indices is the \emph{Gutman--Milovanovi\'c family},
-  introduced by Gutman, Milovanovi\'c and
-  Milovanovi\'c~\cite{GutmanMilovanovic2020AKCE} and studied
-  intensively in the recent bounds and QSPR literature
+  The two-parameter unification of the product-based and sum-based
+  degree indices is the \emph{Gutman--Milovanovi\'c family},
+  introduced in~\cite{GutmanMilovanovic2020AKCE} and studied in the
+  recent bounds and QSPR literature
   \cite{GranadosJMC2025GM, MolinaSigarreta2025GM, PortillaJMC2025GM}:
   $M_{\alpha,\beta}(G) = \sum_{uv \in E(G)}
   (d_u d_v)^{\alpha} (d_u + d_v)^{\beta}$, $\alpha, \beta \in
-  \mathbb{R}$. Its special cases (most of them catalogued
+  \mathbb{R}$. Its special cases (catalogued
   in~\cite{MolinaSigarreta2025GM}) include the first and second Zagreb
   indices $M_{0,1} = M_1$ and $M_{1,0} = M_2$, the hyper-Zagreb index
   $M_{0,2} = HM$~\cite{ShirdelRezapourSayadi2013HM}, the modified second
@@ -256,18 +227,15 @@
   $M_{-1/2,0} = R$, the sum-connectivity index
   $M_{0,-1/2} = \chi$~\cite{ZhouTrinajstic2009sumconn}, the harmonic
   index $2M_{0,-1} = H$, the inverse sum indeg index $M_{1,-1} = ISI$,
-  the geometric-arithmetic index $2M_{1/2,-1} = GA$, the
-  arithmetic-geometric index $\tfrac12 M_{-1/2,1} = AG$, and, as
-  parameter axes, the general Randi\'c family
-  $R_\alpha = M_{\alpha,0}$~\cite{BollobasErdos1998} and general
-  sum-connectivity family
-  $\chi_\beta = M_{0,\beta}$~\cite{ZhouTrinajstic2010}.
-  Parameter-optimized versions of this family and of related
-  generalized descriptors have already been fitted to octane
-  properties~\cite{AliGutmanFurtulaAlbalahiHamza2025}. We claim no
-  novelty for this backbone, for its reduction catalogue, or for its
-  generic tunability: those belong to the Gutman--Milovanovi\'c
-  literature.
+  the geometric--arithmetic index
+  $2M_{1/2,-1} = GA$~\cite{VukicevicFurtula2009GA}, the
+  arithmetic--geometric index $\tfrac12 M_{-1/2,1} = AG$, and, as
+  parameter axes, the general Randi\'c family $R_\alpha = M_{\alpha,0}$
+  and the general sum-connectivity family $\chi_\beta = M_{0,\beta}$.
+  Parameter-optimized versions of this family have already been fitted
+  to octane properties~\cite{AliGutmanFurtulaAlbalahiHamza2025}; no
+  novelty is claimed here for the backbone, its reduction catalogue or
+  its tunability.
 
   In this paper we study a three-parameter extension of
   $M_{\alpha,\beta}$, the \emph{Loyola index family}, obtained by
@@ -286,54 +254,41 @@
 
   Writing the summand as
   $\exp\bigl(\alpha \ln(d_u d_v) + \beta \ln(d_u + d_v) +
-  \gamma\, q_{uv}\bigr)$ shows that the family is a
-  three-parameter subfamily of the exponential vertex-degree-based
-  indices introduced by Rada~\cite{Rada2019ExpVDB} and studied in
-  extremal settings by Sigarreta~\cite{Sigarreta2022ExpVDB}; general
-  sufficient conditions for tree-extremal behaviour of such exponential
-  edge-weight sums are known~\cite{GaoAMC2024} (see
-  also~\cite{CruzMonsalveRada2020, DasElumalaiBalachandran2021}), bounds
-  for general edge-weight functions over graphs of given order and size
-  are given in~\cite{HuMATCH2022}, and no extremal-ordering novelty is
-  claimed here. The published one-parameter exponential indices (e.g.\
-  the exponential geometric--arithmetic~\cite{DasMondal2024ExpGA} and
-  exponential inverse symmetric division
-  deg~\cite{DasMondalRazaPal2025ExpISDD} indices) place their parameter
-  on a single classical generator inside the exponent; the scoped
-  contribution of this family is the multi-parameter \emph{linear
-  combination} in the exponent in which the two Gutman--Milovanovi\'c
-  basis terms act as the factors $(d_u d_v)^{\alpha}(d_u + d_v)^{\beta}$
-  while the imbalance coordinate carries its own parameter $\gamma$. The
-  imbalance ratio itself appears in many published indices: the
-  diminished Sombor index, with edge weight
-  $\sqrt{(1+q_{uv}^2)/2}$~\cite{MovahediGutmanRedzepovicFurtula2026};
-  the irregularity index $IRLA(G) = 2\sum_{uv}
-  q_{uv}$~\cite{RetiSharafdini2018IRLA}, of which the pure-$\gamma$ point
-  $LO(G;0,0,\gamma) = \sum_{uv} e^{\gamma q_{uv}}$ is the exponential
-  index in the sense of~\cite{Rada2019ExpVDB}; degree-ratio
-  indices~\cite{NyauliBuragohain2027DRSO, GutmanBuragohainNyauli2026};
-  and the parent family itself, since
+  \gamma\, q_{uv}\bigr)$ shows that the family is a three-parameter
+  subfamily of the exponential vertex-degree-based indices of
+  Rada~\cite{Rada2019ExpVDB}, whose extremal theory is developed
+  in~\cite{Sigarreta2022ExpVDB, GaoAMC2024, HuMATCH2022}; no
+  extremal-ordering result is claimed here. Published one-parameter
+  exponential indices (e.g.~\cite{DasMondal2024ExpGA,
+  DasMondalRazaPal2025ExpISDD}) place their parameter on a single
+  classical generator inside the exponent; here the two
+  Gutman--Milovanovi\'c basis terms act as the factors
+  $(d_u d_v)^{\alpha}(d_u + d_v)^{\beta}$ while the imbalance coordinate
+  carries its own parameter $\gamma$. The imbalance ratio itself is not
+  new: it appears in the diminished Sombor
+  index~\cite{MovahediGutmanRedzepovicFurtula2026}, in the irregularity
+  index $IRLA(G) = 2\sum_{uv} q_{uv}$~\cite{RetiSharafdini2018IRLA} (of
+  which the pure-$\gamma$ point $LO(G;0,0,\gamma) = \sum_{uv} e^{\gamma
+  q_{uv}}$ is the exponential index in the sense
+  of~\cite{Rada2019ExpVDB}), in degree-ratio
+  indices~\cite{NyauliBuragohain2027DRSO, GutmanBuragohainNyauli2026},
+  and in the parent family itself, since
   $1 - q_{uv}^2 = 4 d_u d_v/(d_u + d_v)^2$ gives
-  $M_{\alpha,-2\alpha}(G) = 4^{-\alpha} \sum_{uv} (1 - q_{uv}^2)^{\alpha}$
-  (the variable geometric--arithmetic direction). The parent family is
-  therefore not blind to imbalance; what is new is a coordinate
-  \emph{linear} in $q_{uv}$ in the exponent, which, unlike
-  $\ln(1 - q_{uv}^2)$, is not an affine function of $\ln(d_u d_v)$ and
-  $\ln(d_u + d_v)$ once a vertex of degree at least $3$ is admitted
-  (Lemma~\ref{prop:indep}, $\Delta \ge 3$). To our knowledge, and
-  within the scope of the literature search documented in the
-  reproducibility package, no published index couples it
-  multiplicatively, with its own parameter, to the Gutman--Milovanovi\'c
-  family. Since $0 \le q_{uv} < 1$, the factor lies in $[1, e^{\gamma})$
-  for $\gamma > 0$, equals $1$ for $\gamma = 0$, lies in
-  $(e^{\gamma}, 1]$ for $\gamma < 0$, and reduces to $1$ on regular
-  graphs. The exponential form is not derived from a physical model; it
-  is chosen because it makes the family log-linear in its parameters, so
-  that $\gamma$ acts multiplicatively and only on irregularity, and the
-  whole family is an exponential family in $(\alpha,\beta,\gamma)$,
-  which is what makes the convexity, identifiability and discrimination
-  results of Section~\ref{sec:geometry} available.
-
+  $M_{\alpha,-2\alpha}(G) = 4^{-\alpha} \sum_{uv} (1 - q_{uv}^2)^{\alpha}$.
+  What is new is a coordinate \emph{linear} in $q_{uv}$ in the
+  exponent, which, unlike $\ln(1 - q_{uv}^2)$, is not an affine function
+  of $\ln(d_u d_v)$ and $\ln(d_u + d_v)$ once a vertex of degree at
+  least $3$ is admitted (Lemma~\ref{prop:indep}, $\Delta \ge 3$). To
+  our knowledge, and within the scope of the literature search
+  documented in the reproducibility package, no published index couples
+  it multiplicatively, with its own parameter, to the
+  Gutman--Milovanovi\'c family. The exponential form is not derived
+  from a physical model; it is chosen because it makes the family
+  log-linear in its parameters, so that $\gamma$ acts multiplicatively
+  and only on irregularity and the whole family is an exponential
+  family in $(\alpha,\beta,\gamma)$, which is what makes the convexity,
+  identifiability and discrimination results of
+  Section~\ref{sec:geometry} available.
 
   On hydrogen-suppressed molecular graphs with $\Delta \le 4$, every BID
   index is a linear functional of the ten edge-degree-pair counts
@@ -342,46 +297,27 @@
   Rada~\cite{Rada2026LinearVDB}), so the Loyola family lies inside a fixed
   ten-dimensional descriptor space, however its parameters are chosen.
 
-
-  \emph{Scope of the contribution.} Four questions should be answered
-  at the outset. First, is the family sufficiently novel, given $IRLA$
-  and the existing exponential vertex-degree-based indices? The edge
-  invariant $q_{uv}$ is classical, and the pure-$\gamma$ point
-  $LO(0,0,\gamma)$ is simply the exponential index, in the sense
-  of~\cite{Rada2019ExpVDB}, of the $IRLA$ edge weights. What is new is
-  not a new edge invariant but its embedding as a free, log-linear
-  coordinate inside the Gutman--Milovanovi\'c family, and the exact
-  description of the resulting three-parameter structure: a scale--shape
-  factorisation, a ratio plane on which discrimination is characterised
-  exactly, and per-graph identifiability. Second, several of the
-  mathematical results are applications of standard tools: the
-  convexity of log-sum-exp functions, Laguerre's rule of signs, the
+  \emph{Scope of the contribution.} Several of the mathematical
+  results are applications of standard tools (the convexity of
+  log-sum-exp functions, Laguerre's rule of signs, the
   Lindemann--Weierstrass theorem and the minimality theory of
-  exponential families. We claim no novelty for these tools; the
-  contribution is their application to this family and the structural
-  characterisation that results (the exact $q$-histogram ceiling of the
-  pure-$\gamma$ line, colliding tree families at every order from $13$,
-  a bound on $\gamma$-crossings, and the characterisation of
-  scale-invariant directions). Third, why use a three-parameter family
-  if $IRLA$ performs similarly? Not for predictive superiority, which
-  we do not find on the sets and protocols of Section~\ref{sec:sensitivity}. The reasons are interpretability within the parent
-  family (every member is a deformation of a classical
-  Gutman--Milovanovi\'c index, recovered at $\gamma = 0$); continuous
-  structural deformation (size and shape are controlled separately, and
-  $\gamma$ moves continuously from the parent towards imbalance-weighted
-  indices); ratio-plane geometry (the pure-$\gamma$ line, $GA$ and $AG$
-  lie in one plane on which their discriminating power is described
-  exactly); and analytic tractability (log-linearity gives convexity,
-  closed-form derivatives such as
+  exponential families); we claim no novelty for the tools, only for
+  the structural characterisation that results. The family is not
+  proposed for predictive superiority, which we do not find on the sets
+  and protocols of Section~\ref{sec:sensitivity}; its interest lies in
+  interpretability within the parent family (every member is a
+  deformation of a classical index, recovered at $\gamma = 0$), the
+  separate control of size and shape, the ratio-plane geometry it shares
+  with $GA$ and $AG$, and analytic tractability (log-linearity gives
+  convexity, closed-form derivatives such as
   $\partial_{\gamma}\log LO = \mathbb{E}_{\theta}[q]$, and an exact
-  identifiability theory). $IRLA$ is, to first order in $\gamma$, a
-  single slice of this structure. Fourth, the QSPR datasets are small:
+  identifiability theory); $IRLA$ is, to first order in $\gamma$, a
+  single slice of this structure. The QSPR datasets are small:
   $18$ octanes, $35$ nonanes, $34$ decanes with usable measured boiling
   points, and $100$ alkanes C6--C10 in a pooled size-adjusted set. We
-  therefore present the chemometric
-  component as diagnostic evidence about what imbalance information
-  does and does not add to the parent family, not as proof of chemical
-  predictive utility.
+  therefore present the chemometric component as diagnostic evidence
+  about what imbalance information does and does not add to the parent
+  family, not as proof of chemical predictive utility.
 
   In sum, the contributions are: (i) the scale--shape factorisation and
   the ratio-plane theorem (Theorem~\ref{thm:ratioplane}), which
@@ -1658,14 +1594,6 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
 
  \begin{thebibliography}{99}
 
-  \bibitem{AhmadFarooqDas2025Extremal}
-  S. Ahmad, R. Farooq, K. C. Das, The general Sombor index of extremal
-  trees with a given maximum degree, \textit{MATCH Commun. Math. Comput.
-  Chem.\/} \textbf{94} (2025) 825--853.
-
-  \bibitem{Albertson1997}
-  M. O. Albertson, The irregularity of a graph, \textit{Ars Combin.\/}
-  \textbf{46} (1997) 219--225.
 
   \bibitem{AliGutmanFurtula2026BID} A. Ali, I. Gutman, B. Furtula,
   Extremal results on bond incident degree indices of graphs: a survey,
@@ -1676,11 +1604,6 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   characteristics of generalized degree-based molecular descriptors,
   \textit{AIMS Math.\/} \textbf{10} (2025) 6788--6804.
 
-  \bibitem{ArockiarajPaulClement2023Hybrid} M. Arockiaraj, D. Paul, J.
-  Clement, S. Tigga, K. Jacob, K. Balasubramanian, Novel molecular hybrid
-  geometric-harmonic-Zagreb degree based descriptors and their efficacy in
-  QSPR studies of polycyclic aromatic hydrocarbons, \textit{SAR QSAR
-  Environ. Res.\/} \textbf{34} (2023) 569--589.
 
   \bibitem{Baker1975} A. Baker, \textit{Transcendental Number Theory\/},
   Cambridge Univ. Press, Cambridge, 1975.
@@ -1698,21 +1621,6 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   Theory\/}, IMS Lecture Notes--Monograph Series 9, Institute of
   Mathematical Statistics, Hayward, 1986.
 
-  \bibitem{CruzMonsalveRada2020} R. Cruz, J. Monsalve, J. Rada, Extremal
-  values of vertex-degree-based topological indices of chemical trees,
-  \textit{Appl. Math. Comput.\/} \textbf{380} (2020) \#125281.
-
-  \bibitem{DasCevikCangulShang2021Sombor} K. C. Das, A. S. \c{C}evik, I. N.
-  Cangul, Y. Shang, On Sombor index, \textit{Symmetry\/} \textbf{13}
-  (2021) \#140.
-
-  \bibitem{DasElumalaiBalachandran2021} K. C. Das, S. Elumalai,
-  S. Balachandran, Open problems on the exponential vertex-degree-based
-  topological indices of graphs, \textit{Discrete Appl. Math.\/}
-  \textbf{293} (2021) 38--49.
-
-  \bibitem{DasGutman2022SomborTrees} K. C. Das, I. Gutman, On Sombor index
-  of trees, \textit{Appl. Math. Comput.\/} \textbf{412} (2022) \#126575.
 
   \bibitem{DasMondal2024ExpGA} K. C. Das, S. Mondal, On exponential
   geometric-arithmetic index of graphs, \textit{J. Math. Chem.\/}
@@ -1722,15 +1630,6 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   A. Pal, On exponential inverse symmetric division deg index of graphs,
   \textit{J. Appl. Math. Comput.\/} \textbf{71} (Suppl.~1) (2025) 537--561.
 
-  \bibitem{Ediz2017Octane}
-  S. Ediz, Predicting some physicochemical properties of octane isomers:
-  a topological approach using ev-degree and ve-degree Zagreb indices,
-  arXiv:1701.02859 (2017), \url{https://arxiv.org/abs/1701.02859}.
-
-
-\bibitem{FurtulaGutman2015F} B. Furtula, I. Gutman, A forgotten
-  topological index, \textit{J. Math. Chem.\/} \textbf{53} (2015)
-  1184--1190.
 
   \bibitem{FurtulaGutmanDehmer2013SS} B. Furtula, I. Gutman, M. Dehmer, On
   structure-sensitivity of degree-based topological indices, \textit{Appl.
@@ -1745,17 +1644,6 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   applications, \textit{J. Math. Chem.\/} \textbf{63} (2025)
   406--418.
 
-  \bibitem{GujiWali2025Lanzhou} R. Guji, M. Wali, The Sombor index
-  (coindex) and Lanzhou index (coindex) of some graphs, \textit{Axioms\/}
-  \textbf{14} (2025) \#164.
-
-  \bibitem{Gutman2021Sombor} I. Gutman, Geometric approach to degree-based
-  topological indices: Sombor indices, \textit{MATCH Commun. Math. Comput.
-  Chem.\/} \textbf{86} (2021) 11--16.
-
-  \bibitem{Gutman2021SomborBasic} I. Gutman, Some basic properties of
-  Sombor indices, \textit{Open J. Discr. Appl. Math.\/} \textbf{4} (2021)
-  1--3.
 
   \bibitem{Gutman2026SomborSurvey} I. Gutman, Survey of Sombor-type
   degree-based topological indices, \textit{MATCH Commun. Math. Comput.
@@ -1765,18 +1653,11 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   G. G. Nyauli, Concealed relations between vertex-degree-based
   topological indices, \textit{J. Math. Chem.\/} \textbf{64} (2026) \#39.
 
-  \bibitem{GutmanFurtulaOz2024Elliptic} I. Gutman, B. Furtula, M. S. Oz,
-  Geometric approach to vertex-degree-based topological indices: Elliptic
-  Sombor index, theory and application, \textit{Int. J. Quantum Chem.\/}
-  \textbf{124} (2024) \#e27346.
 
   \bibitem{GutmanMilovanovic2020AKCE} I. Gutman, E. Milovanovi\'c,
   I. Milovanovi\'c, Beyond the Zagreb indices, \textit{AKCE Int. J.
   Graphs Comb.\/} \textbf{17} (2020) 74--85.
 
-  \bibitem{GutmanToganYurttasCevikCangul2018Sigma} I. Gutman, M. Togan, A.
-  Yurtta\c{s}, A. S. \c{C}evik, I. N. Cangul, Inverse problem for sigma index,
-  \textit{MATCH Commun. Math. Comput. Chem.\/} \textbf{79} (2018) 491--508.
 
   \bibitem{GutmanTrinajstic1972} I. Gutman, N. Trinajsti\'c, Graph theory
   and molecular orbitals. Total $\pi$-electron energy of alternant
@@ -1791,20 +1672,12 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   polynomials: Descartes' rule of signs and Laguerre's extensions,
   \textit{Math. Gaz.\/} \textbf{90} (2006) 223--234.
 
-  \bibitem{KalaamGreeniArockiaraj2024} A. R. A. Kalaam, A. B. Greeni, M.
-  Arockiaraj, Modified reverse degree descriptors for combined topological
-  and entropy characterizations of 2D metal organic frameworks:
-  applications in graph energy prediction, \textit{Front. Chem.\/}
-  \textbf{12} (2024) \#1470231.
 
   \bibitem{Konstantinova1996Degeneracy} E. V. Konstantinova, The
   discrimination ability of some topological and information distance indices
   for graphs of unbranched hexagonal systems, \textit{J. Chem. Inf. Comput.
   Sci.\/} \textbf{36} (1996) 54--57.
 
-  \bibitem{KosariDehgardiKhan2023Lower} S. Kosari, N. Dehgardi, A. Khan,
-  Lower bound on the KG-Sombor index, \textit{Commun. Comb. Optim.\/}
-  \textbf{8} (2023) 751--757.
 
   \bibitem{LabaufGreenshieldsRossini1961} A. Labbauf, J. B. Greenshields,
   F. D. Rossini, Heats of formation, combustion, and vaporization of the
@@ -1816,29 +1689,12 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   Institute of Standards and Technology, Gaithersburg MD,
   \href{https://doi.org/10.18434/T4D303}{doi:10.18434/T4D303} (accessed 2025--2026).
 
-  \bibitem{MendezBermudezAguilarSanchez2022MeanSombor} J. A.
-  M\'endez-Berm\'udez, R. Aguilar-S\'anchez, E. D. Molina, J. M. Rodr\'iguez, Mean
-  Sombor index, \textit{Discr. Math. Lett.\/} \textbf{9} (2022) 18--25.
-
-  \bibitem{MilovanovicMilovanovicMatejic2021Sombor} I. Milovanovi\'c, E.
-  Milovanovi\'c, M. Mateji\'c, On some mathematical properties of Sombor
-  indices, \textit{Bull. Int. Math. Virtual Inst.\/} \textbf{11} (2021)
-  341--353.
 
   \bibitem{MolinaSigarreta2025GM} E. D. Molina, J. M.
   Rodr\'iguez-Garc\'ia, J. M. Sigarreta, S. J. Torralbas Fitz, On the
   Gutman--Milovanovi\'c index and chemical applications, \textit{AIMS
   Math.\/} \textbf{10} (2025) 1998--2020.
 
-  \bibitem{MondalDePal2019QSPR}
-  S. Mondal, A. Dey, N. De, A. Pal, QSPR analysis of some novel
-  neighbourhood degree-based topological descriptors, \textit{Complex
-  Intell. Syst.\/} \textbf{7} (2021) 977--996,
-  \url{https://doi.org/10.1007/s40747-020-00262-0} (arXiv:1906.06660).
-
-\bibitem{Movahedi2025DSO} F. Movahedi, Diminished Sombor index and its
-  relationship with topological indices, \textit{Filomat\/} \textbf{39}
-  (2025) 10519--10532.
 
   \bibitem{MovahediGutmanRedzepovicFurtula2026} F. Movahedi, I. Gutman, I.
   Red\v{z}epovi\'c, B. Furtula, Diminished Sombor index, \textit{MATCH Commun.
@@ -1879,9 +1735,6 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   Properties of Hydrocarbons, National Bureau of Standards Circular C461,
   U.S. Government Printing Office, Washington, 1947, Table~3p.
 
-  \bibitem{Shang2022Simplicial}
-  Y. Shang, Sombor index and degree-related properties of simplicial
-  networks, \textit{Appl. Math. Comput.\/} \textbf{419} (2022) \#126881.
 
   \bibitem{ShirdelRezapourSayadi2013HM} G. H. Shirdel, H. Rezapour,
   A. M. Sayadi, The hyper-Zagreb index of graph operations,
@@ -1897,12 +1750,6 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   end-vertex degrees of edges, \textit{J. Math. Chem.\/} \textbf{46} (2009)
   1369--1376.
 
-  \bibitem{WangMaoLiFurtula2022SomborRelations} Z. Wang, Y. Mao, Y. Li, B.
-  Furtula, On relations between Sombor and other degree-based indices,
-  \textit{J. Appl. Math. Comput.\/} \textbf{68} (2022) 1--17.
-
-  \bibitem{Wiener1947} H. Wiener, Structural determination of paraffin
-  boiling points, \textit{J. Am. Chem. Soc.\/} \textbf{69} (1947) 17--20.
 
   \bibitem{WilhoitZwolinski1971} R. C. Wilhoit, B. J. Zwolinski,
   \textit{Handbook of Vapor Pressures and Heats of Vaporization of
@@ -1917,10 +1764,6 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   sum-connectivity index, \textit{J. Math. Chem.\/} \textbf{47} (2010)
   210--218.
 
-  \bibitem{ZuoRatherImranAli2022Modified}
-  X. Zuo, B. A. Rather, M. Imran, A. Ali, On some topological indices
-  defined via the modified Sombor matrix, \textit{Molecules\/} \textbf{27}
-  (2022) \#6772.
 
 \end{thebibliography}
 

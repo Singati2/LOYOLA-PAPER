@@ -724,3 +724,15 @@ replay snapshots the tree and includes tracked formal/ files.
   document references re-audited (Table 4, Table 8, Sections 6.3/6.4);
   the prose registry entries for the moved text now check the supplement.
 - Main paper 37 pages, supplement 27.
+
+## v40.17 (shorter Introduction; old version artefacts removed)
+- Introduction cut from 1425 to 1050 words: the opening literature
+  catalogue reduced to one paragraph, the four-question "scope" paragraph
+  folded into one, repeated novelty disclaimers and the trivial remark on
+  the range of the exponential factor removed; definitions, the reduction
+  catalogue (used by Table 4), the Lemma 1 sentence and the contributions
+  list are unchanged.  24 references that were cited only in the removed
+  catalogue were dropped from the bibliography (36 remain).
+- history/ (v35/v36 notes, the v35 provenance audit) and the verification
+  logs of v40.5-v40.15 removed from the working tree; they remain in the git
+  history.  Only the current version's logs are kept.

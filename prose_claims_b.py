@@ -660,7 +660,7 @@ REGISTRY = []
 _add = REGISTRY.append
 
 # ----- Section 1 Introduction (main) -----
-_add(E("intro_collide_from13", "main", r"colliding tree families at every order from \$(?P<v>\d+)\$",
+_add(E("intro_collide_from13", "main", r"tree collisions at every order\s+from \$(?P<v>\d+)\$, from \$16\$",
        "s1_first_below('all', 'qh')", 0, "structural_checks_out.txt S1: first n with qhist < profiles (all trees)"))  # 1 match
 _add(E("intro_collide_from13_b", "main", r"tree collisions at every order\s+from \$(?P<v>\d+)\$, from \$16\$",
        "s1_first_below('all', 'qh')", 0, "S1 first qhist<profiles, all"))  # 1

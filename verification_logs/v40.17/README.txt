@@ -1,0 +1,1 @@
+v40.17 verification logs: fast path ALL PASS (core FULL PASS, prose 708/0, regression/baseline/auxiliary/source/interval checks, CSV convention, manifest). Experiment code, data, verifier and structural scripts unchanged since v40.16 (its full suite incl. Lean, self-test, counter-attacks, external replay and the every-script replay remains valid).

@@ -1,1 +1,0 @@
-v40.15 verification logs: replay of every script (only a round-off diagnostic moved, 6.93e-13 -> 6.99e-13, regenerated), Lean 36/36, self-test 114/114, counter-attacks 13/13, external PASS, prose 708/0; paper 38 pp, supplement 26 pp.

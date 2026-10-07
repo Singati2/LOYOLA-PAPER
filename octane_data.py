@@ -20,7 +20,7 @@ standard octane QSPR dataset, arXiv:1701.02859 Table 1, to 2 dp):
 v40.5 data correction (gas-phase entropy S, cal/(mol K), 298 K):
   2,3,3-trimethylpentane   S 101.31 -> 102.06
 The v35 value duplicated the 2,2,3-trimethylpentane entry (a copy error
-flagged in history/LOYOLA_V35_DATA_PROVENANCE.md).  102.06 is the value of the
+flagged in the v36 changelog entry).  102.06 is the value of the
 compiled 18-octane dataset reproduced by Mondal, Dey, De & Pal (2021,
 arXiv:1906.06660, Table 2); the one-decimal compilation of Ediz (2017,
 arXiv:1701.02859, Table 1) gives 102.10.  Neither is a primary source; NIST

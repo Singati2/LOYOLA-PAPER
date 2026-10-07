@@ -1,7 +1,0 @@
-Independent dataset rebuild, 2026-10-06 (temporary copy of external/):
-  build_nonane_data.py  -> nonane_data.csv, nonane_provenance.csv, nonane_identity.csv : IDENTICAL to committed (35 isomers, 34 dHvap)
-  bp/build_bp_data.py   -> bp_data.csv, bp_provenance.csv : IDENTICAL to committed (100 molecules: C6 5, C7 9, C8 18, C9 34, C10 34)
-  bp/build_calorimetric_set.py -> calorimetric_dHvap298_alkanes.csv : IDENTICAL
-Octane data: octane_data.py values = Appendix A table (18 rows x 5 properties) = paper_value column of all 90 provenance rows;
-  provenance classes recounted: VERIFIED EXACT 3, VERIFIED AFTER UNIT CONVERSION 29, AGREEMENT WITHIN TOLERANCE 37,
-  SOURCE VARIATION / EXPLAINED 13, CANNOT VERIFY 7, CONFLICT 1 (as stated in Supplementary S1).
