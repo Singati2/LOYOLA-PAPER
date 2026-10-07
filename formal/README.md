@@ -89,3 +89,5 @@ warnings, 36 `#print axioms` checks all clean.
   only through their degree-pair multisets (plus the explicit tree certificates of L10).
 * The other results of the paper (closed forms, the asymptotics, the ceiling and generic-discrimination propositions, `prop:collision`, `prop:generic`,
   `prop:collision`, `prop:generic`, the empirical sections).
+
+Note (v40.14): the termwise bounds formalized here (bracket, upper/lower bounds, Cauchy-Schwarz corollary, ratio bound) and the closed forms now appear in Supplementary Section S9 of the paper; their labels are unchanged.

@@ -670,3 +670,18 @@ unchanged); tuning_pool_seed_sweep.py produces the S2 seed sweep (97 of
 100 seeds, not 96%); stale labels fixed (baselines CSV, formal/README);
 hp_counts.py keeps its runtime out of the committed file; the isolated
 replay snapshots the tree and includes tracked formal/ files.
+
+## v40.14 (main paper shortened: routine material moved to the supplement)
+- Moved to new Supplementary Section S9: the closed forms on standard
+  graphs (former Proposition 1), the proof of the global log-convexity
+  theorem (statement kept), and the whole former Section 4 (bracket,
+  (m, Delta, delta), Cauchy-Schwarz and ratio bounds, attribution remark).
+  The gamma -> 0 / +-infinity proposition stays in the main text because
+  the crossing-bound proof uses it.  Main paper 43 -> 37 pages; supplement
+  21 -> 26.  No statement, number or proof changed; the Lean-checked bounds
+  keep their labels (formal/README.md notes the new location).
+- Counter-check of the move: all cross-document citations re-audited after
+  renumbering (ratio-plane theorem now Theorem 2, ceiling Proposition 6,
+  generic discrimination Proposition 7; two citations had been mis-set to
+  "Theorem 1" by a blanket replacement and were corrected); tables
+  unchanged; both documents compile with no undefined references.

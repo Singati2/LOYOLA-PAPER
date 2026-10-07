@@ -630,8 +630,8 @@ degree-pair count vector predicts the nonanes better than every index
 model, for both properties ($Q^2 = 0.927$ for
 $\Delta H_{\mathrm{vap}}$, $0.682$ for $T_B$); on the octanes it matches
 the Loyola model on $\Delta H_{\mathrm{vap}}$ and is weaker elsewhere.
-This is consistent with Proposition~13 of the main paper and the remark
-after Proposition~14: the imbalance coordinate re-weights degree-pair
+This is consistent with Proposition~6 of the main paper and the remark
+after Proposition~7: the imbalance coordinate re-weights degree-pair
 information rather than adding to it, and its value is that one
 interpretable descriptor recovers most of what a model on all ten
 degree-pair counts achieves for the vaporization enthalpy, not that it
@@ -695,7 +695,7 @@ and $AG$; indeed the $106$ trees realise only $79$ distinct
 edge-degree-pair count vectors, so $25.5\%$ is the minimum degeneracy
 attainable by \emph{any} degree-pair-based index on this set, and the
 pure-$\gamma$ points attain this floor; the reason, and the order at
-which this stops, are given by Theorem~3 of the main paper; the first Zagreb index $LO(0, 1, 0)$ ($83.0\%$) and the
+which this stops, are given by Theorem~2 of the main paper; the first Zagreb index $LO(0, 1, 0)$ ($83.0\%$) and the
 second Zagreb index $LO(1, 0, 0)$ ($67.0\%$) are the most degenerate
 (Figure~\ref{fig:degeneracy}).
 
@@ -717,7 +717,7 @@ floor from order $10$), so floor attainment distinguishes the
 pure-$\gamma$ points from the most degenerate classical indices
 ($M_1$, $M_2$) but not from $R$; the observation is that the
 imbalance weights lose nothing, not that they are unique in this
-respect. Theorem~3 of the main paper turns this into an exact
+respect. Theorem~2 of the main paper turns this into an exact
 statement: the pure-$\gamma$ points separate precisely the
 $q$-histograms, which coincide with the degree-pair profiles up to
 order $12$ (order $15$ for $\Delta \le 4$) and not beyond. Among the
@@ -893,6 +893,331 @@ of the main paper.
 
 \singlespacing
 
+
+\section{Closed forms, the log-convexity proof and termwise bounds}\label{sec:s-bounds}
+This section collects material moved from the main paper: closed-form
+values on standard graphs, the proof of the global log-convexity theorem
+(Theorem~1 of the main paper), and termwise bounds for the family.
+
+\subsection*{Closed-form values on standard graphs}
+
+  \begin{proposition}\label{prop:closedforms}
+  Let $\alpha, \beta, \gamma \in \mathbb{R}$. Then:
+  \begin{enumerate}
+  \item  $LO(K_n; \alpha, \beta, \gamma) =
+    \dfrac{n(n-1)}{2}\,2^{\beta}(n - 1)^{2\alpha + \beta}$ for $n \ge 2$.
+  \item  $LO(C_n; \alpha, \beta, \gamma) = n \cdot 4^{\alpha +
+  \beta}$
+    for $n \ge 3$.
+  \item
+    $LO(P_n; \alpha, \beta, \gamma) =
+    \begin{cases}
+      2^{\beta}, & n = 2,\\[2pt]
+      2 \cdot 2^{\alpha} 3^{\beta} e^{\gamma/3}, & n = 3,\\[2pt]
+      2 \cdot 2^{\alpha} 3^{\beta} e^{\gamma/3} + (n - 3) \cdot 4^{\alpha +
+  \beta},
+         & n \ge 4.
+    \end{cases}$
+  \item  $LO(S_n; \alpha, \beta, \gamma) =
+    (n - 1)\,(n - 1)^{\alpha} n^{\beta} \exp\!\left(\gamma\,\dfrac{n -
+  2}{n}\right)$
+    for $n \ge 2$.
+  \item  $LO(K_{p,q}; \alpha, \beta, \gamma) =
+    pq\,(pq)^{\alpha}(p + q)^{\beta}\exp\!\left(\gamma\,\dfrac{|p - q|}{p +
+  q}\right)$.
+  \item  $LO(Q_k; \alpha, \beta, \gamma) =
+    k \cdot 2^{k - 1} \cdot 2^{\beta} k^{2\alpha + \beta}$ for $k \ge 1$.
+  \item  For $n \ge 5$, $W_n$ has $n - 1$ spoke edges with
+    degree pair $(3, n - 1)$ and $n - 1$ rim edges with degree pair
+    $(3, 3)$, so
+    \[
+    LO(W_n; \alpha, \beta, \gamma)
+    = (n - 1)\Bigl[\,3^{\alpha} (n - 1)^{\alpha}(n + 2)^{\beta}
+         \exp\!\left(\gamma\,\tfrac{n - 4}{n + 2}\right)
+       + 9^{\alpha} 6^{\beta}\Bigr].
+    \]
+  \item  For $p \ge 1$, $F_p$ has $2p$ spoke edges
+    $(2, 2p)$ and $p$ outer edges $(2, 2)$, so
+    \[
+    LO(F_p; \alpha, \beta, \gamma)
+    = p \cdot 4^{\alpha + \beta}
+     + 2p\,(4p)^{\alpha}(2p + 2)^{\beta}
+         \exp\!\left(\gamma\,\tfrac{p - 1}{p + 1}\right).
+    \]
+  \item  For an $r$-regular graph $G$ with $m$ edges,
+    $\Wuzi = m \cdot 2^{\beta} r^{2\alpha + \beta}$.
+  \end{enumerate}
+  \end{proposition}
+
+  \begin{proof}
+  Each case follows by enumerating the edge degree pairs and applying
+  the definition of the main paper. In $K_n$, $C_n$, $Q_k$ and $r$-regular
+  graphs every edge has $d_u = d_v = r$, so $\mathrm{imb} = 0$ and
+  $(d_u d_v)^{\alpha}(d_u + d_v)^{\beta} = 2^{\beta} r^{2\alpha + \beta}$,
+  which gives items (1), (2), (6) and (9). All $n - 1$ edges of $S_n$
+  have degree pair $(1, n - 1)$ with $\mathrm{imb} = (n - 2)/n$
+  (item (4)); all $pq$ edges of $K_{p,q}$ have pair $(p, q)$ (item (5));
+  $P_n$, $n \ge 4$, has two pendant edges $(1, 2)$ and $n - 3$ interior
+  edges $(2, 2)$, and the cases $n = 2, 3$ are immediate (item (3));
+  items (7) and (8) follow by summing over the two edge-degree-pair
+  classes of $W_n$ and $F_p$.
+  \end{proof}
+
+
+
+\subsection*{Proof of the global log-convexity theorem}
+\begin{proof}[Proof of Theorem~1 of the main paper]
+  Direct differentiation of
+  $LO_G(\theta) = \sum_{uv} e^{\theta^{\top} z_{uv}}$ gives
+  $\partial_k F_G = \sum_{uv} w_{uv} z_{uv,k} =
+  \mathbb{E}_{\theta}[z_k]$ and
+  $\partial_k \partial_l F_G =
+  \mathbb{E}_{\theta}[z_k z_l] -
+  \mathbb{E}_{\theta}[z_k]\,\mathbb{E}_{\theta}[z_l]$, the
+  $(k,l)$-entry of $\operatorname{Cov}_{\theta}(z)$, which is positive
+  semidefinite; convexity follows. The measure $w(\theta)$ has full
+  support on $E$ for every $\theta$, so
+  $\operatorname{Cov}_{\theta}(z)$ is singular in a direction $v$ iff
+  $v^{\top} z_{uv}$ is constant over all edges, i.e.\ iff the
+  $z_{uv}$ lie in a proper affine subspace; this proves the strictness
+  criterion. Since $q_{uv} \in [0,1)$,
+  $\mathbb{E}_{\theta}[q] \in [0,1)$, and
+  $\mathbb{E}_{\theta}[q] = 0$ iff $q_{uv} = 0$ on every edge. On an
+  $r$-regular graph all $z_{uv}$ equal
+  $z_0 = (2\ln r, \ln 2r, 0)$.
+  \end{proof}
+
+\subsection*{Termwise bounds}
+  We give a bracket bound via the edge-contribution function $\psi$,
+  bounds in $(m, \Delta, \delta)$ for non-negative parameters, a
+  Cauchy--Schwarz interpolation bound, a uniform ratio bound, and the
+  $\gamma \to \pm\infty$ asymptotics; the $\gamma \neq 0$ bounds rest on
+  bounding $e^{\gamma q_{uv}}$ edge by edge (for $\gamma \ge 0$) between $1$ and
+  $e^{\gamma(\Delta-1)/(\Delta+1)}$. Throughout, $G$ is a simple
+  connected graph with $\delta \le d_v \le \Delta$ for every
+  $v \in V(G)$. Several of the inequalities have been machine-checked
+  (Section~\ref{sec:s-lean}).
+
+
+  \begin{remark}[Attribution at $\gamma = 0$]\label{rem:gmattr}
+  At $\gamma = 0$ the family coincides with $M_{\alpha,\beta}$, for
+  which inequalities of all the types developed here are already known:
+  $(\Delta,\delta,m)$-bounds with regular/biregular equality and
+  two-sided comparisons against $M_1$, $M_2$, $R$, $\chi$, $H$, $GA$,
+  $AG$ and $ISI$~\cite{MolinaSigarreta2025GM}, Jensen- and H\"older-type
+  relations~\cite{GranadosJMC2025GM}, and further
+  inequalities~\cite{PortillaJMC2025GM}. The $\gamma = 0$
+  specializations below are therefore not claimed as new; the content
+  of this section is their extension to $\gamma \neq 0$, where the
+  imbalance factor $e^{\gamma q_{uv}}$ enters every edge weight, and the
+  tracking of how $\gamma$ deforms the equality cases (the
+  $\gamma = 0$ comparisons with the Randi\'c, sum-connectivity and
+  Sombor indices are not repeated).
+  \end{remark}
+
+
+  The summand in~the defining sum of the main paper depends only on the unordered
+  edge degree pair $(d_u, d_v)$. We isolate this dependence as follows:
+
+  \begin{definition}\label{def:psi}
+  For real parameters $\alpha, \beta, \gamma$ and positive reals
+  $x, y$,
+  \begin{equation}\label{eq:psi}
+  \edgepsi = (xy)^{\alpha}(x + y)^{\beta}
+  \exp\!\left(\gamma\,\tfrac{|x - y|}{x + y}\right).
+  \end{equation}
+  \end{definition}
+
+  With this notation $\Wuzi = \sum_{uv \in E(G)} \psi(d_u, d_v; \alpha,
+  \beta, \gamma)$.
+
+  \begin{proposition}\label{thm:bracket}
+  Let $G$ be a simple connected graph of size $m \ge 1$ with
+  degrees in $[\delta, \Delta]$. Then
+  \begin{equation}\label{eq:bracket}
+  m \cdot \psi_{\min}(\delta, \Delta; \alpha, \beta, \gamma)
+  \;\le\; \Wuzi \;\le\;
+  m \cdot \psi_{\max}(\delta, \Delta; \alpha, \beta, \gamma),
+  \end{equation}
+  where,
+  $\psi_{\min} = \min\{\psi(i, j; \alpha, \beta, \gamma)
+                : \delta \le i \le j \le \Delta\}$
+  and $\psi_{\max} = \max\{\psi(i, j; \alpha, \beta, \gamma)
+                : \delta \le i \le j \le \Delta\}$. The upper
+  inequality is an equality if and only if every edge of $G$ has a
+  degree pair attaining $\psi_{\max}$, and the lower
+  inequality is an equality if and only if every edge has a degree
+  pair attaining $\psi_{\min}$.
+  \end{proposition}
+
+  \begin{proof}
+  Every edge $uv$ has its degree pair in the admissible set
+  $\mathcal{P}(\delta, \Delta) := \{(i, j) \in \mathbb{Z}^2 : \delta \le
+  i \le j \le \Delta\}$, so
+  $\psi_{\min} \le \psi(d_u, d_v; \alpha, \beta, \gamma) \le \psi_{\max}$
+  on every edge; summing over the $m$ edges and using
+  $\sum_{uv} \psi(d_u, d_v; \alpha, \beta, \gamma) = \Wuzi$
+  gives~\eqref{eq:bracket}. Each side of~\eqref{eq:bracket} is the sum
+  of $m$ per-edge inequalities, so it is an equality if and only if
+  every per-edge inequality is, i.e.\ if and only if every edge has a
+  degree pair attaining $\psi_{\max}$ (upper side), respectively
+  $\psi_{\min}$ (lower side), over $\mathcal{P}(\delta, \Delta)$.
+  \end{proof}
+
+
+  \begin{corollary}\label{thm:cs}
+  Let $\alpha_1 + \alpha_2 = 2\alpha$, $\beta_1 + \beta_2 = 2\beta$,
+  and $\gamma_1 + \gamma_2 = 2\gamma$. Then for every simple
+  connected graph $G$ without isolated vertices,
+  \[
+  LO(G; \alpha, \beta, \gamma)
+  \;\le\;
+  \sqrt{LO(G; \alpha_1, \beta_1, \gamma_1)
+         \cdot LO(G; \alpha_2, \beta_2, \gamma_2)}
+  \]
+  Equality holds if and only if the ratio
+  \[
+  \psi(d_u, d_v; \alpha_1, \beta_1, \gamma_1)/\psi(d_u, d_v; \alpha_2,
+  \beta_2, \gamma_2)
+  \]
+  is the same for every edge of $G$.
+  \end{corollary}
+  \begin{proof}
+  For each edge $e = uv$ write
+  $\psi_e^{(k)} := \psi(d_u, d_v; \alpha_k, \beta_k, \gamma_k) > 0$,
+  $k \in \{1, 2\}$. By additivity of the exponents and the hypotheses on
+  $(\alpha_k, \beta_k, \gamma_k)$,
+  $\psi_e^{(1)}\psi_e^{(2)} = \psi(d_u, d_v; \alpha, \beta, \gamma)^2$
+  on every edge. The Cauchy--Schwarz inequality for
+  $a_e = (\psi_e^{(1)})^{1/2}$ and $b_e = (\psi_e^{(2)})^{1/2}$ gives
+  $\sum_e a_e b_e \le (\sum_e a_e^2)^{1/2} (\sum_e b_e^2)^{1/2}$, which
+  is the claim because $\sum_e a_e b_e = \Wuzi$,
+  $\sum_e a_e^2 = LO(G; \alpha_1, \beta_1, \gamma_1)$ and
+  $\sum_e b_e^2 = LO(G; \alpha_2, \beta_2, \gamma_2)$. Equality holds if
+  and only if $b_e = \lambda a_e$ for a constant $\lambda \ge 0$ and all
+  $e$, i.e.\ if and only if
+  $\psi_e^{(2)}/\psi_e^{(1)} = \lambda^2$ is the same on every edge.
+  (The inequality itself is midpoint log-convexity of
+  $\theta \mapsto LO(G; \theta)$, Theorem~1 of the main paper.)
+  \end{proof}
+
+
+  \begin{proposition}\label{thm:upper_Delta}
+  Let $G$ be a connected graph of size $m$ and maximum degree $\Delta$. For
+  $\alpha, \beta \ge 0$ and $\gamma \ge 0$,
+  \begin{equation}\label{eq:upper_Delta}
+  \Wuzi \;\le\; m \cdot \Delta^{2\alpha} \cdot (2\Delta)^{\beta}
+  \cdot \exp\!\left(\gamma\,\frac{\Delta - 1}{\Delta + 1}\right).
+  \end{equation}
+  \end{proposition}
+
+  \begin{proof}
+  On every edge $uv$ we have $1 \le d_u, d_v \le \Delta$, hence
+  $d_u d_v \le \Delta^2$ and $d_u + d_v \le 2\Delta$; and the normalised
+  imbalance $\mathrm{imb}(x, y) = |x - y|/(x + y)$ is maximised over
+  $\{(i, j) : 1 \le i \le j \le \Delta\}$ at $(1, \Delta)$, so
+  $|d_u - d_v|/(d_u + d_v) \le (\Delta - 1)/(\Delta + 1)$. Since
+  $\alpha, \beta, \gamma \ge 0$, the maps $t \mapsto t^{\alpha}$,
+  $t \mapsto t^{\beta}$ and $t \mapsto e^{\gamma t}$ are non-decreasing,
+  so $\psi(d_u, d_v; \alpha, \beta, \gamma) \le \Delta^{2\alpha}
+  (2\Delta)^{\beta} \exp(\gamma(\Delta - 1)/(\Delta + 1))$; summing over
+  the $m$ edges yields~\eqref{eq:upper_Delta}. For $\gamma > 0$
+  and $\Delta \ge 2$ the bound is attained if and only if
+  $\alpha = \beta = 0$ and every edge has degree pair $(1, \Delta)$
+  (for connected $G$, $G \cong K_{1,\Delta}$); if $\alpha > 0$ or
+  $\beta > 0$ the three factor-wise maxima are not simultaneously
+  attainable and the inequality is strict.
+  \end{proof}
+
+
+  \begin{proposition}\label{thm:lower_delta}
+  Let $G$ be a connected graph of size $m$ and minimum degree $\delta$. For
+  $\alpha, \beta \ge 0$ and $\gamma \ge 0$,
+  \begin{equation}\label{eq:lower_delta}
+  \Wuzi \;\ge\; m \cdot \delta^{2\alpha} \cdot (2\delta)^{\beta},
+  \end{equation}
+  with equality if and only if $G$ is $\delta$-regular, except in the
+  degenerate case $(\alpha, \beta, \gamma) = (0, 0, 0)$, where
+  $\Wuzi \equiv m$ and the bound holds with equality for every graph.
+  \end{proposition}
+
+  \begin{proof}
+  On every edge $d_u, d_v \ge \delta$, so for $\alpha, \beta \ge 0$,
+  $(d_u d_v)^{\alpha} \ge \delta^{2\alpha}$ and
+  $(d_u + d_v)^{\beta} \ge (2\delta)^{\beta}$, and for $\gamma \ge 0$ the
+  exponential factor is at least $1$ because the imbalance is
+  non-negative. Multiplying and summing over the $m$ edges
+  yields~\eqref{eq:lower_delta}. If $(\alpha, \beta, \gamma) = (0, 0, 0)$
+  then $LO(G; 0, 0, 0) = m$ equals the bound for every graph. Otherwise,
+  equality requires equality in every active per-edge factor: if
+  $\alpha > 0$ or $\beta > 0$ this forces $d_u = d_v = \delta$ on every
+  edge; if $\alpha = \beta = 0$ and $\gamma > 0$ it forces $d_u = d_v$
+  on every edge, so the connected graph $G$ is regular, hence
+  $\delta$-regular. Conversely, on a $\delta$-regular graph every edge
+  has degree pair $(\delta, \delta)$ and equality holds.
+  \end{proof}
+
+  The next proposition gives a single uniform template for bounding
+  $\Wuzi$ both above and below in terms of any classical
+  bond-incident-degree index whose edge contribution is strictly
+  positive on the admissible degree pairs of the graph.
+
+  \begin{proposition}\label{thm:ratio_bound}
+  Let $G$ be a simple graph with maximum degree at most $\Delta$, and let
+  $I_h(G) = \sum_{uv \in E(G)} h(d_u, d_v)$ be a BID index with
+  edge contribution $h(i, j)$ strictly positive on every degree pair
+  $(i, j)$ that appears in $G$. Define
+  \[
+  c_{\min}^{h} = \min_{(i, j)}\,\frac{\psi(i, j; \alpha, \beta,
+  \gamma)}{h(i, j)},
+  \qquad
+  c_{\max}^{h} = \max_{(i, j)}\,\frac{\psi(i, j; \alpha, \beta,
+  \gamma)}{h(i, j)},
+  \]
+  where the extrema range over the degree pairs actually appearing in
+  $G$.
+  Then
+  \begin{equation}\label{eq:ratio_bound}
+  c_{\min}^{h} \cdot I_h(G)
+  \;\le\; \Wuzi
+  \;\le\; c_{\max}^{h} \cdot I_h(G),
+  \end{equation}
+  with equality on either side if and only if every edge of $G$
+  attains the corresponding extremum of $\psi/h$.
+  \end{proposition}
+
+  \begin{proof}
+  Since $h(d_u, d_v) > 0$ and $c_{\min}^{h} \le \psi(d_u, d_v; \alpha,
+  \beta, \gamma)/h(d_u, d_v) \le c_{\max}^{h}$ on every edge $uv$,
+  multiplying by $h(d_u, d_v)$ and summing over $E(G)$, with
+  $\sum_{uv} h(d_u, d_v) = I_h(G)$ and $\sum_{uv} \psi = \Wuzi$,
+  gives~\eqref{eq:ratio_bound}; each side is an equality if and only if
+  every edge attains the corresponding extremum of $\psi/h$ over the
+  appearing pairs.
+  \end{proof}
+
+
+  Proposition~\ref{thm:ratio_bound} is a \emph{sharp graph-specific}
+  comparison: its constants depend on the degree pairs that actually
+  appear in $G$. A uniform version follows immediately by enlarging
+  the range of the extrema.
+
+  \begin{corollary}[Uniform $\Delta$-bounded version]\label{cor:ratio_uniform}
+  With the hypotheses of Proposition~\ref{thm:ratio_bound}, but with $h$
+  strictly positive on all of
+  $P_{\Delta} = \{(i,j) : 1 \le i \le j \le \Delta\}$ and the extrema
+  taken over $P_{\Delta}$,
+  inequality~\eqref{eq:ratio_bound} holds simultaneously for every
+  graph of maximum degree at most $\Delta$, with constants independent
+  of the individual graph. Equality on either side holds if and only
+  if every edge of $G$ realises a degree pair attaining the
+  corresponding extremum over $P_{\Delta}$; the uniform constants are
+  in general strictly worse than the graph-specific ones, since the
+  extrema are taken over a superset.
+  \end{corollary}
+
+
+
 \begin{thebibliography}{9}
 
   \bibitem{BarmanDas2026HSO} J. Barman, S. Das, Geometric approach to
@@ -930,6 +1255,21 @@ of the main paper.
   \textit{Handbook of Vapor Pressures and Heats of Vaporization of
   Hydrocarbons and Related Compounds\/}, Texas A\&M Research Foundation,
   College Station, 1971.
+
+  \bibitem{GranadosJMC2025GM} A. Granados, A. Portilla, Y. Quintana,
+  E. Tour\'is, Bounds for the Gutman--Milovanovi\'c index and some
+  applications, \textit{J. Math. Chem.\/} \textbf{63} (2025)
+  406--418.
+
+  \bibitem{MolinaSigarreta2025GM} E. D. Molina, J. M.
+  Rodr\'iguez-Garc\'ia, J. M. Sigarreta, S. J. Torralbas Fitz, On the
+  Gutman--Milovanovi\'c index and chemical applications, \textit{AIMS
+  Math.\/} \textbf{10} (2025) 1998--2020.
+
+  \bibitem{PortillaJMC2025GM} A. Portilla, J. M. Rodr\'iguez,
+  I. Salas Lorenzo, J. M. Sigarreta, The Gutman--Milovanovi\'c index
+  in mathematical chemistry, \textit{J. Math. Chem.\/} \textbf{63}
+  (2025) 2068--2087.
 
 \end{thebibliography}
 
