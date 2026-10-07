@@ -869,39 +869,39 @@ _add(E("app_dHvap_3E3MP", "main", r"3-ethyl-3-methylpentane \(\$(?P<v>[\d.]+)\$\
 _add(E("app_dHvap_223TMP", "main", r"2,2,3-trimethylpentane \(\$(?P<v>[\d.]+)\$\) and", "oct_prop('2,2,3-trimethylpentane', 'dHvap')", 0.0005, "octane_data"))  # 1
 _add(E("app_dHvap_233TMP", "main", r"2,3,3-trimethylpentane \(\$(?P<v>[\d.]+)\$\) are values consistent", "oct_prop('2,3,3-trimethylpentane', 'dHvap')", 0.0005, "octane_data"))  # 1
 _add(E("app_S_233TMP", "main", r"2,3,3-trimethylpentane \(\$(?P<v>[\d.]+)\$\) is a compiled-dataset", "oct_prop('2,3,3-trimethylpentane', 'S')", 0.0005, "octane_data"))  # 1
-_add(E("app_six_S", "main", r"the remaining (?P<v>[a-z]+) \(4-methylheptane", "word(prov_S_cannot_verify())", 0, "octane_property_provenance_v35.csv: S rows CANNOT VERIFY"))  # 1
-_add(E("app_api44_lo", "main", r"values used by \$(?P<v>[\d.]+)\$--\$2\.2\$", "min(prov_api44_diffs())", 0.005, "provenance notes: API-44 differences"))  # 1
-_add(E("app_api44_hi", "main", r"values used by \$0\.07\$--\$(?P<v>[\d.]+)\$", "max(prov_api44_diffs())", 0.05, "provenance notes: API-44 differences (2.21 displayed as 2.2)"))  # 1
-_add(E("app_api44_maxdr", "main", r"correlations by at most \$(?P<v>[\d.]+)\$ in \$\|r\|\$ and puts", "sens_maxdr('entropy_api44_sensitivity_v41.csv')", 0.0005, "entropy_api44_sensitivity_v41.csv"))  # 1
-_add(E("app_api44_M1_HM", "main", r"ahead of\s+\$HM\$ by \$(?P<v>[\d.]+)\$", "sens_alt('entropy_api44_sensitivity_v41.csv', 'M1') - sens_alt('entropy_api44_sensitivity_v41.csv', 'HM')", 0.0005, "entropy_api44_sensitivity_v41.csv alternative |r|"))  # 1
-_add(E("app_old_10131", "main", r"The value \$(?P<v>[\d.]+)\$ found in our", "old_S_233()", 0.0005, "provenance paper_value 'was 101.31'"))  # 1
-_add(E("app_used_10206", "main", r"The value used, \$(?P<v>[\d.]+)\$, is that of", "oct_prop('2,3,3-trimethylpentane', 'S')", 0.0005, "octane_data"))  # 1
-_add(E("app_ediz_10210", "main", r"Ediz~\\cite\{Ediz2017Octane\} gives\s+\$(?P<v>[\d.]+)\$\)", "prov_ediz_233()", 0.0005, "provenance source_value (transcription of a published value)"))  # 1
-_add(E("app_S_change_0006", "main", r"The change moves the \$S\$ correlations by at most \$(?P<v>[\d.]+)\$", "oct_S_change_maxdr('2,3,3-trimethylpentane', old_S_233())", 0.0005, "recomputed: max |Delta r| over the 12 descriptors of Table 4, S with 101.31 vs 102.06 (ISI shifts by 0.0086; M2 0.0059 is the max of the other eleven)"))  # 1
-_add(E("app_oct_S", "main", r"\(octane \$(?P<v>[\d.]+)\$ vs \$111\.70\$", "oct_prop('octane', 'S')", 0.0005, "octane_data"))  # 1
-_add(E("app_oct_S_ediz", "main", r"\(octane \$111\.55\$ vs \$(?P<v>[\d.]+)\$;", None, 0, "Ediz 2017 compilation value; not in the repository"))  # 1
-_add(E("app_22DMH_S", "main", r"2,2-dimethylhexane \$(?P<v>[\d.]+)\$ vs \$103\.40\$", "oct_prop('2,2-dimethylhexane', 'S')", 0.0005, "octane_data"))  # 1
-_add(E("app_22DMH_S_ediz", "main", r"2,2-dimethylhexane \$103\.13\$ vs \$(?P<v>[\d.]+)\$;", None, 0, "Ediz 2017 value; not in the repository"))  # 1
-_add(E("app_224TMP_S", "main", r"2,2,4-trimethylpentane \$(?P<v>[\d.]+)\$\s+vs \$104\.10\$", "oct_prop('2,2,4-trimethylpentane', 'S')", 0.0005, "octane_data"))  # 1
-_add(E("app_224TMP_S_ediz", "main", r"2,2,4-trimethylpentane \$101\.81\$\s+vs \$(?P<v>[\d.]+)\$;", None, 0, "Ediz 2017 value; not in the repository"))  # 1
-_add(E("app_233TMP_S_b", "main", r"2,3,3-trimethylpentane \$(?P<v>[\d.]+)\$ vs \$102\.10\$\)", "oct_prop('2,3,3-trimethylpentane', 'S')", 0.0005, "octane_data"))  # 1
-_add(E("app_233TMP_S_ediz", "main", r"2,3,3-trimethylpentane \$102\.06\$ vs \$(?P<v>[\d.]+)\$\)", "prov_ediz_233()", 0.0005, "provenance source_value"))  # 1
-_add(E("app_nist_11163", "main", r"NIST WebBook \(\$(?P<v>[\d.]+)\$\)", "prov_octane_S_nist()", 0.0005, "provenance converted_value for octane S"))  # 1
-_add(E("app_twelve", "main", r"compilation values changes all (?P<v>[a-z]+) \$S\$ correlations, by up to", "word(sens_nchanged('entropy_source_sensitivity_v36.csv'))", 0, "entropy_source_sensitivity_v36.csv displayed_changes"))  # 1
-_add(E("app_0043", "main", r"by up to \$(?P<v>[\d.]+)\$\s+in \$\|r\|\$, and moves", "sens_maxdr('entropy_source_sensitivity_v36.csv')", 0.0005, "entropy_source_sensitivity_v36.csv"))  # 1
-_add(E("app_HM_M1_0001", "main", r"in \$\|r\|\$, and moves the margin between \$HM\$ and \$M_1\$ at the top from\s+\$[\d.]+\$ to \$(?P<v>[\d.]+)\$\.\s+\\item",
+_add(E("app_six_S", "supp", r"the remaining (?P<v>[a-z]+) \(4-methylheptane", "word(prov_S_cannot_verify())", 0, "octane_property_provenance_v35.csv: S rows CANNOT VERIFY"))  # 1
+_add(E("app_api44_lo", "supp", r"values used by \$(?P<v>[\d.]+)\$--\$2\.2\$", "min(prov_api44_diffs())", 0.005, "provenance notes: API-44 differences"))  # 1
+_add(E("app_api44_hi", "supp", r"values used by \$0\.07\$--\$(?P<v>[\d.]+)\$", "max(prov_api44_diffs())", 0.05, "provenance notes: API-44 differences (2.21 displayed as 2.2)"))  # 1
+_add(E("app_api44_maxdr", "supp", r"correlations by at most \$(?P<v>[\d.]+)\$ in \$\|r\|\$ and puts", "sens_maxdr('entropy_api44_sensitivity_v41.csv')", 0.0005, "entropy_api44_sensitivity_v41.csv"))  # 1
+_add(E("app_api44_M1_HM", "supp", r"ahead of\s+\$HM\$ by \$(?P<v>[\d.]+)\$", "sens_alt('entropy_api44_sensitivity_v41.csv', 'M1') - sens_alt('entropy_api44_sensitivity_v41.csv', 'HM')", 0.0005, "entropy_api44_sensitivity_v41.csv alternative |r|"))  # 1
+_add(E("app_old_10131", "supp", r"The value \$(?P<v>[\d.]+)\$ found in our", "old_S_233()", 0.0005, "provenance paper_value 'was 101.31'"))  # 1
+_add(E("app_used_10206", "supp", r"The value used, \$(?P<v>[\d.]+)\$, is that of", "oct_prop('2,3,3-trimethylpentane', 'S')", 0.0005, "octane_data"))  # 1
+_add(E("app_ediz_10210", "supp", r"Ediz~\\cite\{Ediz2017Octane\} gives\s+\$(?P<v>[\d.]+)\$\)", "prov_ediz_233()", 0.0005, "provenance source_value (transcription of a published value)"))  # 1
+_add(E("app_S_change_0006", "supp", r"The change moves the \$S\$ correlations by at most \$(?P<v>[\d.]+)\$", "oct_S_change_maxdr('2,3,3-trimethylpentane', old_S_233())", 0.0005, "recomputed: max |Delta r| over the 12 descriptors of Table 4, S with 101.31 vs 102.06 (ISI shifts by 0.0086; M2 0.0059 is the max of the other eleven)"))  # 1
+_add(E("app_oct_S", "supp", r"\(octane \$(?P<v>[\d.]+)\$ vs \$111\.70\$", "oct_prop('octane', 'S')", 0.0005, "octane_data"))  # 1
+_add(E("app_oct_S_ediz", "supp", r"\(octane \$111\.55\$ vs \$(?P<v>[\d.]+)\$;", None, 0, "Ediz 2017 compilation value; not in the repository"))  # 1
+_add(E("app_22DMH_S", "supp", r"2,2-dimethylhexane \$(?P<v>[\d.]+)\$ vs \$103\.40\$", "oct_prop('2,2-dimethylhexane', 'S')", 0.0005, "octane_data"))  # 1
+_add(E("app_22DMH_S_ediz", "supp", r"2,2-dimethylhexane \$103\.13\$ vs \$(?P<v>[\d.]+)\$;", None, 0, "Ediz 2017 value; not in the repository"))  # 1
+_add(E("app_224TMP_S", "supp", r"2,2,4-trimethylpentane \$(?P<v>[\d.]+)\$\s+vs \$104\.10\$", "oct_prop('2,2,4-trimethylpentane', 'S')", 0.0005, "octane_data"))  # 1
+_add(E("app_224TMP_S_ediz", "supp", r"2,2,4-trimethylpentane \$101\.81\$\s+vs \$(?P<v>[\d.]+)\$;", None, 0, "Ediz 2017 value; not in the repository"))  # 1
+_add(E("app_233TMP_S_b", "supp", r"2,3,3-trimethylpentane \$(?P<v>[\d.]+)\$ vs \$102\.10\$\)", "oct_prop('2,3,3-trimethylpentane', 'S')", 0.0005, "octane_data"))  # 1
+_add(E("app_233TMP_S_ediz", "supp", r"2,3,3-trimethylpentane \$102\.06\$ vs \$(?P<v>[\d.]+)\$\)", "prov_ediz_233()", 0.0005, "provenance source_value"))  # 1
+_add(E("app_nist_11163", "supp", r"NIST WebBook \(\$(?P<v>[\d.]+)\$\)", "prov_octane_S_nist()", 0.0005, "provenance converted_value for octane S"))  # 1
+_add(E("app_twelve", "supp", r"compilation values changes all (?P<v>[a-z]+) \$S\$ correlations, by up to", "word(sens_nchanged('entropy_source_sensitivity_v36.csv'))", 0, "entropy_source_sensitivity_v36.csv displayed_changes"))  # 1
+_add(E("app_0043", "supp", r"by up to \$(?P<v>[\d.]+)\$\s+in \$\|r\|\$, and moves", "sens_maxdr('entropy_source_sensitivity_v36.csv')", 0.0005, "entropy_source_sensitivity_v36.csv"))  # 1
+_add(E("app_HM_M1_0001", "supp", r"in \$\|r\|\$, and moves the margin between \$HM\$ and \$M_1\$ at the top from\s+\$[\d.]+\$ to \$(?P<v>[\d.]+)\$\.\s+\\item",
        "sens_alt('entropy_source_sensitivity_v36.csv', 'HM') - sens_alt('entropy_source_sensitivity_v36.csv', 'M1')", 0.0005,
        "entropy_source_sensitivity_v36.csv: |r_alt(HM)| - |r_alt(M1)| after substituting the compilation values"))  # 1
-_add(E("app_tmb_841", "main", r"benchmark-compilation value \(\$(?P<v>[\d.]+)\$\) whose", "oct_prop('2,2,3,3-tetramethylbutane', 'dHvap')", 0.0005, "octane_data"))  # 1
-_add(E("app_tmb_103", "main", r"near \$(?P<v>[\d.]+)\$~kcal", "prov_tmb_dvap_kcal()", 0.05, "provenance source_value 42.94 kJ/mol / 4.184"))  # 1
-_add(E("app_93", "main", r"\(\$(?P<v>\d+)/100\$ and \$96/100\$ seeds", "tmb_lo_better(tmb_budgets()[0])", 0, "dhvap_tmb_exclusion_summary_v36.csv budget 200"))  # 1
-_add(E("app_96", "main", r"and \$(?P<v>\d+)/100\$ seeds instead", "tmb_lo_better(tmb_budgets()[1])", 0, "dhvap_tmb_exclusion_summary_v36.csv budget 500"))  # 1
-_add(E("app_nseeds", "main", r"\(\$93/(?P<v>\d+)\$ and", "tmb_nseeds()", 0, "dhvap_tmb_exclusion_summary_v36.csv n_seeds"))  # 1
-_add(E("app_100of100", "main", r"seeds instead of \$(?P<v>\d+)/100\$\)", "expanded_lo_better('dHvap')", 0, "expanded_robustness_summary_v35.csv dHvap LO_better (both budgets)"))  # 1
-_add(E("app_omega_lo", "main", r"compilation by\s+\$(?P<v>[\d.]+)\$--\$0\.004\$", "min(prov_omega_diffs())", 0.0005, "provenance notes for 2,2,4-TMP and TMB omega"))  # 1
-_add(E("app_omega_hi", "main", r"\$0\.002\$--\$(?P<v>[\d.]+)\$; the alternative", "max(prov_omega_diffs())", 0.0005, "provenance notes"))  # 1
-_add(E("app_overall_0043", "main", r"by\s+more than \$(?P<v>[\d.]+)\$\. The only bolded entry", "sens_overall_max()", 0.0005, "max |Delta|r|| over the three sensitivity CSVs"))  # 1
-_add(E("app_margin_0001", "main", r"where \$HM\$ leads \$M_1\$ by \$(?P<v>[\d.]+)\$ with the values used", "oct_S_margin('HM', 'M1')", 0.0005, "recomputed |r(HM,S)| - |r(M1,S)| on octane_data"))  # 1
+_add(E("app_tmb_841", "supp", r"benchmark-compilation value \(\$(?P<v>[\d.]+)\$\) whose", "oct_prop('2,2,3,3-tetramethylbutane', 'dHvap')", 0.0005, "octane_data"))  # 1
+_add(E("app_tmb_103", "supp", r"near \$(?P<v>[\d.]+)\$~kcal", "prov_tmb_dvap_kcal()", 0.05, "provenance source_value 42.94 kJ/mol / 4.184"))  # 1
+_add(E("app_93", "supp", r"\(\$(?P<v>\d+)/100\$ and \$96/100\$ seeds", "tmb_lo_better(tmb_budgets()[0])", 0, "dhvap_tmb_exclusion_summary_v36.csv budget 200"))  # 1
+_add(E("app_96", "supp", r"and \$(?P<v>\d+)/100\$ seeds instead", "tmb_lo_better(tmb_budgets()[1])", 0, "dhvap_tmb_exclusion_summary_v36.csv budget 500"))  # 1
+_add(E("app_nseeds", "supp", r"\(\$93/(?P<v>\d+)\$ and", "tmb_nseeds()", 0, "dhvap_tmb_exclusion_summary_v36.csv n_seeds"))  # 1
+_add(E("app_100of100", "supp", r"seeds instead of \$(?P<v>\d+)/100\$\)", "expanded_lo_better('dHvap')", 0, "expanded_robustness_summary_v35.csv dHvap LO_better (both budgets)"))  # 1
+_add(E("app_omega_lo", "supp", r"compilation by\s+\$(?P<v>[\d.]+)\$--\$0\.004\$", "min(prov_omega_diffs())", 0.0005, "provenance notes for 2,2,4-TMP and TMB omega"))  # 1
+_add(E("app_omega_hi", "supp", r"\$0\.002\$--\$(?P<v>[\d.]+)\$; the alternative", "max(prov_omega_diffs())", 0.0005, "provenance notes"))  # 1
+_add(E("app_overall_0043", "supp", r"by\s+more than \$(?P<v>[\d.]+)\$\. The only bolded entry", "sens_overall_max()", 0.0005, "max |Delta|r|| over the three sensitivity CSVs"))  # 1
+_add(E("app_margin_0001", "supp", r"where \$HM\$ leads \$M_1\$ by \$(?P<v>[\d.]+)\$ with the values used", "oct_S_margin('HM', 'M1')", 0.0005, "recomputed |r(HM,S)| - |r(M1,S)| on octane_data"))  # 1
 
 # ----- Supplement S5 -----
 _add(E("sup_106", "supp", r"On the \$(?P<v>\d+)\$ non-isomorphic\s+trees of order \$10\$ we use", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1

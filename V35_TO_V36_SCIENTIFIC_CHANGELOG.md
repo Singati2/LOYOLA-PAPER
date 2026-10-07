@@ -708,3 +708,19 @@ replay snapshots the tree and includes tracked formal/ files.
   version (the committed one predated v40.12 fixes).
 - Not changed: the abstract (kept in its agreed format), the section order
   and the location of the data-quality appendix (author decisions).
+
+## v40.16 (presentation: shorter abstract, lean captions, provenance appendix to the supplement)
+- Abstract shortened from 296 to 227 words (same two-paragraph structure
+  and displayed definition; the routine-bounds and log-convexity clauses,
+  now supplementary material, dropped).  It still runs two lines onto
+  page 2 because of the title block; fitting it fully would cut core
+  results.
+- Captions of Tables 5-7 reduced to their definitions; the shared
+  reporting conventions (seed counts are not replications, values rounded
+  once, median of differences, paired box streams) stated once in a
+  "Reporting conventions" paragraph at the start of Section 6.
+- The data-quality appendix moved to new Supplementary Section S10; the
+  main paper keeps the octane data table and a short pointer.  Cross-
+  document references re-audited (Table 4, Table 8, Sections 6.3/6.4);
+  the prose registry entries for the moved text now check the supplement.
+- Main paper 37 pages, supplement 27.

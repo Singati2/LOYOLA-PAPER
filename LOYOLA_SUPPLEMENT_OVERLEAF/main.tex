@@ -243,12 +243,11 @@ against a primary source (see above); four entropies
 ($n$-octane, 2,2-dimethylhexane, 2,2,4- and 2,3,3-trimethylpentane)
 differ from those of a widely used octane QSPR compilation by
 $0.04$--$2.29$ units (the $2,3,3$-trimethylpentane value $102.06$ is a compiled-dataset
-value; see the data-quality appendix of the main paper); substituting the compilation values changes
+value; see Section~\ref{sec:s-quality}); substituting the compilation values changes
 all twelve $S$ correlations in Table~4 of the main paper (by up to
 $0.043$ in $|r|$) but not the winning descriptor
 ($HM$). Apart from the four corrected vaporization enthalpies and the corrected
-transcription of the 2,3,3-trimethylpentane entropy (data-quality
-appendix of the main paper, item~(ii)), the benchmark values are
+transcription of the 2,3,3-trimethylpentane entropy (Section~\ref{sec:s-quality}, item~(ii)), the benchmark values are
 preserved as supplied for comparability.
 \paragraph{Correlation details for Table~4 of the main paper.}
 The best correlation per property is split among the reductions and
@@ -1218,6 +1217,71 @@ values on standard graphs, the proof of the global log-convexity theorem
 
 
 
+
+\section{Data quality and open provenance items}\label{sec:s-quality}
+
+Every value in Table~8 of the main paper was traced to a source
+(per-value record in the repository); the items that remain
+open are collected here so that they can be read in one place.
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Thirteen gas-phase entropies have no $S^{\circ}$(gas) entry
+  in the NIST WebBook.} Seven of them (2,3-, 2,4-, 2,5- and
+  3,3-dimethylhexane, 3-ethylhexane, 2,2,3- and 2,2,4-trimethylpentane)
+  agree, within tolerance or as documented revisions between editions,
+  with the 1947 API Research Project~44 tables or a compiled octane
+  dataset; the remaining six (4-methylheptane, 2,2-dimethylhexane,
+  3,4-dimethylhexane, 3-ethyl-2-methylpentane, 3-ethyl-3-methylpentane,
+  2,3,3-trimethylpentane) could not be matched to any primary source. The 1947 API Research Project 44
+  tables~\cite{APIProject44Circ461} list gas-phase entropies for all six
+  that differ from the values used by $0.07$--$2.2$\,cal\,mol$^{-1}$\,K$^{-1}$,
+  as that edition does for isomers whose later revisions we could
+  confirm; no later primary determination was located, so the values used
+  are compiled-dataset values. Substituting the 1947 values changes the
+  $S$ correlations by at most $0.018$ in $|r|$ and puts $M_1$ ahead of
+  $HM$ by $0.004$.
+\item \emph{2,3,3-trimethylpentane $S$.} The value $101.31$ found in our
+  earlier compilation is a copy of the 2,2,3-trimethylpentane entry and is
+  not used. The value used, $102.06$, is that of the compiled
+  $18$-octane dataset reproduced by Mondal et al.~\cite{MondalDePal2019QSPR}
+  (the one-decimal compilation of Ediz~\cite{Ediz2017Octane} gives
+  $102.10$). The change moves the $S$ correlations by at most $0.009$;
+  it is still a secondary value (item~(i)).
+\item \emph{Four entropies differ from the compiled octane dataset of
+  Ediz~\cite{Ediz2017Octane}} (octane $111.55$ vs $111.70$;
+  2,2-dimethylhexane $103.13$ vs $103.40$; 2,2,4-trimethylpentane $101.81$
+  vs $104.10$; 2,3,3-trimethylpentane $102.06$ vs $102.10$); for octane
+  the value used agrees with the NIST WebBook ($111.63$). Substituting the
+  compilation values changes all twelve $S$ correlations, by up to $0.043$
+  in $|r|$, and moves the margin between $HM$ and $M_1$ at the top from
+  $0.001$ to $0.007$.
+\item \emph{2,2,3,3-tetramethylbutane $\Delta H_{\mathrm{vap}}$} is a
+  benchmark-compilation value ($8.41$) whose reference state is unresolved
+  (the compound is a solid at $298$~K; NIST lists sublimation and standard
+  vaporization enthalpies near $10.3$~kcal\,mol$^{-1}$). Repeating the
+  matched-budget comparison of Supplementary Section~S3 without this
+  isomer, the vaporization-enthalpy gain in the $(-2,2)$ box persists
+  ($93/100$ and $96/100$ seeds instead of $100/100$) and the
+  $\Delta H_{\mathrm{vap}}$ column winner of Table~4 of the main paper is
+  unchanged; no conclusion of the paper rests on this value.
+\item \emph{Acentric factors} of 2,2,4-trimethyl\-pentane and
+  2,2,3,3-tetra\-methyl\-butane differ from an alternative compilation by
+  $0.002$--$0.004$; the alternative values change several $\omega$
+  correlations at the third decimal and leave the $\omega$ ranking
+  unchanged.
+\end{enumerate}
+None of these items moves a correlation of Table~4 of the main paper by
+more than $0.043$. The only bolded entry at stake is the $S$ winner,
+where $HM$ leads $M_1$ by $0.001$ with the values used; the 1947
+substitution of item~(i) reverses that order by $0.004$, a margin
+without meaning at this resolution. None of the items enters the
+pre-registered nonane and boiling-point tests of Sections~6.3 and~6.4 of the main paper,
+which use no entropy, vaporization-enthalpy or acentric-factor value of
+Table~8 of the main paper (the pooled boiling-point test re-extracts
+the octane boiling points under its own rule). Item~(ii) was a transcription error in our
+earlier data file, corrected here; the remaining items are limitations
+of the compiled octane benchmark rather than of the analysis.
+
+
 \begin{thebibliography}{9}
 
   \bibitem{BarmanDas2026HSO} J. Barman, S. Das, Geometric approach to
@@ -1270,6 +1334,23 @@ values on standard graphs, the proof of the global log-convexity theorem
   I. Salas Lorenzo, J. M. Sigarreta, The Gutman--Milovanovi\'c index
   in mathematical chemistry, \textit{J. Math. Chem.\/} \textbf{63}
   (2025) 2068--2087.
+
+  \bibitem{APIProject44Circ461}
+  F. D. Rossini, K. S. Pitzer, W. J. Taylor, J. P. Ebert, J. E. Kilpatrick,
+  C. W. Beckett, M. G. Williams, H. G. Werner, Selected Values of
+  Properties of Hydrocarbons, National Bureau of Standards Circular C461,
+  U.S. Government Printing Office, Washington, 1947, Table~3p.
+
+  \bibitem{Ediz2017Octane}
+  S. Ediz, Predicting some physicochemical properties of octane isomers:
+  a topological approach using ev-degree and ve-degree Zagreb indices,
+  arXiv:1701.02859 (2017), \url{https://arxiv.org/abs/1701.02859}.
+
+  \bibitem{MondalDePal2019QSPR}
+  S. Mondal, A. Dey, N. De, A. Pal, QSPR analysis of some novel
+  neighbourhood degree-based topological descriptors, \textit{Complex
+  Intell. Syst.\/} \textbf{7} (2021) 977--996,
+  \url{https://doi.org/10.1007/s40747-020-00262-0} (arXiv:1906.06660).
 
 \end{thebibliography}
 

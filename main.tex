@@ -176,33 +176,24 @@
   \end{equation*}
   with $LO(G;\alpha,\beta,0) = M_{\alpha,\beta}(G)$ identically.
 
-  We characterise exactly what the imbalance coordinate can and cannot
-  resolve. The family factorises into a degree-sum (scale) coordinate
-  and a shape (degree-ratio) coordinate; on the resulting ratio plane the
-  pure-$\gamma$ points separate exactly the histograms of edge
-  imbalances (for algebraic $\gamma \neq 0$). Since these histograms
-  coincide with degree-pair profiles on trees up to order $12$ (order
-  $15$ for $\Delta \le 4$; enumeration), the pure-$\gamma$ points attain
-  the discrimination limit of the whole vertex-degree-based class there,
-  and provably lose information beyond it. We also bound the number of
-  $\gamma$-crossings of two graphs, characterise per-graph
-  identifiability, record routine termwise bounds for $\gamma \ge 0$
-  (in the Supplementary Material),
-  and note that $\log LO$ is
-  convex (the standard log-sum-exp property). The predictive result is
-  negative: an apparent gain for the vaporization enthalpy of the
-  octanes, which met a pre-registered replication criterion on the
-  nonanes, vanishes once the parent family is searched over a
-  box that does not truncate it (a post hoc analysis), and pre-registered
-  tests on measured
-  boiling points (34 decanes; 100 alkanes C6--C10, adjusted for size)
-  find no demonstrated benefit from $\gamma$ under these protocols,
-  while ridge regression on the
-  degree-pair counts is far ahead of every single index on the decanes
-  and ahead on the pooled set. The
-  untuned point $LO(0,0,1)$ is highly correlated with the irregularity
-  index $IRLA$ on the evaluated sets. Hence $\gamma$ is presented as an interpretable,
-  analytically tractable direction, not a predictive upgrade.
+  We characterise what the imbalance coordinate can and cannot resolve.
+  The family factorises into a degree-sum (scale) and a degree-ratio
+  (shape) coordinate; on the resulting ratio plane the pure-$\gamma$
+  points separate exactly the histograms of edge imbalances (for
+  algebraic $\gamma \neq 0$). These histograms coincide with degree-pair
+  profiles on trees up to order $12$ (order $15$ for $\Delta \le 4$), so
+  there the pure-$\gamma$ points attain the discrimination limit of all
+  vertex-degree-based indices, and they provably lose information beyond
+  it. We also bound the number of $\gamma$-crossings of two graphs and
+  characterise per-graph identifiability. The predictive result is
+  negative: an apparent vaporization-enthalpy gain on the octanes and
+  nonanes vanishes when the parent family is searched over a box that
+  does not truncate it (a post hoc analysis), pre-registered tests on
+  measured boiling points (34 decanes; 100 alkanes C6--C10, adjusted for
+  size) find no demonstrated benefit from $\gamma$, and ridge regression
+  on the degree-pair counts outperforms every single index. Hence
+  $\gamma$ is an interpretable, analytically tractable direction, not a
+  predictive upgrade.
   \end{abstract}
 
 \onehalfspacing
@@ -1113,6 +1104,15 @@ $LO(0,0,2)$ & $0.1257$ & $0.2745$ & $0.4579$\\
 \section{A concise QSPR diagnostic}\label{sec:sensitivity}
 % =====================================================================
 
+\paragraph{Reporting conventions.} In Tables~\ref{tab:box}--\ref{tab:bp},
+medians are taken over candidate-stream seeds; seed counts summarise the
+variability of the random search on fixed data and are not replications.
+All values are full-precision results rounded once, and a median of
+differences quoted in the text need not equal the difference of the
+medians shown. The narrow- and wide-box streams use the same uniform
+variates scaled by the half-width, so comparisons across boxes are
+paired.
+
 We benchmark the Loyola family against the classical indices it
 reduces to on the $18$ octane isomers, following the chemometric
 benchmark of the diminished Sombor
@@ -1311,7 +1311,7 @@ candidates per model, and the number of seeds (of $50$) in which LO
 beats GM (half-width $2$) or LO$_h$ beats GM (half-width $12$). LO$_h$ is
 a hybrid control with $(\alpha,\beta)$ in the wide box and $\gamma$ in
 $(-2,2)$, which avoids diluting the Loyola search over a wide $\gamma$
-range. The streams of the two boxes use the same underlying uniform variates scaled by the half-width, so the comparison across boxes is paired. Seed counts summarise the variability of the random search on fixed data and are not replications.}
+range.}
 \label{tab:box}
 \small
 \setlength{\tabcolsep}{1.6pt}
@@ -1400,9 +1400,7 @@ model on $IRLA$; Ridge: ridge regression on the edge-degree-pair counts;
 LO$_1$: the fixed, untuned point $LO(0,0,1)$; GM, LO: median of $Q^2$
 over seeds $0$--$99$ at budget $200$ in the box of half-width $2$
 (see Table~\ref{tab:box} for wider boxes); last column: seeds in which
-LO beat GM at budgets $200$/$500$. A median of differences, quoted in
-the text, need not equal the difference of the medians shown. All
-values are full-precision results rounded once. Seed counts summarise the variability of the random search on fixed data and are not replications.}
+LO beat GM at budgets $200$/$500$.}
 \label{tab:external}
 \small
 \setlength{\tabcolsep}{2pt}
@@ -1477,7 +1475,7 @@ Class.: best classical index chosen in each fold; LO$_1$: fixed
 $LO(0,0,1)$; Ridge: ridge regression on the degree-pair counts; GM,
 LO: medians over seeds $0$--$49$ in the non-truncating boxes;
 $\Delta Q^2$: median of LO minus GM; last column: seeds (of $50$) in
-which LO beats GM. Seed counts summarise the variability of the random search on fixed data and are not replications.}
+which LO beats GM.}
 \label{tab:bp}
 \scriptsize
 \setlength{\tabcolsep}{1.5pt}
@@ -1614,68 +1612,14 @@ physical reference state is unresolved (Section~\ref{sec:octanes}). The
 $S$ value of 2,3,3-trimethylpentane ($102.06$) is a compiled-dataset
 value (Appendix~\ref{app:quality}).
 
-\subsection{Data quality and open provenance items}\label{app:quality}
+\subsection{Data quality}\label{app:quality}
 
-Every value in Table~\ref{tab:octane-data} was traced to a source
-(per-value record in the repository); the items that remain
-open are collected here so that they can be read in one place.
-\begin{enumerate}[label=(\roman*)]
-\item \emph{Thirteen gas-phase entropies have no $S^{\circ}$(gas) entry
-  in the NIST WebBook.} Seven of them (2,3-, 2,4-, 2,5- and
-  3,3-dimethylhexane, 3-ethylhexane, 2,2,3- and 2,2,4-trimethylpentane)
-  agree, within tolerance or as documented revisions between editions,
-  with the 1947 API Research Project~44 tables or a compiled octane
-  dataset; the remaining six (4-methylheptane, 2,2-dimethylhexane,
-  3,4-dimethylhexane, 3-ethyl-2-methylpentane, 3-ethyl-3-methylpentane,
-  2,3,3-trimethylpentane) could not be matched to any primary source. The 1947 API Research Project 44
-  tables~\cite{APIProject44Circ461} list gas-phase entropies for all six
-  that differ from the values used by $0.07$--$2.2$\,cal\,mol$^{-1}$\,K$^{-1}$,
-  as that edition does for isomers whose later revisions we could
-  confirm; no later primary determination was located, so the values used
-  are compiled-dataset values. Substituting the 1947 values changes the
-  $S$ correlations by at most $0.018$ in $|r|$ and puts $M_1$ ahead of
-  $HM$ by $0.004$.
-\item \emph{2,3,3-trimethylpentane $S$.} The value $101.31$ found in our
-  earlier compilation is a copy of the 2,2,3-trimethylpentane entry and is
-  not used. The value used, $102.06$, is that of the compiled
-  $18$-octane dataset reproduced by Mondal et al.~\cite{MondalDePal2019QSPR}
-  (the one-decimal compilation of Ediz~\cite{Ediz2017Octane} gives
-  $102.10$). The change moves the $S$ correlations by at most $0.009$;
-  it is still a secondary value (item~(i)).
-\item \emph{Four entropies differ from the compiled octane dataset of
-  Ediz~\cite{Ediz2017Octane}} (octane $111.55$ vs $111.70$;
-  2,2-dimethylhexane $103.13$ vs $103.40$; 2,2,4-trimethylpentane $101.81$
-  vs $104.10$; 2,3,3-trimethylpentane $102.06$ vs $102.10$); for octane
-  the value used agrees with the NIST WebBook ($111.63$). Substituting the
-  compilation values changes all twelve $S$ correlations, by up to $0.043$
-  in $|r|$, and moves the margin between $HM$ and $M_1$ at the top from
-  $0.001$ to $0.007$.
-\item \emph{2,2,3,3-tetramethylbutane $\Delta H_{\mathrm{vap}}$} is a
-  benchmark-compilation value ($8.41$) whose reference state is unresolved
-  (the compound is a solid at $298$~K; NIST lists sublimation and standard
-  vaporization enthalpies near $10.3$~kcal\,mol$^{-1}$). Repeating the
-  matched-budget comparison of Supplementary Section~S3 without this
-  isomer, the vaporization-enthalpy gain in the $(-2,2)$ box persists
-  ($93/100$ and $96/100$ seeds instead of $100/100$) and the
-  $\Delta H_{\mathrm{vap}}$ column winner of Table~\ref{tab:lo_octane} is
-  unchanged; no conclusion of the paper rests on this value.
-\item \emph{Acentric factors} of 2,2,4-trimethyl\-pentane and
-  2,2,3,3-tetra\-methyl\-butane differ from an alternative compilation by
-  $0.002$--$0.004$; the alternative values change several $\omega$
-  correlations at the third decimal and leave the $\omega$ ranking
-  unchanged.
-\end{enumerate}
-None of these items moves a correlation of Table~\ref{tab:lo_octane} by
-more than $0.043$. The only bolded entry at stake is the $S$ winner,
-where $HM$ leads $M_1$ by $0.001$ with the values used; the 1947
-substitution of item~(i) reverses that order by $0.004$, a margin
-without meaning at this resolution. None of the items enters the
-pre-registered nonane and boiling-point tests of Sections~\ref{sec:external} and~\ref{sec:bp},
-which use no entropy, vaporization-enthalpy or acentric-factor value of
-Table~\ref{tab:octane-data} (the pooled boiling-point test re-extracts
-the octane boiling points under its own rule). Item~(ii) was a transcription error in our
-earlier data file, corrected here; the remaining items are limitations
-of the compiled octane benchmark rather than of the analysis.
+The open provenance items of Table~\ref{tab:octane-data} (unverified
+entropies, the vaporization enthalpy of 2,2,3,3-tetramethylbutane, the
+corrected transcription of the 2,3,3-trimethylpentane entropy and the
+alternative compiled values, with their effect on Table~\ref{tab:lo_octane})
+are collected in Supplementary Section~S10; none of them enters the
+pre-registered tests of Sections~\ref{sec:external} and~\ref{sec:bp}.
 
 \begin{table}[H]
 \centering\small
