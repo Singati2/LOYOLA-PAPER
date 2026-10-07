@@ -1,7 +1,7 @@
 n_C,name,nist_id,T_B_C,status,rule_or_reason,all_determinations
 6,"Butane, 2,3-dimethyl-",C79298,58.1,INCLUDED,AVG,331.2 ± 0.2 K (N/A; AVG; C79298)
 6,"Pentane, 2-methyl-",C107835,60.9,INCLUDED,AVG,334. ± 1. K (N/A; AVG; C107835)
-6,"Pentane, 3-methyl-",C96140,63.2,INCLUDED,AVG,336.4 ± 0.4 K (N/A; AVG; C96140)
+6,"Pentane, 3-methyl-",C96140,63.3,INCLUDED,AVG,336.4 ± 0.4 K (N/A; AVG; C96140)
 6,"Butane, 2,2-dimethyl-",C75832,49.8,INCLUDED,AVG,322.9 ± 0.1 K (N/A; AVG; C75832)
 6,n-Hexane,C110543,68.8,INCLUDED,AVG,341.9 ± 0.3 K (N/A; AVG; C110543)
 7,Heptane,C142825,98.4,INCLUDED,AVG,371.5 ± 0.3 K (N/A; AVG; C142825)
@@ -13,7 +13,7 @@ n_C,name,nist_id,T_B_C,status,rule_or_reason,all_determinations
 7,"Pentane, 3,3-dimethyl-",C562492,86.1,INCLUDED,AVG,359.2 ± 0.2 K (N/A; AVG; C562492)
 7,"Butane, 2,2,3-trimethyl-",C464062,81.0,INCLUDED,AVG,354.1 ± 0.2 K (N/A; AVG; C464062)
 7,"Pentane, 3-ethyl-",C617787,93.5,INCLUDED,AVG,366.6 ± 0.2 K (N/A; AVG; C617787)
-8,"Pentane, 2,2,4-trimethyl-",C540841,99.2,INCLUDED,AVG,372.4 ± 0.2 K (N/A; AVG; C540841)
+8,"Pentane, 2,2,4-trimethyl-",C540841,99.3,INCLUDED,AVG,372.4 ± 0.2 K (N/A; AVG; C540841)
 8,"Heptane, 2-methyl-",C592278,117.6,INCLUDED,AVG,390.7 ± 0.8 K (N/A; AVG; C592278)
 8,"Heptane, 3-methyl- / (S)-3-methylheptane",C589811 C6131255,118.9,INCLUDED,AVG,"392. ± 1. K (N/A; AVG; C589811) ; 390.15 K (Levene and Marker, 1931; N/A; C6131255)"
 8,"Pentane, 2,3,4-trimethyl-",C565753,113.7,INCLUDED,AVG,386.8 ± 0.3 K (N/A; AVG; C565753)
@@ -38,7 +38,7 @@ n_C,name,nist_id,T_B_C,status,rule_or_reason,all_determinations
 9,"Octane, 4-methyl-",C2216344,141.9,INCLUDED,AVG,415. ± 1. K (N/A; AVG; C2216344)
 9,"Heptane, 2,4-dimethyl-",C2213232,132.9,INCLUDED,AVG,406. ± 1. K (N/A; AVG; C2213232)
 9,"Heptane, 2,2-dimethyl-",C1071267,131.9,INCLUDED,AVG,405. ± 3. K (N/A; AVG; C1071267)
-9,"Pentane, 2,2,4,4-tetramethyl-",C1070877,122.2,INCLUDED,AVG,395.4 ± 0.7 K (N/A; AVG; C1070877)
+9,"Pentane, 2,2,4,4-tetramethyl-",C1070877,122.3,INCLUDED,AVG,395.4 ± 0.7 K (N/A; AVG; C1070877)
 9,"Pentane, 3,3-diethyl-",C1067205,146.2,INCLUDED,AVG,419.3 ± 0.4 K (N/A; AVG; C1067205)
 9,"Hexane, 2,3,5-trimethyl-",C1069530,130.9,INCLUDED,AVG,404. ± 2. K (N/A; AVG; C1069530)
 9,"Hexane, 2,2,4-trimethyl-",C16747265,126.5,INCLUDED,AVG,399.6 ± 0.4 K (N/A; AVG; C16747265)

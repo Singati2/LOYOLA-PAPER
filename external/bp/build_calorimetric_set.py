@@ -14,7 +14,8 @@ for a in sk:
     if a['hvAVG']=='True':
         for cid in a['ids'].split():
             f=os.path.join(HERE, f'nist_hvap_pts/{cid}.html')
-            if os.path.exists(f):
+            if not os.path.exists(f): raise FileNotFoundError(f'missing archived NIST points page {f} (v40.13: every skeleton with a NIST average must be resolved against its points page)')
+            if True:
                 t=open(f,errors='replace').read()
                 for r in re.findall(r'<tr[^>]*>(.*?)</tr>',t,re.S):
                     c=[clean(x) for x in re.findall(r'<td[^>]*>(.*?)</td>',r,re.S)]

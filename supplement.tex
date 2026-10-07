@@ -182,8 +182,8 @@ each index and each of the five physicochemical properties of the
 $18$ octane isomers (boiling point $T_B$, enthalpy of formation
 $\Delta H_f$, enthalpy of vaporization $\Delta H_{\mathrm{vap}}$,
 entropy $S$, acentric factor $\omega$; property data traced to the NIST
-WebBook~\cite{NISTWebBook} (each value traced to the WebBook entry listed in
-the provenance file), except the acentric
+WebBook~\cite{NISTWebBook} (the provenance file records, for each value, the WebBook entry or,
+where the WebBook lists no value, the compilation consulted), except the acentric
 factors, which NIST does not list and which were taken from KDB-derived
 compilations; the same five properties form the octane benchmark used
 in~\cite{MovahediGutmanRedzepovicFurtula2026}). Units are: $T_B$ in
@@ -198,13 +198,15 @@ molecule-level values were traced against authoritative sources
 (NIST WebBook first; KDB-derived compilations for the acentric
 factor, which NIST does not list), and classified under a strict
 taxonomy in which ``verified'' requires agreement at the value's
-reported precision: $3$ match exactly, $29$ match a specific recorded
-determination at reported precision after unit conversion (gas phase
-confirmed for formation enthalpies and entropies), $37$ agree within
-the audit tolerances, the source's stated uncertainty or the span of
+reported precision (a converted value exactly half a display unit away
+counts as agreement at reported precision): $3$ match exactly, $29$ match
+a specific recorded determination at reported precision after unit
+conversion (gas phase confirmed for formation enthalpies and entropies),
+$40$ agree within the audit tolerances, the source's stated uncertainty or the span of
 several determinations without matching any one of them at reported
-precision, $13$ lie within explained variation among authoritative
-determinations, $7$ could not be verified against a reachable
+precision, $10$ lie within explained variation among authoritative
+determinations (1947 API Project~44 entries superseded by later TRC
+revisions), $7$ could not be verified against a reachable
 authoritative value (six gas-phase entropies absent from
 the NIST WebBook, for which the 1947 API Project 44 tables give values
 differing by $0.07$--$2.2$ units, as they do for isomers whose later
@@ -233,10 +235,10 @@ package. For 3,3-dimethylhexane, 3-ethyl-3-methylpentane,
 $\Delta H_{\mathrm{vap}}$ that differ from the NIST WebBook by
 $0.05$--$0.13$\,kcal\,mol$^{-1}$ circulate in octane benchmark tables;
 we use values consistent with NIST (Appendix~A of the main paper): two exact
-conversions of NIST determinations ($8.97$, $9.08$) and two values that
-lie within the span or stated uncertainty of the NIST determinations
-and equal the API Project~44 compilation at the displayed precision
-($8.83$, $8.90$). Six gas-phase entropies could not be verified
+conversions of NIST determinations ($8.97$, $9.08$) and two values that lie within the span or stated uncertainty of the
+NIST determinations ($8.83$, which also equals the API Project~44 value
+at the displayed precision, and $8.90$, which equals the compiled octane
+dataset value $8.897$ at the displayed precision). Six gas-phase entropies could not be verified
 against a primary source (see above); four entropies
 ($n$-octane, 2,2-dimethylhexane, 2,2,4- and 2,3,3-trimethylpentane)
 differ from those of a widely used octane QSPR compilation by
@@ -244,8 +246,10 @@ $0.04$--$2.29$ units (the $2,3,3$-trimethylpentane value $102.06$ is a compiled-
 value; see the data-quality appendix of the main paper); substituting the compilation values changes
 all twelve $S$ correlations in Table~4 of the main paper (by up to
 $0.043$ in $|r|$) but not the winning descriptor
-($HM$). Apart from the four corrected vaporization enthalpies, the
-benchmark values are preserved as supplied for comparability.
+($HM$). Apart from the four corrected vaporization enthalpies and the corrected
+transcription of the 2,3,3-trimethylpentane entropy (data-quality
+appendix of the main paper, item~(ii)), the benchmark values are
+preserved as supplied for comparability.
 \paragraph{Correlation details for Table~4 of the main paper.}
 The best correlation per property is split among the reductions and
 the pure-$\gamma$ points: the modified second Zagreb index
@@ -379,8 +383,8 @@ $LO(0, 0, 1)$ on $\Delta H_{\mathrm{vap}}$ --- the nested gain for
 this pool seed is $-0.0003$, $-0.004$ and $-0.001$. These near-zero
 values are specific to the seed: re-drawing the pools with seeds
 $0$--$99$, the nested gain for $M_2$ on $\omega$ is small but
-positive in most seeds (median about $+0.003$, positive in $96\%$
-of seeds), so the defensible statement is that tuning a column
+positive in most seeds (median $+0.003$, positive in $97$ of $100$
+seeds; repository script \texttt{tuning\_pool\_seed\_sweep.py}), so the defensible statement is that tuning a column
 winner changes its nested correlation by at most a few thousandths.
 Third, tuning near the pure-$\gamma$ points $LO(0, 0, 1)$ and
 $LO(0, 0, 2)$ does not exceed the best fixed index under nested
@@ -513,7 +517,7 @@ $\Delta H_{\mathrm{vap}}$ the parent chose $(\alpha,\beta) =
 folds. The consequences of this are examined in Section~6.2
 of the main paper. On the one property where
 $\gamma$ helps most stably, $\Delta H_{\mathrm{vap}}$, the identical
-triple $(-0.27, +0.27, +0.24)$ was selected in every fold. With
+triple $(-0.270, +0.271, +0.239)$ was selected in every fold. With
 $n = 18$ molecules these $Q^2$ differences carry substantial
 selection noise and we attach no inferential claim to them.
 
@@ -563,9 +567,11 @@ to the $35$ constitutional nonane isomers, with boiling points ($35$
 values) and standard vaporization enthalpies ($34$ values; none listed
 for 3-ethyl-4-methylhexane) taken from the NIST
 WebBook~\cite{NISTWebBook} with every value traced to its archived
-source page. The two properties differ in evidential status. The
-boiling points are NIST averages of experimental determinations (several
-quoted only to $1$\,K), so the $T_B$ test is experimentally grounded.
+source page. The two properties differ in evidential status. Twenty of the $35$ boiling points are NIST averages of experimental
+determinations ($13$ quoted only to $1$\,K), five are single NIST
+determinations and ten are the most recent primary determination listed
+by NIST (Deviation~D1 of the protocol); all are experimental
+measurements, so the $T_B$ test is experimentally grounded.
 Of the vaporization enthalpies, only $4$ of $34$ are calorimetric
 determinations and one is a NIST average; $29$ come from two compilations, the 1961 tabulation of
 Labauf, Greenshields and Rossini~\cite{LabaufGreenshieldsRossini1961},
@@ -859,7 +865,10 @@ profiles.
 Hessian formulas and strict convexity; the ratio-plane theorem, the
 $\gamma$-crossing bound and the identifiability proposition (which rely
 on the Lindemann--Weierstrass theorem, Laguerre's rule and the theory of
-exponential families, not available in Mathlib); and all statistical and chemometric results. A theorem-by-theorem
+exponential families, not available in Mathlib); and all statistical and chemometric results; the closed forms, the $\gamma \to \pm\infty$ asymptotics, the
+ceiling and generic-discrimination propositions, and the
+identifiability consequence of Lemma~1 together with its $\Delta = 1, 2$
+cases. A theorem-by-theorem
 map is in \texttt{formal/README.md}.
 
 \section{Further directions}\label{sec:s-further}
@@ -899,7 +908,7 @@ of the main paper.
   for graphs of unbranched hexagonal systems, \textit{J. Chem. Inf. Comput.
   Sci.\/} \textbf{36} (1996) 54--57.
 
-  \bibitem{LabaufGreenshieldsRossini1961} A. Labauf, J. B. Greenshields,
+  \bibitem{LabaufGreenshieldsRossini1961} A. Labbauf, J. B. Greenshields,
   F. D. Rossini, Heats of formation, combustion, and vaporization of the
   35 nonanes and 75 decanes, \textit{J. Chem. Eng. Data\/} \textbf{6}
   (1961) 261--263.

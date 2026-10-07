@@ -145,8 +145,8 @@ def run_test(label, P, y, z=None):
     wins = int((d > 0).sum())
     verdict = "gamma adds value" if (wins >= 40 and (ci[0] > 0 or ci[1] < 0) and np.median(d) > 0) else "no evidence that gamma adds value"
     med = lambda k: np.median([q2(p, y) for p in preds[k]])
-    summ = [label, len(y), f"{med('GM2'):.4f}", f"{med('LO2'):.4f}", f"{med('GM12'):.4f}", f"{med('LOh'):.4f}",
-            f"{np.median(d):+.4f}", wins, f"{ci[0]:+.4f}", f"{ci[1]:+.4f}", verdict]
+    summ = [label, len(y), f"{med('GM2'):.10f}", f"{med('LO2'):.10f}", f"{med('GM12'):.10f}", f"{med('LOh'):.10f}",
+            f"{np.median(d):+.10f}", wins, f"{ci[0]:+.10f}", f"{ci[1]:+.10f}", verdict]   # v40.13: full precision
     return seed_rows, summ
 
 
@@ -167,7 +167,7 @@ def baselines(label, P, y, z=None):
         out.append(("size + IRLA", nested_size(ir, z, y)))
         out.append(("size + LO(0,0,1) fixed", nested_size(lo1, z, y)))
     out.append(("ridge on degree-pair counts", B.outer_loo(B.fold_ridge, F, y)[0]))
-    return [[label, nm, len(y), f"{q2(p, y):.4f}", f"{np.sqrt(((p - y) ** 2).mean()):.3f}"] for nm, p in out]
+    return [[label, nm, len(y), f"{q2(p, y):.10f}", f"{np.sqrt(((p - y) ** 2).mean()):.10f}"] for nm, p in out]   # v40.13: full precision
 
 
 def main():

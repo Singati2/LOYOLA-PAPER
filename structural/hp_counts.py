@@ -71,8 +71,8 @@ def main():
         bad += (not same) + (not exact)
         out.append(f"Table S4 n={n} {row['graph_set']}: 9-decimal counts {'REPRODUCED' if same else 'DIFFER'} at 32 digits; pure-gamma counts == q-histograms: {exact}")
         print(out[-1], flush=True)
-    out.append(f"RESULT: {'all counts reproduced at 32 significant digits' if bad == 0 else str(bad) + ' MISMATCHES'} ({time.time()-t0:.0f} s)")
-    print(out[-1])
+    out.append(f"RESULT: {'all counts reproduced at 32 significant digits' if bad == 0 else str(bad) + ' MISMATCHES'}")
+    print(out[-1] + f" ({time.time()-t0:.0f} s)")   # runtime on stdout only, so the committed output is reproducible
     open(os.path.join(HERE, "hp_counts_out.txt"), "w").write("\n".join(out) + "\n")
     sys.exit(1 if bad else 0)
 

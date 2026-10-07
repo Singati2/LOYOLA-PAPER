@@ -341,7 +341,7 @@ def analyse(ds, min_n=None, seeds=SEEDS, budgets=BUDGETS, verbose=True):
                                  selection="Q2/RMSE/r_pred = median over seeds"))
             q, e, r = res[(REF_SEED, REF_BUDGET)]
             rows.append(dict(property=p, n=n, method=f"{mname}_s{REF_SEED}_b{REF_BUDGET}",
-                             Q2=q, RMSE=e, r_pred=r, selection="paper Table 5 configuration"))
+                             Q2=q, RMSE=e, r_pred=r, selection="Supplementary Table S3(a) configuration (seed 12345, budget 200)"))
             rows[-1]["_per_seed"] = res  # kept for tests; not written
         if verbose:
             print(f"  {p}: done ({time.time() - t0:.1f}s)", flush=True)

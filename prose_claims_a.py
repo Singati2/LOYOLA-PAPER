@@ -691,7 +691,14 @@ def tuning_dout(anchor, prop):
     return r[f"{anchor}/{prop}/LOO50"] - r[f"{anchor}/{prop}/LOO0"]
 
 
+def sweep_positive():
+    import re as _re
+    t = open(P("tuning_pool_seed_sweep_out.txt")).read()
+    return int(_re.search(r"positive in (\d+) of 100 seeds", t).group(1))
+
+
 REGISTRY = [
+    E("s2_sweep97", "supp", r"positive in \$(?P<v>\d+)\$ of \$100\$\s+seeds; repository script", "sweep_positive()", 0, "tuning_pool_seed_sweep_out.txt"),
     E("s2_dout_m2_omega", "supp", r"this pool seed is \$(?P<v>-?[\d.]+)\$, \$-?[\d.]+\$ and \$-?[\d.]+\$\.", "tuning_dout('M2', 'omega')", 0.0011, "verify_loyola_v35_results.csv E rows (3 dp)"),
     E("s2_dout_hm_s", "supp", r"this pool seed is \$-?[\d.]+\$, \$(?P<v>-?[\d.]+)\$ and \$-?[\d.]+\$\.", "tuning_dout('HM', 'S')", 0.0015, "verify_loyola_v35_results.csv E rows (3 dp): HM on S"),
     E("s2_dout_lo1_dhvap", "supp", r"this pool seed is \$-?[\d.]+\$, \$-?[\d.]+\$ and \$(?P<v>-?[\d.]+)\$\.", "tuning_dout('LO(0,0,1)', 'dHvap')", 0.0011, "verify_loyola_v35_results.csv E rows (3 dp)"),
@@ -782,7 +789,7 @@ REGISTRY = [
     E("abl_hyb002", "main", r"seeds\) and \$(?P<v>[+-]?[\d.]+)\$ on the nonanes \(\$24\$ of \$50\$\)", "box('nonane','dHvap',12,'median_dQ2_hybrid')", 0.0005, "box_sensitivity_summary.csv"),
     E("abl_hyb24", "main", r"on the nonanes \(\$(?P<v>\d+)\$ of \$50\$\), and\s+widening", "box('nonane','dHvap',12,'LO_hybrid_better')", 0, "LO_hybrid_better"),
     E("abl_wide011", "main", r"widening all three coordinates gives \$(?P<v>[+-]?[\d.]+)\$ and \$-0\.016\$", "box('octane','dHvap',12,'median_dQ2')", 0.0005, "median_dQ2 L=12 octane dHvap"),
-    E("abl_wide016", "main", r"coordinates gives \$-0\.011\$ and \$(?P<v>[+-]?[\d.]+)\$\.", "box('nonane','dHvap',12,'median_dQ2')", 0.0005, "median_dQ2 L=12 nonane dHvap"),
+    E("abl_wide016", "main", r"coordinates gives \$-0\.010\$ and \$(?P<v>[+-]?[\d.]+)\$\.", "box('nonane','dHvap',12,'median_dQ2')", 0.0005, "median_dQ2 L=12 nonane dHvap"),
     E("abl_S38", "main", r"ahead for octane \$S\$ \(\$(?P<v>\d+)\$ of \$50\$\s+seeds\)", "box('octane','S',12,'LO_hybrid_better')", 0, "LO_hybrid_better"),
     E("abl_TB31", "main", r"nonane \$T_B\$ \(\$(?P<v>\d+)\$ of \$50\$\), but behind", "box('nonane','T_B',12,'LO_hybrid_better')", 0, "LO_hybrid_better"),
     E("abl_gm887", "main", r"\(\$(?P<v>[\d.]+) \\to 0\.942\$ on the octanes\)", "box('octane','dHvap',2,'median_Q2_GM')", 0.0005, "median_Q2_GM L=2"),
@@ -847,8 +854,8 @@ REGISTRY = [
     # ======================= main.tex : sec:bp =======================
     E("bp_298", "main", r"standard-state \$(?P<v>\d+)\$\\,K determination, after resolving", None, 0, "UNCHECKABLE: condition constant"),
     E("bp_cal25", "main", r"NIST lists only \$(?P<v>\d+)\$\s+acyclic alkane skeletons outside", "cal_count('outside_c8_c9')", 0, "calorimetric_dHvap298_alkanes.csv rows with n not in {8,9}"),
-    E("bp_cal_one", "main", r"and (?P<v>one) of the \$75\$\s+decanes; file", "word(cal_count('decanes'))", 0, "calorimetric_dHvap298_alkanes.csv n=10 rows"),
-    E("bp_75decanes_a", "main", r"and one of the \$(?P<v>\d+)\$\s+decanes; file", "bpp_count(10)", 0, "bp_provenance.csv decane rows (= 75 molecular trees of order 10)"),
+    E("bp_cal_one", "main", r"and (?P<v>one) of the \$75\$\s+decanes\), two", "word(cal_count('decanes'))", 0, "calorimetric_dHvap298_alkanes.csv n=10 rows"),
+    E("bp_75decanes_a", "main", r"and one of the \$(?P<v>\d+)\$\s+decanes\), two", "bpp_count(10)", 0, "bp_provenance.csv decane rows (= 75 molecular trees of order 10)"),
     E("bp_two_days", "main", r"archived (?P<v>two) days earlier", None, 0, "UNCHECKABLE: calendar statement (git/PREREG dates)"),
     E("bp_3K_a", "main", r"if they agree within\s+\$(?P<v>\d+)\$\\,K; otherwise the molecule is excluded", "bpp_spread_threshold()", 0, "bp_provenance.csv exclusion reasons 'spread X K > 3 K'"),
     E("bp_34non", "main", r"giving all hexanes, heptanes and octanes, \$(?P<v>\d+)\$ of the \$35\$ nonanes", "bpp_count(9,'INCLUDED')", 0, "bp_provenance.csv"),
@@ -880,7 +887,7 @@ REGISTRY = [
     E("bp_A_15", "main", r"LO ahead\s+in \$(?P<v>\d+)\$ of \$50\$ seeds, \$95\\%\$ interval", "bps('A','LOh_better_of_50')", 0, "bp_results_summary.csv"),
     E("bp_A_of50", "main", r"in \$15\$ of \$(?P<v>\d+)\$ seeds, \$95\\%\$ interval \$\[-0\.156", "BP_SEEDS", 0, "bp_tests.py"),
     E("bp_A_95", "main", r"seeds, \$(?P<v>\d+)\\%\$ interval \$\[-0\.156", None, 0, "UNCHECKABLE: confidence level"),
-    E("bp_A_ci_lo", "main", r"\$95\\%\$ interval \$\[(?P<v>-?[\d.]+), \+0\.002\]\$\) or in the", "bps('A','ci95_lo')", 0.0005, "bp_results_summary.csv"),
+    E("bp_A_ci_lo", "main", r"\$95\\%\$ interval \$\[(?P<v>-?[\d.]+), \+0\.001\]\$\) or in the", "bps('A','ci95_lo')", 0.0005, "bp_results_summary.csv"),
     E("bp_A_ci_hi", "main", r"\$\[-0\.156, (?P<v>[+-]?[\d.]+)\]\$\) or in the\s+pooled", "bps('A','ci95_hi')", 0.0005, "bp_results_summary.csv"),
     E("bp_B_dq2", "main", r"pooled size-adjusted set \(\$(?P<v>[+-]?[\d.]+)\$, \$25\$ of \$50\$, \$\[-0\.003, \+0\.002\]\$\)", "bps('B','median_dQ2_LOh_GM12')", 0.0005, "bp_results_summary.csv"),
     E("bp_B_25", "main", r"set \(\$-0\.000\$, \$(?P<v>\d+)\$ of \$50\$, \$\[-0\.003", "bps('B','LOh_better_of_50')", 0, "bp_results_summary.csv"),
@@ -911,7 +918,7 @@ REGISTRY = [
 
     # ======================= main.tex : conclusion =======================
     E("con_order13", "main", r"information from tree order \$(?P<v>\d+)\$ \(order \$16\$", "first_order_profiles_ne_qhist('all')", 0, "structural_checks_out.txt S1"),
-    E("con_order16", "main", r"\(order \$(?P<v>\d+)\$ for \$\\Delta \\le 4\$\); two\s+molecular", "first_order_profiles_ne_qhist('mol')", 0, "structural_checks_out.txt S1"),
+    E("con_order16", "main", r"\(order \$(?P<v>\d+)\$ for \$\\Delta \\le 4\$\); two graphs with maximum degree", "first_order_profiles_ne_qhist('mol')", 0, "structural_checks_out.txt S1"),
     E("con_five_cross", "main", r"exchange order at most (?P<v>five) times along", r"word(int(struct_num(r'max crossings (\d+), attained')))", 0, "structural_checks_out.txt S3 max crossings"),
     E("con_93", "main", r"octane sweep \(\$(?P<v>\d+)\$--\$96\$ of \$100\$ without", "min(tmbx(200,'LO_better'),tmbx(500,'LO_better'))", 0, "dhvap_tmb_exclusion_summary_v36.csv"),
     E("con_96", "main", r"\(\$93\$--\$(?P<v>\d+)\$ of \$100\$ without", "max(tmbx(200,'LO_better'),tmbx(500,'LO_better'))", 0, "dhvap_tmb_exclusion_summary_v36.csv"),
@@ -922,16 +929,14 @@ REGISTRY = [
     E("con_902", "main", r"medians \$0\.900\$--\$(?P<v>[\d.]+)\$ on\s+the nonanes\)", "base('non','dHvap_kcal','LO_b500')", 0.0005, "baselines_nonane.csv LO_b500"),
     E("con_34dec", "main", r"\$\\gamma\$ on the \$(?P<v>\d+)\$ decanes or the \$100\$ pooled", "bps('A','n')", 0, "bp_results_summary.csv n"),
     E("con_100pool", "main", r"decanes or the \$(?P<v>\d+)\$ pooled C6--C10 alkanes", "bps('B','n')", 0, "bp_results_summary.csv n"),
-    E("con_order17", "main", r"\(tree orders up to \$(?P<v>\d+)\$, the crossing", "struct_max_order()", 0, "structural_checks_out.txt S1 max order"),
-    E("con_32digits", "main", r"count at \$(?P<v>\d+)\$ significant digits", r"hp_num(r'reproduced at (\d+) significant digits')", 0, "structural/hp_counts_out.txt RESULT line"),
     E("con_order13b", "main", r"and the order-\$(?P<v>\d+)\$\s+profile collision", "first_order_profiles_ne_qhist('all')", 0, "structural_checks_out.txt S1"),
 
     # ======================= main.tex : app:quality =======================
-    E("aq_six_word", "main", r"\\item \\emph\{(?P<v>Six) gas-phase entropies\} \(4-methylheptane", "word(len(API44), True)", 0, "provenance S CANNOT VERIFY rows"),
+    E("aq_six_word", "main", r"the remaining (?P<v>six) \(4-methylheptane", "word(len(API44))", 0, "provenance S CANNOT VERIFY rows"),
     E("aq_api44_007", "main", r"differ from the values used by \$(?P<v>[\d.]+)\$--\$2\.2\$\\,cal", "min(API44_DIFFS)", 0.005, "provenance API-44 S diffs (2,2-dimethylhexane 103.13 vs 103.06)"),
     E("aq_api44_22", "main", r"by \$0\.07\$--\$(?P<v>[\d.]+)\$\\,cal\\,mol\$\^\{-1\}\$\\,K\$\^\{-1\}\$,\s+as that edition", "max(API44_DIFFS)", 0.05, "provenance API-44 S diffs (max 2.21)"),
     E("aq_api44_018", "main", r"Substituting the 1947 values changes the\s+\$S\$ correlations by at most \$(?P<v>[\d.]+)\$ in \$\|r\|\$", "max_abs_change(A_SENS)", 0.0005, "entropy_api44_sensitivity_v41.csv max ||r_alt|-|r_orig|| (HM 0.0180)"),
-    E("aq_api44_004", "main", r"and puts \$M_1\$ ahead of\s+\$HM\$ by \$(?P<v>[\d.]+)\$ \(repository file", "api44_m1_minus_hm()", 0.0005, "entropy_api44_sensitivity_v41.csv |r_M1|-|r_HM| alternative (0.0037)"),
+    E("aq_api44_004", "main", r"and puts \$M_1\$ ahead of\s+\$HM\$ by \$(?P<v>[\d.]+)\$\.", "api44_m1_minus_hm()", 0.0005, "entropy_api44_sensitivity_v41.csv |r_M1|-|r_HM| alternative (0.0037)"),
     E("aq_10131", "main", r"The value \$(?P<v>[\d.]+)\$ found in our\s+earlier compilation", "OCTANES[IDX['2,2,3-trimethylpentane']][4]", 0.005, "octane_data 2,2,3-TMP S (the duplicated entry)"),
     E("aq_10206", "main", r"The value used, \$(?P<v>[\d.]+)\$, is that of the compiled\s+\$18\$-octane", "OCTANES[IDX['2,3,3-trimethylpentane']][4]", 0.005, "octane_data 2,3,3-TMP S"),
     E("aq_18oct", "main", r"is that of the compiled\s+\$(?P<v>\d+)\$-octane dataset", "N_OCT", 0, "octane_data"),
@@ -950,8 +955,8 @@ REGISTRY = [
     E("aq_233_10210", "main", r"\$102\.06\$ vs \$(?P<v>[\d.]+)\$\); for octane", "S_ALT['2,3,3-trimethylpentane']", 0.005, "S_ALT"),
     E("aq_nist_11163", "main", r"agrees with the NIST WebBook \(\$(?P<v>[\d.]+)\$\)\. Substituting", "OCTANE_S_NIST", 0.005, "provenance octane S converted_value"),
     E("aq_S_change043", "main", r"changes all twelve \$S\$ correlations, by up to \$(?P<v>[\d.]+)\$\s+in \$\|r\|\$, and moves", "max_abs_change(S_SENS)", 0.0005, "entropy_source_sensitivity_v36.csv"),
-    E("aq_S_margin001", "main", r"and moves the margin between \$HM\$ and \$M_1\$ at the top from\s+\$(?P<v>[\d.]+)\$ to \$[\d.]+\$ \(repository", "s_margin()", 0.0005, "original-data HM/M1 margin on S (see oct_S_margin001)"),
-    E("aq_S_margin007_alt", "main", r"and moves the margin between \$HM\$ and \$M_1\$ at the top from\s+\$[\d.]+\$ to \$(?P<v>[\d.]+)\$ \(repository", "s_margin_alt_csv()", 0.0005,
+    E("aq_S_margin001", "main", r"and moves the margin between \$HM\$ and \$M_1\$ at the top from\s+\$(?P<v>[\d.]+)\$ to \$[\d.]+\$\.\s+\\item", "s_margin()", 0.0005, "original-data HM/M1 margin on S (see oct_S_margin001)"),
+    E("aq_S_margin007_alt", "main", r"and moves the margin between \$HM\$ and \$M_1\$ at the top from\s+\$[\d.]+\$ to \$(?P<v>[\d.]+)\$\.\s+\\item", "s_margin_alt_csv()", 0.0005,
       "AUDIT: literal reading (margin after substitution) is 0.0071 per entropy_source_sensitivity_v36.csv"),
     E("aq_tmb_841", "main", r"benchmark-compilation value \(\$(?P<v>[\d.]+)\$\) whose reference state is unresolved", "OCTANES[IDX[TMB]][3]", 0.005, "octane_data"),
     E("aq_298", "main", r"the compound is a solid at \$(?P<v>\d+)\$~K; NIST lists", None, 0, "UNCHECKABLE: condition constant"),
@@ -970,8 +975,8 @@ REGISTRY = [
     E("s1_n18", "supp", r"properties of the\s+\$(?P<v>\d+)\$ octane isomers \(boiling point \$T_B\$, enthalpy of formation\s+\$\\Delta H_f\$, enthalpy of vaporization \$\\Delta H_\{\\mathrm\{vap\}\}\$,\s+entropy \$S\$, acentric factor \$\\omega\$; property data", "N_OCT", 0, "octane_data"),
     E("s1_298a", "supp", r"kcal\\,mol\$\^\{-1\}\$ \(the latter at \$(?P<v>\d+)\$~K\)", None, 0, "UNCHECKABLE: condition constant"),
     E("s1_90", "supp", r"All \$(?P<v>\d+)\$\s+molecule-level values\s+were traced", "len(PROV)", 0, "provenance rows"),
-    E("s1_cls3", "supp", r"precision: \$(?P<v>\d+)\$ match exactly, \$29\$", "prov_count('VERIFIED EXACT')", 0, "provenance classification counts"),
-    E("s1_cls29", "supp", r"match exactly, \$(?P<v>\d+)\$ match a specific recorded", "prov_count('VERIFIED AFTER UNIT CONVERSION')", 0, "provenance"),
+    E("s1_cls3", "supp", r"reported precision\): \$(?P<v>\d+)\$ match exactly", "prov_count('VERIFIED EXACT')", 0, "provenance classification counts"),
+    E("s1_cls29", "supp", r"match exactly, \$(?P<v>\d+)\$ match\s+a specific recorded", "prov_count('VERIFIED AFTER UNIT CONVERSION')", 0, "provenance"),
     E("s1_cls37", "supp", r"\$(?P<v>\d+)\$ agree within\s+the audit tolerances", "prov_count('AGREEMENT WITHIN TOLERANCE')", 0, "provenance"),
     E("s1_cls13", "supp", r"\$(?P<v>\d+)\$ lie within explained variation", "prov_count('SOURCE VARIATION / EXPLAINED')", 0, "provenance"),
     E("s1_cls7", "supp", r"\$(?P<v>\d+)\$ could not be verified against a reachable", "prov_count('CANNOT VERIFY')", 0, "provenance"),
@@ -997,8 +1002,8 @@ REGISTRY = [
     E("s1_dhvap_013", "supp", r"by\s+\$0\.05\$--\$(?P<v>[\d.]+)\$\\,kcal", "max(DHVAP_CORR_DIFFS)", 0.005, "octane_data.py docstring v36 corrections (9.21->9.08)"),
     E("s1_897", "supp", r"conversions of NIST determinations \(\$(?P<v>[\d.]+)\$, \$9\.08\$\)", "OCTANES[IDX['3,3-dimethylhexane']][3]", 0.005, "octane_data"),
     E("s1_908", "supp", r"\(\$8\.97\$, \$(?P<v>[\d.]+)\$\) and two values", "OCTANES[IDX['3-ethyl-3-methylpentane']][3]", 0.005, "octane_data"),
-    E("s1_883", "supp", r"at the displayed precision\s+\(\$(?P<v>[\d.]+)\$, \$8\.90\$\)", "OCTANES[IDX['2,2,3-trimethylpentane']][3]", 0.005, "octane_data"),
-    E("s1_890", "supp", r"\(\$8\.83\$, \$(?P<v>[\d.]+)\$\)\. Six gas-phase", "OCTANES[IDX['2,3,3-trimethylpentane']][3]", 0.005, "octane_data"),
+    E("s1_883", "supp", r"NIST determinations \(\$(?P<v>[\d.]+)\$, which also equals", "OCTANES[IDX['2,2,3-trimethylpentane']][3]", 0.005, "octane_data"),
+    E("s1_890", "supp", r"at the displayed precision, and \$(?P<v>[\d.]+)\$, which equals", "OCTANES[IDX['2,3,3-trimethylpentane']][3]", 0.005, "octane_data"),
     E("s1_S_004", "supp", r"octane QSPR compilation by\s+\$(?P<v>[\d.]+)\$--\$2\.29\$ units", "min(S_DIFFS)", 0.005, "S_ALT vs octane_data (102.10-102.06)"),
     E("s1_S_229", "supp", r"\$0\.04\$--\$(?P<v>[\d.]+)\$ units", "max(S_DIFFS)", 0.005, "S_ALT vs octane_data (104.10-101.81)"),
     E("s1_10206", "supp", r"trimethylpentane value \$(?P<v>[\d.]+)\$ is a compiled-dataset\s+value; see the data-quality", "OCTANES[IDX['2,3,3-trimethylpentane']][4]", 0.005, "octane_data"),
@@ -1043,9 +1048,9 @@ REGISTRY = [
     E("s3_beta1993", "supp", r"\(1\.021, (?P<v>-?[\d.]+)\)\$, on the boundary of the box, in \$16\$ of the \$18\$\s+folds", "perfold_mode('dHvap','GM')[0][1]", 0.0005, "ablation_perfold.csv"),
     E("s3_16of18a", "supp", r"on the boundary of the box, in \$(?P<v>\d+)\$ of the \$18\$\s+folds\. The consequences", "perfold_mode('dHvap','GM')[1]", 0, "ablation_perfold.csv"),
     E("s3_16of18b", "supp", r"in \$16\$ of the \$(?P<v>\d+)\$\s+folds\. The consequences", "len(perfold_triples('dHvap','GM'))", 0, "ablation_perfold.csv"),
-    E("s3_triple_a", "supp", r"the identical\s+triple \$\((?P<v>-?[\d.]+), \+0\.27, \+0\.24\)\$", "perfold_mode('dHvap','LO')[0][0]", 0.005, "ablation_perfold.csv dHvap LO triple (-0.270, 0.271, 0.239)"),
-    E("s3_triple_b", "supp", r"triple \$\(-0\.27, (?P<v>[+-]?[\d.]+), \+0\.24\)\$", "perfold_mode('dHvap','LO')[0][1]", 0.005, "ablation_perfold.csv"),
-    E("s3_triple_g", "supp", r"triple \$\(-0\.27, \+0\.27, (?P<v>[+-]?[\d.]+)\)\$", "perfold_mode('dHvap','LO')[0][2]", 0.005, "ablation_perfold.csv"),
+    E("s3_triple_a", "supp", r"the identical\s+triple \$\((?P<v>-?[\d.]+), \+0\.271, \+0\.239\)\$", "perfold_mode('dHvap','LO')[0][0]", 0.0005, "ablation_perfold.csv dHvap LO triple (-0.270, 0.271, 0.239)"),
+    E("s3_triple_b", "supp", r"triple \$\(-0\.270, (?P<v>[+-]?[\d.]+), \+0\.239\)\$", "perfold_mode('dHvap','LO')[0][1]", 0.005, "ablation_perfold.csv"),
+    E("s3_triple_g", "supp", r"triple \$\(-0\.270, \+0\.271, (?P<v>[+-]?[\d.]+)\)\$", "perfold_mode('dHvap','LO')[0][2]", 0.005, "ablation_perfold.csv"),
     E("s3_n18", "supp", r"With\s+\$n = (?P<v>\d+)\$ molecules these \$Q\^2\$ differences", "N_OCT", 0, "octane_data"),
     E("s3_onehundred", "supp", r"repeated for (?P<v>one hundred) seeds \(\$0\$--\$99\$\) at both\s+budgets", "word(len(SEEDS_EXP))", 0, "expanded_robustness_v35.csv"),
     E("s3_seeds99", "supp", r"one hundred seeds \(\$0\$--\$(?P<v>\d+)\$\) at both\s+budgets", "max(SEEDS_EXP)", 0, "expanded_robustness_v35.csv"),

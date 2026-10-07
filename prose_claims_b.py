@@ -715,27 +715,9 @@ _add(E("cr_eight_imb", "main", r"and (?P<v>[a-z]+) distinct imbalances, with", "
 _add(E("cr_V5", "main", r"distinct imbalances, with \$V = (?P<v>\d+)\$, cross", "s3()['V']", 0, "S3 V"))  # 1
 _add(E("cr_five_times", "main", r", cross\s+(?P<v>[a-z]+) times at \$\(\\alpha,\\beta\) = \(-1,0\)\$", "word(s3()['cross'])", 0, "S3 crossings"))  # 1
 _add(E("cr_alpha", "main", r"cross\s+five times at \$\(\\alpha,\\beta\) = \((?P<v>-?\d+),0\)\$", "s3()['alpha']", 0, "S3 header (alpha,beta)"))  # 1
-_add(E("cr_beta", "main", r"cross\s+five times at \$\(\\alpha,\\beta\) = \(-1,(?P<v>-?\d+)\)\$", "s3()['beta']", 0, "S3 header (alpha,beta)"))  # 1
-_add(E("cr_V5_rational", "main", r"are rational with \$V = (?P<v>\d+)\$ sign changes", "s3()['V_cert']", 0, "S3 certificate Laguerre V"))  # 1
-_add(E("cr_sign_five", "main", r"\$D\$ changes sign (?P<v>[a-z]+) times\s+on", "word(s3()['nsign'])", 0, "S3 certificate sign changes"))  # 1
-_add(E("cr_grid_lo", "main", r"on \$\\gamma \\in \((?P<v>-?\d+), 60\)\$", "sc_grid()[0]", 0, "structural_checks.py s3_certify linspace"))  # 1
-_add(E("cr_grid_hi", "main", r"on \$\\gamma \\in \(-60, (?P<v>\d+)\)\$", "sc_grid()[1]", 0, "structural_checks.py s3_certify linspace"))  # 1
-_add(E("cr_dps50", "main", r"in \$(?P<v>\d+)\$-digit arithmetic \(near", "s3()['dps']", 0, "S3 certificate line"))  # 1
-_add(E("cr_root1", "main", r"\(near \$(?P<v>-?\d+\.\d+)\$,\s+\$-11\.96\$", "s3()['roots'][0]", 0.005, "S3 certificate roots"))  # 1
-_add(E("cr_root2", "main", r"\(near \$-17\.17\$,\s+\$(?P<v>-?\d+\.\d+)\$, \$-2\.03\$", "s3()['roots'][1]", 0.005, "S3 certificate roots"))  # 1
-_add(E("cr_root3", "main", r"\$-11\.96\$, \$(?P<v>-?\d+\.\d+)\$, \$2\.73\$", "s3()['roots'][2]", 0.005, "S3 certificate roots"))  # 1
-_add(E("cr_root4", "main", r"\$-2\.03\$, \$(?P<v>-?\d+\.\d+)\$ and \$31\.13\$", "s3()['roots'][3]", 0.005, "S3 certificate roots"))  # 1
-_add(E("cr_root5", "main", r"\$2\.73\$ and \$(?P<v>-?\d+\.\d+)\$\), so by", "s3()['roots'][4]", 0.005, "S3 certificate roots"))  # 1
-_add(E("cr_exactly_five", "main", r"so by the bound it has exactly\s+(?P<v>[a-z]+) zeros", "word(s3()['exact'])", 0, "S3 '=> exactly k crossings: CERTIFIED'"))  # 1
-_add(E("cr_grid_order12", "main", r"in a grid search over the order-\$(?P<v>\d+)\$ trees they are the only", "s3()['order']", 0, "S3 header"))  # 1
-_add(E("cr_only_pair", "main", r"they are the only\s+pair with five sign changes", "'the only' if s3()['npairs'] == 1 else 'NOT the only'", 0,
-       "S3 'attained by 1 pair(s)'; pattern group captures no number, so the phrase is matched instead"))
-REGISTRY[-1]["pattern"] = r"they are (?P<v>the only)\s+pair with five sign changes"  # 1
-_add(E("cr_five_sign", "main", r"the only\s+pair with (?P<v>[a-z]+) sign changes of \$D\$", "word(s3()['V'])", 0, "S3 V"))  # 1
+_add(E("cr_beta", "main", r"five times at \$\(\\alpha,\\beta\) = \(-1,(?P<v>-?\d+)\)\$ \(near", "s3()['beta']", 0, "S3 header (alpha,beta)"))  # 1
 # identifiability
-_add(E("id_delta6", "main", r"admissible pairs with\s+\$\\Delta \\le (?P<v>\d+)\$ \(checked exhaustively", "s4_max_ok()", 0, "S4 Delta=6: 0 violations"))  # 1
-_add(E("id_four_pairs", "main", r"checked exhaustively for all sets of at most (?P<v>[a-z]+) pairs\s+in", "word(sc_s4_maxk())", 0, "structural_checks.py s4 range(2, 5)"))  # 1
-_add(E("id_dps60", "main", r"pairs\s+in \$(?P<v>\d+)\$-digit arithmetic", "sc_s4_dps()", 0, "structural_checks.py s4 mp.dps"))  # 1
+_add(E("id_delta6", "main", r"admissible pairs with\s+\$\\Delta \\le (?P<v>\d+)\$ \(by exhaustive enumeration", "s4_max_ok()", 0, "S4 Delta=6: 0 violations"))  # 1
 _add(E("id_delta7", "main", r"It fails from \$\\Delta = (?P<v>\d+)\$: the single violating set", "s4_first_fail()", 0, "S4 Delta=7: 1 violation"))  # 1
 _add(E("id_fail_set", "main", r"of at most four pairs there is \$\\\{(?P<v>[0-9(),]+)\\\}\$, whose", "s4_fail_set_str()", 0, "S4 Delta=7 violating set"))  # 1
 _add(E("id_degree_sum8", "main", r"whose\s+degree sums all equal \$(?P<v>\d+)\$", "(lambda s: s.pop() if len(s) == 1 else None)({i + j for i, j in s4_fail_set()})", 0, "sum of each pair in the S4 set"))  # 1
@@ -802,8 +784,7 @@ _add(E("deg_1090", "main", r"the pure-\$\\gamma\$ points give \$(?P<v>\d+)\$\s+v
 _add(E("deg_R_order13", "main", r"\$R\$ still attains the floor at order \$(?P<v>\d+)\$ \(\$570\$ values\)", "s1_first_below('all', 'R') - 1", 0, "S1: order before R's first failure"))  # 1
 _add(E("deg_R_570", "main", r"still attains the floor at order \$13\$ \(\$(?P<v>\d+)\$ values\)", "s1(13, 'all')['R']", 0, "S1 n=13 R"))  # 1
 # Table 2 caption and cells
-_add(E("ff_cap_11", "main", r"counted as distinct at \$(?P<v>\d+)\$ significant digits, as throughout", "sc_sigdigits()", 0, "structural_checks.py key() format"))  # 1
-_add(E("ff_cap_32", "main", r"are unchanged at \$(?P<v>\d+)\$ significant digits, and the pure", "hp_digits()", 0, "hp_counts_out.txt RESULT line"))  # 1
+_add(E("ff_cap_11", "main", r"counted as distinct at \$(?P<v>\d+)\$ significant digits\)\. ``Below", "sc_sigdigits()", 0, "structural_checks.py key() format"))  # 1
 _add(E("ff_cap_below7", "main", r"Orders below\s+\$(?P<v>\d+)\$ not examined", "min(s1_orders('all'))", 0, "S1"))  # 1
 _add(E("ff_LO_all_n", "main", r"\\gamma\)\$ & \$(?P<v>\d+)\$ \(\$566/570\$\) & never", "s1_first_below('all', 'LO1')", 0, "S1"))  # 1
 _add(E("ff_LO_all_v", "main", r"\\gamma\)\$ & \$13\$ \(\$(?P<v>\d+)/570\$\) & never", "s1(13, 'all')['LO1']", 0, "S1"))  # 1
@@ -879,8 +860,6 @@ _add(E("s6_dTB_pair1", "main", r"by up to \$(?P<v>[\d.]+)\\,\^\{\\circ\}\$C in \
 _add(E("s6_dTB_pair2", "main", r"\$(?P<v>[\d.]+)\\,\^\{\\circ\}\$C within the second", "oct_collision_diff(1, 'T_B')", 0.005, "|T_B(3,4-DMH) - T_B(3E2MP)|"))  # 1
 
 # ----- Reproducibility paragraph (main) -----
-_add(E("rep_17", "main", r"\(tree orders up to \$(?P<v>\d+)\$, the crossing", "max(s1_orders('all'))", 0, "S1"))  # 1
-_add(E("rep_32", "main", r"recount every structural\s+count at \$(?P<v>\d+)\$ significant digits", "hp_digits()", 0, "hp_counts_out.txt"))  # 1
 _add(E("rep_order13", "main", r"and the order-\$(?P<v>\d+)\$\s+profile collision of Section", "lean_order()", 0, "Profiles.lean"))  # 1
 
 # ----- Appendix A prose (main) -----
@@ -890,7 +869,7 @@ _add(E("app_dHvap_3E3MP", "main", r"3-ethyl-3-methylpentane \(\$(?P<v>[\d.]+)\$\
 _add(E("app_dHvap_223TMP", "main", r"2,2,3-trimethylpentane \(\$(?P<v>[\d.]+)\$\) and", "oct_prop('2,2,3-trimethylpentane', 'dHvap')", 0.0005, "octane_data"))  # 1
 _add(E("app_dHvap_233TMP", "main", r"2,3,3-trimethylpentane \(\$(?P<v>[\d.]+)\$\) are values consistent", "oct_prop('2,3,3-trimethylpentane', 'dHvap')", 0.0005, "octane_data"))  # 1
 _add(E("app_S_233TMP", "main", r"2,3,3-trimethylpentane \(\$(?P<v>[\d.]+)\$\) is a compiled-dataset", "oct_prop('2,3,3-trimethylpentane', 'S')", 0.0005, "octane_data"))  # 1
-_add(E("app_six_S", "main", r"\\emph\{(?P<v>[A-Za-z]+) gas-phase entropies\}", "word(prov_S_cannot_verify()).capitalize()", 0, "octane_property_provenance_v35.csv: S rows CANNOT VERIFY"))  # 1
+_add(E("app_six_S", "main", r"the remaining (?P<v>[a-z]+) \(4-methylheptane", "word(prov_S_cannot_verify())", 0, "octane_property_provenance_v35.csv: S rows CANNOT VERIFY"))  # 1
 _add(E("app_api44_lo", "main", r"values used by \$(?P<v>[\d.]+)\$--\$2\.2\$", "min(prov_api44_diffs())", 0.005, "provenance notes: API-44 differences"))  # 1
 _add(E("app_api44_hi", "main", r"values used by \$0\.07\$--\$(?P<v>[\d.]+)\$", "max(prov_api44_diffs())", 0.05, "provenance notes: API-44 differences (2.21 displayed as 2.2)"))  # 1
 _add(E("app_api44_maxdr", "main", r"correlations by at most \$(?P<v>[\d.]+)\$ in \$\|r\|\$ and puts", "sens_maxdr('entropy_api44_sensitivity_v41.csv')", 0.0005, "entropy_api44_sensitivity_v41.csv"))  # 1
@@ -910,7 +889,7 @@ _add(E("app_233TMP_S_ediz", "main", r"2,3,3-trimethylpentane \$102\.06\$ vs \$(?
 _add(E("app_nist_11163", "main", r"NIST WebBook \(\$(?P<v>[\d.]+)\$\)", "prov_octane_S_nist()", 0.0005, "provenance converted_value for octane S"))  # 1
 _add(E("app_twelve", "main", r"compilation values changes all (?P<v>[a-z]+) \$S\$ correlations, by up to", "word(sens_nchanged('entropy_source_sensitivity_v36.csv'))", 0, "entropy_source_sensitivity_v36.csv displayed_changes"))  # 1
 _add(E("app_0043", "main", r"by up to \$(?P<v>[\d.]+)\$\s+in \$\|r\|\$, and moves", "sens_maxdr('entropy_source_sensitivity_v36.csv')", 0.0005, "entropy_source_sensitivity_v36.csv"))  # 1
-_add(E("app_HM_M1_0001", "main", r"in \$\|r\|\$, and moves the margin between \$HM\$ and \$M_1\$ at the top from\s+\$[\d.]+\$ to \$(?P<v>[\d.]+)\$ \(repository",
+_add(E("app_HM_M1_0001", "main", r"in \$\|r\|\$, and moves the margin between \$HM\$ and \$M_1\$ at the top from\s+\$[\d.]+\$ to \$(?P<v>[\d.]+)\$\.\s+\\item",
        "sens_alt('entropy_source_sensitivity_v36.csv', 'HM') - sens_alt('entropy_source_sensitivity_v36.csv', 'M1')", 0.0005,
        "entropy_source_sensitivity_v36.csv: |r_alt(HM)| - |r_alt(M1)| after substituting the compilation values"))  # 1
 _add(E("app_tmb_841", "main", r"benchmark-compilation value \(\$(?P<v>[\d.]+)\$\) whose", "oct_prop('2,2,3,3-tetramethylbutane', 'dHvap')", 0.0005, "octane_data"))  # 1
@@ -1006,6 +985,11 @@ _add(E("lean_two_order13", "supp", r"except for the two\s+order-\$(?P<v>\d+)\$ t
 _add(E("lean_order13_pair", "supp", r"the order-\$(?P<v>\d+)\$ profile pair with equal", "lean_order()", 0, "Profiles.lean"))  # 1
 _add(E("lean_13_vertex", "supp", r"explicit \$(?P<v>\d+)\$-vertex trees realising", "lean_par_len('par1') + 1", 0, "Profiles.lean par1 length + 1"))  # 1
 
+_add(E("cr_root1r", "main", r"\(near \$\\gamma = (?P<v>-?\d+\.\d)\$,", "round(s3()['roots'][0], 1)", 0.05, "S3 certificate roots, 1 dp"))
+_add(E("cr_root2r", "main", r"\$\\gamma = -17\.2\$,\s+\$(?P<v>-?\d+\.\d)\$, \$-2\.0\$", "round(s3()['roots'][1], 1)", 0.05, "S3 certificate roots, 1 dp"))
+_add(E("cr_root3r", "main", r"\$-12\.0\$, \$(?P<v>-?\d+\.\d)\$, \$2\.7\$", "round(s3()['roots'][2], 1)", 0.05, "S3 certificate roots, 1 dp"))
+_add(E("cr_root4r", "main", r"\$-2\.0\$, \$(?P<v>-?\d+\.\d)\$ and \$31\.1\$", "round(s3()['roots'][3], 1)", 0.05, "S3 certificate roots, 1 dp"))
+_add(E("cr_root5r", "main", r"\$2\.7\$ and \$(?P<v>-?\d+\.\d)\$; by the bound", "round(s3()['roots'][4], 1)", 0.05, "S3 certificate roots, 1 dp"))
 UNCHECKABLE = [e["id"] for e in REGISTRY if e["expected"] is None]
 # app_oct_S_ediz, app_22DMH_S_ediz, app_224TMP_S_ediz: values of the Ediz (2017) compilation, cited, not held in the repository.
 

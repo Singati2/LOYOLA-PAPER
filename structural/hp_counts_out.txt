@@ -31,4 +31,4 @@ Table S4 n=11 all_trees: 9-decimal counts REPRODUCED at 32 digits; pure-gamma co
 Table S4 n=11 molecular: 9-decimal counts REPRODUCED at 32 digits; pure-gamma counts == q-histograms: True
 Table S4 n=12 all_trees: 9-decimal counts REPRODUCED at 32 digits; pure-gamma counts == q-histograms: True
 Table S4 n=12 molecular: 9-decimal counts REPRODUCED at 32 digits; pure-gamma counts == q-histograms: True
-RESULT: all counts reproduced at 32 significant digits (64 s)
+RESULT: all counts reproduced at 32 significant digits

@@ -83,5 +83,5 @@ R. C. Reid's review (AIChE J. 18 (1972) 1278) of the handbook by R. C. Wilhoit
 and B. J. Zwolinski, *Handbook of Vapor Pressures and Heats of Vaporization of
 Hydrocarbons and Related Compounds* (Texas A&M Research Foundation, 1971); the
 manuscript cites the handbook (WilhoitZwolinski1971). The other 4 compilation
-entries are Labauf (NIST: "Labbauf"), Greenshields & Rossini, J. Chem. Eng.
+entries are Labbauf (the journal record spells it "Labauf"), Greenshields & Rossini, J. Chem. Eng.
 Data 6 (1961) 261-263.

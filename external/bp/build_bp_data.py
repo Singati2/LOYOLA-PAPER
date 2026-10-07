@@ -17,6 +17,7 @@ Outputs: bp_data.csv (included molecules), bp_provenance.csv (every molecule,
 every determination, rule applied or exclusion reason).
 """
 import csv, html, os, re, statistics, sys
+from decimal import Decimal, ROUND_HALF_UP
 from collections import Counter
 import networkx as nx
 
@@ -117,7 +118,7 @@ def main():
         else:
             reason = "only compilation values" if not prim else f"spread {max(prim)-min(prim):.2f} K > 3 K"
             prov.append([n, name, cid, "", "EXCLUDED", reason, dets]); continue
-        tbc = round(T - 273.15, 1)
+        tbc = float((Decimal(repr(T)) - Decimal('273.15')).quantize(Decimal('0.1'), rounding=ROUND_HALF_UP))   # v40.13: half-up, as in build_nonane_data.py (was float round-half-even)
         data.append([n, name, cid, f"{tbc:.1f}", pairs_s])
         prov.append([n, name, cid, f"{tbc:.1f}", "INCLUDED", rule, dets])
     if any(c > 1 for c in used.values()):

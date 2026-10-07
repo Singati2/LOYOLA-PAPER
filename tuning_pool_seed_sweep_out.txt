@@ -1,0 +1,2 @@
+seed-42 pool (Table S2): nested gain M2/omega = -0.0003
+seeds 0-99: median nested gain M2/omega = +0.0033, positive in 97 of 100 seeds, min -0.0004, max +0.0063

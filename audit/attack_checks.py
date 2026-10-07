@@ -17,7 +17,7 @@ PY = sys.executable
 
 def tracked():
     out = subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True, text=True, check=True).stdout.split("\n")
-    return [p for p in out if p and not p.startswith("formal/")]
+    return [p for p in out if p]   # tracked files only (formal/.lake is untracked); prose_claims_b reads formal/LoyolaFormal/Profiles.lean
 
 
 def edit(tmp, rel, old, new, count=1, binary=False):

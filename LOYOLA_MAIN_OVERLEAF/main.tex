@@ -327,7 +327,8 @@
   therefore not blind to imbalance; what is new is a coordinate
   \emph{linear} in $q_{uv}$ in the exponent, which, unlike
   $\ln(1 - q_{uv}^2)$, is not an affine function of $\ln(d_u d_v)$ and
-  $\ln(d_u + d_v)$ (Lemma~\ref{prop:indep}). To our knowledge, and
+  $\ln(d_u + d_v)$ once a vertex of degree at least $3$ is admitted
+  (Lemma~\ref{prop:indep}, $\Delta \ge 3$). To our knowledge, and
   within the scope of the literature search documented in the
   reproducibility package, no published index couples it
   multiplicatively, with its own parameter, to the Gutman--Milovanovi\'c
@@ -395,9 +396,9 @@
   characterises exactly what the pure-$\gamma$ line can discriminate and
   is in large part a limitation result (tree collisions at every order
   from $13$, from $16$ for $\Delta \le 4$); (ii) the crossing bound
-  (Proposition~\ref{prop:laguerre}) and per-graph identifiability
-  (Proposition~\ref{prop:identrank}), resting on an elementary
-  independence lemma (Lemma~\ref{prop:indep}); (iii) log-convexity with
+  (Proposition~\ref{prop:laguerre}, from Laguerre's rule of signs) and
+  per-graph identifiability (Proposition~\ref{prop:identrank}), the latter
+  resting on an elementary independence lemma (Lemma~\ref{prop:indep}); (iii) log-convexity with
   mean/covariance derivatives (Theorem~\ref{thm:logconvex}, standard),
   closed forms and routine termwise bounds for $\gamma \ge 0$; (iv) the
   degree-pair ceiling, an elementary observation that is realised on the
@@ -866,12 +867,12 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   molecular graphs. It fails from $\Delta = 7$: the single violating set
   of at most four pairs there is $\{(1,7),(2,6),(3,5),(4,4)\}$, whose
   degree sums all equal $8$ (a constant degree sum makes $\ln(i+j)$
-  constant on the set, so $A \le 2$ for any such set with at least three
-  imbalances); a
-  connected graph cannot realise more than one pair with a common degree
-  sum $s$ (each neighbour of a vertex of degree $d$ then has degree
-  $s - d$, so by connectivity only the pair $\{d, s-d\}$ occurs), and no
-  connected graph has this set as its pair set.
+  constant on the set, so $A \le 2$, while the bound equals $3$ as soon as
+  the set has at least four pairs and three imbalances); a connected graph
+  all of whose edges have the same degree sum $s$ realises only one pair
+  (each neighbour of a vertex of degree $d$ then has degree $s - d$, so by
+  connectivity only the pair $\{d, s-d\}$ occurs), hence no connected
+  graph has this set as its pair set.
   For example, the spider with four legs of length three realises the
   pairs $(2,4)$, $(2,2)$ and $(1,2)$, which have only two imbalances
   ($\tfrac13$ and $0$); on it, $\gamma$ is confounded with
@@ -1313,7 +1314,8 @@ Theorem~\ref{thm:ratioplane}(ii) requires). ``Below
 floor'': first order with fewer distinct values than distinct
 edge-degree-pair profiles (the floor for every vertex-degree-based
 index), with (values/profiles) at that order. ``Merges'': first order at
-which two trees with different $q$-histograms get equal values.
+which an index on $\Pi$ gives equal values to two trees with different
+$q$-histograms (not applicable to $R$, which is not on $\Pi$).
 $LO(0,0,\gamma)$: the pure-$\gamma$ points $\gamma = 1, 2$. Orders below
 $7$ not examined; ``---'': not determined.}
 \label{tab:firstfail}
@@ -1380,7 +1382,8 @@ published decane-class values of Barman and Das~\cite{BarmanDas2026HSO}
 decimals, the other three within one unit in the fourth); the protocol
 and this control are detailed in Supplementary Section~S6. Under the
 published desideratum ($SS$ large, $Abr$ small), $LO(0,0,2)$ has a
-structure sensitivity equal to that of the hyper-Zagreb index
+structure sensitivity indistinguishable at three decimals from that of
+the hyper-Zagreb index
 ($0.1257$ against $0.1256$) at a markedly smaller abruptness ($0.274$
 against $0.313$), and the sensitivity-to-abruptness ratios of the
 pure-$\gamma$ points ($0.4579$ and $0.4565$) are comparable to those of
@@ -1391,8 +1394,8 @@ fixed property of the family: along the pure-$\gamma$ line it grows
 with $\gamma$ ($0.031$, $0.062$, $0.126$, $0.319$ at
 $\gamma = 0.5, 1, 2, 5$) while the ratio peaks near $\gamma = 2$ and
 then falls ($0.427$ at $\gamma = 5$); and the parameter-free aggregate
-$IRLA$, which the pure-$\gamma$ points approximate to first order in
-$\gamma$, has a higher ratio ($SS = 0.2343$, $Abr = 0.5066$, ratio
+$IRLA$, to which the pure-$\gamma$ points reduce to first order in
+$\gamma$ ($LO(0,0,\gamma) = m + \tfrac{\gamma}{2}\,IRLA + O(\gamma^2)$), has a higher ratio ($SS = 0.2343$, $Abr = 0.5066$, ratio
 $0.4625$). The favourable sensitivity--abruptness balance is therefore
 a property of linear imbalance weighting rather than of the
 exponential form, and the equality of $SS$ with hyper-Zagreb at
@@ -1461,9 +1464,14 @@ each index and each of the five physicochemical properties of the
 $18$ octane isomers (boiling point $T_B$, enthalpy of formation
 $\Delta H_f$, enthalpy of vaporization $\Delta H_{\mathrm{vap}}$,
 entropy $S$, acentric factor $\omega$; data and units in
-Appendix~\ref{app:data}). Property values are traced
-to the NIST WebBook~\cite{NISTWebBook}, except the acentric factors
-(KDB-derived compilations; NIST does not list them); all $90$
+Appendix~\ref{app:data}). Boiling points, formation enthalpies and (with the exception noted
+below) vaporization enthalpies are traced to the NIST
+WebBook~\cite{NISTWebBook}; the acentric factors come from KDB-derived
+compilations (NIST does not list them); the WebBook lists a gas-phase
+entropy for only five of the isomers, so seven entropies are compared
+with the 1947 API Research Project~44 tables~\cite{APIProject44Circ461}
+or a compiled octane dataset and six could not be traced to a primary
+source (Appendix~\ref{app:quality}); all $90$
 molecule-level values were audited against authoritative sources
 (Supplementary Section~S1, with the molecule-by-molecule discussion).
 Three caveats remain. The $298$\,K vaporization enthalpy of
@@ -1598,7 +1606,7 @@ $90\%$ of folds for every property, and the vaporization-enthalpy gain
 shrinks to about zero: a hybrid control that widens only
 $(\alpha,\beta)$ gives median $\Delta Q^2 = +0.004$ on the octanes
 ($28$ of $50$ seeds) and $-0.002$ on the nonanes ($24$ of $50$), and
-widening all three coordinates gives $-0.011$ and $-0.016$. On the
+widening all three coordinates gives $-0.010$ and $-0.016$. On the
 other properties no advantage is consistent across boxes: under the
 hybrid control the Loyola model is ahead for octane $S$ ($38$ of $50$
 seeds) and nonane $T_B$ ($31$ of $50$), but behind for octane $T_B$,
@@ -1634,13 +1642,13 @@ range. The streams of the two boxes use the same underlying uniform variates sca
 \cmidrule(lr){2-5}\cmidrule(lr){6-10}
 Set, prop. & Edge & GM & LO & $>$ & Edge & GM & LO & LO$_h$ & $>$\\
 \midrule
-oct. $T_B$ & $69\%$ & $0.665$ & $0.730$ & $36$ & $2\%$ & $0.606$ & $0.495$ & $0.543$ & $21$\\
+oct. $T_B$ & $69\%$ & $0.665$ & $0.730$ & $36$ & $2\%$ & $0.606$ & $0.495$ & $0.544$ & $21$\\
 oct. $\Delta H_f$ & $52\%$ & $0.821$ & $0.769$ & $11$ & $0\%$ & $0.820$ & $0.670$ & $0.761$ & $10$\\
 oct. $\Delta H_{\mathrm{vap}}$ & $97\%$ & $0.887$ & $0.957$ & $50$ & $3\%$ & $0.942$ & $0.934$ & $0.946$ & $28$\\
 oct. $S$ & $85\%$ & $0.904$ & $0.891$ & $11$ & $4\%$ & $0.842$ & $0.838$ & $0.867$ & $38$\\
 oct. $\omega$ & $0\%$ & $0.979$ & $0.974$ & $10$ & $0\%$ & $0.979$ & $0.938$ & $0.951$ & $7$\\
 non. $T_B$ & $61\%$ & $0.576$ & $0.601$ & $30$ & $0\%$ & $0.524$ & $0.392$ & $0.577$ & $31$\\
-non. $\Delta H_{\mathrm{vap}}$ & $93\%$ & $0.855$ & $0.895$ & $49$ & $10\%$ & $0.892$ & $0.881$ & $0.889$ & $24$\\
+non. $\Delta H_{\mathrm{vap}}$ & $93\%$ & $0.855$ & $0.895$ & $49$ & $9\%$ & $0.892$ & $0.881$ & $0.889$ & $24$\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1668,7 +1676,9 @@ determinations selected under the protocol's Deviation D1) and standard vaporiza
 enthalpies ($34$ values) from the NIST WebBook~\cite{NISTWebBook}; only $4$ of the $34$ vaporization
 enthalpies are calorimetric determinations (one more is a NIST average)
 and $29$ come from two
-compilations~\cite{LabaufGreenshieldsRossini1961, WilhoitZwolinski1971},
+compilations~\cite{LabaufGreenshieldsRossini1961, WilhoitZwolinski1971}
+(NIST attributes the $25$ handbook values to a 1972 review of that
+handbook, listed as ``Reid, 1972'' in the provenance file),
 so agreement with them measures consistency with the compiled values
 rather than independent experimental validation; within-fold
 baselines are in Table~\ref{tab:external}. The pre-registered verdicts are that the
@@ -1754,7 +1764,12 @@ them). Because the same rule is applied to every molecule, the octane
 boiling points in the pooled set can differ from those of
 Table~\ref{tab:octane-data} by up to $0.5\,^{\circ}$C (for example
 2,4-dimethylhexane, $108.9$ against $109.4\,^{\circ}$C, a documented
-source variation). The included and excluded decanes do not differ detectably in
+source variation). For the same reason, eight of the pooled nonane
+boiling points differ from the replication-set values of
+Section~\ref{sec:external} by $0.1$--$0.9\,^{\circ}$C: the nonane
+protocol took the most recent determination where NIST gives no
+average, whereas this rule takes the median of all non-compilation
+determinations. The included and excluded decanes do not differ detectably in
 branching or imbalance (numbers of tertiary and quaternary carbons and
 of methyl groups, Wiener index, $IRLA$, $LO(0,0,1)$ and $R$; two-sided
 permutation tests, all $p \ge 0.10$), although with $34$ and $41$
@@ -1791,7 +1806,7 @@ which LO beats GM. Seed counts summarise the variability of the random search on
 \toprule
 Test & Base & Class. & $IRLA$ & LO$_1$ & Ridge & GM & LO & $\Delta Q^2$ & $>$\\
 \midrule
-decanes ($n = 34$) & $-0.061$ & $0.176$ & $0.167$ & $0.149$ & $0.860$ & $0.514$ & $0.406$ & $-0.072$ & $15$\\
+decanes ($n = 34$) & $-0.062$ & $0.176$ & $0.167$ & $0.149$ & $0.860$ & $0.514$ & $0.406$ & $-0.072$ & $15$\\
 C6--C10, with $n_C$ ($n = 100$) & $0.938$ & $0.967$ & $0.963$ & $0.963$ & $0.991$ & $0.977$ & $0.977$ & $-0.000$ & $25$\\
 \bottomrule
 \end{tabular}
@@ -1800,7 +1815,7 @@ C6--C10, with $n_C$ ($n = 100$) & $0.938$ & $0.967$ & $0.963$ & $0.963$ & $0.991
 Both pre-registered verdicts are negative: under these protocols,
 freeing $\gamma$ shows no demonstrated advantage for boiling points,
 either on the decane cohort (median $\Delta Q^2 = -0.072$, LO ahead
-in $15$ of $50$ seeds, $95\%$ interval $[-0.156, +0.002]$) or in the
+in $15$ of $50$ seeds, $95\%$ interval $[-0.156, +0.001]$) or in the
 pooled size-adjusted set ($-0.000$, $25$ of $50$, $[-0.003, +0.002]$).
 In the original box of half-width $2$, reported as the pre-registration
 requires, the two tuned models are level on the decanes (medians $0.469$
@@ -1848,9 +1863,8 @@ is affinely independent of the two parent directions for
 $\Delta \ge 3$ (a class-level statement, Remark~\ref{rem:ident});
 $\log LO$ is globally convex; the pure-$\gamma$ line discriminates
 exactly the histogram of edge imbalances and loses degree-pair
-information from tree order $13$ (order $16$ for $\Delta \le 4$); two
-molecular graphs exchange order at most five times along the $\gamma$
-axis; and the bounds of Section~\ref{sec:bounds} extend parent
+information from tree order $13$ (order $16$ for $\Delta \le 4$); two graphs with maximum degree at most $4$ (all alkane
+skeletons) exchange order at most five times along the $\gamma$ axis; and the bounds of Section~\ref{sec:bounds} extend parent
 inequalities to $\gamma \neq 0$. Generic discrimination is inherited
 from the parent, and the imbalance coordinate re-weights degree-pair
 information without adding to it.
@@ -1872,7 +1886,8 @@ tuned models (nested $Q^2$ $0.903$ against medians $0.900$--$0.902$ on
 the nonanes), and ridge regression on all degree-pair counts predicts
 both nonane properties better than every fixed index and than the
 median tuned GM and LO models. Pre-registered tests on
-measured boiling points complement this on larger data: no demonstrated
+measured boiling points complement this with a new cohort and a larger
+pooled set: no demonstrated
 benefit from
 $\gamma$ on the $34$ decanes or the $100$ pooled C6--C10 alkanes
 adjusted for size, with ridge on the degree-pair counts far ahead of
@@ -1891,9 +1906,11 @@ boiling-point protocols were committed there before the corresponding
 models were fitted, and a separate script reproduces the structural
 counts (tree orders up to $17$, the crossing and $GA$ witnesses with the
 exact crossing certificate, the identifiability check) and the auxiliary
-values quoted in the text; companion scripts recount every structural
-count at $32$ significant digits and produce the fractional-exponent
-counts of Section~\ref{sec:discrimination}. The inequalities of
+values quoted in the text; companion scripts recount the distinct-value
+counts of Table~\ref{tab:firstfail} and of Supplementary Table~S4 at
+$32$ significant digits and produce the fractional-exponent and off-plane
+counts of Section~\ref{sec:discrimination} (at $11$ significant digits,
+as throughout). The inequalities of
 Propositions~\ref{thm:upper_Delta} and~\ref{thm:lower_delta}, of
 Corollary~\ref{thm:cs} and Proposition~\ref{thm:ratio_bound}, the
 convexity part of Theorem~\ref{thm:logconvex}, the rank-$4$ statement
@@ -1933,10 +1950,14 @@ Every value in Table~\ref{tab:octane-data} was traced to a source
 \texttt{octane\_property\_provenance\_v35.csv}); the items that remain
 open are collected here so that they can be read in one place.
 \begin{enumerate}[label=(\roman*)]
-\item \emph{Six gas-phase entropies} (4-methylheptane,
-  2,2-dimethylhexane, 3,4-dimethylhexane, 3-ethyl-2-methylpentane,
-  3-ethyl-3-methylpentane, 2,3,3-trimethylpentane) have no $S^{\circ}$(gas)
-  entry in the NIST WebBook. The 1947 API Research Project 44
+\item \emph{Thirteen gas-phase entropies have no $S^{\circ}$(gas) entry
+  in the NIST WebBook.} Seven of them (2,3-, 2,4-, 2,5- and
+  3,3-dimethylhexane, 3-ethylhexane, 2,2,3- and 2,2,4-trimethylpentane)
+  agree, within tolerance or as documented revisions between editions,
+  with the 1947 API Research Project~44 tables or a compiled octane
+  dataset; the remaining six (4-methylheptane, 2,2-dimethylhexane,
+  3,4-dimethylhexane, 3-ethyl-2-methylpentane, 3-ethyl-3-methylpentane,
+  2,3,3-trimethylpentane) could not be matched to any primary source. The 1947 API Research Project 44
   tables~\cite{APIProject44Circ461} list gas-phase entropies for all six
   that differ from the values used by $0.07$--$2.2$\,cal\,mol$^{-1}$\,K$^{-1}$,
   as that edition does for isomers whose later revisions we could
@@ -1982,7 +2003,9 @@ where $HM$ leads $M_1$ by $0.001$ with the values used; the 1947
 substitution of item~(i) reverses that order by $0.004$, a margin
 without meaning at this resolution. None of the items enters the
 pre-registered nonane and boiling-point tests of Sections~\ref{sec:external} and~\ref{sec:bp},
-which use no octane value. Item~(ii) was a transcription error in our
+which use no entropy, vaporization-enthalpy or acentric-factor value of
+Table~\ref{tab:octane-data} (the pooled boiling-point test re-extracts
+the octane boiling points under its own rule). Item~(ii) was a transcription error in our
 earlier data file, corrected here; the remaining items are limitations
 of the compiled octane benchmark rather than of the analysis.
 
@@ -2171,7 +2194,7 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   Lower bound on the KG-Sombor index, \textit{Commun. Comb. Optim.\/}
   \textbf{8} (2023) 751--757.
 
-  \bibitem{LabaufGreenshieldsRossini1961} A. Labauf, J. B. Greenshields,
+  \bibitem{LabaufGreenshieldsRossini1961} A. Labbauf, J. B. Greenshields,
   F. D. Rossini, Heats of formation, combustion, and vaporization of the
   35 nonanes and 75 decanes, \textit{J. Chem. Eng. Data\/} \textbf{6}
   (1961) 261--263.

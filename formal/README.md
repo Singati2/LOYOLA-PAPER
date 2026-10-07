@@ -87,5 +87,5 @@ warnings, 36 `#print axioms` checks all clean.
   dimension claims (only the Δ ≥ 3 spanning statement is proved).
 * The graph layer: no `SimpleGraph`, connectivity, or degree-sum combinatorics; graphs enter
   only through their degree-pair multisets (plus the explicit tree certificates of L10).
-* The other results of the paper (closed forms, `thm:m1_bound`, `thm:R_chi`, `thm:sombor`,
+* The other results of the paper (closed forms, the asymptotics, the ceiling and generic-discrimination propositions, `prop:collision`, `prop:generic`,
   `prop:collision`, `prop:generic`, the empirical sections).

@@ -625,3 +625,48 @@ taken.
 - The full isolated replay of every script (audit/run_all_scripts.py) was
   still running when v40.12 was committed; its committed output follows in
   v40.12.1.
+
+## v40.13 (final Feynman review: six reviewers re-derived every claim; fixes)
+Numbers corrected (all from one cause, double rounding: summaries were
+written at 4 dp and the table generators rounded them again; summaries
+are now written at full precision and the tables regenerated, per-seed
+results identical):
+- Table 5: octane T_B hybrid-control median 0.543 -> 0.544; nonane dHvap
+  wide-box edge share 10% -> 9%.  Section 6.2: octane dHvap wide-box median
+  difference -0.011 -> -0.010.  Table 7: decane base Q2 -0.061 -> -0.062
+  (= 1 - (34/33)^2, as in Table 6).
+  Found by the prose check once the summaries were at full precision:
+  the decane bootstrap interval of Section 6.4 is [-0.156, +0.001], not
+  [-0.156, +0.002] (upper end 0.00148).
+Mathematics/wording: the constant-degree-sum sentence after Proposition 4
+stated a false general lemma (seven octanes realise two pairs with equal
+degree sum); now restricted to graphs all of whose edges have the same
+degree sum.  Crossing bound in the Conclusion scoped to maximum degree 4;
+Lemma 1 hypothesis (Delta >= 3) in the Introduction; contribution (ii)
+attributes the crossing bound to Laguerre's rule; Table 2 "merges" defined
+for indices on the ratio plane; "equal" structure sensitivity ->
+indistinguishable at three decimals; IRLA as the first-order term of the
+pure-gamma points; reproducibility paragraph states the scope of the
+32-digit recount.
+Data/provenance: entropy sourcing stated exactly (NIST for 5 isomers, API
+Project 44 or a compiled dataset for 7, untraceable for 6); five
+provenance rows: three entropies within 0.3 of API-44 reclassified as
+within tolerance (counts now 3/29/40/10/7/1); a reviewer's proposal to
+also reclassify two boiling points was rejected by the counter-check (the
+closest authoritative value, KDB, is 0.05 C away, i.e. at reported
+precision under the stated rule, now written out in S1); Supplementary S4 gives the
+20/5/10 composition of the nonane boiling points; 8.90 attributed to the
+compiled dataset (no API-44 record); S1 mentions the corrected entropy
+transcription; Section 6.4 discloses that eight pooled nonane boiling
+points differ from the replication set by 0.1-0.9 C (different rules) ;
+"Reid, 1972" mapped to the handbook citation; author spelled Labbauf;
+A.1 closing reason corrected (the pooled test does use octane boiling
+points).
+Code: build_bp_data.py converts K to C half-up as the nonane build does
+(no included value changes); build_calorimetric_set.py stops on a missing
+points page and the six missing NIST points pages were archived (rows for
+six C8/C9 skeletons added; the 25 outside C8/C9 and 1 decane are
+unchanged); tuning_pool_seed_sweep.py produces the S2 seed sweep (97 of
+100 seeds, not 96%); stale labels fixed (baselines CSV, formal/README);
+hp_counts.py keeps its runtime out of the committed file; the isolated
+replay snapshots the tree and includes tracked formal/ files.

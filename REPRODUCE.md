@@ -20,6 +20,7 @@ networkx, matplotlib, sympy, mpmath). Lean: `formal/verify.sh` (elan/lake).
 | `python3 audit/check_exploratory_outputs.py` | fractional-point, chi-floor and calorimetric-availability outputs rebuilt in an isolated copy and compared byte-for-byte | seconds |
 | `python3 audit/check_source_identities.py` | archived boiling-point pages: molecular formulas and carbon skeletons match the 154 source records | seconds |
 | `python3 audit/check_mathematics.py` | 50-digit interval certificates of the finite-rank exception set (Delta 6, 7) and of the five-crossing witness, independent of structural_checks.py | seconds |
+| `python3 tuning_pool_seed_sweep.py` | seed sweep behind Supplementary S2 (nested gain of tuning near M2 on omega, seeds 0-99) | seconds |
 | `python3 constancy_test_check.py` | shows that the constancy test is inert: no candidate descriptor of the octane analyses is flagged under the old or the new definition | ~1 min |
 
 `verify_loyola_v35.py` establishes agreement between the manuscript tables, the canonical CSVs and a fresh recomputation from `octane_data.py`; it does not re-derive the octane values from primary sources (those are checked against `octane_property_provenance_v35.csv` by class rules), and a few checks assert previously observed outcomes (sign patterns of dQ2, provenance agreement counts) as regression guards.

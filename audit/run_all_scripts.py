@@ -36,7 +36,7 @@ SCRIPTS = [
     ("external/wide_box_diagnostics.py", True), ("external/bp/bp_tests.py", True), ("external/bp/coverage_bias.py", False),
     ("external/bp/make_bp_table.py", False), ("external/make_box_table.py", False), ("external/make_v37_table.py", False),
     ("structural/structural_checks.py", True), ("structural/hp_counts.py", False), ("structural/fractional_points.py", False),
-    ("structural/chi_floor.py", False), ("constancy_test_check.py", False),
+    ("structural/chi_floor.py", False), ("constancy_test_check.py", False), ("tuning_pool_seed_sweep.py", False),
     ("audit/check_exploratory_outputs.py", False), ("audit/check_source_identities.py", False), ("audit/check_mathematics.py", False),
     ("prose_numbers_check.py", False), ("external/test_regressions.py", False), ("external/test_baselines.py", False),
     ("verify_loyola_v35.py", True), ("manifest.py", False),
@@ -45,7 +45,7 @@ SCRIPTS = [
 
 def tracked():
     out = subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True, text=True, check=True).stdout.split("\n")
-    return [p for p in out if p and not p.startswith("formal/")]
+    return [p for p in out if p]   # tracked files only (formal/.lake is untracked); prose_claims_b reads formal/LoyolaFormal/Profiles.lean
 
 
 def digest(path):
@@ -90,10 +90,18 @@ def run_one(script, files, ref):
 
 def main():
     fast = "--fast" in sys.argv
-    files = tracked(); ref = {p: digest(os.path.join(ROOT, p)) for p in files}
+    files = tracked()
+    # one snapshot of the tracked tree, taken before anything runs, is the source
+    # of every per-script copy and of the reference digests, so edits made to
+    # the working tree while this script runs cannot contaminate the comparison
+    global ROOT
+    base = tempfile.mkdtemp(prefix="loyola_base_"); make_copy(files, base); ROOT = base
+    head = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                          capture_output=True, text=True).stdout.strip()
+    ref = {p: digest(os.path.join(ROOT, p)) for p in files}
     todo = [s for s, slow in SCRIPTS if not (fast and slow)]
-    lines = [f"run_all_scripts: {len(todo)} scripts, each in an isolated copy of the {len(files)} tracked files; "
-             f"comparison: bytes (PDFs by canonical form)"]
+    lines = [f"run_all_scripts at {head}: {len(todo)} scripts, each in an isolated copy of the {len(files)} tracked files "
+             f"snapshotted before the run; comparison: bytes (PDFs by canonical form)"]
     print(lines[0], flush=True)
     bad = 0
     with ThreadPoolExecutor(max_workers=3) as ex:
@@ -106,7 +114,9 @@ def main():
             lines.append(line); print(line, flush=True)
     lines.append(f"RESULT: {'every script exits 0 and reproduces its committed outputs' if bad == 0 else str(bad) + ' PROBLEM(S)'}")
     print(lines[-1])
-    open(os.path.join(ROOT, "audit", "run_all_scripts_out.txt"), "w").write("\n".join(lines) + "\n")
+    repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    open(os.path.join(repo, "audit", "run_all_scripts_out.txt"), "w").write("\n".join(lines) + "\n")
+    shutil.rmtree(base, ignore_errors=True)
     sys.exit(1 if bad else 0)
 
 

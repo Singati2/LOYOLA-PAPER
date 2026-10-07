@@ -67,10 +67,10 @@ def main():
             r = [x for x in out if x[0] == ds and x[1] == prop and x[3] == L]
             g = np.array([float(x[5]) for x in r]); l = np.array([float(x[6]) for x in r])
             h = np.array([float(x[9]) for x in r]) if L == 12 else None
-            summ.append([ds, prop, len(y), L, len(r), f"{np.median(g):.4f}", f"{np.median(l):.4f}",
-                         f"{np.median(l - g):+.4f}", int((l > g).sum()),
-                         f"{np.mean([x[7] for x in r]) / len(y):.3f}", f"{np.mean([x[8] for x in r]) / len(y):.3f}",
-                         f"{np.median(h):.4f}" if h is not None else "", f"{np.median(h - g):+.4f}" if h is not None else "",
+            summ.append([ds, prop, len(y), L, len(r), f"{np.median(g):.10f}", f"{np.median(l):.10f}",   # v40.13: full precision; the table generator rounds once
+                         f"{np.median(l - g):+.10f}", int((l > g).sum()),
+                         f"{np.mean([x[7] for x in r]) / len(y):.10f}", f"{np.mean([x[8] for x in r]) / len(y):.10f}",
+                         f"{np.median(h):.10f}" if h is not None else "", f"{np.median(h - g):+.10f}" if h is not None else "",
                          int((h > g).sum()) if h is not None else ""])
     with open(os.path.join(HERE, "box_sensitivity_summary.csv"), "w", newline="") as f:
         w = csv.writer(f)

@@ -1,3 +1,3 @@
 test,n,median_Q2_GM2,median_Q2_LO2,median_Q2_GM12,median_Q2_LOh,median_dQ2_LOh_GM12,LOh_better_of_50,ci95_lo,ci95_hi,prereg_verdict
-A: decane T_B,34,0.4686,0.4650,0.5137,0.4059,-0.0715,15,-0.1558,+0.0015,no evidence that gamma adds value
-B: pooled C6-C10 T_B (size-adjusted),100,0.9764,0.9800,0.9771,0.9766,-0.0001,25,-0.0026,+0.0019,no evidence that gamma adds value
+A: decane T_B,34,0.4686159287,0.4649986484,0.5137107715,0.4058675810,-0.0715304490,15,-0.1558428696,+0.0014841250,no evidence that gamma adds value
+B: pooled C6-C10 T_B (size-adjusted),100,0.9763759912,0.9799763646,0.9771333669,0.9765586882,-0.0001133864,25,-0.0026358173,+0.0019075534,no evidence that gamma adds value
