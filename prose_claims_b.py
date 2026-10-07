@@ -660,16 +660,16 @@ REGISTRY = []
 _add = REGISTRY.append
 
 # ----- Section 1 Introduction (main) -----
-_add(E("intro_collide_from13", "main", r"tree collisions at every order\s+from \$(?P<v>\d+)\$, from \$16\$",
+_add(E("intro_collide_from13", "main", r"from\s+\$(?P<v>\d+)\$,\s+and",
        "s1_first_below('all', 'qh')", 0, "structural_checks_out.txt S1: first n with qhist < profiles (all trees)"))  # 1 match
-_add(E("intro_collide_from13_b", "main", r"tree collisions at every order\s+from \$(?P<v>\d+)\$, from \$16\$",
+_add(E("intro_collide_from13_b", "main", r"from\s+\$(?P<v>\d+)\$,\s+and",
        "s1_first_below('all', 'qh')", 0, "S1 first qhist<profiles, all"))  # 1
-_add(E("intro_collide_from16_mol", "main", r"tree collisions at every order\s+from \$13\$, from \$(?P<v>\d+)\$ for \$\\Delta \\le 4\$",
+_add(E("intro_collide_from16_mol", "main", r"from\s+\$(?P<v>\d+)\$\s+for",
        "s1_first_below('mol', 'qh')", 0, "S1 first qhist<profiles, mol"))  # 1
-_add(E("intro_n_octanes", "main", r"\$(?P<v>\d+)\$ octanes, \$35\$ nonanes", "oct_n()", 0, "octane_data.OCTANES"))  # 1
-_add(E("intro_n_nonanes", "main", r"\$18\$ octanes, \$(?P<v>\d+)\$ nonanes", "nonane_count('T_B_C')", 0, "external/nonane_data.csv rows with T_B"))  # 1
-_add(E("intro_n_decanes", "main", r"\$(?P<v>\d+)\$ decanes with usable measured boiling", "bp_count(10)", 0, "external/bp/bp_data.csv n_C=10"))  # 1
-_add(E("intro_n_pooled", "main", r"points, and \$(?P<v>\d+)\$ alkanes C6--C10", "bp_count()", 0, "external/bp/bp_data.csv all rows"))  # 1
+_add(E("intro_n_octanes", "main", r"\(\$(?P<v>\d+)\$ octanes,\s+\$35\$ nonanes", "oct_n()", 0, "octane_data.OCTANES"))  # 1
+_add(E("intro_n_nonanes", "main", r"\$18\$ octanes,\s+\$(?P<v>\d+)\$ nonanes", "nonane_count('T_B_C')", 0, "external/nonane_data.csv rows with T_B"))  # 1
+_add(E("intro_n_decanes", "main", r"\$(?P<v>\d+)\$ decanes, \$100\$ pooled", "bp_count(10)", 0, "external/bp/bp_data.csv n_C=10"))  # 1
+_add(E("intro_n_pooled", "main", r"decanes,\s+\$(?P<v>\d+)\$\s+pooled", "bp_count()", 0, "external/bp/bp_data.csv all rows"))  # 1
 
 # ----- Section 3 Parameter geometry (main) -----
 _add(E("rp_n13", "main", r"for every \$n \\ge (?P<v>\d+)\$ \(and every \$n \\ge 16\$ among trees", "s1_first_below('all', 'qh')", 0, "S1"))  # 1
@@ -689,16 +689,15 @@ for _k, (_pair, _slot) in enumerate([((1, 4), 0), ((2, 2), 1), ((2, 4), 2)]):
     _add(E("rp_mol16_B_%d%d" % _pair, "main", _M16B % tuple(_f), "mol16_pair()[1][%r]" % (_pair,), 0,
            "enumeration: order-16 Delta<=4 collision (profile containing (2,2))"))  # 1 each
 _add(E("rp_proof_d4", "main", r"\(2,4\)\^\{4\}\\\}\$, has \$d = (?P<v>\d+)\$", "common_leaf_degree(*mol16_pair())", 0, "smallest common leaf-neighbour degree of the order-16 pair"))  # 1
-_add(E("rp_enum_from7", "main", r"By exhaustive enumeration \(orders \$(?P<v>\d+)\$--\$17\$", "min(s1_orders('all'))", 0, "S1 orders"))  # 1
-_add(E("rp_enum_to17", "main", r"\(orders \$7\$--\$(?P<v>\d+)\$; orders", "max(s1_orders('all'))", 0, "S1 orders"))  # 1
+_add(E("rp_enum_from7", "main", r"orders\s+\$(?P<v>\d+)\$\-\-\$17\$\s+\(orders", "min(s1_orders('all'))", 0, "S1 orders"))  # 1
+_add(E("rp_enum_to17", "main", r"orders\s+\$7\$\-\-\$(?P<v>\d+)\$\s+\(orders", "max(s1_orders('all'))", 0, "S1 orders"))  # 1
 _add(E("rp_below7", "main", r"orders\s+below \$(?P<v>\d+)\$ are trivial", "min(s1_orders('all'))", 0, "S1 orders"))  # 1
-_add(E("rp_coincide_12", "main", r"profiles for all trees of order at most \$(?P<v>\d+)\$ and for trees with", "s1_last_eq('all')", 0, "S1: last n with qhist==profiles (all)"))  # 1
-_add(E("rp_coincide_15", "main", r"\$\\Delta \\le 4\$ of order at most \$(?P<v>\d+)\$, so the pure", "s1_last_eq('mol')", 0, "S1: last n with qhist==profiles (mol)"))  # 1
-_add(E("rp_order10", "main", r"the trees of order \$(?P<v>\d+)\$ \(Section~\\ref\{sec:degeneracy\}\)", "mod_order_with_N(106)", 0, "multi_order_degeneracy.csv: order whose all-trees count is 106"))  # 1
-_add(E("rp_orders13", "main", r"line: at orders \$(?P<v>\d+)\$--\$17\$, the orders", "s1_first_below('all', 'qh')", 0, "S1"))  # 1
-_add(E("rp_orders17", "main", r"line: at orders \$13\$--\$(?P<v>\d+)\$, the orders", "max(s1_orders('all'))", 0, "S1"))  # 1
-_add(E("rp_R_floor14", "main", r"itself leaves the floor only at order \$(?P<v>\d+)\$\)", "s1_first_below('all', 'R')", 0, "S1: first n with R < profiles"))  # 1
-_add(E("rp_GA_merge17", "main", r"among trees first at order \$(?P<v>\d+)\$ \(exact", "s1_first_merge()", 0, "S1 GA_qmerges column"))  # 1
+_add(E("rp_coincide_12", "main", r"most\s+\$(?P<v>\d+)\$\.\s+The", "s1_last_eq('all')", 0, "S1: last n with qhist==profiles (all)"))  # 1
+_add(E("rp_coincide_15", "main", r"most\s+\$(?P<v>\d+)\$\.\s+So", "s1_last_eq('mol')", 0, "S1: last n with qhist==profiles (mol)"))  # 1
+_add(E("rp_order10", "main", r"the trees of order \$(?P<v>\d+)\$\s+\(Section~\\ref\{sec:degeneracy\}\)", "mod_order_with_N(106)", 0, "multi_order_degeneracy.csv: order whose all-trees count is 106"))  # 1
+_add(E("rp_orders13", "main", r"At orders \$(?P<v>\d+)\$--\$17\$ generic points", "s1_first_below('all', 'qh')", 0, "S1"))  # 1
+_add(E("rp_orders17", "main", r"At orders \$13\$--\$(?P<v>\d+)\$ generic points", "max(s1_orders('all'))", 0, "S1"))  # 1
+_add(E("rp_GA_merge17", "main", r"order\s+\$(?P<v>\d+)\$\.\s+A", "s1_first_merge()", 0, "S1 GA_qmerges column"))  # 1
 _GA_A = r"\\\{\(1,5\)\^\{%s\}, \(2,2\)\^\{%s\}, \(5,5\)\^\{%s\}, \(2,5\), \(1,2\)\\\}"
 _GA_B = r"\\\{\(4,5\)\^\{%s\}, \(1,4\)\^\{%s\}, \(1,5\)\^\{%s\}, \(2,5\), \(1,2\)\\\}"
 for _pair, _slot in [((1, 5), 0), ((2, 2), 1), ((5, 5), 2)]:
@@ -709,19 +708,19 @@ for _pair, _slot in [((4, 5), 0), ((1, 4), 1), ((1, 5), 2)]:
     _f = ["3", "5", "6"]; _f[_slot] = r"(?P<v>\d+)"
     _add(E("rp_ga17_B_%d%d" % _pair, "main", _GA_B % tuple(_f), "ga17_pair()[1][%r]" % (_pair,), 0, "enumeration: order-17 GA merge (other profile)"))  # 1 each
 # crossings
-_add(E("cr_order12", "main", r"two trees of order \$(?P<v>\d+)\$ with\s+maximum degree", "s3()['order']", 0, "S3 header"))  # 1
+_add(E("cr_order12", "main", r"order\s+\$(?P<v>\d+)\$\s+with", "s3()['order']", 0, "S3 header"))  # 1
 _add(E("cr_maxdeg6", "main", r"maximum degree \$(?P<v>\d+)\$ and eight distinct imbalances", "s3()['maxdeg']", 0, "S3 maxdeg"))  # 1
-_add(E("cr_eight_imb", "main", r"and (?P<v>[a-z]+) distinct imbalances, with", "word(s3()['nimb'])", 0, "S3 distinct imbalances"))  # 1
-_add(E("cr_V5", "main", r"distinct imbalances, with \$V = (?P<v>\d+)\$, cross", "s3()['V']", 0, "S3 V"))  # 1
-_add(E("cr_five_times", "main", r", cross\s+(?P<v>[a-z]+) times at \$\(\\alpha,\\beta\) = \(-1,0\)\$", "word(s3()['cross'])", 0, "S3 crossings"))  # 1
+_add(E("cr_eight_imb", "main", r"\$6\$\s+and\s+(?P<v>[a-z]+)\s+distinct\s+imbalances", "word(s3()['nimb'])", 0, "S3 distinct imbalances"))  # 1
+_add(E("cr_V5", "main", r"\$V\s+=\s+(?P<v>\d+)\$\s+and", "s3()['V']", 0, "S3 V"))  # 1
+_add(E("cr_five_times", "main", r"and\s+cross\s+(?P<v>[a-z]+)\s+times\s+at", "word(s3()['cross'])", 0, "S3 crossings"))  # 1
 _add(E("cr_alpha", "main", r"cross\s+five times at \$\(\\alpha,\\beta\) = \((?P<v>-?\d+),0\)\$", "s3()['alpha']", 0, "S3 header (alpha,beta)"))  # 1
-_add(E("cr_beta", "main", r"five times at \$\(\\alpha,\\beta\) = \(-1,(?P<v>-?\d+)\)\$ \(near", "s3()['beta']", 0, "S3 header (alpha,beta)"))  # 1
+_add(E("cr_beta", "main", r"=\s+\(\-1,(?P<v>-?\d+)\)\$,\s+near", "s3()['beta']", 0, "S3 header (alpha,beta)"))  # 1
 # identifiability
 _add(E("id_delta6", "main", r"admissible pairs with\s+\$\\Delta \\le (?P<v>\d+)\$ \(by exhaustive enumeration", "s4_max_ok()", 0, "S4 Delta=6: 0 violations"))  # 1
-_add(E("id_delta7", "main", r"It fails from \$\\Delta = (?P<v>\d+)\$: the single violating set", "s4_first_fail()", 0, "S4 Delta=7: 1 violation"))  # 1
+_add(E("id_delta7", "main", r"\$\\Delta\s+=\s+(?P<v>\d+)\$\.\s+The", "s4_first_fail()", 0, "S4 Delta=7: 1 violation"))  # 1
 _add(E("id_fail_set", "main", r"of at most four pairs there is \$\\\{(?P<v>[0-9(),]+)\\\}\$, whose", "s4_fail_set_str()", 0, "S4 Delta=7 violating set"))  # 1
 _add(E("id_degree_sum8", "main", r"whose\s+degree sums all equal \$(?P<v>\d+)\$", "(lambda s: s.pop() if len(s) == 1 else None)({i + j for i, j in s4_fail_set()})", 0, "sum of each pair in the S4 set"))  # 1
-_add(E("id_nine_pairs", "main", r"on the octanes this union contains (?P<v>nine) of the ten\s+admissible pairs", "word(len(oct_union_pairs()))", 0, "octane_data: union of realised degree pairs"))  # 1
+_add(E("id_nine_pairs", "main", r"union\s+contains\s+(?P<v>nine)\s+of\s+the", "word(len(oct_union_pairs()))", 0, "octane_data: union of realised degree pairs"))  # 1
 _add(E("id_affdim3", "main", r"admissible pairs and its\s+affine dimension is \$(?P<v>\d+)\$, so", "oct_affine_dim()", 0, "rank of z_ij differences over the octane pair union"))  # 1
 
 # ----- Section 5 Discrimination (main) -----
@@ -731,24 +730,21 @@ _add(E("ceil_pair1", "main", r"pairs \$\\\{\$(?P<v>[^$]+)\$\\\}\$ and\s+\$\\\{\$
 _add(E("ceil_pair2", "main", r"and\s+\$\\\{\$(?P<v>[^$]+)\$\\\}\$ share their", "oct_collision_str(1)", 0, "octane_data collision groups"))  # 1
 _add(E("ceil_proof_18", "main", r"The counts for the \$(?P<v>\d+)\$ octane\s+isomers are computed", "oct_n()", 0, "octane_data"))  # 1
 _add(E("tabcoll_18", "main", r"collision pairs among the \$(?P<v>\d+)\$ octane", "oct_n()", 0, "octane_data (table caption)"))  # 1
-_add(E("deg_106", "main", r"On the\s+\$(?P<v>\d+)\$ non-isomorphic trees of order \$10\$, with", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1
-_add(E("deg_order10", "main", r"non-isomorphic trees of order \$(?P<v>\d+)\$, with the distinct-value", "mod_order_with_N(106)", 0, "multi_order_degeneracy.csv"))  # 1
-_add(E("deg_N106", "main", r"distinct values among \$N = (?P<v>\d+)\$ trees;", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1
-_add(E("deg_255", "main", r"attain degeneracy \$(?P<v>[\d.]+)\\%\$ \(\$79\$ distinct values\), tied", "pct(mod(10,'all_trees')['LO001'], mod(10,'all_trees')['N_trees'])", 0.05, "100(1-79/106)"))  # 1
-_add(E("deg_79", "main", r"attain degeneracy \$25\.5\\%\$ \(\$(?P<v>\d+)\$ distinct values\), tied", "mod(10, 'all_trees')['LO001']", 0, "multi_order_degeneracy.csv LO001"))  # 1
-_add(E("deg_106b", "main", r"since the \$(?P<v>\d+)\$ trees realise only \$79\$ distinct\s+edge", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1
-_add(E("deg_79b", "main", r"trees realise only \$(?P<v>\d+)\$ distinct\s+edge-degree-pair count vectors, \$25", "mod(10, 'all_trees')['distinct_BID_profiles']", 0, "multi_order_degeneracy.csv profiles"))  # 1
-_add(E("deg_255b", "main", r"count vectors, \$(?P<v>[\d.]+)\\%\$ is the minimum attainable", "pct(mod(10,'all_trees')['distinct_BID_profiles'], mod(10,'all_trees')['N_trees'])", 0.05, "floor percentage"))  # 1
-_add(E("deg_M1_83", "main", r"while \$M_1\$ \(\$(?P<v>[\d.]+)\\%\$\)", "pct(mod(10,'all_trees')['M1'], mod(10,'all_trees')['N_trees'])", 0.05, "100(1-18/106)"))  # 1
-_add(E("deg_M2_67", "main", r"and \$M_2\$ \(\$(?P<v>[\d.]+)\\%\$\) are the most degenerate", "pct(mod(10,'all_trees')['M2'], mod(10,'all_trees')['N_trees'])", 0.05, "100(1-35/106)"))  # 1
-_add(E("deg_orders7", "main", r"orders \$(?P<v>\d+)\$ through \$12\$ and for their molecular", "min(mod_orders())", 0, "multi_order_degeneracy.csv"))  # 1
-_add(E("deg_orders12", "main", r"orders \$7\$ through \$(?P<v>\d+)\$ and for their molecular", "max(mod_orders())", 0, "multi_order_degeneracy.csv"))  # 1
-_add(E("deg_chi_order10", "main", r"\\chi\$ falls off the floor from order \$(?P<v>\d+)\$, with", "chi_first_below()", 0, "chi_floor_out.txt"))  # 1
-_add(E("deg_chi_77", "main", r"with\s+\$(?P<v>\d+)\$ values against \$79\$ profiles\), so", "chi_floor(10)[1]", 0, "chi_floor_out.txt n=10"))  # 1
-_add(E("deg_chi_79", "main", r"\$77\$ values against \$(?P<v>\d+)\$ profiles\), so", "chi_floor(10)[0]", 0, "chi_floor_out.txt n=10"))  # 1
+_add(E("deg_106", "main", r"\$N\s+=\s+(?P<v>\d+)\$\s+trees", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1
+_add(E("deg_order10", "main", r"of\s+order\s+\$(?P<v>\d+)\$\s+the\s+pure\-\$\\gamma\$", "mod_order_with_N(106)", 0, "multi_order_degeneracy.csv"))  # 1
+_add(E("deg_N106", "main", r"the\s+\$(?P<v>\d+)\$\s+trees", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1
+_add(E("deg_79", "main", r"attain \$25\.5\\%\$\s+\(\$(?P<v>\d+)\$ distinct values\), tied", "mod(10, 'all_trees')['LO001']", 0, "multi_order_degeneracy.csv LO001"))  # 1
+_add(E("deg_106b", "main", r"The\s+\$(?P<v>\d+)\$\s+trees", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1
+_add(E("deg_79b", "main", r"trees\s+realise\s+only\s+\$(?P<v>\d+)\$\s+distinct\s+edge\-degree\-pair\s+count", "mod(10, 'all_trees')['distinct_BID_profiles']", 0, "multi_order_degeneracy.csv profiles"))  # 1
+_add(E("deg_M2_67", "main", r"\$M_2\$\s+\(\$(?P<v>[\d.]+)\\%\$\)\s+are", "pct(mod(10,'all_trees')['M2'], mod(10,'all_trees')['N_trees'])", 0.05, "100(1-35/106)"))  # 1
+_add(E("deg_orders7", "main", r"For orders \$(?P<v>\d+)\$ through \$12\$, on all trees", "min(mod_orders())", 0, "multi_order_degeneracy.csv"))  # 1
+_add(E("deg_orders12", "main", r"For orders \$7\$ through \$(?P<v>\d+)\$, on all trees", "max(mod_orders())", 0, "multi_order_degeneracy.csv"))  # 1
+_add(E("deg_chi_order10", "main", r"order\s+\$(?P<v>\d+)\$,\s+with", "chi_first_below()", 0, "chi_floor_out.txt"))  # 1
+_add(E("deg_chi_77", "main", r"with\s+\$(?P<v>[+-]?[\d.]+)\$\s+values", "chi_floor(10)[1]", 0, "chi_floor_out.txt n=10"))  # 1
+_add(E("deg_chi_79", "main", r"against\s+\$(?P<v>\d+)\$\s+profiles\.", "chi_floor(10)[0]", 0, "chi_floor_out.txt n=10"))  # 1
 _add(E("deg_upto12", "main", r"profiles up to\s+order \$(?P<v>\d+)\$ \(order \$15\$ for", "s1_last_eq('all')", 0, "S1"))  # 1
-_add(E("deg_upto15", "main", r"\(order \$(?P<v>\d+)\$ for \$\\Delta \\le 4\$\) and not beyond", "s1_last_eq('mol')", 0, "S1 mol"))  # 1
-_add(E("deg_order13", "main", r"Among the\s+trees of order \$(?P<v>\d+)\$ the profiles", "s1_first_below('all', 'qh')", 0, "S1"))  # 1
+_add(E("deg_upto15", "main", r"\(order \$(?P<v>\d+)\$ for \$\\Delta \\le 4\$\)\s+and not beyond", "s1_last_eq('mol')", 0, "S1 mol"))  # 1
+_add(E("deg_order13", "main", r"At\s+order\s+\$(?P<v>\d+)\$\s+the\s+profiles", "s1_first_below('all', 'qh')", 0, "S1"))  # 1
 
 
 def _profile_entries(file_, prefix):
@@ -779,13 +775,13 @@ def _profile_entries(file_, prefix):
 
 
 REGISTRY.extend(_profile_entries("main", "deg13"))  # 16 entries, 1 match each
-_add(E("deg_first_14", "main", r"first failures; at order \$(?P<v>\d+)\$,\s+where \$R\$ falls", "s1_first_below('all', 'R')", 0, "S1"))  # 1
-_add(E("deg_1090", "main", r"the pure-\$\\gamma\$ points give \$(?P<v>\d+)\$\s+values, and \$R\$ still", "s1(14, 'all')['LO1']", 0, "S1 n=14 LO(0,0,1)"))  # 1
-_add(E("deg_R_order13", "main", r"\$R\$ still attains the floor at order \$(?P<v>\d+)\$ \(\$570\$ values\)", "s1_first_below('all', 'R') - 1", 0, "S1: order before R's first failure"))  # 1
-_add(E("deg_R_570", "main", r"still attains the floor at order \$13\$ \(\$(?P<v>\d+)\$ values\)", "s1(13, 'all')['R']", 0, "S1 n=13 R"))  # 1
+_add(E("deg_first_14", "main", r"order\s+\$(?P<v>\d+)\$,\s+where", "s1_first_below('all', 'R')", 0, "S1"))  # 1
+_add(E("deg_1090", "main", r"ure\-\$\\gamma\$\ points\ give\ \$(?P<v>[+-]?[\d.]+)\$\ values\.", "s1(14, 'all')['LO1']", 0, "S1 n=14 LO(0,0,1)"))  # 1
+_add(E("deg_R_order13", "main", r"\$R\$ still\s+attains the floor at order \$(?P<v>\d+)\$ \(\$570\$ values\)", "s1_first_below('all', 'R') - 1", 0, "S1: order before R's first failure"))  # 1
+_add(E("deg_R_570", "main", r"\$13\$\s+\(\$(?P<v>[+-]?[\d.]+)\$\s+values\)", "s1(13, 'all')['R']", 0, "S1 n=13 R"))  # 1
 # Table 2 caption and cells
-_add(E("ff_cap_11", "main", r"counted as distinct at \$(?P<v>\d+)\$ significant digits\)\. ``Below", "sc_sigdigits()", 0, "structural_checks.py key() format"))  # 1
-_add(E("ff_cap_below7", "main", r"Orders below\s+\$(?P<v>\d+)\$ not examined", "min(s1_orders('all'))", 0, "S1"))  # 1
+_add(E("ff_cap_11", "main", r"at\s+\$(?P<v>\d+)\$\s+significant", "sc_sigdigits()", 0, "structural_checks.py key() format"))  # 1
+_add(E("ff_cap_below7", "main", r"below\s+\$(?P<v>\d+)\$\s+were", "min(s1_orders('all'))", 0, "S1"))  # 1
 _add(E("ff_LO_all_n", "main", r"\\gamma\)\$ & \$(?P<v>\d+)\$ \(\$566/570\$\) & never", "s1_first_below('all', 'LO1')", 0, "S1"))  # 1
 _add(E("ff_LO_all_v", "main", r"\\gamma\)\$ & \$13\$ \(\$(?P<v>\d+)/570\$\) & never", "s1(13, 'all')['LO1']", 0, "S1"))  # 1
 _add(E("ff_LO_all_p", "main", r"\\gamma\)\$ & \$13\$ \(\$566/(?P<v>\d+)\$\) & never", "s1(13, 'all')['prof']", 0, "S1"))  # 1
@@ -807,43 +803,43 @@ _add(E("ff_fn_upto16", "main", r"order up to \$(?P<v>\d+)\$, the largest examine
 _add(E("ff_fn_below17", "main", r"merges no \$q\$-histograms below order \$(?P<v>\d+)\$, so", "s1_first_merge()", 0, "S1"))  # 1
 _add(E("ff_fn_maxdeg5", "main", r"has maximum degree \$(?P<v>\d+)\$\.", "ga17_maxdeg()", 0, "max degree in the order-17 GA witness profiles"))  # 1
 # off the ratio plane
-_add(E("off_order16", "main", r"on all trees of order \$(?P<v>\d+)\$\s+\(\$4069\$ profiles\)", "max(frac_orders())", 0, "fractional_points_out.txt"))  # 1
+_add(E("off_order16", "main", r"order\s+\$(?P<v>\d+)\$\s+\(\$4069\$", "max(frac_orders())", 0, "fractional_points_out.txt"))  # 1
 _add(E("off_4069_prof", "main", r"\s+\(\$(?P<v>\d+)\$ profiles\), \$LO\(0,\\tfrac12,0\)\$", "frac_profiles(16)", 0, "fractional_points_out.txt n=16"))  # 1
-_add(E("off_3475", "main", r"take only\s+\$(?P<v>\d+)\$ and \$3476\$ distinct values", "frac_count(16, 0, 0.5, 0)", 0, "fractional_points_out.txt"))  # 1
-_add(E("off_3476", "main", r"take only\s+\$3475\$ and \$(?P<v>\d+)\$ distinct values", "frac_count(16, 0, 1/3, 0)", 0, "fractional_points_out.txt"))  # 1
-_add(E("off_4069_sep", "main", r"\$LO\(0,\\tfrac13,1\)\$ separate all \$(?P<v>\d+)\$ profiles; likewise",
+_add(E("off_3475", "main", r"only\ \$(?P<v>[+-]?[\d.]+)\$\ and\ \$3476\$\ distinct\ valu", "frac_count(16, 0, 0.5, 0)", 0, "fractional_points_out.txt"))  # 1
+_add(E("off_3476", "main", r"and\s+\$(?P<v>[+-]?[\d.]+)\$\s+distinct", "frac_count(16, 0, 1/3, 0)", 0, "fractional_points_out.txt"))  # 1
+_add(E("off_4069_sep", "main", r"all\s+\$(?P<v>\d+)\$\.\s+\$LO\(\\tfrac12,0,\\cdot\)\$",
        "frac_count(16, 0, 0.5, 1) if frac_count(16, 0, 0.5, 1) == frac_count(16, 0, 1/3, 1) == frac_profiles(16) else None", 0, "fractional_points_out.txt"))  # 1
-_add(E("off_3940", "main", r"rises from \$(?P<v>\d+)\$ to \$4067\$", "frac_count(16, 0.5, 0, 0)", 0, "fractional_points_out.txt"))  # 1
-_add(E("off_4067", "main", r"rises from \$3940\$ to \$(?P<v>\d+)\$", "frac_count(16, 0.5, 0, 1)", 0, "fractional_points_out.txt"))  # 1
-_add(E("off_4007", "main", r"\$LO\(-\\tfrac12,0,\\cdot\)\$ from \$(?P<v>\d+)\$ to \$4068\$", "frac_count(16, -0.5, 0, 0)", 0, "fractional_points_out.txt"))  # 1
-_add(E("off_4068", "main", r"from \$4007\$ to \$(?P<v>\d+)\$ when", "frac_count(16, -0.5, 0, 1)", 0, "fractional_points_out.txt"))  # 1
-_add(E("off_3996", "main", r"are unaffected \(\$(?P<v>\d+)\$ in\s+both cases\)", "frac_ratio_plane_count(16)", 0, "fractional_points_out.txt (0.5,-1) and (-0.5,1), both gammas"))  # 1
-_add(E("off_generic_4069", "main", r"\$LO\(0\.3,0\.2,0\)\$ already separate all\s+\$(?P<v>\d+)\$ profiles", "distinct_count(16, 0.3, 0.2, 0)", 0, "enumeration of order-16 trees, 11 significant digits"))  # 1
-_add(E("off_orders12", "main", r"enumeration for orders \$(?P<v>\d+)\$--\$16\$ rather than proved", "min(frac_orders())", 0, "fractional_points_out.txt"))  # 1
-_add(E("off_orders16", "main", r"enumeration for orders \$12\$--\$(?P<v>\d+)\$ rather than proved", "max(frac_orders())", 0, "fractional_points_out.txt"))  # 1
+_add(E("off_3940", "main", r"from\ \$(?P<v>[+-]?[\d.]+)\$\ to\ \$4067\$\ and\ the\ Randi\\", "frac_count(16, 0.5, 0, 0)", 0, "fractional_points_out.txt"))  # 1
+_add(E("off_4067", "main", r"to\s+\$(?P<v>[+-]?[\d.]+)\$\s+and", "frac_count(16, 0.5, 0, 1)", 0, "fractional_points_out.txt"))  # 1
+_add(E("off_4007", "main", r"from\ \$(?P<v>[+-]?[\d.]+)\$\ to\ \$4068\$\ as\ \$\\gamma\$\ go", "frac_count(16, -0.5, 0, 0)", 0, "fractional_points_out.txt"))  # 1
+_add(E("off_4068", "main", r"\$4007\$\s+to\s+\$(?P<v>[+-]?[\d.]+)\$\s+as\s+\$\\gamma\$", "frac_count(16, -0.5, 0, 1)", 0, "fractional_points_out.txt"))  # 1
+_add(E("off_3996", "main", r"unaffected\s+\(\$(?P<v>\d+)\$\s+in", "frac_ratio_plane_count(16)", 0, "fractional_points_out.txt (0.5,-1) and (-0.5,1), both gammas"))  # 1
+_add(E("off_generic_4069", "main", r"all\s+\$(?P<v>\d+)\$\s+profiles", "distinct_count(16, 0.3, 0.2, 0)", 0, "enumeration of order-16 trees, 11 significant digits"))  # 1
+_add(E("off_orders12", "main", r"orders\s+\$(?P<v>\d+)\$\-\-\$16\$\s+but", "min(frac_orders())", 0, "fractional_points_out.txt"))  # 1
+_add(E("off_orders16", "main", r"orders\s+\$12\$\-\-\$(?P<v>\d+)\$\s+but", "max(frac_orders())", 0, "fractional_points_out.txt"))  # 1
 # structure sensitivity (main)
 _add(E("ss_75", "main", r"published protocol on the \$(?P<v>\d+)\$ decane isomer", "mod(10, 'molecular')['N_trees']", 0, "multi_order_degeneracy.csv n=10 molecular"))  # 1
-_add(E("ss_eleven", "main", r"\((?P<v>[a-z]+) of fourteen \$SS\$/\$Abr\$ values", "word(control_count('exact_at_4dp'))", 0, "fgd_published_control.csv"))  # 1
-_add(E("ss_fourteen", "main", r"\(eleven of (?P<v>[a-z]+) \$SS\$/\$Abr\$ values", "word(control_count())", 0, "fgd_published_control.csv rows"))  # 1
-_add(E("ss_three", "main", r"decimals, the other (?P<v>[a-z]+) within one unit in the fourth\)", "word(control_count('within_1_unit_4th_dp'))", 0, "fgd_published_control.csv"))  # 1
+_add(E("ss_eleven", "main", r"Das\~\\cite\{BarmanDas2026HSO\},\s+with\s+(?P<v>[a-z]+)\s+of\s+fourteen", "word(control_count('exact_at_4dp'))", 0, "fgd_published_control.csv"))  # 1
+_add(E("ss_fourteen", "main", r"eleven\s+of\s+(?P<v>[a-z]+)\s+\$SS\$/\$Abr\$\s+values", "word(control_count())", 0, "fgd_published_control.csv rows"))  # 1
+_add(E("ss_three", "main", r"the\s+other\s+(?P<v>[a-z]+)\s+agrees\s+within", "word(control_count('within_1_unit_4th_dp'))", 0, "fgd_published_control.csv"))  # 1
 
 
 def _ss_common(file_, prefix):
     return [
         E(prefix + "_LO2_SS", file_, r"\(\$(?P<v>[\d.]+)\$ against \$0\.1256\$\)", "fgd('LO(0,0,2)')[0]", 0.00005, "fgd_structure_sensitivity_decanes.csv"),
         E(prefix + "_HM_SS", file_, r"\(\$0\.1257\$ against \$(?P<v>[\d.]+)\$\)", "fgd('HM')[0]", 0.00005, "fgd_structure_sensitivity_decanes.csv"),
-        E(prefix + "_LO2_Abr", file_, r"abruptness \(\$(?P<v>[\d.]+)\$\s+against \$0\.313\$\)", "fgd('LO(0,0,2)')[1]", 0.0005, "fgd CSV"),
-        E(prefix + "_HM_Abr", file_, r"abruptness \(\$0\.274\$\s+against \$(?P<v>[\d.]+)\$\)", "fgd('HM')[1]", 0.0005, "fgd CSV"),
-        E(prefix + "_LO2_ratio", file_, r"points \(\$(?P<v>[\d.]+)\$ and \$0\.4565\$\)", "fgd('LO(0,0,2)')[2]", 0.00005, "fgd CSV"),
-        E(prefix + "_LO1_ratio", file_, r"points \(\$0\.4579\$ and \$(?P<v>[\d.]+)\$\)", "fgd('LO(0,0,1)')[2]", 0.00005, "fgd CSV"),
-        E(prefix + "_range_lo", file_, r"\$GA\$ and \$R\$ \(\$(?P<v>[\d.]+)\$--\$0\.451\$", "min(fgd(k)[2] for k in ('H/2', 'GA', 'R'))", 0.0005, "fgd CSV ratios of H/2, GA, R"),
-        E(prefix + "_range_hi", file_, r"\$GA\$ and \$R\$ \(\$0\.448\$--\$(?P<v>[\d.]+)\$", "max(fgd(k)[2] for k in ('H/2', 'GA', 'R'))", 0.0005, "fgd CSV ratios of H/2, GA, R"),
+        E(prefix + "_LO2_Abr", file_, r"abruptness(?: is markedly smaller)? \(\$(?P<v>[\d.]+)\$\s+against \$0\.313\$\)", "fgd('LO(0,0,2)')[1]", 0.0005, "fgd CSV"),
+        E(prefix + "_HM_Abr", file_, r"abruptness(?: is markedly smaller)? \(\$0\.274\$\s+against \$(?P<v>[\d.]+)\$\)", "fgd('HM')[1]", 0.0005, "fgd CSV"),
+        E(prefix + "_LO2_ratio", file_, r"points\s+\(\$(?P<v>[\d.]+)\$ and \$0\.4565\$\)", "fgd('LO(0,0,2)')[2]", 0.00005, "fgd CSV"),
+        E(prefix + "_LO1_ratio", file_, r"points\s+\(\$0\.4579\$ and \$(?P<v>[\d.]+)\$\)", "fgd('LO(0,0,1)')[2]", 0.00005, "fgd CSV"),
+        E(prefix + "_range_lo", file_, r"\$GA\$ and\s+\$R\$ \(\$(?P<v>[\d.]+)\$--\$0\.451\$", "min(fgd(k)[2] for k in ('H/2', 'GA', 'R'))", 0.0005, "fgd CSV ratios of H/2, GA, R"),
+        E(prefix + "_range_hi", file_, r"\$GA\$ and\s+\$R\$ \(\$0\.448\$--\$(?P<v>[\d.]+)\$", "max(fgd(k)[2] for k in ('H/2', 'GA', 'R'))", 0.0005, "fgd CSV ratios of H/2, GA, R"),
         E(prefix + "_SS_g05", file_, r"\(\$(?P<v>[\d.]+)\$,\s+\$0\.062\$, \$0\.126\$, \$0\.319\$", "s5('LO(0,0,0.5)')[0]", 0.0005, "S5 lines"),
         E(prefix + "_SS_g1", file_, r"\(\$0\.031\$,\s+\$(?P<v>[\d.]+)\$, \$0\.126\$", "s5('LO(0,0,1)')[0]", 0.0005, "S5 lines"),
         E(prefix + "_SS_g2", file_, r"\$0\.062\$, \$(?P<v>[\d.]+)\$, \$0\.319\$", "s5('LO(0,0,2)')[0]", 0.0005, "S5 lines"),
         E(prefix + "_SS_g5", file_, r"\$0\.126\$, \$(?P<v>[\d.]+)\$ at\s+\$\\gamma = 0\.5, 1, 2, 5\$", "s5('LO(0,0,5)')[0]", 0.0005, "S5 lines"),
-        E(prefix + "_peak_g2", file_, r"the ratio\s+peaks near \$\\gamma = (?P<v>\d+)\$", "s5_ratio_peak()", 0, "argmax of ratio over the S5 gammas"),
-        E(prefix + "_ratio_g5", file_, r"then falls \(\$(?P<v>[\d.]+)\$ at \$\\gamma = 5\$\)", "s5('LO(0,0,5)')[2]", 0.0005, "S5 lines"),
+        E(prefix + "_peak_g2", file_, r"[Tt]he ratio\s+peaks near \$\\gamma = (?P<v>\d+)\$", "s5_ratio_peak()", 0, "argmax of ratio over the S5 gammas"),
+        E(prefix + "_ratio_g5", file_, r"then\s+falls \(\$(?P<v>[\d.]+)\$ at \$\\gamma = 5\$\)", "s5('LO(0,0,5)')[2]", 0.0005, "S5 lines"),
         E(prefix + "_IRLA_SS", file_, r"\(\$SS = (?P<v>[\d.]+)\$, \$Abr = 0\.5066\$", "s5('IRLA')[0]", 0.00005, "S5 IRLA"),
         E(prefix + "_IRLA_Abr", file_, r"\$Abr = (?P<v>[\d.]+)\$, ratio", "s5('IRLA')[1]", 0.00005, "S5 IRLA"),
         E(prefix + "_IRLA_ratio", file_, r"\$Abr = 0\.5066\$, ratio\s+\$(?P<v>[\d.]+)\$\)", "s5('IRLA')[2]", 0.00005, "S5 IRLA"),
@@ -860,16 +856,15 @@ _add(E("s6_dTB_pair1", "main", r"by up to \$(?P<v>[\d.]+)\\,\^\{\\circ\}\$C in \
 _add(E("s6_dTB_pair2", "main", r"\$(?P<v>[\d.]+)\\,\^\{\\circ\}\$C within the second", "oct_collision_diff(1, 'T_B')", 0.005, "|T_B(3,4-DMH) - T_B(3E2MP)|"))  # 1
 
 # ----- Reproducibility paragraph (main) -----
-_add(E("rep_order13", "main", r"and the order-\$(?P<v>\d+)\$\s+profile collision of Section", "lean_order()", 0, "Profiles.lean"))  # 1
 
 # ----- Appendix A prose (main) -----
-_add(E("app_18", "main", r"\$(?P<v>\d+)\$-isomer dataset used in Section", "oct_n()", 0, "octane_data"))  # 1
+_add(E("app_18", "main", r"full\s+\$(?P<v>\d+)\$\-isomer\s+dataset", "oct_n()", 0, "octane_data"))  # 1
 _add(E("app_dHvap_33DMH", "main", r"values of 3,3-dimethylhexane \(\$(?P<v>[\d.]+)\$\),", "oct_prop('3,3-dimethylhexane', 'dHvap')", 0.0005, "octane_data"))  # 1
 _add(E("app_dHvap_3E3MP", "main", r"3-ethyl-3-methylpentane \(\$(?P<v>[\d.]+)\$\), 2,2,3-trimethylpentane", "oct_prop('3-ethyl-3-methylpentane', 'dHvap')", 0.0005, "octane_data"))  # 1
 _add(E("app_dHvap_223TMP", "main", r"2,2,3-trimethylpentane \(\$(?P<v>[\d.]+)\$\) and", "oct_prop('2,2,3-trimethylpentane', 'dHvap')", 0.0005, "octane_data"))  # 1
 _add(E("app_dHvap_233TMP", "main", r"2,3,3-trimethylpentane \(\$(?P<v>[\d.]+)\$\) are values consistent", "oct_prop('2,3,3-trimethylpentane', 'dHvap')", 0.0005, "octane_data"))  # 1
 _add(E("app_S_233TMP", "main", r"2,3,3-trimethylpentane \(\$(?P<v>[\d.]+)\$\) is a compiled-dataset", "oct_prop('2,3,3-trimethylpentane', 'S')", 0.0005, "octane_data"))  # 1
-_add(E("app_six_S", "supp", r"the remaining (?P<v>[a-z]+) \(4-methylheptane", "word(prov_S_cannot_verify())", 0, "octane_property_provenance_v35.csv: S rows CANNOT VERIFY"))  # 1
+_add(E("app_six_S", "supp", r"The\s+remaining\s+(?P<v>[a-z]+)\s+\(4\-methylheptane,\s+2,2\-dimethylhexane,", "word(prov_S_cannot_verify())", 0, "octane_property_provenance_v35.csv: S rows CANNOT VERIFY"))  # 1
 _add(E("app_api44_lo", "supp", r"values used by \$(?P<v>[\d.]+)\$--\$2\.2\$", "min(prov_api44_diffs())", 0.005, "provenance notes: API-44 differences"))  # 1
 _add(E("app_api44_hi", "supp", r"values used by \$0\.07\$--\$(?P<v>[\d.]+)\$", "max(prov_api44_diffs())", 0.05, "provenance notes: API-44 differences (2.21 displayed as 2.2)"))  # 1
 _add(E("app_api44_maxdr", "supp", r"correlations by at most \$(?P<v>[\d.]+)\$ in \$\|r\|\$ and puts", "sens_maxdr('entropy_api44_sensitivity_v41.csv')", 0.0005, "entropy_api44_sensitivity_v41.csv"))  # 1
@@ -877,7 +872,7 @@ _add(E("app_api44_M1_HM", "supp", r"ahead of\s+\$HM\$ by \$(?P<v>[\d.]+)\$", "se
 _add(E("app_old_10131", "supp", r"The value \$(?P<v>[\d.]+)\$ found in our", "old_S_233()", 0.0005, "provenance paper_value 'was 101.31'"))  # 1
 _add(E("app_used_10206", "supp", r"The value used, \$(?P<v>[\d.]+)\$, is that of", "oct_prop('2,3,3-trimethylpentane', 'S')", 0.0005, "octane_data"))  # 1
 _add(E("app_ediz_10210", "supp", r"Ediz~\\cite\{Ediz2017Octane\} gives\s+\$(?P<v>[\d.]+)\$\)", "prov_ediz_233()", 0.0005, "provenance source_value (transcription of a published value)"))  # 1
-_add(E("app_S_change_0006", "supp", r"The change moves the \$S\$ correlations by at most \$(?P<v>[\d.]+)\$", "oct_S_change_maxdr('2,3,3-trimethylpentane', old_S_233())", 0.0005, "recomputed: max |Delta r| over the 12 descriptors of Table 4, S with 101.31 vs 102.06 (ISI shifts by 0.0086; M2 0.0059 is the max of the other eleven)"))  # 1
+_add(E("app_S_change_0006", "supp", r"most\s+\$(?P<v>[\d.]+)\$,\s+and", "oct_S_change_maxdr('2,3,3-trimethylpentane', old_S_233())", 0.0005, "recomputed: max |Delta r| over the 12 descriptors of Table 4, S with 101.31 vs 102.06 (ISI shifts by 0.0086; M2 0.0059 is the max of the other eleven)"))  # 1
 _add(E("app_oct_S", "supp", r"\(octane \$(?P<v>[\d.]+)\$ vs \$111\.70\$", "oct_prop('octane', 'S')", 0.0005, "octane_data"))  # 1
 _add(E("app_oct_S_ediz", "supp", r"\(octane \$111\.55\$ vs \$(?P<v>[\d.]+)\$;", None, 0, "Ediz 2017 compilation value; not in the repository"))  # 1
 _add(E("app_22DMH_S", "supp", r"2,2-dimethylhexane \$(?P<v>[\d.]+)\$ vs \$103\.40\$", "oct_prop('2,2-dimethylhexane', 'S')", 0.0005, "octane_data"))  # 1
@@ -899,7 +894,7 @@ _add(E("app_96", "supp", r"and \$(?P<v>\d+)/100\$ seeds instead", "tmb_lo_better
 _add(E("app_nseeds", "supp", r"\(\$93/(?P<v>\d+)\$ and", "tmb_nseeds()", 0, "dhvap_tmb_exclusion_summary_v36.csv n_seeds"))  # 1
 _add(E("app_100of100", "supp", r"seeds instead of \$(?P<v>\d+)/100\$\)", "expanded_lo_better('dHvap')", 0, "expanded_robustness_summary_v35.csv dHvap LO_better (both budgets)"))  # 1
 _add(E("app_omega_lo", "supp", r"compilation by\s+\$(?P<v>[\d.]+)\$--\$0\.004\$", "min(prov_omega_diffs())", 0.0005, "provenance notes for 2,2,4-TMP and TMB omega"))  # 1
-_add(E("app_omega_hi", "supp", r"\$0\.002\$--\$(?P<v>[\d.]+)\$; the alternative", "max(prov_omega_diffs())", 0.0005, "provenance notes"))  # 1
+_add(E("app_omega_hi", "supp", r"by\s+\$0\.002\$\-\-\$(?P<v>[\d.]+)\$,\s+and", "max(prov_omega_diffs())", 0.0005, "provenance notes"))  # 1
 _add(E("app_overall_0043", "supp", r"by\s+more than \$(?P<v>[\d.]+)\$\. The only bolded entry", "sens_overall_max()", 0.0005, "max |Delta|r|| over the three sensitivity CSVs"))  # 1
 _add(E("app_margin_0001", "supp", r"where \$HM\$ leads \$M_1\$ by \$(?P<v>[\d.]+)\$ with the values used", "oct_S_margin('HM', 'M1')", 0.0005, "recomputed |r(HM,S)| - |r(M1,S)| on octane_data"))  # 1
 
@@ -907,13 +902,13 @@ _add(E("app_margin_0001", "supp", r"where \$HM\$ leads \$M_1\$ by \$(?P<v>[\d.]+
 _add(E("sup_106", "supp", r"On the \$(?P<v>\d+)\$ non-isomorphic\s+trees of order \$10\$ we use", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1
 _add(E("sup_order10", "supp", r"trees of order \$(?P<v>\d+)\$ we use", "mod_order_with_N(106)", 0, "multi_order_degeneracy.csv"))  # 1
 _add(E("sup_N106", "supp", r"values\}\\\},\\ N = (?P<v>\d+),", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1
-_add(E("sup_45", "supp", r"\$(?P<v>\d+)\$ of the \$106\$ trees, \$42\.5\\%\$, share", "shared_count(10, 0, 0, 1)", 0, "enumeration: order-10 trees sharing their LO(0,0,1) value"))  # 1
-_add(E("sup_45_106", "supp", r"\$45\$ of the \$(?P<v>\d+)\$ trees, \$42", "len(trees(10))", 0, "enumeration"))  # 1
-_add(E("sup_425", "supp", r"trees, \$(?P<v>[\d.]+)\\%\$, share their value", "round(100.0 * shared_count(10, 0, 0, 1) / len(trees(10)), 1)", 0.05, "100*45/106"))  # 1
+_add(E("sup_45", "supp", r"set,\s+\$(?P<v>\d+)\$\s+of", "shared_count(10, 0, 0, 1)", 0, "enumeration: order-10 trees sharing their LO(0,0,1) value"))  # 1
+_add(E("sup_45_106", "supp", r"the\s+\$(?P<v>\d+)\$\s+trees", "len(trees(10))", 0, "enumeration"))  # 1
+_add(E("sup_425", "supp", r"trees\s+\(\$(?P<v>[\d.]+)\\%\$\)\s+share", "round(100.0 * shared_count(10, 0, 0, 1) / len(trees(10)), 1)", 0.05, "100*45/106"))  # 1
 _add(E("sup_255", "supp", r"attain degeneracy \$(?P<v>[\d.]+)\\%\$ \(\$79\$ distinct values\),\s+among", "pct(mod(10,'all_trees')['LO001'], mod(10,'all_trees')['N_trees'])", 0.05, "multi_order_degeneracy.csv"))  # 1
 _add(E("sup_79", "supp", r"attain degeneracy \$25\.5\\%\$ \(\$(?P<v>\d+)\$ distinct values\),\s+among", "mod(10, 'all_trees')['LO001']", 0, "multi_order_degeneracy.csv"))  # 1
-_add(E("sup_106b", "supp", r"indeed the \$(?P<v>\d+)\$ trees realise only", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1
-_add(E("sup_79b", "supp", r"indeed the \$106\$ trees realise only \$(?P<v>\d+)\$ distinct", "mod(10, 'all_trees')['distinct_BID_profiles']", 0, "multi_order_degeneracy.csv"))  # 1
+_add(E("sup_106b", "supp", r"\$AG\$\.\s+The\s+\$(?P<v>\d+)\$\s+trees\s+realise", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1
+_add(E("sup_79b", "supp", r"\$AG\$\.\s+The\s+\$106\$\s+trees\s+realise\s+only\s+\$(?P<v>\d+)\$\s+distinct\s+edge\-degree\-pair\s+count\s+vectors,\s+so\s+\$25\.5\\%\$", "mod(10, 'all_trees')['distinct_BID_profiles']", 0, "multi_order_degeneracy.csv"))  # 1
 _add(E("sup_255b", "supp", r"count vectors, so \$(?P<v>[\d.]+)\\%\$ is the minimum degeneracy", "pct(mod(10,'all_trees')['distinct_BID_profiles'], mod(10,'all_trees')['N_trees'])", 0.05, "floor"))  # 1
 _add(E("sup_M1_83", "supp", r"\$LO\(0, 1, 0\)\$ \(\$(?P<v>[\d.]+)\\%\$\)", "pct(mod(10,'all_trees')['M1'], mod(10,'all_trees')['N_trees'])", 0.05, "multi_order_degeneracy.csv M1"))  # 1
 _add(E("sup_M2_67", "supp", r"\$LO\(1, 0, 0\)\$ \(\$(?P<v>[\d.]+)\\%\$\)", "pct(mod(10,'all_trees')['M2'], mod(10,'all_trees')['N_trees'])", 0.05, "multi_order_degeneracy.csv M2"))  # 1
@@ -922,17 +917,17 @@ _add(E("sup_fig_order10", "supp", r"non-isomorphic trees of order \$(?P<v>\d+)\$
 _add(E("sup_fig_255", "supp", r"floor, \$(?P<v>[\d.]+)\\% = 100\(1 - 79/106\)\$", "pct(mod(10,'all_trees')['distinct_BID_profiles'], mod(10,'all_trees')['N_trees'])", 0.05, "figure caption"))  # 1
 _add(E("sup_fig_79", "supp", r"= 100\(1 - (?P<v>\d+)/106\)\$", "mod(10, 'all_trees')['distinct_BID_profiles']", 0, "figure caption"))  # 1
 _add(E("sup_fig_106b", "supp", r"= 100\(1 - 79/(?P<v>\d+)\)\$", "mod(10, 'all_trees')['N_trees']", 0, "figure caption"))  # 1
-_add(E("sup_fig_106c", "supp", r": the \$(?P<v>\d+)\$ trees realise only \$79\$ distinct edge-degree-pair count vectors, so no", "mod(10, 'all_trees')['N_trees']", 0, "figure caption"))  # 1
-_add(E("sup_fig_79b", "supp", r": the \$106\$ trees realise only \$(?P<v>\d+)\$ distinct edge-degree-pair count vectors, so no", "mod(10, 'all_trees')['distinct_BID_profiles']", 0, "figure caption"))  # 1
-_add(E("sup_orders7", "supp", r"orders\s+\$(?P<v>\d+)\$ through \$12\$ and, separately", "min(mod_orders())", 0, "multi_order_degeneracy.csv"))  # 1
-_add(E("sup_orders12", "supp", r"\$7\$ through \$(?P<v>\d+)\$ and, separately", "max(mod_orders())", 0, "multi_order_degeneracy.csv"))  # 1
-_add(E("sup_chi_10", "supp", r"\\chi\$ falls off the\s+floor from order \$(?P<v>\d+)\$\)", "chi_first_below()", 0, "chi_floor_out.txt"))  # 1
+_add(E("sup_fig_106c", "supp", r"79/106\)\$\.\s+The\s+\$(?P<v>\d+)\$\s+trees\s+realise", "mod(10, 'all_trees')['N_trees']", 0, "figure caption"))  # 1
+_add(E("sup_fig_79b", "supp", r"79/106\)\$\.\s+The\s+\$106\$\s+trees\s+realise\s+only\s+\$(?P<v>\d+)\$\s+distinct\s+edge\-degree\-pair\s+count\s+vectors,\s+so\s+no", "mod(10, 'all_trees')['distinct_BID_profiles']", 0, "figure caption"))  # 1
+_add(E("sup_orders7", "supp", r"orders\s+\$(?P<v>\d+)\$\s+through", "min(mod_orders())", 0, "multi_order_degeneracy.csv"))  # 1
+_add(E("sup_orders12", "supp", r"through\s+\$(?P<v>\d+)\$\.\s+It", "max(mod_orders())", 0, "multi_order_degeneracy.csv"))  # 1
+_add(E("sup_chi_10", "supp", r"order\s+\$(?P<v>\d+)\$\.\s+Floor", "chi_first_below()", 0, "chi_floor_out.txt"))  # 1
 _add(E("sup_upto12", "supp", r"profiles up to\s+order \$(?P<v>\d+)\$ \(order \$15\$", "s1_last_eq('all')", 0, "S1"))  # 1
-_add(E("sup_upto15", "supp", r"\(order \$(?P<v>\d+)\$ for \$\\Delta \\le 4\$\) and not beyond", "s1_last_eq('mol')", 0, "S1 mol"))  # 1
-_add(E("sup_order13", "supp", r"Among the\s+trees of order \$(?P<v>\d+)\$ the profiles", "s1_first_below('all', 'qh')", 0, "S1"))  # 1
+_add(E("sup_upto15", "supp", r"\(order\s+\$(?P<v>\d+)\$\s+for", "s1_last_eq('mol')", 0, "S1 mol"))  # 1
+_add(E("sup_order13", "supp", r"order\s+\$(?P<v>\d+)\$\s+the", "s1_first_below('all', 'qh')", 0, "S1"))  # 1
 REGISTRY.extend(_profile_entries("supp", "sup13"))  # 16 entries, 1 match each
 _add(E("sup_566", "supp", r"points realise \$(?P<v>\d+)\$ distinct values against\s+\$570\$ profiles", "s1(13, 'all')['LO1']", 0, "S1"))  # 1
-_add(E("sup_570", "supp", r"distinct values against\s+\$(?P<v>\d+)\$ profiles; among molecular", "s1(13, 'all')['prof']", 0, "S1"))  # 1
+_add(E("sup_570", "supp", r"against\s+\$(?P<v>\d+)\$\s+profiles\.", "s1(13, 'all')['prof']", 0, "S1"))  # 1
 _add(E("sup_mol16", "supp", r"failure occurs at order \$(?P<v>\d+)\$ \(\$809\$ values against \$810\$ profiles\)", "s1_first_below('mol', 'LO1')", 0, "S1 mol"))  # 1
 _add(E("sup_809", "supp", r"at order \$16\$ \(\$(?P<v>\d+)\$ values against \$810\$ profiles\)", "s1(16, 'mol')['LO1']", 0, "S1 mol"))  # 1
 _add(E("sup_810", "supp", r"\(\$809\$ values against \$(?P<v>\d+)\$ profiles\)", "s1(16, 'mol')['prof']", 0, "S1 mol"))  # 1
@@ -942,26 +937,26 @@ _add(E("sup_R14", "supp", r"falls below it at order \$(?P<v>\d+)\$ \(\$1095\$", 
 _add(E("sup_1095", "supp", r"at order \$14\$ \(\$(?P<v>\d+)\$ values against \$1100\$", "s1(14, 'all')['R']", 0, "S1"))  # 1
 _add(E("sup_1100", "supp", r"\(\$1095\$ values against \$(?P<v>\d+)\$\s+profiles, where", "s1(14, 'all')['prof']", 0, "S1"))  # 1
 _add(E("sup_1090", "supp", r"where the pure-\$\\gamma\$ points give \$(?P<v>\d+)\$\)", "s1(14, 'all')['LO1']", 0, "S1"))  # 1
-_add(E("sup_tab_n7", "supp", r"tree orders \$n = (?P<v>\d+)\$--\$12\$: number of", "min(mod_orders())", 0, "multi_order_degeneracy.csv (table caption)"))  # 1
-_add(E("sup_tab_n12", "supp", r"\$n = 7\$--\$(?P<v>\d+)\$: number of", "max(mod_orders())", 0, "multi_order_degeneracy.csv (table caption)"))  # 1
+_add(E("sup_tab_n7", "supp", r"\$n\s+=\s+(?P<v>\d+)\$\-\-\$12\$\.\s+The", "min(mod_orders())", 0, "multi_order_degeneracy.csv (table caption)"))  # 1
+_add(E("sup_tab_n12", "supp", r"=\s+7\$\-\-\$(?P<v>\d+)\$\.\s+The", "max(mod_orders())", 0, "multi_order_degeneracy.csv (table caption)"))  # 1
 _add(E("sup_nine_points", "supp", r"evaluates the (?P<v>[a-z]+) fixed\s+points", "word(frac_npoints())", 0, "fractional_points_out.txt distinct (alpha,beta)"))  # 1
-_add(E("sup_frac_12", "supp", r"all trees of orders \$(?P<v>\d+)\$--\$16\$, every point", "min(frac_orders())", 0, "fractional_points_out.txt"))  # 1
-_add(E("sup_frac_16", "supp", r"orders \$12\$--\$(?P<v>\d+)\$, every point", "max(frac_orders())", 0, "fractional_points_out.txt"))  # 1
-_add(E("sup_eg_order16", "supp", r"order\s+\$(?P<v>\d+)\$: \$4069\$, \$4067\$", "max(frac_orders())", 0, "fractional_points_out.txt"))  # 1
-_add(E("sup_g1_0_05", "supp", r"\$16\$: \$(?P<v>\d+)\$, \$4067\$, \$4069\$, \$4068\$", "frac_count(16, 0, 0.5, 1)", 0, "fractional_points_out.txt"))  # 1
-_add(E("sup_g1_05_0", "supp", r"\$16\$: \$4069\$, \$(?P<v>\d+)\$, \$4069\$, \$4068\$", "frac_count(16, 0.5, 0, 1)", 0, "fractional_points_out.txt"))  # 1
-_add(E("sup_g1_0_m05", "supp", r"\$4067\$, \$(?P<v>\d+)\$, \$4068\$, \$4069\$ and", "frac_count(16, 0, -0.5, 1)", 0, "fractional_points_out.txt"))  # 1
-_add(E("sup_g1_m05_0", "supp", r"\$4067\$, \$4069\$, \$(?P<v>\d+)\$, \$4069\$ and \$4069\$", "frac_count(16, -0.5, 0, 1)", 0, "fractional_points_out.txt"))  # 1
-_add(E("sup_g1_13_0", "supp", r"\$4068\$, \$(?P<v>\d+)\$ and \$4069\$ of \$4069\$", "frac_count(16, 1/3, 0, 1)", 0, "fractional_points_out.txt"))  # 1
-_add(E("sup_g1_0_13", "supp", r"\$4068\$, \$4069\$ and \$(?P<v>\d+)\$ of \$4069\$", "frac_count(16, 0, 1/3, 1)", 0, "fractional_points_out.txt"))  # 1
+_add(E("sup_frac_12", "supp", r"orders\s+\$(?P<v>\d+)\$\-\-\$16\$,\s+where", "min(frac_orders())", 0, "fractional_points_out.txt"))  # 1
+_add(E("sup_frac_16", "supp", r"\(0,\\tfrac13\),\s+\(\\tfrac(?P<v>\d+),0\)\\bigr\\\}\s+\\end\{multline\*\}", "max(frac_orders())", 0, "fractional_points_out.txt"))  # 1
+_add(E("sup_eg_order16", "supp", r"orders\s+\$12\$\-\-\$(?P<v>\d+)\$,\s+where", "max(frac_orders())", 0, "fractional_points_out.txt"))  # 1
+_add(E("sup_g1_0_05", "supp", r"are\s+\$(?P<v>\d+)\$,\s+\$4067\$,", "frac_count(16, 0, 0.5, 1)", 0, "fractional_points_out.txt"))  # 1
+_add(E("sup_g1_05_0", "supp", r"\$4069\$,\s+\$(?P<v>\d+)\$,\s+\$4069\$,", "frac_count(16, 0.5, 0, 1)", 0, "fractional_points_out.txt"))  # 1
+_add(E("sup_g1_0_m05", "supp", r"\$4067\$,\s+\$(?P<v>\d+)\$,\s+\$4068\$,", "frac_count(16, 0, -0.5, 1)", 0, "fractional_points_out.txt"))  # 1
+_add(E("sup_g1_m05_0", "supp", r"\$4069\$,\s+\$4067\$,\s+\$4069\$,\s+\$(?P<v>\d+)\$,\s+\$4069\$ and", "frac_count(16, -0.5, 0, 1)", 0, "fractional_points_out.txt"))  # 1
+_add(E("sup_g1_13_0", "supp", r"\$4068\$,\s+\$(?P<v>\d+)\$\s+and", "frac_count(16, 1/3, 0, 1)", 0, "fractional_points_out.txt"))  # 1
+_add(E("sup_g1_0_13", "supp", r"and\s+\$(?P<v>\d+)\$\s+of", "frac_count(16, 0, 1/3, 1)", 0, "fractional_points_out.txt"))  # 1
 _add(E("sup_of_4069", "supp", r"and \$4069\$ of \$(?P<v>\d+)\$ for", "frac_profiles(16)", 0, "fractional_points_out.txt"))  # 1
 _add(E("sup_g0_0_05", "supp", r"give \$(?P<v>\d+)\$, \$3940\$, \$3476\$, \$4007\$", "frac_count(16, 0, 0.5, 0)", 0, "fractional_points_out.txt"))  # 1
 _add(E("sup_g0_05_0", "supp", r"give \$3475\$, \$(?P<v>\d+)\$, \$3476\$", "frac_count(16, 0.5, 0, 0)", 0, "fractional_points_out.txt"))  # 1
 _add(E("sup_g0_0_m05", "supp", r"\$3940\$, \$(?P<v>\d+)\$, \$4007\$", "frac_count(16, 0, -0.5, 0)", 0, "fractional_points_out.txt"))  # 1
-_add(E("sup_g0_m05_0", "supp", r"\$3476\$, \$(?P<v>\d+)\$, \$4009\$", "frac_count(16, -0.5, 0, 0)", 0, "fractional_points_out.txt"))  # 1
-_add(E("sup_g0_13_0", "supp", r"\$4007\$, \$(?P<v>\d+)\$ and \$3476\$;", "frac_count(16, 1/3, 0, 0)", 0, "fractional_points_out.txt"))  # 1
-_add(E("sup_g0_0_13", "supp", r"\$4009\$ and \$(?P<v>\d+)\$; the two points", "frac_count(16, 0, 1/3, 0)", 0, "fractional_points_out.txt"))  # 1
-_add(E("sup_3996", "supp", r"ratio plane give \$(?P<v>\d+)\$ for both values", "frac_ratio_plane_count(16)", 0, "fractional_points_out.txt"))  # 1
+_add(E("sup_g0_m05_0", "supp", r"\$3476\$,\s+\$(?P<v>\d+)\$,\s+\$4009\$", "frac_count(16, -0.5, 0, 0)", 0, "fractional_points_out.txt"))  # 1
+_add(E("sup_g0_13_0", "supp", r"\$4007\$,\s+\$(?P<v>\d+)\$\s+and", "frac_count(16, 1/3, 0, 0)", 0, "fractional_points_out.txt"))  # 1
+_add(E("sup_g0_0_13", "supp", r"and\s+\$(?P<v>\d+)\$,\s+while", "frac_count(16, 0, 1/3, 0)", 0, "fractional_points_out.txt"))  # 1
+_add(E("sup_3996", "supp", r"give\s+\$(?P<v>\d+)\$\s+for", "frac_ratio_plane_count(16)", 0, "fractional_points_out.txt"))  # 1
 _add(E("sup_52", "supp", r"in \$(?P<v>\d+)\$ of \$81\$ point--dataset", "frac_wins()[0]", 0, "fractional_points_out.txt last line"))  # 1
 _add(E("sup_81", "supp", r"in \$52\$ of \$(?P<v>\d+)\$ point--dataset", "frac_wins()[1]", 0, "fractional_points_out.txt last line"))  # 1
 _add(E("sup_q2_021", "supp", r"stays at \$Q\^2 \\le (?P<v>[\d.]+)\$ on the\s+decanes", "math.ceil(frac_pred_max('decane T_B') * 100 - 1e-9) / 100", 0, "fractional_points_out.txt decane T_B (max 0.201 -> bound 0.21)"))  # 1
@@ -972,24 +967,24 @@ _add(E("sup_ss_75b", "supp", r"means over all\s+\$(?P<v>\d+)\$ trees\.", "mod(10
 _add(E("sup_ss_size7", "supp", r"nonempty \(sizes \$(?P<v>\d+)\$ to\s+\$43\$\)", "decane_nb_sizes()[0]", 0, "recomputed single-edge-relocation neighbour sets (WL hashing, as in structural_checks.py s5)"))  # 1
 _add(E("sup_ss_size43", "supp", r"\(sizes \$7\$ to\s+\$(?P<v>\d+)\$\)", "decane_nb_sizes()[1]", 0, "recomputed neighbour sets"))  # 1
 _add(E("sup_ss_seven", "supp", r"for the (?P<v>[a-z]+) indices common to both", "word(control_nindices())", 0, "fgd_published_control.csv distinct indices"))  # 1
-_add(E("sup_ss_fourteen", "supp", r"\$AG\$;\s+(?P<v>[a-z]+) tabulated \$SS\$/\$Abr\$ values\)", "word(control_count())", 0, "fgd_published_control.csv rows"))  # 1
-_add(E("sup_ss_eleven", "supp", r"values\): (?P<v>[a-z]+) agree exactly at the four", "word(control_count('exact_at_4dp'))", 0, "fgd_published_control.csv"))  # 1
-_add(E("sup_ss_three", "supp", r"the remaining (?P<v>[a-z]+) differ by one unit", "word(control_count('within_1_unit_4th_dp'))", 0, "fgd_published_control.csv"))  # 1
+_add(E("sup_ss_fourteen", "supp", r"These\s+give\s+(?P<v>[a-z]+)\s+tabulated\s+\$SS\$/\$Abr\$", "word(control_count())", 0, "fgd_published_control.csv rows"))  # 1
+_add(E("sup_ss_eleven", "supp", r"of\s+which\s+(?P<v>[a-z]+)\s+agree\s+exactly", "word(control_count('exact_at_4dp'))", 0, "fgd_published_control.csv"))  # 1
+_add(E("sup_ss_three", "supp", r"the\s+remaining\s+(?P<v>[a-z]+)\s+differ\s+by", "word(control_count('within_1_unit_4th_dp'))", 0, "fgd_published_control.csv"))  # 1
 _add(E("sup_ss_twelve", "supp", r"our values for all (?P<v>[a-z]+) compared indices", "word(fgd_nindices())", 0, "fgd_structure_sensitivity_decanes.csv rows"))  # 1
 REGISTRY.extend(_ss_common("supp", "sup_ss"))  # 17 entries, 1 match each
 
 # ----- Supplement S7 -----
 _add(E("lean_version", "supp", r"\(Lean v(?P<v>[\d.]+), Mathlib", "lean_version()", 0, "formal/lean-toolchain"))  # 1
 _add(E("mathlib_version", "supp", r"Mathlib v(?P<v>[\d.]+)\)", "mathlib_version()", 0, "formal/lake-manifest.json inputRev"))  # 1
-_add(E("lean_two_order13", "supp", r"except for the two\s+order-\$(?P<v>\d+)\$ trees below", "lean_order()", 0, "Profiles.lean"))  # 1
-_add(E("lean_order13_pair", "supp", r"the order-\$(?P<v>\d+)\$ profile pair with equal", "lean_order()", 0, "Profiles.lean"))  # 1
-_add(E("lean_13_vertex", "supp", r"explicit \$(?P<v>\d+)\$-vertex trees realising", "lean_par_len('par1') + 1", 0, "Profiles.lean par1 length + 1"))  # 1
+_add(E("lean_two_order13", "supp", r"two\s+order\-\$(?P<v>\d+)\$\s+trees", "lean_order()", 0, "Profiles.lean"))  # 1
+_add(E("lean_order13_pair", "supp", r"3\s+\-\s+(?P<v>\d+)\\ln\s+2\)", "lean_order()", 0, "Profiles.lean"))  # 1
+_add(E("lean_13_vertex", "supp", r"the\s+order\-\$(?P<v>\d+)\$\s+profile", "lean_par_len('par1') + 1", 0, "Profiles.lean par1 length + 1"))  # 1
 
-_add(E("cr_root1r", "main", r"\(near \$\\gamma = (?P<v>-?\d+\.\d)\$,", "round(s3()['roots'][0], 1)", 0.05, "S3 certificate roots, 1 dp"))
+_add(E("cr_root1r", "main", r"\$\\gamma\s+=\s+(?P<v>-?\d+\.\d)\$,\s+\$\-12\.0\$,", "round(s3()['roots'][0], 1)", 0.05, "S3 certificate roots, 1 dp"))
 _add(E("cr_root2r", "main", r"\$\\gamma = -17\.2\$,\s+\$(?P<v>-?\d+\.\d)\$, \$-2\.0\$", "round(s3()['roots'][1], 1)", 0.05, "S3 certificate roots, 1 dp"))
 _add(E("cr_root3r", "main", r"\$-12\.0\$, \$(?P<v>-?\d+\.\d)\$, \$2\.7\$", "round(s3()['roots'][2], 1)", 0.05, "S3 certificate roots, 1 dp"))
 _add(E("cr_root4r", "main", r"\$-2\.0\$, \$(?P<v>-?\d+\.\d)\$ and \$31\.1\$", "round(s3()['roots'][3], 1)", 0.05, "S3 certificate roots, 1 dp"))
-_add(E("cr_root5r", "main", r"\$2\.7\$ and \$(?P<v>-?\d+\.\d)\$; by the bound", "round(s3()['roots'][4], 1)", 0.05, "S3 certificate roots, 1 dp"))
+_add(E("cr_root5r", "main", r"and\s+\$(?P<v>-?\d+\.\d)\$\.\s+By", "round(s3()['roots'][4], 1)", 0.05, "S3 certificate roots, 1 dp"))
 UNCHECKABLE = [e["id"] for e in REGISTRY if e["expected"] is None]
 # app_oct_S_ediz, app_22DMH_S_ediz, app_224TMP_S_ediz: values of the Ediz (2017) compilation, cited, not held in the repository.
 

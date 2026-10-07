@@ -14,12 +14,14 @@ networkx, matplotlib, sympy, mpmath). Lean: `formal/verify.sh` (elan/lake).
 | `formal/verify.sh` | Lean 4 proofs (36 theorems; no sorry/axioms) | ~1 min after first build |
 | `python3 manifest.py` | SHA-256 of every tracked file, one hash per path (`--write` regenerates it; stage new files with `git add` first, since untracked files are not hashed) | seconds |
 | `python3 external/test_regressions.py` | unit checks of the shared regression core (extreme descriptor scales, large-offset constancy), the fail-closed CSV comparator, the fail-closed data build (missing archived page) and the structural certificate (empty witness set), without running the external suite | seconds |
-| `python3 prose_numbers_check.py` | every registered numeral of the running prose of both documents (735 entries in prose_claims_a.py and prose_claims_b.py; 16 cited values listed as uncheckable) recomputed from the canonical files | seconds |
+| `python3 prose_numbers_check.py` | every registered numeral of the running prose of both documents (686 entries in prose_claims_a.py and prose_claims_b.py; 16 cited values listed as uncheckable) recomputed from the canonical files | seconds |
 | `python3 audit/attack_checks.py` | 13 counter-attacks on the checkers outside the core verifier's self-test (corrupted outputs, data, manuscript numerals, archived records, disabled guards): each must be rejected | ~3 min |
 | `python3 audit/run_all_scripts.py` | every script of the repository re-run in an isolated copy of the tracked tree; every file it writes compared with the committed one (PDFs by canonical form); `python3 verify.py --everything` runs it after the full suite | ~2 h |
 | `python3 audit/check_exploratory_outputs.py` | fractional-point, chi-floor and calorimetric-availability outputs rebuilt in an isolated copy and compared byte-for-byte | seconds |
 | `python3 audit/check_source_identities.py` | archived boiling-point pages: molecular formulas and carbon skeletons match the 154 source records | seconds |
 | `python3 audit/check_mathematics.py` | 50-digit interval certificates of the finite-rank exception set (Delta 6, 7) and of the five-crossing witness, independent of structural_checks.py | seconds |
+| `python3 audit/check_style.py` | plain-prose check of both documents: no em dash or spaced en dash in the running text, no sentence over 45 words, no stock phrases or "X, not Y" contrasts; prints sentence-length statistics (in the fast path) | seconds |
+| `python3 audit/check_labels.py` | every \ref resolves, labels unique, every table and figure has one caption and one label and is referenced, every \cite has a \bibitem and vice versa, the supplement's "Table~N / Theorem~N of the main paper" match the compiled main paper, figure files present in every bundle (in `--full`; needs tectonic) | ~1 min |
 | `python3 tuning_pool_seed_sweep.py` | seed sweep behind Supplementary S2 (nested gain of tuning near M2 on omega, seeds 0-99) | seconds |
 | `python3 constancy_test_check.py` | shows that the constancy test is inert: no candidate descriptor of the octane analyses is flagged under the old or the new definition | ~1 min |
 

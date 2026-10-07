@@ -736,3 +736,87 @@ replay snapshots the tree and includes tracked formal/ files.
 - history/ (v35/v36 notes, the v35 provenance audit) and the verification
   logs of v40.5-v40.15 removed from the working tree; they remain in the git
   history.  Only the current version's logs are kept.
+
+## v40.18 (co-author's presentation requests)
+- Abstract: the text after the definition of LO rewritten as a precise
+  qualitative statement of the contributions (no numerals; the text
+  before and including the definition of LO is unchanged; 296 -> 134
+  words, so the abstract now fits on page 1).
+- Introduction: the cross-references to lemmas, sections and propositions
+  in the "mathematical side" paragraphs removed; the final contributions
+  paragraph keeps them.
+- Conclusion rewritten in the past tense as a qualitative account of the
+  contributions, without theorem, proposition or table references
+  (501 -> 460 words including the reproducibility paragraph, which no
+  longer cites result numbers).  Prose-registry entries for the removed
+  numerals dropped (690 remain; the numbers are still checked where they
+  appear in the body).
+
+## v40.19 (journal register: plain prose, MATCH format, trims)
+- Every section of both documents rewritten into the plain register of
+  the journal, with the mathematics, every numeral, every math token
+  and every reference held fixed by an edit guard (numerals compared as
+  a sequence, $...$ tokens and \ref/\cite/\label tokens as multisets,
+  per edit).  Sentence statistics, counted by audit/check_style.py with
+  math tokens as single words: main paper 188 sentences of mean 38.2
+  words (59% over 30 words) -> 374 sentences of mean 19.5 words (4% over
+  30, longest 35); supplement mean 41.6 -> 18.5 words.  The two reference
+  MATCH papers average 21-22 words.  Em dashes removed from the running
+  text (4 in the main paper, 7 in the supplement); stock phrases and
+  "X, not Y" contrasts removed; sentences merged again where the first
+  pass had left the text choppy (mean 13.8 words after splitting).
+- Abstract: the text after the definition of LO rewritten once more as
+  short declarative sentences (99 words); the abstract is now a single
+  paragraph, as in the journal, and still fits page 1.  Introduction
+  (993 words after the sentence splits): the special-case catalogue
+  split into two sentences, the italic "Scope of the contribution"
+  run-in head and the closing slogan removed.  Conclusion rewritten (305 words,
+  past tense, no theorem/table references); the reproducibility
+  paragraph moved to the end of Section 5 with the repository cited as
+  a reference (bibitem LoyolaRepo) instead of an in-text URL.
+- MATCH format, after a point-by-point comparison with the journal's
+  LaTeX template and two published papers (MATCH 95 (2026) 141-162 and
+  97 (2027) 121-134): corresponding-author mark "a," + footnote as in
+  the template; Corollary and Remark unnumbered (\newtheorem*) as in
+  the template, with the one \ref to a remark reworded; the template's
+  commented licence block and abstract footnote hook restored;
+  \begin{thebibliography}{00}; journal abbreviations (Ars Comb.,
+  J. Chemom., Iran. J. Math. Chem.), NIST and Circular 461 entries in
+  template form; short section headings (Parameter geometry,
+  Discrimination, QSPR diagnostics, Measured boiling points, ...);
+  \paragraph run-in heads removed; "Eq.~(n)" for equation references;
+  the octane data table moved from an appendix into Section 5.1 (so the
+  acknowledgment is followed directly by the bibliography, as in the
+  template); supplement: \singlespacing only before its bibliography.
+  Tables are therefore renumbered: data table 4, correlations 5, search
+  box 6, nonane 7, boiling points 8; the supplement's "Table~N of the
+  main paper" references updated, and its stale "Section~6.x of the
+  main paper" references (left over from the v40.14 section removal)
+  corrected to 5.x.  Not changed (author decisions): title, placeholder
+  acknowledgment, single corresponding e-mail, named theorems,
+  multi-sentence table captions, and the existence of a supplement.
+- Two sentences of the supplement promised "gamma -> +-infinity
+  asymptotics" that the termwise-bounds subsection no longer contains;
+  the promise is removed.
+- Figures: both figures regenerate byte-identically from
+  generate_loyola_v35_figures.py; the 60 heatmap cells were compared
+  with Table 5 and the degeneracy bars with the text (83.0, 67.0, floor
+  25.5); captions unchanged; both figures remain in the supplement
+  (S1, S2), the main paper has none.
+- New checkers: audit/check_style.py (fast path; fails on em dashes or
+  spaced en dashes in prose, sentences over 45 words, stock phrases and
+  "X, not Y" punchlines; prints sentence-length statistics, also for the
+  reference MATCH papers when MATCH_REF_DIR points at their text) and
+  audit/check_labels.py (verify.py --full; labels, references, captions,
+  cites/bibitems, figure files in every bundle, and the supplement's
+  "Table~N / Theorem~N / Section~N.M of the main paper" references
+  against the numbering of main.tex, with a caption-keyword check for
+  the tables).  The stale Section~6.x references above were found by
+  this checker.
+- Prose registries re-anchored to the new wording (686 entries, 0
+  failures); 3 entries whose numerals left the text dropped
+  (deg_255, deg_255b, deg_M1_83; rp_R_floor14), the shared
+  abruptness/ratio patterns made whitespace-tolerant.
+- Trims carried over from the uncommitted v40.18 work: Section 4 bounds
+  and closed forms in the supplement (S9), graph-family list moved to
+  S9, Preliminaries 276 words, 31 condensation edits in Sections 3-5.

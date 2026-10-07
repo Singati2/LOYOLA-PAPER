@@ -8,12 +8,14 @@
                                external/test_baselines.py
                                constancy_test_check.py
                                audit/check_exploratory_outputs.py, check_source_identities.py, check_mathematics.py
+                               audit/check_style.py      sentence length, dashes and stock phrases in the prose
                                manifest.py               SHA-256 of every tracked file
   python3 verify.py --full   also (about one hour):
                                external/verify_external.py
                                structural/structural_checks.py, structural/hp_counts.py
                                verify_loyola_v35.py --selftest
                                audit/attack_checks.py      (13 counter-attacks on the newer checkers)
+                               audit/check_labels.py       (labels, references, captions, cross-document numbering; needs tectonic)
                                formal/verify.sh (if a Lean toolchain is installed)
   python3 verify.py --everything   also audit/run_all_scripts.py: every script of the
                                repository re-run in an isolated copy and every file it
@@ -35,6 +37,7 @@ FAST = [
     ("auxiliary outputs", [PY, os.path.join("audit", "check_exploratory_outputs.py")], HERE),
     ("archived-source identities", [PY, os.path.join("audit", "check_source_identities.py")], HERE),
     ("interval certificates", [PY, os.path.join("audit", "check_mathematics.py")], HERE),
+    ("prose style", [PY, os.path.join("audit", "check_style.py")], HERE),
     ("manifest", [PY, "manifest.py"], HERE),
 ]
 
@@ -85,6 +88,10 @@ def main():
     if "--full" in sys.argv or "--everything" in sys.argv:
         steps += FULL
     if "--full" in sys.argv or "--everything" in sys.argv:
+        if shutil.which("tectonic"):
+            steps.append(("labels and references", [PY, os.path.join("audit", "check_labels.py")], HERE))
+        else:
+            print("[SKIP] labels and references: no tectonic on PATH")
         if shutil.which("lake"):
             steps.append(("Lean proofs", ["bash", "verify.sh"], os.path.join(HERE, "formal")))
         else:
