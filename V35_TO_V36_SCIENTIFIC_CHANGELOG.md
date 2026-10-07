@@ -826,3 +826,77 @@ replay snapshots the tree and includes tracked formal/ files.
   counter-attack record is now written without runtimes and the replay re-run
   clean (38 scripts).  Superseded log folders v40.16 and v40.17 removed; build
   artefacts git-ignored; bundle READMEs updated to the new table numbering.
+
+## v40.20 (response to three independent referee reports: mathematics, chemometrics, editorial fit)
+- Title: "The Loyola Index Family and the Resolution Limit of Degree
+  Imbalance" (short noun phrase, as in the journal); the name is kept.
+- New Corollary (Degree-ratio indices) after Theorem 2: every index of the
+  form sum f(min(d_u,d_v)/max(d_u,d_v)) depends on a graph only through its
+  q-histogram, so the colliding trees of Theorem 2(iii) (every order >= 13,
+  >= 16 for chemical trees) are not separated by GA, AG, the diminished
+  Sombor, the symmetric division deg or the degree-ratio indices.  The
+  Introduction, abstract and Conclusion now state this class limitation.
+- Section 4 "Closed forms, bounds and extremal trees": the closed forms on
+  standard graphs, the proof of Theorem 1 (now directly after the theorem)
+  and the termwise bounds return from the supplement (MATCH papers are
+  self-contained), plus a new Proposition (Extremal trees): for gamma > 0
+  the path is the unique minimiser and the star the unique maximiser of
+  LO(.;0,0,gamma) among trees of order n >= 4, with explicit bounds,
+  exchanged for gamma < 0; checked exhaustively for orders 4-12 by the new
+  structural/extremal_trees_check.py (fast path, run-all list).  Former S9
+  removed; the data-quality section is now S9.
+- Proof gaps named by the mathematics referee closed: Lemma 1's proof now
+  records the rank-3 determinant ln2 * ln(9/8) of the other three
+  columns; Theorem 2(iii) states that the profile change does not depend
+  on the chosen leaf edge being the only (1,d)-edge; "biregular" ->
+  "semiregular bipartite".  Rada's 2019 MATCH paper on discrimination of
+  exponential VDB indices is now cited at the first-failure table.
+- Section 6 (QSPR) cut from about 3,600 to about 2,100 words: the octane
+  data table and its provenance paragraphs moved to the supplement
+  (Table S5 in S9), the reporting-convention preamble shortened, the
+  narrow-box narrative compressed.  Disclosed for the first time: the
+  dense-parent-grid curve of the parent's nested Q2 against the box
+  half-width (octane dHvap 0.8873, 0.6996, 0.9525, 0.9383 at half-widths
+  2, 4, 8, 12; nonanes 0.8532, 0.8779, 0.8997, 0.8837; boundary-fold
+  counts), from external/wide_box_diagnostics_out.txt, with 16 new
+  registry entries; the half-width-12 choice is explained as the smallest
+  box with interior selections, and the verdict is stated as "no
+  demonstrated gain" rather than "no gain" (abstract, Section 6.2,
+  Conclusion).  The matched-budget search penalty on the three-parameter
+  model is stated as a caveat.
+- Pre-registration: commit hashes cited in the text (964b127 nonane
+  protocol, a5cf378 boiling-point protocol); the seed-count criterion of
+  the nonane protocol is labelled a design error; the reclassification of
+  the measured boiling points as the primary predictive evidence after
+  the nonane result is stated explicitly as a post hoc decision.
+- Provenance wording: "traced to NIST" replaced by "standard octane
+  benchmark compilation, audited value by value against the NIST WebBook
+  and the API Project 44 tables"; the ridge baseline is described as a
+  reference for what the counts carry, not a competing index; the hybrid
+  control is stated to be seed-paired; the supplement no longer calls the
+  SS values "equal" and says the SS/Abr ratio is our own summary.
+- Overlap with the companion paper on exact redundancy (Paper 2): the
+  three-sentence "span certificate" aside in Section 5.1 (ten indices
+  span the count space; every BID index is an exact linear combination)
+  is removed, since it is that paper's result and this paper does not use
+  it.  Proposition 12 (degree-pair collisions on the octanes) and the
+  remark that every degree-based index is a function of the degree-pair
+  counts stay, since Section 6 relies on them.
+- References added: Gutman, MATCH 86 (2021) 11-16 (Sombor index);
+  Albertson, Ars Comb. 46 (1997) 219-225 (irregularity); Cruz, Monsalve,
+  Rada, Discrete Appl. Math. 283 (2020) 634-643 (extremal exponential
+  trees).  The supplement's three Gutman-Milovanovic bibitems, cited only
+  in the former S9, removed from its bibliography.
+- Cross-document numbering: main tables are now 1 collisions, 2 first
+  failures, 3 structure sensitivity, 4 octane correlations, 5 search box,
+  6 nonane test, 7 boiling points; QSPR is Section 6 (Discrimination 5);
+  the ceiling proposition is Proposition 12.  The supplement's references
+  were remapped and three that had been stale since v40.19 (two pointing
+  at the search-box table instead of the correlation table, one at the
+  correlation table instead of the baselines table) corrected;
+  audit/check_labels.py now normalises line breaks inside these citations
+  and judges a citation by the keyword nearest to it.
+- Registries: 14 entries dropped (numerals moved to the supplement where
+  the S1 entries already check them, or removed with the narrow-box
+  narrative), 6 re-pointed to the supplement, 7 hand re-anchored; 688
+  entries, 0 failures.  Main paper 36 A5 pages, supplement 24.

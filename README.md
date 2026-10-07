@@ -3,13 +3,13 @@
 Advik Natarajan, Ganesh Shiwakoti, Michael Arockiaraj — manuscript, supplement,
 data, code and machine-checked proofs.
 
-**v40.19 (2026-10-07):** both documents rewritten into the journal's plain register with every number held fixed, MATCH template conformance, octane data table in Section 5.1 (tables 4-8), new prose-style and label checkers; see V35_TO_V36_SCIENTIFIC_CHANGELOG.md.
+**v40.20 (2026-10-07):** referee-driven rebuild: degree-ratio corollary of the ratio-plane theorem, closed forms and termwise bounds back in the main paper (Section 4) with a new extremal-tree proposition, QSPR section cut by half with the search-box curve disclosed, pre-registration commits cited, data table to the supplement; see V35_TO_V36_SCIENTIFIC_CHANGELOG.md.
 
 ## Current documents
 | File | Content |
 |---|---|
-| `main.tex`, `LOYOLA_paper.pdf` | the paper (31 A5 pages, MATCH template) |
-| `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (29 pages) |
+| `main.tex`, `LOYOLA_paper.pdf` | the paper (36 A5 pages, MATCH template) |
+| `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (24 pages) |
 | `LOYOLA_FINAL_PAPER_OVERLEAF.zip` | Overleaf upload (both documents + figures) |
 
 ## What the paper shows

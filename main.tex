@@ -156,7 +156,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{The Loyola Index Family: What a Degree-Imbalance Coordinate Can and Cannot Resolve}
+\title{The Loyola Index Family and the Resolution Limit of Degree Imbalance}
 \author{Advik Natarajan$^{a}$, Ganesh Shiwakoti$^{b}$, Michael Arockiaraj$^{a,}$\footnote{Corresponding author.}}
 
 \address{$^a$Department of Mathematics, Loyola College, Chennai, India\\
@@ -189,13 +189,15 @@
   We ask what the imbalance coordinate $\gamma$ adds to the parent
   family. On a ratio plane that separates size from shape, the
   pure-$\gamma$ points distinguish two graphs exactly when their
-  histograms of edge imbalances differ. On small trees this is the
-  discrimination limit of all degree-based indices, and we prove that
-  the limit is lost at larger orders. We bound the number of times two
-  graphs exchange order along $\gamma$ and characterise the directions
-  in parameter space that a given graph can identify. Pre-registered
-  tests on alkane properties show that $\gamma$ gives no predictive gain
-  over the parent family.
+  histograms of edge imbalances differ, a limit shared by every index
+  that depends on an edge only through its degree ratio. On small trees
+  this is the discrimination limit of all degree-based indices, and we
+  prove that it is lost from order thirteen. We bound the number of
+  times two graphs exchange order along $\gamma$, characterise the
+  directions in parameter space that a given graph can identify, and
+  determine the extremal trees of the pure-$\gamma$ points.
+  Pre-registered tests on alkane properties show no demonstrated
+  predictive gain from $\gamma$ over the parent family.
   \end{abstract}
 
 \onehalfspacing
@@ -208,8 +210,7 @@
   Randi\'c and Zagreb indices~\cite{Randic1975, GutmanTrinajstic1972}
   and their parametric extensions, the general Randi\'c and
   sum-connectivity families~\cite{BollobasErdos1998, ZhouTrinajstic2010},
-  to the Sombor family and its many variants. See the
-  survey~\cite{Gutman2026SomborSurvey}. Extremal results on
+  to the Sombor index~\cite{Gutman2021Sombor} and its many variants, surveyed in~\cite{Gutman2026SomborSurvey}. Extremal results on
   bond-incident-degree (BID) indices are surveyed
   in~\cite{AliGutmanFurtula2026BID}, while a finite-dimensional linear
   framework for such indices is developed in~\cite{Rada2026LinearVDB}.
@@ -259,8 +260,7 @@
   $\exp\bigl(\alpha \ln(d_u d_v) + \beta \ln(d_u + d_v) +
   \gamma\, q_{uv}\bigr)$ shows that the family is a three-parameter
   subfamily of the exponential vertex-degree-based indices of
-  Rada~\cite{Rada2019ExpVDB}, whose extremal theory is developed
-  in~\cite{Sigarreta2022ExpVDB, GaoAMC2024, HuMATCH2022}. Extremal
+  Rada~\cite{Rada2019ExpVDB}, whose extremal theory is developed in~\cite{CruzMonsalveRada2020, Sigarreta2022ExpVDB, GaoAMC2024, HuMATCH2022}. Extremal
   problems are not considered here. Published one-parameter
   exponential indices (e.g.~\cite{DasMondal2024ExpGA,
   DasMondalRazaPal2025ExpISDD}) place their parameter on a single
@@ -268,10 +268,7 @@
   Gutman--Milovanovi\'c basis terms act as the factors
   $(d_u d_v)^{\alpha}(d_u + d_v)^{\beta}$, while the imbalance
   coordinate carries its own parameter $\gamma$. The imbalance ratio
-  itself is not new. It appears in the diminished Sombor
-  index~\cite{MovahediGutmanRedzepovicFurtula2026} and in the
-  irregularity index
-  $IRLA(G) = 2\sum_{uv} q_{uv}$~\cite{RetiSharafdini2018IRLA}. The
+  itself is not new. It appears in the diminished Sombor index~\cite{MovahediGutmanRedzepovicFurtula2026} and, as a normalised form of Albertson's irregularity~\cite{Albertson1997}, in the irregularity index $IRLA(G) = 2\sum_{uv} q_{uv}$~\cite{RetiSharafdini2018IRLA}. The
   pure-$\gamma$ point $LO(G;0,0,\gamma) = \sum_{uv} e^{\gamma
   q_{uv}}$ is the exponential index of the latter in the sense
   of~\cite{Rada2019ExpVDB}. The ratio also appears in degree-ratio
@@ -302,12 +299,8 @@
   fixed ten-dimensional descriptor space, however its parameters are
   chosen.
 
-  Several of the mathematical results apply standard tools, namely
-  log-sum-exp convexity, Laguerre's rule of signs, the
-  Lindemann--Weierstrass theorem and exponential-family minimality.
-  The contribution lies in the structural characterisation they yield.
-  The family is not proposed as a better predictor, and we find no
-  predictive advantage on the sets and protocols studied here. Its
+  The tools are classical (log-sum-exp convexity, Laguerre's rule of signs, the Lindemann--Weierstrass theorem, exponential-family minimality); the contribution is the exact characterisation they yield, which also bounds every index that sees an edge only through its degree ratio.
+  The family is not proposed as a better predictor, and we find no demonstrated predictive advantage on the sets and protocols studied here. Its
   interest lies in the structure it exposes. It keeps the interpretation
   of the parent family, separates size from shape, and shares the
   ratio-plane geometry of $GA$ and $AG$. Because the QSPR datasets are
@@ -316,27 +309,28 @@
   than proof of chemical predictive utility.
 
   The contributions are as follows. (i) The scale--shape factorisation
-  and the ratio-plane theorem (Theorem~\ref{thm:ratioplane}). This
-  theorem characterises exactly what the pure-$\gamma$ line can
-  discriminate and is in large part a limitation result, with tree
-  collisions at every order from $13$, and from $16$ for
-  $\Delta \le 4$. (ii) The crossing bound
+  and the ratio-plane theorem (Theorem~\ref{thm:ratioplane}), which
+  characterises exactly what the pure-$\gamma$ line can discriminate,
+  with tree collisions at every order from $13$, and from $16$ for
+  $\Delta \le 4$. Its corollary extends the collisions to every index
+  that depends on an edge only through its degree ratio, such as $GA$,
+  $AG$ and the diminished Sombor index. (ii) The crossing bound
   (Proposition~\ref{prop:laguerre}, from Laguerre's rule of signs) and
   per-graph identifiability (Proposition~\ref{prop:identrank}), the
-  latter resting on an elementary independence lemma
-  (Lemma~\ref{prop:indep}). (iii) Log-convexity with mean/covariance
-  derivatives (Theorem~\ref{thm:logconvex}, standard), and closed forms
-  and routine termwise bounds for $\gamma \ge 0$ (Supplementary
-  Material). (iv) The degree-pair ceiling, an elementary observation
-  that is realised on the octane benchmark
+  latter resting on an independence lemma (Lemma~\ref{prop:indep}).
+  (iii) Log-convexity with mean/covariance derivatives
+  (Theorem~\ref{thm:logconvex}), closed forms on standard graphs,
+  termwise bounds for $\gamma \ge 0$ and the extremal trees of the
+  pure-$\gamma$ points (Section~\ref{sec:bounds}). (iv) The first
+  orders at which discrimination is lost on trees, with the colliding
+  profiles, the degree-pair ceiling realised on the octane benchmark
   (Proposition~\ref{prop:collision}), and structure sensitivity. (v) A
-  negative, reproducible QSPR diagnostic, in which freeing $\gamma$
-  gives no consistent gain once the parent's search box does not
-  truncate it. This is complemented by pre-registered tests on measured
-  boiling points of decanes and of pooled C6--C10 alkanes
-  (Section~\ref{sec:bp}). There, ridge regression on the degree-pair
-  counts is far ahead of every single index on the decanes and ahead on
-  the pooled set.
+  reproducible QSPR diagnostic, in which freeing $\gamma$ gives no
+  demonstrated gain once the parent's search box does not truncate it,
+  complemented by pre-registered tests on measured boiling points of
+  decanes and of pooled C6--C10 alkanes (Section~\ref{sec:bp}). There,
+  ridge regression on the degree-pair counts is far ahead of every
+  single index on the decanes and ahead on the pooled set.
 
 
 % =====================================================================
@@ -419,10 +413,12 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   \end{lemma}
 
   \begin{proof}
-  It suffices to show that $q_{ij}$ is not an affine function of
-  $\bigl(\ln(ij), \ln(i+j)\bigr)$ on $P_{\Delta}$, and the four pairs
-  $(1,1), (2,2), (1,2), (1,3)$, all admissible once $\Delta \ge 3$,
-  witness this. Suppose
+  The vectors $(1, \ln(ij), \ln(i+j))$ on the pairs $(1,1), (2,2),
+  (1,2)$ have rank $3$, since the corresponding $3 \times 3$ determinant
+  equals $\ln 2 \cdot \ln(9/8) \ne 0$, so it suffices to show that
+  $q_{ij}$ is not an affine function of $\bigl(\ln(ij), \ln(i+j)\bigr)$
+  on $P_{\Delta}$. The four pairs $(1,1), (2,2), (1,2), (1,3)$, all
+  admissible once $\Delta \ge 3$, witness this. Suppose
   $q_{ij} = a + b \ln(ij) + c \ln(i+j)$ on these pairs. The pairs
   $(1,1)$ and $(2,2)$ have $q = 0$, so they give $a + c \ln 2 = 0$ and
   $a + (2b + 2c) \ln 2 = 0$, hence $a = -c \ln 2$ and $b = -c/2$.
@@ -485,7 +481,7 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   $\operatorname{Var}_{\theta}(q) = 0$ at some (equivalently, every)
   $\theta$ if and only if $q_{uv}$ is constant over the edges of $G$,
   which covers regular graphs ($q \equiv 0$) and, for example,
-  $(\Delta,\delta)$-biregular graphs. On these every edge carries the
+  $(\Delta,\delta)$-semiregular bipartite graphs. On these every edge carries the
   same nonzero imbalance, and $\log LO$ is affine and strictly
   increasing in $\gamma$. $F_G$ is strictly convex if and only if the
   edge feature vectors $\{z_{uv}\}_{uv \in E}$ do not lie in a proper
@@ -494,9 +490,28 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   $\operatorname{Cov}_{\theta}(z) = 0$.
   \end{theorem}
 
-  The formulas follow by direct differentiation (proof in Supplementary
-  Section~S9), and the Cauchy--Schwarz midpoint inequality there is midpoint
-  log-convexity, a corollary of this theorem.
+  \begin{proof}
+  Direct differentiation of
+  $LO_G(\theta) = \sum_{uv} e^{\theta^{\top} z_{uv}}$ gives
+  $\partial_k F_G = \sum_{uv} w_{uv} z_{uv,k} =
+  \mathbb{E}_{\theta}[z_k]$ and
+  $\partial_k \partial_l F_G =
+  \mathbb{E}_{\theta}[z_k z_l] -
+  \mathbb{E}_{\theta}[z_k]\,\mathbb{E}_{\theta}[z_l]$, the
+  $(k,l)$-entry of $\operatorname{Cov}_{\theta}(z)$, which is positive
+  semidefinite. Convexity follows. The measure $w(\theta)$ has full
+  support on $E$ for every $\theta$. Hence
+  $\operatorname{Cov}_{\theta}(z)$ is singular in a direction $v$ iff
+  $v^{\top} z_{uv}$ is constant over all edges, i.e.\ iff the
+  $z_{uv}$ lie in a proper affine subspace, which proves the strictness
+  criterion. Since $q_{uv} \in [0,1)$,
+  $\mathbb{E}_{\theta}[q] \in [0,1)$, and
+  $\mathbb{E}_{\theta}[q] = 0$ iff $q_{uv} = 0$ on every edge. On an
+  $r$-regular graph all $z_{uv}$ equal
+  $z_0 = (2\ln r, \ln 2r, 0)$.
+  \end{proof}
+
+  The Cauchy--Schwarz midpoint inequality of Section~\ref{sec:bounds} is midpoint log-convexity, a corollary of this theorem.
 
   \subsection{The ratio plane, crossings and identifiability}\label{sec:ratioplane}
 
@@ -530,9 +545,7 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   holds for all but finitely many real $\gamma$.
   \item[(iii)] Let $G$ and $H$ be trees with distinct
   edge-degree-pair profiles and equal $q$-histograms, each having a
-  leaf adjacent to a vertex of the same degree $d \ge 2$. Attaching a
-  pendant path of length $L \ge 1$ at such a leaf in each produces
-  trees with the same two properties and the same maximum degree.
+  leaf adjacent to a vertex of the same degree $d \ge 2$. Attaching a pendant path of length $L \ge 1$ at such a leaf in each produces trees with the same two properties (the profiles change by the same vector, whether or not the chosen leaf edge was the only $(1,d)$-edge) and the same maximum degree.
   Consequently, for every $n \ge 13$ (and every $n \ge 16$ among trees
   with $\Delta \le 4$) there are non-isomorphic trees of order $n$
   with distinct degree-pair profiles that no point of $\Pi$ separates.
@@ -567,6 +580,26 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   $\{(1,4)^{8}, (2,2)^{3}, (2,4)^{4}\}$, has $d = 4$, which gives every
   larger order.
   \end{proof}
+
+  \begin{corollary}[Degree-ratio indices]\label{cor:ratioclass}
+  Let $\rho_{uv} = \min(d_u,d_v)/\max(d_u,d_v)$ and let
+  $I_f(G) = \sum_{uv \in E(G)} f(\rho_{uv})$ for any function
+  $f$ on $(0,1]$. Since $\rho_{uv} = (1-q_{uv})/(1+q_{uv})$, $I_f$
+  depends on $G$ only through its $q$-histogram. Consequently the
+  trees of Theorem~\ref{thm:ratioplane}(iii), which exist at every
+  order $n \ge 13$ (and $n \ge 16$ with $\Delta \le 4$), are not
+  separated by any such index, in particular not by $GA$, $AG$, the
+  diminished Sombor index~\cite{MovahediGutmanRedzepovicFurtula2026},
+  the symmetric division deg index or the degree-ratio
+  indices~\cite{NyauliBuragohain2027DRSO, GutmanBuragohainNyauli2026}.
+  \end{corollary}
+
+  The corollary needs no proof beyond the identity for $\rho_{uv}$; it
+  turns the colliding families of part~(iii) into a limitation for the
+  whole class of indices that see an edge only through its degree
+  ratio. The pure-$\gamma$ points are the members of that class for
+  which the limitation is also sharp, by part~(ii).
+
 
   Theorem~\ref{thm:ratioplane} is both a limitation result and a
   characterisation. By exhaustive enumeration of orders $7$--$17$ (orders
@@ -684,7 +717,7 @@ not the $q_k$, so the constant five does not apply.
   The behaviour at the two ends of the $\gamma$ axis is used in the
   proof of Proposition~\ref{prop:laguerre}. Routine termwise bounds in
   $(m,\Delta,\delta)$, a Cauchy--Schwarz interpolation bound and a
-  uniform ratio bound are collected in Supplementary Section~S9.
+  uniform ratio bound are collected in Section~\ref{sec:termwise}.
 
   \begin{proposition}\label{prop:gamma_eq_0_or_inf}
   At $\gamma = 0$, $LO(G; \alpha, \beta, 0)$ coincides with the
@@ -719,6 +752,357 @@ not the $q_k$, so the constant five does not apply.
   $\gamma \to -\infty$ is dual.
   \end{proof}
 
+\section{Closed forms, bounds and extremal trees}\label{sec:bounds}
+% =====================================================================
+
+This section gives the closed-form values of the family on standard
+graphs, the extremal trees of the pure-$\gamma$ points, and termwise
+bounds. The proofs are short and are included for completeness.
+
+\subsection{Closed-form values on standard graphs}\label{sec:closedforms}
+The classical graph families used are the complete graph $K_n$, the
+cycle $C_n$, the path $P_n$, the star $S_n$ and the complete bipartite
+graph $K_{p,q}$. Beyond these, the hypercube $Q_k$ has $2^k$ vertices and
+$k \cdot 2^{k - 1}$ edges and is $k$-regular. The wheel $W_n$ is an
+$(n - 1)$-cycle plus a universal vertex, and the friendship graph $F_p$
+consists of $p$ triangles sharing a common vertex. Finally, the $r$-regular
+graphs are also used.
+
+  \begin{proposition}\label{prop:closedforms}
+  Let $\alpha, \beta, \gamma \in \mathbb{R}$. Then:
+  \begin{enumerate}
+  \item  $LO(K_n; \alpha, \beta, \gamma) =
+    \dfrac{n(n-1)}{2}\,2^{\beta}(n - 1)^{2\alpha + \beta}$ for $n \ge 2$.
+  \item  $LO(C_n; \alpha, \beta, \gamma) = n \cdot 4^{\alpha +
+  \beta}$
+    for $n \ge 3$.
+  \item
+    $LO(P_n; \alpha, \beta, \gamma) =
+    \begin{cases}
+      2^{\beta}, & n = 2,\\[2pt]
+      2 \cdot 2^{\alpha} 3^{\beta} e^{\gamma/3}, & n = 3,\\[2pt]
+      2 \cdot 2^{\alpha} 3^{\beta} e^{\gamma/3} + (n - 3) \cdot 4^{\alpha +
+  \beta},
+         & n \ge 4.
+    \end{cases}$
+  \item  $LO(S_n; \alpha, \beta, \gamma) =
+    (n - 1)\,(n - 1)^{\alpha} n^{\beta} \exp\!\left(\gamma\,\dfrac{n -
+  2}{n}\right)$
+    for $n \ge 2$.
+  \item  $LO(K_{p,q}; \alpha, \beta, \gamma) =
+    pq\,(pq)^{\alpha}(p + q)^{\beta}\exp\!\left(\gamma\,\dfrac{|p - q|}{p +
+  q}\right)$.
+  \item  $LO(Q_k; \alpha, \beta, \gamma) =
+    k \cdot 2^{k - 1} \cdot 2^{\beta} k^{2\alpha + \beta}$ for $k \ge 1$.
+  \item  For $n \ge 5$, $W_n$ has $n - 1$ spoke edges with
+    degree pair $(3, n - 1)$ and $n - 1$ rim edges with degree pair
+    $(3, 3)$, so
+    \[
+    LO(W_n; \alpha, \beta, \gamma)
+    = (n - 1)\Bigl[\,3^{\alpha} (n - 1)^{\alpha}(n + 2)^{\beta}
+         \exp\!\left(\gamma\,\tfrac{n - 4}{n + 2}\right)
+       + 9^{\alpha} 6^{\beta}\Bigr].
+    \]
+  \item  For $p \ge 1$, $F_p$ has $2p$ spoke edges
+    $(2, 2p)$ and $p$ outer edges $(2, 2)$, so
+    \[
+    LO(F_p; \alpha, \beta, \gamma)
+    = p \cdot 4^{\alpha + \beta}
+     + 2p\,(4p)^{\alpha}(2p + 2)^{\beta}
+         \exp\!\left(\gamma\,\tfrac{p - 1}{p + 1}\right).
+    \]
+  \item  For an $r$-regular graph $G$ with $m$ edges,
+    $\Wuzi = m \cdot 2^{\beta} r^{2\alpha + \beta}$.
+  \end{enumerate}
+  \end{proposition}
+
+  \begin{proof}
+  Each case follows by enumerating the edge degree pairs and applying
+  Definition~\ref{def:wuzi}. In $K_n$, $C_n$, $Q_k$ and $r$-regular
+  graphs every edge has $d_u = d_v = r$, so $\mathrm{imb} = 0$ and
+  $(d_u d_v)^{\alpha}(d_u + d_v)^{\beta} = 2^{\beta} r^{2\alpha + \beta}$,
+  which gives items (1), (2), (6) and (9). All $n - 1$ edges of $S_n$
+  have degree pair $(1, n - 1)$ with $\mathrm{imb} = (n - 2)/n$
+  (item (4)), and all $pq$ edges of $K_{p,q}$ have pair $(p, q)$ (item (5)).
+  For $n \ge 4$, $P_n$ has two pendant edges $(1, 2)$ and $n - 3$ interior
+  edges $(2, 2)$, and the cases $n = 2, 3$ are immediate (item (3)).
+  Items (7) and (8) follow by summing over the two edge-degree-pair
+  classes of $W_n$ and $F_p$.
+  \end{proof}
+
+
+
+\subsection{Extremal trees for the pure-imbalance points}\label{sec:extremal}
+
+The pure-$\gamma$ points are ordered on trees by the same two graphs
+as most classical indices, and the proof is a one-line consequence of
+the edge-by-edge bound $0 \le q_{uv} \le (n-2)/n$ on a tree of order $n$.
+
+\begin{proposition}[Extremal trees]\label{prop:extremal}
+Let $n \ge 4$ and $\gamma > 0$. Among all trees of order $n$, the
+path $P_n$ is the unique minimiser and the star $S_n$ the unique
+maximiser of $LO(\cdot\,;0,0,\gamma)$, with
+\[
+(n-3) + 2e^{\gamma/3} \;\le\; LO(T;0,0,\gamma) \;\le\; (n-1)\,e^{\gamma(n-2)/n}.
+\]
+For $\gamma < 0$ the roles of $P_n$ and $S_n$ are exchanged.
+\end{proposition}
+
+\begin{proof}
+Let $\gamma > 0$. Every edge $uv$ of a tree of order $n$ has
+$q_{uv} \le (n-2)/n$, with equality if and only if $\{d_u,d_v\} =
+\{1,n-1\}$, so $LO(T;0,0,\gamma) \le (n-1)e^{\gamma(n-2)/n}$ with
+equality if and only if every edge is a $(1,n-1)$-edge, that is,
+$T = S_n$. For the lower bound, a tree with $k \ge 2$ leaves has at
+least $k$ edges incident to a leaf, and each such edge has
+$q \ge \tfrac13$ because the other end has degree at least $2$ and
+$(d-1)/(d+1)$ is increasing in $d$. Hence
+$LO(T;0,0,\gamma) \ge (n-1-k) + k e^{\gamma/3} \ge (n-3) + 2e^{\gamma/3}$,
+since $e^{\gamma/3} > 1$. Equality in the second inequality forces
+$k = 2$, so $T = P_n$, and $P_n$ attains the bound because its two
+pendant edges are $(1,2)$-edges and its other edges are $(2,2)$-edges.
+For $\gamma < 0$ every inequality reverses.
+\end{proof}
+
+The proof uses only the bounds on $q$ and does not extend verbatim to
+general $(\alpha,\beta)$, where the ordering of trees depends on the
+scale exponent $2\alpha + \beta$ as well as on $\gamma$. Among
+chemical trees ($\Delta \le 4$) the termwise bound gives
+$LO(T;0,0,\gamma) \le (n-1)e^{3\gamma/5}$ for $\gamma > 0$, with
+equality only for $n = 5$, and the extremal chemical trees for
+$n > 5$ are left open. The orders $4$ to $12$ were also checked by
+enumeration in the reproducibility package.
+
+\subsection{Termwise bounds}\label{sec:termwise}
+  We give a bracket bound via the edge-contribution function $\psi$,
+  bounds in $(m, \Delta, \delta)$ for non-negative parameters, a
+  Cauchy--Schwarz interpolation bound and a uniform ratio bound. The
+  $\gamma \neq 0$ bounds rest on
+  bounding $e^{\gamma q_{uv}}$ edge by edge (for $\gamma \ge 0$) between $1$ and
+  $e^{\gamma(\Delta-1)/(\Delta+1)}$. Throughout, $G$ is a simple
+  connected graph with $\delta \le d_v \le \Delta$ for every
+  $v \in V(G)$. Several of the inequalities have been machine-checked
+  (Supplementary Section~S7).
+
+
+  \begin{remark}[Attribution at $\gamma = 0$]\label{rem:gmattr}
+  At $\gamma = 0$ the family coincides with $M_{\alpha,\beta}$, and
+  inequalities of all the types developed here are already known for it.
+  These include $(\Delta,\delta,m)$-bounds with regular/biregular equality,
+  two-sided comparisons against $M_1$, $M_2$, $R$, $\chi$, $H$, $GA$,
+  $AG$ and $ISI$~\cite{MolinaSigarreta2025GM}, Jensen-
+  and H\"older-type relations~\cite{GranadosJMC2025GM} and further
+  inequalities~\cite{PortillaJMC2025GM}. The $\gamma = 0$
+  specialisations below are therefore not claimed as new. What this section
+  adds is their extension to $\gamma \neq 0$, where the
+  imbalance factor $e^{\gamma q_{uv}}$ enters every edge weight, and the
+  tracking of how $\gamma$ deforms the equality cases. Comparisons
+  at $\gamma = 0$ with the Randi\'c, sum-connectivity and
+  Sombor indices are not repeated.
+  \end{remark}
+
+
+  The summand in~Eq.~\eqref{eq:wuzi} depends only on the unordered
+  edge degree pair $(d_u, d_v)$. We isolate this dependence as follows:
+
+  \begin{definition}\label{def:psi}
+  For real parameters $\alpha, \beta, \gamma$ and positive reals
+  $x, y$,
+  \begin{equation}\label{eq:psi}
+  \edgepsi = (xy)^{\alpha}(x + y)^{\beta}
+  \exp\!\left(\gamma\,\tfrac{|x - y|}{x + y}\right).
+  \end{equation}
+  \end{definition}
+
+  With this notation $\Wuzi = \sum_{uv \in E(G)} \psi(d_u, d_v; \alpha,
+  \beta, \gamma)$.
+
+  \begin{proposition}\label{thm:bracket}
+  Let $G$ be a simple connected graph of size $m \ge 1$ with
+  degrees in $[\delta, \Delta]$. Then
+  \begin{equation}\label{eq:bracket}
+  m \cdot \psi_{\min}(\delta, \Delta; \alpha, \beta, \gamma)
+  \;\le\; \Wuzi \;\le\;
+  m \cdot \psi_{\max}(\delta, \Delta; \alpha, \beta, \gamma),
+  \end{equation}
+  where,
+  $\psi_{\min} = \min\{\psi(i, j; \alpha, \beta, \gamma)
+                : \delta \le i \le j \le \Delta\}$
+  and $\psi_{\max} = \max\{\psi(i, j; \alpha, \beta, \gamma)
+                : \delta \le i \le j \le \Delta\}$. The upper
+  inequality is an equality if and only if every edge of $G$ has a
+  degree pair attaining $\psi_{\max}$. The lower
+  inequality is an equality if and only if every edge has a degree
+  pair attaining $\psi_{\min}$.
+  \end{proposition}
+
+  \begin{proof}
+  Every edge $uv$ has its degree pair in the admissible set
+  $\mathcal{P}(\delta, \Delta) := \{(i, j) \in \mathbb{Z}^2 : \delta \le
+  i \le j \le \Delta\}$, hence
+  $\psi_{\min} \le \psi(d_u, d_v; \alpha, \beta, \gamma) \le \psi_{\max}$
+  on every edge, and summing over the $m$ edges and using
+  $\sum_{uv} \psi(d_u, d_v; \alpha, \beta, \gamma) = \Wuzi$
+  gives~\eqref{eq:bracket}. Each side of~\eqref{eq:bracket} is the sum
+  of $m$ per-edge inequalities, and is therefore an equality if and only
+  if every per-edge inequality is. That is, equality holds if and only
+  if every edge has a degree pair attaining $\psi_{\max}$ (upper side),
+  respectively $\psi_{\min}$ (lower side), over $\mathcal{P}(\delta, \Delta)$.
+  \end{proof}
+
+
+  \begin{corollary}\label{thm:cs}
+  Let $\alpha_1 + \alpha_2 = 2\alpha$, $\beta_1 + \beta_2 = 2\beta$,
+  and $\gamma_1 + \gamma_2 = 2\gamma$. Then for every simple
+  connected graph $G$ without isolated vertices,
+  \[
+  LO(G; \alpha, \beta, \gamma)
+  \;\le\;
+  \sqrt{LO(G; \alpha_1, \beta_1, \gamma_1)
+         \cdot LO(G; \alpha_2, \beta_2, \gamma_2)}
+  \]
+  Equality holds if and only if the ratio
+  \[
+  \psi(d_u, d_v; \alpha_1, \beta_1, \gamma_1)/\psi(d_u, d_v; \alpha_2,
+  \beta_2, \gamma_2)
+  \]
+  is the same for every edge of $G$.
+  \end{corollary}
+  \begin{proof}
+  For each edge $e = uv$ write
+  $\psi_e^{(k)} := \psi(d_u, d_v; \alpha_k, \beta_k, \gamma_k) > 0$,
+  $k \in \{1, 2\}$, and by additivity of the exponents and the hypotheses on
+  $(\alpha_k, \beta_k, \gamma_k)$,
+  $\psi_e^{(1)}\psi_e^{(2)} = \psi(d_u, d_v; \alpha, \beta, \gamma)^2$
+  on every edge. The Cauchy--Schwarz inequality for
+  $a_e = (\psi_e^{(1)})^{1/2}$ and $b_e = (\psi_e^{(2)})^{1/2}$ gives
+  $\sum_e a_e b_e \le (\sum_e a_e^2)^{1/2} (\sum_e b_e^2)^{1/2}$, which
+  is the claim because $\sum_e a_e b_e = \Wuzi$,
+  $\sum_e a_e^2 = LO(G; \alpha_1, \beta_1, \gamma_1)$ and
+  $\sum_e b_e^2 = LO(G; \alpha_2, \beta_2, \gamma_2)$. Equality holds if
+  and only if $b_e = \lambda a_e$ for a constant $\lambda \ge 0$ and all
+  $e$, i.e.\ if and only if
+  $\psi_e^{(2)}/\psi_e^{(1)} = \lambda^2$ is the same on every edge.
+  (The inequality itself is midpoint log-convexity of
+  $\theta \mapsto LO(G; \theta)$, Theorem~\ref{thm:logconvex}.)
+  \end{proof}
+
+
+  \begin{proposition}\label{thm:upper_Delta}
+  Let $G$ be a connected graph of size $m$ and maximum degree $\Delta$. For
+  $\alpha, \beta \ge 0$ and $\gamma \ge 0$,
+  \begin{equation}\label{eq:upper_Delta}
+  \Wuzi \;\le\; m \cdot \Delta^{2\alpha} \cdot (2\Delta)^{\beta}
+  \cdot \exp\!\left(\gamma\,\frac{\Delta - 1}{\Delta + 1}\right).
+  \end{equation}
+  \end{proposition}
+
+  \begin{proof}
+  On every edge $uv$ we have $1 \le d_u, d_v \le \Delta$, hence
+  $d_u d_v \le \Delta^2$ and $d_u + d_v \le 2\Delta$, and the normalised
+  imbalance $\mathrm{imb}(x, y) = |x - y|/(x + y)$ is maximised over
+  $\{(i, j) : 1 \le i \le j \le \Delta\}$ at $(1, \Delta)$, so
+  $|d_u - d_v|/(d_u + d_v) \le (\Delta - 1)/(\Delta + 1)$. Since
+  $\alpha, \beta, \gamma \ge 0$, the maps $t \mapsto t^{\alpha}$,
+  $t \mapsto t^{\beta}$ and $t \mapsto e^{\gamma t}$ are non-decreasing,
+  so $\psi(d_u, d_v; \alpha, \beta, \gamma) \le \Delta^{2\alpha}
+  (2\Delta)^{\beta} \exp(\gamma(\Delta - 1)/(\Delta + 1))$, and summing over
+  the $m$ edges yields~\eqref{eq:upper_Delta}. For $\gamma > 0$
+  and $\Delta \ge 2$ the bound is attained if and only if
+  $\alpha = \beta = 0$ and every edge has degree pair $(1, \Delta)$
+  (for connected $G$, $G \cong K_{1,\Delta}$). If $\alpha > 0$ or
+  $\beta > 0$ the three factor-wise maxima are not simultaneously
+  attainable and the inequality is strict.
+  \end{proof}
+
+
+  \begin{proposition}\label{thm:lower_delta}
+  Let $G$ be a connected graph of size $m$ and minimum degree $\delta$. For
+  $\alpha, \beta \ge 0$ and $\gamma \ge 0$,
+  \begin{equation}\label{eq:lower_delta}
+  \Wuzi \;\ge\; m \cdot \delta^{2\alpha} \cdot (2\delta)^{\beta},
+  \end{equation}
+  with equality if and only if $G$ is $\delta$-regular, except in the
+  degenerate case $(\alpha, \beta, \gamma) = (0, 0, 0)$, where
+  $\Wuzi \equiv m$ and the bound holds with equality for every graph.
+  \end{proposition}
+
+  \begin{proof}
+  On every edge $d_u, d_v \ge \delta$, so for $\alpha, \beta \ge 0$,
+  $(d_u d_v)^{\alpha} \ge \delta^{2\alpha}$ and
+  $(d_u + d_v)^{\beta} \ge (2\delta)^{\beta}$. For $\gamma \ge 0$ the
+  exponential factor is at least $1$ because the imbalance is
+  non-negative, and multiplying and summing over the $m$ edges
+  yields~\eqref{eq:lower_delta}. If $(\alpha, \beta, \gamma) = (0, 0, 0)$
+  then $LO(G; 0, 0, 0) = m$ equals the bound for every graph, while otherwise
+  equality requires equality in every active per-edge factor, which for
+  $\alpha > 0$ or $\beta > 0$ forces $d_u = d_v = \delta$ on every
+  edge. If $\alpha = \beta = 0$ and $\gamma > 0$ it forces $d_u = d_v$
+  on every edge, so the connected graph $G$ is regular, hence
+  $\delta$-regular. Conversely, on a $\delta$-regular graph every edge
+  has degree pair $(\delta, \delta)$ and equality holds.
+  \end{proof}
+
+  The next proposition gives a single uniform template for bounding
+  $\Wuzi$ both above and below. The bound is in terms of any classical
+  bond-incident-degree index whose edge contribution is strictly
+  positive on the admissible degree pairs of the graph.
+
+  \begin{proposition}\label{thm:ratio_bound}
+  Let $G$ be a simple graph with maximum degree at most $\Delta$. Let
+  $I_h(G) = \sum_{uv \in E(G)} h(d_u, d_v)$ be a BID index with
+  edge contribution $h(i, j)$ strictly positive on every degree pair
+  $(i, j)$ that appears in $G$. Define
+  \[
+  c_{\min}^{h} = \min_{(i, j)}\,\frac{\psi(i, j; \alpha, \beta,
+  \gamma)}{h(i, j)},
+  \qquad
+  c_{\max}^{h} = \max_{(i, j)}\,\frac{\psi(i, j; \alpha, \beta,
+  \gamma)}{h(i, j)},
+  \]
+  where the extrema range over the degree pairs actually appearing in
+  $G$.
+  Then
+  \begin{equation}\label{eq:ratio_bound}
+  c_{\min}^{h} \cdot I_h(G)
+  \;\le\; \Wuzi
+  \;\le\; c_{\max}^{h} \cdot I_h(G),
+  \end{equation}
+  with equality on either side if and only if every edge of $G$
+  attains the corresponding extremum of $\psi/h$.
+  \end{proposition}
+
+  \begin{proof}
+  On every edge $uv$ we have $h(d_u, d_v) > 0$ and $c_{\min}^{h} \le \psi(d_u, d_v; \alpha,
+  \beta, \gamma)/h(d_u, d_v) \le c_{\max}^{h}$. Multiplying by $h(d_u, d_v)$
+  and summing over $E(G)$, with
+  $\sum_{uv} h(d_u, d_v) = I_h(G)$ and $\sum_{uv} \psi = \Wuzi$,
+  gives~\eqref{eq:ratio_bound}. Each side is an equality if and only if
+  every edge attains the corresponding extremum of $\psi/h$ over the
+  appearing pairs.
+  \end{proof}
+
+
+  Proposition~\ref{thm:ratio_bound} is a \emph{sharp graph-specific}
+  comparison, whose constants depend on the degree pairs that actually
+  appear in $G$, and a uniform version follows immediately by enlarging
+  the range of the extrema.
+
+  \begin{corollary}[Uniform $\Delta$-bounded version]\label{cor:ratio_uniform}
+  Assume the hypotheses of Proposition~\ref{thm:ratio_bound}, but with $h$
+  strictly positive on all of
+  $P_{\Delta} = \{(i,j) : 1 \le i \le j \le \Delta\}$ and the extrema
+  taken over $P_{\Delta}$. Then
+  inequality~\eqref{eq:ratio_bound} holds simultaneously for every
+  graph of maximum degree at most $\Delta$, with constants independent
+  of the individual graph. Equality on either side holds if and only
+  if every edge of $G$ realises a degree pair attaining the
+  corresponding extremum over $P_{\Delta}$. The uniform constants are
+  in general strictly worse than the graph-specific ones, since the
+  extrema are taken over a superset.
+  \end{corollary}
+
+% =====================================================================
 % =====================================================================
 \section{Discrimination}\label{sec:discrimination}
 % =====================================================================
@@ -798,12 +1182,7 @@ distinct values and a \emph{floor} on degeneracy.
   the edge-degree-pair counts, of which every vertex-degree-based index
   is a functional~\cite{Rada2026LinearVDB}. What it
   adds is the functional direction of Lemma~\ref{prop:indep}, that is,
-  a different weighting of the same information. As a corollary, on graphs of maximum degree four any
-  ten degree-based indices with linearly independent weight vectors
-  $(f(i,j))_{i \le j \le 4}$ span the ten-dimensional count
-  space. Hence every bond-incident-degree index, the Loyola family at
-  every parameter value included, is an exact linear combination of
-  them and adds no linear information for any target. Whether such a reweighting still helps prediction is the question of
+  a different weighting of the same information.  Whether such a reweighting still helps prediction is the question of
   Section~\ref{sec:sensitivity}.
 
 \begin{table}[htbp]
@@ -854,7 +1233,7 @@ $\{(1,2)^{1}, (1,3)^{2}, (1,6)^{5}, (2,3)^{2}, (2,6)^{1}, (3,3)^{1}\}$
 and $\{(1,3)^{3}, (1,6)^{5}, (2,2)^{1}, (2,3)^{2}, (3,6)^{1}\}$
 (exponents are edge multiplicities) share the $q$-histogram
 $\{0^{1}, \tfrac15^{2}, \tfrac13^{1}, \tfrac12^{3}, \tfrac57^{5}\}$.
-Table~\ref{tab:firstfail} collects the first failures, and the index
+Rada~\cite{Rada2019ExpVDB} introduced exponential indices of this type for their discriminating power on trees. Table~\ref{tab:firstfail} collects the first failures, and the index
 $R$ still attains the floor at order $13$ ($570$ values) and leaves it
 at order $14$, where the pure-$\gamma$ points give $1090$ values.
 
@@ -982,30 +1361,28 @@ $LO(0,0,2)$ & $0.1257$ & $0.2745$ & $0.4579$\\
 \section{QSPR diagnostics}\label{sec:sensitivity}
 % =====================================================================
 
-In Tables~\ref{tab:box}--\ref{tab:bp},
-medians are taken over candidate-stream seeds, and seed counts summarise the
-variability of the random search on fixed data and are not replications.
-Values are computed in double precision and rounded once for display
-(three decimals for correlations, $Q^2$ and RMSE, four for structure
-sensitivity). A tabulated difference may therefore differ in the last place
-from the difference of two displayed entries, and a quoted median of
-differences need not equal the difference of medians. The narrow- and
-wide-box streams use the same uniform variates scaled by the half-width,
-so comparisons across boxes are paired.
+In Tables~\ref{tab:box}--\ref{tab:bp} medians are taken over
+candidate-stream seeds, and seed counts describe the variability of the
+random search on fixed data rather than replications. Values are rounded
+once for display (three decimals for correlations, $Q^2$ and RMSE), so a
+tabulated difference may differ in the last place from the difference of
+two displayed entries. The narrow- and wide-box streams use the same
+uniform variates scaled by the half-width, so comparisons across boxes
+are paired.
 
 We benchmark the Loyola family against the classical indices it
 reduces to on the $18$ octane isomers, following the chemometric
 benchmark of the diminished Sombor
-study~\cite{MovahediGutmanRedzepovicFurtula2026}. The $35$
-nonane isomers are a replication set, with models refitted on it. The
+study~\cite{MovahediGutmanRedzepovicFurtula2026}, and use the $35$
+nonane isomers as a replication set with models refitted on it. The
 comparison set consists of the exact reductions of Section~\ref{sec:intro},
 $M_1, M_2, HM, {}^{m}\!M_2, R, \chi, H/2, ISI, GA, AG$, and the two
 fixed pure-$\gamma$ benchmark points $LO(0, 0, 1)$ and $LO(0, 0, 2)$.
 Since the edge count $m = LO(0, 0, 0)$ is constant on the octanes, it is
 omitted. No parameter in the correlation comparison is tuned against
-the property data. An exploratory local-tuning check (Supplementary
-Section~S2) did not exceed the best fixed benchmark except by a $0.001$ in-sample
-$\Delta H_{\mathrm{vap}}$ margin. All comparisons are
+the property data, and an exploratory local-tuning check (Supplementary
+Section~S2) did not exceed the best fixed benchmark except by a $0.001$
+in-sample $\Delta H_{\mathrm{vap}}$ margin. All comparisons are
 descriptive. On sets this small they indicate how imbalance information
 changes the fit of the parent family, and they do not establish
 chemical predictive utility.
@@ -1013,92 +1390,21 @@ chemical predictive utility.
 \subsection{Correlations on the octane isomers}\label{sec:octanes}
 
 Table~\ref{tab:lo_octane} reports the Pearson correlation $r$ between
-each index and each of the five physicochemical properties of the
-$18$ octane isomers. The properties are the boiling point $T_B$, the enthalpy of formation
+each index and the boiling point $T_B$, the enthalpy of formation
 $\Delta H_f$, the enthalpy of vaporization $\Delta H_{\mathrm{vap}}$, the
-entropy $S$ and the acentric factor $\omega$. Data and units are in
-Table~\ref{tab:octane-data}. Boiling points, formation enthalpies and
-(with one exception) vaporization enthalpies are traced to the NIST
-WebBook~\cite{NISTWebBook}, and acentric factors to KDB-derived
-compilations. The WebBook lists a gas-phase entropy for only five
-isomers, while seven entropies are compared with the 1947 API Research
-Project~44 tables~\cite{APIProject44Circ461} or a compiled octane
-dataset. All $90$ molecule-level values were audited against
-authoritative sources (Supplementary Section~S1).
-Three caveats remain. The $298$\,K vaporization enthalpy of
-2,2,3,3-tetramethylbutane, a solid at $298$\,K (triple point
-$374$\,K), is the benchmark-compilation value $8.41$\,kcal\,mol$^{-1}$
-($35.19$\,kJ\,mol$^{-1}$). This matches neither of the NIST standard vaporization
-enthalpies ($42.94$ and $42.91$\,kJ\,mol$^{-1}$, about
-$10.26$\,kcal\,mol$^{-1}$), so its physical reference state is
-unresolved. Six gas-phase entropies could not be verified against a
-primary source, and the 1947 API Project 44 values differ from them by up to
-$2.2$ units. The 2,3,3-trimethylpentane value is a compiled-dataset
-value, and four entropies differ from a widely used compilation.
-Substituting the compilation values changes all twelve $S$ correlations (by up to $0.043$ in $|r|$)
-and moves the margin between $HM$ and $M_1$ at the top from $0.001$ to
-$0.007$. Margins of this size are not meaningful at this resolution. Alternative compiled
-acentric factors change several $\omega$ correlations in the third
-decimal (e.g.\ $M_2$ from $-0.988$ to $-0.986$) and leave the $\omega$
-ranking unchanged (detail in Supplementary Section~S10).
-
-Table~\ref{tab:octane-data} lists the full $18$-isomer dataset used
-in this section, with $T_B$ in $^{\circ}$C, $\Delta H_f$ and
-$\Delta H_{\mathrm{vap}}$ in kcal\,mol$^{-1}$
-($\Delta H_{\mathrm{vap}}$ at $298$~K), $S$ in
-cal\,mol$^{-1}$K$^{-1}$ and $\omega$ dimensionless. The
-$\Delta H_{\mathrm{vap}}$ values of 3,3-dimethylhexane ($8.97$),
-3-ethyl-3-methylpentane ($9.08$), 2,2,3-trimethylpentane ($8.83$) and
-2,3,3-trimethylpentane ($8.90$) are values consistent with the NIST
-WebBook determinations, and Supplementary Section~S1 gives the
-exact-versus-within-uncertainty status of each. The
-$\Delta H_{\mathrm{vap}}$ entry of 2,2,3,3-tetramethylbutane is the
-benchmark-compilation value discussed above. The $S$ value of
-2,3,3-trimethylpentane ($102.06$) is a compiled-dataset value
-(Supplementary Section~S10).
-
-
-Table~\ref{tab:octane-data} has several open provenance items, namely
-the unverified entropies, the vaporization enthalpy of
-2,2,3,3-tetramethylbutane, the corrected transcription of the
-2,3,3-trimethylpentane entropy and the alternative compiled values.
-These items, with their effect on Table~\ref{tab:lo_octane}, are
-collected in Supplementary Section~S10, and none of them enters the
-pre-registered tests of Sections~\ref{sec:external} and~\ref{sec:bp}.
-
-\begin{table}[H]
-\centering\small
-\caption{Physicochemical properties of the $18$ octane isomers.}
-\label{tab:octane-data}
-\begin{tabular}{lrrrrr}
-\toprule
-Isomer & $T_B$ & $\Delta H_f$ & $\Delta H_{\mathrm{vap}}$ & $S$ & $\omega$\\
-\midrule
-$n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
-2-methylheptane & 117.6 & $-51.50$ & 9.48 & 109.84 & 0.378\\
-3-methylheptane & 118.9 & $-50.82$ & 9.52 & 111.26 & 0.371\\
-4-methylheptane & 117.7 & $-50.69$ & 9.48 & 109.32 & 0.372\\
-2,2-dimethylhexane & 106.8 & $-53.71$ & 8.92 & 103.13 & 0.339\\
-2,3-dimethylhexane & 115.6 & $-51.13$ & 9.27 & 108.02 & 0.348\\
-2,4-dimethylhexane & 109.4 & $-52.44$ & 9.03 & 106.98 & 0.344\\
-2,5-dimethylhexane & 109.1 & $-53.21$ & 9.05 & 105.72 & 0.357\\
-3,3-dimethylhexane & 111.9 & $-52.61$ & 8.97 & 104.74 & 0.322\\
-3,4-dimethylhexane & 117.7 & $-50.91$ & 9.32 & 106.59 & 0.340\\
-3-ethyl-2-methylpentane & 115.6 & $-50.48$ & 9.21 & 106.06 & 0.330\\
-3-ethyl-3-methylpentane & 118.3 & $-51.38$ & 9.08 & 101.48 & 0.302\\
-3-ethylhexane & 118.5 & $-50.40$ & 9.48 & 109.43 & 0.362\\
-2,2,3-trimethylpentane & 109.8 & $-52.61$ & 8.83 & 101.31 & 0.300\\
-2,2,4-trimethylpentane & 99.2 & $-53.57$ & 8.40 & 101.81 & 0.305\\
-2,3,3-trimethylpentane & 114.8 & $-51.73$ & 8.90 & 102.06 & 0.291\\
-2,3,4-trimethylpentane & 113.5 & $-51.97$ & 9.01 & 102.39 & 0.317\\
-2,2,3,3-tetramethylbutane & 106.5 & $-53.99$ & 8.41 & 93.06 & 0.247\\
-\bottomrule
-\end{tabular}
-\end{table}
-
-
-
-% References should be ordered alphabetically.
+entropy $S$ and the acentric factor $\omega$ of the $18$ octane isomers.
+The property values are the standard octane benchmark compilation,
+audited value by value against the NIST WebBook~\cite{NISTWebBook} and
+the 1947 API Research Project~44 tables~\cite{APIProject44Circ461};
+Supplementary Table~S5 lists them and Supplementary Section~S1 records
+the status of each of the $90$ values. Three items remain open. The
+$298$\,K vaporization enthalpy of 2,2,3,3-tetramethylbutane, a solid at
+$298$\,K, has an unresolved physical reference state, six gas-phase
+entropies have no primary source, and the acentric factors are compiled
+values. Their effect on Table~\ref{tab:lo_octane} is confined to the
+third decimal and to the $0.001$ margin between $HM$ and $M_1$ on $S$
+(Supplementary Section~S9), and none of them enters the pre-registered
+tests of Sections~\ref{sec:external} and~\ref{sec:bp}.
 
 \begin{table}[htbp]
 \centering
@@ -1125,27 +1431,21 @@ $LO(0,0,2)$ & $-0.829$ & $-0.846$ & $-0.981$ & $-0.937$ & $-0.925$\\
 \end{tabular}
 \end{table}
 
-The best correlation per property is split, with ${}^{m}\!M_2 = LO(-1, 0, 0)$
-strongest on $T_B$ and $\Delta H_f$, $HM = LO(0, 2, 0)$ on $S$ and
-$M_2 = LO(1, 0, 0)$ on $\omega$. The fixed pure-$\gamma$ point
+The best correlation per property is split. ${}^{m}\!M_2 = LO(-1, 0, 0)$
+is strongest on $T_B$ and $\Delta H_f$, $HM = LO(0, 2, 0)$ on $S$ and
+$M_2 = LO(1, 0, 0)$ on $\omega$, while the fixed pure-$\gamma$ point
 $LO(0, 0, 1)$ is strongest on $\Delta H_{\mathrm{vap}}$ ($|r| = 0.984$, with
-$LO(0, 0, 2)$ second at $0.981$), and at the exact-reduction triples the
+$LO(0, 0, 2)$ second at $0.981$). At the exact-reduction triples the
 Loyola correlations coincide with the classical indices, as they must.
-For each property a descriptive post-selection paired bootstrap
-interval for the observed top-two $|r|$ difference included zero, but these
-intervals are not multiplicity-adjusted and do not establish equivalence.
 Recomputing each bolded correlation with single isomers deleted
-shifts $|r|$ by at most $0.027$ (bootstrap details are in Supplementary
-Section~S1). The bolded entries are the largest of twelve highly correlated sample
-correlations on $18$ molecules, and are therefore optimistic (winner's-curse)
-estimates of the selected descriptor's correlation on new molecules.
-They are descriptive rankings rather than tests.
-
-Fourteen of the descriptor pairs
-have $|r| \ge 0.99$, and the first two principal components carry
-$99.05\%$ of the variance (Supplementary Section~S1). The
-pure-$\gamma$ points are collinear with the classical reductions
-(maximum $|r|$ with a reduction equal to
+shifts $|r|$ by at most $0.027$ (Supplementary Section~S1). The bolded
+entries are the largest of twelve highly correlated sample correlations
+on $18$ molecules and are therefore optimistic estimates of the selected
+descriptor's correlation on new molecules. They are descriptive rankings
+rather than tests. Fourteen of the descriptor pairs have $|r| \ge 0.99$
+and the first two principal components carry $99.05\%$ of the variance
+(Supplementary Section~S1), and the pure-$\gamma$ points are collinear
+with the classical reductions (maximum $|r|$ with a reduction equal to
 $0.982$ for $LO(0, 0, 1)$ and $0.993$ for $LO(0, 0, 2)$). Differences
 in the third decimal of $|r|$ between near-collinear descriptors are
 therefore not meaningful rankings.
@@ -1153,71 +1453,68 @@ therefore not meaningful rankings.
 Proposition~\ref{prop:collision} is realised on these data, where
 the $18$ isomers realise only $16$ distinct edge-degree-pair count
 vectors. The two collision pairs of Table~\ref{tab:collisions}
-are indistinguishable by \emph{every} vertex-degree-based index at
-\emph{every} parameter choice. Their measured properties
-differ, by up to $1.2\,^{\circ}$C in $T_B$ within the first pair and
-$2.1\,^{\circ}$C within the second. Every correlation in
-Table~\ref{tab:lo_octane}, and every tuned variant below, operates
-above this irreducible floor.
+receive the same value from every vertex-degree-based index at every
+parameter choice, although their measured properties differ, by up to
+$1.2\,^{\circ}$C in $T_B$ within the first pair and $2.1\,^{\circ}$C
+within the second. Every correlation in Table~\ref{tab:lo_octane}, and
+every tuned variant below, operates above this irreducible floor.
 
 \subsection{Effect of freeing $\gamma$ and of the search
 box}\label{sec:ablation}
 
 We ask whether, at identical search budgets, freeing $\gamma$ improves
 out-of-sample prediction beyond an optimised parent $M_{\alpha,\beta}$.
-The design is a fully nested leave-one-out (details in Supplementary
-Section~S3) in which, for each property and each outer fold, candidate parameter
-vectors are drawn uniformly per coordinate from a search box. These are triples
+The design is a fully nested leave-one-out (Supplementary Section~S3).
+For each property and each outer fold, candidate parameter vectors are
+drawn uniformly per coordinate from a search box, triples
 $(\alpha,\beta,\gamma)$ for the Loyola model and pairs $(\alpha,\beta)$
-with $\gamma = 0$ for the parent, with identical budget. Candidates are scored on the
-training isomers only, by \emph{inner} leave-one-out root-mean-square
-error of the one-descriptor linear regression, after which the best candidate is
-refit and the held-out isomer predicted. No quantity computed on the
-held-out isomer enters selection or fitting. In the box $(-2,2)$ used
-first, freeing $\gamma$ appeared to help the vaporization enthalpy
-(Supplementary Table~S3), improving
-nested predictive performance for $\Delta H_{\mathrm{vap}}$ in every
-seed over one hundred candidate streams. The count was $100/100$ at budgets $200$ and $500$, with median
-$\Delta Q^2 = +0.069$ and $+0.068$, whereas freeing $\gamma$ usually degraded
-$\Delta H_f$ and gave mixed or slightly negative results for the other
-properties. With 2,2,3,3-tetramethylbutane excluded the count falls to
-$93/100$ and $96/100$ (Supplementary Section~S3), and these counts describe
-optimiser variance on one fixed set of $18$ molecules. Selection also varies across folds. For $\Delta H_f$
-the three-parameter search chose three distinct triples over the $18$
-folds, whereas for $\Delta H_{\mathrm{vap}}$ it chose the same triple
-in every fold (Supplementary Section~S3). The nested $Q^2$ therefore evaluates
-the selection-plus-fit procedure rather than one fitted model. These counts also
-hide a boundary effect, since for
+with $\gamma = 0$ for the parent, with identical budget. Candidates are
+scored on the training isomers only, by inner leave-one-out
+root-mean-square error of the one-descriptor linear regression, after
+which the best candidate is refit and the held-out isomer predicted. No
+quantity computed on the held-out isomer enters selection or fitting.
+
+In the box $(-2,2)$ used first, freeing $\gamma$ appeared to help the
+vaporization enthalpy. It improved the nested $Q^2$ for
+$\Delta H_{\mathrm{vap}}$ in $100/100$ candidate streams at budgets
+$200$ and $500$, with median $\Delta Q^2 = +0.069$ and $+0.068$
+(Supplementary Table~S3), while it usually degraded $\Delta H_f$ and
+gave mixed results for the other properties. With
+2,2,3,3-tetramethylbutane excluded the count falls to $93/100$ and
+$96/100$. These counts describe optimiser variance on one fixed set of
+$18$ molecules, and they hide a boundary effect. For
 $\Delta H_{\mathrm{vap}}$ the parent chose
 $(\alpha,\beta) = (1.021, -1.993)$, on the boundary of the box, in $16$
 of the $18$ folds.
 
-The decisive design choice is the box $(-2,2)$, which the nonane
-pre-registration also fixed. By $\ln(ij) = 2\ln(i+j) +
-\ln(1-q^2) - \ln 4$ (Eq.~\eqref{eq:factor}) the parent family
-reaches imbalance information through $(1-q^2)^{\alpha}$ along the
-direction $\beta \approx -2\alpha$. It needs large exponents to
-weight it strongly, and the box truncates exactly that direction. The
-matched comparison was therefore repeated with $2000$
-candidates per model, seeds $0$--$49$, and boxes of half-width $2$
-and $12$ for both models (Table~\ref{tab:box}), a repetition that was
-not pre-registered. In the box of
-half-width $12$ the parent's selections are interior in more than
-$90\%$ of folds for every property, and the vaporization-enthalpy gain
-shrinks to about zero. A hybrid control that widens only
-$(\alpha,\beta)$ gives median $\Delta Q^2 = +0.004$ on the octanes
-($28$ of $50$ seeds) and $-0.002$ on the nonanes ($24$ of $50$).
-Widening all three coordinates gives $-0.010$ and $-0.016$, while on the
-other properties no advantage is consistent across boxes. Under the
-hybrid control the Loyola model is ahead for octane $S$ ($38$ of $50$
-seeds) and nonane $T_B$ ($31$ of $50$), and behind for octane $T_B$,
-$\Delta H_f$ and $\omega$. The wide box itself lowers the parent's
-$Q^2$ for $S$ and $T_B$. The vaporization-enthalpy gains above are thus
-a truncation effect rather than information the parent lacks. Most of
-the change comes from the parent improving in
-the wide box ($0.887 \to 0.942$ on the octanes). The rest comes from the
-three-dimensional search being slightly less efficient there ($0.957
-\to 0.946$ for the hybrid control). What remains is due to linear imbalance weighting itself. Both the fixed point $LO(0,0,1)$ and the
+The decisive design choice is the box, which the nonane
+pre-registration also fixed at half-width $2$. By $\ln(ij) = 2\ln(i+j) +
+\ln(1-q^2) - \ln 4$ (Eq.~\eqref{eq:factor}) the parent reaches
+imbalance information through $(1-q^2)^{\alpha}$ along the direction
+$\beta \approx -2\alpha$, which needs large exponents and is exactly the
+direction the box truncates. The dependence on the box is not monotone.
+On a dense parent grid the nested $Q^2$ of the parent for octane
+$\Delta H_{\mathrm{vap}}$ is $0.8873$, $0.6996$, $0.9525$ and $0.9383$
+at half-widths $2$, $4$, $8$ and $12$. The selected point lies on the
+boundary in $18$, $17$, $2$ and $0$ of the $18$ folds. On the nonanes
+the values are $0.8532$, $0.8779$, $0.8997$ and $0.8837$, with $34$,
+$32$, $3$ and $0$ boundary folds of $34$. The half-width-$12$ box is the
+smallest examined in which the parent's selections are interior, and it
+is the box used below. The matched comparison was therefore repeated
+with $2000$ candidates per model, seeds $0$--$49$, and boxes of
+half-width $2$ and $12$ for both models (Table~\ref{tab:box}); this
+repetition was not pre-registered. In the wide box the
+vaporization-enthalpy gain shrinks to about zero. A hybrid control widens only $(\alpha,\beta)$ and keeps
+$\gamma \in (-2,2)$; it is drawn after the parent from the same
+candidate stream, so the two are paired by seed rather than by
+candidate. It gives median $\Delta Q^2 = +0.004$ on the octanes ($28$
+of $50$ seeds) and $-0.002$ on the nonanes ($24$ of $50$), while
+widening all three coordinates gives $-0.010$ and $-0.016$. On the other properties no advantage is
+consistent across boxes. Most of the change comes from the parent
+improving in the wide box ($0.887 \to 0.942$ on the octanes), and the
+rest from the three-dimensional search being slightly less efficient
+there ($0.957 \to 0.946$ for the hybrid control). What remains is due to
+linear imbalance weighting itself. The fixed point $LO(0,0,1)$ and the
 parameter-free $IRLA$ approach what the parent reaches only near
 $(\alpha,\beta) \approx (4.5, -9)$ ($Q^2 = 0.957$ and $0.948$ against
 $0.949$ there, on the octanes).
@@ -1253,57 +1550,64 @@ non. $\Delta H_{\mathrm{vap}}$ & $93\%$ & $0.855$ & $0.895$ & $49$ & $9\%$ & $0.
 \end{tabular}
 \end{table}
 
-Under these protocols, then, tuning $\gamma$ yields no demonstrated
-predictive advantage over a parent evaluated over the wider search box.
-Equal candidate budgets do not guarantee equally thorough search in two
-and three dimensions, and the hybrid control, which keeps $\gamma$ in a
-narrow range, reduces this asymmetry without removing it. A more
-exhaustive three-dimensional search could in principle find a better
-Loyola point. The value of $\gamma$ lies in the structural results of
-Section~\ref{sec:geometry} and in the comparison with linear imbalance
-weighting of Section~\ref{sec:external}.
+Under these protocols tuning $\gamma$ yields no demonstrated predictive
+advantage over a parent evaluated over the wider box. Two caveats
+remain. Equal candidate budgets do not guarantee equally thorough
+searches in two and three dimensions, and the hybrid control reduces
+this asymmetry without removing it, so the matched design costs the
+three-parameter model part of the effect sought. The parent's own $Q^2$
+also varies with the box by more than that effect, as the grid values
+above show. The verdict is therefore no demonstrated gain rather than
+no gain.
 
 \subsection{Replication on the nonane isomers}\label{sec:external}
 
-Under a protocol committed to the reproducibility package before any
-nonane value was collected, the identical nested design was applied to
-the $35$ constitutional nonane isomers. Boiling points were $35$ values:
-$20$ NIST averages, $5$ single determinations and $10$ most recent
-determinations selected under the protocol's Deviation D1. Standard vaporization
-enthalpies were $34$ values from the NIST WebBook~\cite{NISTWebBook}. Only $4$ of the $34$ vaporization
-enthalpies are calorimetric determinations (one more is a NIST average),
-and $29$ come from two
-compilations~\cite{LabaufGreenshieldsRossini1961, WilhoitZwolinski1971}.
-Agreement with them therefore measures consistency with compiled values rather than
-independent experimental validation. Within-fold baselines are in
-Table~\ref{tab:external}. The pre-registered verdict is that the
-$\gamma$ effect \emph{replicates} for $\Delta H_{\mathrm{vap}}$
-(compilation values), with LO better than GM in $95/100$ and $98/100$ seeds
-and median $\Delta Q^2 = +0.048$ and $+0.053$. For $T_B$ the verdict is \emph{mixed}
-($58/100$ and $63/100$). The pre-registered protocol, however, fixed the
-box of half-width $2$, which binds the parent (Table~\ref{tab:box}), and in
-a box that does not, the nonane gain disappears (median
-$\Delta Q^2 = -0.002$ under the hybrid control). The pre-registered
-verdict is reported as obtained, with this deviation recorded. On both sets the
-untuned fixed point $LO(0,0,1)$ matches or
-beats the tuned Loyola model ($0.957$ and $0.903$ against
-medians $0.953$ and $0.900$). It is closely related to $IRLA$:
-$LO(G;0,0,\gamma) = m + \tfrac{\gamma}{2}\,IRLA(G) + O(\gamma^2)$ as $\gamma \to 0$.
-At $\gamma = 1$ higher moments of the imbalance remain, and trees with
-equal $IRLA$ can differ in $LO(0,0,1)$. Even so, the correlation between the two is $0.996$ on both sets. $IRLA$ itself
+Under a protocol committed to the reproducibility package (commit
+\texttt{964b127}) before any nonane value was collected, the identical
+nested design was applied to the $35$ constitutional nonane isomers.
+Boiling points were $35$ values, namely $20$ NIST averages, $5$ single
+determinations and $10$ most recent determinations selected under the
+protocol's Deviation D1. Standard vaporization enthalpies were $34$
+values from the NIST WebBook~\cite{NISTWebBook}, of which only $4$ are
+calorimetric determinations (one more is a NIST average) and $29$ come
+from two compilations~\cite{LabaufGreenshieldsRossini1961,
+WilhoitZwolinski1971}. Agreement with them therefore measures
+consistency with compiled values rather than independent experimental
+validation. The pre-registered verdict is that the $\gamma$ effect
+\emph{replicates} for $\Delta H_{\mathrm{vap}}$, with LO better than GM
+in $95/100$ and $98/100$ seeds and median $\Delta Q^2 = +0.048$ and
+$+0.053$, and is \emph{mixed} for $T_B$ ($58/100$ and $63/100$).
+Within-fold baselines are in Table~\ref{tab:external}. The protocol,
+however, fixed the box of half-width $2$, which binds the parent
+(Table~\ref{tab:box}), and in a box that does not, the nonane gain
+disappears (median $\Delta Q^2 = -0.002$ under the hybrid control). The
+pre-registered verdict is reported as obtained, with this deviation
+recorded. The seed-count criterion of that protocol counts optimiser
+variance on fixed data, and we now regard it as a design error of the
+protocol rather than as evidence. Because the nonane vaporization
+enthalpies are compilation values, we decided after this result to
+treat the measured boiling points of Section~\ref{sec:bp} as the primary
+predictive evidence of the paper and the nonane analysis as a secondary
+diagnostic. That reclassification was made after the result, and we
+record it here.
+
+On both sets the untuned fixed point $LO(0,0,1)$ matches or beats the
+tuned Loyola model ($0.957$ and $0.903$ against medians $0.953$ and
+$0.900$). It is closely related to $IRLA$, since
+$LO(G;0,0,\gamma) = m + \tfrac{\gamma}{2}\,IRLA(G) + O(\gamma^2)$ as
+$\gamma \to 0$. At $\gamma = 1$ higher moments of the imbalance remain
+and trees with equal $IRLA$ can differ in $LO(0,0,1)$, yet the
+correlation between the two is $0.996$ on both sets, and $IRLA$ itself
 comes within $0.003$ of the median Loyola model on the nonanes ($0.897$
-against $0.900$). What matters for this property is therefore a term linear in
-the imbalance. Ridge regression on the full
-degree-pair count vector predicts the nonanes better than every index
-model ($Q^2 = 0.927$ for $\Delta H_{\mathrm{vap}}$, $0.682$ for $T_B$).
-This is consistent with Proposition~\ref{prop:collision} and the remark after
-Proposition~\ref{prop:generic} (every index in the family is a
-one-dimensional reweighting of the degree-pair counts). A post hoc molecule
-bootstrap, conditional on the fitted predictions, omits refitting
-and selection uncertainty, and its $95\%$ interval for LO minus GM on nonane
-$\Delta H_{\mathrm{vap}}$, $[-0.006, +0.113]$ at budget $200$, includes
-zero. Protocol details, an exploratory transfer analysis and this
-bootstrap are in Supplementary Section~S4.
+against $0.900$). What matters for this property is therefore a term
+linear in the imbalance. Ridge regression on the full degree-pair count
+vector, a reference for what the counts carry rather than a competing
+index, predicts the nonanes better than every index model
+($Q^2 = 0.927$ for $\Delta H_{\mathrm{vap}}$, $0.682$ for $T_B$). A post
+hoc molecule bootstrap conditional on the fitted predictions, which
+omits refitting and selection uncertainty, gives a $95\%$ interval for
+LO minus GM on nonane $\Delta H_{\mathrm{vap}}$ of $[-0.006, +0.113]$ at
+budget $200$, which includes zero (Supplementary Section~S4).
 
 \begin{table}[htbp]
 \centering
@@ -1336,47 +1640,47 @@ non. $\Delta H_{\mathrm{vap}}$ & $-0.062$ & $0.857$ & $0.897$ & $0.927$ & $0.903
 
 \subsection{Measured boiling points}\label{sec:bp}
 
-Measured vaporization enthalpies are too scarce for a larger
-test. NIST lists only $25$ acyclic alkane skeletons outside $C_8$ and
-$C_9$, and one of the $75$ decanes, with at least one calorimetric
-standard-state $298$\,K determination (NIST averaged entries resolved
-against their individual measurements). Two further tests therefore used measured boiling points, under a
-protocol committed to the repository before any model was fitted. The
-NIST pages had been archived two days earlier during a
-data-availability audit that counted available values only. Boiling
-points were taken from the NIST
-WebBook~\cite{NISTWebBook} by a fixed rule. The rule takes the NIST average, or else
-the median of non-compilation determinations if they agree within
-$3$\,K, and otherwise excludes the molecule. This gives all hexanes, heptanes and octanes and $34$ of the $35$ nonanes,
-since one nonane has two NIST entries with the same InChI whose boiling points differ
-by $6.4$\,K. It also gives $34$ of the $75$ decanes, because $31$ of them have no NIST boiling point
-and $10$ have determinations more than $3$\,K apart. For $14$ of the $34$ included decanes NIST lists a single
-non-compilation determination, so the agreement rule does not apply to
-them. Under this uniform rule the pooled octane boiling points can
-differ from those of
-Table~\ref{tab:octane-data} by up to $0.5\,^{\circ}$C, for example
-2,4-dimethylhexane at $108.9$ against $109.4\,^{\circ}$C, a documented
-source variation. Eight pooled nonane boiling points differ from
-the replication-set values of Section~\ref{sec:external} by
-$0.1$--$0.9\,^{\circ}$C, as that protocol took the most recent
-determination where NIST gives no average. The included and excluded
-decanes do not differ detectably in
-branching or imbalance. The measures were the numbers of tertiary and quaternary carbons and
-of methyl groups, the Wiener index, $IRLA$, $LO(0,0,1)$ and $R$. Two-sided
-permutation tests gave $p \ge 0.10$ in every case, though with $34$ and $41$
-molecules such tests can rule out only large differences. Test~A
-evaluates the models on the decanes as a new cohort, refitting and
-reselecting inside each leave-one-out fold. Test~B pools all
-$100$ molecules and adds the carbon number $n_C$ as a covariate, so
+Measured vaporization enthalpies are too scarce for a larger test. NIST
+lists only $25$ acyclic alkane skeletons outside $C_8$ and $C_9$, and
+one of the $75$ decanes, with at least one calorimetric standard-state
+$298$\,K determination. Two further tests therefore used measured
+boiling points, under a protocol committed to the repository (commit
+\texttt{a5cf378}) before any model was fitted. The NIST pages had been
+archived two days earlier during a data-availability audit that counted
+available values only. Boiling points were taken from the NIST
+WebBook~\cite{NISTWebBook} by a fixed rule. The rule takes the NIST
+average, or else the median of non-compilation determinations if they
+agree within $3$\,K, and otherwise excludes the molecule. This gives all
+hexanes, heptanes and octanes and $34$ of the $35$ nonanes, since one
+nonane has two NIST entries with the same InChI whose boiling points
+differ by $6.4$\,K. It also gives $34$ of the $75$ decanes, because
+$31$ of them have no NIST boiling point and $10$ have determinations
+more than $3$\,K apart. For $14$ of the $34$ included decanes NIST lists
+a single non-compilation determination, so the agreement rule does not
+apply to them. Under this uniform rule the pooled octane boiling points
+can differ from those of Supplementary Table~S5 by up to
+$0.5\,^{\circ}$C, for example 2,4-dimethylhexane at $108.9$ against
+$109.4\,^{\circ}$C, a documented source variation. Eight pooled nonane
+boiling points differ from the replication-set values of
+Section~\ref{sec:external} by $0.1$--$0.9\,^{\circ}$C, as that protocol
+took the most recent determination where NIST gives no average. The
+included and excluded decanes do not differ detectably in branching or
+imbalance, measured by the numbers of tertiary and quaternary carbons
+and of methyl groups, the Wiener index, $IRLA$, $LO(0,0,1)$ and $R$.
+Two-sided permutation tests gave $p \ge 0.10$ in every case, though
+with $34$ and $41$ molecules such tests can rule out only large
+differences. Test~A evaluates the models on the decanes as a new cohort,
+refitting and reselecting inside each leave-one-out fold. Test~B pools
+all $100$ molecules and adds the carbon number $n_C$ as a covariate, so
 that each descriptor is judged on branching beyond size. Both use the
-non-truncating design of Section~\ref{sec:ablation}, with the parent searched
-over $(\alpha,\beta) \in (-12,12)^2$ and the Loyola model over the same
-box with $\gamma \in (-2,2)$, at $2000$ candidates and seeds
-$0$--$49$. The pre-registered criterion for a $\gamma$ effect
-required at least $40$ wins in $50$ seeds and a molecule-bootstrap
-interval excluding zero (Table~\ref{tab:bp}). The rule is one-sided,
-so a negative difference also returns ``no evidence'' and the rule never returns evidence
-that $\gamma$ hurts.
+non-truncating design of Section~\ref{sec:ablation}, with the parent
+searched over $(\alpha,\beta) \in (-12,12)^2$ and the Loyola model over
+the same box with $\gamma \in (-2,2)$, at $2000$ candidates and seeds
+$0$--$49$. The pre-registered criterion for a $\gamma$ effect required
+at least $40$ wins in $50$ seeds and a molecule-bootstrap interval
+excluding zero (Table~\ref{tab:bp}). The rule is one-sided, so a
+negative difference also returns ``no evidence'' and the rule never
+returns evidence that $\gamma$ hurts.
 
 \begin{table}[htbp]
 \centering
@@ -1403,48 +1707,42 @@ C6--C10, with $n_C$ ($n = 100$) & $0.938$ & $0.967$ & $0.963$ & $0.963$ & $0.991
 \end{tabular}
 \end{table}
 
-Both pre-registered verdicts are negative.
-On the decane cohort the median $\Delta Q^2 = -0.072$, LO is ahead
-in $15$ of $50$ seeds, and the $95\%$ interval is $[-0.156, +0.001]$. In the
-pooled size-adjusted set the values are $-0.000$, $25$ of $50$ and $[-0.003, +0.002]$.
-In the original box of half-width $2$, reported as the pre-registration
+Both pre-registered verdicts are negative. On the decane cohort the
+median $\Delta Q^2 = -0.072$, LO is ahead in $15$ of $50$ seeds, and the
+$95\%$ interval is $[-0.156, +0.001]$. In the pooled size-adjusted set
+the values are $-0.000$, $25$ of $50$ and $[-0.003, +0.002]$. In the
+original box of half-width $2$, reported as the pre-registration
 requires, the two tuned models are level on the decanes (medians $0.469$
 and $0.465$). The Loyola model is marginally ahead on the pooled set
-($0.980$ against $0.976$). Therefore the decane verdict does not depend on the
-box. The lower decane $Q^2$ of the hybrid control ($0.406$ against
+($0.980$ against $0.976$). The decane verdict therefore does not depend
+on the box. The lower decane $Q^2$ of the hybrid control ($0.406$ against
 $0.465$ in the narrow box) reflects the cost of a three-dimensional
-search over a wide box. It is not a penalty for $\gamma$.
-The pooled cohort was corrected after an external audit found one
-nonane's second NIST entry skipped (Deviation D5 in the
-repository), and pooling grouped pages also moved one heptane value by
-$0.2\,^{\circ}$C. On the uncorrected cohort of $101$ molecules the same test
-gave $-0.000$, $24$ of $50$, $[-0.003, +0.002]$, so the correction
-changes no conclusion. The intervals are molecule bootstraps
-conditional on the fitted predictions, as in Section~\ref{sec:external}.
-Ridge regression on the ten degree-pair counts
-reaches $Q^2 = 0.860$ on the decanes, where every single index stays
-between $0.15$ and $0.51$, and $0.991$ on the pooled set. A permutation
-check on the decanes ($200$ random permutations of the boiling points)
-gives it a median $Q^2$ of $-0.09$, so the gap is not an artefact of the
-cross-validation procedure itself. A permutation test cannot, however,
-exclude every form of leakage. Branching effects on the boiling point
-are thus spread over several degree-pair counts in a way that no
-one-dimensional summary of the family, with or without $\gamma$,
-recovers. These conclusions concern acyclic alkanes and are the
-primary predictive evidence of this paper, while the
-vaporization-enthalpy analyses of Sections~\ref{sec:ablation}
-and~\ref{sec:external} are secondary diagnostics. Data, rule,
-exclusions and scripts are in the repository.
+search over a wide box. It is not a penalty for $\gamma$. The pooled
+cohort was corrected after an external audit found one nonane's second
+NIST entry skipped (Deviation D5 in the repository), and pooling grouped
+pages also moved one heptane value by $0.2\,^{\circ}$C. On the
+uncorrected cohort of $101$ molecules the same test gave $-0.000$, $24$
+of $50$, $[-0.003, +0.002]$, so the correction changes no conclusion.
+The intervals are molecule bootstraps conditional on the fitted
+predictions, as in Section~\ref{sec:external}. Ridge regression on the
+ten degree-pair counts reaches $Q^2 = 0.860$ on the decanes, where
+every single index stays between $0.15$ and $0.51$, and $0.991$ on the
+pooled set. A permutation check on the decanes ($200$ random
+permutations of the boiling points) gives it a median $Q^2$ of $-0.09$,
+so the gap is not an artefact of the cross-validation procedure itself,
+although a permutation test cannot exclude every form of leakage.
+Branching effects on the boiling point are thus spread over several
+degree-pair counts in a way that no one-dimensional summary of the
+family, with or without $\gamma$, recovers. These conclusions concern
+acyclic alkanes.
 
 Data, scripts and verifiers that recompute every tabulated value are
 in the reproducibility package~\cite{LoyolaRepo}, where the nonane and
 boiling-point protocols were committed before the corresponding
 models were fitted. The termwise bounds, the convexity statement, the
 independence of the imbalance direction and the order-thirteen profile
-collision have also been machine-checked in Lean~4 with Mathlib. There
-graphs are modelled by their multisets of edge degree pairs, while equality
-characterisations were not formalised. The scope of the formalisation
-is described in the Supplementary Material.
+collision have also been machine-checked in Lean~4 with Mathlib
+(Supplementary Section~S7).
 
 % =====================================================================
 \section{Conclusion}\label{sec:conclusion}
@@ -1456,24 +1754,20 @@ third coordinate adds. On the mathematical side we showed that the imbalance dir
 affinely independent of the two parent directions once a vertex of
 degree three is present. The logarithm of the index is globally
 convex. The family factorises
-into a size coordinate and a shape coordinate. On the resulting ratio
-plane the pure-imbalance points discriminate exactly the histogram of
-edge imbalances. For trees of small order this histogram carries the
+into a size coordinate and a shape coordinate. On the resulting ratio plane the pure-imbalance points discriminate exactly the histogram of edge imbalances, and the same limit binds every index that depends on an edge only through its degree ratio. For trees of small order this histogram carries the
 full degree-pair information, so these points attain the discrimination
 limit of the whole degree-based class. From order thirteen onward
 (sixteen for chemical trees) they provably lose information, and we
-exhibited the colliding families. We also bounded the number of order
-exchanges between two chemical graphs along the imbalance axis. For
+exhibited the colliding families. We also bounded the number of order exchanges between two chemical graphs along the imbalance axis and determined the extremal trees of the pure-imbalance points. For
 each graph we characterised the parameter directions that leave the
 index unchanged up to scale.
 
-On the chemometric side the evidence was negative. An apparent gain
+On the chemometric side no predictive gain was demonstrated. An apparent gain
 from the imbalance parameter on vaporization enthalpies replicated
 under a pre-registered protocol, but it disappeared once the parent
 family was searched over a box that did not truncate it.
 Pre-registered tests on measured boiling points of decanes and of a
-pooled set of C6--C10 alkanes showed no benefit from the third
-coordinate. There a linear model on the degree-pair counts
+pooled set of C6--C10 alkanes showed no demonstrated benefit from the third coordinate. There a linear model on the degree-pair counts
 outperformed every single index. The untuned pure-imbalance point is highly
 correlated with the parameter-free irregularity index and matched the
 tuned models on vaporization enthalpy. The compactness of the family
@@ -1489,6 +1783,9 @@ Material.
 
  \begin{thebibliography}{00}
 
+
+  \bibitem{Albertson1997} M. O. Albertson, The irregularity of a graph,
+  \textit{Ars Comb.\/} \textbf{46} (1997) 219--225.
 
   \bibitem{AliGutmanFurtula2026BID} A. Ali, I. Gutman, B. Furtula,
   Extremal results on bond incident degree indices of graphs: a survey,
@@ -1517,6 +1814,10 @@ Material.
   Mathematical Statistics, Hayward, 1986.
 
 
+  \bibitem{CruzMonsalveRada2020} R. Cruz, J. Monsalve, J. Rada, Trees with
+  maximum exponential Randi\'c index, \textit{Discrete Appl. Math.\/}
+  \textbf{283} (2020) 634--643.
+
   \bibitem{DasMondal2024ExpGA} K. C. Das, S. Mondal, On exponential
   geometric-arithmetic index of graphs, \textit{J. Math. Chem.\/}
   \textbf{62} (2024) 2740--2760.
@@ -1539,6 +1840,10 @@ Material.
   applications, \textit{J. Math. Chem.\/} \textbf{63} (2025)
   406--418.
 
+
+  \bibitem{Gutman2021Sombor} I. Gutman, Geometric approach to degree-based
+  topological indices: Sombor indices, \textit{MATCH Commun. Math. Comput.
+  Chem.\/} \textbf{86} (2021) 11--16.
 
   \bibitem{Gutman2026SomborSurvey} I. Gutman, Survey of Sombor-type
   degree-based topological indices, \textit{MATCH Commun. Math. Comput.

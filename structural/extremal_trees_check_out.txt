@@ -1,0 +1,37 @@
+n= 4 gamma=+0.3 trees=   2: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 4 gamma=+1.0 trees=   2: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 4 gamma=+2.0 trees=   2: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 4 gamma=-1.0 trees=   2: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 5 gamma=+0.3 trees=   3: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 5 gamma=+1.0 trees=   3: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 5 gamma=+2.0 trees=   3: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 5 gamma=-1.0 trees=   3: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 6 gamma=+0.3 trees=   6: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 6 gamma=+1.0 trees=   6: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 6 gamma=+2.0 trees=   6: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 6 gamma=-1.0 trees=   6: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 7 gamma=+0.3 trees=  11: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 7 gamma=+1.0 trees=  11: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 7 gamma=+2.0 trees=  11: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 7 gamma=-1.0 trees=  11: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 8 gamma=+0.3 trees=  23: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 8 gamma=+1.0 trees=  23: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 8 gamma=+2.0 trees=  23: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 8 gamma=-1.0 trees=  23: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 9 gamma=+0.3 trees=  47: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 9 gamma=+1.0 trees=  47: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 9 gamma=+2.0 trees=  47: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n= 9 gamma=-1.0 trees=  47: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n=10 gamma=+0.3 trees= 106: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n=10 gamma=+1.0 trees= 106: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n=10 gamma=+2.0 trees= 106: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n=10 gamma=-1.0 trees= 106: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n=11 gamma=+0.3 trees= 235: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n=11 gamma=+1.0 trees= 235: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n=11 gamma=+2.0 trees= 235: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n=11 gamma=-1.0 trees= 235: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n=12 gamma=+0.3 trees= 551: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n=12 gamma=+1.0 trees= 551: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n=12 gamma=+2.0 trees= 551: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+n=12 gamma=-1.0 trees= 551: path unique min/star unique max (gamma>0; exchanged for gamma<0): OK
+RESULT: extremal-tree proposition holds for all orders 4..12

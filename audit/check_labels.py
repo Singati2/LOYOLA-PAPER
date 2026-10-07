@@ -101,8 +101,10 @@ def main():
             fail(f"supplement cites Section~{n} of the main paper, which the compiled main paper does not number so")
     for m in re.finditer(r"Table~(\d+) of the main paper", su):
         ctx = su[max(0, m.start() - 100):m.start()].lower()
-        for word, cap_word in TABLE_WORDS.items():
-            if word in ctx and int(m.group(1)) in tables and cap_word not in tables[int(m.group(1))].lower():
+        found = [(ctx.rfind(word), word) for word in TABLE_WORDS if word in ctx]
+        for _, word in sorted(found)[-1:]:                      # the keyword nearest the citation decides
+            cap_word = TABLE_WORDS[word]
+            if int(m.group(1)) in tables and cap_word not in tables[int(m.group(1))].lower():
                 fail(f"supplement cites Table~{m.group(1)} of the main paper for '{word}' but that table's caption is '{tables[int(m.group(1))][:40]}'")
     for kind, n in re.findall(r"(Theorem|Proposition|Lemma|Corollary|Remark)~(\d+) of the main paper", su):
         if (kind, int(n)) not in results:
