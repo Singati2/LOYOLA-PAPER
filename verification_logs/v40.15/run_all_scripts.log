@@ -38,3 +38,4 @@ run_all_scripts at d3ae3bc: 38 scripts, each in an isolated copy of the 474 trac
 [OK] verify_loyola_v35.py: exit 0, 153 s; all written files identical; last line:   node_labels = _init_node_labels(G, edge_attr, node_attr)
 [PROBLEM] manifest.py: exit 1, 0 s; all written files identical; last line: verify.py: hash mismatch
 RESULT: 2 PROBLEM(S)
+replay exit=1

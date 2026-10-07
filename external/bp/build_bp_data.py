@@ -37,6 +37,22 @@ def inchi_tree(inchi, n_expected):
     layer = m.group(1)
     if not re.fullmatch(r"[0-9()\-,]+", layer):
         raise ValueError(f"unexpected characters in {layer}")
+    # v40.15: well-formed connection layer only -- atoms separated by single
+    # '-', ',' or brackets; no empty segments, no leading/trailing separator,
+    # ',' only inside a bracket, balanced brackets, each atom number once in
+    # 1..n_expected.
+    if re.search(r"[-,(]{2}|[-,(]\)|\([-,]|^[-,()]|[-,(]$", layer):
+        raise ValueError(f"malformed connection layer {layer}")
+    depth = 0
+    for ch in layer:
+        depth += {"(": 1, ")": -1}.get(ch, 0)
+        if depth < 0 or (ch == "," and depth == 0):
+            raise ValueError(f"malformed connection layer {layer}")
+    if depth != 0:
+        raise ValueError(f"unbalanced brackets in {layer}")
+    atoms = [int(t) for t in re.findall(r"\d+", layer)]
+    if sorted(set(atoms)) != list(range(1, n_expected + 1)):
+        raise ValueError(f"atom numbers of {layer} are not 1..{n_expected}")
     G = nx.Graph(); stack = []; prev = None; i = 0
     while i < len(layer):
         ch = layer[i]

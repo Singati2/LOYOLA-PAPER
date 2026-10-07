@@ -63,6 +63,23 @@ class RegressionTests(unittest.TestCase):
             self.assertAlmostEqual(BP.press_size((x * scale)[None, :], z, y)[0], score)
             self.assertAlmostEqual(BP.fit_pred_size(x * scale, z, y, 5. * scale, 12.), prediction)
 
+    def test_header_only_csv_rejected(self):
+        with tempfile.TemporaryDirectory() as td:
+            a, b = Path(td) / "a.csv", Path(td) / "b.csv"
+            a.write_text("x,y\n"); b.write_text("x,y\n")
+            self.assertFalse(csv_equal(a, b))
+
+    def test_nan_candidate_never_selected(self):
+        X = np.array([[np.nan] * 6, [0., 1., 4., 2., 8., 3.]])
+        y = np.array([0., 1., 2., 4., 3., 9.])
+        orig = B.inner_loo_rmse_all
+        try:
+            B.inner_loo_rmse_all = lambda Xt, yt: np.array([np.nan, 1.0])
+            pred, k = B.fold_select_ols(X, y, 0)
+        finally:
+            B.inner_loo_rmse_all = orig
+        self.assertEqual(k, 1); self.assertTrue(np.isfinite(pred))
+
     def test_missing_grouped_archive_fails(self):
         """A missing archived NIST page must stop the boiling-point data build
         (skipping it silently admitted 3-ethyl-4-methylhexane: 101 molecules)."""

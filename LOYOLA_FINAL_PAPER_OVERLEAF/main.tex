@@ -200,8 +200,8 @@
   while ridge regression on the
   degree-pair counts is far ahead of every single index on the decanes
   and ahead on the pooled set. The
-  untuned point $LO(0,0,1)$ is essentially the irregularity index
-  $IRLA$. Hence $\gamma$ is presented as an interpretable,
+  untuned point $LO(0,0,1)$ is highly correlated with the irregularity
+  index $IRLA$ on the evaluated sets. Hence $\gamma$ is presented as an interpretable,
   analytically tractable direction, not a predictive upgrade.
   \end{abstract}
 
@@ -1334,7 +1334,7 @@ non. $\Delta H_{\mathrm{vap}}$ & $93\%$ & $0.855$ & $0.895$ & $49$ & $9\%$ & $0.
 
 The honest summary is therefore that, under these protocols, tuning
 $\gamma$ yields no demonstrated predictive advantage over a parent model
-that is allowed to reach its own optimum. Equal candidate budgets do not
+that is evaluated over the wider search box. Equal candidate budgets do not
 guarantee equally thorough search in two and three dimensions; the
 hybrid control, which keeps $\gamma$ in a narrow range, reduces this
 asymmetry but does not remove it, and a more exhaustive
@@ -1371,9 +1371,10 @@ $\Delta Q^2 = -0.002$ under the hybrid control), and the pre-registered
 verdict is reported as obtained, with this deviation recorded. The
 fixed point $LO(0,0,1)$, which involves no tuning at all, matches or
 beats the tuned Loyola model on both sets ($0.957$ and $0.903$ against
-medians $0.953$ and $0.900$). It is essentially $IRLA$:
-$LO(G;0,0,\gamma) = m + \tfrac{\gamma}{2}\,IRLA(G) + O(\gamma^2)$, the
-correlation between the two is $0.996$ on both sets, and $IRLA$ itself
+medians $0.953$ and $0.900$). It is closely related to $IRLA$:
+$LO(G;0,0,\gamma) = m + \tfrac{\gamma}{2}\,IRLA(G) + O(\gamma^2)$ as $\gamma \to 0$
+(at $\gamma = 1$ higher moments of the imbalance remain, and trees with
+equal $IRLA$ can differ in $LO(0,0,1)$), the correlation between the two is $0.996$ on both sets, and $IRLA$ itself
 comes within $0.003$ of the median Loyola model on the nonanes ($0.897$
 against $0.900$), so what matters for this property is a term linear in
 the imbalance, not the tuned exponential. Ridge regression on the full
@@ -1559,7 +1560,7 @@ Table~\ref{tab:box}). Tuning
 $\gamma$ thus yields no demonstrated predictive advantage under the
 protocols used here, which does not exclude benefits on other
 properties, compound classes or search designs; on vaporization
-enthalpy the untuned point $LO(0,0,1)$, essentially $IRLA$, matches the
+enthalpy the untuned point $LO(0,0,1)$, highly correlated with $IRLA$, matches the
 tuned models (nested $Q^2$ $0.903$ against medians $0.900$--$0.902$ on
 the nonanes), and ridge regression on all degree-pair counts predicts
 both nonane properties better than every fixed index and than the

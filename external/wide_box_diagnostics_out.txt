@@ -1,4 +1,4 @@
-D1 Test-B solver: rejected 0 of 3000 candidates, max rel error 6.93e-13, argmin agreement 10/10
+D1 Test-B solver: rejected 0 of 3000 candidates, max rel error 6.99e-13, argmin agreement 10/10
 D3 octane dHvap dense parent grid half-width 2: nested Q2 0.8873, folds on boundary 18/18
 D3 octane dHvap dense parent grid half-width 4: nested Q2 0.6996, folds on boundary 17/18
 D3 octane dHvap dense parent grid half-width 8: nested Q2 0.9525, folds on boundary 2/18

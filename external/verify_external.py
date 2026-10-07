@@ -40,6 +40,8 @@ def csv_equal(a, b, rel=1e-8, abs_=1e-9):
         ra, rb = list(csv.reader(fa)), list(csv.reader(fb))
     if not ra or not rb or not ra[0] or ra[0] != rb[0]:
         return False
+    if len(ra) < 2 or len(rb) < 2:            # v40.15: header-only outputs never count as reproduced
+        return False
     header = ra[0]
     if len(set(header)) != len(header) or len(ra) != len(rb):
         return False

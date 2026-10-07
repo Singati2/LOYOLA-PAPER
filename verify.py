@@ -84,12 +84,13 @@ def main():
     steps = list(FAST)
     if "--full" in sys.argv or "--everything" in sys.argv:
         steps += FULL
-    if "--everything" in sys.argv:
-        steps += EVERYTHING
+    if "--full" in sys.argv or "--everything" in sys.argv:
         if shutil.which("lake"):
             steps.append(("Lean proofs", ["bash", "verify.sh"], os.path.join(HERE, "formal")))
         else:
             print("[SKIP] Lean proofs: no Lean toolchain (lake) on PATH")
+    if "--everything" in sys.argv:
+        steps += EVERYTHING
     ok = all([run(*s) for s in steps] + [check_csv_conventions()])
     print("ALL PASS" if ok else "FAILURES")
     return 0 if ok else 1

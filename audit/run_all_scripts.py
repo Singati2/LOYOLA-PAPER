@@ -82,6 +82,8 @@ def run_one(script, files, ref):
                         changed.append(rel)
                 else:
                     new.append(rel)
+        present = {os.path.relpath(os.path.join(dp, fn), tmp) for dp, _, fns in os.walk(tmp) for fn in fns}
+        changed += sorted(f"{p} (DELETED)" for p in ref if p not in present and p != "SHA256SUMS.txt")
         tail = (r.stdout + r.stderr).strip().splitlines()[-1:] or [""]
         return dict(script=script, exit=r.returncode, seconds=dt, changed=sorted(changed), new=sorted(new), tail=tail[0][:120])
     finally:

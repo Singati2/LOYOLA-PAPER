@@ -176,10 +176,14 @@ def fold_select_ols(X, y, i):
     m = _mask(len(y), i)
     Xt, yt = X[:, m], y[m]
     rmse = inner_loo_rmse_all(Xt, yt)
+    rmse = np.where(np.isfinite(rmse), rmse, np.inf)   # v40.15: a NaN score must never be selected (argmin returns the first NaN)
     if not np.isfinite(rmse).any():      # never reached on the package data; argmin over all-inf would silently pick 0
         raise RuntimeError(f"fold {i}: every candidate descriptor is degenerate on the training set")
     k = int(np.argmin(rmse))
-    return fit_predict(Xt[k], yt, X[k, i]), k
+    pred = fit_predict(Xt[k], yt, X[k, i])
+    if not np.isfinite(pred):
+        raise RuntimeError(f"fold {i}: non-finite prediction from candidate {k}")
+    return pred, k
 
 
 def fold_ols(x, y, i):
@@ -217,6 +221,7 @@ def fold_ridge(F, y, i):
     m = _mask(len(y), i)
     Ft, yt = F[m], y[m]
     rr = ridge_inner_rmse(Ft, yt)
+    rr = np.where(np.isfinite(rr), rr, np.inf)
     if not np.isfinite(rr).any():
         raise RuntimeError(f"fold {i}: ridge inner-LOO error not finite for any lambda")
     li = int(np.argmin(rr))
