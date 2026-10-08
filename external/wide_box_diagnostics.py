@@ -72,9 +72,11 @@ def d3():
     P9 = [alkane_pairs(r["smiles"]) for r in kk]; y9 = np.array([float(r["dHvap_kcal"]) for r in kk])
     for name, P, y in (("octane dHvap", P8, y8), ("nonane dHvap", P9, y9)):
         for L, step in ((2, 0.05), (4, 0.1), (8, 0.2), (12, 0.25)):
-            g = np.arange(-L, L + 1e-9, step); T_ = [(a, b, 0.0) for a in g for b in g]
+            K = int(round(L / step)); g = np.arange(-K, K + 1) * step   # v40.22: exact grid (0.0 is exactly representable)
+            assert all(abs(x / step - round(x / step)) < 1e-12 for x in g) and 0.0 in g, "grid hygiene: every value a multiple of the step, zero exact"
+            T_ = [(a, b, 0.0) for a in g for b in g]
             preds, sel = B.outer_loo(B.fold_select_ols, B.descriptor_matrix(P, T_), y)
-            edge = sum(1 for s in sel if max(abs(T_[s][0]), abs(T_[s][1])) >= L - step + 1e-9)
+            edge = sum(1 for s in sel if max(abs(T_[s][0]), abs(T_[s][1])) >= L - step - 1e-9)   # v40.22: within one grid step
             log(f"D3 {name} dense parent grid half-width {L}: nested Q2 {B.scores(preds, y)[0]:.4f}, folds on boundary {edge}/{len(y)}")
 if __name__ == "__main__":
     d1(); d3(); d2()

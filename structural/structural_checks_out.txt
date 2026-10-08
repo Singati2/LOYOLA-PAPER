@@ -39,6 +39,7 @@ S1 tree orders: n subset N profiles qhist R GA LO(0,0,1) LO(0,0,2) GA_qmerges
   16 all 19320 4069 3996 4007 3996 3996 3996 0
   16 mol 10359 810 809 810 809 809 809 0
   17 all 48629 7778 7582 7604 7581 7582 7582 1
+  17 mol 24894 1194 1189 1191 1189 1189 1189 0
 TAB firstfail LO row: OK
 TAB firstfail R row: OK
 TAB firstfail GA row: OK

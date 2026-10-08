@@ -100,6 +100,7 @@ def nested_size(X, z, y):
         m = np.ones(n, bool); m[i] = False
         r = press_size(X[:, m], z[m], y[m])
         r = np.where(np.isfinite(r), r, np.inf)   # v40.15: never select a NaN score
+        r = np.where(B.degenerate_rows(X[:, m]), np.inf, r)   # v40.22: never select a degenerate candidate
         if not np.isfinite(r).any():     # never reached (design determinant has ~7000x headroom); argmin over all-inf would silently pick 0
             raise RuntimeError(f"fold {i}: every candidate rejected by the singular-design guard")
         k = int(np.argmin(r))

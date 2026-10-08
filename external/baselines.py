@@ -147,6 +147,15 @@ def inner_loo_rmse_all(Xt, yt):
     return np.sqrt(((pred - yt) ** 2).mean(axis=1))
 
 
+def degenerate_rows(Xt):
+    """Boolean mask of candidate rows (C x n) that are constant to floating-point resolution or whose relative
+    range is below 1e-9 (quantisation noise); such rows must never be selected (v40.22)."""
+    Xt = np.asarray(Xt, float)
+    const = np.array([is_constant(Xt[k]) for k in range(Xt.shape[0])], bool)
+    rng_ = Xt.max(axis=1) - Xt.min(axis=1); scale_ = np.maximum(np.abs(Xt).max(axis=1), np.finfo(float).tiny)
+    return const | (rng_ <= 1e-9 * scale_)
+
+
 def fit_predict(xt, yt, xnew):
     xt = np.asarray(xt, float)
     if is_constant(xt):
@@ -181,10 +190,16 @@ def fold_select_ols(X, y, i):
     # no information and would be fitted as the training mean; standardising its rounding noise can give it a spuriously
     # small inner RMSE (seen for the dense-grid point (3.6e-15, 3.6e-15) of wide_box_diagnostics D3), so it is never selected.
     const = np.array([is_constant(Xt[k]) for k in range(Xt.shape[0])], bool)
+    # v40.22: the same guard with a relative-range floor, so that a candidate whose values differ only by
+    # quantisation noise (relative range below 1e-9; genuine 3-decimal candidates have relative range above 1e-4
+    # on these data) is never selected either, whatever the scale of its values
+    rng_ = Xt.max(axis=1) - Xt.min(axis=1); scale_ = np.maximum(np.abs(Xt).max(axis=1), np.finfo(float).tiny)
+    const |= rng_ <= 1e-9 * scale_
     rmse = np.where(const, np.inf, rmse)
     if not np.isfinite(rmse).any():      # never reached on the package data; argmin over all-inf would silently pick 0
         raise RuntimeError(f"fold {i}: every candidate descriptor is degenerate on the training set")
     k = int(np.argmin(rmse))
+    assert not const[k], "selected candidate is degenerate on the training fold"   # v40.22 winner sanity
     pred = fit_predict(Xt[k], yt, X[k, i])
     if not np.isfinite(pred):
         raise RuntimeError(f"fold {i}: non-finite prediction from candidate {k}")

@@ -3,7 +3,7 @@
 Advik Natarajan, Ganesh Shiwakoti, Michael Arockiaraj — manuscript, supplement,
 data, code and machine-checked proofs.
 
-**v40.21 (2026-10-07):** second referee round: a dense-grid artefact fixed in the shared candidate selection (constant candidates never selected; half-width-4 value 0.6996 -> 0.9156), explicit colliding trees and crossing witness in the proofs, Rada attribution for Theorem 2(ii), equality cases of the upper bound, degree-ratio corollary citing SDD, Discrimination now Section 4 before the bounds, supplement S8 (open problems) folded into the Conclusion, spelling unified (-ise); see V35_TO_V36_SCIENTIFIC_CHANGELOG.md.
+**v40.22 (2026-10-07):** novelty audit against the 2026 literature (family and name have no prior; positioned against the variable Euler-Sombor and cosine-rule Sombor families and Gutman's survey remark), new Proposition 3 (a nonzero algebraic gamma never destroys a distinction of the parent at rational exponents), K_2 equality case corrected, chemical-tree column of Table 2 certified to order 17, exact integer grids and a scale-robust degeneracy guard in every candidate selection (boundary-fold counts corrected), QSPR section reduced to two tables (search-box and baseline tables now S6/S7), verified citations added; see V35_TO_V36_SCIENTIFIC_CHANGELOG.md.
 
 ## Current documents
 | File | Content |

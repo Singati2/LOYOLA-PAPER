@@ -401,6 +401,7 @@ def check_tex(texpath, CMP):
             if not t.endswith(r"\\") or r"\multicolumn" in t or r"\tabularnewline" in t:
                 msgs.append(f"unrecognised table line (not a plain data row): '{t[:60]}'");continue
             if amp is None or t.count("&")==amp:out.append(t)
+            else:msgs.append(f"table row with {t.count('&')} '&' where {amp} were expected (row ignored): '{t[:60]}'")   # v40.22: never drop a row silently
         return out
     def header_ok(blk,label,expected):
         hdr=blk[:blk.index(r"\midrule")] if r"\midrule" in blk else ""

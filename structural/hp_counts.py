@@ -4,7 +4,7 @@
 structural_checks.py counts distinct index values at 11 significant digits.
 Here every value is recomputed in 40-digit arithmetic (mpmath) and counted at
 32 significant digits, for R, GA, LO(0,0,1) and LO(0,0,2) on all trees and on
-the molecular trees (max degree <= 4) of orders 7-17 (molecular: 7-16), and
+the molecular trees (max degree <= 4) of orders 7-17 (molecular: 7-17), and
 compared with the committed S1 output.  For the pure-gamma points the count
 must equal the number of distinct q-histograms exactly (Lindemann-Weierstrass;
 ratio-plane theorem of the paper), which is checked as well.
@@ -35,7 +35,7 @@ def main():
     for n in range(7, 18):
         trees = list(nx.nonisomorphic_trees(n))
         for sub in ("all", "mol"):
-            if sub == "mol" and n > 16:
+            if sub == "mol" and n > 17:
                 continue
             vals = {k: set() for k in IDX}; qh = set(); N = 0; ga = {}
             for T in trees:

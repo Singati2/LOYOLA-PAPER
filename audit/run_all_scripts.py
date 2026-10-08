@@ -31,7 +31,7 @@ SCRIPTS = [
     ("ablation_gm_vs_lo.py", False), ("ablation_robustness.py", True), ("expanded_robustness_v35.py", True),
     ("tmb_exclusion_sensitivity.py", True), ("source_sensitivity.py", False), ("multi_order_degeneracy.py", False),
     ("redundancy_collisions.py", False), ("fgd_structure_sensitivity.py", True), ("generate_loyola_v35_figures.py", False),
-    ("external/baselines.py", True), ("external/nonane_validation.py", True), ("external/transfer_exploratory.py", True),
+    ("external/baselines.py", True), ("external/baselines.py --dataset nonane", True), ("external/nonane_validation.py", True), ("external/transfer_exploratory.py", True),
     ("external/uncertainty_exploratory.py", True), ("external/box_sensitivity.py", True),
     ("external/wide_box_diagnostics.py", True), ("external/bp/bp_tests.py", True), ("external/bp/coverage_bias.py", False),
     ("external/bp/make_bp_table.py", False), ("external/make_box_table.py", False), ("external/make_v37_table.py", False),
@@ -67,17 +67,19 @@ def run_one(script, files, ref):
     tmp = tempfile.mkdtemp(prefix="loyola_run_")
     try:
         make_copy(files, tmp)
-        cwd = os.path.join(tmp, os.path.dirname(script)) or tmp
+        cwd = os.path.join(tmp, os.path.dirname(script.split()[0])) or tmp
         t0 = time.time()
-        r = subprocess.run([sys.executable, os.path.basename(script)], cwd=cwd, capture_output=True, text=True, timeout=7200)
+        parts = script.split(); r = subprocess.run([sys.executable, os.path.basename(parts[0])] + parts[1:], cwd=cwd, capture_output=True, text=True, timeout=7200)
         dt = time.time() - t0
-        changed, new = [], []
+        changed, new, touched = [], [], 0
         for dp, _, fns in os.walk(tmp):
             for fn in fns:
                 full = os.path.join(dp, fn); rel = os.path.relpath(full, tmp)
                 if "__pycache__" in rel or rel == "SHA256SUMS.txt":
                     continue
                 if rel in ref:
+                    if os.path.getmtime(full) > t0:
+                        touched += 1                               # v40.22: the script must rewrite something
                     if digest(full) != ref[rel]:
                         changed.append(rel)
                 else:
@@ -85,7 +87,7 @@ def run_one(script, files, ref):
         present = {os.path.relpath(os.path.join(dp, fn), tmp) for dp, _, fns in os.walk(tmp) for fn in fns}
         changed += sorted(f"{p} (DELETED)" for p in ref if p not in present and p != "SHA256SUMS.txt")
         tail = (r.stdout + r.stderr).strip().splitlines()[-1:] or [""]
-        return dict(script=script, exit=r.returncode, seconds=dt, changed=sorted(changed), new=sorted(new), tail=tail[0][:120])
+        return dict(script=script, exit=r.returncode, seconds=dt, changed=sorted(changed), new=sorted(new), tail=tail[0][:120], touched=touched)
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 
@@ -108,10 +110,10 @@ def main():
     bad = 0
     with ThreadPoolExecutor(max_workers=3) as ex:
         for res in ex.map(lambda s: run_one(s, files, ref), todo):
-            ok = res["exit"] == 0 and not res["changed"]
+            ok = res["exit"] == 0 and not res["changed"] and res["touched"] > 0
             bad += not ok
             line = (f"[{'OK' if ok else 'PROBLEM'}] {res['script']}: exit {res['exit']}, {res['seconds']:.0f} s"
-                    + (f"; CHANGED {res['changed']}" if res["changed"] else "; all written files identical")
+                    + (f"; CHANGED {res['changed']}" if res["changed"] else (f"; all {res['touched']} rewritten files identical" if res["touched"] else "; WROTE NO TRACKED FILE"))
                     + (f"; new files {res['new']}" if res["new"] else "") + f"; last line: {res['tail']}")
             lines.append(line); print(line, flush=True)
     lines.append(f"RESULT: {'every script exits 0 and reproduces its committed outputs' if bad == 0 else str(bad) + ' PROBLEM(S)'}")

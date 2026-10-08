@@ -33,6 +33,13 @@ TELLS = [
     r"\bremarkabl[ey]\b", r"\bstrikingly\b", r"\bsubstantially\b", r"\bseamless(ly)?\b", r"\bholistic\b",
     r"\bmultifaceted\b", r"\bshed(s)? light\b", r"\bpav(e|es|ing) the way\b", r"\bin a nutshell\b",
 ]
+# filler vocabulary of machine prose (any occurrence fails)
+FILLER = [r"\bdelv(e|es|ed|ing)\b", r"\btapestry\b", r"\brealm\b", r"\bpivotal\b", r"\bshowcas(e|es|ing)\b", r"\bnavigat(e|es|ing)\b",
+          r"\bintricate\b", r"\btestament\b", r"\bfoster(s|ing)?\b", r"\bharness(es|ing)?\b", r"\bunlock(s|ing)?\b", r"\bvibrant\b",
+          r"\bgroundbreaking\b", r"\bcutting-edge\b", r"\bstate-of-the-art\b", r"\bparadigm\b", r"\bsynergy\b", r"\belevat(e|es|ing)\b",
+          r"\bit is important to note\b", r"\bin today's\b", r"\bin the realm of\b", r"\ba testament to\b", r"\bcomprehensive\b"]
+# generic sentence-opening transitions: reported as a count, and each run of two consecutive sentences fails
+GENERIC_TRANSITIONS = r"^(Moreover|Furthermore|Additionally|In addition|Therefore|Thus|Hence|Consequently|Overall|In summary|To summari[sz]e|In conclusion|Finally|Notably|Importantly|Interestingly|Ultimately),?\s"
 CONTRAST = [r",\s+not\s+(a|an|the)?\s*[a-z-]+(\s+[a-z-]+){0,3}[.;:]", r"\bnot\s+[a-z-]+(\s+[a-z-]+){0,4}\s+but\s+(rather\s+)?[a-z]"]
 
 
@@ -43,8 +50,10 @@ def body(tex):
     t = re.sub(r"\\begin\{cases\}.*?\\end\{cases\}", "", t, flags=re.S)       # may hold $ inside \text{}
     t = re.sub(r"\\(?:text|mbox|textrm)\{[^{}]*\}", " ", t)
     t = re.sub(r"\\(?:texttt|url)\{[^{}]*\}", "CODE", t)
+    caps = " . ".join(re.findall(r"\\caption\{((?:[^{}]|\{[^{}]*\})*)\}", t, re.S))   # captions are prose too
     for env in ("table", "figure", "equation\\*?", "align\\*?", "gather\\*?", "multline\\*?", "tabular", "thebibliography"):
         t = re.sub(r"\\begin\{%s\}.*?\\end\{%s\}" % (env, env), ". ", t, flags=re.S)
+    t = t + " . " + caps
     t = re.sub(r"\\\[.*?\\\]", " MATH ", t, flags=re.S)
     t = re.sub(r"\$\$.*?\$\$", " MATH ", t, flags=re.S)
     t = re.sub(r"\$[^$]*\$", "MATH", t)
@@ -67,7 +76,7 @@ def sentences(txt):
 
 def dash_findings(txt):
     out = []
-    for m in re.finditer(r"---", txt):
+    for m in re.finditer(r"---|\u2014|\u2013|\\textemdash|\\textendash", txt):
         out.append(("em dash", txt[max(0, m.start() - 50):m.end() + 50]))
     for m in re.finditer(r"(?<!-)\s--\s(?!-)", txt):
         out.append(("spaced en dash", txt[max(0, m.start() - 50):m.end() + 50]))
@@ -79,13 +88,26 @@ def stats(sents):
     return dict(n=len(L), mean=statistics.mean(L), sd=statistics.pstdev(L), over30=sum(x > 30 for x in L) / len(L), max=max(L))
 
 
+def triplets(s):
+    """'A, B and C' lists of three short items (the triple-list habit); items of at most three words each."""
+    return re.findall(r"(?<![\w$])([A-Za-z-]+(?: [A-Za-z-]+){0,2}), ([A-Za-z-]+(?: [A-Za-z-]+){0,2}),? and ([A-Za-z-]+(?: [A-Za-z-]+){0,2})(?=[ .,;:)])", s)
+
+
 def check(name):
     raw = open(os.path.join(ROOT, name)).read()
     txt = body(raw)
     findings = [(name, kind, ctx.replace("\n", " ")) for kind, ctx in dash_findings(txt)]
     sents = sentences(txt)
+    gt = [bool(re.match(GENERIC_TRANSITIONS, s)) for s in sents]
+    for i in range(1, len(sents)):
+        if gt[i] and gt[i - 1]:
+            findings.append((name, "two generic transitions in a row", sents[i - 1][:60] + " | " + sents[i][:60]))
+    print(f"{name}: generic sentence-opening transitions: {sum(gt)} of {len(sents)} sentences; triple lists: {sum(len(triplets(s)) for s in sents)}")
     for s in sents:
         n = len(s.split())
+        for pat in FILLER:
+            if re.search(pat, s, re.I):
+                findings.append((name, "filler " + pat, s[:140]))
         if n > MAX_WORDS:
             findings.append((name, f"{n} words", s[:140]))
         for pat in TELLS:

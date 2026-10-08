@@ -44,7 +44,7 @@ def main():
                 gm_t, lo_t = B.candidate_triples(seed, b)
                 for model, T in (("GM", gm_t), ("LO", lo_t)):
                     X8 = B.descriptor_matrix(P8, T)
-                    k = int(np.argmin(B.inner_loo_rmse_all(X8, y8)))
+                    k = int(np.argmin(np.where(B.degenerate_rows(X8), np.inf, B.inner_loo_rmse_all(X8, y8))))   # v40.22 guard
                     x8 = X8[k]; th = T[k]
                     x9 = B.descriptor_matrix(P9, [th])[0]
                     slope, icpt = np.polyfit(x8, y8, 1)

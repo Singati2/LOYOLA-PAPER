@@ -3,7 +3,7 @@
 are not covered by verify_loyola_v35.py or external/verify_external.py.
 Run from anywhere; writes structural_checks_out.txt next to this file.
 
-S1  tree orders 7-17 (all trees) and 7-16 (Delta<=4): distinct degree-pair
+S1  tree orders 7-17 (all trees and Delta<=4): distinct degree-pair
     profiles, q-histograms, and distinct values of R, GA, LO(0,0,1),
     LO(0,0,2); number of GA values merging distinct q-histograms.
 S2  the order-17 GA witness (exact, sympy).
@@ -47,7 +47,7 @@ def s1():
     log("S1 tree orders: n subset N profiles qhist R GA LO(0,0,1) LO(0,0,2) GA_qmerges")
     for n in range(7, 18):
         for sub in ("all", "mol"):
-            if sub == "mol" and n > 16:
+            if sub == "mol" and n > 17:
                 continue
             prof, qh = set(), set(); vals = {k: set() for k in ("R", "GA", "LO1", "LO2")}; ga = {}; N = 0
             for T in nx.nonisomorphic_trees(n):
@@ -235,15 +235,17 @@ def check_tab_firstfail():
     """Every entry of Table tab:firstfail in ../main.tex must follow from S1."""
     tex = open(os.path.join(ROOT, "main.tex")).read()
     i = tex.index(r"\label{tab:firstfail}"); blk = tex[tex.index(r"\midrule", i):tex.index(r"\bottomrule", i)]
-    lo_a, lo_m = first("all", "LO1"), first("mol", "LO1", nmax=16)
-    r_a, r_m = first("all", "R"), first("mol", "R", nmax=16)
-    ga_a, ga_m = first("all", "GA"), first("mol", "GA", nmax=16)
+    lo_a, lo_m = first("all", "LO1"), first("mol", "LO1", nmax=17)
+    r_a, r_m = first("all", "R"), first("mol", "R", nmax=17)
+    ga_a, ga_m = first("all", "GA"), first("mol", "GA", nmax=17)
     ga_merge = next(n for n in range(7, 18) if RES[(n, "all")]["merge"] > 0)
     assert all(RES[(n, "all")]["LO1"] == RES[(n, "all")]["qh"] for n in range(7, 18)), "LO1 != q-histograms"
     want = {
         "LO row": f"$LO(0,0,\\gamma)$ & ${lo_a[0]}$ (${lo_a[1]}/{lo_a[2]}$) & never$^{{a}}$ & ${lo_m[0]}$ (${lo_m[1]}/{lo_m[2]}$) & never$^{{a}}$",
-        "R row": f"$R$ & ${r_a[0]}$ (${r_a[1]}/{r_a[2]}$) & n/a$^{{b}}$ & $> 16^{{c}}$ & n/a$^{{b}}$" if r_m is None else "R mol fails <=16",
-        "GA row": f"$GA$ & ${ga_a[0]}$ (${ga_a[1]}/{ga_a[2]}$)$^{{d}}$ & ${ga_merge}^{{e}}$ & ${ga_m[0]}$ (${ga_m[1]}/{ga_m[2]}$)$^{{d}}$",
+        "R row": (f"$R$ & ${r_a[0]}$ (${r_a[1]}/{r_a[2]}$) & n/a$^{{b}}$ & ${r_m[0]}$ (${r_m[1]}/{r_m[2]}$) & n/a$^{{b}}$" if r_m
+                  else f"$R$ & ${r_a[0]}$ (${r_a[1]}/{r_a[2]}$) & n/a$^{{b}}$ & $> 17^{{c}}$ & n/a$^{{b}}$"),
+        "GA row": f"$GA$ & ${ga_a[0]}$ (${ga_a[1]}/{ga_a[2]}$)$^{{d}}$ & ${ga_merge}^{{e}}$ & ${ga_m[0]}$ (${ga_m[1]}/{ga_m[2]}$)$^{{d}}$ & "
+                  + ("$> 17^{e}$" if all(RES[(n, "mol")]["merge"] == 0 for n in range(7, 18)) else "MOL-MERGE"),
     }
     for k, w in want.items():
         log(f"TAB firstfail {k}: {'OK' if w in blk else 'MISMATCH, expected: ' + w}")

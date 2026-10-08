@@ -961,3 +961,59 @@ replay snapshots the tree and includes tracked formal/ files.
   verifier parses its rows), a Zenodo DOI (author account), Table 2
   chemical-tree column at order 17 (would need a new structural run).
 - Registries 690 entries, 0 failures.  Main paper 38 A5 pages, supplement 23.
+
+## v40.22 (novelty audit, counter-attack round, remaining experiment fixes)
+- Novelty (three literature audits with web access, arXiv/Crossref/OpenAlex
+  and MATCH tables of contents 92-97): no published or preprint index
+  multiplies the Gutman-Milovanovic family by exp(gamma q) or sums
+  exp(gamma q); "Loyola index" is unused; the nearest parametric rivals
+  are the variable Euler-Sombor index EU(lambda) (Gutman, Redzepovic,
+  Ozkan Kizilirmak, Kulli, Open J. Math. Sci. 9 (2025) 141-148) and the
+  cosine-rule Sombor indices (Nyauli, Buragohain, MATCH 96 (2026)
+  295-324), both polynomial and unnormalised; the Introduction now
+  positions the family against them and quotes (paraphrased, verified in
+  the PDF) the conclusion of Gutman's 2026 survey that new variants
+  hardly ever have better applicative properties.  Theorem 2(ii) is
+  Rada's argument; Proposition 10 is covered by the Cruz-Rada criteria
+  (MATCH 82 (2019) 715-732, now cited); "weakly discriminating" indices
+  (Rada, Rodriguez, Sigarreta, MATCH 87 (2022) 97-108, now cited) are the
+  published form of Proposition 8's notion; the general Albertson index
+  (Lin, Zhou, Wang, Miao, AIMS Math. 7 (2022) 25-38) is cited as the
+  parametric irregularity family; e^{GA} added to the ratio-class list.
+  Every added reference was verified from the publisher's page or PDF.
+- New Proposition 3 (Discrimination off the ratio plane): for rational
+  alpha, beta and algebraic gamma != 0, LO(G) = LO(H) iff all
+  imbalance-class sums c_q(G,H) vanish; hence a nonzero algebraic gamma
+  never destroys a distinction made by the parent (Lindemann-
+  Weierstrass).  Explains the fractional-point enumeration of S5.
+- Corrections from an external review and the counter-attack round:
+  the equality clause of the (m, Delta) upper bound failed for K_2
+  (Delta = 1 attains the bound for every parameter triple; now stated);
+  "no one-dimensional summary of the family recovers" replaced by "no
+  linear model on a single member of the family", since Proposition 8
+  shows the values still separate the profiles.
+- Table 2: the chemical-tree enumeration extended to order 17
+  (structural_checks.py, hp_counts.py): R first falls below the chemical
+  floor at order 17 (1191 values / 1194 profiles) and GA merges no
+  chemical q-histograms up to 17; footnote c removed.
+- Experiments: dense grids built from integers (exact 0.0, exact
+  boundary), the "within one grid step" tolerance had the wrong sign and
+  counted only exact-boundary selections (18, 18, 2, 0 / 34, 32, 3, 0);
+  corrected counts are 18, 18, 18, 0 and 34, 34, 34, 0 (the parent sits
+  on the beta boundary at every half-width <= 8), Q2 values unchanged;
+  the constant-candidate guard now also excludes candidates whose
+  relative range is below 1e-9 and is applied in baselines.fold_select_ols,
+  bp_tests.nested_size and transfer_exploratory (no committed result
+  changes; replay recorded).  Candidate streams are described as drawn
+  per seed and shared across properties and folds, as the code does;
+  Test B's solver re-conditioning after first results is now Deviation
+  D6 of PREREG_v40.md and mentioned in Section 6.4; the pre-registered
+  12-index fixed baseline versus the 10-index Class. column is
+  disclosed in S9; the "paired boxes" statement is restricted to the
+  search-box table.
+- QSPR section: the search-box sensitivity and nonane-baseline tables
+  moved to a new final supplement section (Tables S6, S7) with the
+  reporting conventions and the extraction-rule detail; the main paper
+  keeps the correlation table and the boiling-point table.  Table 5 (bp)
+  caption defines LO_h; the provenance-effect sentence matches S8.
+- Registries 693 entries, 0 failures.

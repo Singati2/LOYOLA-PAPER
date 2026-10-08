@@ -72,3 +72,10 @@ The "also reported" GM and LO results in the box (-2,2) (Tests A and B) are in
 external/bp/bp_results_summary.csv (columns median_Q2_GM2, median_Q2_LO2) and
 are now quoted in Section 6.4 of the manuscript (decanes 0.469 / 0.465; pooled
 0.976 / 0.980). No analysis was changed.
+
+## Deviation D6 (recorded 2026-10-07, after the results)
+
+The Test B least-squares solver was re-conditioned (column scaling) after the first
+results had been seen (commit 0844d6b); on the uncorrected 101-molecule cohort this moved
+the Test B summary from -0.0004 / 23 of 50 to -0.0001 / 24 of 50 and changes no verdict.
+Recorded here so that the protocol file lists every post hoc change.

@@ -702,7 +702,7 @@ _add(E("rp_enum_from7", "main", r"orders\s+\$(?P<v>\d+)\$\-\-\$17\$\s+\(orders",
 _add(E("rp_enum_to17", "main", r"orders\s+\$7\$\-\-\$(?P<v>\d+)\$\s+\(orders", "max(s1_orders('all'))", 0, "S1 orders"))  # 1
 _add(E("rp_below7", "main", r"orders\s+below \$(?P<v>\d+)\$ are trivial", "min(s1_orders('all'))", 0, "S1 orders"))  # 1
 _add(E("rp_coincide_12", "main", r"most\s+\$(?P<v>\d+)\$\.\s+The", "s1_last_eq('all')", 0, "S1: last n with qhist==profiles (all)"))  # 1
-_add(E("rp_coincide_15", "main", r"most\s+\$(?P<v>\d+)\$\.\s+So", "s1_last_eq('mol')", 0, "S1: last n with qhist==profiles (mol)"))  # 1
+_add(E("rp_coincide_15", "main", r"most\s+\$(?P<v>\d+)\$\.\s+Combined", "s1_last_eq('mol')", 0, "S1: last n with qhist==profiles (mol)"))  # 1
 _add(E("rp_order10", "main", r"the trees of order \$(?P<v>\d+)\$\s+\(Section~\\ref\{sec:degeneracy\}\)", "mod_order_with_N(106)", 0, "multi_order_degeneracy.csv: order whose all-trees count is 106"))  # 1
 _add(E("rp_orders13", "main", r"At orders \$(?P<v>\d+)\$--\$17\$ generic points", "s1_first_below('all', 'qh')", 0, "S1"))  # 1
 _add(E("rp_orders17", "main", r"At orders \$13\$--\$(?P<v>\d+)\$ generic points", "max(s1_orders('all'))", 0, "S1"))  # 1
@@ -742,6 +742,8 @@ _add(E("tabcoll_18", "main", r"collision pairs among the \$(?P<v>\d+)\$ octane",
 _add(E("deg_106", "main", r"\$N\s+=\s+(?P<v>\d+)\$\s+trees", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1
 _add(E("deg_order10", "main", r"of\s+order\s+\$(?P<v>\d+)\$\s+the\s+pure\-\$\\gamma\$", "mod_order_with_N(106)", 0, "multi_order_degeneracy.csv"))  # 1
 _add(E("deg_N106", "main", r"the\s+\$(?P<v>\d+)\$\s+trees", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1
+_add(E("deg_255_pct", "main", r"attain \$(?P<v>[\d.]+)\\%\$\s+\(\$79\$ distinct values\)", "pct(mod(10,'all_trees')['LO001'], mod(10,'all_trees')['N_trees'])", 0.05, "100(1-79/106)"))  # 1
+_add(E("deg_M1_830_pct", "main", r"while \$M_1\$\s+\(\$(?P<v>[\d.]+)\\%\$\) and\s+\$M_2\$", "pct(mod(10,'all_trees')['M1'], mod(10,'all_trees')['N_trees'])", 0.05, "100(1-18/106)"))  # 1
 _add(E("deg_79", "main", r"attain \$25\.5\\%\$\s+\(\$(?P<v>\d+)\$ distinct values\), tied", "mod(10, 'all_trees')['LO001']", 0, "multi_order_degeneracy.csv LO001"))  # 1
 _add(E("deg_106b", "main", r"The\s+\$(?P<v>\d+)\$\s+trees", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1
 _add(E("deg_79b", "main", r"trees\s+realise\s+only\s+\$(?P<v>\d+)\$\s+distinct\s+edge\-degree\-pair\s+count", "mod(10, 'all_trees')['distinct_BID_profiles']", 0, "multi_order_degeneracy.csv profiles"))  # 1
@@ -800,7 +802,10 @@ _add(E("ff_LO_mol_p", "main", r"never\$\^\{a\}\$ & \$16\$ \(\$809/(?P<v>\d+)\$\)
 _add(E("ff_R_all_n", "main", r"\$R\$ & \$(?P<v>\d+)\$ \(\$1095/1100\$\)", "s1_first_below('all', 'R')", 0, "S1"))  # 1
 _add(E("ff_R_all_v", "main", r"\$R\$ & \$14\$ \(\$(?P<v>\d+)/1100\$\)", "s1(14, 'all')['R']", 0, "S1"))  # 1
 _add(E("ff_R_all_p", "main", r"\$R\$ & \$14\$ \(\$1095/(?P<v>\d+)\$\)", "s1(14, 'all')['prof']", 0, "S1"))  # 1
-_add(E("ff_R_mol_gt16", "main", r"& \$> (?P<v>\d+)\^\{c\}\$ &", "max(s1_orders('mol')) if s1_first_below('mol', 'R') is None else None", 0, "S1 mol: R never below floor up to the largest order examined"))  # 1
+_add(E("ff_R_mol_n", "main", r"\$R\$ & \$14\$ \(\$1095/1100\$\) & n/a\$\^\{b\}\$ & \$(?P<v>\d+)\$ \(\$1191/1194\$\)", "s1_first_below('mol', 'R')", 0, "S1 mol: first order with R below the profile floor"))  # 1
+_add(E("ff_R_mol_v", "main", r"n/a\$\^\{b\}\$ & \$17\$ \(\$(?P<v>\d+)/1194\$\)", "s1(17, 'mol')['R']", 0, "S1 mol n=17 R"))  # 1
+_add(E("ff_R_mol_p", "main", r"n/a\$\^\{b\}\$ & \$17\$ \(\$1191/(?P<v>\d+)\$\)", "s1(17, 'mol')['prof']", 0, "S1 mol n=17 profiles"))  # 1
+_add(E("ff_GA_mol_gt17", "main", r"\$\^\{d\}\$ & \$> (?P<v>\d+)\^\{e\}\$", "max(s1_orders('mol')) if all(s1(n, 'mol')['merge'] == 0 for n in s1_orders('mol')) else None", 0, "S1 mol: GA merges no q-histograms up to the largest order examined"))  # 1
 _add(E("ff_GA_all_n", "main", r"\$GA\$ & \$(?P<v>\d+)\$ \(\$566/570\$\)\$\^\{d\}\$", "s1_first_below('all', 'GA')", 0, "S1"))  # 1
 _add(E("ff_GA_all_v", "main", r"\$GA\$ & \$13\$ \(\$(?P<v>\d+)/570\$\)\$\^\{d\}\$", "s1(13, 'all')['GA']", 0, "S1"))  # 1
 _add(E("ff_GA_all_p", "main", r"\$GA\$ & \$13\$ \(\$566/(?P<v>\d+)\$\)\$\^\{d\}\$", "s1(13, 'all')['prof']", 0, "S1"))  # 1
@@ -808,9 +813,9 @@ _add(E("ff_GA_merge17", "main", r"& \$(?P<v>\d+)\^\{e\}\$ & \$16\$", "s1_first_m
 _add(E("ff_GA_mol_n", "main", r"\$17\^\{e\}\$ & \$(?P<v>\d+)\$ \(\$809/810\$\)\$\^\{d\}\$", "s1_first_below('mol', 'GA')", 0, "S1 mol"))  # 1
 _add(E("ff_GA_mol_v", "main", r"\$17\^\{e\}\$ & \$16\$ \(\$(?P<v>\d+)/810\$\)\$\^\{d\}\$", "s1(16, 'mol')['GA']", 0, "S1 mol"))  # 1
 _add(E("ff_GA_mol_p", "main", r"\$17\^\{e\}\$ & \$16\$ \(\$809/(?P<v>\d+)\$\)\$\^\{d\}\$", "s1(16, 'mol')['prof']", 0, "S1 mol"))  # 1
-_add(E("ff_fn_upto16", "main", r"order up to \$(?P<v>\d+)\$, the largest examined", "max(s1_orders('mol'))", 0, "S1 mol orders"))  # 1
+_add(E("ff_fn_mol_upto17", "main", r"merges no \$q\$-histograms up to order \$(?P<v>\d+)\$, the largest examined", "max(s1_orders('mol'))", 0, "S1 mol orders"))  # 1
 _add(E("ff_fn_below17", "main", r"merges no \$q\$-histograms below order \$(?P<v>\d+)\$, so", "s1_first_merge()", 0, "S1"))  # 1
-_add(E("ff_fn_maxdeg5", "main", r"has maximum degree \$(?P<v>\d+)\$\.", "ga17_maxdeg()", 0, "max degree in the order-17 GA witness profiles"))  # 1
+_add(E("ff_fn_maxdeg5", "main", r"has maximum degree \$(?P<v>\d+)\$;", "ga17_maxdeg()", 0, "max degree in the order-17 GA witness profiles"))  # 1
 # off the ratio plane
 _add(E("off_order16", "main", r"order\s+\$(?P<v>\d+)\$\s+\(\$4069\$", "max(frac_orders())", 0, "fractional_points_out.txt"))  # 1
 _add(E("off_4069_prof", "main", r"\s+\(\$(?P<v>\d+)\$ profiles\), \$LO\(0,\\tfrac12,0\)\$", "frac_profiles(16)", 0, "fractional_points_out.txt n=16"))  # 1
@@ -957,7 +962,7 @@ _add(E("sup_g1_05_0", "supp", r"\$4069\$,\s+\$(?P<v>\d+)\$,\s+\$4069\$,", "frac_
 _add(E("sup_g1_0_m05", "supp", r"\$4067\$,\s+\$(?P<v>\d+)\$,\s+\$4068\$,", "frac_count(16, 0, -0.5, 1)", 0, "fractional_points_out.txt"))  # 1
 _add(E("sup_g1_m05_0", "supp", r"\$4069\$,\s+\$4067\$,\s+\$4069\$,\s+\$(?P<v>\d+)\$,\s+\$4069\$ and", "frac_count(16, -0.5, 0, 1)", 0, "fractional_points_out.txt"))  # 1
 _add(E("sup_g1_13_0", "supp", r"\$4068\$,\s+\$(?P<v>\d+)\$\s+and", "frac_count(16, 1/3, 0, 1)", 0, "fractional_points_out.txt"))  # 1
-_add(E("sup_g1_0_13", "supp", r"and\s+\$(?P<v>\d+)\$\s+of", "frac_count(16, 0, 1/3, 1)", 0, "fractional_points_out.txt"))  # 1
+_add(E("sup_g1_0_13", "supp", r"\$4069\$\s+and\s+\$(?P<v>\d+)\$\s+of\s+\$4069\$", "frac_count(16, 0, 1/3, 1)", 0, "fractional_points_out.txt"))  # 1
 _add(E("sup_of_4069", "supp", r"and \$4069\$ of \$(?P<v>\d+)\$ for", "frac_profiles(16)", 0, "fractional_points_out.txt"))  # 1
 _add(E("sup_g0_0_05", "supp", r"give \$(?P<v>\d+)\$, \$3940\$, \$3476\$, \$4007\$", "frac_count(16, 0, 0.5, 0)", 0, "fractional_points_out.txt"))  # 1
 _add(E("sup_g0_05_0", "supp", r"give \$3475\$, \$(?P<v>\d+)\$, \$3476\$", "frac_count(16, 0.5, 0, 0)", 0, "fractional_points_out.txt"))  # 1
@@ -1008,18 +1013,18 @@ _add(E("d3_oct_q2_2", "main", r"is\s+\$(?P<v>[\d.]+)\$, \$0\.9156\$, \$0\.9525\$
 _add(E("d3_oct_q2_4", "main", r"\$0\.8873\$, \$(?P<v>[\d.]+)\$, \$0\.9525\$ and", "d3('octane', 4, 'q2')", 0, "D3 octane hw4"))
 _add(E("d3_oct_q2_8", "main", r"\$0\.9156\$, \$(?P<v>[\d.]+)\$ and \$0\.9383\$", "d3('octane', 8, 'q2')", 0, "D3 octane hw8"))
 _add(E("d3_oct_q2_12", "main", r"\$0\.9525\$ and \$(?P<v>[\d.]+)\$\s+at half-widths", "d3('octane', 12, 'q2')", 0, "D3 octane hw12"))
-_add(E("d3_oct_bd_2", "main", r"boundary\s+in \$(?P<v>\d+)\$, \$18\$, \$2\$ and \$0\$ of the \$18\$ folds", "d3('octane', 2, 'bd')", 0, "D3 octane boundary folds hw2"))
-_add(E("d3_oct_bd_4", "main", r"boundary\s+in \$18\$, \$(?P<v>\d+)\$, \$2\$ and \$0\$ of the \$18\$ folds", "d3('octane', 4, 'bd')", 0, "D3 octane boundary folds hw4"))
+_add(E("d3_oct_bd_2", "main", r"boundary\s+in \$(?P<v>\d+)\$, \$18\$, \$18\$ and \$0\$ of the \$18\$ folds", "d3('octane', 2, 'bd')", 0, "D3 octane boundary folds hw2"))
+_add(E("d3_oct_bd_4", "main", r"boundary\s+in \$18\$, \$(?P<v>\d+)\$, \$18\$ and \$0\$ of the \$18\$ folds", "d3('octane', 4, 'bd')", 0, "D3 octane boundary folds hw4"))
 _add(E("d3_oct_bd_8", "main", r"boundary\s+in \$18\$, \$18\$, \$(?P<v>\d+)\$ and \$0\$ of the \$18\$ folds", "d3('octane', 8, 'bd')", 0, "D3 octane boundary folds hw8"))
-_add(E("d3_oct_bd_12", "main", r"boundary\s+in \$18\$, \$18\$, \$2\$ and \$(?P<v>\d+)\$ of the \$18\$ folds", "d3('octane', 12, 'bd')", 0, "D3 octane boundary folds hw12"))
+_add(E("d3_oct_bd_12", "main", r"boundary\s+in \$18\$, \$18\$, \$18\$ and \$(?P<v>\d+)\$ of the \$18\$ folds", "d3('octane', 12, 'bd')", 0, "D3 octane boundary folds hw12"))
 _add(E("d3_non_q2_2", "main", r"the values are \$(?P<v>[\d.]+)\$, \$0\.8779\$, \$0\.8997\$ and \$0\.8837\$", "d3('nonane', 2, 'q2')", 0, "D3 nonane hw2"))
 _add(E("d3_non_q2_4", "main", r"\$0\.8532\$, \$(?P<v>[\d.]+)\$, \$0\.8997\$ and", "d3('nonane', 4, 'q2')", 0, "D3 nonane hw4"))
 _add(E("d3_non_q2_8", "main", r"\$0\.8779\$, \$(?P<v>[\d.]+)\$ and \$0\.8837\$", "d3('nonane', 8, 'q2')", 0, "D3 nonane hw8"))
 _add(E("d3_non_q2_12", "main", r"\$0\.8997\$ and \$(?P<v>[\d.]+)\$, with \$34\$", "d3('nonane', 12, 'q2')", 0, "D3 nonane hw12"))
-_add(E("d3_non_bd_2", "main", r"with \$(?P<v>\d+)\$,\s+\$32\$, \$3\$ and \$0\$ boundary folds of \$34\$", "d3('nonane', 2, 'bd')", 0, "D3 nonane boundary folds hw2"))
-_add(E("d3_non_bd_4", "main", r"with \$34\$,\s+\$(?P<v>\d+)\$, \$3\$ and \$0\$ boundary folds", "d3('nonane', 4, 'bd')", 0, "D3 nonane boundary folds hw4"))
-_add(E("d3_non_bd_8", "main", r"\$32\$, \$(?P<v>\d+)\$ and \$0\$ boundary folds of \$34\$", "d3('nonane', 8, 'bd')", 0, "D3 nonane boundary folds hw8"))
-_add(E("d3_non_bd_12", "main", r"\$32\$, \$3\$ and \$(?P<v>\d+)\$ boundary folds of \$34\$", "d3('nonane', 12, 'bd')", 0, "D3 nonane boundary folds hw12"))
+_add(E("d3_non_bd_2", "main", r"with \$(?P<v>\d+)\$,\s+\$34\$, \$34\$ and \$0\$ boundary folds of \$34\$", "d3('nonane', 2, 'bd')", 0, "D3 nonane boundary folds hw2"))
+_add(E("d3_non_bd_4", "main", r"with \$34\$,\s+\$(?P<v>\d+)\$, \$34\$ and \$0\$ boundary folds of \$34\$", "d3('nonane', 4, 'bd')", 0, "D3 nonane boundary folds hw4"))
+_add(E("d3_non_bd_8", "main", r"with \$34\$,\s+\$34\$, \$(?P<v>\d+)\$ and \$0\$ boundary folds of \$34\$", "d3('nonane', 8, 'bd')", 0, "D3 nonane boundary folds hw8"))
+_add(E("d3_non_bd_12", "main", r"with \$34\$,\s+\$34\$, \$34\$ and \$(?P<v>\d+)\$ boundary folds of \$34\$", "d3('nonane', 12, 'bd')", 0, "D3 nonane boundary folds hw12"))
 
 def evaluate(root=None):
     global ROOT

@@ -19,6 +19,7 @@ n=15 mol N=4347 qhist=538 GA_qmerges=0 R=538 GA=538 LO1=538 LO2=538 | 11-digit c
 n=16 all N=19320 qhist=3996 GA_qmerges=0 R=4007 GA=3996 LO1=3996 LO2=3996 | 11-digit counts REPRODUCED | pure-gamma counts == q-histograms: True
 n=16 mol N=10359 qhist=809 GA_qmerges=0 R=810 GA=809 LO1=809 LO2=809 | 11-digit counts REPRODUCED | pure-gamma counts == q-histograms: True
 n=17 all N=48629 qhist=7582 GA_qmerges=1 R=7604 GA=7581 LO1=7582 LO2=7582 | 11-digit counts REPRODUCED | pure-gamma counts == q-histograms: True
+n=17 mol N=24894 qhist=1189 GA_qmerges=0 R=1191 GA=1189 LO1=1189 LO2=1189 | 11-digit counts REPRODUCED | pure-gamma counts == q-histograms: True
 Table S4 n=7 all_trees: 9-decimal counts REPRODUCED at 32 digits; pure-gamma counts == q-histograms: True
 Table S4 n=7 molecular: 9-decimal counts REPRODUCED at 32 digits; pure-gamma counts == q-histograms: True
 Table S4 n=8 all_trees: 9-decimal counts REPRODUCED at 32 digits; pure-gamma counts == q-histograms: True

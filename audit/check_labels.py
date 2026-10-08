@@ -70,10 +70,23 @@ def compiled_numbers():
         fail("main.tex does not compile"); return {}, {}
     import fitz
     txt = "".join(p.get_text() for p in fitz.open(os.path.join(tmp, "main.pdf")))
-    results = {}
-    for kind in ("Theorem", "Proposition", "Lemma", "Corollary", "Remark"):
-        for n, title in re.findall(kind + r"\s+(\d+)\s*\(([^)]{0,60})\)", txt):
-            results[(kind, int(n))] = title
+    # theorem-type numbering follows source order (shared counter for theorem/proposition/corollary when the
+    # corollary environment is numbered; lemma has its own counter), so it is read from main.tex, not harvested
+    # from the PDF text, where in-text references such as "Theorem 2(ii)" would be mistaken for headings
+    src = strip_comments(open(os.path.join(ROOT, "main.tex")).read()); body_src = src[src.find(r"\begin{document}"):]
+    shared = re.findall(r"\\newtheorem\{(\w+)\}\[theorem\]", src) + ["theorem"]
+    counters = {}; results = {}
+    for m_ in re.finditer(r"\\begin\{(theorem|proposition|lemma|corollary|remark)\}(?:\[([^\]]*)\])?", body_src):
+        env, title = m_.group(1), (m_.group(2) or "").strip()
+        if env in ("corollary", "remark") and not re.search(r"\\newtheorem\{%s\}" % env, src):
+            continue                                                  # unnumbered (\newtheorem*) environment
+        key = "theorem" if env in shared else env
+        counters[key] = counters.get(key, 0) + 1
+        results[(env.capitalize(), counters[key])] = title or "(untitled)"
+    pdf_heads = set(re.findall(r"\n(Theorem|Proposition|Lemma) (\d+)[ .(]", txt))
+    for (kind, n), title in results.items():
+        if kind in ("Theorem", "Proposition", "Lemma") and (kind, str(n)) not in pdf_heads:
+            fail(f"{kind} {n} ({title[:30]}) numbered in the source but not found as a heading in the compiled paper")
     shutil.rmtree(tmp, ignore_errors=True)
     # table and section numbers follow source order, so they are read from main.tex itself
     src = strip_comments(open(os.path.join(ROOT, "main.tex")).read())
@@ -99,17 +112,17 @@ def main():
       for n in re.findall(r"\d(?:\.\d)?", m.group(0)):
         if n not in sections:
             fail(f"supplement cites Section~{n} of the main paper, which the compiled main paper does not number so")
-    for m in re.finditer(r"Table~(\d+) of the main paper", su):
-        ctx = su[max(0, m.start() - 100):m.start()].lower()
+    for m in re.finditer(r"Table~(\d+) of the main paper|main paper, Table~(\d+)", su):
+        num = m.group(1) or m.group(2); ctx = su[max(0, m.start() - 100):m.start()].lower()
         found = [(ctx.rfind(word), word) for word in TABLE_WORDS if word in ctx]
         for _, word in sorted(found)[-1:]:                      # the keyword nearest the citation decides
             cap_word = TABLE_WORDS[word]
-            if int(m.group(1)) in tables and cap_word not in tables[int(m.group(1))].lower():
-                fail(f"supplement cites Table~{m.group(1)} of the main paper for '{word}' but that table's caption is '{tables[int(m.group(1))][:40]}'")
+            if int(num) in tables and cap_word not in tables[int(num)].lower():
+                fail(f"supplement cites Table~{num} of the main paper for '{word}' but that table's caption is '{tables[int(num)][:40]}'")
     for kind, n in re.findall(r"(Theorem|Proposition|Lemma|Corollary|Remark)~(\d+) of the main paper", su):
         if (kind, int(n)) not in results:
             fail(f"supplement cites {kind}~{n} of the main paper, which the compiled main paper does not number so")
-    for n in re.findall(r"Table~(\d+) of the main paper", su):
+    for n in [x or y for x, y in re.findall(r"Table~(\d+) of the main paper|main paper, Table~(\d+)", su)]:
         if int(n) not in tables:
             fail(f"supplement cites Table~{n} of the main paper, not present")
     print("compiled main-paper numbering:", {f"{k[0]} {k[1]}": v[:30] for k, v in sorted(results.items())})
