@@ -177,6 +177,11 @@ def fold_select_ols(X, y, i):
     Xt, yt = X[:, m], y[m]
     rmse = inner_loo_rmse_all(Xt, yt)
     rmse = np.where(np.isfinite(rmse), rmse, np.inf)   # v40.15: a NaN score must never be selected (argmin returns the first NaN)
+    # v40.21: a candidate that is constant on the training fold (within floating-point resolution, is_constant) carries
+    # no information and would be fitted as the training mean; standardising its rounding noise can give it a spuriously
+    # small inner RMSE (seen for the dense-grid point (3.6e-15, 3.6e-15) of wide_box_diagnostics D3), so it is never selected.
+    const = np.array([is_constant(Xt[k]) for k in range(Xt.shape[0])], bool)
+    rmse = np.where(const, np.inf, rmse)
     if not np.isfinite(rmse).any():      # never reached on the package data; argmin over all-inf would silently pick 0
         raise RuntimeError(f"fold {i}: every candidate descriptor is degenerate on the training set")
     k = int(np.argmin(rmse))

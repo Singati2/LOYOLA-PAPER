@@ -17,11 +17,11 @@
 \newtheorem{theorem}{Theorem}
 \newtheorem{conjecture}{Conjecture}
 \newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{corollary}{Corollary}
 \renewcommand{\qedsymbol}{\rule{.7em}{.7em}}
 
 \theoremstyle{remark}
-\newtheorem{remark}{Remark}
+\newtheorem*{remark}{Remark}
 \newtheorem*{note}{Note}
 \newtheorem{case}{Case}
 
@@ -145,9 +145,9 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{Supplementary Material for: The Loyola Index Family: What a Degree-Imbalance Coordinate Can and Cannot Resolve}
+\title{Supplementary Material for: The Loyola Index Family and the Resolution Limit of Degree Imbalance}
 
-\author{Advik Natarajan$^{a}$, Ganesh Shiwakoti$^{b}$, Michael Arockiaraj$^{a}$\footnote{Corresponding author.}}
+\author{Advik Natarajan$^{a}$, Ganesh Shiwakoti$^{b}$, Michael Arockiaraj$^{a,}$\footnote{Corresponding author.}}
 
 \address{$^a$Department of Mathematics, Loyola College, Chennai, India\\
     $^b$Department of Mathematics and Statistics, Florida Atlantic University, USA
@@ -169,18 +169,17 @@
 
 \onehalfspacing
 
-\noindent This supplement accompanies the paper ``The Loyola Index
-Family: What a Degree-Imbalance Coordinate Can and Cannot Resolve''. Section,
+\noindent This supplement accompanies the paper ``The Loyola Index Family and the Resolution Limit of Degree Imbalance''. Section,
 table, figure, equation and proposition numbers without the prefix S
 refer to the main paper, and data, scripts and the verifier are available
 at \url{https://github.com/Singati2/LOYOLA-PAPER}.
 
-\section{Octane property data: provenance audit and correlation heatmap}\label{sec:s-prov}
+\section{Octane data provenance}\label{sec:s-prov}
 
 Table~4 of the main paper reports the Pearson correlation $r$ between
 each index and each of the five physicochemical properties of the
 $18$ octane isomers. The properties are the boiling point $T_B$, the
-enthalpy of formation $\Delta H_f$, the enthalpy of vaporization
+enthalpy of formation $\Delta H_f$, the enthalpy of vaporisation
 $\Delta H_{\mathrm{vap}}$, the entropy $S$ and the acentric factor
 $\omega$. The property data were traced to the NIST
 WebBook~\cite{NISTWebBook}, and for each value the provenance file
@@ -215,9 +214,9 @@ reachable authoritative value, six of these being gas-phase entropies
 absent from the NIST WebBook. For them the 1947 API Project 44 tables
 give values differing by $0.07$--$2.2$ units, as they do for isomers
 whose later revisions were confirmed. The remaining one is the
-$298$\,K vaporization enthalpy of 2,2,3,3-tetramethylbutane. This
+$298$\,K vaporisation enthalpy of 2,2,3,3-tetramethylbutane. This
 compound is a solid at $298$\,K (triple point $374$\,K), and the NIST
-WebBook lists standard vaporization enthalpies of $42.94$ and
+WebBook lists standard vaporisation enthalpies of $42.94$ and
 $42.91$\,kJ\,mol$^{-1}$ (about $10.26$\,kcal\,mol$^{-1}$) together with
 sublimation enthalpies. The benchmark value used here,
 $8.41$\,kcal\,mol$^{-1}$ ($35.19$\,kJ\,mol$^{-1}$), is that of the
@@ -238,7 +237,7 @@ reproducibility package. For 3,3-dimethylhexane,
 2,3,3-trimethylpentane, values of $\Delta H_{\mathrm{vap}}$ that differ
 from the NIST WebBook by $0.05$--$0.13$\,kcal\,mol$^{-1}$ circulate in
 octane benchmark tables. We use values consistent with NIST
-(Appendix~A of the main paper). Two are exact conversions of NIST
+(Table~\ref{tab:octane-data} and Section~\ref{sec:s-quality}). Two are exact conversions of NIST
 determinations ($8.97$, $9.08$), and two lie within the span or stated
 uncertainty of the NIST determinations. These are $8.83$, which also
 equals the API Project~44 value at the displayed precision, and $8.90$,
@@ -251,7 +250,7 @@ the $2,3,3$-trimethylpentane value $102.06$ being a compiled-dataset
 value (see Section~\ref{sec:s-quality}). Substituting the compilation values
 changes all twelve $S$ correlations in Table~4 of the main paper, by up
 to $0.043$ in $|r|$, but it does not change the winning descriptor
-($HM$). Apart from the four corrected vaporization enthalpies and the
+($HM$). Apart from the four corrected vaporisation enthalpies and the
 corrected transcription of the 2,3,3-trimethylpentane entropy
 (Section~\ref{sec:s-quality}, item~(ii)), the benchmark values are
 preserved as supplied for comparability.
@@ -300,7 +299,7 @@ Table~4 of the main paper.
 \caption{Signed Pearson $r$ between the Loyola reductions, the fixed pure-$\gamma$ benchmark points and the five octane physicochemical properties on the $18$ isomers.}
 \label{fig:octanes}
 \end{figure}
-\section{Effect of parameter tuning near the best indices}\label{sec:tuning}
+\section{Local parameter tuning}\label{sec:tuning}
 
 The benchmark of Section~6.1 of the main paper tunes no parameters
 and compares only the exact reductions and the two fixed pure-$\gamma$
@@ -433,7 +432,7 @@ predictive $Q^{2}$. A constant-descriptor control confirms that
 absolute pooled correlation alone can be inflated for degenerate
 descriptors (cf.\ the caveat in the caption of
 Table~\ref{tab:lo_tuning_bestfixed}).
-\section{Matched-budget comparison in the search box $(-2,2)$}\label{sec:s-ablation}
+\section{Matched-budget comparison}\label{sec:s-ablation}
 
 The analyses above tune around fixed anchors and are descriptive.
 The question raised by the Gutman--Milovanovi\'c framing is
@@ -560,18 +559,17 @@ longer sign-invariant.
 These comparisons share the box $(-2,2)$, which truncates the parent
 along the direction $\beta \approx -2\alpha$. Section~6.2
 and Table~5 of the main paper show that the
-vaporization-enthalpy gain shrinks to about zero once the parent is
+vaporisation-enthalpy gain shrinks to about zero once the parent is
 searched over a box that does not truncate it.
 
-\section{Nonane replication test: protocol, exploratory transfer and
-molecule bootstrap}\label{sec:s-external}
+\section{Nonane replication}\label{sec:s-external}
 
 Two limitations of the octane analysis are its size ($18$ molecules) and
 its restriction to index models. Both were addressed under a protocol
 recorded in a git commit of the reproducibility package before any
 nonane value was collected. The identical nested design was applied to
 the $35$ constitutional nonane isomers. Boiling points ($35$ values) and
-standard vaporization enthalpies ($34$ values, none being listed for
+standard vaporisation enthalpies ($34$ values, none being listed for
 3-ethyl-4-methylhexane) were taken from the NIST
 WebBook~\cite{NISTWebBook}, with every value traced to its archived
 source page. The two properties differ in evidential status. Twenty of
@@ -580,10 +578,10 @@ determinations ($13$ quoted only to $1$\,K). Five are single NIST
 determinations and ten are the most recent primary determination listed
 by NIST (Deviation~D1 of the protocol). All are experimental
 measurements, so the $T_B$ test is experimentally grounded.
-Of the vaporization enthalpies, only $4$ of $34$ are calorimetric
+Of the vaporisation enthalpies, only $4$ of $34$ are calorimetric
 determinations and one is a NIST average. The other $29$ come from two
 compilations. These are the 1961 tabulation of
-Labauf, Greenshields and Rossini~\cite{LabaufGreenshieldsRossini1961},
+Labbauf, Greenshields and Rossini~\cite{LabaufGreenshieldsRossini1961},
 which covers all $35$ nonanes and $75$ decanes and is not a set of
 individual calorimetric measurements, and a 1971 vapour-pressure
 handbook~\cite{WilhoitZwolinski1971}. Such tabulations may rest
@@ -617,7 +615,7 @@ protocol fixed the box of half-width $2$, which, as
 Table~5 of the main paper shows, binds the parent. In a box that does not, the nonane gain
 disappears (median $\Delta Q^2 = -0.002$ under the hybrid control), and
 the pre-registered verdict is reported as obtained, with this deviation
-recorded. The pattern behind the vaporization result is the same on
+recorded. The pattern behind the vaporisation result is the same on
 both sets. Models whose edge weight depends on imbalance only through
 $q^2$ inside the box of half-width $2$ (the classical indices,
 including $GA = \sum_{uv}\sqrt{1-q_{uv}^2}$, and GM) reach
@@ -638,12 +636,10 @@ the claim. Ridge regression on the full degree-pair count vector
 predicts the nonanes better than every index model, for both
 properties ($Q^2 = 0.927$ for $\Delta H_{\mathrm{vap}}$, $0.682$ for
 $T_B$). On the octanes it matches the Loyola model on
-$\Delta H_{\mathrm{vap}}$ and is weaker elsewhere. This is consistent
-with Proposition~12 of the main paper and the remark after
-Proposition~7. The imbalance coordinate re-weights degree-pair
+$\Delta H_{\mathrm{vap}}$ and is weaker elsewhere. This is consistent with Proposition~6 of the main paper and the remark preceding it that every vertex-degree-based index is a function of the edge-degree-pair counts. The imbalance coordinate re-weights degree-pair
 information rather than adding to it, and one interpretable descriptor
 recovers most of what a model on all ten degree-pair counts achieves
-for the vaporization enthalpy. It does not outperform such a model. The
+for the vaporisation enthalpy. It does not outperform such a model. The
 specific exponential form is not essential either, since the
 parameter-free aggregate $IRLA$ comes within $0.003$ of the median
 Loyola model on the nonanes ($0.897$ against $0.900$). For this
@@ -724,10 +720,7 @@ subsets with $\Delta \le 4$ (Table~\ref{tab:multiorder}), and the
 pure-$\gamma$ points attain the degree-pair-profile floor at
 \emph{every} order in both sets. The Randi\'c index also attains the
 floor at every order in this range, while $\chi$ falls off the floor
-from order $10$. Floor attainment therefore distinguishes the
-pure-$\gamma$ points from the most degenerate classical indices
-($M_1$, $M_2$) but not from $R$. The imbalance weights therefore lose nothing, although they are not
-unique in this respect.
+from order $10$. Floor attainment therefore distinguishes the pure-$\gamma$ points from the most degenerate classical indices ($M_1$, $M_2$) but not from $R$. The imbalance weights thus lose nothing, although they are not unique in this respect.
 Theorem~2 of the main paper turns this into an exact statement. The
 pure-$\gamma$ points separate precisely the $q$-histograms, which
 coincide with the degree-pair profiles up to order $12$ (order $15$ for
@@ -792,12 +785,12 @@ $4009$ and $3476$, while the two points on the ratio plane give $3996$
 for both values of $\gamma$. We next consider prediction (fixed points,
 leave-one-out $Q^2$, no tuning). Here $\gamma = 1$ beats $\gamma = 0$
 in $52$ of $81$ point--dataset combinations, mostly for the
-vaporization enthalpy and decane boiling points, and loses mostly on
+vaporisation enthalpy and decane boiling points, and loses mostly on
 the octane entropy and acentric factor. Every fixed fractional point
 stays at $Q^2 \le 0.21$ on the decanes. The full output is committed
 with the script.
 
-\section{Structure sensitivity: protocol and published control}\label{sec:s-ss}
+\section{Structure-sensitivity protocol}\label{sec:s-ss}
 
 The structure-sensitivity criterion for descriptor quality was
 introduced by Furtula, Gutman and
@@ -849,7 +842,7 @@ $0.4625$). The favourable sensitivity--abruptness balance is
 therefore a property of linear imbalance weighting rather than of the
 exponential form.
 
-\section{Lean 4 formalisation: scope and encoding}\label{sec:s-lean}
+\section{Lean formalisation}\label{sec:s-lean}
 
 The directory \texttt{formal/} of the repository contains a Lean~4
 formalisation (Lean v4.34.1, Mathlib v4.34.1) of the following
@@ -866,7 +859,7 @@ the vertex degrees of a graph'' is not formalised. The only
 exception is the two order-$13$ trees below, which are realised by
 explicit parent arrays.
 
-\emph{Formalized} (inequalities and identities, with their hypotheses).
+\emph{Formalised} (inequalities and identities, with their hypotheses).
 The formalised statements are the upper and lower $(\Delta,\delta)$
 bounds, the Cauchy--Schwarz interpolation bound and the ratio bound
 (and the bracket form). They also include the convexity of
@@ -886,34 +879,13 @@ the identifiability proposition are not formalised either. These rely
 on the Lindemann--Weierstrass theorem, Laguerre's rule and the theory
 of exponential families, which are not available in Mathlib. All
 statistical and chemometric results are outside the formalisation, as
-are the closed forms and the
+are the closed forms, the extremal-tree proposition and the
 ceiling and generic-discrimination propositions. The identifiability
 consequence of Lemma~1 together with its $\Delta = 1, 2$ cases is
 also not formalised. A theorem-by-theorem map is in
 \texttt{formal/README.md}.
 
-\section{Further directions}\label{sec:s-further}
-
-The following open problems remain:
-\begin{enumerate}
-\item Sharp two-sided bounds for $\Wuzi$ via degree-based indices
-lying outside the family, such as the atom-bond-connectivity index $ABC$ and the
-Sombor index.
-
-
-\item Extremal-graph characterisations (not attempted in this paper) for
-several graph classes, including trees, unicyclic and bicyclic graphs.
-
-\item Chemometric extension to additional chemical compound classes such as benzene derivatives, alkane homologues beyond the octanes, nonanes and
-decanes studied here and to compound-class-specific QSPR endpoints.
-\end{enumerate}
-
-The first orders at which the pure-$\gamma$ points, the Randi\'c index
-and $GA$ lose discrimination are summarised in Table~2 of the main paper.
-
-
-
-\section{Data quality and open provenance items}\label{sec:s-quality}
+\section{Open provenance items}\label{sec:s-quality}
 
 Every value in Table~\ref{tab:octane-data} was traced to a source
 (per-value record in the repository). The items that remain
@@ -952,9 +924,9 @@ open are listed here so that they can be read in one place.
 \item \emph{2,2,3,3-tetramethylbutane $\Delta H_{\mathrm{vap}}$} is a
   benchmark-compilation value ($8.41$) whose reference state is unresolved.
   The compound is a solid at $298$~K, and NIST lists sublimation and standard
-  vaporization enthalpies near $10.3$~kcal\,mol$^{-1}$. We repeated the
+  vaporisation enthalpies near $10.3$~kcal\,mol$^{-1}$. We repeated the
   matched-budget comparison of Supplementary Section~S3 without this
-  isomer, and the vaporization-enthalpy gain in the $(-2,2)$ box persists
+  isomer, and the vaporisation-enthalpy gain in the $(-2,2)$ box persists
   ($93/100$ and $96/100$ seeds instead of $100/100$). The
   $\Delta H_{\mathrm{vap}}$ column winner of Table~4 of the main paper is
   unchanged, and no conclusion of the paper rests on this value.
@@ -970,7 +942,7 @@ where $HM$ leads $M_1$ by $0.001$ with the values used. The 1947
 substitution of item~(i) reverses that order by $0.004$, a margin
 without meaning at this resolution. None of the items enters the
 pre-registered nonane and boiling-point tests of Sections~6.3 and~6.4 of the main paper.
-Those tests use no entropy, vaporization-enthalpy or acentric-factor value of
+Those tests use no entropy, vaporisation-enthalpy or acentric-factor value of
 Table~\ref{tab:octane-data}, and the pooled boiling-point test re-extracts
 the octane boiling points under its own rule. Item~(ii) was a transcription error in our
 earlier data file, corrected here, while the remaining items are limitations
@@ -992,14 +964,6 @@ $\Delta H_{\mathrm{vap}}$ entry of 2,2,3,3-tetramethylbutane is the
 benchmark-compilation value discussed above. The $S$ value of
 2,3,3-trimethylpentane ($102.06$) is a compiled-dataset value
 (this section).
-
-Table~\ref{tab:octane-data} has several open provenance items, namely
-the unverified entropies, the vaporization enthalpy of
-2,2,3,3-tetramethylbutane, the corrected transcription of the
-2,3,3-trimethylpentane entropy and the alternative compiled values.
-These items, with their effect on Table~\ref{tab:octane-data}, are
-collected in this section, and none of them enters the
-pre-registered tests of Sections~6.3 and~6.4 of the main paper.
 
 \begin{table}[H]
 \centering\small
@@ -1033,10 +997,14 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
 
 \singlespacing
 \begin{thebibliography}{00}
-
   \bibitem{BarmanDas2026HSO} J. Barman, S. Das, Geometric approach to
   degree-based topological index: Hyperbolic Sombor index, \textit{MATCH
   Commun. Math. Comput. Chem.\/} \textbf{95} (2026) 63--94.
+
+  \bibitem{Ediz2017Octane}
+  S. Ediz, Predicting some physicochemical properties of octane isomers:
+  a topological approach using ev-degree and ve-degree Zagreb indices,
+  arXiv:1701.02859 (2017), \url{https://arxiv.org/abs/1701.02859}.
 
   \bibitem{FurtulaGutmanDehmer2013SS} B. Furtula, I. Gutman, M. Dehmer, On
   structure-sensitivity of degree-based topological indices, \textit{Appl.
@@ -1055,36 +1023,30 @@ $n$-octane & 125.6 & $-49.82$ & 9.92 & 111.55 & 0.398\\
   \bibitem{NISTWebBook} P. J. Linstrom, W. G. Mallard (Eds.), \textit{NIST
   Chemistry WebBook, NIST Standard Reference Database Number 69\/}, National
   Institute of Standards and Technology, Gaithersburg, 2025,
-  https://doi.org/10.18434/T4D303.
-
-  \bibitem{MovahediGutmanRedzepovicFurtula2026} F. Movahedi, I. Gutman, I.
-  Red\v{z}epovi\'c, B. Furtula, Diminished Sombor index, \textit{MATCH Commun.
-  Math. Comput. Chem.\/} \textbf{95} (2026) 141--162.
-
-  \bibitem{RakicFurtula2019SS} M. Raki\'c, B. Furtula, A novel method for
-  measuring the structure sensitivity of molecular descriptors, \textit{J.
-  Chemometrics\/} \textbf{33} (2019) \#e3138.
-
-  \bibitem{WilhoitZwolinski1971} R. C. Wilhoit, B. J. Zwolinski,
-  \textit{Handbook of Vapor Pressures and Heats of Vaporization of
-  Hydrocarbons and Related Compounds\/}, Texas A\&M Research Foundation,
-  College Station, 1971.
-
-  \bibitem{APIProject44Circ461} F. D. Rossini, K. S. Pitzer, W. J. Taylor,
-  J. P. Ebert, J. E. Kilpatrick, C. W. Beckett, M. G. Williams, H. G. Werner,
-  \textit{Selected Values of Properties of Hydrocarbons\/}, Natl. Bur.
-  Stand. Circ. 461, U.S. Government Printing Office, Washington, 1947.
-
-  \bibitem{Ediz2017Octane}
-  S. Ediz, Predicting some physicochemical properties of octane isomers:
-  a topological approach using ev-degree and ve-degree Zagreb indices,
-  arXiv:1701.02859 (2017), \url{https://arxiv.org/abs/1701.02859}.
+  \url{https://doi.org/10.18434/T4D303}.
 
   \bibitem{MondalDePal2019QSPR}
   S. Mondal, A. Dey, N. De, A. Pal, QSPR analysis of some novel
   neighbourhood degree-based topological descriptors, \textit{Complex
   Intell. Syst.\/} \textbf{7} (2021) 977--996,
   \url{https://doi.org/10.1007/s40747-020-00262-0} (arXiv:1906.06660).
+
+  \bibitem{MovahediGutmanRedzepovicFurtula2026} F. Movahedi, I. Gutman, I.
+  Red\v{z}epovi\'c, B. Furtula, Diminished Sombor index, \textit{MATCH Commun.
+  Math. Comput. Chem.\/} \textbf{95} (2026) 141--162.
+
+  \bibitem{RakicFurtula2019SS} M. Raki\'c, B. Furtula, A novel method for
+  measuring the structure sensitivity of molecular descriptors, \textit{J. Chemom.\/} \textbf{33} (2019) \#e3138.
+
+  \bibitem{APIProject44Circ461} F. D. Rossini, K. S. Pitzer, W. J. Taylor,
+  J. P. Ebert, J. E. Kilpatrick, C. W. Beckett, M. G. Williams, H. G. Werner,
+  \textit{Selected Values of Properties of Hydrocarbons\/}, Natl. Bur.
+  Stand. Circ. 461, U.S. Government Printing Office, Washington, 1947.
+
+  \bibitem{WilhoitZwolinski1971} R. C. Wilhoit, B. J. Zwolinski,
+  \textit{Handbook of Vapor Pressures and Heats of Vaporization of
+  Hydrocarbons and Related Compounds\/}, Texas A\&M Research Foundation,
+  College Station, 1971.
 
 \end{thebibliography}
 

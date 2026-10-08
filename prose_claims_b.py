@@ -683,10 +683,10 @@ _add(E("intro_n_pooled", "main", r"decanes,\s+\$(?P<v>\d+)\$\s+pooled", "bp_coun
 # ----- Section 3 Parameter geometry (main) -----
 _add(E("rp_n13", "main", r"for every \$n \\ge (?P<v>\d+)\$ \(and every \$n \\ge 16\$ among trees", "s1_first_below('all', 'qh')", 0, "S1"))  # 1
 _add(E("rp_n16", "main", r"for every \$n \\ge 13\$ \(and every \$n \\ge (?P<v>\d+)\$ among trees", "s1_first_below('mol', 'qh')", 0, "S1 mol"))  # 1
-_add(E("rp_proof_order13", "main", r"The order-\$(?P<v>\d+)\$ pair of\s+Section~\\ref\{sec:degeneracy\}", "lean_order()", 0, "formal/LoyolaFormal/Profiles.lean P1/P2 (12 edges)"))  # 1
-_add(E("rp_proof_d3", "main", r"has a common leaf-neighbour degree\s+\$d = (?P<v>\d+)\$", "common_leaf_degree(*order13_pair())", 0,
+_add(E("rp_proof_order13", "main", r"two\s+order\-\$(?P<v>\d+)\$\s+profiles", "lean_order()", 0, "formal/LoyolaFormal/Profiles.lean P1/P2 (12 edges)"))  # 1
+_add(E("rp_proof_d3", "main", r"dimension\s+\$(?P<v>\d+)\$,\s+while", "common_leaf_degree(*order13_pair())", 0,
        "smallest degree d>=2 with (1,d) in both Lean profiles P1,P2"))  # 1
-_add(E("rp_proof_order16", "main", r"and the order-\$(?P<v>\d+)\$ pair with \$\\Delta \\le 4\$,", "s1_first_below('mol', 'qh')", 0, "S1 mol first failure"))  # 1
+_add(E("rp_proof_order16", "main", r"the\s+order\-\$(?P<v>\d+)\$\s+pair", "s1_first_below('mol', 'qh')", 0, "S1 mol first failure"))  # 1
 _M16A = r"\\\{\(1,2\)\^\{%s\}, \(1,4\)\^\{%s\}, \(2,4\)\^\{%s\}, \(4,4\)\^\{%s\}\\\}"
 _M16B = r"\\\{\(1,4\)\^\{%s\}, \(2,2\)\^\{%s\}, \(2,4\)\^\{%s\}\\\}"
 for _k, (_pair, _slot) in enumerate([((1, 2), 0), ((1, 4), 1), ((2, 4), 2), ((4, 4), 3)]):
@@ -697,7 +697,7 @@ for _k, (_pair, _slot) in enumerate([((1, 4), 0), ((2, 2), 1), ((2, 4), 2)]):
     _f = ["8", "3", "4"]; _f[_slot] = r"(?P<v>\d+)"
     _add(E("rp_mol16_B_%d%d" % _pair, "main", _M16B % tuple(_f), "mol16_pair()[1][%r]" % (_pair,), 0,
            "enumeration: order-16 Delta<=4 collision (profile containing (2,2))"))  # 1 each
-_add(E("rp_proof_d4", "main", r"\(2,4\)\^\{4\}\\\}\$, has \$d = (?P<v>\d+)\$", "common_leaf_degree(*mol16_pair())", 0, "smallest common leaf-neighbour degree of the order-16 pair"))  # 1
+_add(E("rp_proof_d4", "main", r"pairs\s+\$\(2,(?P<v>\d+)\)\$,\s+\$\(2,2\)\$", "common_leaf_degree(*mol16_pair())", 0, "smallest common leaf-neighbour degree of the order-16 pair"))  # 1
 _add(E("rp_enum_from7", "main", r"orders\s+\$(?P<v>\d+)\$\-\-\$17\$\s+\(orders", "min(s1_orders('all'))", 0, "S1 orders"))  # 1
 _add(E("rp_enum_to17", "main", r"orders\s+\$7\$\-\-\$(?P<v>\d+)\$\s+\(orders", "max(s1_orders('all'))", 0, "S1 orders"))  # 1
 _add(E("rp_below7", "main", r"orders\s+below \$(?P<v>\d+)\$ are trivial", "min(s1_orders('all'))", 0, "S1 orders"))  # 1
@@ -1004,14 +1004,14 @@ def _norm(s):
 
 
 # dense-grid box curve (Section 6.2), from external/wide_box_diagnostics_out.txt
-_add(E("d3_oct_q2_2", "main", r"is \$(?P<v>[\d.]+)\$, \$0\.6996\$, \$0\.9525\$ and \$0\.9383\$", "d3('octane', 2, 'q2')", 0, "D3 octane hw2"))
+_add(E("d3_oct_q2_2", "main", r"is\s+\$(?P<v>[\d.]+)\$, \$0\.9156\$, \$0\.9525\$ and \$0\.9383\$", "d3('octane', 2, 'q2')", 0, "D3 octane hw2"))
 _add(E("d3_oct_q2_4", "main", r"\$0\.8873\$, \$(?P<v>[\d.]+)\$, \$0\.9525\$ and", "d3('octane', 4, 'q2')", 0, "D3 octane hw4"))
-_add(E("d3_oct_q2_8", "main", r"\$0\.6996\$, \$(?P<v>[\d.]+)\$ and \$0\.9383\$", "d3('octane', 8, 'q2')", 0, "D3 octane hw8"))
+_add(E("d3_oct_q2_8", "main", r"\$0\.9156\$, \$(?P<v>[\d.]+)\$ and \$0\.9383\$", "d3('octane', 8, 'q2')", 0, "D3 octane hw8"))
 _add(E("d3_oct_q2_12", "main", r"\$0\.9525\$ and \$(?P<v>[\d.]+)\$\s+at half-widths", "d3('octane', 12, 'q2')", 0, "D3 octane hw12"))
-_add(E("d3_oct_bd_2", "main", r"boundary in \$(?P<v>\d+)\$, \$17\$, \$2\$ and \$0\$ of the \$18\$ folds", "d3('octane', 2, 'bd')", 0, "D3 octane boundary folds hw2"))
-_add(E("d3_oct_bd_4", "main", r"boundary in \$18\$, \$(?P<v>\d+)\$, \$2\$ and \$0\$ of the", "d3('octane', 4, 'bd')", 0, "D3 octane boundary folds hw4"))
-_add(E("d3_oct_bd_8", "main", r"boundary in \$18\$, \$17\$, \$(?P<v>\d+)\$ and \$0\$ of the", "d3('octane', 8, 'bd')", 0, "D3 octane boundary folds hw8"))
-_add(E("d3_oct_bd_12", "main", r"boundary in \$18\$, \$17\$, \$2\$ and \$(?P<v>\d+)\$ of the", "d3('octane', 12, 'bd')", 0, "D3 octane boundary folds hw12"))
+_add(E("d3_oct_bd_2", "main", r"boundary\s+in \$(?P<v>\d+)\$, \$18\$, \$2\$ and \$0\$ of the \$18\$ folds", "d3('octane', 2, 'bd')", 0, "D3 octane boundary folds hw2"))
+_add(E("d3_oct_bd_4", "main", r"boundary\s+in \$18\$, \$(?P<v>\d+)\$, \$2\$ and \$0\$ of the \$18\$ folds", "d3('octane', 4, 'bd')", 0, "D3 octane boundary folds hw4"))
+_add(E("d3_oct_bd_8", "main", r"boundary\s+in \$18\$, \$18\$, \$(?P<v>\d+)\$ and \$0\$ of the \$18\$ folds", "d3('octane', 8, 'bd')", 0, "D3 octane boundary folds hw8"))
+_add(E("d3_oct_bd_12", "main", r"boundary\s+in \$18\$, \$18\$, \$2\$ and \$(?P<v>\d+)\$ of the \$18\$ folds", "d3('octane', 12, 'bd')", 0, "D3 octane boundary folds hw12"))
 _add(E("d3_non_q2_2", "main", r"the values are \$(?P<v>[\d.]+)\$, \$0\.8779\$, \$0\.8997\$ and \$0\.8837\$", "d3('nonane', 2, 'q2')", 0, "D3 nonane hw2"))
 _add(E("d3_non_q2_4", "main", r"\$0\.8532\$, \$(?P<v>[\d.]+)\$, \$0\.8997\$ and", "d3('nonane', 4, 'q2')", 0, "D3 nonane hw4"))
 _add(E("d3_non_q2_8", "main", r"\$0\.8779\$, \$(?P<v>[\d.]+)\$ and \$0\.8837\$", "d3('nonane', 8, 'q2')", 0, "D3 nonane hw8"))

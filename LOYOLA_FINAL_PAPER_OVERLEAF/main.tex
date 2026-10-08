@@ -177,7 +177,7 @@
   The two-parameter Gutman--Milovanovi\'c family
   $M_{\alpha,\beta}(G) = \sum_{uv \in E(G)} (d_u d_v)^{\alpha} (d_u + d_v)^{\beta}$
   unifies the Zagreb, Randi\'c, sum-connectivity and related degree-based
-  indices. We study its normalized degree-imbalance exponential
+  indices. We study its normalised degree-imbalance exponential
   extension, the \emph{Loyola index family}
   \begin{equation*}
   LO(G;\alpha,\beta,\gamma)
@@ -196,8 +196,11 @@
   times two graphs exchange order along $\gamma$, characterise the
   directions in parameter space that a given graph can identify, and
   determine the extremal trees of the pure-$\gamma$ points.
-  Pre-registered tests on alkane properties show no demonstrated
-  predictive gain from $\gamma$ over the parent family.
+  A gain from $\gamma$ on vaporisation enthalpies that replicated
+  under a pre-registered protocol disappears once the parent family is
+  searched over a box that does not truncate it. Pre-registered tests
+  on measured boiling points show no demonstrated predictive gain from
+  $\gamma$ over the parent family.
   \end{abstract}
 
 \onehalfspacing
@@ -269,10 +272,7 @@
   Gutman--Milovanovi\'c basis terms act as the factors
   $(d_u d_v)^{\alpha}(d_u + d_v)^{\beta}$, while the imbalance
   coordinate carries its own parameter $\gamma$. The imbalance ratio
-  itself is not new. It appears in the diminished Sombor index~\cite{MovahediGutmanRedzepovicFurtula2026} and, as a normalised form of Albertson's irregularity~\cite{Albertson1997}, in the irregularity index $IRLA(G) = 2\sum_{uv} q_{uv}$~\cite{RetiSharafdini2018IRLA}. The
-  pure-$\gamma$ point $LO(G;0,0,\gamma) = \sum_{uv} e^{\gamma
-  q_{uv}}$ is the exponential index of the latter in the sense
-  of~\cite{Rada2019ExpVDB}. The ratio also appears in degree-ratio
+  itself is not new. It appears in the diminished Sombor index~\cite{MovahediGutmanRedzepovicFurtula2026} and, as a normalised form of Albertson's irregularity~\cite{Albertson1997}, in the irregularity index $IRLA(G) = 2\sum_{uv} q_{uv}$~\cite{RetiSharafdini2018IRLA}. The pure-$\gamma$ point $LO(G;0,0,\gamma) = \sum_{uv} e^{\gamma q_{uv}}$ is the exponential index, in the sense of~\cite{Rada2019ExpVDB}, of the edge function $\gamma q_{uv}$, and at $\gamma = 2$ it is the exponential of $IRLA$. The ratio also appears in degree-ratio
   indices~\cite{NyauliBuragohain2027DRSO, GutmanBuragohainNyauli2026}
   and in the parent family itself, since
   $1 - q_{uv}^2 = 4 d_u d_v/(d_u + d_v)^2$ gives
@@ -280,9 +280,7 @@
   What is new is a coordinate \emph{linear} in $q_{uv}$ in the
   exponent. Unlike $\ln(1 - q_{uv}^2)$, this coordinate is not an
   affine function of $\ln(d_u d_v)$ and $\ln(d_u + d_v)$ once a vertex
-  of degree at least $3$ is admitted. We prove this below. To our
-  knowledge, and within the scope of the literature search documented
-  in the reproducibility package, no published index couples it
+  of degree at least $3$ is admitted. We prove this below. To our knowledge, no published index couples it
   multiplicatively, with its own parameter, to the
   Gutman--Milovanovi\'c family. The exponential form is not derived
   from a physical model and is chosen instead because it makes the
@@ -317,8 +315,7 @@
   that depends on an edge only through its degree ratio, such as $GA$,
   $AG$ and the diminished Sombor index. (ii) The crossing bound
   (Proposition~\ref{prop:laguerre}, from Laguerre's rule of signs) and
-  per-graph identifiability (Proposition~\ref{prop:identrank}), the
-  latter resting on an independence lemma (Lemma~\ref{prop:indep}).
+  per-graph identifiability (Proposition~\ref{prop:identrank}), together with the independence lemma for the admissible pair set (Lemma~\ref{prop:indep}).
   (iii) Log-convexity with mean/covariance derivatives
   (Theorem~\ref{thm:logconvex}), closed forms on standard graphs,
   termwise bounds for $\gamma \ge 0$ and the extremal trees of the
@@ -333,8 +330,6 @@
   ridge regression on the degree-pair counts is far ahead of every
   single index on the decanes and ahead on the pooled set.
 
-
-% =====================================================================
 \section{Preliminaries}\label{sec:prelim}
 % =====================================================================
 
@@ -358,7 +353,7 @@ $\{d_u, d_v\}$.
 \begin{definition}[Loyola index family]\label{def:wuzi}
 Let $G = (V, E)$ be a simple connected graph. For
 $\alpha, \beta, \gamma \in \mathbb{R}$, the \emph{Loyola index family}
-is defined as,
+is defined as
 \begin{equation}\label{eq:wuzi}
 \Wuzi
 \;=\; \sum_{uv \in E(G)}
@@ -386,6 +381,7 @@ downweights them. On regular graphs every $q_{uv} = 0$, so $\gamma$
 has no effect and
 $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
  % =====================================================================
+
   \section{Parameter geometry}\label{sec:geometry}
 
   Throughout,
@@ -409,8 +405,7 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   constant reproduces the action of $\gamma \neq 0$ on all admissible
   degree pairs. For $\Delta = 2$ the span has dimension $3$, while for
   $\Delta = 1$ the only pair is $(1,1)$, with augmented vector
-  $(1, 0, \ln 2, 0)$, and the span has dimension $1$. In both cases the
-  conclusion fails.
+  $(1, 0, \ln 2, 0)$, and the span has dimension $1$. In both cases the conclusion fails; for $\Delta = 2$, indeed, $q_{ij} = [\ln(i+j) - \ln 2 - \tfrac12 \ln(ij)]/(3\ln 3 - \tfrac92 \ln 2)$ on the three pairs, so there the $\gamma$ direction is a rescaled $(\alpha,\beta)$ direction.
   \end{lemma}
 
   \begin{proof}
@@ -476,7 +471,7 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   In particular
   $\partial_{\gamma} F_G = \mathbb{E}_{\theta}[q] \in [0, 1)$ and
   $\partial^2_{\gamma} F_G = \operatorname{Var}_{\theta}(q) \ge 0$, so
-  $\log LO$ is nondecreasing and convex in $\gamma$, and it is strictly
+  $\log LO$ is non-decreasing and convex in $\gamma$, and it is strictly
   increasing in $\gamma$ unless every edge of $G$ joins vertices of
   equal degree. Moreover
   $\operatorname{Var}_{\theta}(q) = 0$ at some (equivalently, every)
@@ -522,9 +517,9 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   LO(G;\alpha,\beta,\gamma) = 4^{-\alpha} \sum_{uv \in E(G)}
   (d_u + d_v)^{2\alpha+\beta}\,(1 - q_{uv}^2)^{\alpha}\, e^{\gamma q_{uv}}.
   \end{equation}
-  Thus $\kappa = 2\alpha + \beta$ acts only on the edge degree sum
-  (scale), while the parameters $\alpha$, $\gamma$ act only on $q_{uv}$, a function of the
-  degree ratio (shape). Write
+  Thus, in the coordinates $(\kappa, \alpha, \gamma)$ with $\kappa = 2\alpha + \beta$, the
+  parameter $\kappa$ acts only on the edge degree sum (scale), while $\alpha$
+  and $\gamma$ act only on $q_{uv}$, a function of the degree ratio (shape). Write
   $n_q(G)$ for the number of edges of $G$ with $q_{uv} = q$ (the
   $q$-histogram) and $\Pi = \{(\alpha,\beta,\gamma) : \beta = -2\alpha\}$
   for the plane $\kappa = 0$, which contains every pure-$\gamma$ point
@@ -568,38 +563,54 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   $e^{\gamma q}$ are linearly independent over the algebraic numbers.
   Hence the integer coefficients $n_q(G) - n_q(H)$ must all vanish. For real
   $\gamma$, a nonzero exponential sum with $k$ distinct real exponents
-  has at most $k - 1$ real zeros (Proposition~\ref{prop:laguerre}), and
+  has at most $k - 1$ real zeros (Proposition~\ref{prop:laguerre} below), and
   a finite set of graphs gives finitely many such sums. (iii) The
   attachment changes the profile of each tree by the same vector,
   $-(1,d) + (2,d) + (L-1)(2,2) + (1,2)$, so distinct profiles stay
   distinct and equal histograms stay equal. The new or changed
   vertices have degree at most $2$, so the maximum degree is unchanged
-  when it is at least $2$. The order-$13$ pair of
-  Section~\ref{sec:degeneracy} has a common leaf-neighbour degree
-  $d = 3$, and the order-$16$ pair with $\Delta \le 4$,
-  $\{(1,2)^{2}, (1,4)^{8}, (2,4)^{2}, (4,4)^{3}\}$ and
-  $\{(1,4)^{8}, (2,2)^{3}, (2,4)^{4}\}$, has $d = 4$, which gives every
+  when it is at least $2$. Trees realising the two order-$13$ profiles of
+  Section~\ref{sec:degeneracy} are the following. $T_1$: a path
+  $c\,a\,b\,d\,e\,\ell$ in which $c$ carries five pendant leaves, $b$ and
+  $d$ carry one pendant leaf each and $\ell$ is a leaf, so that
+  $d_c = 6$, $d_a = d_e = 2$, $d_b = d_d = 3$; its edges are
+  $(1,6)^{5}, (2,6), (2,3)^{2}, (3,3), (1,3)^{2}, (1,2)$. $T_2$: a path
+  $c\,b\,x\,y\,z$ in which $c$ carries five pendant leaves, $b$ one and
+  $z$ two, so that $d_c = 6$, $d_b = d_z = 3$, $d_x = d_y = 2$; its
+  edges are $(1,6)^{5}, (3,6), (1,3)^{3}, (2,3)^{2}, (2,2)$. Both have a
+  leaf adjacent to a vertex of degree $d = 3$. Consider now the order-$16$ pair with $\Delta \le 4$. The profile
+  $\{(1,2)^{2}, (1,4)^{8}, (2,4)^{2}, (4,4)^{3}\}$ is realised by a path
+  $A\,B\,C\,D$ of vertices of degree $4$. Here $A$ and $D$ carry three
+  pendant leaves each, while $B$ and $C$ carry one pendant leaf and one
+  pendant path of length $2$ each. The profile $\{(1,4)^{8}, (2,2)^{3}, (2,4)^{4}\}$ is realised by
+  three vertices $A, B, C$ of degree $4$. They are joined as $A\,w\,B$
+  through a vertex $w$ of degree $2$ and as $B\,v_1 v_2 v_3 v_4\,C$
+  through a path of four vertices of degree $2$, and $A$, $B$ and $C$
+  carry three, two and three pendant leaves. Both
+  have a leaf adjacent to a vertex of degree $d = 4$, which gives every
   larger order.
   \end{proof}
+
+  The first sentence of part~(ii) is the Lindemann--Weierstrass argument of Rada~\cite{Rada2019ExpVDB} applied to the edge function $\gamma q_{uv}$, whose equivalence classes of graphs are exactly the graphs with equal $q$-histograms; it is included for completeness. Parts~(i) and~(iii), the statement for real $\gamma$ and the corollary below are new.
 
   \begin{corollary}[Degree-ratio indices]\label{cor:ratioclass}
   Let $\rho_{uv} = \min(d_u,d_v)/\max(d_u,d_v)$ and let
   $I_f(G) = \sum_{uv \in E(G)} f(\rho_{uv})$ for any function
   $f$ on $(0,1]$. Since $\rho_{uv} = (1-q_{uv})/(1+q_{uv})$, $I_f$
-  depends on $G$ only through its $q$-histogram. Consequently the
-  trees of Theorem~\ref{thm:ratioplane}(iii), which exist at every
-  order $n \ge 13$ (and $n \ge 16$ with $\Delta \le 4$), are not
-  separated by any such index, in particular not by $GA$, $AG$, the
+  depends on $G$ only through its $q$-histogram. Consequently the trees of Theorem~\ref{thm:ratioplane}(iii), which
+  exist at every order $n \ge 13$ (and $n \ge 16$ with $\Delta \le 4$),
+  are not separated by any such index. This applies to $GA$, $AG$, the
   diminished Sombor index~\cite{MovahediGutmanRedzepovicFurtula2026},
-  the symmetric division deg index or the degree-ratio
+  the symmetric division deg index~\cite{VukicevicGasperov2010}, the
+  inverse symmetric division deg index and its
+  exponential~\cite{DasMondalRazaPal2025ExpISDD}, and the degree-ratio
   indices~\cite{NyauliBuragohain2027DRSO, GutmanBuragohainNyauli2026}.
   \end{corollary}
 
   The corollary needs no proof beyond the identity for $\rho_{uv}$; it
   turns the colliding families of part~(iii) into a limitation for the
   whole class of indices that see an edge only through its degree
-  ratio. The pure-$\gamma$ points are the members of that class for
-  which the limitation is also sharp, by part~(ii).
+  ratio. Among the members of that class, the pure-$\gamma$ points are those for which the limitation is also sharp, by part~(ii).
 
 
   Theorem~\ref{thm:ratioplane} is both a limitation result and a
@@ -646,12 +657,10 @@ $LO(G;\alpha,\beta,\gamma) = M_{\alpha,\beta}(G)$ for all $\gamma$.
   number of positive zeros, with multiplicity, is at most $V$ and has
   its parity, and the parity statement also follows from the signs of $D$
   as $\gamma \to \mp\infty$. These are the signs of the first and last nonzero $c_k$,
-  by the termwise argument of Proposition~\ref{prop:gamma_eq_0_or_inf}
-  applied to $D$.
+  by the termwise argument of Proposition~\ref{prop:gamma_eq_0_or_inf} below applied to $D$.
   \end{proof}
 
-  The bound $V$ can be attained. Two trees of order $12$ with
-  maximum degree $6$ and eight distinct imbalances have $V = 5$ and cross
+  The bound $V$ can be attained. Two trees of order $12$ with maximum degree $6$ and eight distinct imbalances, with profiles $\{(1,3)^{2},(1,4)^{2},(1,6)^{5},(3,4),(4,6)\}$ and $\{(1,2),(1,5)^{4},(1,6)^{4},(2,6),(5,6)\}$, have $V = 5$ and cross
   five times at $(\alpha,\beta) = (-1,0)$, near $\gamma = -17.2$,
   $-12.0$, $-2.0$, $2.7$ and $31.1$. By the bound these are all its
   zeros. Whether five crossings are attained for $\Delta \le 4$ is open. Along directions other than the $\gamma$ axis the exponents are
@@ -720,10 +729,7 @@ not the $q_k$, so the constant five does not apply.
   $(m,\Delta,\delta)$, a Cauchy--Schwarz interpolation bound and a
   uniform ratio bound are collected in Section~\ref{sec:termwise}.
 
-  \begin{proposition}\label{prop:gamma_eq_0_or_inf}
-  At $\gamma = 0$, $LO(G; \alpha, \beta, 0)$ coincides with the
-  two-parameter $(\alpha, \beta)$ degree-based index
-  $\sum_{uv \in E(G)} (d_u d_v)^{\alpha}(d_u + d_v)^{\beta}$.
+  \begin{proposition}[Limits along the $\gamma$ axis]\label{prop:gamma_eq_0_or_inf}
   Let $E_{\max}(G)$ denote the set of edges realising
   $\mathrm{imb}_{\max}(G) = \max_{uv} \mathrm{imb}(d_u, d_v)$
   and $E_{\min}(G)$ the set realising
@@ -753,358 +759,6 @@ not the $q_k$, so the constant five does not apply.
   $\gamma \to -\infty$ is dual.
   \end{proof}
 
-\section{Closed forms, bounds and extremal trees}\label{sec:bounds}
-% =====================================================================
-
-This section gives the closed-form values of the family on standard
-graphs, the extremal trees of the pure-$\gamma$ points, and termwise
-bounds. The proofs are short and are included for completeness.
-
-\subsection{Closed-form values on standard graphs}\label{sec:closedforms}
-The classical graph families used are the complete graph $K_n$, the
-cycle $C_n$, the path $P_n$, the star $S_n$ and the complete bipartite
-graph $K_{p,q}$. Beyond these, the hypercube $Q_k$ has $2^k$ vertices and
-$k \cdot 2^{k - 1}$ edges and is $k$-regular. The wheel $W_n$ is an
-$(n - 1)$-cycle plus a universal vertex, and the friendship graph $F_p$
-consists of $p$ triangles sharing a common vertex. Finally, the $r$-regular
-graphs are also used.
-
-  \begin{proposition}\label{prop:closedforms}
-  Let $\alpha, \beta, \gamma \in \mathbb{R}$. Then:
-  \begin{enumerate}
-  \item  $LO(K_n; \alpha, \beta, \gamma) =
-    \dfrac{n(n-1)}{2}\,2^{\beta}(n - 1)^{2\alpha + \beta}$ for $n \ge 2$.
-  \item  $LO(C_n; \alpha, \beta, \gamma) = n \cdot 4^{\alpha +
-  \beta}$
-    for $n \ge 3$.
-  \item
-    $LO(P_n; \alpha, \beta, \gamma) =
-    \begin{cases}
-      2^{\beta}, & n = 2,\\[2pt]
-      2 \cdot 2^{\alpha} 3^{\beta} e^{\gamma/3}, & n = 3,\\[2pt]
-      2 \cdot 2^{\alpha} 3^{\beta} e^{\gamma/3} + (n - 3) \cdot 4^{\alpha +
-  \beta},
-         & n \ge 4.
-    \end{cases}$
-  \item  $LO(S_n; \alpha, \beta, \gamma) =
-    (n - 1)\,(n - 1)^{\alpha} n^{\beta} \exp\!\left(\gamma\,\dfrac{n -
-  2}{n}\right)$
-    for $n \ge 2$.
-  \item  $LO(K_{p,q}; \alpha, \beta, \gamma) =
-    pq\,(pq)^{\alpha}(p + q)^{\beta}\exp\!\left(\gamma\,\dfrac{|p - q|}{p +
-  q}\right)$.
-  \item  $LO(Q_k; \alpha, \beta, \gamma) =
-    k \cdot 2^{k - 1} \cdot 2^{\beta} k^{2\alpha + \beta}$ for $k \ge 1$.
-  \item  For $n \ge 5$, $W_n$ has $n - 1$ spoke edges with
-    degree pair $(3, n - 1)$ and $n - 1$ rim edges with degree pair
-    $(3, 3)$, so
-    \[
-    LO(W_n; \alpha, \beta, \gamma)
-    = (n - 1)\Bigl[\,3^{\alpha} (n - 1)^{\alpha}(n + 2)^{\beta}
-         \exp\!\left(\gamma\,\tfrac{n - 4}{n + 2}\right)
-       + 9^{\alpha} 6^{\beta}\Bigr].
-    \]
-  \item  For $p \ge 1$, $F_p$ has $2p$ spoke edges
-    $(2, 2p)$ and $p$ outer edges $(2, 2)$, so
-    \[
-    LO(F_p; \alpha, \beta, \gamma)
-    = p \cdot 4^{\alpha + \beta}
-     + 2p\,(4p)^{\alpha}(2p + 2)^{\beta}
-         \exp\!\left(\gamma\,\tfrac{p - 1}{p + 1}\right).
-    \]
-  \item  For an $r$-regular graph $G$ with $m$ edges,
-    $\Wuzi = m \cdot 2^{\beta} r^{2\alpha + \beta}$.
-  \end{enumerate}
-  \end{proposition}
-
-  \begin{proof}
-  Each case follows by enumerating the edge degree pairs and applying
-  Definition~\ref{def:wuzi}. In $K_n$, $C_n$, $Q_k$ and $r$-regular
-  graphs every edge has $d_u = d_v = r$, so $\mathrm{imb} = 0$ and
-  $(d_u d_v)^{\alpha}(d_u + d_v)^{\beta} = 2^{\beta} r^{2\alpha + \beta}$,
-  which gives items (1), (2), (6) and (9). All $n - 1$ edges of $S_n$
-  have degree pair $(1, n - 1)$ with $\mathrm{imb} = (n - 2)/n$
-  (item (4)), and all $pq$ edges of $K_{p,q}$ have pair $(p, q)$ (item (5)).
-  For $n \ge 4$, $P_n$ has two pendant edges $(1, 2)$ and $n - 3$ interior
-  edges $(2, 2)$, and the cases $n = 2, 3$ are immediate (item (3)).
-  Items (7) and (8) follow by summing over the two edge-degree-pair
-  classes of $W_n$ and $F_p$.
-  \end{proof}
-
-
-
-\subsection{Extremal trees for the pure-imbalance points}\label{sec:extremal}
-
-The pure-$\gamma$ points are ordered on trees by the same two graphs
-as most classical indices, and the proof is a one-line consequence of
-the edge-by-edge bound $0 \le q_{uv} \le (n-2)/n$ on a tree of order $n$.
-
-\begin{proposition}[Extremal trees]\label{prop:extremal}
-Let $n \ge 4$ and $\gamma > 0$. Among all trees of order $n$, the
-path $P_n$ is the unique minimiser and the star $S_n$ the unique
-maximiser of $LO(\cdot\,;0,0,\gamma)$, with
-\[
-(n-3) + 2e^{\gamma/3} \;\le\; LO(T;0,0,\gamma) \;\le\; (n-1)\,e^{\gamma(n-2)/n}.
-\]
-For $\gamma < 0$ the roles of $P_n$ and $S_n$ are exchanged.
-\end{proposition}
-
-\begin{proof}
-Let $\gamma > 0$. Every edge $uv$ of a tree of order $n$ has
-$q_{uv} \le (n-2)/n$, with equality if and only if $\{d_u,d_v\} =
-\{1,n-1\}$, so $LO(T;0,0,\gamma) \le (n-1)e^{\gamma(n-2)/n}$ with
-equality if and only if every edge is a $(1,n-1)$-edge, that is,
-$T = S_n$. For the lower bound, a tree with $k \ge 2$ leaves has at
-least $k$ edges incident to a leaf, and each such edge has
-$q \ge \tfrac13$ because the other end has degree at least $2$ and
-$(d-1)/(d+1)$ is increasing in $d$. Hence
-$LO(T;0,0,\gamma) \ge (n-1-k) + k e^{\gamma/3} \ge (n-3) + 2e^{\gamma/3}$,
-since $e^{\gamma/3} > 1$. Equality in the second inequality forces
-$k = 2$, so $T = P_n$, and $P_n$ attains the bound because its two
-pendant edges are $(1,2)$-edges and its other edges are $(2,2)$-edges.
-For $\gamma < 0$ every inequality reverses.
-\end{proof}
-
-The proof uses only the bounds on $q$ and does not extend verbatim to
-general $(\alpha,\beta)$, where the ordering of trees depends on the
-scale exponent $2\alpha + \beta$ as well as on $\gamma$. Among
-chemical trees ($\Delta \le 4$) the termwise bound gives
-$LO(T;0,0,\gamma) \le (n-1)e^{3\gamma/5}$ for $\gamma > 0$, with
-equality only for $n = 5$, and the extremal chemical trees for
-$n > 5$ are left open. The orders $4$ to $12$ were also checked by
-enumeration in the reproducibility package.
-
-\subsection{Termwise bounds}\label{sec:termwise}
-  We give a bracket bound via the edge-contribution function $\psi$,
-  bounds in $(m, \Delta, \delta)$ for non-negative parameters, a
-  Cauchy--Schwarz interpolation bound and a uniform ratio bound. The
-  $\gamma \neq 0$ bounds rest on
-  bounding $e^{\gamma q_{uv}}$ edge by edge (for $\gamma \ge 0$) between $1$ and
-  $e^{\gamma(\Delta-1)/(\Delta+1)}$. Throughout, $G$ is a simple
-  connected graph with $\delta \le d_v \le \Delta$ for every
-  $v \in V(G)$. Several of the inequalities have been machine-checked
-  (Supplementary Section~S7).
-
-
-  \begin{remark}[Attribution at $\gamma = 0$]\label{rem:gmattr}
-  At $\gamma = 0$ the family coincides with $M_{\alpha,\beta}$, and
-  inequalities of all the types developed here are already known for it.
-  These include $(\Delta,\delta,m)$-bounds with regular/biregular equality,
-  two-sided comparisons against $M_1$, $M_2$, $R$, $\chi$, $H$, $GA$,
-  $AG$ and $ISI$~\cite{MolinaSigarreta2025GM}, Jensen-
-  and H\"older-type relations~\cite{GranadosJMC2025GM} and further
-  inequalities~\cite{PortillaJMC2025GM}. The $\gamma = 0$
-  specialisations below are therefore not claimed as new. What this section
-  adds is their extension to $\gamma \neq 0$, where the
-  imbalance factor $e^{\gamma q_{uv}}$ enters every edge weight, and the
-  tracking of how $\gamma$ deforms the equality cases. Comparisons
-  at $\gamma = 0$ with the Randi\'c, sum-connectivity and
-  Sombor indices are not repeated.
-  \end{remark}
-
-
-  The summand in~Eq.~\eqref{eq:wuzi} depends only on the unordered
-  edge degree pair $(d_u, d_v)$. We isolate this dependence as follows:
-
-  \begin{definition}\label{def:psi}
-  For real parameters $\alpha, \beta, \gamma$ and positive reals
-  $x, y$,
-  \begin{equation}\label{eq:psi}
-  \edgepsi = (xy)^{\alpha}(x + y)^{\beta}
-  \exp\!\left(\gamma\,\tfrac{|x - y|}{x + y}\right).
-  \end{equation}
-  \end{definition}
-
-  With this notation $\Wuzi = \sum_{uv \in E(G)} \psi(d_u, d_v; \alpha,
-  \beta, \gamma)$.
-
-  \begin{proposition}\label{thm:bracket}
-  Let $G$ be a simple connected graph of size $m \ge 1$ with
-  degrees in $[\delta, \Delta]$. Then
-  \begin{equation}\label{eq:bracket}
-  m \cdot \psi_{\min}(\delta, \Delta; \alpha, \beta, \gamma)
-  \;\le\; \Wuzi \;\le\;
-  m \cdot \psi_{\max}(\delta, \Delta; \alpha, \beta, \gamma),
-  \end{equation}
-  where,
-  $\psi_{\min} = \min\{\psi(i, j; \alpha, \beta, \gamma)
-                : \delta \le i \le j \le \Delta\}$
-  and $\psi_{\max} = \max\{\psi(i, j; \alpha, \beta, \gamma)
-                : \delta \le i \le j \le \Delta\}$. The upper
-  inequality is an equality if and only if every edge of $G$ has a
-  degree pair attaining $\psi_{\max}$. The lower
-  inequality is an equality if and only if every edge has a degree
-  pair attaining $\psi_{\min}$.
-  \end{proposition}
-
-  \begin{proof}
-  Every edge $uv$ has its degree pair in the admissible set
-  $\mathcal{P}(\delta, \Delta) := \{(i, j) \in \mathbb{Z}^2 : \delta \le
-  i \le j \le \Delta\}$, hence
-  $\psi_{\min} \le \psi(d_u, d_v; \alpha, \beta, \gamma) \le \psi_{\max}$
-  on every edge, and summing over the $m$ edges and using
-  $\sum_{uv} \psi(d_u, d_v; \alpha, \beta, \gamma) = \Wuzi$
-  gives~\eqref{eq:bracket}. Each side of~\eqref{eq:bracket} is the sum
-  of $m$ per-edge inequalities, and is therefore an equality if and only
-  if every per-edge inequality is. That is, equality holds if and only
-  if every edge has a degree pair attaining $\psi_{\max}$ (upper side),
-  respectively $\psi_{\min}$ (lower side), over $\mathcal{P}(\delta, \Delta)$.
-  \end{proof}
-
-
-  \begin{corollary}\label{thm:cs}
-  Let $\alpha_1 + \alpha_2 = 2\alpha$, $\beta_1 + \beta_2 = 2\beta$,
-  and $\gamma_1 + \gamma_2 = 2\gamma$. Then for every simple
-  connected graph $G$ without isolated vertices,
-  \[
-  LO(G; \alpha, \beta, \gamma)
-  \;\le\;
-  \sqrt{LO(G; \alpha_1, \beta_1, \gamma_1)
-         \cdot LO(G; \alpha_2, \beta_2, \gamma_2)}
-  \]
-  Equality holds if and only if the ratio
-  \[
-  \psi(d_u, d_v; \alpha_1, \beta_1, \gamma_1)/\psi(d_u, d_v; \alpha_2,
-  \beta_2, \gamma_2)
-  \]
-  is the same for every edge of $G$.
-  \end{corollary}
-  \begin{proof}
-  For each edge $e = uv$ write
-  $\psi_e^{(k)} := \psi(d_u, d_v; \alpha_k, \beta_k, \gamma_k) > 0$,
-  $k \in \{1, 2\}$, and by additivity of the exponents and the hypotheses on
-  $(\alpha_k, \beta_k, \gamma_k)$,
-  $\psi_e^{(1)}\psi_e^{(2)} = \psi(d_u, d_v; \alpha, \beta, \gamma)^2$
-  on every edge. The Cauchy--Schwarz inequality for
-  $a_e = (\psi_e^{(1)})^{1/2}$ and $b_e = (\psi_e^{(2)})^{1/2}$ gives
-  $\sum_e a_e b_e \le (\sum_e a_e^2)^{1/2} (\sum_e b_e^2)^{1/2}$, which
-  is the claim because $\sum_e a_e b_e = \Wuzi$,
-  $\sum_e a_e^2 = LO(G; \alpha_1, \beta_1, \gamma_1)$ and
-  $\sum_e b_e^2 = LO(G; \alpha_2, \beta_2, \gamma_2)$. Equality holds if
-  and only if $b_e = \lambda a_e$ for a constant $\lambda \ge 0$ and all
-  $e$, i.e.\ if and only if
-  $\psi_e^{(2)}/\psi_e^{(1)} = \lambda^2$ is the same on every edge.
-  (The inequality itself is midpoint log-convexity of
-  $\theta \mapsto LO(G; \theta)$, Theorem~\ref{thm:logconvex}.)
-  \end{proof}
-
-
-  \begin{proposition}\label{thm:upper_Delta}
-  Let $G$ be a connected graph of size $m$ and maximum degree $\Delta$. For
-  $\alpha, \beta \ge 0$ and $\gamma \ge 0$,
-  \begin{equation}\label{eq:upper_Delta}
-  \Wuzi \;\le\; m \cdot \Delta^{2\alpha} \cdot (2\Delta)^{\beta}
-  \cdot \exp\!\left(\gamma\,\frac{\Delta - 1}{\Delta + 1}\right).
-  \end{equation}
-  \end{proposition}
-
-  \begin{proof}
-  On every edge $uv$ we have $1 \le d_u, d_v \le \Delta$, hence
-  $d_u d_v \le \Delta^2$ and $d_u + d_v \le 2\Delta$, and the normalised
-  imbalance $\mathrm{imb}(x, y) = |x - y|/(x + y)$ is maximised over
-  $\{(i, j) : 1 \le i \le j \le \Delta\}$ at $(1, \Delta)$, so
-  $|d_u - d_v|/(d_u + d_v) \le (\Delta - 1)/(\Delta + 1)$. Since
-  $\alpha, \beta, \gamma \ge 0$, the maps $t \mapsto t^{\alpha}$,
-  $t \mapsto t^{\beta}$ and $t \mapsto e^{\gamma t}$ are non-decreasing,
-  so $\psi(d_u, d_v; \alpha, \beta, \gamma) \le \Delta^{2\alpha}
-  (2\Delta)^{\beta} \exp(\gamma(\Delta - 1)/(\Delta + 1))$, and summing over
-  the $m$ edges yields~\eqref{eq:upper_Delta}. For $\gamma > 0$
-  and $\Delta \ge 2$ the bound is attained if and only if
-  $\alpha = \beta = 0$ and every edge has degree pair $(1, \Delta)$
-  (for connected $G$, $G \cong K_{1,\Delta}$). If $\alpha > 0$ or
-  $\beta > 0$ the three factor-wise maxima are not simultaneously
-  attainable and the inequality is strict.
-  \end{proof}
-
-
-  \begin{proposition}\label{thm:lower_delta}
-  Let $G$ be a connected graph of size $m$ and minimum degree $\delta$. For
-  $\alpha, \beta \ge 0$ and $\gamma \ge 0$,
-  \begin{equation}\label{eq:lower_delta}
-  \Wuzi \;\ge\; m \cdot \delta^{2\alpha} \cdot (2\delta)^{\beta},
-  \end{equation}
-  with equality if and only if $G$ is $\delta$-regular, except in the
-  degenerate case $(\alpha, \beta, \gamma) = (0, 0, 0)$, where
-  $\Wuzi \equiv m$ and the bound holds with equality for every graph.
-  \end{proposition}
-
-  \begin{proof}
-  On every edge $d_u, d_v \ge \delta$, so for $\alpha, \beta \ge 0$,
-  $(d_u d_v)^{\alpha} \ge \delta^{2\alpha}$ and
-  $(d_u + d_v)^{\beta} \ge (2\delta)^{\beta}$. For $\gamma \ge 0$ the
-  exponential factor is at least $1$ because the imbalance is
-  non-negative, and multiplying and summing over the $m$ edges
-  yields~\eqref{eq:lower_delta}. If $(\alpha, \beta, \gamma) = (0, 0, 0)$
-  then $LO(G; 0, 0, 0) = m$ equals the bound for every graph, while otherwise
-  equality requires equality in every active per-edge factor, which for
-  $\alpha > 0$ or $\beta > 0$ forces $d_u = d_v = \delta$ on every
-  edge. If $\alpha = \beta = 0$ and $\gamma > 0$ it forces $d_u = d_v$
-  on every edge, so the connected graph $G$ is regular, hence
-  $\delta$-regular. Conversely, on a $\delta$-regular graph every edge
-  has degree pair $(\delta, \delta)$ and equality holds.
-  \end{proof}
-
-  The next proposition gives a single uniform template for bounding
-  $\Wuzi$ both above and below. The bound is in terms of any classical
-  bond-incident-degree index whose edge contribution is strictly
-  positive on the admissible degree pairs of the graph.
-
-  \begin{proposition}\label{thm:ratio_bound}
-  Let $G$ be a simple graph with maximum degree at most $\Delta$. Let
-  $I_h(G) = \sum_{uv \in E(G)} h(d_u, d_v)$ be a BID index with
-  edge contribution $h(i, j)$ strictly positive on every degree pair
-  $(i, j)$ that appears in $G$. Define
-  \[
-  c_{\min}^{h} = \min_{(i, j)}\,\frac{\psi(i, j; \alpha, \beta,
-  \gamma)}{h(i, j)},
-  \qquad
-  c_{\max}^{h} = \max_{(i, j)}\,\frac{\psi(i, j; \alpha, \beta,
-  \gamma)}{h(i, j)},
-  \]
-  where the extrema range over the degree pairs actually appearing in
-  $G$.
-  Then
-  \begin{equation}\label{eq:ratio_bound}
-  c_{\min}^{h} \cdot I_h(G)
-  \;\le\; \Wuzi
-  \;\le\; c_{\max}^{h} \cdot I_h(G),
-  \end{equation}
-  with equality on either side if and only if every edge of $G$
-  attains the corresponding extremum of $\psi/h$.
-  \end{proposition}
-
-  \begin{proof}
-  On every edge $uv$ we have $h(d_u, d_v) > 0$ and $c_{\min}^{h} \le \psi(d_u, d_v; \alpha,
-  \beta, \gamma)/h(d_u, d_v) \le c_{\max}^{h}$. Multiplying by $h(d_u, d_v)$
-  and summing over $E(G)$, with
-  $\sum_{uv} h(d_u, d_v) = I_h(G)$ and $\sum_{uv} \psi = \Wuzi$,
-  gives~\eqref{eq:ratio_bound}. Each side is an equality if and only if
-  every edge attains the corresponding extremum of $\psi/h$ over the
-  appearing pairs.
-  \end{proof}
-
-
-  Proposition~\ref{thm:ratio_bound} is a \emph{sharp graph-specific}
-  comparison, whose constants depend on the degree pairs that actually
-  appear in $G$, and a uniform version follows immediately by enlarging
-  the range of the extrema.
-
-  \begin{corollary}[Uniform $\Delta$-bounded version]\label{cor:ratio_uniform}
-  Assume the hypotheses of Proposition~\ref{thm:ratio_bound}, but with $h$
-  strictly positive on all of
-  $P_{\Delta} = \{(i,j) : 1 \le i \le j \le \Delta\}$ and the extrema
-  taken over $P_{\Delta}$. Then
-  inequality~\eqref{eq:ratio_bound} holds simultaneously for every
-  graph of maximum degree at most $\Delta$, with constants independent
-  of the individual graph. Equality on either side holds if and only
-  if every edge of $G$ realises a degree pair attaining the
-  corresponding extremum over $P_{\Delta}$. The uniform constants are
-  in general strictly worse than the graph-specific ones, since the
-  extrema are taken over a superset.
-  \end{corollary}
-
-% =====================================================================
-% =====================================================================
 \section{Discrimination}\label{sec:discrimination}
 % =====================================================================
 
@@ -1211,6 +865,8 @@ Isomer & $T_B$ & $\Delta H_f$ & $\Delta H_{\mathrm{vap}}$ & $S$ & $\omega$\\
 \end{table}
 
 \subsection{Degeneracy across tree orders}\label{sec:degeneracy}
+Exponential indices of this type were introduced by Rada~\cite{Rada2019ExpVDB} for their discriminating power on trees.
+
 
 Degeneracy~\cite{Konstantinova1996Degeneracy} measures the failure to
 discriminate non-isomorphic graphs, and we quantify it with the
@@ -1234,7 +890,7 @@ $\{(1,2)^{1}, (1,3)^{2}, (1,6)^{5}, (2,3)^{2}, (2,6)^{1}, (3,3)^{1}\}$
 and $\{(1,3)^{3}, (1,6)^{5}, (2,2)^{1}, (2,3)^{2}, (3,6)^{1}\}$
 (exponents are edge multiplicities) share the $q$-histogram
 $\{0^{1}, \tfrac15^{2}, \tfrac13^{1}, \tfrac12^{3}, \tfrac57^{5}\}$.
-Rada~\cite{Rada2019ExpVDB} introduced exponential indices of this type for their discriminating power on trees. Table~\ref{tab:firstfail} collects the first failures, and the index
+Table~\ref{tab:firstfail} collects the first failures, and the index
 $R$ still attains the floor at order $13$ ($570$ values) and leaves it
 at order $14$, where the pure-$\gamma$ points give $1090$ values.
 
@@ -1358,18 +1014,361 @@ $LO(0,0,2)$ & $0.1257$ & $0.2745$ & $0.4579$\\
 \end{tabular}
 \end{table}
 
-% =====================================================================
-\section{QSPR diagnostics}\label{sec:sensitivity}
+
+\section{Closed forms, bounds and extremal trees}\label{sec:bounds}
 % =====================================================================
 
-In Tables~\ref{tab:box}--\ref{tab:bp} medians are taken over
-candidate-stream seeds, and seed counts describe the variability of the
-random search on fixed data rather than replications. Values are rounded
-once for display (three decimals for correlations, $Q^2$ and RMSE), so a
-tabulated difference may differ in the last place from the difference of
-two displayed entries. The narrow- and wide-box streams use the same
-uniform variates scaled by the half-width, so comparisons across boxes
-are paired.
+This section gives the closed-form values of the family on standard
+graphs, the extremal trees of the pure-$\gamma$ points, and termwise
+bounds. The proofs are short and are included for completeness.
+
+\subsection{Closed-form values on standard graphs}\label{sec:closedforms}
+The classical graph families used are the complete graph $K_n$, the
+cycle $C_n$, the path $P_n$, the star $S_n$ and the complete bipartite
+graph $K_{p,q}$. Beyond these, the hypercube $Q_k$ has $2^k$ vertices and
+$k \cdot 2^{k - 1}$ edges and is $k$-regular. The wheel $W_n$ is an
+$(n - 1)$-cycle plus a universal vertex, and the friendship graph $F_p$
+consists of $p$ triangles sharing a common vertex. We also treat $r$-regular graphs.
+
+  \begin{proposition}\label{prop:closedforms}
+  Let $\alpha, \beta, \gamma \in \mathbb{R}$. Then:
+  \begin{enumerate}
+  \item  $LO(K_n; \alpha, \beta, \gamma) =
+    \dfrac{n(n-1)}{2}\,2^{\beta}(n - 1)^{2\alpha + \beta}$ for $n \ge 2$.
+  \item  $LO(C_n; \alpha, \beta, \gamma) = n \cdot 4^{\alpha +
+  \beta}$
+    for $n \ge 3$.
+  \item
+    $LO(P_n; \alpha, \beta, \gamma) =
+    \begin{cases}
+      2^{\beta}, & n = 2,\\[2pt]
+      2 \cdot 2^{\alpha} 3^{\beta} e^{\gamma/3}, & n = 3,\\[2pt]
+      2 \cdot 2^{\alpha} 3^{\beta} e^{\gamma/3} + (n - 3) \cdot 4^{\alpha +
+  \beta},
+         & n \ge 4.
+    \end{cases}$
+  \item  $LO(S_n; \alpha, \beta, \gamma) =
+    (n - 1)\,(n - 1)^{\alpha} n^{\beta} \exp\!\left(\gamma\,\dfrac{n -
+  2}{n}\right)$
+    for $n \ge 2$.
+  \item  $LO(K_{p,q}; \alpha, \beta, \gamma) =
+    pq\,(pq)^{\alpha}(p + q)^{\beta}\exp\!\left(\gamma\,\dfrac{|p - q|}{p +
+  q}\right)$.
+  \item  $LO(Q_k; \alpha, \beta, \gamma) =
+    k \cdot 2^{k - 1} \cdot 2^{\beta} k^{2\alpha + \beta}$ for $k \ge 1$.
+  \item  For $n \ge 5$, $W_n$ has $n - 1$ spoke edges with
+    degree pair $(3, n - 1)$ and $n - 1$ rim edges with degree pair
+    $(3, 3)$, so
+    \[
+    LO(W_n; \alpha, \beta, \gamma)
+    = (n - 1)\Bigl[\,3^{\alpha} (n - 1)^{\alpha}(n + 2)^{\beta}
+         \exp\!\left(\gamma\,\tfrac{n - 4}{n + 2}\right)
+       + 9^{\alpha} 6^{\beta}\Bigr].
+    \]
+  \item  For $p \ge 1$, $F_p$ has $2p$ spoke edges
+    $(2, 2p)$ and $p$ outer edges $(2, 2)$, so
+    \[
+    LO(F_p; \alpha, \beta, \gamma)
+    = p \cdot 4^{\alpha + \beta}
+     + 2p\,(4p)^{\alpha}(2p + 2)^{\beta}
+         \exp\!\left(\gamma\,\tfrac{p - 1}{p + 1}\right).
+    \]
+  \item  For an $r$-regular graph $G$ with $m$ edges,
+    $\Wuzi = m \cdot 2^{\beta} r^{2\alpha + \beta}$.
+  \end{enumerate}
+  \end{proposition}
+
+  \begin{proof}
+  Each case follows by enumerating the edge degree pairs and applying
+  Definition~\ref{def:wuzi}. In $K_n$, $C_n$, $Q_k$ and $r$-regular
+  graphs every edge has $d_u = d_v = r$, so $\mathrm{imb} = 0$ and
+  $(d_u d_v)^{\alpha}(d_u + d_v)^{\beta} = 2^{\beta} r^{2\alpha + \beta}$,
+  which gives items (1), (2), (6) and (9). All $n - 1$ edges of $S_n$
+  have degree pair $(1, n - 1)$ with $\mathrm{imb} = (n - 2)/n$
+  (item (4)), and all $pq$ edges of $K_{p,q}$ have pair $(p, q)$ (item (5)).
+  For $n \ge 4$, $P_n$ has two pendant edges $(1, 2)$ and $n - 3$ interior
+  edges $(2, 2)$, and the cases $n = 2, 3$ are immediate (item (3)).
+  Items (7) and (8) follow by summing over the two edge-degree-pair
+  classes of $W_n$ and $F_p$.
+  \end{proof}
+
+
+
+\subsection{Extremal trees for the pure-imbalance points}\label{sec:extremal}
+
+The pure-$\gamma$ points are ordered on trees by the same two graphs
+as most classical indices, and the proof is a short consequence of
+the edge-by-edge bound $0 \le q_{uv} \le (n-2)/n$ on a tree of order $n$.
+
+\begin{proposition}[Extremal trees]\label{prop:extremal}
+Let $n \ge 4$ and $\gamma > 0$. Among all trees of order $n$, the
+path $P_n$ is the unique minimiser and the star $S_n$ the unique
+maximiser of $LO(\cdot\,;0,0,\gamma)$, with
+\[
+(n-3) + 2e^{\gamma/3} \;\le\; LO(T;0,0,\gamma) \;\le\; (n-1)\,e^{\gamma(n-2)/n}.
+\]
+For $\gamma < 0$ the roles of $P_n$ and $S_n$ are exchanged.
+\end{proposition}
+
+\begin{proof}
+Let $\gamma > 0$. Every edge $uv$ of a tree of order $n$ has
+$q_{uv} \le (n-2)/n$, with equality if and only if $\{d_u,d_v\} =
+\{1,n-1\}$, so $LO(T;0,0,\gamma) \le (n-1)e^{\gamma(n-2)/n}$ with
+equality if and only if every edge is a $(1,n-1)$-edge, that is,
+$T = S_n$. For the lower bound, a tree with $k \ge 2$ leaves has at
+least $k$ edges incident to a leaf, and each such edge has
+$q \ge \tfrac13$ because the other end has degree at least $2$ and
+$(d-1)/(d+1)$ is increasing in $d$. Hence
+$LO(T;0,0,\gamma) \ge (n-1-k) + k e^{\gamma/3} \ge (n-3) + 2e^{\gamma/3}$,
+since $e^{\gamma/3} > 1$. Equality in the second inequality forces
+$k = 2$, so $T = P_n$, and $P_n$ attains the bound because its two
+pendant edges are $(1,2)$-edges and its other edges are $(2,2)$-edges.
+For $\gamma < 0$ every inequality reverses.
+\end{proof}
+
+The proof uses only the bounds on $q$ and does not extend verbatim to
+general $(\alpha,\beta)$, where the ordering of trees depends on the
+scale exponent $2\alpha + \beta$ as well as on $\gamma$. Among
+chemical trees ($\Delta \le 4$) the termwise bound gives
+$LO(T;0,0,\gamma) \le (n-1)e^{3\gamma/5}$ for $\gamma > 0$, with
+equality only for $n = 5$. The path remains the unique minimiser for $\gamma > 0$ among chemical trees by Proposition~\ref{prop:extremal}, while the maximal chemical trees for $n > 5$ are left open. The orders $4$ to $12$ were also checked by
+enumeration in the reproducibility package.
+
+\subsection{Termwise bounds}\label{sec:termwise}
+  We give a bracket bound via the edge-contribution function $\psi$,
+  bounds in $(m, \Delta, \delta)$ for non-negative parameters, a
+  Cauchy--Schwarz interpolation bound and a uniform ratio bound. The
+  $\gamma \neq 0$ bounds rest on
+  bounding $e^{\gamma q_{uv}}$ edge by edge (for $\gamma \ge 0$) between $1$ and
+  $e^{\gamma(\Delta-1)/(\Delta+1)}$. Throughout, $G$ is a simple
+  connected graph with $\delta \le d_v \le \Delta$ for every
+  $v \in V(G)$. Several of the inequalities have been machine-checked
+  (Supplementary Section~S7).
+
+
+  \begin{remark}[Attribution at $\gamma = 0$]\label{rem:gmattr}
+  At $\gamma = 0$ the family coincides with $M_{\alpha,\beta}$, and
+  inequalities of all the types developed here are already known for it.
+  These include $(\Delta,\delta,m)$-bounds with regular/biregular equality,
+  two-sided comparisons against $M_1$, $M_2$, $R$, $\chi$, $H$, $GA$,
+  $AG$ and $ISI$~\cite{MolinaSigarreta2025GM}, Jensen-
+  and H\"older-type relations~\cite{GranadosJMC2025GM} and further
+  inequalities~\cite{PortillaJMC2025GM}. The $\gamma = 0$
+  specialisations below are therefore not claimed as new. What this section
+  adds is their extension to $\gamma \neq 0$, where the
+  imbalance factor $e^{\gamma q_{uv}}$ enters every edge weight, and the
+  tracking of how $\gamma$ deforms the equality cases. Comparisons
+  at $\gamma = 0$ with the Randi\'c, sum-connectivity and
+  Sombor indices are not repeated.
+  \end{remark}
+
+
+  The summand in~Eq.~\eqref{eq:wuzi} depends only on the unordered
+  edge degree pair $(d_u, d_v)$. We isolate this dependence as follows:
+
+  \begin{definition}\label{def:psi}
+  For real parameters $\alpha, \beta, \gamma$ and positive reals
+  $x, y$,
+  \begin{equation}\label{eq:psi}
+  \edgepsi = (xy)^{\alpha}(x + y)^{\beta}
+  \exp\!\left(\gamma\,\tfrac{|x - y|}{x + y}\right).
+  \end{equation}
+  \end{definition}
+
+  With this notation $\Wuzi = \sum_{uv \in E(G)} \psi(d_u, d_v; \alpha,
+  \beta, \gamma)$.
+
+  \begin{proposition}\label{thm:bracket}
+  Let $G$ be a simple connected graph of size $m \ge 1$ with
+  degrees in $[\delta, \Delta]$. Then
+  \begin{equation}\label{eq:bracket}
+  m \cdot \psi_{\min}(\delta, \Delta; \alpha, \beta, \gamma)
+  \;\le\; \Wuzi \;\le\;
+  m \cdot \psi_{\max}(\delta, \Delta; \alpha, \beta, \gamma),
+  \end{equation}
+  where $\psi_{\min} = \min\{\psi(i, j; \alpha, \beta, \gamma)
+                : \delta \le i \le j \le \Delta\}$
+  and $\psi_{\max} = \max\{\psi(i, j; \alpha, \beta, \gamma)
+                : \delta \le i \le j \le \Delta\}$. The upper
+  inequality is an equality if and only if every edge of $G$ has a
+  degree pair attaining $\psi_{\max}$. The lower
+  inequality is an equality if and only if every edge has a degree
+  pair attaining $\psi_{\min}$.
+  \end{proposition}
+
+  \begin{proof}
+  Every edge $uv$ has its degree pair in the admissible set
+  $\mathcal{P}(\delta, \Delta) := \{(i, j) \in \mathbb{Z}^2 : \delta \le
+  i \le j \le \Delta\}$, hence
+  $\psi_{\min} \le \psi(d_u, d_v; \alpha, \beta, \gamma) \le \psi_{\max}$
+  on every edge, and summing over the $m$ edges and using
+  $\sum_{uv} \psi(d_u, d_v; \alpha, \beta, \gamma) = \Wuzi$
+  gives~\eqref{eq:bracket}. Each side of~\eqref{eq:bracket} is the sum
+  of $m$ per-edge inequalities, and is therefore an equality if and only
+  if every per-edge inequality is. That is, equality holds if and only
+  if every edge has a degree pair attaining $\psi_{\max}$ (upper side),
+  respectively $\psi_{\min}$ (lower side), over $\mathcal{P}(\delta, \Delta)$.
+  \end{proof}
+
+
+  \begin{corollary}\label{thm:cs}
+  Let $\alpha_1 + \alpha_2 = 2\alpha$, $\beta_1 + \beta_2 = 2\beta$,
+  and $\gamma_1 + \gamma_2 = 2\gamma$. Then for every simple
+  connected graph $G$ without isolated vertices,
+  \[
+  LO(G; \alpha, \beta, \gamma)
+  \;\le\;
+  \sqrt{LO(G; \alpha_1, \beta_1, \gamma_1)
+         \cdot LO(G; \alpha_2, \beta_2, \gamma_2)}
+  \]
+  Equality holds if and only if the ratio
+  \[
+  \psi(d_u, d_v; \alpha_1, \beta_1, \gamma_1)/\psi(d_u, d_v; \alpha_2,
+  \beta_2, \gamma_2)
+  \]
+  is the same for every edge of $G$.
+  \end{corollary}
+  \begin{proof}
+  For each edge $e = uv$ write
+  $\psi_e^{(k)} := \psi(d_u, d_v; \alpha_k, \beta_k, \gamma_k) > 0$,
+  $k \in \{1, 2\}$, and by additivity of the exponents and the hypotheses on
+  $(\alpha_k, \beta_k, \gamma_k)$,
+  $\psi_e^{(1)}\psi_e^{(2)} = \psi(d_u, d_v; \alpha, \beta, \gamma)^2$
+  on every edge. The Cauchy--Schwarz inequality for
+  $a_e = (\psi_e^{(1)})^{1/2}$ and $b_e = (\psi_e^{(2)})^{1/2}$ gives
+  $\sum_e a_e b_e \le (\sum_e a_e^2)^{1/2} (\sum_e b_e^2)^{1/2}$, which
+  is the claim because $\sum_e a_e b_e = \Wuzi$,
+  $\sum_e a_e^2 = LO(G; \alpha_1, \beta_1, \gamma_1)$ and
+  $\sum_e b_e^2 = LO(G; \alpha_2, \beta_2, \gamma_2)$. Equality holds if
+  and only if $b_e = \lambda a_e$ for a constant $\lambda \ge 0$ and all
+  $e$, i.e.\ if and only if
+  $\psi_e^{(2)}/\psi_e^{(1)} = \lambda^2$ is the same on every edge.
+  (The inequality itself is midpoint log-convexity of
+  $\theta \mapsto LO(G; \theta)$, Theorem~\ref{thm:logconvex}.)
+  \end{proof}
+
+
+  \begin{proposition}\label{thm:upper_Delta}
+  Let $G$ be a connected graph of size $m$ and maximum degree $\Delta$. For
+  $\alpha, \beta \ge 0$ and $\gamma \ge 0$,
+  \begin{equation}\label{eq:upper_Delta}
+  \Wuzi \;\le\; m \cdot \Delta^{2\alpha} \cdot (2\Delta)^{\beta}
+  \cdot \exp\!\left(\gamma\,\frac{\Delta - 1}{\Delta + 1}\right).
+  \end{equation}
+  Equality holds if and only if $\alpha = \beta = \gamma = 0$, or
+  $\gamma = 0$, $\alpha + \beta > 0$ and $G$ is $\Delta$-regular, or
+  $\gamma > 0$, $\alpha = \beta = 0$ and $G \cong K_{1,\Delta}$ with
+  $\Delta \ge 2$; for $\gamma > 0$ and $\alpha + \beta > 0$ the
+  inequality is strict.
+  \end{proposition}
+
+  \begin{proof}
+  On every edge $uv$ we have $1 \le d_u, d_v \le \Delta$, hence
+  $d_u d_v \le \Delta^2$ and $d_u + d_v \le 2\Delta$, and the normalised
+  imbalance $\mathrm{imb}(x, y) = |x - y|/(x + y)$ is maximised over
+  $\{(i, j) : 1 \le i \le j \le \Delta\}$ at $(1, \Delta)$, so
+  $|d_u - d_v|/(d_u + d_v) \le (\Delta - 1)/(\Delta + 1)$. Since
+  $\alpha, \beta, \gamma \ge 0$, the maps $t \mapsto t^{\alpha}$,
+  $t \mapsto t^{\beta}$ and $t \mapsto e^{\gamma t}$ are non-decreasing,
+  so $\psi(d_u, d_v; \alpha, \beta, \gamma) \le \Delta^{2\alpha}
+  (2\Delta)^{\beta} \exp(\gamma(\Delta - 1)/(\Delta + 1))$, and summing over
+  the $m$ edges yields~\eqref{eq:upper_Delta}. For $\gamma > 0$
+  and $\Delta \ge 2$ the bound is attained if and only if
+  $\alpha = \beta = 0$ and every edge has degree pair $(1, \Delta)$
+  (for connected $G$, $G \cong K_{1,\Delta}$). If $\alpha > 0$ or
+  $\beta > 0$ the three factor-wise maxima are not simultaneously
+  attainable and the inequality is strict.
+  \end{proof}
+
+
+  \begin{proposition}\label{thm:lower_delta}
+  Let $G$ be a connected graph of size $m$ and minimum degree $\delta$. For
+  $\alpha, \beta \ge 0$ and $\gamma \ge 0$,
+  \begin{equation}\label{eq:lower_delta}
+  \Wuzi \;\ge\; m \cdot \delta^{2\alpha} \cdot (2\delta)^{\beta},
+  \end{equation}
+  with equality if and only if $G$ is $\delta$-regular, except in the
+  degenerate case $(\alpha, \beta, \gamma) = (0, 0, 0)$, where
+  $\Wuzi \equiv m$ and the bound holds with equality for every graph.
+  \end{proposition}
+
+  \begin{proof}
+  On every edge $d_u, d_v \ge \delta$, so for $\alpha, \beta \ge 0$,
+  $(d_u d_v)^{\alpha} \ge \delta^{2\alpha}$ and
+  $(d_u + d_v)^{\beta} \ge (2\delta)^{\beta}$. For $\gamma \ge 0$ the
+  exponential factor is at least $1$ because the imbalance is
+  non-negative, and multiplying and summing over the $m$ edges
+  yields~\eqref{eq:lower_delta}. If $(\alpha, \beta, \gamma) = (0, 0, 0)$
+  then $LO(G; 0, 0, 0) = m$ equals the bound for every graph, while otherwise
+  equality requires equality in every active per-edge factor, which for
+  $\alpha > 0$ or $\beta > 0$ forces $d_u = d_v = \delta$ on every
+  edge. If $\alpha = \beta = 0$ and $\gamma > 0$ it forces $d_u = d_v$
+  on every edge, so the connected graph $G$ is regular, hence
+  $\delta$-regular. Conversely, on a $\delta$-regular graph every edge
+  has degree pair $(\delta, \delta)$ and equality holds.
+  \end{proof}
+
+  The next proposition gives a single uniform template for bounding
+  $\Wuzi$ both above and below. The bound is in terms of any classical
+  bond-incident-degree index whose edge contribution is strictly
+  positive on the admissible degree pairs of the graph.
+
+  \begin{proposition}\label{thm:ratio_bound}
+  Let $G$ be a simple graph with maximum degree at most $\Delta$. Let
+  $I_h(G) = \sum_{uv \in E(G)} h(d_u, d_v)$ be a BID index with
+  edge contribution $h(i, j)$ strictly positive on every degree pair
+  $(i, j)$ that appears in $G$. Define
+  \[
+  c_{\min}^{h} = \min_{(i, j)}\,\frac{\psi(i, j; \alpha, \beta,
+  \gamma)}{h(i, j)},
+  \qquad
+  c_{\max}^{h} = \max_{(i, j)}\,\frac{\psi(i, j; \alpha, \beta,
+  \gamma)}{h(i, j)},
+  \]
+  where the extrema range over the degree pairs actually appearing in
+  $G$.
+  Then
+  \begin{equation}\label{eq:ratio_bound}
+  c_{\min}^{h} \cdot I_h(G)
+  \;\le\; \Wuzi
+  \;\le\; c_{\max}^{h} \cdot I_h(G),
+  \end{equation}
+  with equality on either side if and only if every edge of $G$
+  attains the corresponding extremum of $\psi/h$.
+  \end{proposition}
+
+  \begin{proof}
+  On every edge $uv$ we have $h(d_u, d_v) > 0$ and $c_{\min}^{h} \le \psi(d_u, d_v; \alpha,
+  \beta, \gamma)/h(d_u, d_v) \le c_{\max}^{h}$. Multiplying by $h(d_u, d_v)$
+  and summing over $E(G)$, with
+  $\sum_{uv} h(d_u, d_v) = I_h(G)$ and $\sum_{uv} \psi = \Wuzi$,
+  gives~\eqref{eq:ratio_bound}. Each side is an equality if and only if
+  every edge attains the corresponding extremum of $\psi/h$ over the
+  appearing pairs.
+  \end{proof}
+
+
+  Proposition~\ref{thm:ratio_bound} is a \emph{sharp graph-specific}
+  comparison, whose constants depend on the degree pairs that actually
+  appear in $G$, and a uniform version follows immediately by enlarging
+  the range of the extrema.
+
+  \begin{corollary}[Uniform $\Delta$-bounded version]\label{cor:ratio_uniform}
+  Assume the hypotheses of Proposition~\ref{thm:ratio_bound}, but with $h$
+  strictly positive on all of
+  $P_{\Delta} = \{(i,j) : 1 \le i \le j \le \Delta\}$ and the extrema
+  taken over $P_{\Delta}$. Then
+  inequality~\eqref{eq:ratio_bound} holds simultaneously for every
+  graph of maximum degree at most $\Delta$, with constants independent
+  of the individual graph. Equality on either side holds if and only
+  if every edge of $G$ realises a degree pair attaining the
+  corresponding extremum over $P_{\Delta}$. The uniform constants are
+  in general strictly worse than the graph-specific ones, since the
+  extrema are taken over a superset.
+  \end{corollary}
+
+\section{QSPR diagnostics}\label{sec:sensitivity}
+% =====================================================================
 
 We benchmark the Loyola family against the classical indices it
 reduces to on the $18$ octane isomers, following the chemometric
@@ -1388,23 +1387,25 @@ descriptive. On sets this small they indicate how imbalance information
 changes the fit of the parent family, and they do not establish
 chemical predictive utility.
 
+In Tables~\ref{tab:box}--\ref{tab:bp} medians are taken over candidate-stream seeds, seed counts describe the random search on fixed data rather than replications, and values are rounded once for display, so a tabulated difference may differ in the last place from the difference of two displayed entries. The narrow- and wide-box streams use the same uniform variates scaled by the half-width, so comparisons across boxes are paired.
+
 \subsection{Correlations on the octane isomers}\label{sec:octanes}
 
 Table~\ref{tab:lo_octane} reports the Pearson correlation $r$ between
 each index and the boiling point $T_B$, the enthalpy of formation
-$\Delta H_f$, the enthalpy of vaporization $\Delta H_{\mathrm{vap}}$, the
+$\Delta H_f$, the enthalpy of vaporisation $\Delta H_{\mathrm{vap}}$, the
 entropy $S$ and the acentric factor $\omega$ of the $18$ octane isomers.
 The property values are the standard octane benchmark compilation,
 audited value by value against the NIST WebBook~\cite{NISTWebBook} and
 the 1947 API Research Project~44 tables~\cite{APIProject44Circ461};
 Supplementary Table~S5 lists them and Supplementary Section~S1 records
 the status of each of the $90$ values. Three items remain open. The
-$298$\,K vaporization enthalpy of 2,2,3,3-tetramethylbutane, a solid at
+$298$\,K vaporisation enthalpy of 2,2,3,3-tetramethylbutane, a solid at
 $298$\,K, has an unresolved physical reference state, six gas-phase
 entropies have no primary source, and the acentric factors are compiled
 values. Their effect on Table~\ref{tab:lo_octane} is confined to the
 third decimal and to the $0.001$ margin between $HM$ and $M_1$ on $S$
-(Supplementary Section~S9), and none of them enters the pre-registered
+(Supplementary Section~S8), and none of them enters the pre-registered
 tests of Sections~\ref{sec:external} and~\ref{sec:bp}.
 
 \begin{table}[htbp]
@@ -1476,7 +1477,7 @@ which the best candidate is refit and the held-out isomer predicted. No
 quantity computed on the held-out isomer enters selection or fitting.
 
 In the box $(-2,2)$ used first, freeing $\gamma$ appeared to help the
-vaporization enthalpy. It improved the nested $Q^2$ for
+vaporisation enthalpy. It improved the nested $Q^2$ for
 $\Delta H_{\mathrm{vap}}$ in $100/100$ candidate streams at budgets
 $200$ and $500$, with median $\Delta Q^2 = +0.069$ and $+0.068$
 (Supplementary Table~S3), while it usually degraded $\Delta H_f$ and
@@ -1493,44 +1494,29 @@ pre-registration also fixed at half-width $2$. By $\ln(ij) = 2\ln(i+j) +
 \ln(1-q^2) - \ln 4$ (Eq.~\eqref{eq:factor}) the parent reaches
 imbalance information through $(1-q^2)^{\alpha}$ along the direction
 $\beta \approx -2\alpha$, which needs large exponents and is exactly the
-direction the box truncates. The dependence on the box is not monotone.
-On a dense parent grid the nested $Q^2$ of the parent for octane
-$\Delta H_{\mathrm{vap}}$ is $0.8873$, $0.6996$, $0.9525$ and $0.9383$
-at half-widths $2$, $4$, $8$ and $12$. The selected point lies on the
-boundary in $18$, $17$, $2$ and $0$ of the $18$ folds. On the nonanes
+direction the box truncates. On a dense parent grid (steps $0.05$, $0.1$, $0.2$ and $0.25$) the
+nested $Q^2$ of the parent for octane $\Delta H_{\mathrm{vap}}$ is
+$0.8873$, $0.9156$, $0.9525$ and $0.9383$ at half-widths $2$, $4$, $8$
+and $12$. The selected point lies within one grid step of the boundary
+in $18$, $18$, $2$ and $0$ of the $18$ folds. On the nonanes
 the values are $0.8532$, $0.8779$, $0.8997$ and $0.8837$, with $34$,
-$32$, $3$ and $0$ boundary folds of $34$. The half-width-$12$ box is the
-smallest examined in which the parent's selections are interior, and it
-is the box used below. The matched comparison was therefore repeated
-with $2000$ candidates per model, seeds $0$--$49$, and boxes of
-half-width $2$ and $12$ for both models (Table~\ref{tab:box}); this
-repetition was not pre-registered. In the wide box the
-vaporization-enthalpy gain shrinks to about zero. A hybrid control widens only $(\alpha,\beta)$ and keeps
+$32$, $3$ and $0$ boundary folds of $34$. The half-width-$12$ box, chosen after inspecting these two $\Delta H_{\mathrm{vap}}$ curves as the smallest examined in which the parent's selections are interior, is used below for every property. The matched comparison was therefore repeated with $2000$ candidates per model, seeds $0$--$49$, and boxes of half-width $2$ and $12$ for both models (Table~\ref{tab:box}); this repetition was not pre-registered. In the table, Edge is the share of outer folds, pooled over the $50$
+seeds, in which the parent's selection lies within $10\%$ of the
+boundary of the box. The counts are the number of seeds in which LO
+beats GM (half-width $2$) or LO$_h$ beats GM (half-width $12$). In the wide box the
+vaporisation-enthalpy gain shrinks to about zero. A hybrid control widens only $(\alpha,\beta)$ and keeps
 $\gamma \in (-2,2)$; it is drawn after the parent from the same
 candidate stream, so the two are paired by seed rather than by
 candidate. It gives median $\Delta Q^2 = +0.004$ on the octanes ($28$
 of $50$ seeds) and $-0.002$ on the nonanes ($24$ of $50$), while
-widening all three coordinates gives $-0.010$ and $-0.016$. On the other properties no advantage is
-consistent across boxes. Most of the change comes from the parent
+widening all three coordinates gives $-0.010$ and $-0.016$. On the other properties no advantage reaches the seed-count criterion in either box. Nonane $T_B$ has $30$ and $31$ wins of $50$ in the two boxes, and octane $S$ moves from $11$ to $38$, which illustrates optimiser variance rather than an effect. Most of the change comes from the parent
 improving in the wide box ($0.887 \to 0.942$ on the octanes), and the
 rest from the three-dimensional search being slightly less efficient
-there ($0.957 \to 0.946$ for the hybrid control). What remains is due to
-linear imbalance weighting itself. The fixed point $LO(0,0,1)$ and the
-parameter-free $IRLA$ approach what the parent reaches only near
-$(\alpha,\beta) \approx (4.5, -9)$ ($Q^2 = 0.957$ and $0.948$ against
-$0.949$ there, on the octanes).
+there ($0.957 \to 0.946$ for the hybrid control). What remains ($+0.004$ in $28$ of $50$ seeds) is within optimiser variance. The fixed point $LO(0,0,1)$ and the parameter-free $IRLA$ match the fixed parent point $M_{4.5,-9}$ (leave-one-out $Q^2 = 0.957$ and $0.948$ against $0.949$, on the octanes), which lies near the parent's wide-box selections.
 
 \begin{table}[htbp]
 \centering
-\caption{Sensitivity of the matched comparison to the search box.
-Oct.: octanes, $n = 18$. Non.: nonanes. Edge: share of outer folds in
-which the parent's selection lies within $10\%$ of the boundary of the
-box of the stated half-width. Medians of $Q^2$ are over seeds $0$--$49$ at $2000$
-candidates per model. Counts: the number of seeds (of $50$) in which LO
-beats GM (half-width $2$) or LO$_h$ beats GM (half-width $12$). LO$_h$ is
-a hybrid control with $(\alpha,\beta)$ in the wide box and $\gamma$ in
-$(-2,2)$, which avoids diluting the Loyola search over a wide $\gamma$
-range.}
+\caption{Sensitivity of the matched comparison to the search box (medians of $Q^2$ over seeds $0$--$49$ at $2000$ candidates per model).}
 \label{tab:box}
 \small
 \setlength{\tabcolsep}{1.6pt}
@@ -1556,10 +1542,7 @@ advantage over a parent evaluated over the wider box. Two caveats
 remain. Equal candidate budgets do not guarantee equally thorough
 searches in two and three dimensions, and the hybrid control reduces
 this asymmetry without removing it, so the matched design costs the
-three-parameter model part of the effect sought. The parent's own $Q^2$
-also varies with the box by more than that effect, as the grid values
-above show. The verdict is therefore no demonstrated gain rather than
-no gain.
+three-parameter model part of the effect sought. The parent's own $Q^2$ also varies with the box by about as much as the narrow-box gain, as the grid values above show. We conclude that no gain has been demonstrated, which leaves open whether a gain exists.
 
 \subsection{Replication on the nonane isomers}\label{sec:external}
 
@@ -1567,14 +1550,13 @@ Under a protocol committed to the reproducibility package (commit
 \texttt{964b127}) before any nonane value was collected, the identical
 nested design was applied to the $35$ constitutional nonane isomers.
 Boiling points were $35$ values, namely $20$ NIST averages, $5$ single
-determinations and $10$ most recent determinations selected under the
-protocol's Deviation D1. Standard vaporization enthalpies were $34$
-values from the NIST WebBook~\cite{NISTWebBook}, of which only $4$ are
-calorimetric determinations (one more is a NIST average) and $29$ come
-from two compilations~\cite{LabaufGreenshieldsRossini1961,
-WilhoitZwolinski1971}. Agreement with them therefore measures
-consistency with compiled values rather than independent experimental
-validation. The pre-registered verdict is that the $\gamma$ effect
+determinations and $10$ most recent determinations selected, where NIST gives no average, as the most recent determination (a deviation recorded in the protocol). Standard vaporisation enthalpies were $34$ values from the NIST
+WebBook~\cite{NISTWebBook}. Only $4$ of them are calorimetric
+determinations (one more is a NIST average), and $29$ come from two
+compilations, the 1961 tabulation of Labbauf et
+al.~\cite{LabaufGreenshieldsRossini1961} and the 1971
+Wilhoit--Zwolinski handbook~\cite{WilhoitZwolinski1971}, which NIST
+lists under Reid's 1972 review. Agreement with them therefore measures consistency with compiled values rather than independent experimental validation, and, if the compiled values rest on structural increments, it favours any model linear in the degree-pair counts. The pre-registered verdict is that the $\gamma$ effect
 \emph{replicates} for $\Delta H_{\mathrm{vap}}$, with LO better than GM
 in $95/100$ and $98/100$ seeds and median $\Delta Q^2 = +0.048$ and
 $+0.053$, and is \emph{mixed} for $T_B$ ($58/100$ and $63/100$).
@@ -1585,7 +1567,7 @@ disappears (median $\Delta Q^2 = -0.002$ under the hybrid control). The
 pre-registered verdict is reported as obtained, with this deviation
 recorded. The seed-count criterion of that protocol counts optimiser
 variance on fixed data, and we now regard it as a design error of the
-protocol rather than as evidence. Because the nonane vaporization
+protocol rather than as evidence. Because the nonane vaporisation
 enthalpies are compilation values, we decided after this result to
 treat the measured boiling points of Section~\ref{sec:bp} as the primary
 predictive evidence of the paper and the nonane analysis as a secondary
@@ -1641,7 +1623,7 @@ non. $\Delta H_{\mathrm{vap}}$ & $-0.062$ & $0.857$ & $0.897$ & $0.927$ & $0.903
 
 \subsection{Measured boiling points}\label{sec:bp}
 
-Measured vaporization enthalpies are too scarce for a larger test. NIST
+Measured vaporisation enthalpies are too scarce for a larger test. NIST
 lists only $25$ acyclic alkane skeletons outside $C_8$ and $C_9$, and
 one of the $75$ decanes, with at least one calorimetric standard-state
 $298$\,K determination. Two further tests therefore used measured
@@ -1661,8 +1643,7 @@ a single non-compilation determination, so the agreement rule does not
 apply to them. Under this uniform rule the pooled octane boiling points
 can differ from those of Supplementary Table~S5 by up to
 $0.5\,^{\circ}$C, for example 2,4-dimethylhexane at $108.9$ against
-$109.4\,^{\circ}$C, a documented source variation. Eight pooled nonane
-boiling points differ from the replication-set values of
+$109.4\,^{\circ}$C, a documented source variation. Seven pooled nonane boiling points differ from the replication-set values of
 Section~\ref{sec:external} by $0.1$--$0.9\,^{\circ}$C, as that protocol
 took the most recent determination where NIST gives no average. The
 included and excluded decanes do not differ detectably in branching or
@@ -1671,9 +1652,7 @@ and of methyl groups, the Wiener index, $IRLA$, $LO(0,0,1)$ and $R$.
 Two-sided permutation tests gave $p \ge 0.10$ in every case, though
 with $34$ and $41$ molecules such tests can rule out only large
 differences. Test~A evaluates the models on the decanes as a new cohort,
-refitting and reselecting inside each leave-one-out fold. Test~B pools
-all $100$ molecules and adds the carbon number $n_C$ as a covariate, so
-that each descriptor is judged on branching beyond size. Both use the
+refitting and reselecting inside each leave-one-out fold. Test~B pools all $100$ molecules and adds the carbon number $n_C$ as a covariate, so that each descriptor is judged on branching beyond size. Because the octane and nonane boiling points had already been used in Sections~\ref{sec:octanes} and~\ref{sec:external}, Test~B is a pooled size-adjusted analysis and not a fresh external test; only the hexanes, heptanes and decanes are new. Both use the
 non-truncating design of Section~\ref{sec:ablation}, with the parent
 searched over $(\alpha,\beta) \in (-12,12)^2$ and the Loyola model over
 the same box with $\gamma \in (-2,2)$, at $2000$ candidates and seeds
@@ -1700,7 +1679,7 @@ which LO beats GM.}
 \setlength{\tabcolsep}{1.5pt}
 \begin{tabular}{lrrrrrrrrr}
 \toprule
-Test & Base & Class. & $IRLA$ & LO$_1$ & Ridge & GM & LO & $\Delta Q^2$ & $>$\\
+Test & Base & Class. & $IRLA$ & LO$_1$ & Ridge & GM & LO$_h$ & $\Delta Q^2$ & $>$\\
 \midrule
 decanes ($n = 34$) & $-0.062$ & $0.176$ & $0.167$ & $0.149$ & $0.860$ & $0.514$ & $0.406$ & $-0.072$ & $15$\\
 C6--C10, with $n_C$ ($n = 100$) & $0.938$ & $0.967$ & $0.963$ & $0.963$ & $0.991$ & $0.977$ & $0.977$ & $-0.000$ & $25$\\
@@ -1716,11 +1695,8 @@ original box of half-width $2$, reported as the pre-registration
 requires, the two tuned models are level on the decanes (medians $0.469$
 and $0.465$). The Loyola model is marginally ahead on the pooled set
 ($0.980$ against $0.976$). The decane verdict therefore does not depend
-on the box. The lower decane $Q^2$ of the hybrid control ($0.406$ against
-$0.465$ in the narrow box) reflects the cost of a three-dimensional
-search over a wide box. It is not a penalty for $\gamma$. The pooled
-cohort was corrected after an external audit found one nonane's second
-NIST entry skipped (Deviation D5 in the repository), and pooling grouped
+on the box. The lower decane $Q^2$ of the hybrid control ($0.406$ against $0.465$ in the narrow box) is consistent with the cost of a three-dimensional search over a wide box; the one-sided design cannot separate that cost from a penalty of selecting $\gamma$. The pooled
+cohort was corrected after an external audit found one nonane's second NIST entry skipped (a deviation recorded in the repository), and pooling grouped
 pages also moved one heptane value by $0.2\,^{\circ}$C. On the
 uncorrected cohort of $101$ molecules the same test gave $-0.000$, $24$
 of $50$, $[-0.003, +0.002]$, so the correction changes no conclusion.
@@ -1745,15 +1721,12 @@ independence of the imbalance direction and the order-thirteen profile
 collision have also been machine-checked in Lean~4 with Mathlib
 (Supplementary Section~S7).
 
-% =====================================================================
 \section{Conclusion}\label{sec:conclusion}
 % =====================================================================
 
 We extended the Gutman--Milovanovi\'c family by an exponential factor
 in the normalised degree imbalance of each edge and asked what this
-third coordinate adds. On the mathematical side we showed that the imbalance direction is
-affinely independent of the two parent directions once a vertex of
-degree three is present. The logarithm of the index is globally
+third coordinate adds. On the mathematical side we showed that the imbalance direction is affinely independent of the two parent directions once degree pairs containing a vertex of degree three are admitted, while on an individual graph the identifiable directions were characterised separately. The logarithm of the index is globally
 convex. The family factorises
 into a size coordinate and a shape coordinate. On the resulting ratio plane the pure-imbalance points discriminate exactly the histogram of edge imbalances, and the same limit binds every index that depends on an edge only through its degree ratio. For trees of small order this histogram carries the
 full degree-pair information, so these points attain the discrimination
@@ -1764,19 +1737,25 @@ each graph we characterised the parameter directions that leave the
 index unchanged up to scale.
 
 On the chemometric side no predictive gain was demonstrated. An apparent gain
-from the imbalance parameter on vaporization enthalpies replicated
+from the imbalance parameter on vaporisation enthalpies replicated
 under a pre-registered protocol, but it disappeared once the parent
 family was searched over a box that did not truncate it.
 Pre-registered tests on measured boiling points of decanes and of a
 pooled set of C6--C10 alkanes showed no demonstrated benefit from the third coordinate. There a linear model on the degree-pair counts
 outperformed every single index. The untuned pure-imbalance point is highly
 correlated with the parameter-free irregularity index and matched the
-tuned models on vaporization enthalpy. The compactness of the family
+tuned models on vaporisation enthalpy. The compactness of the family
 therefore comes from linear imbalance weighting rather than from
 tuning. The third coordinate remains useful as an interpretable direction on
 the parent family along which the effect of degree imbalance can be
-analysed exactly. Open problems are listed in the Supplementary
-Material.
+analysed exactly. Three problems remain open. The first is sharp two-sided bounds for
+the family in terms of indices outside it, such as the
+atom-bond-connectivity and Sombor indices. The second is the extremal
+graphs for general parameter triples, beginning with the maximal
+chemical trees of the pure-imbalance points, and for unicyclic and
+bicyclic graphs. The third is the chemometric behaviour on other
+compound classes, such as benzene derivatives, and on class-specific
+endpoints.
 
 \acknowledgment{The authors thank colleagues for helpful discussions.}
 
@@ -1816,7 +1795,7 @@ Material.
 
 
   \bibitem{CruzMonsalveRada2020} R. Cruz, J. Monsalve, J. Rada, Trees with
-  maximum exponential Randi\'c index, \textit{Discrete Appl. Math.\/}
+  maximum exponential Randi\'c index, \textit{Discr. Appl. Math.\/}
   \textbf{283} (2020) 634--643.
 
   \bibitem{DasMondal2024ExpGA} K. C. Das, S. Mondal, On exponential
@@ -1888,7 +1867,7 @@ Material.
   \bibitem{NISTWebBook} P. J. Linstrom, W. G. Mallard (Eds.), \textit{NIST
   Chemistry WebBook, NIST Standard Reference Database Number 69\/}, National
   Institute of Standards and Technology, Gaithersburg, 2025,
-  https://doi.org/10.18434/T4D303.
+  \url{https://doi.org/10.18434/T4D303}.
 
 
   \bibitem{MolinaSigarreta2025GM} E. D. Molina, J. M.
@@ -1924,8 +1903,7 @@ Material.
   Commun. Math. Comput. Chem.\/} \textbf{96} (2026) 841--863.
 
   \bibitem{RakicFurtula2019SS} M. Raki\'c, B. Furtula, A novel method for
-  measuring the structure sensitivity of molecular descriptors, \textit{J.
-  Chemometrics\/} \textbf{33} (2019) \#e3138.
+  measuring the structure sensitivity of molecular descriptors, \textit{J. Chemom.\/} \textbf{33} (2019) \#e3138.
 
   \bibitem{Randic1975} M. Randi\'c, Characterization of molecular
   branching, \textit{J. Am. Chem. Soc.\/} \textbf{97} (1975) 6609--6615.
@@ -1955,10 +1933,13 @@ Material.
   1369--1376.
 
 
+  \bibitem{VukicevicGasperov2010} D. Vuki\v{c}evi\'c, M. Ga\v{s}perov, Bond additive
+  modeling 1. Adriatic indices, \textit{Croat. Chem. Acta\/} \textbf{83} (2010)
+  243--260.
+
   \bibitem{WilhoitZwolinski1971} R. C. Wilhoit, B. J. Zwolinski,
   \textit{Handbook of Vapor Pressures and Heats of Vaporization of
-  Hydrocarbons and Related Compounds\/}, Texas A\&M Research Foundation,
-  College Station, 1971.
+  Hydrocarbons and Related Compounds\/}, Thermodynamics Research Center, Texas A\&M University, College Station, 1971.
 
   \bibitem{ZhouTrinajstic2009sumconn}
   B. Zhou, N. Trinajsti\'c, On a novel connectivity index, \textit{J. Math.

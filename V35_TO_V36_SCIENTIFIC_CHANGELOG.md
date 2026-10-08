@@ -900,3 +900,64 @@ replay snapshots the tree and includes tracked formal/ files.
   the S1 entries already check them, or removed with the narrow-box
   narrative), 6 re-pointed to the supplement, 7 hand re-anchored; 688
   entries, 0 failures.  Main paper 36 A5 pages, supplement 24.
+
+## v40.21 (second round of three independent referee reports)
+- Bug found by the chemometrics referee and confirmed: the dense parent
+  grids of external/wide_box_diagnostics.py (np.arange) contain the point
+  (3.6e-15, 3.6e-15); the descriptor there is constant to floating-point
+  resolution, standardising its rounding noise gave it a spuriously small
+  inner leave-one-out RMSE in one fold of the half-width-4 octane grid,
+  and fit_predict then returned the training mean.  external/baselines.py
+  fold_select_ols now never selects a candidate that is_constant on the
+  training fold (the same guard fit_predict already applied).  Rerun:
+  octane dHvap parent Q2 0.8873, 0.9156, 0.9525, 0.9383 at half-widths
+  2, 4, 8, 12 (was 0.6996 at 4; boundary-fold counts 18, 18, 2, 0);
+  nonane values unchanged.  Section 6.2 re-quotes the curve with the grid
+  steps, "within one grid step of the boundary", and says that the
+  half-width-12 box was chosen after inspecting the two dHvap curves.
+  Random-search pipelines cannot draw a constant candidate, so no other
+  output changes (full isolated replay recorded with this version).
+- Mathematics: Theorem 2(ii) attributed to Rada's Lindemann--Weierstrass
+  argument (parts (i), (iii), the real-gamma statement and the corollary
+  are new); the proof of Theorem 2(iii) now exhibits the trees realising
+  the order-13 and order-16 colliding profiles; the five-crossing witness
+  profiles are given; Lemma 1's Delta = 2 case made explicit; the
+  equality cases of the (m, Delta) upper bound stated in the proposition;
+  Proposition 5 named "Limits along the gamma axis" and its restating
+  first sentence removed; the exponential-of-IRLA sentence corrected
+  (gamma = 2); scale/shape sentence stated in the (kappa, alpha, gamma)
+  coordinates; chemical-tree remark records that the path minimiser is
+  settled; the corollary cites Vukicevic and Gasperov (2010) for SDD and
+  adds ISDD and its exponential; "among the members ... sharp".
+  Discrimination is now Section 4, directly after the geometry, and the
+  closed forms, bounds and extremal trees are Section 5 (forward
+  references in proofs are marked "below").  Compiled numbering: ceiling
+  Proposition 6, generic discrimination 7, closed forms 8, extremal
+  trees 9, bounds 10-13.
+- Chemometrics: abstract no longer attributes the null to the
+  pre-registered nonane test (which replicated); "no advantage is
+  consistent across boxes" replaced by the seed counts (nonane T_B 30 and
+  31 of 50, octane S 11 to 38; four new registry entries); the hybrid
+  decane sentence no longer asserts "not a penalty for gamma"; "what
+  remains" (+0.004, 28 of 50) is called optimiser variance; the fixed
+  parent point M_{4.5,-9} described as such; Table 7's wide-box column
+  headed LO_h; Edge defined as pooled over seeds; seven (not eight)
+  pooled nonane values differ; Test B stated to be a pooled analysis, not
+  a fresh external test; the two compilations attributed (Labbauf 1961,
+  Wilhoit--Zwolinski 1971 under Reid's 1972 review); the
+  structural-increment caveat added to Section 6.3; deviation labels
+  replaced by plain words.
+- Presentation: supplement title and opening sentence updated to the new
+  title; "Appendix A" and "remark after Proposition 7" references fixed;
+  supplement bibliography alphabetical; author mark and theorem block as
+  in the template; short supplement headings; S8 open problems moved into
+  the Conclusion (supplement S8 removed, data section now S8); the
+  duplicated closing paragraph of the data section removed; spelling
+  unified to -ise (vaporisation, normalised in the abstract, Formalised);
+  "Discr. Appl. Math.", "J. Chemom.", \url for the NIST DOI, Wilhoit
+  publisher wording; Table 5 caption one sentence with the glossary in
+  the text; "where," and "defined as," punctuation; hyphenation.
+  Declined: transposing Table 7 (it fits A5 without overflow and the
+  verifier parses its rows), a Zenodo DOI (author account), Table 2
+  chemical-tree column at order 17 (would need a new structural run).
+- Registries 690 entries, 0 failures.  Main paper 38 A5 pages, supplement 23.

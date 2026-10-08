@@ -3,13 +3,13 @@
 Advik Natarajan, Ganesh Shiwakoti, Michael Arockiaraj — manuscript, supplement,
 data, code and machine-checked proofs.
 
-**v40.20 (2026-10-07):** referee-driven rebuild: degree-ratio corollary of the ratio-plane theorem, closed forms and termwise bounds back in the main paper (Section 4) with a new extremal-tree proposition, QSPR section cut by half with the search-box curve disclosed, pre-registration commits cited, data table to the supplement; see V35_TO_V36_SCIENTIFIC_CHANGELOG.md.
+**v40.21 (2026-10-07):** second referee round: a dense-grid artefact fixed in the shared candidate selection (constant candidates never selected; half-width-4 value 0.6996 -> 0.9156), explicit colliding trees and crossing witness in the proofs, Rada attribution for Theorem 2(ii), equality cases of the upper bound, degree-ratio corollary citing SDD, Discrimination now Section 4 before the bounds, supplement S8 (open problems) folded into the Conclusion, spelling unified (-ise); see V35_TO_V36_SCIENTIFIC_CHANGELOG.md.
 
 ## Current documents
 | File | Content |
 |---|---|
-| `main.tex`, `LOYOLA_paper.pdf` | the paper (36 A5 pages, MATCH template) |
-| `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (24 pages) |
+| `main.tex`, `LOYOLA_paper.pdf` | the paper (38 A5 pages, MATCH template) |
+| `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (23 pages) |
 | `LOYOLA_FINAL_PAPER_OVERLEAF.zip` | Overleaf upload (both documents + figures) |
 
 ## What the paper shows
