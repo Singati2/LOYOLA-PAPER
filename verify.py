@@ -12,6 +12,7 @@
                                structural/extremal_trees_check.py  path/star extremality of the pure-gamma points, orders 4-12
                                structural/minimality_check.py      first q-histogram collision orders 13 / 16, all orders 2-16
                                structural/weak_discrimination_check.py  Theorem thm:weakdisc, chemical trees 4-18, graphs <= 7
+                               DATA/build_data.py --check  every file in DATA/ identical to its source
                                manifest.py               SHA-256 of every tracked file
   python3 verify.py --full   also (about one hour):
                                external/verify_external.py
@@ -44,6 +45,7 @@ FAST = [
     ("extremal trees", [PY, "extremal_trees_check.py"], os.path.join(HERE, "structural")),
     ("collision minimality", [PY, "minimality_check.py"], os.path.join(HERE, "structural")),
     ("weak discrimination", [PY, "weak_discrimination_check.py"], os.path.join(HERE, "structural")),
+    ("DATA copies", [PY, os.path.join("DATA", "build_data.py"), "--check"], HERE),
     ("manifest", [PY, "manifest.py"], HERE),
 ]
 

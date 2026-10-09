@@ -1,0 +1,143 @@
+n_C,name,nist_id,T_B_C,status,rule_or_reason,all_determinations
+6,"Butane, 2,3-dimethyl-",C79298,58.1,INCLUDED,AVG,331.2 ± 0.2 K (N/A; AVG; C79298)
+6,"Pentane, 2-methyl-",C107835,60.9,INCLUDED,AVG,334. ± 1. K (N/A; AVG; C107835)
+6,"Pentane, 3-methyl-",C96140,63.3,INCLUDED,AVG,336.4 ± 0.4 K (N/A; AVG; C96140)
+6,"Butane, 2,2-dimethyl-",C75832,49.8,INCLUDED,AVG,322.9 ± 0.1 K (N/A; AVG; C75832)
+6,n-Hexane,C110543,68.8,INCLUDED,AVG,341.9 ± 0.3 K (N/A; AVG; C110543)
+7,Heptane,C142825,98.4,INCLUDED,AVG,371.5 ± 0.3 K (N/A; AVG; C142825)
+7,"Hexane, 2-methyl-",C591764,90.1,INCLUDED,AVG,363.2 ± 0.5 K (N/A; AVG; C591764)
+7,"Pentane, 2,4-dimethyl-",C108087,80.6,INCLUDED,AVG,353.7 ± 0.3 K (N/A; AVG; C108087)
+7,"Pentane, 2,2-dimethyl-",C590352,79.2,INCLUDED,AVG,352.3 ± 0.3 K (N/A; AVG; C590352)
+7,"Pentane, 2,3-dimethyl- / pentane, 2,3-dimethyl-, (R)- / (S)-2,3-dimethylpentane",C565593 C54665462 C7485452,89.8,INCLUDED,AVG,"362.9 ± 0.3 K (N/A; AVG; C565593) ; 361.15 K (Lukes and Langthaler, 1957; N/A; C54665462) ; 363. K (Tsuda, Hayatsu, et al., 1959; N/A; C7485452)"
+7,"Hexane, 3-methyl- / (S)-(+)-3-methylhexane",C589344 C6131244,91.7,INCLUDED,mean of 2 NIST averages (agreeing within 3 K),365.0 ± 0.3 K (N/A; AVG; C589344) ; 364.7 ± 0.9 K (N/A; AVG; C6131244)
+7,"Pentane, 3,3-dimethyl-",C562492,86.1,INCLUDED,AVG,359.2 ± 0.2 K (N/A; AVG; C562492)
+7,"Butane, 2,2,3-trimethyl-",C464062,81.0,INCLUDED,AVG,354.1 ± 0.2 K (N/A; AVG; C464062)
+7,"Pentane, 3-ethyl-",C617787,93.5,INCLUDED,AVG,366.6 ± 0.2 K (N/A; AVG; C617787)
+8,"Pentane, 2,2,4-trimethyl-",C540841,99.3,INCLUDED,AVG,372.4 ± 0.2 K (N/A; AVG; C540841)
+8,"Heptane, 2-methyl-",C592278,117.6,INCLUDED,AVG,390.7 ± 0.8 K (N/A; AVG; C592278)
+8,"Heptane, 3-methyl- / (S)-3-methylheptane",C589811 C6131255,118.9,INCLUDED,AVG,"392. ± 1. K (N/A; AVG; C589811) ; 390.15 K (Levene and Marker, 1931; N/A; C6131255)"
+8,"Pentane, 2,3,4-trimethyl-",C565753,113.7,INCLUDED,AVG,386.8 ± 0.3 K (N/A; AVG; C565753)
+8,"Heptane, 4-methyl-",C589537,117.8,INCLUDED,AVG,390.9 ± 0.4 K (N/A; AVG; C589537)
+8,Octane,C111659,125.6,INCLUDED,AVG,398.7 ± 0.5 K (N/A; AVG; C111659)
+8,"Hexane, 2,5-dimethyl-",C592132,109.0,INCLUDED,AVG,382.1 ± 0.9 K (N/A; AVG; C592132)
+8,"Hexane, 2,3-dimethyl-",C584941,115.9,INCLUDED,AVG,389. ± 1. K (N/A; AVG; C584941)
+8,"Hexane, 2,4-dimethyl- / (S)-2,4-dimethylhexane",C589435 C53990980,108.9,INCLUDED,AVG,"382. ± 2. K (N/A; AVG; C589435) ; 383.65 K (Levene and Marker, 1931; N/A; C53990980)"
+8,"Hexane, 3,4-dimethyl- / hexane, 3,4-dimethyl-, (R*,R*)-(.+-.)- / hexane, 3,4-dimethyl-, (R*,S*)-",C583482,117.9,INCLUDED,AVG,391. ± 1. K (N/A; AVG; C583482)
+8,"Hexane, 2,2-dimethyl-",C590738,106.9,INCLUDED,AVG,380.0 ± 0.3 K (N/A; AVG; C590738)
+8,"Hexane, 3,3-dimethyl-",C563166,112.0,INCLUDED,AVG,385.1 ± 0.4 K (N/A; AVG; C563166)
+8,"Pentane, 2,3,3-trimethyl-",C560214,114.7,INCLUDED,AVG,387.8 ± 0.3 K (N/A; AVG; C560214)
+8,"Pentane, 3-ethyl-2-methyl-",C609267,115.7,INCLUDED,AVG,388.8 ± 0.2 K (N/A; AVG; C609267)
+8,"Hexane, 3-ethyl-",C619998,118.6,INCLUDED,AVG,391.7 ± 0.2 K (N/A; AVG; C619998)
+8,"Pentane, 2,2,3-trimethyl-",C564023,110.0,INCLUDED,AVG,383.1 ± 0.2 K (N/A; AVG; C564023)
+8,"Pentane, 3-ethyl-3-methyl-",C1067089,118.4,INCLUDED,AVG,391.5 ± 0.3 K (N/A; AVG; C1067089)
+8,"Butane, 2,2,3,3-tetramethyl-",C594821,106.5,INCLUDED,AVG,379.6 ± 0.5 K (N/A; AVG; C594821)
+9,"Octane, 2-methyl-",C3221612,143.0,INCLUDED,AVG,416.1 ± 0.9 K (N/A; AVG; C3221612)
+9,Nonane,C111842,150.7,INCLUDED,AVG,423.8 ± 0.3 K (N/A; AVG; C111842)
+9,"Hexane, 2,2,5-trimethyl-",C3522949,123.9,INCLUDED,AVG,397. ± 2. K (N/A; AVG; C3522949)
+9,"Octane, 3-methyl-",C2216333,143.9,INCLUDED,AVG,417. ± 1. K (N/A; AVG; C2216333)
+9,"Octane, 4-methyl-",C2216344,141.9,INCLUDED,AVG,415. ± 1. K (N/A; AVG; C2216344)
+9,"Heptane, 2,4-dimethyl-",C2213232,132.9,INCLUDED,AVG,406. ± 1. K (N/A; AVG; C2213232)
+9,"Heptane, 2,2-dimethyl-",C1071267,131.9,INCLUDED,AVG,405. ± 3. K (N/A; AVG; C1071267)
+9,"Pentane, 2,2,4,4-tetramethyl-",C1070877,122.3,INCLUDED,AVG,395.4 ± 0.7 K (N/A; AVG; C1070877)
+9,"Pentane, 3,3-diethyl-",C1067205,146.2,INCLUDED,AVG,419.3 ± 0.4 K (N/A; AVG; C1067205)
+9,"Hexane, 2,3,5-trimethyl-",C1069530,130.9,INCLUDED,AVG,404. ± 2. K (N/A; AVG; C1069530)
+9,"Hexane, 2,2,4-trimethyl-",C16747265,126.5,INCLUDED,AVG,399.6 ± 0.4 K (N/A; AVG; C16747265)
+9,"Heptane, 2,3-dimethyl-",C3074713,139.9,INCLUDED,AVG,413. ± 2. K (N/A; AVG; C3074713)
+9,"Heptane, 2,5-dimethyl-",C2216300,134.9,INCLUDED,AVG,408. ± 2. K (N/A; AVG; C2216300)
+9,"Heptane, 2,6-dimethyl-",C1072055,134.9,INCLUDED,AVG,408. ± 2. K (N/A; AVG; C1072055)
+9,"Heptane, 3,3-dimethyl-",C4032864,136.9,INCLUDED,AVG,410. ± 1. K (N/A; AVG; C4032864)
+9,"Hexane, 2,2,3-trimethyl-",C16747254,133.4,INCLUDED,"median of 3 non-compilation determination(s), spread 2.55 K","407.4 K (Maretina and Petrov, 1961; N/A; C16747254) ; 404.85 K (Braun, Spooner, et al., 1950; N/A; C16747254) ; 406.55 K (Schlesman, 1943; N/A; C16747254)"
+9,"Pentane, 2,2,3,3-tetramethyl-",C7154792,140.3,INCLUDED,AVG,413.42 ± 0.04 K (N/A; AVG; C7154792)
+9,"Heptane, 3-ethyl-",C15869804,143.1,INCLUDED,"median of 3 non-compilation determination(s), spread 0.50 K","416.75 K (Bazhulin, Ukholin, et al., 1949; N/A; C15869804) ; 416.25 K (Whitmore and Orem, 1938; N/A; C15869804) ; 416.25 K (Whitmore and Southgate, 1938; N/A; C15869804)"
+9,"Pentane, 2,2,3,4-tetramethyl-",C1186534,133.0,INCLUDED,AVG,406.153 ± 0.009 K (N/A; AVG; C1186534)
+9,"Hexane, 2,4,4-trimethyl-",C16747301,130.9,INCLUDED,AVG,404. ± 1. K (N/A; AVG; C16747301)
+9,"Heptane, 3,4-dimethyl-",C922281,140.4,INCLUDED,"median of 2 non-compilation determination(s), spread 0.60 K","413.8 K (Weast and Grasselli, 1989; N/A; C922281) ; 413.85 K (Fenske, Braun, et al., 1947; N/A; C922281) ; 413.25 K (Henne and Chanan, 1944; N/A; C922281)"
+9,"Heptane, 4-ethyl-",C2216322,141.2,INCLUDED,"median of 3 non-compilation determination(s), spread 2.90 K","414.35 K (Butler, 1941; N/A; C2216322) ; 414.55 K (Brooks, Cleaton, et al., 1937; N/A; C2216322) ; 411.65 K (Oberreit, 1896; N/A; C2216322)"
+9,"Hexane, 2,3,4-trimethyl- / (R*,S*)-(.+-.)-2,3,4-trimethylhexane / (R*,R*)-(.+-.)-2,3,4-trimethylhexane",C921471,138.9,INCLUDED,AVG,412. ± 1. K (N/A; AVG; C921471)
+9,"Heptane, 3,5-dimethyl-",C926829,135.5,INCLUDED,"median of 3 non-compilation determination(s), spread 1.10 K","409.2 K (Weast and Grasselli, 1989; N/A; C926829) ; 408.65 K (Maurel, Choque, et al., 1964; N/A; C926829) ; 408.05 K (Treshchova, Tatevskii, et al., 1953; N/A; C926829) ; 409.15 K (Fenske, Braun, et al., 1947; N/A; C926829)"
+9,"Heptane, 4,4-dimethyl-",C1068195,134.8,INCLUDED,"median of 2 non-compilation determination(s), spread 0.85 K","408.4 K (Weast and Grasselli, 1989; N/A; C1068195) ; 407.5 K (Levina, Tantsyreva, et al., 1952; N/A; C1068195) ; 408.35 K (Fenske, Braun, et al., 1947; N/A; C1068195)"
+9,"Hexane, 2,3,3-trimethyl-",C16747287,136.8,INCLUDED,"median of 3 non-compilation determination(s), spread 1.30 K","410.9 K (Weast and Grasselli, 1989; N/A; C16747287) ; 409.45 K (Levina, Tantsyreva, et al., 1952; N/A; C16747287) ; 409.95 K (Buck, Elsner, et al., 1948; N/A; C16747287) ; 410.75 K (Cline, 1939; N/A; C16747287)"
+9,"Pentane, 2,3,3,4-tetramethyl-",C16747389,139.9,INCLUDED,AVG,413. ± 6. K (N/A; AVG; C16747389)
+9,"Hexane, 3,3,4-trimethyl-",C16747312,140.2,INCLUDED,"median of 2 non-compilation determination(s), spread 0.52 K","413.57 K (Pomerantz, Mears, et al., 1949; N/A; C16747312) ; 413.05 K (Fenske, Braun, et al., 1947; N/A; C16747312)"
+9,"Pentane, 3-ethyl-2,4-dimethyl-",C1068877,136.6,INCLUDED,"median of 4 non-compilation determination(s), spread 0.71 K","409.81 K (Anonymous, 1954; N/A; C1068877) ; 409.15 K (Bazhulin, Ukholin, et al., 1949; N/A; C1068877) ; 409.75 K (Fenske, Braun, et al., 1947; N/A; C1068877) ; 409.86 K (Howard, Mears, et al., 1947; N/A; C1068877)"
+9,"Pentane, 3-ethyl-2,2-dimethyl-",C16747323,133.8,INCLUDED,"median of 3 non-compilation determination(s), spread 0.23 K","406.96 K (Anonymous, 1953; N/A; C16747323) ; 406.75 K (Fenske, Braun, et al., 1947; N/A; C16747323) ; 406.98 K (Howard, Mears, et al., 1947; N/A; C16747323)"
+9,"Hexane, 4-ethyl-2-methyl-",C3074757,133.8,INCLUDED,"median of 1 non-compilation determination(s), spread 0.00 K","406.95 K (Fenske, Braun, et al., 1947; N/A; C3074757)"
+9,"Hexane, 3-ethyl-3-methyl-",C3074768,140.6,INCLUDED,"median of 1 non-compilation determination(s), spread 0.00 K","413.75 K (Fenske, Braun, et al., 1947; N/A; C3074768)"
+9,"Hexane, 3-ethyl-2-methyl-",C16789461,138.0,INCLUDED,"median of 1 non-compilation determination(s), spread 0.00 K","411.15 K (Fenske, Braun, et al., 1947; N/A; C16789461)"
+9,"Hexane, 3-ethyl-4-methyl- / d-3-ethyl-4-methylhexane",C3074779 C500006531,,EXCLUDED,spread 6.40 K > 3 K,"413.55 K (Fenske, Braun, et al., 1947; N/A; C3074779) ; 407.15 K (Lukes and Langthaler, 1957; N/A; C500006531)"
+9,"Pentane, 3-ethyl-2,3-dimethyl-",C16747334,141.6,INCLUDED,"median of 1 non-compilation determination(s), spread 0.00 K","414.75 K (Kinney and Spliethoff, 1949; N/A; C16747334)"
+10,Decane,C124185,174.1,INCLUDED,AVG,447.2 ± 0.3 K (N/A; AVG; C124185)
+10,"Nonane, 3-methyl-",C5911046,167.8,INCLUDED,AVG,440.9 ± 0.3 K (N/A; AVG; C5911046)
+10,"Nonane, 2-methyl-",C871830,166.9,INCLUDED,"median of 2 non-compilation determination(s), spread 0.15 K","440.0 K (Weast and Grasselli, 1989; N/A; C871830) ; 440.2 K (Majer and Svoboda, 1985; N/A; C871830) ; 440.15 K (Mears, Fookson, et al., 1950; N/A; C871830) ; 440.0 K (Calingaert and Soroos, 1936; N/A; C871830)"
+10,"Nonane, 4-methyl-",C17301949,166.9,INCLUDED,AVG,440. ± 3. K (N/A; AVG; C17301949)
+10,"Nonane, 5-methyl-",C15869859,165.0,INCLUDED,"median of 3 non-compilation determination(s), spread 2.65 K","438.3 K (Weast and Grasselli, 1989; N/A; C15869859) ; 438.3 K (Majer and Svoboda, 1985; N/A; C15869859) ; 438.3 K (Calingaert and Soroos, 1936; N/A; C15869859) ; 435.65 K (Levene and Marker, 1934; N/A; C15869859) ; 438.15 K (Levene and Cretcher, 1918; N/A; C15869859)"
+10,"Octane, 2,6-dimethyl-",C2051301,158.9,INCLUDED,AVG,432. ± 1. K (N/A; AVG; C2051301)
+10,"Octane, 2,3-dimethyl-",C7146603,164.3,INCLUDED,"median of 3 non-compilation determination(s), spread 0.90 K","437.46 K (Mears, Fookson, et al., 1950; N/A; C7146603) ; 437.8 K (Buck, Elsner, et al., 1949; N/A; C7146603) ; 436.90 K (Cline, 1939; N/A; C7146603)"
+10,"Octane, 3-ethyl-",C5881174,,EXCLUDED,no NIST boiling point,
+10,"Octane, 2,2-dimethyl-",C15869871,,EXCLUDED,no NIST boiling point,
+10,"Octane, 2,7-dimethyl-",C1072168,160.0,INCLUDED,AVG,433.1 ± 0.8 K (N/A; AVG; C1072168)
+10,"Octane, 3,3-dimethyl-",C4110445,,EXCLUDED,spread 5.20 K > 3 K,"434.35 K (Kinney and Spliethoff, 1949; N/A; C4110445) ; 429.15 K (Levene and Marker, 1932; N/A; C4110445)"
+10,"Octane, 4-ethyl-",C15869860,163.4,INCLUDED,"median of 1 non-compilation determination(s), spread 0.00 K","436.51 K (Pomerantz, Fookson, et al., 1954; N/A; C15869860)"
+10,"Heptane, 2,4,6-trimethyl-",C2613618,146.7,INCLUDED,"median of 2 non-compilation determination(s), spread 1.75 K","419. K (Kinney and Spliethoff, 1949; N/A; C2613618) ; 420.75 K (Butler, 1941; N/A; C2613618)"
+10,"4,4-Dimethyl octane",C15869951,,EXCLUDED,spread 4.50 K > 3 K,"430.7 K (Weast and Grasselli, 1989; N/A; C15869951) ; 428. K (Petrov, Sushchinskii, et al., 1957; N/A; C15869951) ; 426.15 K (Chel'tsova, Chernyshev, et al., 1955; N/A; C15869951) ; 430.65 K (Levina, Tantsyreva, et al., 1952; N/A; C15869951)"
+10,"Heptane, 2,2,4-trimethyl-",C14720742,,EXCLUDED,spread 5.97 K > 3 K,"419.15 K (Braun, Spooner, et al., 1950; N/A; C14720742) ; 422.55 K (Moersch and Whitmore, 1949; N/A; C14720742) ; 425.12 K (Brooks, Cleaton, et al., 1937; N/A; C14720742)"
+10,"Octane, 3,5-dimethyl-",C15869939,158.9,INCLUDED,AVG,432. ± 4. K (N/A; AVG; C15869939)
+10,"Octane, 2,4-dimethyl-",C4032944,155.9,INCLUDED,"median of 1 non-compilation determination(s), spread 0.00 K","429.05 K (Levina, Tantsyreva, et al., 1951; N/A; C4032944)"
+10,"Heptane, 3,3,5-trimethyl-",C7154805,,EXCLUDED,spread 5.90 K > 3 K,"428.8 K (Anonymous, 1952; N/A; C7154805) ; 434.7 K (Foehr and Fenske, 1949; N/A; C7154805) ; 428.83 K (Pomerantz, Mears, et al., 1949; N/A; C7154805)"
+10,"Octane, 3,6-dimethyl-",C15869940,,EXCLUDED,no NIST boiling point,
+10,"Heptane, 3-ethyl-2-methyl-",C14676290,,EXCLUDED,no NIST boiling point,
+10,"Octane, 2,5-dimethyl-",C15869893,156.9,INCLUDED,"median of 3 non-compilation determination(s), spread 1.00 K","430.0 K (Shuikin and Cherkashin, 1957; N/A; C15869893) ; 430.15 K (Kazanskii and Sergienko, 1939; N/A; C15869893) ; 429.15 K (Levene and Marker, 1932; N/A; C15869893)"
+10,"Hexane, 2,2,5,5-tetramethyl-",C1071814,137.0,INCLUDED,"median of 2 non-compilation determination(s), spread 0.95 K","410.7 K (Weast and Grasselli, 1989; N/A; C1071814) ; 409.65 K (Darwent and Steacie, 1949; N/A; C1071814) ; 410.6 K (Howard, Mears, et al., 1947; N/A; C1071814)"
+10,"3,4-Diethyl hexane",C19398777,,EXCLUDED,spread 5.20 K > 3 K,"430.7 K (Sokolova, 1953; N/A; C19398777) ; 435.9 K (Kinney and Spliethoff, 1949; N/A; C19398777)"
+10,"Hexane, 3,3,4,4-tetramethyl-",C5171846,170.1,INCLUDED,"median of 3 non-compilation determination(s), spread 0.90 K","443.2 K (Meshcheryakov, Erzyutova, et al., 1952; N/A; C5171846) ; 444.05 K (Fenske, Braun, et al., 1947; N/A; C5171846) ; 443.15 K (Howard, Mears, et al., 1947; N/A; C5171846)"
+10,"Heptane, 4-propyl-",C3178298,,EXCLUDED,spread 5.00 K > 3 K,"430. K (Challenger and Pantony, 1954; N/A; C3178298) ; 435. K (Petrov and Chernyshev, 1949; N/A; C3178298) ; 435.0 K (Butler, 1941; N/A; C3178298)"
+10,"Heptane, 3,4,5-trimethyl-",C20278891,,EXCLUDED,no NIST boiling point,
+10,"Octane, 4,5-dimethyl- / (R*,R*)-(.+-.)-4,5-dimethyloctane / (R*,S*)-4,5-dimethyloctane",C15869962,162.1,INCLUDED,"median of 3 non-compilation determination(s), spread 0.87 K","436.15 K (Desty and Fidler, 1951; N/A; C15869962) ; 435.28 K (Anonymous, 1947; N/A; C15869962) ; 435.28 K (Boord, Greenlee, et al., 1947; N/A; C15869962)"
+10,3-Ethyl-3-methylheptane,C17302011,163.9,INCLUDED,"median of 2 non-compilation determination(s), spread 0.10 K","437.05 K (Kinney and Spliethoff, 1949; N/A; C17302011) ; 436.95 K (Buck, Elsner, et al., 1948; N/A; C17302011)"
+10,"Hexane, 2,2,3,3-tetramethyl-",C13475815,159.9,INCLUDED,"median of 3 non-compilation determination(s), spread 2.26 K","431.2 K (Whitmore, Goldsmith, et al., 1950; N/A; C13475815) ; 433.0 K (Fenske, Braun, et al., 1947; N/A; C13475815) ; 433.46 K (Howard, Mears, et al., 1947; N/A; C13475815)"
+10,"Heptane, 2,2,6-trimethyl-",C1190836,148.2,INCLUDED,"median of 5 non-compilation determination(s), spread 0.93 K","421.15 K (Marschner and Carmody, 1951; N/A; C1190836) ; 421.65 K (Marschner and Carmody, 1951; N/A; C1190836) ; 421.15 K (Marschner and Carmody, 1951; N/A; C1190836) ; 421.35 K (Fenske, Braun, et al., 1947; N/A; C1190836) ; 422.08 K (Brooks, Cleaton, et al., 1937; N/A; C1190836)"
+10,"Heptane, 2,2,3-trimethyl-",C52896921,,EXCLUDED,no NIST boiling point,
+10,"Heptane, 2,3,6-trimethyl-",C4032933,,EXCLUDED,spread 18.51 K > 3 K,"410.64 K (Anonymous, 1959; N/A; C4032933) ; 429.15 K (Fenske, Braun, et al., 1947; N/A; C4032933) ; 428.4 K (Cline, 1939; N/A; C4032933)"
+10,"Pentane, 2,2,3,3,4-pentamethyl-",C16747447,166.1,INCLUDED,"median of 1 non-compilation determination(s), spread 0.00 K","439.2 K (Howard, Mears, et al., 1947; N/A; C16747447)"
+10,"Heptane, 3,3,4-trimethyl-",C20278879,,EXCLUDED,no NIST boiling point,
+10,"Heptane, 2,2,5-trimethyl-",C20291956,,EXCLUDED,no NIST boiling point,
+10,"Heptane, 3-ethyl-5-methyl-",C52896909,,EXCLUDED,no NIST boiling point,
+10,"Heptane, 4-(1-methylethyl)-",C52896874,,EXCLUDED,no NIST boiling point,
+10,"Heptane, 2,5,5-trimethyl-",C1189997,152.8,INCLUDED,"median of 1 non-compilation determination(s), spread 0.00 K","425.95 K (Boord, Greenlee, et al., 1947; N/A; C1189997)"
+10,"Octane, 3,4-dimethyl-",C15869928,,EXCLUDED,no NIST boiling point,
+10,"Heptane, 2,3,5-trimethyl-",C20278857,,EXCLUDED,no NIST boiling point,
+10,"Heptane, 2,4,4-trimethyl-",C4032922,149.6,INCLUDED,"median of 1 non-compilation determination(s), spread 0.00 K","422.7 K (Petrov, Sushchinskii, et al., 1957; N/A; C4032922)"
+10,"Heptane, 5-ethyl-2-methyl-",C13475780,,EXCLUDED,no NIST boiling point,
+10,"Hexane, 4-ethyl-2,2-dimethyl-",C52896998,147.1,INCLUDED,"median of 1 non-compilation determination(s), spread 0.00 K","420.2 K (Braun, Spooner, et al., 1950; N/A; C52896998)"
+10,"Heptane, 2,3,4-trimethyl-",C52896954,155.9,INCLUDED,"median of 1 non-compilation determination(s), spread 0.00 K","429. K (Cherkasova, Bal'yan, et al., 1964; N/A; C52896954)"
+10,"Hexane, 2,2,3,5-tetramethyl-",C52897093,148.7,INCLUDED,"median of 2 non-compilation determination(s), spread 0.40 K","422. K (Whitmore, Goldsmith, et al., 1950; N/A; C52897093) ; 421.6 K (Fenske, Braun, et al., 1947; N/A; C52897093)"
+10,"Hexane, 2,2,4,5-tetramethyl-",C16747425,,EXCLUDED,spread 23.08 K > 3 K,"444.1 K (Fenske, Braun, et al., 1947; N/A; C16747425) ; 421.02 K (Howard, Mears, et al., 1947; N/A; C16747425)"
+10,"Hexane, 2,3,4,4-tetramethyl-",C52897128,162.2,INCLUDED,"median of 2 non-compilation determination(s), spread 1.20 K","434.75 K (Pomerantz, Mears, et al., 1949; N/A; C52897128) ; 435.95 K (Johnson, 1947; N/A; C52897128)"
+10,"Pentane, 2,2,3,4,4-pentamethyl-",C16747458,159.3,INCLUDED,"median of 1 non-compilation determination(s), spread 0.00 K","432.44 K (Howard, Mears, et al., 1947; N/A; C16747458)"
+10,"Hexane, 2,2,3,4-tetramethyl-",C52897082,,EXCLUDED,spread 4.50 K > 3 K,"432.0 K (Foehr and Fenske, 1949; N/A; C52897082) ; 427.5 K (Fenske, Braun, et al., 1947; N/A; C52897082)"
+10,"Hexane, 2,3,4,5-tetramethyl-",C52897151,155.4,INCLUDED,"median of 2 non-compilation determination(s), spread 1.15 K","429.15 K (Petrov and Melekhin, 1955; N/A; C52897151) ; 428. K (Rust, Seubold, et al., 1948; N/A; C52897151)"
+10,"Hexane, 2,2,4,4-tetramethyl-",C51750653,,EXCLUDED,no NIST boiling point,
+10,"Hexane, 2,3,3,4-tetramethyl-",C52897106,164.6,INCLUDED,"median of 1 non-compilation determination(s), spread 0.00 K","437.74 K (Pomerantz, Mears, et al., 1949; N/A; C52897106)"
+10,"Pentane, 3-ethyl-2,2,3-trimethyl-",C52897173,,EXCLUDED,no NIST boiling point,
+10,"Hexane, 2,3,3,5-tetramethyl-",C52897117,152.9,INCLUDED,"median of 1 non-compilation determination(s), spread 0.00 K","426. K (Whitmore, Goldsmith, et al., 1950; N/A; C52897117)"
+10,"Pentane, 3-ethyl-2,2,4-trimethyl",C52897184,155.3,INCLUDED,"median of 1 non-compilation determination(s), spread 0.00 K","428.45 K (Pomerantz, Mears, et al., 1949; N/A; C52897184)"
+10,"Pentane, 2,4-dimethyl-3-(1-methylethyl)-",C13475791,157.0,INCLUDED,"median of 1 non-compilation determination(s), spread 0.00 K","430.19 K (Howard, Mears, et al., 1947; N/A; C13475791)"
+10,"Heptane, 4-ethyl-4-methyl-",C17302044,,EXCLUDED,no NIST boiling point,
+10,"Hexane, 3-ethyl-3,4-dimethyl-",C52897060,,EXCLUDED,no NIST boiling point,
+10,"Heptane, 3-ethyl-4-methyl-",C52896910,,EXCLUDED,no NIST boiling point,
+10,"Heptane, 4-ethyl-2-methyl-",C52896885,,EXCLUDED,no NIST boiling point,
+10,"Pentane, 3-ethyl-2,3,4-trimethyl-",C52897195,169.4,INCLUDED,"median of 1 non-compilation determination(s), spread 0.00 K","442.59 K (Pomerantz, Mears, et al., 1949; N/A; C52897195)"
+10,"Hexane, 3-ethyl-2,5-dimethyl-",C52897048,,EXCLUDED,no NIST boiling point,
+10,"Heptane, 3,4,4-trimethyl-",C20278880,,EXCLUDED,no NIST boiling point,
+10,"Hexane, 2-methyl-3-(1-methylethyl)-",C62016131,,EXCLUDED,no NIST boiling point,
+10,"Hexane, 4-ethyl-2,3-dimethyl-",C52897015,,EXCLUDED,no NIST boiling point,
+10,"Hexane, 4-ethyl-3,3-dimethyl-",C52897059,,EXCLUDED,no NIST boiling point,
+10,"Hexane, 4-ethyl-2,4-dimethyl-",C52897037,,EXCLUDED,no NIST boiling point,
+10,"Hexane, 3-ethyl-2,2-dimethyl-",C20291912,,EXCLUDED,no NIST boiling point,
+10,"Hexane, 3-ethyl-2,4-dimethyl-",C7220260,,EXCLUDED,no NIST boiling point,
+10,"Heptane, 4-ethyl-3-methyl-",C52896896,,EXCLUDED,no NIST boiling point,
+10,"Heptane, 2,4,5-trimethyl-",C20278846,,EXCLUDED,no NIST boiling point,
+10,"Hexane, 3,3-diethyl-",C17302022,,EXCLUDED,spread 3.55 K > 3 K,"435.85 K (Kinney and Spliethoff, 1949; N/A; C17302022) ; 439.4 K (Buck, Elsner, et al., 1948; N/A; C17302022)"
+10,"Hexane, 3-ethyl-2,3-dimethyl-",C52897004,,EXCLUDED,no NIST boiling point,
+10,"Heptane, 2,3,3-trimethyl-",C52896932,160.1,INCLUDED,"median of 1 non-compilation determination(s), spread 0.00 K","433.2 K (Cline, 1939; N/A; C52896932)"
+10,"Pentane, 3,3-diethyl-2-methyl-",C52897162,,EXCLUDED,no NIST boiling point,

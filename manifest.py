@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Write or check SHA256SUMS.txt: exactly one SHA-256 per git-tracked file
-(the manifest itself excluded).
+(the manifest itself and the executed notebooks/*.ipynb excluded).
 
   python3 manifest.py --write   regenerate from `git ls-files`
   python3 manifest.py           check; exit 1 on any of: duplicate path,
@@ -18,6 +18,9 @@ def sha(p):
 try:
     tracked = sorted(set(subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True, text=True,
                                         check=True).stdout.splitlines()) - {"SHA256SUMS.txt"})
+    # executed notebooks are result views whose outputs change when they are run; their code is generated
+    # by notebooks/gen_notebooks.py, which is tracked and hashed
+    tracked = [p for p in tracked if not (p.startswith("notebooks/") and p.endswith(".ipynb"))]
 except (subprocess.CalledProcessError, FileNotFoundError):
     tracked = None   # not a git checkout (e.g. a downloaded archive): check the listed files only
 if "--write" in sys.argv:

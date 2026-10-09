@@ -1,9 +1,32 @@
-# The Loyola Index Family: What a Degree-Imbalance Coordinate Can and Cannot Resolve
+# The Loyola Index Family and the Resolution Limit of Degree Imbalance
 
-Advik Natarajan, Ganesh Shiwakoti, Michael Arockiaraj — manuscript, supplement,
-data, code and machine-checked proofs.
+Advik Natarajan, Ganesh Shiwakoti, Michael Arockiaraj: manuscript, supplement,
+data, code, machine-checked proofs and runnable notebooks.
 
-**v40.23 (2026-10-07):** co-authors' review applied: Section 3 framed in plain words, attribution remark removed, QSPR data detail cut further, LEAN_VERIFICATION.md added (statement-by-statement map to the Lean theorems); collision minimality certified by exhaustive enumeration (structural/minimality_check.py); Rada 2026 overlap stated before Theorem 2; new Theorem 4.3: imbalance restores weak discrimination on molecular graphs at rational exponents with 2a+b non-integer; restructured in MATCH statement-driven form (section-based numbering, numbered contributions, Discussion and limitations); v40.22 added the novelty audit, Proposition 3, the order-17 certification and the experiment fixes; see V35_TO_V36_SCIENTIFIC_CHANGELOG.md.
+**v40.23 (2026-10-09):** restructured in MATCH statement-driven form; new Theorem 4.3
+(at rational exponents with 2α+β = p/r non-integer and algebraic γ ≠ 0 the edge weights are
+linearly independent over Q exactly when Δ < 2^(r+1), so the index is weakly discriminating,
+which repairs sum-connectivity); collision minimality certified over all tree orders 2–16;
+tetramethylbutane ΔH_vap source audit; exploratory selection-aware resampling; independent
+permutation audit. Full history in `V35_TO_V36_SCIENTIFIC_CHANGELOG.md`.
+
+## Run the checks yourself (Jupyter or Google Colab)
+
+Each notebook recomputes one part of the paper from the data in `DATA/` and prints the
+value in the paper next to the recomputed value; the last cell fails if any differ. On
+Colab the notebook clones this repository and installs the requirements itself.
+
+| Notebook | What it checks | Time | Open |
+|---|---|---|---|
+| `notebooks/01_data.ipynb` | the datasets in `DATA/` and their provenance | seconds | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/01_data.ipynb) |
+| `notebooks/02_mathematics.ipynb` | Lemma 3.1, the colliding profiles of Theorem 3.5, the threshold of Theorem 4.3, Example 4.4, certificates | under a minute | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/02_mathematics.ipynb) |
+| `notebooks/03_degeneracy.ipynb` | Table 2 and the order-10 and order-16 counts, by enumerating every tree | under a minute | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/03_degeneracy.ipynb) |
+| `notebooks/04_octane_correlations.ipynb` | all 60 correlations of Table 4 and the tetramethylbutane audit | seconds | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/04_octane_correlations.ipynb) |
+| `notebooks/05_boiling_points.ipynb` | Table 5 baselines, the 200-permutation check, the resampling summary | about 5 minutes (`RUN_SLOW = True`: about 1 hour) | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/05_boiling_points.ipynb) |
+| `notebooks/06_verification_suite.ipynb` | the repository's own fast verification suite, in an environment with the pinned versions | about 7 minutes | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/06_verification_suite.ipynb) |
+
+The notebooks are committed with their outputs from a local run. `notebooks/gen_notebooks.py`
+regenerates them. The Lean proofs need a Lean toolchain and are not run in a notebook.
 
 ## Lean verification
 
@@ -12,8 +35,9 @@ data, code and machine-checked proofs.
 ## Current documents
 | File | Content |
 |---|---|
-| `main.tex`, `LOYOLA_paper.pdf` | the paper (38 A5 pages, MATCH template) |
-| `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (23 pages) |
+| `main.tex`, `LOYOLA_paper.pdf` | the paper (42 A5 pages, MATCH template) |
+| `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (26 pages) |
+| `DATA/` | every dataset, byte-identical copies, with a README |
 | `LOYOLA_FINAL_PAPER_OVERLEAF.zip` | Overleaf upload (both documents + figures) |
 
 ## What the paper shows
@@ -22,6 +46,9 @@ extends the Gutman–Milovanović family (γ = 0).
 - **Structure:** a size–shape factorisation; a ratio-plane theorem stating exactly what
   the pure-γ line can discriminate (edge-imbalance histograms), with colliding trees at
   every order ≥ 13; a bound on γ-crossings; per-graph identifiability.
+- **Positive structural result:** at rational exponents with 2α+β non-integer and algebraic
+  γ ≠ 0 the index is weakly discriminating on all graphs with Δ ≤ 7 (sharp threshold
+  Δ < 2^(r+1) for the edge weights), which the sum-connectivity index is not.
 - **Prediction (negative, under the stated protocols):** an apparent vaporization-enthalpy
   gain was an artefact of a search box that truncated the parent family; pre-registered
   tests on measured boiling points (34 decanes; 100 alkanes C6–C10) show no demonstrated
