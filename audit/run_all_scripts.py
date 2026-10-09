@@ -33,14 +33,19 @@ SCRIPTS = [
     ("redundancy_collisions.py", False), ("fgd_structure_sensitivity.py", True), ("generate_loyola_v35_figures.py", False),
     ("external/baselines.py", True), ("external/baselines.py --dataset nonane", True), ("external/nonane_validation.py", True), ("external/transfer_exploratory.py", True),
     ("external/uncertainty_exploratory.py", True), ("external/box_sensitivity.py", True),
-    ("external/wide_box_diagnostics.py", True), ("external/bp/bp_tests.py", True), ("external/bp/coverage_bias.py", False),
+    ("external/wide_box_diagnostics.py", True), ("external/bp/bp_tests.py", True), ("external/bp/coverage_bias.py", False), ("external/bp/selection_resampling.py", True),
     ("external/bp/make_bp_table.py", False), ("external/make_box_table.py", False), ("external/make_v37_table.py", False),
     ("structural/structural_checks.py", True), ("structural/hp_counts.py", False), ("structural/fractional_points.py", False),
-    ("structural/chi_floor.py", False), ("structural/extremal_trees_check.py", False), ("constancy_test_check.py", False), ("tuning_pool_seed_sweep.py", False),
+    ("structural/chi_floor.py", False), ("structural/extremal_trees_check.py", False), ("structural/minimality_check.py", False), ("structural/weak_discrimination_check.py", False), ("tmb_dhvap_audit.py", False), ("constancy_test_check.py", False), ("tuning_pool_seed_sweep.py", False),
     ("audit/check_exploratory_outputs.py", False), ("audit/check_source_identities.py", False), ("audit/check_mathematics.py", False),
     ("prose_numbers_check.py", False), ("external/test_regressions.py", False), ("external/test_baselines.py", False),
     ("verify_loyola_v35.py", True), ("manifest.py", False),
 ]
+# Scripts that only check (exit status is their result) and write no tracked
+# file; for every other script a run that rewrites nothing is a PROBLEM.
+CHECK_ONLY = {"external/check_nonane_structures.py", "audit/check_exploratory_outputs.py", "audit/check_source_identities.py",
+              "audit/check_mathematics.py", "prose_numbers_check.py", "external/test_regressions.py", "external/test_baselines.py",
+              "manifest.py"}
 
 
 def tracked():
@@ -110,10 +115,12 @@ def main():
     bad = 0
     with ThreadPoolExecutor(max_workers=3) as ex:
         for res in ex.map(lambda s: run_one(s, files, ref), todo):
-            ok = res["exit"] == 0 and not res["changed"] and res["touched"] > 0
+            check_only = res["script"] in CHECK_ONLY
+            ok = res["exit"] == 0 and not res["changed"] and (res["touched"] > 0 or check_only)
             bad += not ok
             line = (f"[{'OK' if ok else 'PROBLEM'}] {res['script']}: exit {res['exit']}, {res['seconds']:.0f} s"
-                    + (f"; CHANGED {res['changed']}" if res["changed"] else (f"; all {res['touched']} rewritten files identical" if res["touched"] else "; WROTE NO TRACKED FILE"))
+                    + (f"; CHANGED {res['changed']}" if res["changed"] else (f"; all {res['touched']} rewritten files identical" if res["touched"]
+                       else ("; check-only script, writes no file" if check_only else "; WROTE NO TRACKED FILE")))
                     + (f"; new files {res['new']}" if res["new"] else "") + f"; last line: {res['tail']}")
             lines.append(line); print(line, flush=True)
     lines.append(f"RESULT: {'every script exits 0 and reproduces its committed outputs' if bad == 0 else str(bad) + ' PROBLEM(S)'}")

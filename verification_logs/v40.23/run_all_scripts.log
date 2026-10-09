@@ -44,3 +44,4 @@ run_all_scripts at eef7493: 44 scripts, each in an isolated copy of the 442 trac
 [OK] verify_loyola_v35.py: exit 0, 150 s; all 2 rewritten files identical; last line:   node_labels = _init_node_labels(G, edge_attr, node_attr)
 [OK] manifest.py: exit 0, 0 s; check-only script, writes no file; last line: manifest OK: 441 files, one hash per path, all match (no git checkout: listed files verified, untracked files not detect
 RESULT: every script exits 0 and reproduces its committed outputs
+exit=0

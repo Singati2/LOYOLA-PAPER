@@ -1,0 +1,24 @@
+[PASS] core verifier (146 s): scope: FULL PASS covers the executed computations, all 8 numeric tables of main.tex/supplement.tex (exact display strings), and canonical ar
+[PASS] prose numbers (5 s): prose numbers: 717 checked, 0 failures, 18 uncheckable (cited values; see UNCHECKABLE in the registries)
+[PASS] external regression tests (0 s): OK
+[PASS] baseline tests (55 s): 0 failures; 54.5s
+[PASS] constancy test check (8 s): RESULT: the two constancy tests never disagree on these inputs; no fold is affected
+[PASS] auxiliary outputs (4 s): Auxiliary output reproduction PASS
+[PASS] archived-source identities (0 s): Archived source formula/skeleton checks PASS: 154 pages
+[PASS] interval certificates (1 s): Mathematics interval checks PASS
+[PASS] prose style (0 s): prose style check: PASS
+[PASS] extremal trees (0 s): RESULT: extremal-tree proposition holds for all orders 4..12
+[PASS] collision minimality (3 s): RESULT: first order with distinct profiles sharing a q-histogram: 13 (all trees), 16 (maximum degree <= 4)
+[PASS] weak discrimination (9 s): RESULT: no merge at any point with non-integer 2*alpha+beta
+[PASS] manifest (0 s): manifest OK: 440 files, one hash per path, all match
+[PASS] external verifier (1697 s): external verification: PASS (structures, rebuild, baseline validation, fresh re-runs, table)
+[PASS] structural checks (1001 s): TAB firstfail GA row: OK
+[PASS] 32-digit recount (86 s): RESULT: all counts reproduced at 32 significant digits (85 s)
+[PASS] verifier self-test (307 s): PASS  op:missing-artifact
+[PASS] counter-attacks on the checkers (113 s): RESULT: 13 attacks, 13 rejected, 0 false negatives
+[PASS] labels and references (1 s): label/reference/figure/table checks: PASS
+[PASS] Lean proofs (252 s): OK: all 38 expected theorems report only propext / Classical.choice / Quot.sound
+[FAIL] every script replayed in isolation (1659 s): RESULT: 2 PROBLEM(S)
+[PASS] provenance CSV convention: 91 CRLF rows, field counts [12]
+FAILURES
+exit=1

@@ -1,10 +1,12 @@
 # Lean 4 formalization of key results of the Loyola-index paper
 
+The statement-by-statement map to the paper's numbering is `../LEAN_VERIFICATION.md`.
+
 Lean `leanprover/lean4:v4.34.1`, Mathlib tag `v4.34.1` (prebuilt oleans via `lake exe cache get`).
 Build and check: `./verify.sh` (runs `lake build`, greps the sources for `sorry`/`axiom`/
 `native_decide`, and checks that every `#print axioms` line lists only
 `propext`, `Classical.choice`, `Quot.sound`). Current status: builds cleanly, no `sorry`, no
-warnings, 36 `#print axioms` checks all clean.
+warnings, 38 `#print axioms` checks (all 37 theorems and the lemma `K13_degrees_in_range`) all clean.
 
 ## Modelling choices (read this first)
 
@@ -88,6 +90,4 @@ warnings, 36 `#print axioms` checks all clean.
 * The graph layer: no `SimpleGraph`, connectivity, or degree-sum combinatorics; graphs enter
   only through their degree-pair multisets (plus the explicit tree certificates of L10).
 * The other results of the paper (closed forms, the asymptotics, the ceiling and generic-discrimination propositions, `prop:collision`, `prop:generic`,
-  `prop:collision`, `prop:generic`, the empirical sections).
-
-Note (v40.14): the termwise bounds formalized here (bracket, upper/lower bounds, Cauchy-Schwarz corollary, ratio bound) and the closed forms now appear in Supplementary Section S9 of the paper; their labels are unchanged.
+  the extremal-tree proposition, the empirical sections).

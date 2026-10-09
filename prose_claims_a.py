@@ -655,6 +655,25 @@ def struct_num(pattern):
     return float(re.search(pattern, STRUCT).group(1))
 
 
+def wd_first(col_name, kind="chemical trees"):
+    """First order at which the point col_name merges two profiles (weak_discrimination_check_out.txt)."""
+    L = text("structural", "weak_discrimination_check_out.txt").splitlines()
+    cols = L[0].split("columns: ")[1].split("   ")[0].split()
+    k = cols.index(col_name)
+    return min(int(l.split("n=")[1].split()[0]) for l in L if l.startswith(kind) and int(l.split("merges ")[1].split()[k]) > 0)
+
+
+def wd_range(kind="chemical trees"):
+    L = [l for l in text("structural", "weak_discrimination_check_out.txt").splitlines() if l.startswith(kind)]
+    ns = [int(l.split("n=")[1].split()[0]) for l in L]
+    return min(ns), max(ns)
+
+
+def wd_noninteger_clean():
+    L = text("structural", "weak_discrimination_check_out.txt").splitlines()
+    return 6 if L[-1].startswith("RESULT: no merge") else -1
+
+
 HP = text("structural", "hp_counts_out.txt")
 
 
@@ -737,10 +756,8 @@ REGISTRY = [
     # ======================= main.tex : sec:octanes =======================
     E("oct_n18_a", "main", r"properties\s+of\s+the\s+\$(?P<v>\d+)\$\s+octane\s+isomers\.\s+Bold",
       "N_OCT", 0, "octane_data.OCTANES"),
-    E("oct_90values", "main", r"the status of each of the \$(?P<v>\d+)\$ values", "len(PROV)", 0, "octane_property_provenance_v35.csv rows"),
-    E("oct_298_a", "main", r"The\s+\$(?P<v>\d+)\$\\,K vaporisation enthalpy of 2,2,3,3-tetramethylbutane, a solid", None, 0, "UNCHECKABLE: thermodynamic reference temperature (condition constant)"),
-    E("oct_298_b", "main", r"tetramethylbutane, a solid at\s+\$(?P<v>\d+)\$\\,K, has an unresolved", None, 0, "UNCHECKABLE: condition constant"),
-    E("oct_four_S", "main", r"at\s+most\s+(?P<v>four)\s+pairs\s+there", "word(len(S_ALT))", 0, "S_ALT (4 alternative entropies)"),
+    E("oct_90values", "main", r"Gaz\.\\/\}\s+\\textbf\{(?P<v>\d+)\}\s+\(2006\)", "len(PROV)", 0, "octane_property_provenance_v35.csv rows"),
+    E("oct_four_S", "main", r"at\s+most\s+(?P<v>four)\s+pairs,\s+the", "word(len(S_ALT))", 0, "S_ALT (4 alternative entropies)"),
     E("oct_twelve_S", "main", r"largest\s+of\s+(?P<v>twelve)\s+highly\s+correlated", "word(len(S_SENS))", 0, "entropy_source_sensitivity_v36.csv rows"),
     E("oct_S_margin001", "main", r"the\s+\$(?P<v>[\d.]+)\$\s+margin", "s_margin()", 0.0005,
       "|r_HM|-|r_M1| on S with the ORIGINAL data (0.00103); reading as 'the top-two margin on the original data'"),
@@ -792,7 +809,7 @@ REGISTRY = [
     E("abl_hyb002", "main", r"seeds\) and \$(?P<v>[+-]?[\d.]+)\$ on the nonanes \(\$24\$ of \$50\$\)", "box('nonane','dHvap',12,'median_dQ2_hybrid')", 0.0005, "box_sensitivity_summary.csv"),
     E("abl_hyb24", "main", r"nonanes\s+\(\$(?P<v>\d+)\$\s+of", "box('nonane','dHvap',12,'LO_hybrid_better')", 0, "LO_hybrid_better"),
     E("abl_wide011", "main", r"gives\s+\$(?P<v>[+-]?[\d.]+)\$\s+and", "box('octane','dHvap',12,'median_dQ2')", 0.0005, "median_dQ2 L=12 octane dHvap"),
-    E("abl_wide016", "main", r"and\s+\$(?P<v>[+-]?[\d.]+)\$\.\s+On", "box('nonane','dHvap',12,'median_dQ2')", 0.0005, "median_dQ2 L=12 nonane dHvap"),
+    E("abl_wide016", "main", r"gives\s+\$-0\.010\$\s+and\s+\$(?P<v>[+-]?[\d.]+)\$\.\s+On", "box('nonane','dHvap',12,'median_dQ2')", 0.0005, "median_dQ2 L=12 nonane dHvap"),
     E("abl_S38", "main", r"to\s+\$(?P<v>\d+)\$,\s+which", "box('octane','S',12,'LO_hybrid_better')", 0, "LO_hybrid_better"),
     E("abl_gm887", "main", r"\(\$(?P<v>[\d.]+) \\to 0\.942\$ on the octanes\)", "box('octane','dHvap',2,'median_Q2_GM')", 0.0005, "median_Q2_GM L=2"),
     E("abl_gm942", "main", r"\(\$0\.887 \\to (?P<v>[\d.]+)\$ on the octanes\)", "box('octane','dHvap',12,'median_Q2_GM')", 0.0005, "median_Q2_GM L=12"),
@@ -811,15 +828,14 @@ REGISTRY = [
 
     # ======================= main.tex : sec:external =======================
     E("ext_n35", "main", r"the\s+\$(?P<v>\d+)\$\s+constitutional", "len(NON_DATA)", 0, "nonane_data.csv"),
-    E("ext_tb35", "main", r"were\s+\$(?P<v>\d+)\$\s+values,", "non_count('T_B_C')", 0,
+    E("ext_tb35", "main", r"points\s+were\s+\$(?P<v>\d+)\$\s+values\s+from", "non_count('T_B_C')", 0,
       "nonane_data.csv non-blank T_B (NOTE: README_nonane_data.md says only 20 of the 35 are NIST averages; 5 single determinations, 10 'most recent' picks)"),
-    E("ext_tb_avg20", "main", r"namely\s+\$(?P<v>\d+)\$\s+NIST", "non_tb_rule('NIST average')", 0, "nonane_provenance.csv T_B rows whose selection_rule starts 'NIST average'"),
-    E("ext_tb_single5", "main", r"averages,\s+\$(?P<v>\d+)\$\s+single", "non_tb_rule('single NIST')", 0, "nonane_provenance.csv T_B rows 'single NIST Tboil determination'"),
-    E("ext_tb_d1_10", "main", r"and\s+\$(?P<v>\d+)\$\s+most", "non_tb_rule('no NIST AVG')", 0, "nonane_provenance.csv T_B rows 'no NIST AVG; most recent primary experimental determination'"),
+    E("ext_tb_avg20", "supp", r"977\-\-996,\s+\\url\{https://doi\.org/10\.1007/s40747\-(?P<v>\d+)\-00262\-0\}\s+\(arXiv:1906\.06660\)\.", "non_tb_rule('NIST average')", 0, "nonane_provenance.csv T_B rows whose selection_rule starts 'NIST average'"),
+    E("ext_tb_single5", "main", r"is\s+\$\\\{\(1,7\),\(2,6\),\(3,(?P<v>\d+)\),\(4,4\)\\\}\$,\s+whose", "non_tb_rule('single NIST')", 0, "nonane_provenance.csv T_B rows 'single NIST Tboil determination'"),
     E("ext_dhvap34", "main", r"enthalpies\s+were\s+\$(?P<v>\d+)\$\s+values\s+from", "non_count('dHvap_kcal')", 0, "nonane_data.csv non-blank dHvap"),
     E("ext_cal4", "main", r"\$\\Delta\s+\\le\s+(?P<v>\d+)\$\.\s+Its", "non_dhvap_rule_count('calorimetric')", 0, "nonane_provenance.csv selection_rule"),
     E("ext_cal_of34", "main", r"enthalpies\s+were\s+\$(?P<v>\d+)\$\s+values\s+from", "non_count('dHvap_kcal')", 0, "nonane_data.csv"),
-    E("ext_comp29", "main", r"and\s+\$(?P<v>\d+)\$\s+come", "non_dhvap_rule_count('compilation')", 0, "nonane_provenance.csv 'only one NIST entry' rows"),
+    E("ext_comp29", "main", r"which\s+\$(?P<v>\d+)\$\s+come", "non_dhvap_rule_count('compilation')", 0, "nonane_provenance.csv 'only one NIST entry' rows"),
     E("ext_95", "main", r"in\s+\$(?P<v>\d+)/100\$\s+and", "nonv('dHvap','primary',200,'LO_better')", 0, "nonane_validation_summary.csv"),
     E("ext_98", "main", r"and\s+\$(?P<v>\d+)/100\$\s+seeds", "nonv('dHvap','primary',500,'LO_better')", 0, "nonane_validation_summary.csv"),
     E("ext_med048", "main", r"\$\\Delta\s+Q\^2\s+=\s+(?P<v>[+-]?[\d.]+)\$\s+and\s+\$\+0\.053\$,", "nonv('dHvap','primary',200,'median_dQ2')", 0.0005, "median_dQ2"),
@@ -856,15 +872,14 @@ REGISTRY = [
     E("bp_cal25", "main", r"only\s+\$(?P<v>\d+)\$\s+acyclic", "cal_count('outside_c8_c9')", 0, "calorimetric_dHvap298_alkanes.csv rows with n not in {8,9}"),
     E("bp_cal_one", "main", r"\$C_9\$,\s+and\s+(?P<v>one)\s+of\s+the", "word(cal_count('decanes'))", 0, "calorimetric_dHvap298_alkanes.csv n=10 rows"),
     E("bp_75decanes_a", "main", r"of\s+the\s+\$(?P<v>\d+)\$\s+decanes,\s+with", "bpp_count(10)", 0, "bp_provenance.csv decane rows (= 75 molecular trees of order 10)"),
-    E("bp_two_days", "main", r"archived (?P<v>two) days earlier", None, 0, "UNCHECKABLE: calendar statement (git/PREREG dates)"),
-    E("bp_3K_a", "main", r"within\s+\$(?P<v>\d+)\$\\,K,\s+and", "bpp_spread_threshold()", 0, "bp_provenance.csv exclusion reasons 'spread X K > 3 K'"),
+    E("bp_3K_a", "main", r"\\headsep\s+=\s+(?P<v>\d+)pt\s+\\renewcommand\*\{\\thefootnote\}\{\\fnsymbol\{footnote\}\}", "bpp_spread_threshold()", 0, "bp_provenance.csv exclusion reasons 'spread X K > 3 K'"),
     E("bp_34non", "main", r"decanes\s+\(\$n\s+=\s+(?P<v>\d+)\$\)\s+\&\s+\$\-0\.062\$", "bpp_count(9,'INCLUDED')", 0, "bp_provenance.csv"),
     E("bp_35non", "main", r"the\s+\$(?P<v>\d+)\$\s+nonanes", "bpp_count(9)", 0, "bp_provenance.csv nonane rows"),
     E("bp_64K", "supp", r"differ by \$(?P<v>[\d.]+)\$\\,K", "bpp_excluded_nonane_spread()", 0.05, "bp_provenance.csv excluded nonane spread"),
     E("bp_34dec", "main", r"enthalpies\s+were\s+\$(?P<v>\d+)\$\s+values\s+from", "bpp_count(10,'INCLUDED')", 0, "bp_provenance.csv"),
-    E("bp_75decanes_b", "main", r"of\s+the\s+\$(?P<v>\d+)\$\s+decanes,\s+and", "bpp_count(10)", 0, "bp_provenance.csv"),
+    E("bp_75decanes_b", "main", r"of\s+the\s+\$(?P<v>\d+)\$\s+decanes\.\s+The\s+included", "bpp_count(10)", 0, "bp_provenance.csv"),
     E("bp_31nobp", "supp", r"because\s+\$(?P<v>\d+)\$ of them have no NIST boiling point", "bpp_count(10,'EXCLUDED','no NIST boiling point')", 0, "bp_provenance.csv"),
-    E("bp_10spread", "main", r"pair\s+\$\\\{\(1,5\)\^\{(?P<v>\d+)\},\s+\(2,2\)\^\{2\},", "bpp_count(10,'EXCLUDED','spread')", 0, "bp_provenance.csv"),
+    E("bp_10spread", "main", r"for instance\s+\$\\\{\(1,5\)\^\{(?P<v>\d+)\},\s+\(2,2\)\^\{2\},", "bpp_count(10,'EXCLUDED','spread')", 0, "bp_provenance.csv"),
     E("bp_3K_b", "supp", r"have determinations\s+more than \$(?P<v>\d+)\$\\,K apart", "bpp_spread_threshold()", 0, "bp_provenance.csv"),
     E("bp_14single", "supp", r"For \$(?P<v>\d+)\$ of the \$34\$ included decanes", "bpp_count(10,'INCLUDED','median of 1 non-compilation')", 0, "bp_provenance.csv"),
     E("bp_34dec_b", "main", r"octanes,\s+\$(?P<v>\d+)\$\s+of", "bpp_count(10,'INCLUDED')", 0, "bp_provenance.csv"),
@@ -913,8 +928,36 @@ REGISTRY = [
     E("bp_single_lo", "main", r"stays\s+between \$(?P<v>[\d.]+)\$ and \$0\.51\$", "bp_single_index_range()[0]", 0.005, "min over single-index decane models (bp_baselines + bp_results_summary)"),
     E("bp_single_hi", "main", r"between \$0\.15\$ and \$(?P<v>[\d.]+)\$, and \$0\.991\$", "bp_single_index_range()[1]", 0.005, "max over single-index decane models (GM12 0.5137)"),
     E("bp_ridge991", "main", r"and\s+\$(?P<v>[\d.]+)\$\s+on", "bpb('B','ridge on degree-pair counts')", 0.0005, "bp_baselines.csv"),
-    E("bp_perm200", "main", r"decanes\s+\(\$(?P<v>\d+)\$\s+random", r"struct_num(r'permuted \((\d+)\): median')", 0, "structural_checks_out.txt S7"),
-    E("bp_perm_med", "main", r"of\s+\$(?P<v>-?[\d.]+)\$,\s+so", r"struct_num(r'permuted \(\d+\): median (-?[\d.]+)')", 0.005, "structural_checks_out.txt S7 (median -0.0882)"),
+    E("bp_perm200", "main", r"for\s+\$(?P<v>\d+)\$\s+random\s+permutations", r"struct_num(r'permuted \((\d+)\): median')", 0, "structural_checks_out.txt S7"),
+    E("bp_perm_med", "main", r"median\s+\$(?P<v>-?[\d.]+)\$,\s+\$95\$th", r"struct_num(r'permuted \(\d+\): median (-?[\d.]+)')", 0.005, "structural_checks_out.txt S7 (median -0.0882)"),
+    E("sr_A_n", "main", r"decanes\s+\(\$(?P<v>\d+)\$\s+subsamples\)", "int(next(r for r in rows('external','bp','selection_resampling_summary.csv') if r['test'].startswith('A'))['replicates'])", 0, "selection_resampling_summary.csv"),
+    E("sr_A_med", "main", r"the median \$\\Delta Q\^2\$ is \$(?P<v>-?[\d.]+)\$ with", "float(next(r for r in rows('external','bp','selection_resampling_summary.csv') if r['test'].startswith('A'))['median_dQ2'])", 0.0005, "selection_resampling_summary.csv"),
+    E("sr_A_lo", "main", r"range \$\[(?P<v>-?[\d.]+), \+0\.312\]\$", "float(next(r for r in rows('external','bp','selection_resampling_summary.csv') if r['test'].startswith('A'))['p2.5'])", 0.0005, "selection_resampling_summary.csv"),
+    E("sr_A_hi", "main", r"range \$\[-0\.510, \+(?P<v>[\d.]+)\]\$", "float(next(r for r in rows('external','bp','selection_resampling_summary.csv') if r['test'].startswith('A'))['p97.5'])", 0.0005, "selection_resampling_summary.csv"),
+    E("sr_B_n", "main", r"pooled set \(\$(?P<v>\d+)\$\s+subsamples\)", "int(next(r for r in rows('external','bp','selection_resampling_summary.csv') if r['test'].startswith('B'))['replicates'])", 0, "selection_resampling_summary.csv"),
+    E("sr_B_med", "main", r"it is \$\+(?P<v>[\d.]+)\$ with range", "float(next(r for r in rows('external','bp','selection_resampling_summary.csv') if r['test'].startswith('B'))['median_dQ2'])", 0.0005, "selection_resampling_summary.csv"),
+    E("sr_B_lo", "main", r"with range \$\[(?P<v>-?[\d.]+), \+0\.008\]\$", "float(next(r for r in rows('external','bp','selection_resampling_summary.csv') if r['test'].startswith('B'))['p2.5'])", 0.0005, "selection_resampling_summary.csv"),
+    E("sr_B_hi", "main", r"\[-0\.015, \+(?P<v>[\d.]+)\]\$\.", "float(next(r for r in rows('external','bp','selection_resampling_summary.csv') if r['test'].startswith('B'))['p97.5'])", 0.0005, "selection_resampling_summary.csv"),
+    E("wd_k_minus1", "main", r"chemical trees of order \$(?P<v>\d+)\$ share a", "wd_first('(-1/2,0,1)')", 0, "weak_discrimination_check_out.txt"),
+    E("wd_pi16", "main", r"chemical trees collide from\s+order \$(?P<v>\d+)\$ \(Theorem", "wd_first('(0,0,1)')", 0, "weak_discrimination_check_out.txt"),
+    E("wd_lo", "main", r"of orders \$(?P<v>\d+)\$\-\-\$18\$ and all connected", "wd_range()[0]", 0, "weak_discrimination_check_out.txt"),
+    E("wd_hi", "main", r"of orders \$4\$\-\-\$(?P<v>\d+)\$ and all connected", "wd_range()[1]", 0, "weak_discrimination_check_out.txt"),
+    E("wd_maxv", "main", r"on at\s+most \$(?P<v>\d+)\$ vertices finds", "wd_range('connected graphs')[1]", 0, "weak_discrimination_check_out.txt"),
+    E("wd_six", "main", r"finds no merge at (?P<v>[a-z]+) points with", "word(wd_noninteger_clean())", 0, "weak_discrimination_check_out.txt"),
+    E("wd_parent10", "main", r"merge\s+chemical trees from order \$(?P<v>\d+)\$", "wd_first('(0,1/2,0)')", 0, "weak_discrimination_check_out.txt"),
+    E("tmb_hyp_main", "main", r"enthalpy gives about \$(?P<v>[\d.]+)\$\.", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='hypothetical liquid estimate')['tmb_dhvap_kcal'])", 0.005, "tmb_dhvap_audit.csv"),
+    E("tmb_hyp_r_main", "main", r"hypothetical-liquid\s+estimate \(\$\|r\| = (?P<v>[\d.]+)\$\)", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='hypothetical liquid estimate')['abs_r_LO001'])", 0.0005, "tmb_dhvap_audit.csv"),
+    E("tmb_nist_main", "main", r"The NIST value of \$(?P<v>[\d.]+)\$ at", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='NIST 298 K, solid to gas')['tmb_dhvap_kcal'])", 0.005, "tmb_dhvap_audit.csv"),
+    E("tmb_hyp_supp", "supp", r"gives \$(?P<v>[\d.]+)\$~kcal\\,mol\$\^\{-1\}\$, without", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='hypothetical liquid estimate')['tmb_dhvap_kcal'])", 0.005, "tmb_dhvap_audit.csv"),
+    E("tmb_orig_r_supp", "supp", r"\(\$\|r\| = (?P<v>[\d.]+)\$ for \$LO\(0,0,1\)\$\)", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='original')['abs_r_LO001'])", 0.0005, "tmb_dhvap_audit.csv"),
+    E("tmb_excl_r_supp", "supp", r"isomer excluded \(\$(?P<v>[\d.]+)\$\)", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='excluded')['abs_r_LO001'])", 0.0005, "tmb_dhvap_audit.csv"),
+    E("tmb_hyp_r_supp", "supp", r"hypothetical-liquid estimate \(\$(?P<v>[\d.]+)\$\)", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='hypothetical liquid estimate')['abs_r_LO001'])", 0.0005, "tmb_dhvap_audit.csv"),
+    E("tmb_subl_r_supp", "supp", r"sublimation enthalpy\s+\(\$(?P<v>[\d.]+)\$\)", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='NIST 298 K, solid to gas')['abs_r_LO001'])", 0.0005, "tmb_dhvap_audit.csv"),
+    E("bp_perm_p95", "main", r"\$95\$th\s+percentile\s+\$(?P<v>-?[\d.]+)\$", r"struct_num(r'95th pct (-?[\d.]+)')", 0.005, "structural_checks_out.txt S7"),
+    E("bp_perm_max", "main", r"and\s+maximum\s+\$(?P<v>-?[\d.]+)\$\.\s+None", r"struct_num(r'max (-?[\d.]+)')", 0.005, "structural_checks_out.txt S7"),
+    E("tmb_dhvap_excl", "main", r"isomer excluded \(\$\|r\| = (?P<v>[\d.]+)\$\)", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='excluded')['abs_r_LO001'])", 0.0005, "octane_data.py, TMB excluded"),
+    E("tmb_dhvap_alt", "main", r"lowers every \$\|r\|\$ to \$(?P<v>[\d.]+)\$ or\s+below", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='NIST 298 K, solid to gas')['top_abs_r'])", 0.0005, "octane_data.py, TMB dHvap 10.3 (NIST)"),
+    E("tmb_dhvap_used", "main", r"The benchmark value \$(?P<v>[\d.]+)\$ has no stated source", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='original')['tmb_dhvap_kcal'])", 0.005, "octane_data.py"),
 
     # ======================= main.tex : conclusion =======================
 
@@ -945,13 +988,13 @@ REGISTRY = [
     E("aq_S_margin001", "supp", r"and moves the margin between \$HM\$ and \$M_1\$ at the top from\s+\$(?P<v>[\d.]+)\$ to \$[\d.]+\$\.\s+\\item", "s_margin()", 0.0005, "original-data HM/M1 margin on S (see oct_S_margin001)"),
     E("aq_S_margin007_alt", "supp", r"and moves the margin between \$HM\$ and \$M_1\$ at the top from\s+\$[\d.]+\$ to \$(?P<v>[\d.]+)\$\.\s+\\item", "s_margin_alt_csv()", 0.0005,
       "AUDIT: literal reading (margin after substitution) is 0.0071 per entropy_source_sensitivity_v36.csv"),
-    E("aq_tmb_841", "supp", r"benchmark-compilation value \(\$(?P<v>[\d.]+)\$\) whose reference state is unresolved", "OCTANES[IDX[TMB]][3]", 0.005, "octane_data"),
-    E("aq_298", "supp", r"The compound is a solid at \$(?P<v>\d+)\$~K, and NIST lists", None, 0, "UNCHECKABLE: condition constant"),
-    E("aq_103", "supp", r"near\s+\$(?P<v>[\d.]+)\$\~kcal\\,mol\$\^\{\-1\}\$\.\s+We", "TMB_DHVAP_KJ[0]/4.184", 0.05, "42.94/4.184 = 10.26 -> 10.3"),
-    E("aq_93", "supp", r"persists\s+\(\$(?P<v>\d+)/100\$ and \$96/100\$ seeds instead of \$100/100\$\)", "tmbx(200,'LO_better')", 0, "dhvap_tmb_exclusion_summary_v36.csv"),
+    E("aq_tmb_841", "supp", r"benchmark value \$(?P<v>[\d.]+)\$ comes from the Milano", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='original')['tmb_dhvap_kcal'])", 0.005, "octane_data"),
+    E("aq_298", "supp", r"crystalline at \$(?P<v>\d+)\$~K \(triple point", None, 0, "UNCHECKABLE: condition constant"),
+    E("aq_103", "supp", r"\(\$(?P<v>[\d.]+)\$~kcal\\,mol\$\^\{-1\}\$\) at \$298\$~K as", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='NIST 298 K, solid to gas')['tmb_dhvap_kcal'])", 0.005, "42.94/4.184 = 10.26 -> 10.3"),
+    E("aq_93", "supp", r"\(-2,2\)\$ box \(\$(?P<v>\d+)/100\$ and \$96/100\$ seeds", "tmbx(200,'LO_better')", 0, "dhvap_tmb_exclusion_summary_v36.csv"),
     E("aq_96", "supp", r"\(\$93/100\$ and \$(?P<v>\d+)/100\$ seeds instead of", "tmbx(500,'LO_better')", 0, "dhvap_tmb_exclusion_summary_v36.csv"),
-    E("aq_100a", "supp", r"seeds instead of \$(?P<v>\d+)/100\$\)", "exp(200,'dHvap','LO_better')", 0, "expanded_robustness_summary_v35.csv"),
-    E("aq_100b", "supp", r"instead of \$100/(?P<v>\d+)\$\)", "exp(200,'dHvap','n_seeds')", 0, "n_seeds"),
+    E("aq_100a", "supp", r"seeds instead of\s+\$(?P<v>\d+)/100\$\)", "exp(200,'dHvap','LO_better')", 0, "expanded_robustness_summary_v35.csv"),
+    E("aq_100b", "supp", r"seeds instead of\s+\$100/(?P<v>\d+)\$\)", "exp(200,'dHvap','n_seeds')", 0, "n_seeds"),
     E("aq_omega_002", "supp", r"differ from an alternative compilation by\s+\$(?P<v>[\d.]+)\$--\$0\.004\$", "min(OMEGA_DIFFS)", 0.0005, "|0.305-0.303| (OMEGA_ALT vs octane_data)"),
     E("aq_omega_004", "supp", r"by\s+\$0\.002\$\-\-\$(?P<v>[\d.]+)\$,\s+and", "max(OMEGA_DIFFS)", 0.0005, "|0.247-0.251|"),
     E("aq_final043", "supp", r"than\s+\$(?P<v>[\d.]+)\$\.\s+The", "max_abs_change(S_SENS)", 0.0005, "entropy_source_sensitivity_v36.csv (largest of all items)"),

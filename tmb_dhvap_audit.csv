@@ -1,0 +1,5 @@
+variant,tmb_dhvap_kcal,top_index,top_abs_r,second_index,second_abs_r,abs_r_LO001,min_abs_r,note
+original,8.410,"LO(0,0,1)",0.9838,"LO(0,0,2)",0.9813,0.9838,0.3827,"benchmark value (Milano octane set, DHVAP); source and reference state unstated"
+excluded,,"LO(0,0,1)",0.9799,"LO(0,0,2)",0.9795,0.9799,0.2794,isomer removed (n = 17)
+hypothetical liquid estimate,8.564,"LO(0,0,1)",0.9761,"LO(0,0,2)",0.9696,0.9761,0.3675,dsubH(298 K) 43.37 kJ/mol minus dfusH(373.9 K) 7.54 kJ/mol (Scott et al. 1952 via NIST); no heat-capacity correction
+"NIST 298 K, solid to gas",10.263,"LO(0,0,1)",0.3736,"LO(0,0,2)",0.3317,0.3736,0.0183,"NIST dvapH 42.94 kJ/mol (Majer-Svoboda 1985); the compound is crystalline at 298 K, value equals dsubH (Circular 461: 10.24, footnote b)"

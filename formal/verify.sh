@@ -22,10 +22,10 @@ else echo "OK: no axiom declarations, no native_decide"; fi
 
 echo "--- #print axioms output (fresh, fail-closed) ---"
 # The expected theorem list is a COMMITTED file (expected_axiom_theorems.txt,
-# 36 names), not regenerated from the sources being audited; the axiom-check
+# 38 names), not regenerated from the sources being audited; the axiom-check
 # file is generated from that list so reports are fresh even on a cached build,
 # and a theorem missing from the sources makes the check file fail to compile.
-EXPECTED_COUNT=36
+EXPECTED_COUNT=38
 if [ "$(sort -u expected_axiom_theorems.txt | grep -c .)" -ne "$EXPECTED_COUNT" ]; then
   echo "FAIL: expected_axiom_theorems.txt must list exactly $EXPECTED_COUNT distinct names"; exit 1; fi
 for t in $(cat expected_axiom_theorems.txt); do

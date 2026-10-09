@@ -57,7 +57,7 @@ def first_csv_number(tmp, rel, column_hint=None):
 ATTACKS = [
     # (name, checker command (cwd-relative to its directory), mutation(tmp))
     ("prose: a prose numeral changed", ["prose_numbers_check.py"],
-     lambda t: edit(t, "main.tex", "by up to $0.043$ in $|r|$", "by up to $0.044$ in $|r|$")),
+     lambda t: edit(t, "main.tex", "($|r| = 0.984$, with", "($|r| = 0.985$, with")),
     ("prose: a registered sentence reworded", ["prose_numbers_check.py"],
      lambda t: edit(t, "main.tex", "this union contains nine of the ten", "this union contains all ten")),
     ("auxiliary outputs: fractional-point output corrupted", ["audit/check_exploratory_outputs.py"],

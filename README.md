@@ -3,7 +3,11 @@
 Advik Natarajan, Ganesh Shiwakoti, Michael Arockiaraj — manuscript, supplement,
 data, code and machine-checked proofs.
 
-**v40.22 (2026-10-07):** novelty audit against the 2026 literature (family and name have no prior; positioned against the variable Euler-Sombor and cosine-rule Sombor families and Gutman's survey remark), new Proposition 3 (a nonzero algebraic gamma never destroys a distinction of the parent at rational exponents), K_2 equality case corrected, chemical-tree column of Table 2 certified to order 17, exact integer grids and a scale-robust degeneracy guard in every candidate selection (boundary-fold counts corrected), QSPR section reduced to two tables (search-box and baseline tables now S6/S7), verified citations added; see V35_TO_V36_SCIENTIFIC_CHANGELOG.md.
+**v40.23 (2026-10-07):** co-authors' review applied: Section 3 framed in plain words, attribution remark removed, QSPR data detail cut further, LEAN_VERIFICATION.md added (statement-by-statement map to the Lean theorems); collision minimality certified by exhaustive enumeration (structural/minimality_check.py); Rada 2026 overlap stated before Theorem 2; new Theorem 4.3: imbalance restores weak discrimination on molecular graphs at rational exponents with 2a+b non-integer; restructured in MATCH statement-driven form (section-based numbering, numbered contributions, Discussion and limitations); v40.22 added the novelty audit, Proposition 3, the order-17 certification and the experiment fixes; see V35_TO_V36_SCIENTIFIC_CHANGELOG.md.
+
+## Lean verification
+
+`LEAN_VERIFICATION.md` maps every numbered statement of the paper to the Lean 4 theorems of `formal/` and states what is machine-checked; `cd formal && ./verify.sh` rebuilds and checks the development.
 
 ## Current documents
 | File | Content |

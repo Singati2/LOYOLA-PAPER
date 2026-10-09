@@ -1,0 +1,31 @@
+all  n= 2 trees=    1 profiles=    1 histograms=    1 colliding classes=0
+all  n= 3 trees=    1 profiles=    1 histograms=    1 colliding classes=0
+all  n= 4 trees=    2 profiles=    2 histograms=    2 colliding classes=0
+all  n= 5 trees=    3 profiles=    3 histograms=    3 colliding classes=0
+all  n= 6 trees=    6 profiles=    6 histograms=    6 colliding classes=0
+all  n= 7 trees=   11 profiles=   11 histograms=   11 colliding classes=0
+all  n= 8 trees=   23 profiles=   21 histograms=   21 colliding classes=0
+all  n= 9 trees=   47 profiles=   40 histograms=   40 colliding classes=0
+all  n=10 trees=  106 profiles=   79 histograms=   79 colliding classes=0
+all  n=11 trees=  235 profiles=  152 histograms=  152 colliding classes=0
+all  n=12 trees=  551 profiles=  294 histograms=  294 colliding classes=0
+all  n=13 trees= 1301 profiles=  570 histograms=  566 colliding classes=4
+all  n=14 trees= 3159 profiles= 1100 histograms= 1090 colliding classes=10
+all  n=15 trees= 7741 profiles= 2119 histograms= 2093 colliding classes=26
+all  n=16 trees=19320 profiles= 4069 histograms= 3996 colliding classes=69
+chem n= 2 trees=    1 profiles=    1 histograms=    1 colliding classes=0
+chem n= 3 trees=    1 profiles=    1 histograms=    1 colliding classes=0
+chem n= 4 trees=    2 profiles=    2 histograms=    2 colliding classes=0
+chem n= 5 trees=    3 profiles=    3 histograms=    3 colliding classes=0
+chem n= 6 trees=    5 profiles=    5 histograms=    5 colliding classes=0
+chem n= 7 trees=    9 profiles=    9 histograms=    9 colliding classes=0
+chem n= 8 trees=   18 profiles=   16 histograms=   16 colliding classes=0
+chem n= 9 trees=   35 profiles=   28 histograms=   28 colliding classes=0
+chem n=10 trees=   75 profiles=   49 histograms=   49 colliding classes=0
+chem n=11 trees=  159 profiles=   83 histograms=   83 colliding classes=0
+chem n=12 trees=  355 profiles=  137 histograms=  137 colliding classes=0
+chem n=13 trees=  802 profiles=  223 histograms=  223 colliding classes=0
+chem n=14 trees= 1858 profiles=  350 histograms=  350 colliding classes=0
+chem n=15 trees= 4347 profiles=  538 histograms=  538 colliding classes=0
+chem n=16 trees=10359 profiles=  810 histograms=  809 colliding classes=1
+RESULT: first order with distinct profiles sharing a q-histogram: 13 (all trees), 16 (maximum degree <= 4)

@@ -74,18 +74,21 @@ def compiled_numbers():
     # corollary environment is numbered; lemma has its own counter), so it is read from main.tex, not harvested
     # from the PDF text, where in-text references such as "Theorem 2(ii)" would be mistaken for headings
     src = strip_comments(open(os.path.join(ROOT, "main.tex")).read()); body_src = src[src.find(r"\begin{document}"):]
-    shared = re.findall(r"\\newtheorem\{(\w+)\}\[theorem\]", src) + ["theorem"]
-    counters = {}; results = {}
-    for m_ in re.finditer(r"\\begin\{(theorem|proposition|lemma|corollary|remark)\}(?:\[([^\]]*)\])?", body_src):
+    # v40.23: one counter shared by every \newtheorem{...}[theorem] environment, reset at each \section
+    # (\newtheorem{theorem}{Theorem}[section]), so numbers read "3.4"
+    shared = set(re.findall(r"\\newtheorem\{(\w+)\}\[theorem\]", src)) | {"theorem"}
+    results = {}; sec = 0; k = 0
+    for m_ in re.finditer(r"\\section\{|\\begin\{(\w+)\}(?:\[([^\]]*)\])?", body_src):
+        if m_.group(0).startswith("\\section"):
+            sec += 1; k = 0; continue
         env, title = m_.group(1), (m_.group(2) or "").strip()
-        if env in ("corollary", "remark") and not re.search(r"\\newtheorem\{%s\}" % env, src):
-            continue                                                  # unnumbered (\newtheorem*) environment
-        key = "theorem" if env in shared else env
-        counters[key] = counters.get(key, 0) + 1
-        results[(env.capitalize(), counters[key])] = title or "(untitled)"
-    pdf_heads = set(re.findall(r"\n(Theorem|Proposition|Lemma) (\d+)[ .(]", txt))
+        if env not in shared:
+            continue
+        k += 1
+        results[(env.capitalize(), f"{sec}.{k}")] = title or "(untitled)"
+    pdf_heads = set(re.findall(r"\n(Theorem|Proposition|Lemma)\s+(\d+\.\d+)\s*[.(]", txt))   # PyMuPDF may break a justified line at every word
     for (kind, n), title in results.items():
-        if kind in ("Theorem", "Proposition", "Lemma") and (kind, str(n)) not in pdf_heads:
+        if kind in ("Theorem", "Proposition", "Lemma") and (kind, n) not in pdf_heads:
             fail(f"{kind} {n} ({title[:30]}) numbered in the source but not found as a heading in the compiled paper")
     shutil.rmtree(tmp, ignore_errors=True)
     # table and section numbers follow source order, so they are read from main.tex itself
@@ -119,8 +122,8 @@ def main():
             cap_word = TABLE_WORDS[word]
             if int(num) in tables and cap_word not in tables[int(num)].lower():
                 fail(f"supplement cites Table~{num} of the main paper for '{word}' but that table's caption is '{tables[int(num)][:40]}'")
-    for kind, n in re.findall(r"(Theorem|Proposition|Lemma|Corollary|Remark)~(\d+) of the main paper", su):
-        if (kind, int(n)) not in results:
+    for kind, n in re.findall(r"(Theorem|Proposition|Lemma|Corollary|Remark)~(\d+(?:\.\d+)?) of the main paper", su):
+        if (kind, n) not in results:
             fail(f"supplement cites {kind}~{n} of the main paper, which the compiled main paper does not number so")
     for n in [x or y for x, y in re.findall(r"Table~(\d+) of the main paper|main paper, Table~(\d+)", su)]:
         if int(n) not in tables:

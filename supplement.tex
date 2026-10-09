@@ -635,7 +635,7 @@ the claim. Ridge regression on the full degree-pair count vector
 predicts the nonanes better than every index model, for both
 properties ($Q^2 = 0.927$ for $\Delta H_{\mathrm{vap}}$, $0.682$ for
 $T_B$). On the octanes it matches the Loyola model on
-$\Delta H_{\mathrm{vap}}$ and is weaker elsewhere. This is consistent with Proposition~7 of the main paper and the remark preceding it that every vertex-degree-based index is a function of the edge-degree-pair counts. The imbalance coordinate re-weights degree-pair
+$\Delta H_{\mathrm{vap}}$ and is weaker elsewhere. This is consistent with Proposition~4.1 of the main paper and the observation preceding it that every vertex-degree-based index is a function of the edge-degree-pair counts. The imbalance coordinate re-weights degree-pair
 information rather than adding to it, and one interpretable descriptor
 recovers most of what a model on all ten degree-pair counts achieves
 for the vaporisation enthalpy. It does not outperform such a model. The
@@ -699,7 +699,7 @@ among the lowest of all compared indices and tied with $R$, $GA$
 and $AG$. The $106$ trees realise only $79$ distinct
 edge-degree-pair count vectors, so $25.5\%$ is the minimum degeneracy
 attainable by \emph{any} degree-pair-based index on this set, and the
-pure-$\gamma$ points attain this floor. Theorem~2 of the main paper
+pure-$\gamma$ points attain this floor. Theorem~3.5 of the main paper
 gives the reason and the order at which this stops. The first
 Zagreb index $LO(0, 1, 0)$ ($83.0\%$) and the second Zagreb index
 $LO(1, 0, 0)$ ($67.0\%$) are the most degenerate
@@ -720,7 +720,7 @@ pure-$\gamma$ points attain the degree-pair-profile floor at
 \emph{every} order in both sets. The Randi\'c index also attains the
 floor at every order in this range, while $\chi$ falls off the floor
 from order $10$. Floor attainment therefore distinguishes the pure-$\gamma$ points from the most degenerate classical indices ($M_1$, $M_2$) but not from $R$.
-Theorem~2 of the main paper turns this into an exact statement. The
+Theorem~3.5 of the main paper turns this into an exact statement. The
 pure-$\gamma$ points separate precisely the $q$-histograms, which
 coincide with the degree-pair profiles up to order $12$ (order $15$ for
 $\Delta \le 4$) and not beyond. Among the trees of order $13$ the
@@ -873,16 +873,18 @@ realising both profiles.
 
 \emph{Not formalised.} The equality characterisations are not
 formalised, and neither are the gradient and Hessian formulas and strict
-convexity. The ratio-plane theorem, the $\gamma$-crossing bound and
+convexity. The ratio-plane theorem is formalised only through the
+order-$13$ pair above; its parts (i) and (ii), the $\gamma$-crossing bound and
 the identifiability proposition are not formalised, as they rest on
 the Lindemann--Weierstrass theorem, Laguerre's rule and
 exponential-family theory, none of which is in Mathlib. All
 statistical and chemometric results are outside the formalisation, as
 are the closed forms, the extremal-tree proposition and the
 ceiling and generic-discrimination propositions. The identifiability
-consequence of Lemma~1 together with its $\Delta = 1, 2$ cases is
-also not formalised. A theorem-by-theorem map is in
-\texttt{formal/README.md}.
+consequence of Lemma~3.1 together with its $\Delta = 1, 2$ cases is
+also not formalised. A statement-by-statement map is the file
+\texttt{LEAN\_VERIFICATION.md} of the repository (the encoding is
+described in \texttt{formal/README.md}).
 
 \section{Open provenance items}\label{sec:s-quality}
 
@@ -920,23 +922,37 @@ open are listed here so that they can be read in one place.
   compilation values changes all twelve $S$ correlations, by up to $0.043$
   in $|r|$, and moves the margin between $HM$ and $M_1$ at the top from
   $0.001$ to $0.007$.
-\item \emph{2,2,3,3-tetramethylbutane $\Delta H_{\mathrm{vap}}$} is a
-  benchmark-compilation value ($8.41$) whose reference state is unresolved.
-  The compound is a solid at $298$~K, and NIST lists sublimation and standard
-  vaporisation enthalpies near $10.3$~kcal\,mol$^{-1}$. We repeated the
-  matched-budget comparison of Section~\ref{sec:s-ablation} without this
-  isomer, and the vaporisation-enthalpy gain in the $(-2,2)$ box persists
-  ($93/100$ and $96/100$ seeds instead of $100/100$). The
-  $\Delta H_{\mathrm{vap}}$ column winner of Table~4 of the main paper is
-  unchanged, and no conclusion of the paper rests on this value.
+\item \emph{2,2,3,3-tetramethylbutane $\Delta H_{\mathrm{vap}}$.} The
+  compound is crystalline at $298$~K (triple point $373.97$~K). The
+  benchmark value $8.41$ comes from the Milano octane dataset reproduced
+  by Ediz~\cite{Ediz2017Octane}, whose $\Delta H_{\mathrm{vap}}$ column
+  follows the 1947 API Research Project~44 tables~\cite{APIProject44Circ461}
+  at $25\,^{\circ}$C for the other seventeen isomers. For this isomer those
+  tables give $10.24$, marked as a heat of sublimation, and $7.56$ for the
+  liquid at the normal boiling point; $8.41$ appears in neither. NIST lists
+  $42.94$ and $42.91$~kJ\,mol$^{-1}$ ($10.26$~kcal\,mol$^{-1}$) at $298$~K as
+  vaporisation enthalpies, and lists the second determination also as a
+  sublimation enthalpy, so these values describe the crystal. The
+  benchmark value is consistent with a hypothetical supercooled liquid:
+  the sublimation enthalpy $43.37$ minus the fusion enthalpy $7.54$~kJ\,mol$^{-1}$
+  gives $8.56$~kcal\,mol$^{-1}$, without a heat-capacity correction. Its
+  original source was not located. The sensitivity of Table~4 of the main
+  paper is reported for each variant separately: original
+  ($|r| = 0.984$ for $LO(0,0,1)$), isomer excluded ($0.980$),
+  hypothetical-liquid estimate ($0.976$) and sublimation enthalpy
+  ($0.374$). The column leader is $LO(0,0,1)$ in all four. The matched-budget
+  comparison repeated without the isomer keeps the vaporisation-enthalpy
+  gain in the $(-2,2)$ box ($93/100$ and $96/100$ seeds instead of
+  $100/100$). The full trace is the file \texttt{TMB\_DHVAP\_AUDIT.md} of
+  the repository.
 \item \emph{Acentric factors} of 2,2,4-trimethyl\-pentane and
   2,2,3,3-tetra\-methyl\-butane differ from an alternative compilation by
   $0.002$--$0.004$, and these alternative values change several $\omega$
   correlations at the third decimal and leave the $\omega$ ranking
   unchanged.
 \end{enumerate}
-None of these items moves a correlation of Table~4 of the main paper by
-more than $0.043$. The only bolded entry at stake is the $S$ winner,
+Apart from the sublimation-enthalpy substitution in item~(iv), none of these items
+moves a correlation of Table~4 of the main paper by more than $0.043$. The only bolded entry at stake is the $S$ winner,
 where $HM$ leads $M_1$ by $0.001$ with the values used. The 1947
 substitution of item~(i) reverses that order by $0.004$, a margin
 without meaning at this resolution. None of the items enters the

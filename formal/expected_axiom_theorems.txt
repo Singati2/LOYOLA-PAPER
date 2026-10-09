@@ -24,7 +24,9 @@ Loyola.P1_P2_same_q
 Loyola.P1_P2_same_qN
 Loyola.P2_card
 Loyola.P2_degree_consistent
+Loyola.P2_eq_replicates
 Loyola.par1_valid
+Loyola.par2_valid
 Loyola.psi_le_upper
 Loyola.psi_mul_psi_eq_sq
 Loyola.q_le_imbalance_max

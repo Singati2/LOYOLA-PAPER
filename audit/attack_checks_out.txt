@@ -1,5 +1,5 @@
-[REJECTED] prose: a prose numeral changed: exit 1; prose numbers: 686 checked, 1 failures, 16 uncheckable (cited values; see UNCHECKABLE in the registries)
-[REJECTED] prose: a registered sentence reworded: exit 1; prose numbers: 686 checked, 1 failures, 16 uncheckable (cited values; see UNCHECKABLE in the registries)
+[REJECTED] prose: a prose numeral changed: exit 1; prose numbers: 717 checked, 1 failures, 18 uncheckable (cited values; see UNCHECKABLE in the registries)
+[REJECTED] prose: a registered sentence reworded: exit 1; prose numbers: 717 checked, 1 failures, 18 uncheckable (cited values; see UNCHECKABLE in the registries)
 [REJECTED] auxiliary outputs: fractional-point output corrupted: exit 1; AssertionError: fresh output differs: structural/fractional_points_out.txt
 [REJECTED] auxiliary outputs: calorimetric CSV corrupted: exit 1; AssertionError: fresh output differs: external/bp/calorimetric_dHvap298_alkanes.csv
 [REJECTED] source identities: two decane skeletons swapped: exit 1; AssertionError: C124185: carbon skeleton differs from dataset record

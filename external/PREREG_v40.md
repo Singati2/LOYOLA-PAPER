@@ -79,3 +79,11 @@ The Test B least-squares solver was re-conditioned (column scaling) after the fi
 results had been seen (commit 0844d6b); on the uncorrected 101-molecule cohort this moved
 the Test B summary from -0.0004 / 23 of 50 to -0.0001 / 24 of 50 and changes no verdict.
 Recorded here so that the protocol file lists every post hoc change.
+
+## Reporting note (recorded 2026-10-08, after the results)
+At a reviewer's request an exploratory, selection-aware resampling was added
+(external/bp/selection_resampling.py): for each replicate a subsample of 80% of
+the molecules and a fresh candidate stream are drawn, and the whole nested
+procedure (selection, refit, prediction) is rerun for GM12 and LOh. It is not
+part of this protocol, no verdict depends on it, and the registered verdicts
+are unchanged.

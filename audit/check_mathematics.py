@@ -55,6 +55,17 @@ def interval_fraction(x):
     return mp.iv.mpf(x.numerator) / x.denominator
 
 
+def check_lemma1_witness():
+    """Lemma 3.1 without the pair (1,1): the augmented vectors of (1,2), (1,3), (2,2), (3,3) are linearly independent
+    (their 4x4 determinant is about -0.015), certified in 50-digit interval arithmetic."""
+    import mpmath as mp
+    mp.mp.dps = 50
+    rows = [[mp.mpf(1), mp.log(i * j), mp.log(i + j), mp.mpf(abs(i - j)) / (i + j)] for i, j in ((1, 2), (1, 3), (2, 2), (3, 3))]
+    d = mp.det(mp.matrix(rows))
+    assert abs(d) > mp.mpf("0.014") and abs(d) < mp.mpf("0.016") and d < 0, f"Lemma 3.1 witness determinant {d}"
+    print(f"Lemma 3.1 witness without (1,1): determinant {mp.nstr(d, 12)} != 0 certified")
+
+
 def check_crossings():
     G = Counter({(1, 6): 5, (1, 3): 2, (1, 4): 2, (3, 4): 1, (4, 6): 1})
     H = Counter({(1, 5): 4, (1, 6): 4, (1, 2): 1, (2, 6): 1, (5, 6): 1})
@@ -89,5 +100,6 @@ def check_crossings():
 
 if __name__ == "__main__":
     check_rank()
+    check_lemma1_witness()
     check_crossings()
     print("Mathematics interval checks PASS")

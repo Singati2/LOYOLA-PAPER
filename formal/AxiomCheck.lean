@@ -26,7 +26,9 @@ import LoyolaFormal
 #print axioms Loyola.P1_P2_same_qN
 #print axioms Loyola.P2_card
 #print axioms Loyola.P2_degree_consistent
+#print axioms Loyola.P2_eq_replicates
 #print axioms Loyola.par1_valid
+#print axioms Loyola.par2_valid
 #print axioms Loyola.psi_le_upper
 #print axioms Loyola.psi_mul_psi_eq_sq
 #print axioms Loyola.q_le_imbalance_max

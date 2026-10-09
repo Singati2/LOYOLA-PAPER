@@ -10,6 +10,8 @@
                                audit/check_exploratory_outputs.py, check_source_identities.py, check_mathematics.py
                                audit/check_style.py      sentence length, dashes and stock phrases in the prose
                                structural/extremal_trees_check.py  path/star extremality of the pure-gamma points, orders 4-12
+                               structural/minimality_check.py      first q-histogram collision orders 13 / 16, all orders 2-16
+                               structural/weak_discrimination_check.py  Theorem thm:weakdisc, chemical trees 4-18, graphs <= 7
                                manifest.py               SHA-256 of every tracked file
   python3 verify.py --full   also (about one hour):
                                external/verify_external.py
@@ -40,6 +42,8 @@ FAST = [
     ("interval certificates", [PY, os.path.join("audit", "check_mathematics.py")], HERE),
     ("prose style", [PY, os.path.join("audit", "check_style.py")], HERE),
     ("extremal trees", [PY, "extremal_trees_check.py"], os.path.join(HERE, "structural")),
+    ("collision minimality", [PY, "minimality_check.py"], os.path.join(HERE, "structural")),
+    ("weak discrimination", [PY, "weak_discrimination_check.py"], os.path.join(HERE, "structural")),
     ("manifest", [PY, "manifest.py"], HERE),
 ]
 

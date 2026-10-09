@@ -1017,3 +1017,212 @@ replay snapshots the tree and includes tracked formal/ files.
   keeps the correlation table and the boiling-point table.  Table 5 (bp)
   caption defines LO_h; the provenance-effect sentence matches S8.
 - Registries 693 entries, 0 failures.
+
+## v40.23 (co-authors' review of the earlier draft, applied to the current one)
+- Section 3 (the former "Section 3" that a co-author found opaque): an
+  opening paragraph now states the three plain questions the section
+  answers and tells the reader which result the rest of the paper uses;
+  Theorem 1 is introduced in words (log LO is convex, moving gamma up never
+  lowers the index, the slope is the weighted mean imbalance); Section 3.1
+  opens with what the ratio plane, the crossing bound and the
+  identifiability proposition are for; one-sentence lead-ins precede the
+  crossing and identifiability propositions.  No mathematics changed.
+- The attribution remark of the bounds section (the former "Remark 2",
+  judged purposeless by a co-author) is removed; its citations survive in
+  one sentence at the head of the termwise bounds.
+- Section 6 (the former "Section 5"): the data-extraction and provenance
+  detail is cut further (octane provenance to two sentences; nonane data to
+  two sentences; the boiling-point rule to one sentence), the detail
+  remaining in Supplementary Sections S1, S4 and S9.
+- Lean display, as requested by a co-author: new top-level
+  LEAN_VERIFICATION.md maps every numbered statement of the paper to the
+  Lean theorems of formal/ with a formalised / not-formalised status and the
+  reason; linked from README.md, formal/README.md and the paper's
+  reproducibility paragraph.
+- Second strict check (computation and Lean map): 64 claim groups of
+  Sections 2 to 5 re-derived independently, none refuted. Bookkeeping fixes:
+  the axiom check now covers all 37 theorems plus one lemma, 38 names (par2_valid and
+  P2_eq_replicates were unlisted); Lemma 1, Theorem 1 and Proposition 11
+  are labelled partly formalised (spanning statement, convexity and the
+  summation step respectively); K13_gamma_absorbed is filed under
+  Proposition 5, not 6; the stale v40.14 note of formal/README.md is
+  removed; S7 points to LEAN_VERIFICATION.md.
+- Full suite on the v40.23 tree: the counter-attack record reported one
+  harness false negative because its prose-numeral attack anchored on a
+  Section 6 sentence (0.043 in |r|) that the trims removed. The attack is
+  re-anchored on the 0.984 correlation sentence; 13 of 13 attacks rejected.
+- The isolated replay (audit/run_all_scripts.py) flagged the eight check-only
+  scripts (check_mathematics, prose_numbers_check, the two test suites,
+  manifest and the three audit checkers) under the v40.22 rule that every
+  script must rewrite a committed file. Those scripts write nothing by
+  design; they are now listed as check-only and judged by exit status and
+  unchanged tree alone. No experiment output changed.
+- Framing pass after an external referee report (novelty perception, octane-first
+  presentation, entropy caveat, companion-paper dependence): the free part of
+  the abstract now opens with the negative predictive result and is cut from
+  151 to 125 words so that the abstract ends on page 1 again (it had spilled
+  since v40.19); the Section 6 opening states that the boiling-point tests
+  are the primary evidence and the ridge regression on the degree-pair counts
+  the reference; Section 6.1 says the S-column ordering is reported without
+  drawing a conclusion. No companion paper is cited anywhere (checked).
+  Frozen abstract text through the LO definition and the Loyola name unchanged.
+  Main 42 pp.
+- Two further external reports (both: the negative result and the
+  institution-named family are the rejection risk; Proposition 3 wording;
+  dense page-3 paragraph; Table 2 commentary). Checked: Proposition 3 is
+  already an if-and-only-if with the hypothesis-necessity example, and the
+  Table 2 text already ties the below-floor entries to Theorem 2(iii). Done:
+  the 367-word paragraph on the family's position is split into five
+  paragraphs, sentences unchanged. Name and framing are author decisions.
+- A GitHub-based report misread "at gamma = 2 it is the exponential of
+  IRLA" (Rada's exponential-index notation) as exp(IRLA(G)); the sentence
+  now spells out the sum of e^{2q} and says exp(IRLA(G)) is a different
+  quantity. One sentence added after the ten-count paragraph saying what
+  the questions here ask beyond Rada's 2026 linear framework. Pendant-path
+  propagation of the collisions to every order was already independently
+  recomputed for orders 13 to 40 (strict check B).
+- Rada (2026, MATCH 96, 841-863) read in full against the manuscript. It
+  has no ratio-plane statement, no q-histogram collisions, no crossing
+  bound and no identifiability result. Added: a two-sentence statement
+  before Theorem 2 separating Rada's profile-level limits from the coarser
+  q-histogram loss; Theorem 2(ii) credit now also cites his Example 3;
+  the extremal remark says the star half of Proposition 10 follows from
+  his Section 4.2 sufficient condition and the path half does not
+  (e^{gamma/3} on (1,2) exceeds e^{gamma/5} on (2,3)). An external report's
+  counterexample to his page-858 star-cone equality was confirmed
+  (n = 4, w13 = 0, w12 = 1, w22 = -100); the paper does not rely on it.
+- Minimality of the collision orders (external report's concern 1): new
+  structural/minimality_check.py enumerates ALL trees of orders 2-16
+  (networkx generator, counts asserted against OEIS A000055 and A000602),
+  exact rational q; first collisions at 13 (4 classes) and 16 for
+  Delta <= 4 (1 class), none below. Table 2 previously said orders below 7
+  were not examined; its caption now states that the histogram search ran
+  from order 2. In the fast path and the isolated replay. Novelty sentence
+  after Theorem 2 now separates part (i) (direct from the factorisation)
+  from what is new.
+- After an independent reproduction of the minimality counts by an outside
+  reviewer: the real-gamma part of Theorem 2(ii) is now described as an
+  application of the standard finiteness of real zeros of exponential sums,
+  not as new; the minimality of orders 13 and 16 is stated as
+  computer-assisted with the enumeration code cited.
+- Clean PDF inspection (fresh build with logs kept): main 42 pp, supplement
+  26 pp; 0 undefined references or citations, 0 missing characters, every
+  font embedded; the one overfull line (2 pt, the Proposition 4 witness
+  profiles) fixed with break points. Full suite rerun on this exact tree.
+- Restructured in the statement-driven form of recent MATCH papers (model:
+  MATCH 98 (2027) 53-88; also Rada, MATCH 96 (2026) 841-863), at the
+  authors' request to use mathematics rather than narration:
+  numbering by section with one shared counter (Lemma 3.1, Theorem 3.5,
+  Proposition 4.1, ...), equations numbered by section, short names on all
+  statements; introduction cut from 1,244 to 672 words, ending in a
+  numbered contribution list; Section 2 merged into "Preliminaries and
+  notation" with the pair-sum formula (2.2) and Definition 2.2
+  (q-histogram); Section 3 narrative replaced by the exponential-family
+  form (3.1), Definition 3.4 (ratio plane), Remarks 3.7, 3.9, 3.10, 3.12,
+  3.14, 3.16 and Example 3.15; new Section 7 "Discussion and limitations"
+  (numbered list) and a Data availability statement. No statement, proof
+  or number changed. Registry: 8 entries re-anchored or dropped with their
+  sentences, 689 entries, 0 failures. Cross-references in the supplement,
+  LEAN_VERIFICATION.md, REPRODUCE.md and the scripts updated to the new
+  numbers; audit/check_labels.py reads section-based numbering. Main
+  39 pp (was 42), supplement 26 pp.
+- External review of the 39-page PDF. Fixed: (1) Section 6.1 said the open
+  data items affect only the S and omega columns; the unresolved
+  2,2,3,3-tetramethylbutane dHvap (8.41) sits in the dHvap column. Recomputed:
+  without it LO(0,0,1) leads with |r| = 0.980; with the NIST value near 10.3
+  it still leads but every |r| in the column falls to 0.359 or below. Main
+  text, limitation (iv) and Supplementary S8 now say the dHvap magnitudes
+  rest on that value; the supplement's "no item moves a correlation by more
+  than 0.043" was false and is qualified. (2) Abstract no longer says the
+  ratio plane separates size from shape (LO(C3) = 3, LO(C4) = 4 on it).
+  (3) Permutation check reported in full: selection-aware (ridge penalty
+  re-chosen per fold), median -0.09, 95th percentile -0.01, max 0.20, none
+  >= 0.860, p = 1/201. (4) New Table 6 lists every change made after outcomes.
+  (5) New exploratory external/bp/selection_resampling.py reruns the whole
+  nested selection on 80% subsamples: decanes (500) median dQ2 -0.110,
+  [-0.510, +0.312]; pooled (200) +0.001, [-0.015, +0.008]; recorded in
+  PREREG_v40.md as added after the results. (6) Decane cohort no longer
+  implied representative. (7) Proposition 5.1 regular-graph item needs
+  r >= 1. Registry 702 entries, 0 failures. A later note reading the
+  author superscripts a, b as surname typos was checked against the source:
+  they are affiliation marks, no change.
+- Line-by-line mathematical review. Checked and NOT changed: the Lemma 3.1
+  witness determinant -0.0150 is correct (the reviewer's +0.0866 used
+  ln 9 for the (3,3) degree-sum coordinate, which is ln 6); 3e^{gamma/2}
+  is typeset correctly (text-extraction artefact); IRLA(G) = 2 sum q_uv
+  confirmed against Reti et al., MATCH 79 (2018) 509-524, Proposition 2;
+  DSO = sum sqrt(du^2+dv^2)/(du+dv) confirmed against MATCH 95 (2026)
+  141-162, a degree-ratio index; the received date is today's. Fixed:
+  "as Theorem 3.5 requires" -> "consistent with" (the theorem caps Pi-points,
+  it does not force equal counts); units added to the Table 1 caption;
+  domain sentence of (2.1) names gamma; two abstract phrases clarified.
+- Lemma 3.1 proof now writes the four witness vectors, (1, ln 2, ln 3, 1/3),
+  (1, ln 3, ln 4, 1/2), (1, ln 4, ln 4, 0), (1, ln 9, ln 6, 0), and the exact
+  determinant -(1/6) ln(3/2) ln(2^13/3^8) ~ -0.0150 (sympy), so the value can be
+  checked by hand; a reviewer had rebuilt the (3,3) vector with ln 9 for ln 6.
+- NEW RESULT (positive contribution of gamma). Theorem 4.3: for rational
+  alpha, beta with kappa = 2 alpha + beta not an integer and algebraic
+  gamma != 0, the nine edge weights on Delta <= 4 are linearly independent
+  over Q (Lindemann-Weierstrass splits imbalance classes; 2^kappa irrational
+  kills the (1,2)/(2,4) class; Besicovitch 1940 kills the (2,2)/(3,3)/(4,4)
+  class), so LO is weakly discriminating on all connected molecular graphs
+  (Rada-Rodriguez-Sigarreta 2022, Theorem 3.1). Corollary 4.4: the gamma
+  extensions of chi and M_{0,1/2}, which that paper showed are NOT weakly
+  discriminating over chemical trees, become weakly discriminating. Remark
+  4.5: kappa = 0 fails (order 16), kappa = -1 fails (chemical trees of order
+  17; graphs from 4 vertices). New certificate
+  structural/weak_discrimination_check.py (chemical trees 4-18, connected
+  graphs Delta <= 4 on <= 7 vertices, 14 points at 50 digits; fast path and
+  replay); six further points (kappa = 1/5, 3/2, -3/2, 2/3, 7/3, 1/2 with
+  gamma = 1/2, -2, sqrt 2, 1, 3) also merge nothing to order 18. Abstract,
+  contribution (iv) and conclusion state the result; Lean map row added (not
+  formalised). Literature checked: Rada-Rodriguez-Sigarreta (MATCH 87, 2022)
+  prove SO weakly discriminating over CT_n and the Z-independence criterion;
+  Rada (2019, 2026) cover exponential indices with distinct algebraic
+  exponents; neither treats a two-parameter family at rational exponents or
+  the kappa condition. Main 42 pp. Registry 709 entries, 0 failures.
+- Theorem 4.3 sharpened after an external assessment: for kappa = p/r in
+  lowest terms the weights on P_Delta minus (1,1) are Q-independent IFF
+  Delta < 2^(r+1) (every non-integer kappa when Delta <= 7; at Delta = 8,
+  kappa = 1/2 gives w_88 = 2 w_22); Besicovitch step written out; brute-force
+  search over imbalance classes confirms the first dependence at
+  Delta = 2^(r+1) for r = 2..5. New Example 4.4: the Rada-Rodriguez-
+  Sigarreta Example 2.2 trees (equal chi) have D(1) = 0.2255 at
+  LO(0,-1/2,1), D(1e-6) = 2.4e-7 (exact but small separation). Remark 4.6
+  says the generic parent is already weakly discriminating and that above
+  the threshold only weight independence fails. Novelty stated as the
+  arithmetic criterion and sharp threshold for the Loyola family; the tools
+  (Z-independence criterion, Besicovitch, Lindemann-Weierstrass) are
+  credited to Rada-Rodriguez-Sigarreta 2022.
+- TMB dHvap source audit (TMB_DHVAP_AUDIT.md, tmb_dhvap_audit.py): the
+  benchmark's dHvap column follows NBS Circular 461 Table 3m at 25 C for the
+  other 17 isomers; for TMB that table gives 10.24 kcal/mol marked as a HEAT
+  OF SUBLIMATION and 7.56 at the normal boiling point; 8.410 appears in
+  neither. NIST's 298 K "dvapH" 42.94/42.91 kJ/mol describe the crystal
+  (TMB triple point 373.97 K; Osborne-Ginnings listed as dsubH too). 8.410
+  is consistent with a hypothetical supercooled liquid (dsubH 43.37 - dfusH
+  7.54 kJ/mol = 8.56 kcal/mol, no heat-capacity correction) but its original
+  source was not located; earliest carrier is the Milano octane set
+  (moleculardescriptors.eu, via Ediz 2017). Variants reported separately:
+  original 0.984, excluded 0.980, hypothetical liquid 0.976, sublimation
+  value 0.374 (|r| of the leader LO(0,0,1), which leads in all four). The
+  earlier "NIST value near 10.3" wording mislabelled a sublimation enthalpy
+  and is corrected in Section 6.1 and S8. Benchmark value unchanged.
+- Permutation pipeline audited: outer LOO, inner-LOO penalty selection and
+  standardisation on training molecules only, permutation of y only; an
+  independent scikit-learn re-implementation (audit/permutation_pipeline_audit.py)
+  reproduces the observed decane ridge Q2 0.8598706416 and, over the same 200
+  permutations, median -0.0882, 95th percentile -0.0087, max 0.1952, none >=
+  observed, p = 1/201 (audit/permutation_pipeline_audit_out.txt, exit 0).
+- Theorem 4.3 statement: gcd(|p|, r) = 1 explicit; Remark 4.6: excluding
+  (1,1) matters (w_{2^r,2^r} = 2^p w_11), and sharpness is for weight
+  independence only, not for weak discrimination of realisable graphs.
+- Full suite on the frozen tree: 20 of 21 stages PASS. The isolated replay
+  flagged (i) external/bp/selection_resampling.py, whose defaults (200 / 100
+  replicates) differed from the run reported in the paper (500 / 200), so the
+  replay produced a smaller run; defaults set to 500 / 200; and (ii) the
+  counter-attack record, which stores the registry size (697 -> 717) and was
+  correctly rewritten by the run. No reported number changed. Fast path and
+  isolated replay rerun after the fix (verification_logs/v40.23/).
+- Registries: three UNCHECKABLE entries whose constants left the main text
+  dropped; 697 entries, 0 failures.
