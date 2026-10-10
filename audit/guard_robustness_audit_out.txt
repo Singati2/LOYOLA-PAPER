@@ -1,0 +1,9 @@
+Test A old      : GM2 0.4686, LO2 0.4650, GM12 0.5137, LOh 0.4059, median dQ2 -0.0715, LOh ahead in 15 of 50
+Test A corrected: GM2 0.4686, LO2 0.4650, GM12 0.5137, LOh 0.4059, median dQ2 -0.0715, LOh ahead in 15 of 50
+Test B old      : GM2 0.9764, LO2 0.9800, GM12 0.9771, LOh 0.9766, median dQ2 -0.0001, LOh ahead in 25 of 50
+Test B corrected: GM2 0.9764, LO2 0.9800, GM12 0.9771, LOh 0.9766, median dQ2 -0.0001, LOh ahead in 25 of 50
+outer folds compared: 26800; folds with a different selected candidate: 101; causes: {'old guard rejected the corrected choice': 101}; by test/stream: {('B', 'LO2'): 101}
+largest |Q2 old - Q2 corrected| for a single seed and stream: 6.480e-03
+largest |RMSE old - RMSE corrected|: 6.808e-01; largest |prediction old - prediction corrected|: 9.452e+00
+seed/stream runs with any prediction difference: 2 of 400
+RESULT: Table 5 summaries identical at displayed precision
