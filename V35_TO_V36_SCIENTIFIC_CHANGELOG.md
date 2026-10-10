@@ -1239,3 +1239,20 @@ replay snapshots the tree and includes tracked formal/ files.
   subsetted-font bytes of the figure PDFs in a fresh environment); notebook 6 runs the
   suite in a dedicated environment with these versions and clears Jupyter's MPLBACKEND,
   which otherwise changes the figure rendering in child processes.
+
+## v40.24 (2026-10-09): weak-discrimination theorem withdrawn from the submission
+- Theorem 4.3 (imbalance restores weak discrimination), its proof, Corollary 4.5 and
+  Remark 4.6 removed, together with the abstract sentence, contribution item (iv), the
+  conclusion sentences that relied on them and the Besicovitch reference. The authors are
+  not yet able to verify and defend the number-theoretic proof independently. The
+  material, with a drafted sharpness proposition and its numerical check, is kept on the
+  branch research/weak-discrimination.
+- Example 4.4 kept as Example 4.3, without the theorem: it now rests on
+  structural/sumconn_pair_check.py, which finds the order-18 chemical-tree pair with the
+  stated profile difference, confirms equal sum-connectivity index and recomputes D(gamma)
+  from the trees at 50 digits (D(1) = 0.2255379, D(1e-6) = 2.401e-7). The word "exact"
+  was dropped from "the separation is exact but small".
+- Proposition 4.2 (generic discrimination) and every other result unchanged.
+- structural/weak_discrimination_check.py and its seven registry entries removed;
+  two entries for Example 4.3 added. Notebook 02, README, REPRODUCE.md and
+  LEAN_VERIFICATION.md updated. No experimental result changed.

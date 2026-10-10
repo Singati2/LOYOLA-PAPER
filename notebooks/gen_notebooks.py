@@ -97,7 +97,7 @@ print(open("TMB_DHVAP_AUDIT.md").read()[:1500])'''),
 
 # ---------------------------------------------------------------- 02 mathematics
 nb("02_mathematics.ipynb", "2. The mathematical results (Sections 3 and 4)",
-   "Lemma 3.1, the collision pairs of Theorem 3.5, the weak-discrimination threshold of Theorem 4.3, Example 4.4 and the exhaustive certificates.",
+   "Lemma 3.1, the collision pairs of Theorem 3.5, Example 4.3 and the exhaustive certificates.",
    [("md", "### Lemma 3.1: the witness determinant without the pair (1,1)"),
     ("code", '''from mpmath import mp, mpf, log, matrix, det, exp, sqrt
 mp.dps = 30
@@ -128,37 +128,13 @@ print("order-13 histogram:", {str(k): v for k, v in sorted(qhist(T1).items())})'
 m = re.search(r"sharing a q-histogram: (\\d+) \\(all trees\\), (\\d+)", out)
 check("first collision order, all trees (orders 2-16 enumerated)", 13, int(m.group(1)))
 check("first collision order, max degree 4", 16, int(m.group(2)))'''),
-    ("md", "### Theorem 4.3: the sharp degree threshold for independent weights\n\n"
-           "For 2*alpha + beta = p/r in lowest terms, the weights are independent over Q exactly when no imbalance class "
-           "contains two multipliers whose quotient is an r-th power. The search below finds the first maximum degree "
-           "where that happens."),
-    ("code", '''from math import gcd
-def rfree(n, r):
-    s, q, m = 1, 2, n
-    while m > 1:
-        e = 0
-        while m % q == 0:
-            m //= q; e += 1
-        s *= q ** (e % r); q += 1
-    return s
-for r in range(2, 6):
-    first = None
-    for D in range(2, 2 ** (r + 1) + 2):
-        cls = {}
-        for i in range(1, D + 1):
-            for j in range(i, D + 1):
-                if (i, j) != (1, 1):
-                    g = gcd(i, j); cls.setdefault((i // g, j // g), []).append(g)
-        if any(len({rfree(l, r) for l in L}) < len(L) for L in cls.values()):
-            first = D; break
-    check(f"r = {r}: first dependent maximum degree = 2^(r+1)", 2 ** (r + 1), first)'''),
-    ("code", '''out = run("python structural/weak_discrimination_check.py", tail=8)
-check("no merge at non-integer 2*alpha+beta (chemical trees 4-18, graphs <= 7 vertices)", True, "RESULT: no merge" in out)'''),
-    ("md", "### Example 4.4: the sum-connectivity pair of Rada, Rodriguez and Sigarreta (2022)"),
+    ("md", "### Example 4.3: the sum-connectivity pair of Rada, Rodriguez and Sigarreta (2022)"),
     ("code", '''D = lambda g: 3 * (exp(g / 2) - 1) - 4 / sqrt(5) * (exp(3 * g / 5) - exp(g / 5)) + 4 / sqrt(6) * (1 - exp(g / 3))
 check("D(0) = chi(S) - chi(T)", 0.0, float(D(0)), 1e-25)
 check("D(1)", 0.2255, float(D(1)), 5e-5)
 check("D(1e-6)", 2.4e-7, float(D(mpf("1e-6"))), 5e-9)
+out = run("python structural/sumconn_pair_check.py", tail=6)
+check("the order-18 trees themselves give the same D(gamma)", True, "RESULT: Example ex:sumconn confirmed" in out)
 check("K4 and K_{1,3} at gamma = ln 4 (Remark 3.9)", 6.0, float(3 * exp(log(4) / 2)), 1e-20)'''),
     ("md", "### Proposition 5.2 and the interval certificates"),
     ("code", 'run("python structural/extremal_trees_check.py", tail=3)\nrun("python audit/check_mathematics.py", tail=6)'),

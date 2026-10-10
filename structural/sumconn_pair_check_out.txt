@@ -1,0 +1,6 @@
+chemical trees of order 18: 1725 profiles; pairs with the stated difference: 1
+chi(S) - chi(T) = -2.14e-50
+gamma = 1.0: D from trees 0.2255379027, closed form 0.2255379027
+gamma = 1.0e-6: D from trees 2.401271913e-7, closed form 2.401271913e-7
+gamma = -1.0: D from trees -0.2346595942, closed form -0.2346595942
+RESULT: Example ex:sumconn confirmed (D(1) = 0.2255, D(1e-6) = 2.4e-7)

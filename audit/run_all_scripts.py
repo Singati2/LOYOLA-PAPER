@@ -36,7 +36,7 @@ SCRIPTS = [
     ("external/wide_box_diagnostics.py", True), ("external/bp/bp_tests.py", True), ("external/bp/coverage_bias.py", False), ("external/bp/selection_resampling.py", True),
     ("external/bp/make_bp_table.py", False), ("external/make_box_table.py", False), ("external/make_v37_table.py", False),
     ("structural/structural_checks.py", True), ("structural/hp_counts.py", False), ("structural/fractional_points.py", False),
-    ("structural/chi_floor.py", False), ("structural/extremal_trees_check.py", False), ("structural/minimality_check.py", False), ("structural/weak_discrimination_check.py", False), ("tmb_dhvap_audit.py", False), ("DATA/build_data.py", False), ("constancy_test_check.py", False), ("tuning_pool_seed_sweep.py", False),
+    ("structural/chi_floor.py", False), ("structural/extremal_trees_check.py", False), ("structural/minimality_check.py", False), ("structural/sumconn_pair_check.py", False), ("tmb_dhvap_audit.py", False), ("DATA/build_data.py", False), ("constancy_test_check.py", False), ("tuning_pool_seed_sweep.py", False),
     ("audit/check_exploratory_outputs.py", False), ("audit/check_source_identities.py", False), ("audit/check_mathematics.py", False),
     ("prose_numbers_check.py", False), ("external/test_regressions.py", False), ("external/test_baselines.py", False),
     ("verify_loyola_v35.py", True), ("manifest.py", False),

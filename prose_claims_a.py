@@ -655,23 +655,8 @@ def struct_num(pattern):
     return float(re.search(pattern, STRUCT).group(1))
 
 
-def wd_first(col_name, kind="chemical trees"):
-    """First order at which the point col_name merges two profiles (weak_discrimination_check_out.txt)."""
-    L = text("structural", "weak_discrimination_check_out.txt").splitlines()
-    cols = L[0].split("columns: ")[1].split("   ")[0].split()
-    k = cols.index(col_name)
-    return min(int(l.split("n=")[1].split()[0]) for l in L if l.startswith(kind) and int(l.split("merges ")[1].split()[k]) > 0)
-
-
-def wd_range(kind="chemical trees"):
-    L = [l for l in text("structural", "weak_discrimination_check_out.txt").splitlines() if l.startswith(kind)]
-    ns = [int(l.split("n=")[1].split()[0]) for l in L]
-    return min(ns), max(ns)
-
-
-def wd_noninteger_clean():
-    L = text("structural", "weak_discrimination_check_out.txt").splitlines()
-    return 6 if L[-1].startswith("RESULT: no merge") else -1
+def sc_num(pattern):
+    return float(re.search(pattern, text("structural", "sumconn_pair_check_out.txt")).group(1))
 
 
 HP = text("structural", "hp_counts_out.txt")
@@ -938,13 +923,6 @@ REGISTRY = [
     E("sr_B_med", "main", r"it is \$\+(?P<v>[\d.]+)\$ with range", "float(next(r for r in rows('external','bp','selection_resampling_summary.csv') if r['test'].startswith('B'))['median_dQ2'])", 0.0005, "selection_resampling_summary.csv"),
     E("sr_B_lo", "main", r"with range \$\[(?P<v>-?[\d.]+), \+0\.008\]\$", "float(next(r for r in rows('external','bp','selection_resampling_summary.csv') if r['test'].startswith('B'))['p2.5'])", 0.0005, "selection_resampling_summary.csv"),
     E("sr_B_hi", "main", r"\[-0\.015, \+(?P<v>[\d.]+)\]\$\.", "float(next(r for r in rows('external','bp','selection_resampling_summary.csv') if r['test'].startswith('B'))['p97.5'])", 0.0005, "selection_resampling_summary.csv"),
-    E("wd_k_minus1", "main", r"chemical trees of order \$(?P<v>\d+)\$ share a", "wd_first('(-1/2,0,1)')", 0, "weak_discrimination_check_out.txt"),
-    E("wd_pi16", "main", r"chemical trees collide from\s+order \$(?P<v>\d+)\$ \(Theorem", "wd_first('(0,0,1)')", 0, "weak_discrimination_check_out.txt"),
-    E("wd_lo", "main", r"of orders \$(?P<v>\d+)\$\-\-\$18\$ and all connected", "wd_range()[0]", 0, "weak_discrimination_check_out.txt"),
-    E("wd_hi", "main", r"of orders \$4\$\-\-\$(?P<v>\d+)\$ and all connected", "wd_range()[1]", 0, "weak_discrimination_check_out.txt"),
-    E("wd_maxv", "main", r"on at\s+most \$(?P<v>\d+)\$ vertices finds", "wd_range('connected graphs')[1]", 0, "weak_discrimination_check_out.txt"),
-    E("wd_six", "main", r"finds no merge at (?P<v>[a-z]+) points with", "word(wd_noninteger_clean())", 0, "weak_discrimination_check_out.txt"),
-    E("wd_parent10", "main", r"merge\s+chemical trees from order \$(?P<v>\d+)\$", "wd_first('(0,1/2,0)')", 0, "weak_discrimination_check_out.txt"),
     E("tmb_hyp_main", "main", r"enthalpy gives about \$(?P<v>[\d.]+)\$\.", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='hypothetical liquid estimate')['tmb_dhvap_kcal'])", 0.005, "tmb_dhvap_audit.csv"),
     E("tmb_hyp_r_main", "main", r"hypothetical-liquid\s+estimate \(\$\|r\| = (?P<v>[\d.]+)\$\)", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='hypothetical liquid estimate')['abs_r_LO001'])", 0.0005, "tmb_dhvap_audit.csv"),
     E("tmb_nist_main", "main", r"The NIST value of \$(?P<v>[\d.]+)\$ at", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='NIST 298 K, solid to gas')['tmb_dhvap_kcal'])", 0.005, "tmb_dhvap_audit.csv"),
@@ -957,6 +935,8 @@ REGISTRY = [
     E("bp_perm_max", "main", r"and\s+maximum\s+\$(?P<v>-?[\d.]+)\$\.\s+None", r"struct_num(r'max (-?[\d.]+)')", 0.005, "structural_checks_out.txt S7"),
     E("tmb_dhvap_excl", "main", r"isomer excluded \(\$\|r\| = (?P<v>[\d.]+)\$\)", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='excluded')['abs_r_LO001'])", 0.0005, "octane_data.py, TMB excluded"),
     E("tmb_dhvap_alt", "main", r"lowers every \$\|r\|\$ to \$(?P<v>[\d.]+)\$ or\s+below", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='NIST 298 K, solid to gas')['top_abs_r'])", 0.0005, "octane_data.py, TMB dHvap 10.3 (NIST)"),
+    E("sc_d1", "main", r"\$D\(1\) \\approx (?P<v>[\d.]+)\$\. The separation", r"sc_num(r'gamma = 1\.0: D from trees ([\d.]+)')", 0.00005, "sumconn_pair_check_out.txt"),
+    E("sc_order", "main", r"chemical trees \$S\$ and \$T\$ of order \$(?P<v>\d+) \+ t\$", "17 if 'pairs with the stated difference: 1' in text('structural', 'sumconn_pair_check_out.txt') else -1", 0, "sumconn_pair_check_out.txt (order 18 = 17 + 1)"),
     E("tmb_dhvap_used", "main", r"The benchmark value \$(?P<v>[\d.]+)\$ has no stated source", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='original')['tmb_dhvap_kcal'])", 0.005, "octane_data.py"),
 
     # ======================= main.tex : conclusion =======================

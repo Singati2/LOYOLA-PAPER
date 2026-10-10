@@ -31,7 +31,7 @@ pairs, degrees are positive reals, and `LO` is the sum of
 | Proposition 3.17 | limits along the γ axis | — | — | not formalised |
 | Proposition 4.1 | degree-pair information ceiling on the octanes | — | — | not formalised (data statement); checked by `verify_loyola_v35.py` |
 | Proposition 4.2 | generic discrimination of distinct profiles | — | — | not formalised (real-analytic zero sets) |
-| Theorem 4.3 (imbalance restores weak discrimination), Example 4.4, Corollary 4.5 | at rational α, β with κ = 2α+β = p/r ∉ ℤ and algebraic γ ≠ 0, the edge weights are ℚ-independent iff Δ < 2^{r+1}; LO is then weakly discriminating | — | — | not formalised (Lindemann–Weierstrass and Besicovitch's theorem are not in Mathlib); Δ ≤ 4 exhaustively checked by `structural/weak_discrimination_check.py` |
+| Example 4.3 | the sum-connectivity pair of Rada, Rodríguez and Sigarreta is separated by the imbalance coordinate | — | — | not formalised; checked from the order-18 trees at 50 digits by `structural/sumconn_pair_check.py` |
 | Proposition 5.1 | closed forms on standard graphs | — | — | not formalised; recomputed by `audit/check_mathematics.py` |
 | Proposition 5.2 | path and star as extremal trees of the pure-γ points | — | — | not formalised; exhaustively checked for orders 4–12 by `structural/extremal_trees_check.py` |
 | Proposition 5.4 (bracket bound) | m ψ_min ≤ LO ≤ m ψ_max | `ratio_bound`, `LO_ratio_bound` | `Bounds.lean` | **partly formalised**: the summation step is `ratio_bound` with h ≡ 1; the per-edge bounds ψ_min ≤ ψ_e ≤ ψ_max, and the extrema over the admissible pairs, enter as hypotheses |

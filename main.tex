@@ -187,11 +187,7 @@
   Pre-registered tests on measured boiling points show no predictive
   gain from $\gamma$, and a gain on vaporisation enthalpies seen in a
   narrow search box disappears once the parent is searched over a box
-  that does not truncate it. The structural effect of $\gamma$ is
-  positive. At rational exponents with $2\alpha + \beta \notin
-  \mathbb{Z}$, any algebraic $\gamma \neq 0$ makes the index weakly
-  discriminating on all molecular graphs, a property that the
-  sum-connectivity index and other parent points lack. On the ratio plane, where each edge
+  that does not truncate it. On the ratio plane, where each edge
   enters only through its degree ratio, the pure-$\gamma$ points at
   algebraic $\gamma \neq 0$ separate exactly the imbalance histograms,
   a limit shared by every degree-ratio index and lost on trees from
@@ -295,21 +291,13 @@
   \item[(iii)] A bound on the number of order exchanges along $\gamma$
   (Proposition~\ref{prop:laguerre}) and per-graph identifiability
   (Proposition~\ref{prop:identrank}).
-  \item[(iv)] At rational exponents with $2\alpha + \beta \notin
-  \mathbb{Z}$ and algebraic $\gamma \neq 0$, the index is weakly
-  discriminating on all graphs with $\Delta \le 7$
-  (Theorem~\ref{thm:weakdisc}). The edge weights obey a sharp
-  arithmetic degree threshold, and the imbalance coordinate repairs the
-  failure of $\chi$ and of
-  $M_{0,1/2}$ shown by Rada, Rodr\'{\i}guez and
-  Sigarreta~\cite{RadaRodriguezSigarreta2022Weak}.
-  \item[(v)] The degree-pair ceiling on the octane benchmark
+  \item[(iv)] The degree-pair ceiling on the octane benchmark
   (Proposition~\ref{prop:collision}), the first tree orders at which
   discrimination is lost, and structure sensitivity
   (Section~\ref{sec:discrimination}).
-  \item[(vi)] Closed forms on standard graphs, the extremal trees of the
+  \item[(v)] Closed forms on standard graphs, the extremal trees of the
   pure-$\gamma$ points and termwise bounds (Section~\ref{sec:bounds}).
-  \item[(vii)] A matched-budget QSPR diagnostic and pre-registered tests
+  \item[(vi)] A matched-budget QSPR diagnostic and pre-registered tests
   on measured boiling points (Section~\ref{sec:sensitivity}), in which
   freeing $\gamma$ gives no demonstrated gain once the parent's search
   box does not truncate it (Section~\ref{sec:ablation}), and ridge
@@ -961,72 +949,13 @@ distinct values and a \emph{floor} on degeneracy.
 
   Proposition~\ref{prop:generic} concerns generic real exponents. The
   indices used in practice have rational exponents, and there the
-  parent often fails: the sum-connectivity index $\chi = M_{0,-1/2}$
+  parent can fail: the sum-connectivity index $\chi = M_{0,-1/2}$
   and the index $M_{0,1/2}$ with edge weight $\sqrt{d_u + d_v}$ are not
   weakly discriminating over chemical
-  trees~\cite[Example~2.2]{RadaRodriguezSigarreta2022Weak}. At rational
-  exponents the imbalance coordinate restores weak discrimination on
-  all molecular graphs, with one arithmetic condition on the scale
-  exponent $\kappa = 2\alpha + \beta$ of~\eqref{eq:factor}.
+  trees~\cite[Example~2.2]{RadaRodriguezSigarreta2022Weak}. The
+  imbalance coordinate separates the pair of trees used there for $\chi$.
 
-  \begin{theorem}[Imbalance restores weak discrimination]\label{thm:weakdisc}
-  Let $\alpha, \beta \in \mathbb{Q}$ with $\kappa = 2\alpha + \beta \notin \mathbb{Z}$,
-  written $\kappa = p/r$ with $\gcd(|p|,r) = 1$ and $r \ge 2$, and let $\gamma \neq 0$
-  be algebraic. The edge weights
-  $w_{ij} = (ij)^{\alpha}(i+j)^{\beta} e^{\gamma q_{ij}}$,
-  $1 \le i \le j \le \Delta$, $(i,j) \neq (1,1)$, are linearly independent
-  over $\mathbb{Q}$ if and only if $\Delta < 2^{r+1}$. In particular they
-  are for every such $\kappa$ when $\Delta \le 7$. Consequently, if
-  $\Delta < 2^{r+1}$ and $G$, $H$ are connected graphs with at least three
-  vertices and maximum degree at most $\Delta$ with
-  $LO(G;\alpha,\beta,\gamma) = LO(H;\alpha,\beta,\gamma)$, then $G$ and $H$
-  have equal degree-pair profiles.
-  \end{theorem}
-
-  \begin{proof}
-  Two pairs have the same imbalance exactly when they have the same
-  degree ratio, so the imbalance classes are indexed by coprime
-  $(a,b)$, $a \le b$, and consist of the pairs $(\lambda a, \lambda b)$.
-  Since $(\lambda^2 ab)^{\alpha}(\lambda(a+b))^{\beta} = (ab)^{\alpha}(a+b)^{\beta}\lambda^{\kappa}$,
-  \[
-  w_{\lambda a,\lambda b} = (ab)^{\alpha}(a+b)^{\beta}\, e^{\gamma q_{ab}}\, \lambda^{\kappa}.
-  \]
-  Let $\sum x_{ij} w_{ij} = 0$ with rational $x_{ij}$. Grouping by class
-  gives $\sum_q c_q e^{\gamma q} = 0$ with algebraic $c_q$, and the numbers
-  $\gamma q$ are distinct and algebraic, so the Lindemann--Weierstrass
-  theorem gives $c_q = 0$ for every class. Within the class of $(a,b)$
-  this reads $\sum_{\lambda} x_{\lambda} \lambda^{\kappa} = 0$, where
-  $\lambda$ runs over $1, \dots, \lfloor \Delta/b \rfloor$, and over
-  $2, \dots, \Delta$ for $(a,b) = (1,1)$ because $(1,1)$ is excluded.
-  Write $\lambda^{p} = c_{\lambda}^{\,r} s_{\lambda}$ with $c_{\lambda}$ rational
-  and $s_{\lambda}$ a positive integer free of $r$-th powers, so that
-  $\lambda^{\kappa} = c_{\lambda} s_{\lambda}^{1/r}$. By Besicovitch's
-  theorem~\cite{Besicovitch1940} (see also~\cite[Theorem~3.3]{RadaRodriguezSigarreta2022Weak}),
-  $r$-th roots of distinct $r$-th-power-free positive integers are
-  linearly independent over $\mathbb{Q}$. Hence the class relation forces
-  every $x_{\lambda} = 0$ exactly when the $s_{\lambda}$ in the class are
-  distinct. As $\gcd(p,r) = 1$, $s_{\lambda} = s_{\mu}$ holds exactly when
-  $\lambda/\mu$ is the $r$-th power of a rational $u/v \ne 1$, so
-  $\lambda = u^{r}t$ and $\mu = v^{r}t$ for coprime $u > v$ and an integer
-  $t$. The largest multiplier is then at least $2^{r}t$. In the class
-  $(1,1)$ the smaller multiplier is at least $2$, so $t \ge 2$ if $v = 1$
-  and $\lambda \ge 3^{r} \ge 2^{r+1}$ if $v \ge 2$; either way
-  $\lambda \ge 2^{r+1}$. In a class with $b \ge 2$ the pair $(\lambda a, \lambda b)$
-  needs $\Delta \ge 2^{r} b \ge 2^{r+1}$. So for $\Delta < 2^{r+1}$ all
-  coefficients vanish. For $\Delta \ge 2^{r+1}$ the pairs $(2,2)$ and
-  $(2^{r+1},2^{r+1})$ satisfy $w_{2^{r+1},2^{r+1}} = 2^{p} w_{22}$, a rational
-  dependence. For the last statement,
-  $\sum (m_{ij}(G) - m_{ij}(H))\, w_{ij} = 0$ with integer coefficients and
-  $m_{11} = 0$ on connected graphs with at least three vertices, so every
-  difference vanishes, as in~\cite[Theorem~3.1]{RadaRodriguezSigarreta2022Weak}.
-  \end{proof}
-
-  The tools are those of Rada, Rodr\'{\i}guez and
-  Sigarreta~\cite{RadaRodriguezSigarreta2022Weak}. What is new is the
-  arithmetic criterion for the Loyola family, with its sharp degree
-  threshold, and the contrast with the parent at the same exponents.
-
-  \begin{example}\label{ex:weakdisc}
+  \begin{example}\label{ex:sumconn}
   For $t \ge 1$ the chemical trees $S$ and $T$ of order $17 + t$ in
   Example~2.2 of~\cite{RadaRodriguezSigarreta2022Weak} have
   $m(S) - m(T) = 6(1,3) + 4(2,3) + 4(3,3) - 4(1,4) - 6(2,2) - 4(2,4)$ and
@@ -1036,40 +965,9 @@ distinct values and a \emph{floor} on degeneracy.
   - \tfrac{4}{\sqrt5}\bigl(e^{3\gamma/5} - e^{\gamma/5}\bigr)
   + \tfrac{4}{\sqrt6}\bigl(1 - e^{\gamma/3}\bigr),
   \]
-  so $D(0) = 0$ and $D(1) \approx 0.2255$. The separation is exact but
-  small for small $\gamma$, for instance $D(10^{-6}) \approx 2.4 \times 10^{-7}$.
+  so $D(0) = 0$ and $D(1) \approx 0.2255$. The separation is small for
+  small $\gamma$, for instance $D(10^{-6}) \approx 2.4 \times 10^{-7}$.
   \end{example}
-
-  \begin{corollary}\label{cor:weakdisc}
-  For every algebraic $\gamma \neq 0$, the imbalance extensions
-  $LO(\cdot\,;0,-\tfrac12,\gamma)$ of $\chi$ and $LO(\cdot\,;0,\tfrac12,\gamma)$
-  of $M_{0,1/2}$ are weakly discriminating over the connected graphs with
-  at least three vertices and $\Delta \le 7$, in particular over all
-  molecular graphs and the chemical trees of each order.
-  \end{corollary}
-
-  \begin{remark}[Scope]\label{rem:weakdisc}
-  The proof uses the order only to exclude $K_2$, so the conclusion
-  holds for graphs of different orders as well. Excluding $(1,1)$
-  matters: with it the dependence $w_{2^{r},2^{r}} = 2^{p} w_{11}$ would
-  appear already at $\Delta = 2^{r}$. The threshold $2^{r+1}$ is sharp for
-  the independence of the weights. For $\Delta \ge 2^{r+1}$ only that
-  independence fails; whether two realisable profiles then share a value,
-  and hence a sharp threshold for weak discrimination itself, is not
-  decided here. At
-  generic real exponents the parent is already weakly discriminating
-  (Proposition~\ref{prop:generic}), so the theorem concerns the rational
-  exponents used in practice, where it does fail. Some integer values
-  of $\kappa$ may also work, but the condition cannot be dropped
-  altogether: on $\Pi$ ($\kappa = 0$) chemical trees collide from
-  order $16$ (Theorem~\ref{thm:ratioplane}), and at $\kappa = -1$, for
-  instance at $LO(-\tfrac12,0,1)$, chemical trees of order $17$ share a
-  value with distinct profiles. An exhaustive check of all chemical trees
-  of orders $4$--$18$ and all connected graphs with $\Delta \le 4$ on at
-  most $7$ vertices finds no merge at six points with
-  $\kappa \notin \mathbb{Z}$, while the parents $M_{0,\pm1/2}$ merge
-  chemical trees from order $10$ (reproducibility package~\cite{LoyolaRepo}).
-  \end{remark}
 
 \begin{table}[htbp]
 \centering
@@ -1949,12 +1847,7 @@ chemical trees, with explicit colliding families. Along the imbalance
 axis two chemical graphs exchange order at most five times, the
 extremal trees of the pure-imbalance points are the path and the star,
 and at rational exponents a nonzero algebraic imbalance parameter never
-destroys a distinction the parent makes. More than that, at rational
-exponents whose scale exponent is not an integer, switching the
-imbalance parameter on made the index weakly discriminating on all
-molecular graphs, a property that the sum-connectivity index and
-several other classical members of the parent family lack. This is the positive structural
-contribution of the third coordinate.
+destroys a distinction the parent makes.
 
 On the chemometric side no predictive gain was demonstrated. An apparent gain
 from the imbalance parameter on vaporisation enthalpies replicated
@@ -2012,10 +1905,6 @@ statement of this paper to its Lean theorem.
   \bibitem{BarmanDas2026HSO} J. Barman, S. Das, Geometric approach to
   degree-based topological index: Hyperbolic Sombor index, \textit{MATCH
   Commun. Math. Comput. Chem.\/} \textbf{95} (2026) 63--94.
-
-  \bibitem{Besicovitch1940} A. S. Besicovitch, On the linear independence of
-  fractional powers of integers, \textit{J. London Math. Soc.\/} \textbf{15}
-  (1940) 3--6.
 
   \bibitem{BollobasErdos1998}
   B. Bollob\'as, P. Erd\H{o}s, Graphs of extremal weights, \textit{Ars Comb.\/}

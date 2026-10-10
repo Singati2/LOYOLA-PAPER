@@ -3,10 +3,11 @@
 Advik Natarajan, Ganesh Shiwakoti, Michael Arockiaraj: manuscript, supplement,
 data, code, machine-checked proofs and runnable notebooks.
 
-**v40.23 (2026-10-09):** restructured in MATCH statement-driven form; new Theorem 4.3
-(at rational exponents with 2α+β = p/r non-integer and algebraic γ ≠ 0 the edge weights are
-linearly independent over Q exactly when Δ < 2^(r+1), so the index is weakly discriminating,
-which repairs sum-connectivity); collision minimality certified over all tree orders 2–16;
+**v40.24 (2026-10-09):** the weak-discrimination theorem (former Theorem 4.3) is withdrawn from
+the submission and kept on the branch `research/weak-discrimination`; Example 4.3 is now
+checked directly from the trees (`structural/sumconn_pair_check.py`).
+
+**v40.23 (2026-10-09):** restructured in MATCH statement-driven form; collision minimality certified over all tree orders 2–16;
 tetramethylbutane ΔH_vap source audit; exploratory selection-aware resampling; independent
 permutation audit. Full history in `V35_TO_V36_SCIENTIFIC_CHANGELOG.md`.
 
@@ -19,7 +20,7 @@ Colab the notebook clones this repository and installs the requirements itself.
 | Notebook | What it checks | Time | Open |
 |---|---|---|---|
 | `notebooks/01_data.ipynb` | the datasets in `DATA/` and their provenance | seconds | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/01_data.ipynb) |
-| `notebooks/02_mathematics.ipynb` | Lemma 3.1, the colliding profiles of Theorem 3.5, the threshold of Theorem 4.3, Example 4.4, certificates | under a minute | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/02_mathematics.ipynb) |
+| `notebooks/02_mathematics.ipynb` | Lemma 3.1, the colliding profiles of Theorem 3.5, Example 4.3, certificates | under a minute | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/02_mathematics.ipynb) |
 | `notebooks/03_degeneracy.ipynb` | Table 2 and the order-10 and order-16 counts, by enumerating every tree | under a minute | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/03_degeneracy.ipynb) |
 | `notebooks/04_octane_correlations.ipynb` | all 60 correlations of Table 4 and the tetramethylbutane audit | seconds | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/04_octane_correlations.ipynb) |
 | `notebooks/05_boiling_points.ipynb` | Table 5 baselines, the 200-permutation check, the resampling summary | about 5 minutes (`RUN_SLOW = True`: about 1 hour) | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/05_boiling_points.ipynb) |
@@ -35,7 +36,7 @@ regenerates them. The Lean proofs need a Lean toolchain and are not run in a not
 ## Current documents
 | File | Content |
 |---|---|
-| `main.tex`, `LOYOLA_paper.pdf` | the paper (42 A5 pages, MATCH template) |
+| `main.tex`, `LOYOLA_paper.pdf` | the paper (40 A5 pages, MATCH template) |
 | `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (26 pages) |
 | `DATA/` | every dataset, byte-identical copies, with a README |
 | `LOYOLA_FINAL_PAPER_OVERLEAF.zip` | Overleaf upload (both documents + figures) |
@@ -46,9 +47,6 @@ extends the Gutman–Milovanović family (γ = 0).
 - **Structure:** a size–shape factorisation; a ratio-plane theorem stating exactly what
   the pure-γ line can discriminate (edge-imbalance histograms), with colliding trees at
   every order ≥ 13; a bound on γ-crossings; per-graph identifiability.
-- **Positive structural result:** at rational exponents with 2α+β non-integer and algebraic
-  γ ≠ 0 the index is weakly discriminating on all graphs with Δ ≤ 7 (sharp threshold
-  Δ < 2^(r+1) for the edge weights), which the sum-connectivity index is not.
 - **Prediction (negative, under the stated protocols):** an apparent vaporization-enthalpy
   gain was an artefact of a search box that truncated the parent family; pre-registered
   tests on measured boiling points (34 decanes; 100 alkanes C6–C10) show no demonstrated
