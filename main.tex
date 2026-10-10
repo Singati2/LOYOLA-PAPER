@@ -1333,7 +1333,7 @@ enumeration in the reproducibility package.
   \end{proof}
 
   \begin{proposition}[Upper bound in $m$ and $\Delta$]\label{thm:upper_Delta}
-  Let $G$ be a connected graph of size $m$ and maximum degree $\Delta$. For
+  Let $G$ be a connected graph of size $m \ge 1$ and maximum degree $\Delta$. For
   $\alpha, \beta \ge 0$ and $\gamma \ge 0$,
   \begin{equation}\label{eq:upper_Delta}
   \Wuzi \;\le\; m \cdot \Delta^{2\alpha} \cdot (2\Delta)^{\beta}
@@ -1370,7 +1370,7 @@ enumeration in the reproducibility package.
   \end{proof}
 
   \begin{proposition}[Lower bound in $m$ and $\delta$]\label{thm:lower_delta}
-  Let $G$ be a connected graph of size $m$ and minimum degree $\delta$. For
+  Let $G$ be a connected graph of size $m \ge 1$ and minimum degree $\delta$. For
   $\alpha, \beta \ge 0$ and $\gamma \ge 0$,
   \begin{equation}\label{eq:lower_delta}
   \Wuzi \;\ge\; m \cdot \delta^{2\alpha} \cdot (2\delta)^{\beta},
@@ -1402,7 +1402,7 @@ enumeration in the reproducibility package.
   positive on the admissible degree pairs of the graph.
 
   \begin{proposition}[Ratio bound]\label{thm:ratio_bound}
-  Let $G$ be a simple graph with maximum degree at most $\Delta$. Let
+  Let $G$ be a simple graph with $E(G) \ne \varnothing$ and maximum degree at most $\Delta$. Let
   $I_h(G) = \sum_{uv \in E(G)} h(d_u, d_v)$ be a BID index with
   edge contribution $h(i, j)$ strictly positive on every degree pair
   $(i, j)$ that appears in $G$. Define
@@ -1435,10 +1435,11 @@ enumeration in the reproducibility package.
   appearing pairs.
   \end{proof}
 
-  Proposition~\ref{thm:ratio_bound} is a \emph{sharp graph-specific}
+  Proposition~\ref{thm:ratio_bound} is a \emph{graph-specific}
   comparison, whose constants depend on the degree pairs that actually
-  appear in $G$, and a uniform version follows immediately by enlarging
-  the range of the extrema.
+  appear in $G$. Its constants are the best edgewise ones, but a bound
+  is attained only when every edge attains the extremum. A uniform
+  version follows by enlarging the range of the extrema.
 
   \begin{corollary}[Uniform ratio bound]\label{cor:ratio_uniform}
   Assume the hypotheses of Proposition~\ref{thm:ratio_bound}, but with $h$

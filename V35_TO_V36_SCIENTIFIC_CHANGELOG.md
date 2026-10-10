@@ -1309,3 +1309,12 @@ replay snapshots the tree and includes tracked formal/ files.
   that correcting it changes no selected fold in the boiling-point tests.
 - No number, interval, table cell or verdict changed. The rank-guard audit stays on the branch
   robustness-guards (no reported value depends on it).
+
+## v40.27 (2026-10-10): Section 5 hypotheses (independent bounds audit)
+- Propositions 5.6 and 5.7 assume m >= 1; Proposition 5.8 assumes E(G) nonempty, since its
+  extrema range over the degree pairs of the edges.
+- The remark after Proposition 5.8 no longer calls the comparison sharp. Its constants are the
+  best edgewise ones, but a bound is attained only when every edge attains the extremum (on P_4
+  at (0,0,1) with h = 1: 3 <= 3.79122 <= 4.18684, neither attained).
+- The audit (764,010 assertions on 32,505 trees and standard families) found no counterexample
+  to any Section 5 bound or closed form. No number, table cell or verdict changed.

@@ -1,0 +1,24 @@
+[PASS] core verifier (137 s): scope: FULL PASS covers the executed computations, all 8 numeric tables of main.tex/supplement.tex (exact display strings), and canonical ar
+[PASS] prose numbers (5 s): prose numbers: 705 checked, 0 failures, 18 uncheckable (cited values; see UNCHECKABLE in the registries)
+[PASS] external regression tests (0 s): OK (expected failures=1)
+[PASS] baseline tests (53 s): 0 failures; 53.2s
+[PASS] constancy test check (7 s): RESULT: the two constancy tests never disagree on these inputs; no fold is affected
+[PASS] auxiliary outputs (6 s): Auxiliary output reproduction PASS
+[PASS] archived-source identities (0 s): Archived source formula/skeleton checks PASS: 154 pages
+[PASS] interval certificates (1 s): Mathematics interval checks PASS
+[PASS] prose style (0 s): prose style check: PASS
+[PASS] extremal trees (0 s): RESULT: extremal-tree proposition holds for all orders 4..12
+[PASS] collision minimality (3 s): RESULT: first order with distinct profiles sharing a q-histogram: 13 (all trees), 16 (maximum degree <= 4)
+[PASS] sum-connectivity pair (3 s): RESULT: Example ex:sumconn confirmed (D(1) = 0.2255, D(1e-6) = 2.4e-7)
+[PASS] DATA copies (0 s): DATA/ check: every file matches its source
+[PASS] manifest (1 s): manifest OK: 457 files, one hash per path, all match
+[PASS] external verifier (5935 s): external verification: PASS (structures, rebuild, baseline validation, fresh re-runs, table)
+[PASS] structural checks (4052 s): TAB firstfail GA row: OK
+[PASS] 32-digit recount (327 s): RESULT: all counts reproduced at 32 significant digits (326 s)
+[PASS] verifier self-test (2550 s): PASS  op:missing-artifact
+[PASS] counter-attacks on the checkers (114 s): RESULT: 13 attacks, 13 rejected, 0 false negatives
+[PASS] labels and references (1 s): label/reference/figure/table checks: PASS
+[PASS] Lean proofs (296 s): OK: all 38 expected theorems report only propext / Classical.choice / Quot.sound
+[PASS] provenance CSV convention: 91 CRLF rows, field counts [12]
+ALL PASS
+exit=0

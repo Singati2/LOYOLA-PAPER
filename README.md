@@ -3,6 +3,10 @@
 Advik Natarajan, Ganesh Shiwakoti, Michael Arockiaraj: manuscript, supplement,
 data, code, machine-checked proofs and runnable notebooks.
 
+**v40.27 (2026-10-10):** Propositions 5.6-5.8 state a nonempty edge set; the remark after
+Proposition 5.8 no longer calls the comparison sharp (its constants are the best edgewise ones,
+and a bound is attained only when every edge attains the extremum).
+
 **v40.26 (2026-10-10):** review fixes: predictive claims in Section 6.4 limited to the models, boxes
 and budgets evaluated; the exploratory resampling range no longer compared with the conditional
 interval; the one-sided gain rule in `external/bp/bp_tests.py` now requires a positive lower endpoint
