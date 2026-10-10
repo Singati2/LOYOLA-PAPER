@@ -1,0 +1,9 @@
+C72 144.0 K9 144.0
+alpha=0 beta=1/2 kappa=1/2 D=8 e=3: C_72 vs 8-regular circulant on 9: LO equal = 144.0
+alpha=0 beta=-1/2 kappa=-1/2 D=8 e=1: C_18 vs 8-regular circulant on 9: LO equal = 9.0
+alpha=-1 beta=-1/2 kappa=-5/2 D=8 e=-3: C_9 vs 8-regular circulant on 72: LO equal = 1.125
+alpha=1/2 beta=1/2 kappa=3/2 D=8 e=5: C_288 vs 8-regular circulant on 9: LO equal = 1152.0
+alpha=0 beta=1/3 kappa=1/3 D=16 e=4: C_272 vs 16-regular circulant on 17: LO equal = 431.77308613535
+alpha=-1 beta=-1/3 kappa=-7/3 D=16 e=-4: C_17 vs 16-regular circulant on 272: LO equal = 2.67733223102661
+alpha=1/4 beta=3/4 kappa=5/4 D=32 e=9: C_16896 vs 32-regular circulant on 33: LO equal = 67584.0
+alpha=-2 beta=1/2 kappa=-7/2 D=8 e=-5: C_9 vs 8-regular circulant on 288: LO equal = 1.125

@@ -1,0 +1,28 @@
+\begin{proposition}[Sharpness]\label{prop:sharp}
+Under the hypotheses of Theorem~\ref{thm:weakdisc} let $D = 2^{r+1}$, $e = p + r$,
+$n = (D+1)2^{\max(0,-e)}$ and $N = (D+1)2^{\max(0,e)}$, and let $H$ be the circulant
+graph on $\mathbb{Z}/n\mathbb{Z}$ with connection set $\{\pm 1, \dots, \pm D/2\}$. Then
+$LO(C_N;\alpha,\beta,\gamma) = LO(H;\alpha,\beta,\gamma)$ while $m_{22}(C_N) = N$ and
+$m_{DD}(H) = nD/2$. Hence over the connected graphs with at least three vertices and
+maximum degree at most $\Delta$ the index is weakly discriminating if and only if
+$\Delta < 2^{r+1}$.
+\end{proposition}
+
+\begin{proof}
+As $n > D$ and $D$ is even, $H$ is simple, connected and $D$-regular. On a $d$-regular
+graph with $m$ edges every edge has $q = 0$, so $LO = m\,2^{\beta} d^{\kappa}$. Hence
+$LO(H)/LO(C_N) = (nD/2)D^{\kappa}/(N 2^{\kappa}) = 2^{r}\,2^{r\kappa}\,n/N = 2^{e}n/N = 1$.
+The converse is Theorem~\ref{thm:weakdisc}.
+\end{proof}
+
+For $(\alpha,\beta) = (0,\pm\tfrac12)$ the circulant on $9$ vertices is $K_9$:
+$LO(C_{72};0,\tfrac12,\gamma) = LO(K_9;0,\tfrac12,\gamma) = 144$ and
+$\chi(C_{18}) = \chi(K_9) = 9$, so the bound $\Delta \le 7$ in
+Corollary~\ref{cor:weakdisc} cannot be raised.
+
+% Remark 4.6, replacing "For $\Delta \ge 2^{r+1}$ only that independence fails; ... is not decided here."
+By Proposition~\ref{prop:sharp} it is also sharp for weak discrimination when the
+orders may differ. For graphs of equal order the question at $\Delta = 2^{r+1}$ is
+open; the trade between $(2,2)$ and $(D,D)$ edges alone cannot give a collision,
+since the order $n = \sum m_{ij}(1/i + 1/j)$ and the value would both be preserved
+only if $2^{p} = 2^{-r}$.
