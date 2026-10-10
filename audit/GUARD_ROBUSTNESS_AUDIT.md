@@ -35,3 +35,19 @@ These agree with Table 5 of the manuscript. The pre-registered rule (LO_h ahead 
 `guard_robustness_audit_out.txt`, `guard_robustness_diffs.csv` (every differing fold with
 old/new scores), `guard_robustness_predictions.npz` (all old and corrected outer predictions),
 `guard_robustness_causes_out.txt`, `guard_robustness_causes.csv`.
+
+## Provenance
+- Code audited (old guards): commit `ace4738` (v40.23). The experiment code under `external/`
+  is byte-identical in `d0d49fc` (v40.25, submitted manuscript), checked with
+  `git diff ace4738 d0d49fc -- external/` (empty).
+- Corrected guards: implemented only inside `audit/guard_robustness_audit.py`
+  (`const_only`, `press_size_corrected`); no pipeline file is modified. Audit commit `6e35350`.
+- This branch is not merged into `main`; the manuscript and its published outputs are unchanged.
+- Commands (Python 3.13, run from the repository root on 2026-10-09):
+  `python3 audit/guard_robustness_audit.py` (about 1 hour; exit 1 by design, since it exits 0
+  only if no selection differs; its RESULT line confirms Table 5 is identical), then
+  `python3 audit/guard_robustness_causes.py` (exit 0).
+- Bootstrap intervals: `bp_tests.boot_ci` with `numpy.random.default_rng(20261005)`, as in the paper.
+- Coverage: `guard_robustness_predictions.npz` holds all 800 outer-prediction vectors
+  (2 tests x 4 streams x 50 seeds x old/corrected); `guard_robustness_diffs.csv` lists the 101
+  differing folds with old and corrected scores; `guard_robustness_causes.csv` gives each cause.
