@@ -3,6 +3,16 @@
 Advik Natarajan, Ganesh Shiwakoti, Michael Arockiaraj: manuscript, supplement,
 data, code, machine-checked proofs and runnable notebooks.
 
+**v40.26 (2026-10-10):** review fixes: predictive claims in Section 6.4 limited to the models, boxes
+and budgets evaluated; the exploratory resampling range no longer compared with the conditional
+interval; the one-sided gain rule in `external/bp/bp_tests.py` now requires a positive lower endpoint
+(verdicts unchanged); m >= 1 in Proposition 3.17; countable-union step for generic discrimination;
+true interval check of the Lemma 3.1 witness; reproduction map and `requirements-extras-lock.txt`.
+Known issue, deferred: the relative-range guard of `fold_select_ols` (`external/baselines.py`) is not
+translation invariant (a candidate x + 1e13 is rejected). It is recorded as an expected failure in
+`external/test_regressions.py`; on the package data correcting it changes no selected fold, and the
+rank-guard audit of the boiling-point tests is on the branch `robustness-guards`.
+
 **v40.25 (2026-10-09):** MATCH-style pass: abstract leads with the mathematical results; Section 6
 and the conclusion condensed (no number or verdict changed); reference list strictly
 alphabetical; three 2027 MATCH papers on the degree-ratio Sombor index cited under Corollary 3.6.
@@ -63,6 +73,7 @@ mapped to the script that produces it and the check that verifies it.
 Quick start:
 ```bash
 python3 -m pip install -r requirements-lock.txt
+# optional, for the scikit-learn audit and the notebooks: -r requirements-extras-lock.txt
 python3 verify.py                       # single entry point: all fast checks (--full for the long suites); run by CI on every push
 python3 verify_loyola_v35.py            # core tables, figures, analyses
 python3 external/verify_external.py     # nonane and boiling-point tests, rebuilt from raw NIST pages

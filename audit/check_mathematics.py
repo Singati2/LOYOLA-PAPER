@@ -57,13 +57,16 @@ def interval_fraction(x):
 
 def check_lemma1_witness():
     """Lemma 3.1 without the pair (1,1): the augmented vectors of (1,2), (1,3), (2,2), (3,3) are linearly independent
-    (their 4x4 determinant is about -0.015), certified in 50-digit interval arithmetic."""
-    import mpmath as mp
-    mp.mp.dps = 50
-    rows = [[mp.mpf(1), mp.log(i * j), mp.log(i + j), mp.mpf(abs(i - j)) / (i + j)] for i, j in ((1, 2), (1, 3), (2, 2), (3, 3))]
-    d = mp.det(mp.matrix(rows))
-    assert abs(d) > mp.mpf("0.014") and abs(d) < mp.mpf("0.016") and d < 0, f"Lemma 3.1 witness determinant {d}"
-    print(f"Lemma 3.1 witness without (1,1): determinant {mp.nstr(d, 12)} != 0 certified")
+    (their 4x4 determinant is about -0.015), certified in 50-digit interval arithmetic (Laplace expansion along
+    the first column, each 3x3 minor evaluated by determinant() on mp.iv intervals)."""
+    rows = [[mp.iv.mpf(1), mp.iv.log(i * j), mp.iv.log(i + j), mp.iv.mpf(abs(i - j)) / (i + j)]
+            for i, j in ((1, 2), (1, 3), (2, 2), (3, 3))]
+    d = mp.iv.mpf(0)
+    for r in range(4):
+        minor = [row[1:] for k, row in enumerate(rows) if k != r]
+        d += (-1) ** r * rows[r][0] * determinant(minor)
+    assert d.b < mp.mpf("-0.014") and d.a > mp.mpf("-0.016"), f"Lemma 3.1 witness determinant {d}"
+    print(f"Lemma 3.1 witness without (1,1): determinant {mp.nstr(mp.mpf(d.mid.a), 12)} != 0 certified")
 
 
 def check_crossings():

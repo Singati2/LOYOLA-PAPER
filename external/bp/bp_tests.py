@@ -121,6 +121,12 @@ def size_only(z, y):
 
 
 # ---------- tests ----------
+def gamma_adds_value(wins, ci, median_d):
+    """Pre-registered one-sided rule (PREREG_v40.md): LOh ahead in >= 40 of 50 seeds, the 95% interval
+    entirely above 0 and a positive median dQ2. v40.26: a wholly negative interval no longer satisfies it."""
+    return wins >= 40 and ci[0] > 0 and median_d > 0
+
+
 def boot_ci(G, L, y, rng):
     n = len(y); stats = []
     for _ in range(2000):
@@ -145,7 +151,7 @@ def run_test(label, P, y, z=None):
     d = np.array([q2(l, y) - q2(g, y) for g, l in zip(Gp, Lp)])
     ci = boot_ci(Gp, Lp, y, np.random.default_rng(20261005))
     wins = int((d > 0).sum())
-    verdict = "gamma adds value" if (wins >= 40 and (ci[0] > 0 or ci[1] < 0) and np.median(d) > 0) else "no evidence that gamma adds value"
+    verdict = "gamma adds value" if gamma_adds_value(wins, ci, np.median(d)) else "no evidence that gamma adds value"
     med = lambda k: np.median([q2(p, y) for p in preds[k]])
     summ = [label, len(y), f"{med('GM2'):.10f}", f"{med('LO2'):.10f}", f"{med('GM12'):.10f}", f"{med('LOh'):.10f}",
             f"{np.median(d):+.10f}", wins, f"{ci[0]:+.10f}", f"{ci[1]:+.10f}", verdict]   # v40.13: full precision

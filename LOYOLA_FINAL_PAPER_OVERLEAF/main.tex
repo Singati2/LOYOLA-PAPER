@@ -191,7 +191,7 @@
   and it is lost on trees from order thirteen. We also bound the order
   exchanges along $\gamma$ and determine the extremal trees of the
   pure-$\gamma$ points. Pre-registered tests on measured boiling points
-  show no predictive gain from $\gamma$, and a gain on vaporisation
+  did not demonstrate a predictive gain from $\gamma$, and a gain on vaporisation
   enthalpies seen in a narrow search box disappears once the parent is
   searched over a box that does not truncate it.
 \end{abstract}
@@ -302,7 +302,7 @@
   freeing $\gamma$ gives no demonstrated gain once the parent's search
   box does not truncate it (Section~\ref{sec:ablation}), and ridge
   regression on the degree-pair counts leads every single index
-  (Section~\ref{sec:bp}).
+  evaluated (Section~\ref{sec:bp}).
   \end{enumerate}
 
 \section{Preliminaries and notation}\label{sec:prelim}\label{sec:notation}\label{sec:def}
@@ -825,13 +825,13 @@ Equal profiles give equal $q$-histograms. The converse fails
   molecule's index by the same factor leaves every correlation
   unchanged and is absorbed into a regression slope. On the octanes
   this union contains nine of the ten admissible pairs and its affine
-  dimension is $3$, so no such direction exists, and the fits of
-  Section~\ref{sec:sensitivity} on the octanes are free of exact
-  confounding of this kind.
+  dimension is $3$, so the octane fits of
+  Section~\ref{sec:sensitivity} are free of exact confounding of this
+  kind.
   \end{remark}
 
   \begin{proposition}[Limits along the $\gamma$ axis]\label{prop:gamma_eq_0_or_inf}
-  Let $E_{\max}(G)$ denote the set of edges realising
+  Let $G$ have at least one edge, let $E_{\max}(G)$ denote the set of edges realising
   $\mathrm{imb}_{\max}(G) = \max_{uv} \mathrm{imb}(d_u, d_v)$
   and $E_{\min}(G)$ the set realising
   $\mathrm{imb}_{\min}(G) = \min_{uv} \mathrm{imb}(d_u, d_v)$.
@@ -854,9 +854,8 @@ Equal profiles give equal $q$-histograms. The converse fails
   $\varepsilon_{uv} := \mu(G) - \mathrm{imb}(d_u, d_v) \ge 0$,
   we have $\Wuzi / e^{\gamma \mu(G)} = \sum_{uv} (d_u d_v)^{\alpha}(d_u +
   d_v)^{\beta} e^{-\gamma \varepsilon_{uv}}$. The summands over
-  $E_{\max}(G)$ ($\varepsilon_{uv} = 0$) do not depend on $\gamma$, while the
-  others ($\varepsilon_{uv} > 0$) tend to $0$ as $\gamma \to
-  +\infty$, termwise since $E(G)$ is finite. The case
+  $E_{\max}(G)$ ($\varepsilon_{uv} = 0$) are constant, and the finitely
+  many others tend to $0$ as $\gamma \to +\infty$. The case
   $\gamma \to -\infty$ is dual.
   \end{proof}
 
@@ -926,7 +925,7 @@ distinct values and a \emph{floor} on degeneracy.
   function has Lebesgue measure zero.
   \end{proof}
 
-  In the terminology of Rada, Rodr\'{\i}guez and Sigarreta~\cite{RadaRodriguezSigarreta2022Weak}, an index is weakly discriminating over a class when equal values force equal count vectors; they showed that several classical indices fail this over chemical trees while the Sombor index satisfies it. Proposition~\ref{prop:generic} says that almost every point of the family is weakly discriminating over every class.
+  In the terminology of Rada, Rodr\'{\i}guez and Sigarreta~\cite{RadaRodriguezSigarreta2022Weak}, an index is weakly discriminating over a class when equal values force equal count vectors; they showed that several classical indices fail this over chemical trees while the Sombor index satisfies it. As there are countably many pairs of count vectors, Proposition~\ref{prop:generic} gives that almost every point of the family is weakly discriminating over every class at once.
 
   The proof uses only the injectivity of
   $(i,j) \mapsto (\ln(ij), \ln(i+j))$ and therefore applies to the parent
@@ -1657,7 +1656,7 @@ reselects inside each leave-one-out fold on the decanes. Test~B pools
 all $100$ molecules with the carbon number $n_C$ as a covariate. The
 octane and nonane boiling points were used above, so Test~B is a pooled
 size-adjusted analysis rather than a fresh external test. Both use the
-non-truncating design of Section~\ref{sec:ablation}, with
+wide-box design of Section~\ref{sec:ablation}, with
 $(\alpha,\beta) \in (-12,12)^2$ for the parent and the same box with
 $\gamma \in (-2,2)$ for the Loyola model, $2000$ candidates and seeds
 $0$--$49$. The pre-registered criterion for a $\gamma$ effect required
@@ -1673,7 +1672,7 @@ LO$_1$: $n_C$ plus that descriptor). Base: training-fold mean (Test A)
 or $n_C$ alone (Test B).
 Class.: best classical index chosen in each fold. LO$_1$: fixed
 $LO(0,0,1)$. Ridge: ridge regression on the degree-pair counts. GM,
-LO$_h$: medians over seeds $0$--$49$ in the non-truncating boxes, LO$_h$
+LO$_h$: medians over seeds $0$--$49$ in the wide boxes, LO$_h$
 being the hybrid control with $(\alpha,\beta)$ in the wide box and
 $\gamma \in (-2,2)$.
 $\Delta Q^2$: median of LO$_h$ minus GM. Last column: seeds (of $50$) in
@@ -1708,8 +1707,8 @@ procedure for both models on random subsamples of $80\%$ of the
 molecules. On the decanes ($500$ subsamples) the median $\Delta Q^2$ is
 $-0.110$ with central $95\%$ range $[-0.510, +0.312]$. On the pooled set
 ($200$ subsamples) it is $+0.001$ with range $[-0.015, +0.008]$.
-Neither range supports a gain from $\gamma$, and the decane range shows
-that the conditional interval understates the uncertainty. Ridge
+Neither range supports a gain from $\gamma$. The two summaries differ in
+training size and seed averaging and are not directly comparable. Ridge
 regression on the ten degree-pair counts reaches $Q^2 = 0.860$ on the
 decanes, where every single index stays between $0.15$ and $0.51$, and
 $0.991$ on the pooled set. A permutation check on the decanes repeats
@@ -1717,9 +1716,9 @@ the whole nested procedure, including the choice of the ridge penalty,
 for $200$ random permutations of the boiling points. The permuted $Q^2$
 has median $-0.09$, $95$th percentile $-0.01$ and maximum $0.20$. None
 reaches $0.860$, so the empirical $p$-value is $1/201 \approx 0.005$.
-Branching effects on the boiling point are thus spread over several
-degree-pair counts in a way that no linear model on a single member of
-the family, with or without $\gamma$, recovers. These conclusions
+Under the stated boxes and candidate budgets, ridge regression thus
+predicts the boiling points more accurately than every single-index
+model evaluated, with or without $\gamma$. These conclusions
 concern acyclic alkanes.
 
 \section{Discussion and limitations}\label{sec:limitations}

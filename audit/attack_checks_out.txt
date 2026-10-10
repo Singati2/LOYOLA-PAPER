@@ -8,7 +8,7 @@
 [REJECTED] coverage bias: a decane provenance row removed: exit 1; coverage_bias: no unique provenance status for Decane (C124185): set()
 [REJECTED] data build: archived page removed: exit 1; FileNotFoundError: missing required archived NIST page: /private/var/folders/mg/gcsbnhm17pbf51dr77g3t9k80000gn
 [REJECTED] constancy check: a constant descriptor injected: exit 1; RESULT: DIFFERENCES FOUND
-[REJECTED] regression tests: silent skip of a missing page restored: exit 1; FAILED (failures=1)
-[REJECTED] regression tests: structural certificate check disabled: exit 1; FAILED (failures=1)
+[REJECTED] regression tests: silent skip of a missing page restored: exit 1; FAILED (failures=1, expected failures=1)
+[REJECTED] regression tests: structural certificate check disabled: exit 1; FAILED (failures=1, expected failures=1)
 [REJECTED] CSV convention: provenance CSV rewritten with LF rows: exit 1; [FAIL] provenance CSV convention: 0 CRLF rows, field counts []
 RESULT: 13 attacks, 13 rejected, 0 false negatives

@@ -63,6 +63,28 @@ class RegressionTests(unittest.TestCase):
             self.assertAlmostEqual(BP.press_size((x * scale)[None, :], z, y)[0], score)
             self.assertAlmostEqual(BP.fit_pred_size(x * scale, z, y, 5. * scale, 12.), prediction)
 
+    @unittest.expectedFailure
+    def test_selection_translation_invariance(self):
+        """Known defect, deferred (v40.26): the relative-range floor of fold_select_ols
+        rejects a well-resolved candidate after a large constant is added, although OLS
+        with an intercept is translation invariant. On the package data correcting it
+        changes no selected fold (audit/GUARD_ROBUSTNESS_AUDIT.md, branch
+        robustness-guards). Remove the decorator when the guard is repaired."""
+        x = np.arange(1., 11.)
+        y = 2 * x + 3
+        p0 = B.fold_select_ols(x[None, :], y, 0)[0]
+        p1 = B.fold_select_ols((x + 1e13)[None, :], y, 0)[0]
+        self.assertAlmostEqual(p0, p1, places=6)
+
+    def test_gamma_rule_one_sided(self):
+        """The pre-registered rule needs the whole interval above zero; a wholly
+        negative or zero-crossing interval never gives a gamma effect."""
+        self.assertTrue(BP.gamma_adds_value(40, (0.001, 0.02), 0.01))
+        self.assertFalse(BP.gamma_adds_value(40, (-0.02, -0.001), 0.01))
+        self.assertFalse(BP.gamma_adds_value(40, (-0.001, 0.02), 0.01))
+        self.assertFalse(BP.gamma_adds_value(39, (0.001, 0.02), 0.01))
+        self.assertFalse(BP.gamma_adds_value(40, (0.001, 0.02), 0.0))
+
     def test_header_only_csv_rejected(self):
         with tempfile.TemporaryDirectory() as td:
             a, b = Path(td) / "a.csv", Path(td) / "b.csv"

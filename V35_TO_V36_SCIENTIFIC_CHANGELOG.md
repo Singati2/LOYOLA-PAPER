@@ -1278,3 +1278,34 @@ replay snapshots the tree and includes tracked formal/ files.
   Jahanbani, MATCH 97 (2027) 657-675.
 - Registry: 66 entries re-anchored to the new wording, 7 dropped with their sentences;
   705 numbers checked, 0 failures.
+
+## v40.26 (2026-10-10): fixes from an external review of v40.25
+- Section 6.4: the closing sentence now says that ridge predicts more accurately than every
+  single-index model evaluated, under the stated boxes and budgets (it previously said that no
+  linear model on a single member of the family recovers the branching effects). The exploratory
+  resampling range is no longer said to show that the conditional interval understates the
+  uncertainty; the two summaries differ in training size and in the averaging over seeds.
+- Abstract: "did not demonstrate a predictive gain" instead of "show no predictive gain".
+  "Non-truncating" boxes of the boiling-point tests renamed "wide" boxes (interior selection is
+  shown by the dense-grid diagnostics for the vaporisation enthalpies only). Intro item (vi):
+  "every single index evaluated".
+- Proposition 3.17 assumes at least one edge. After Proposition 4.2 the countable-union step is
+  stated, which gives almost every point weakly discriminating over every class simultaneously.
+- external/bp/bp_tests.py: the pre-registered rule is one-sided, as Section 6.4 states. The code
+  accepted a wholly negative interval ((ci[0] > 0 or ci[1] < 0)); it now requires ci[0] > 0, in
+  gamma_adds_value(), with a unit test. Both verdicts and every output are unchanged.
+- audit/check_mathematics.py: the Lemma 3.1 witness determinant is now computed in mp.iv
+  interval arithmetic, as its docstring states (it used plain 50-digit floats). Output unchanged.
+- REPRODUCE.md: table map follows the compiled documents (Table 5 tab:bp, Table 6
+  tab:deviations, Tables S5-S7 for the octane data, box and external tables); coverage of CI
+  versus the full suite stated. requirements-extras-lock.txt pins scikit-learn, pandas and the
+  notebook tools on top of the core lock (tested from an empty environment with pip check).
+- Remark 3.16 keeps the qualifier "exact confounding of this kind" (a common rescaling of every
+  molecule's index).
+- Deferred, documented: the relative-range floor in fold_select_ols (external/baselines.py) breaks
+  translation invariance of candidate selection (x + 1e13 is rejected). The reviewer's reproducer is
+  now external/test_regressions.py::test_selection_translation_invariance, marked as an expected
+  failure. The guard is shared by every octane analysis, and the audit on robustness-guards shows
+  that correcting it changes no selected fold in the boiling-point tests.
+- No number, interval, table cell or verdict changed. The rank-guard audit stays on the branch
+  robustness-guards (no reported value depends on it).

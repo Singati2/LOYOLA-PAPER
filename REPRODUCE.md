@@ -1,7 +1,10 @@
 # Reproduction map
 
 Environment: `python3 -m pip install -r requirements-lock.txt` (numpy, scipy,
-networkx, matplotlib, sympy, mpmath). Lean: `formal/verify.sh` (elan/lake).
+networkx, matplotlib, sympy, mpmath). The scikit-learn audit and the notebooks also need
+`requirements-extras-lock.txt` (scikit-learn, pandas, nbformat, nbclient, ipykernel), installed
+on top of the core lock. Lean: `formal/verify.sh` (elan/lake). Table and figure numbers below
+follow the compiled documents; the LaTeX labels are the stable identifiers.
 
 ## Checks to run
 | Command | What it verifies | Runtime |
@@ -13,25 +16,27 @@ networkx, matplotlib, sympy, mpmath). Lean: `formal/verify.sh` (elan/lake).
 | `python3 structural/structural_checks.py` | tree orders 7-17, GA and crossing witnesses, identifiability (Delta<=6), structure sensitivity of IRLA and the gamma sweep, auxiliary Q2 values, ridge permutation check; Table tab:firstfail entry by entry | ~20 min |
 | `formal/verify.sh` | Lean 4 proofs (37 theorems and 1 lemma axiom-checked; no sorry/axioms) | ~1 min after first build |
 | `python3 manifest.py` | SHA-256 of every tracked file, one hash per path (`--write` regenerates it; stage new files with `git add` first, since untracked files are not hashed) | seconds |
-| `python3 external/test_regressions.py` | unit checks of the shared regression core (extreme descriptor scales, large-offset constancy), the fail-closed CSV comparator, the fail-closed data build (missing archived page) and the structural certificate (empty witness set), without running the external suite | seconds |
-| `python3 prose_numbers_check.py` | every registered numeral of the running prose of both documents (693 entries in prose_claims_a.py and prose_claims_b.py; 16 cited values listed as uncheckable) recomputed from the canonical files | seconds |
+| `python3 external/test_regressions.py` | unit checks of the shared regression core (extreme descriptor scales, large-offset constancy, the one-sided boiling-point rule; one documented expected failure: translation invariance of candidate selection, deferred), the fail-closed CSV comparator, the fail-closed data build (missing archived page) and the structural certificate (empty witness set), without running the external suite | seconds |
+| `python3 prose_numbers_check.py` | every registered numeral of the running prose of both documents (705 checked entries in prose_claims_a.py and prose_claims_b.py; 18 cited values listed as uncheckable) recomputed from the canonical files | seconds |
 | `python3 audit/attack_checks.py` | 13 counter-attacks on the checkers outside the core verifier's self-test (corrupted outputs, data, manuscript numerals, archived records, disabled guards): each must be rejected | ~3 min |
 | `python3 audit/run_all_scripts.py` | every script of the repository re-run in an isolated copy of the tracked tree; every file it writes compared with the committed one (PDFs by canonical form); `python3 verify.py --everything` runs it after the full suite | ~2 h |
 | `python3 audit/check_exploratory_outputs.py` | fractional-point, chi-floor and calorimetric-availability outputs rebuilt in an isolated copy and compared byte-for-byte | seconds |
 | `python3 audit/check_source_identities.py` | archived boiling-point pages: molecular formulas and carbon skeletons match the 154 source records | seconds |
-| `python3 audit/check_mathematics.py` | 50-digit interval certificates of the finite-rank exception set (Delta 6, 7) and of the five-crossing witness, independent of structural_checks.py | seconds |
+| `python3 audit/check_mathematics.py` | 50-digit interval certificates of the finite-rank exception set (Delta 6, 7), of the Lemma 3.1 witness determinant and of the five-crossing witness, independent of structural_checks.py | seconds |
 | `python3 structural/extremal_trees_check.py` | exhaustive check of the extremal-tree proposition for the pure-gamma points on all trees of orders 4-12 (path unique minimiser, star unique maximiser for gamma > 0, exchanged for gamma < 0) | seconds |
 | `python3 structural/minimality_check.py` | exhaustive minimality certificate for Theorem 3.5(iii): all trees of orders 2-16 (counts checked against OEIS A000055/A000602), exact rationals; first order with distinct profiles sharing a q-histogram is 13, and 16 for maximum degree 4 | about one minute |
 | `python3 structural/sumconn_pair_check.py` | Example 4.3 from the trees themselves: the order-18 chemical-tree pair with the stated profile difference, equal sum-connectivity index, and D(gamma) from the profiles against the closed form at 50 digits | about 5 s |
 | `python3 tmb_dhvap_audit.py` | Table 4 dHvap column under four labelled values for 2,2,3,3-tetramethylbutane (original, excluded, hypothetical-liquid estimate, NIST 298 K solid-to-gas); source trace in TMB_DHVAP_AUDIT.md | seconds |
 | `python3 DATA/build_data.py --check` | every file in DATA/ is byte-identical to the file the analyses read (fast path) | seconds |
 | `notebooks/*.ipynb` | Jupyter / Colab notebooks recomputing each part of the paper next to the printed values (see README) | 1-7 minutes each |
-| `python3 audit/permutation_pipeline_audit.py` | standalone: independent scikit-learn re-implementation of the nested ridge and its 200 permutations (Section 6.4); must reproduce structural_checks_out.txt S7 | 30-60 minutes |
+| `python3 audit/permutation_pipeline_audit.py` | standalone: needs requirements-extras-lock.txt; independent scikit-learn re-implementation of the nested ridge and its 200 permutations (Section 6.4); must reproduce structural_checks_out.txt S7 | 30-60 minutes |
 | `python3 external/bp/selection_resampling.py` | exploratory, added after the boiling-point results: selection-aware resampling (500 / 200 subsamples of 80% of the molecules, whole nested procedure rerun for GM12 and LOh on each) | about 30 minutes |
 | `python3 audit/check_style.py` | plain-prose check of both documents: no em dash or spaced en dash in the running text, no sentence over 45 words, no stock phrases or "X, not Y" contrasts; prints sentence-length statistics (in the fast path) | seconds |
 | `python3 audit/check_labels.py` | every \ref resolves, labels unique, every table and figure has one caption and one label and is referenced, every \cite has a \bibitem and vice versa, the supplement's "Table~N / Theorem~N of the main paper" match the compiled main paper, figure files present in every bundle (in `--full`; needs tectonic) | ~1 min |
 | `python3 tuning_pool_seed_sweep.py` | seed sweep behind Supplementary S2 (nested gain of tuning near M2 on omega, seeds 0-99) | seconds |
 | `python3 constancy_test_check.py` | shows that the constancy test is inert: no candidate descriptor of the octane analyses is flagged under the old or the new definition | ~1 min |
+
+Coverage: GitHub CI runs the fast path only. The full suite, including the Lean proofs and the label check, is run locally for each release, and its log is committed under `verification_logs/`. A suite whose tool is missing is printed as `[SKIP]`; a log with any `[SKIP]` line is not a full verification. The scikit-learn audit and the notebooks are run separately.
 
 `verify_loyola_v35.py` establishes agreement between the manuscript tables, the canonical CSVs and a fresh recomputation from `octane_data.py`; it does not re-derive the octane values from primary sources (those are checked against `octane_property_provenance_v35.csv` by class rules), and a few checks assert previously observed outcomes (sign patterns of dQ2, provenance agreement counts) as regression guards.
 
@@ -42,15 +47,16 @@ networkx, matplotlib, sympy, mpmath). Lean: `formal/verify.sh` (elan/lake).
 | Table 2 tab:firstfail | main | structural/structural_checks.py (S1) | structural_checks.py (check_tab_firstfail) |
 | Table 3 tab:fgdss | main | fgd_structure_sensitivity.py | verify_loyola_v35.py (first-principles recomputation) |
 | Table 4 tab:lo_octane | main | verify_loyola_v35.py | verify_loyola_v35.py |
-| Table 5 tab:box | main | external/box_sensitivity.py, make_box_table.py | verify_external.py |
-| Table 6 tab:external | main | external/baselines.py, nonane_validation.py, make_v37_table.py | verify_external.py |
-| Table 7 tab:bp | main | external/bp/bp_tests.py, make_bp_table.py | verify_external.py |
-| Table 8 tab:octane-data | main | octane_data.py | verify_loyola_v35.py |
+| Table 5 tab:bp | main | external/bp/bp_tests.py, make_bp_table.py | verify_external.py |
+| Table 6 tab:deviations | main | (protocol deviations, written by hand) | audit/check_labels.py (labels only) |
 | Figure S1 fig:octanes | supplement | generate_loyola_v35_figures.py | verify_loyola_v35.py (regeneration, decompressed-content compare) |
 | Figure S2 fig:degeneracy | supplement | generate_loyola_v35_figures.py | verify_loyola_v35.py |
 | Tables S1-S2 tab:lo_tuning(_bestfixed) | supplement | verify_loyola_v35.py | verify_loyola_v35.py |
 | Table S3 tab:ablation | supplement | ablation_gm_vs_lo.py, expanded_robustness_v35.py | verify_loyola_v35.py |
 | Table S4 tab:multiorder | supplement | multi_order_degeneracy.py | verify_loyola_v35.py |
+| Table S5 tab:octane-data | supplement | octane_data.py | verify_loyola_v35.py |
+| Table S6 tab:box | supplement | external/box_sensitivity.py, make_box_table.py | verify_external.py |
+| Table S7 tab:external | supplement | external/baselines.py, nonane_validation.py, make_v37_table.py | verify_external.py |
 
 ## Experiments quoted in the text without their own table
 | Experiment | Script | Checked by |
