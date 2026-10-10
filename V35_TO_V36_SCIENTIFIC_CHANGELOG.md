@@ -1256,3 +1256,25 @@ replay snapshots the tree and includes tracked formal/ files.
 - structural/weak_discrimination_check.py and its seven registry entries removed;
   two entries for Example 4.3 added. Notebook 02, README, REPRODUCE.md and
   LEAN_VERIFICATION.md updated. No experimental result changed.
+
+## v40.25 (2026-10-09): MATCH-style concision pass
+- Compared against recent MATCH issues (vols 96-98: Rada 96 (2026) 841-863; the degree-ratio
+  Sombor papers 97 (2027) 135-164, 165-174, 639-656, 657-675, 1251-1261; 98 (2027) 53-88,
+  149-175, among others): unnumbered prose abstract stating results first, Introduction ->
+  results -> Conclusion(s), theorem statements in italics with short direct proofs ending
+  in a black square, computer-assisted steps stated as exhaustive enumerations,
+  alphabetical numbered references.
+- Abstract (free part after the LO definition): mathematical results first, the null QSPR
+  result last; the degree-ratio Sombor index named as a member of the class in Corollary 3.6.
+- Section 6 and the conclusion condensed (38 instead of 40 pages). No number, interval or
+  verdict changed. Dropped as redundant: the nonane T_B win counts in the box comparison
+  (in Supplementary Table S6), the narrow-box hybrid sentence for the decanes, the
+  caption-style description of the S6 win counts, duplicated hedges, and the limitation
+  item on unequal search budgets (now stated once in Section 6.2). Remark 3.2 shortened.
+- Intro sentence comparing exp(IRLA) with the gamma = 2 point removed.
+- Reference list: Lin et al. 2022 moved before the NIST WebBook (Linstrom) to restore
+  alphabetical order. Added, verified against the journal PDFs: Gutman, Redzepovic,
+  Buragohain, Nyauli, MATCH 97 (2027) 165-174; Ali et al., MATCH 97 (2027) 639-656; Shao,
+  Jahanbani, MATCH 97 (2027) 657-675.
+- Registry: 66 entries re-anchored to the new wording, 7 dropped with their sentences;
+  705 numbers checked, 0 failures.

@@ -3,6 +3,10 @@
 Advik Natarajan, Ganesh Shiwakoti, Michael Arockiaraj: manuscript, supplement,
 data, code, machine-checked proofs and runnable notebooks.
 
+**v40.25 (2026-10-09):** MATCH-style pass: abstract leads with the mathematical results; Section 6
+and the conclusion condensed (no number or verdict changed); reference list strictly
+alphabetical; three 2027 MATCH papers on the degree-ratio Sombor index cited under Corollary 3.6.
+
 **v40.24 (2026-10-09):** the weak-discrimination theorem (former Theorem 4.3) is withdrawn from
 the submission and kept on the branch `research/weak-discrimination`; Example 4.3 is now
 checked directly from the trees (`structural/sumconn_pair_check.py`).
@@ -36,7 +40,7 @@ regenerates them. The Lean proofs need a Lean toolchain and are not run in a not
 ## Current documents
 | File | Content |
 |---|---|
-| `main.tex`, `LOYOLA_paper.pdf` | the paper (40 A5 pages, MATCH template) |
+| `main.tex`, `LOYOLA_paper.pdf` | the paper (38 A5 pages, MATCH template) |
 | `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (26 pages) |
 | `DATA/` | every dataset, byte-identical copies, with a README |
 | `LOYOLA_FINAL_PAPER_OVERLEAF.zip` | Overleaf upload (both documents + figures) |

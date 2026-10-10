@@ -857,10 +857,10 @@ REGISTRY.extend(_ss_common("main", "ss"))  # 17 entries, 1 match each
 _add(E("ss_cap_75", "main", r"ratio on the \$(?P<v>\d+)\$ decane isomers under", "mod(10, 'molecular')['N_trees']", 0, "multi_order_degeneracy.csv (table caption)"))  # 1
 
 # ----- Section 6.1 collision-pair property differences (requested explicitly) -----
-_add(E("s6_18", "main", r"the \$(?P<v>\d+)\$ isomers realise only \$16\$ distinct edge-degree-pair count", "oct_n()", 0, "octane_data"))  # 1
-_add(E("s6_16", "main", r"the \$18\$ isomers realise only \$(?P<v>\d+)\$ distinct edge-degree-pair count", "oct_nprofiles()", 0, "octane_data"))  # 1
-_add(E("s6_dTB_pair1", "main", r"to\s+\$(?P<v>[\d.]+)\\,\^\{\\circ\}\$C\s+in", "oct_collision_diff(0, 'T_B')", 0.005, "octane_data / bid_collision_table.csv: |T_B(3-MH) - T_B(4-MH)|"))  # 1
-_add(E("s6_dTB_pair2", "main", r"and\s+\$(?P<v>[\d.]+)\\,\^\{\\circ\}\$C\s+within", "oct_collision_diff(1, 'T_B')", 0.005, "|T_B(3,4-DMH) - T_B(3E2MP)|"))  # 1
+_add(E("s6_18", "main", r"The\s+\$(?P<v>\d+)\$\s+isomers\s+have\s+only", "oct_n()", 0, "octane_data"))  # 1
+_add(E("s6_16", "main", r"isomers\s+have\s+only\s+\$(?P<v>\d+)\$\s+distinct\s+count\s+vectors", "oct_nprofiles()", 0, "octane_data"))  # 1
+_add(E("s6_dTB_pair1", "main", r"up\s+to\s+\$(?P<v>[\d.]+)\\,\^\{\\circ\}\$C\s+and", "oct_collision_diff(0, 'T_B')", 0.005, "octane_data / bid_collision_table.csv: |T_B(3-MH) - T_B(4-MH)|"))  # 1
+_add(E("s6_dTB_pair2", "main", r"and\s+\$(?P<v>[\d.]+)\\,\^\{\\circ\}\$C\s+in\s+\$T_B\$\s+although", "oct_collision_diff(1, 'T_B')", 0.005, "|T_B(3,4-DMH) - T_B(3E2MP)|"))  # 1
 
 # ----- Reproducibility paragraph (main) -----
 
@@ -1002,22 +1002,22 @@ def _norm(s):
 
 
 # dense-grid box curve (Section 6.2), from external/wide_box_diagnostics_out.txt
-_add(E("d3_oct_q2_2", "main", r"is\s+\$(?P<v>[\d.]+)\$, \$0\.9156\$, \$0\.9525\$ and \$0\.9383\$", "d3('octane', 2, 'q2')", 0, "D3 octane hw2"))
-_add(E("d3_oct_q2_4", "main", r"\$0\.8873\$, \$(?P<v>[\d.]+)\$, \$0\.9525\$ and", "d3('octane', 4, 'q2')", 0, "D3 octane hw4"))
-_add(E("d3_oct_q2_8", "main", r"\$0\.9156\$, \$(?P<v>[\d.]+)\$ and \$0\.9383\$", "d3('octane', 8, 'q2')", 0, "D3 octane hw8"))
+_add(E("d3_oct_q2_2", "main", r"is\s+\$(?P<v>[\d.]+)\$,\s+\$0\.9156\$,\s+\$0\.9525\$\s+and\s+\$0\.9383\$", "d3('octane', 2, 'q2')", 0, "D3 octane hw2"))
+_add(E("d3_oct_q2_4", "main", r"\$0\.8873\$,\s+\$(?P<v>[\d.]+)\$,\s+\$0\.9525\$\s+and", "d3('octane', 4, 'q2')", 0, "D3 octane hw4"))
+_add(E("d3_oct_q2_8", "main", r"\$0\.9156\$,\s+\$(?P<v>[\d.]+)\$\s+and\s+\$0\.9383\$", "d3('octane', 8, 'q2')", 0, "D3 octane hw8"))
 _add(E("d3_oct_q2_12", "main", r"\$0\.9525\$ and \$(?P<v>[\d.]+)\$\s+at half-widths", "d3('octane', 12, 'q2')", 0, "D3 octane hw12"))
-_add(E("d3_oct_bd_2", "main", r"boundary\s+in \$(?P<v>\d+)\$, \$18\$, \$18\$ and \$0\$ of the \$18\$ folds", "d3('octane', 2, 'bd')", 0, "D3 octane boundary folds hw2"))
-_add(E("d3_oct_bd_4", "main", r"boundary\s+in \$18\$, \$(?P<v>\d+)\$, \$18\$ and \$0\$ of the \$18\$ folds", "d3('octane', 4, 'bd')", 0, "D3 octane boundary folds hw4"))
-_add(E("d3_oct_bd_8", "main", r"boundary\s+in \$18\$, \$18\$, \$(?P<v>\d+)\$ and \$0\$ of the \$18\$ folds", "d3('octane', 8, 'bd')", 0, "D3 octane boundary folds hw8"))
-_add(E("d3_oct_bd_12", "main", r"boundary\s+in \$18\$, \$18\$, \$18\$ and \$(?P<v>\d+)\$ of the \$18\$ folds", "d3('octane', 12, 'bd')", 0, "D3 octane boundary folds hw12"))
-_add(E("d3_non_q2_2", "main", r"the values are \$(?P<v>[\d.]+)\$, \$0\.8779\$, \$0\.8997\$ and \$0\.8837\$", "d3('nonane', 2, 'q2')", 0, "D3 nonane hw2"))
-_add(E("d3_non_q2_4", "main", r"\$0\.8532\$, \$(?P<v>[\d.]+)\$, \$0\.8997\$ and", "d3('nonane', 4, 'q2')", 0, "D3 nonane hw4"))
+_add(E("d3_oct_bd_2", "main", r"boundary\s+in\s+\$(?P<v>\d+)\$,\s+\$18\$,\s+\$18\$\s+and\s+\$0\$\s+of\s+the\s+\$18\$\s+folds", "d3('octane', 2, 'bd')", 0, "D3 octane boundary folds hw2"))
+_add(E("d3_oct_bd_4", "main", r"boundary\s+in\s+\$18\$,\s+\$(?P<v>\d+)\$,\s+\$18\$\s+and\s+\$0\$\s+of\s+the\s+\$18\$\s+folds", "d3('octane', 4, 'bd')", 0, "D3 octane boundary folds hw4"))
+_add(E("d3_oct_bd_8", "main", r"boundary\s+in\s+\$18\$,\s+\$18\$,\s+\$(?P<v>\d+)\$\s+and\s+\$0\$\s+of\s+the\s+\$18\$\s+folds", "d3('octane', 8, 'bd')", 0, "D3 octane boundary folds hw8"))
+_add(E("d3_oct_bd_12", "main", r"boundary\s+in\s+\$18\$,\s+\$18\$,\s+\$18\$\s+and\s+\$(?P<v>\d+)\$\s+of\s+the\s+\$18\$\s+folds", "d3('octane', 12, 'bd')", 0, "D3 octane boundary folds hw12"))
+_add(E("d3_non_q2_2", "main", r"the\s+values\s+are\s+\$(?P<v>[\d.]+)\$,\s+\$0\.8779\$,\s+\$0\.8997\$\s+and\s+\$0\.8837\$", "d3('nonane', 2, 'q2')", 0, "D3 nonane hw2"))
+_add(E("d3_non_q2_4", "main", r"\$0\.8532\$,\s+\$(?P<v>[\d.]+)\$,\s+\$0\.8997\$\s+and", "d3('nonane', 4, 'q2')", 0, "D3 nonane hw4"))
 _add(E("d3_non_q2_8", "main", r"\$0\.8779\$, \$(?P<v>[\d.]+)\$ and \$0\.8837\$", "d3('nonane', 8, 'q2')", 0, "D3 nonane hw8"))
 _add(E("d3_non_q2_12", "main", r"\$0\.8997\$ and \$(?P<v>[\d.]+)\$, with \$34\$", "d3('nonane', 12, 'q2')", 0, "D3 nonane hw12"))
-_add(E("d3_non_bd_2", "main", r"with \$(?P<v>\d+)\$,\s+\$34\$, \$34\$ and \$0\$ boundary folds of \$34\$", "d3('nonane', 2, 'bd')", 0, "D3 nonane boundary folds hw2"))
-_add(E("d3_non_bd_4", "main", r"with \$34\$,\s+\$(?P<v>\d+)\$, \$34\$ and \$0\$ boundary folds of \$34\$", "d3('nonane', 4, 'bd')", 0, "D3 nonane boundary folds hw4"))
-_add(E("d3_non_bd_8", "main", r"with \$34\$,\s+\$34\$, \$(?P<v>\d+)\$ and \$0\$ boundary folds of \$34\$", "d3('nonane', 8, 'bd')", 0, "D3 nonane boundary folds hw8"))
-_add(E("d3_non_bd_12", "main", r"with \$34\$,\s+\$34\$, \$34\$ and \$(?P<v>\d+)\$ boundary folds of \$34\$", "d3('nonane', 12, 'bd')", 0, "D3 nonane boundary folds hw12"))
+_add(E("d3_non_bd_2", "main", r"with\s+\$(?P<v>\d+)\$,\s+\$34\$,\s+\$34\$\s+and\s+\$0\$\s+boundary\s+folds\s+of\s+\$34\$", "d3('nonane', 2, 'bd')", 0, "D3 nonane boundary folds hw2"))
+_add(E("d3_non_bd_4", "main", r"with\s+\$34\$,\s+\$(?P<v>\d+)\$,\s+\$34\$\s+and\s+\$0\$\s+boundary\s+folds\s+of\s+\$34\$", "d3('nonane', 4, 'bd')", 0, "D3 nonane boundary folds hw4"))
+_add(E("d3_non_bd_8", "main", r"with\s+\$34\$,\s+\$34\$,\s+\$(?P<v>\d+)\$\s+and\s+\$0\$\s+boundary\s+folds\s+of\s+\$34\$", "d3('nonane', 8, 'bd')", 0, "D3 nonane boundary folds hw8"))
+_add(E("d3_non_bd_12", "main", r"with\s+\$34\$,\s+\$34\$,\s+\$34\$\s+and\s+\$(?P<v>\d+)\$\s+boundary\s+folds\s+of\s+\$34\$", "d3('nonane', 12, 'bd')", 0, "D3 nonane boundary folds hw12"))
 
 def evaluate(root=None):
     global ROOT
