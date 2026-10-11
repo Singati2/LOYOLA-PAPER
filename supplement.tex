@@ -576,7 +576,14 @@ the $35$ boiling points are NIST averages of experimental
 determinations ($13$ quoted only to $1$\,K). Five are single NIST
 determinations and ten are the most recent primary determination listed
 by NIST (Deviation~D1 of the protocol). All are experimental
-measurements, so the $T_B$ test is experimentally grounded.
+measurements, so the $T_B$ test is experimentally grounded. For
+3-ethyl-4-methylhexane NIST also lists $407.15$\,K (Lukes and
+Langthaler, 1957) under a separate entry, $6.4$\,K below the
+registered $413.55$\,K, which is why the molecule is excluded from the
+pooled boiling-point cohort of Section~6.4 of the main paper. With it
+excluded, LO is better than GM in $55/100$ and $60/100$ seeds and ridge
+regression gives $Q^2 = 0.679$. With $134.0\,^{\circ}$C the figures are
+$61/100$, $66/100$ and $0.647$. The verdict stays mixed.
 Of the vaporisation enthalpies, only $4$ of $34$ are calorimetric
 determinations and one is a NIST average. The other $29$ come from two
 compilations. These are the 1961 tabulation of
@@ -860,16 +867,20 @@ explicit parent arrays.
 
 \emph{Formalised} (inequalities and identities, with their hypotheses).
 The formalised statements are the upper and lower $(\Delta,\delta)$
-bounds, the Cauchy--Schwarz interpolation bound and the ratio bound
-(and the bracket form). They also include the convexity of
-$\theta \mapsto \log LO(G;\theta)$ for any nonempty edge set (via
-H\"older), and the spanning statement of the independence lemma for
+bounds, the Cauchy--Schwarz interpolation bound, and the summation step
+of the ratio and bracket bounds, with the per-edge bounds as
+hypotheses. They also include the convexity of log-sum-exp for any
+nonempty index set (via H\"older), which is $\log LO(G;\theta)$ by
+Eq.~(3.1) of the main paper (that rewriting is not formalised), and the
+spanning statement of the independence lemma for
 every $\Delta \ge 3$ (via $\det W = \tfrac16\ln 2\,(8\ln 3 - 13\ln 2)
 \neq 0$, using $3^8 \neq 2^{13}$). The identity
 $1 - q^2 = 4xy/(x+y)^2$ is also formalised, as is the order-$13$ profile
 pair with equal $q$-histograms and hence equal pure-$\gamma$ values
 for every real $\gamma$, together with explicit $13$-vertex trees
-realising both profiles.
+realising both profiles. The trees are given as parent arrays; that a
+parent array encodes a tree is a standard fact that is not re-proved
+in Lean.
 
 \emph{Not formalised.} The equality characterisations are not
 formalised, and neither are the gradient and Hessian formulas and strict

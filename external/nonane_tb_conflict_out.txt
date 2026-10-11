@@ -1,0 +1,4 @@
+as registered (140.4 degC): n=35; B=200: LO better 58/100, median dQ2 +0.034; B=500: LO better 63/100, median dQ2 +0.049; ridge Q2 0.682; verdict MIXED
+excluded: n=34; B=200: LO better 55/100, median dQ2 +0.033; B=500: LO better 60/100, median dQ2 +0.028; ridge Q2 0.679; verdict MIXED
+second NIST entry (134.0 degC): n=35; B=200: LO better 61/100, median dQ2 +0.050; B=500: LO better 66/100, median dQ2 +0.063; ridge Q2 0.647; verdict MIXED
+RESULT: verdict MIXED in all three cases, as registered

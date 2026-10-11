@@ -1,0 +1,6 @@
+identities m11 = 0, sum m = n - 1, sum (1/i+1/j) m = n on all trees of orders 3-12 with Delta <= 4: hold
+octanes: 18 molecules, identities hold, rank of centred count matrix 7
+measured decanes: 34 molecules, identities hold, rank of centred count matrix 7
+pooled C6-C10: 100 molecules, identities hold, rank of centred count matrix 8
+octane T_B collision floor: 16 classes, within-class SSE 2.925 degC^2, RMSE 0.403 degC
+RESULT: affine dimension bounds attained (7, 7, 8); octane T_B floor SSE 2.925, RMSE 0.403

@@ -68,9 +68,16 @@ def press_size(Xt, zt, yt):
     Xt_raw = np.asarray(Xt, float)
     C, n = Xt_raw.shape
     Xt = _standardize(Xt_raw)
-    A = np.stack([np.ones((C, n)), np.broadcast_to(zt, (C, n)), Xt], axis=2)      # C x n x 3
+    # v40.28: n_C centred and scaled, and full rank decided by singular values. The former test
+    # |det(A'A)| > 1e-9 max|A'A|^3 on the raw n_C was not invariant to translating n_C and rejected
+    # well-conditioned candidates highly correlated with n_C (2 of 50 LO2 seeds of Test B, see
+    # audit/GUARD_ROBUSTNESS_AUDIT.md on branch robustness-guards). Leverages and PRESS residuals are
+    # invariant to this reparametrisation, so only the accept/reject decision changes.
+    zs = np.asarray(zt, float); zs = (zs - zs.mean()) / (zs.std() if zs.std() > 0 else 1.0)
+    A = np.stack([np.ones((C, n)), np.broadcast_to(zs, (C, n)), Xt], axis=2)      # C x n x 3
+    sv = np.linalg.svd(A, compute_uv=False)
+    ok = sv[:, -1] > 1e-10 * sv[:, 0]
     S = np.einsum("cni,cnj->cij", A, A)
-    ok = np.abs(np.linalg.det(S)) > 1e-9 * np.abs(S).max(axis=(1, 2)) ** 3
     S[~ok] = np.eye(3)
     Si = np.linalg.inv(S)
     beta = np.einsum("cij,cnj,n->ci", Si, A, yt)

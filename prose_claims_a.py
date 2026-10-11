@@ -659,6 +659,14 @@ def sc_num(pattern):
     return float(re.search(pattern, text("structural", "sumconn_pair_check_out.txt")).group(1))
 
 
+def cd_num(pattern):
+    return float(re.search(pattern, text("structural", "count_dimension_check_out.txt")).group(1))
+
+
+def nc_num(pattern):
+    return float(re.search(pattern, text("external", "nonane_tb_conflict_out.txt")).group(1))
+
+
 HP = text("structural", "hp_counts_out.txt")
 
 
@@ -825,8 +833,8 @@ REGISTRY = [
     E("ext_hyb002", "main", r"Q\^2\s+=\s+(?P<v>[+-]?[\d.]+)\$\s+under", "box('nonane','dHvap',12,'median_dQ2_hybrid')", 0.0005, "box_sensitivity_summary.csv"),
     E("ext_lo1_957", "main", r"model\s+\(\$(?P<v>[\d.]+)\$\s+and", "base('oct','dHvap','fixed_best')", 0.0005, "baselines_octane.csv fixed_best dHvap (= LO(0,0,1) in all folds)"),
     E("ext_lo1_903", "main", r"\(\$0\.957\$\s+and\s+\$(?P<v>[\d.]+)\$\s+against\s+medians", "base('non','dHvap_kcal','fixed_best')", 0.0005, "baselines_nonane.csv fixed_best dHvap (= LO(0,0,1):34)"),
-    E("ext_lo_953", "main", r"against\s+medians\s+\$(?P<v>[\d.]+)\$\s+and\s+\$0\.900\$\)\.", "base('oct','dHvap','LO_b200')", 0.0005, "baselines_octane.csv LO_b200"),
-    E("ext_lo_900", "main", r"and\s+\$(?P<v>[\d.]+)\$\)\.\s+Since", "base('non','dHvap_kcal','LO_b200')", 0.0005, "baselines_nonane.csv LO_b200"),
+    E("ext_lo_953", "main", r"against\s+medians\s+\$(?P<v>[\d.]+)\$\s+and\s+\$0\.900\$\);", "base('oct','dHvap','LO_b200')", 0.0005, "baselines_octane.csv LO_b200"),
+    E("ext_lo_900", "main", r"and\s+\$(?P<v>[\d.]+)\$\);\s+on\s+the\s+octanes", "base('non','dHvap_kcal','LO_b200')", 0.0005, "baselines_nonane.csv LO_b200"),
     E("ext_corr996_oct", "main", r"two\s+is\s+\$(?P<v>[\d.]+)\$\s+on\s+both", "corr_lo1_irla('oct')", 0.0005, "corr(LO(0,0,1), IRLA) on the octanes (octane_data)"),
     E("ext_corr996_non", "main", r"two\s+is\s+\$(?P<v>[\d.]+)\$\s+on\s+both", "corr_lo1_irla('non')", 0.0005, "corr(LO(0,0,1), IRLA) on the nonanes (nonane_data.csv smiles)"),
     E("ext_irla_003", "main", r"comes\s+within\s+\$(?P<v>[\d.]+)\$\s+of\s+the\s+median\s+Loyola\s+model\s+on\s+the\s+nonanes\s+\(\$0\.897\$", "base('non','dHvap_kcal','LO_b200')-base('non','dHvap_kcal','IRLA')", 0.0005, "baselines_nonane.csv LO_b200 - IRLA"),
@@ -930,6 +938,12 @@ REGISTRY = [
     E("tmb_dhvap_alt", "main", r"lowers\s+every\s+\$\|r\|\$\s+to\s+\$(?P<v>[\d.]+)\$\s+or\s+below", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='NIST 298 K, solid to gas')['top_abs_r'])", 0.0005, "octane_data.py, TMB dHvap 10.3 (NIST)"),
     E("sc_d1", "main", r"\$D\(1\) \\approx (?P<v>[\d.]+)\$\. The separation", r"sc_num(r'gamma = 1\.0: D from trees ([\d.]+)')", 0.00005, "sumconn_pair_check_out.txt"),
     E("sc_order", "main", r"chemical trees \$S\$ and \$T\$ of order \$(?P<v>\d+) \+ t\$", "17 if 'pairs with the stated difference: 1' in text('structural', 'sumconn_pair_check_out.txt') else -1", 0, "sumconn_pair_check_out.txt (order 18 = 17 + 1)"),
+    E("cd_sse", "main", r"this floor is\s+\$(?P<v>[\d.]+)\\,\^\{\\circ\}\$C\$\^2\$", r"cd_num(r'within-class SSE ([\d.]+)')", 0.0005, "count_dimension_check_out.txt"),
+    E("cd_rmse", "main", r"a root mean square of \$(?P<v>[\d.]+)\\,\^\{\\circ\}\$C\. It", r"cd_num(r'RMSE ([\d.]+) degC')", 0.0005, "count_dimension_check_out.txt"),
+    E("cd_rank_oct", "main", r"have rank \$(?P<v>\d+)\$, and that", r"cd_num(r'octanes: 18 molecules, identities hold, rank of centred count matrix (\d+)')", 0, "count_dimension_check_out.txt"),
+    E("cd_rank_pool", "main", r"pooled alkanes has rank \$(?P<v>\d+)\$\.", r"cd_num(r'pooled C6-C10: 100 molecules, identities hold, rank of centred count matrix (\d+)')", 0, "count_dimension_check_out.txt"),
+    E("cd_ndec", "main", r"octanes and the \$(?P<v>\d+)\$ measured decanes have rank", r"cd_num(r'measured decanes: (\d+) molecules')", 0, "count_dimension_check_out.txt"),
+    E("sec_q_class", "main", r"index \(\$0\.963\$ against \$(?P<v>[\d.]+)\$\), while both", "float(next(r for r in rows('external', 'bp', 'bp_baselines.csv') if r['test'].startswith('B') and r['model'] == 'size + classical best')['Q2'])", 0.0005, "bp_baselines.csv Test B size + classical best"),
     E("tmb_dhvap_used", "main", r"The\s+benchmark\s+value\s+\$(?P<v>[\d.]+)\$\s+has\s+no\s+stated\s+source", "float(next(r for r in rows('tmb_dhvap_audit.csv') if r['variant']=='original')['tmb_dhvap_kcal'])", 0.005, "octane_data.py"),
 
     # ======================= main.tex : conclusion =======================

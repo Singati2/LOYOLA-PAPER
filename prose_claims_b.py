@@ -697,8 +697,8 @@ _add(E("rp_proof_d4", "main", r"realises\s+\$\(2,(?P<v>\d+)\)\$,\s+\$\(2,2\)\$",
 _add(E("rp_enum_to17", "main", r"orders\s+\$2\$\-\-\$(?P<v>\d+)\$,\s+two", "max(s1_orders('all'))", 0, "S1 orders"))  # 1
 _add(E("rp_coincide_12", "main", r"most\s+\$(?P<v>\d+)\$\s+with", "s1_last_eq('all')", 0, "S1: last n with qhist==profiles (all)"))  # 1
 _add(E("rp_coincide_15", "main", r"of order at most\s+\$(?P<v>\d+)\$\.\s+With part", "s1_last_eq('mol')", 0, "S1: last n with qhist==profiles (mol)"))  # 1
-_add(E("rp_orders13", "main", r"At orders \$(?P<v>\d+)\$--\$17\$ generic points", "s1_first_below('all', 'qh')", 0, "S1"))  # 1
-_add(E("rp_orders17", "main", r"At orders \$13\$--\$(?P<v>\d+)\$ generic points", "max(s1_orders('all'))", 0, "S1"))  # 1
+_add(E("rp_orders13", "main", r"at orders \$(?P<v>\d+)\$--\$17\$, generic points", "s1_first_below('all', 'qh')", 0, "S1"))  # 1
+_add(E("rp_orders17", "main", r"at orders \$13\$--\$(?P<v>\d+)\$, generic points", "max(s1_orders('all'))", 0, "S1"))  # 1
 _add(E("rp_GA_merge17", "main", r"trees first at\s+order\s+\$(?P<v>\d+)\$,\s+for instance", "s1_first_merge()", 0, "S1 GA_qmerges column"))  # 1
 _GA_A = r"\\\{\(1,5\)\^\{%s\}, \(2,2\)\^\{%s\}, \(5,5\)\^\{%s\}, \(2,5\), \(1,2\)\\\}"
 _GA_B = r"\\\{\(4,5\)\^\{%s\}, \(1,4\)\^\{%s\}, \(1,5\)\^\{%s\}, \(2,5\), \(1,2\)\\\}"
@@ -1018,6 +1018,24 @@ _add(E("d3_non_bd_2", "main", r"with\s+\$(?P<v>\d+)\$,\s+\$34\$,\s+\$34\$\s+and\
 _add(E("d3_non_bd_4", "main", r"with\s+\$34\$,\s+\$(?P<v>\d+)\$,\s+\$34\$\s+and\s+\$0\$\s+boundary\s+folds\s+of\s+\$34\$", "d3('nonane', 4, 'bd')", 0, "D3 nonane boundary folds hw4"))
 _add(E("d3_non_bd_8", "main", r"with\s+\$34\$,\s+\$34\$,\s+\$(?P<v>\d+)\$\s+and\s+\$0\$\s+boundary\s+folds\s+of\s+\$34\$", "d3('nonane', 8, 'bd')", 0, "D3 nonane boundary folds hw8"))
 _add(E("d3_non_bd_12", "main", r"with\s+\$34\$,\s+\$34\$,\s+\$34\$\s+and\s+\$(?P<v>\d+)\$\s+boundary\s+folds\s+of\s+\$34\$", "d3('nonane', 12, 'bd')", 0, "D3 nonane boundary folds hw12"))
+
+
+def nc(case, field):
+    """3-ethyl-4-methylhexane sensitivity of the nonane T_B test (external/nonane_tb_conflict_out.txt)."""
+    import re as _re
+    t = open(os.path.join(ROOT, "external", "nonane_tb_conflict_out.txt")).read()
+    line = [l for l in t.splitlines() if l.startswith(case)][0]
+    if field in (200, 500):
+        return int(_re.search(r"B=%d: LO better (\d+)/100" % field, line).group(1))
+    return float(_re.search(r"ridge Q2 ([\d.]+)", line).group(1))
+
+
+_add(E("nc_ex_200", "supp", r"excluded, LO is better than GM in \$(?P<v>\d+)/100\$", "nc('excluded', 200)", 0, "nonane_tb_conflict_out.txt"))
+_add(E("nc_ex_500", "supp", r"GM in \$55/100\$ and \$(?P<v>\d+)/100\$ seeds", "nc('excluded', 500)", 0, "nonane_tb_conflict_out.txt"))
+_add(E("nc_ex_ridge", "supp", r"regression gives \$Q\^2 = (?P<v>[\d.]+)\$\. With", "nc('excluded', 'ridge')", 0.0005, "nonane_tb_conflict_out.txt"))
+_add(E("nc_alt_200", "supp", r"the figures are\s+\$(?P<v>\d+)/100\$", "nc('second NIST entry', 200)", 0, "nonane_tb_conflict_out.txt"))
+_add(E("nc_alt_500", "supp", r"\$61/100\$, \$(?P<v>\d+)/100\$ and", "nc('second NIST entry', 500)", 0, "nonane_tb_conflict_out.txt"))
+_add(E("nc_alt_ridge", "supp", r"\$66/100\$ and \$(?P<v>[\d.]+)\$\. The verdict", "nc('second NIST entry', 'ridge')", 0.0005, "nonane_tb_conflict_out.txt"))
 
 def evaluate(root=None):
     global ROOT

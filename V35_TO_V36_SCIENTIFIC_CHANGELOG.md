@@ -1318,3 +1318,37 @@ replay snapshots the tree and includes tracked formal/ files.
   at (0,0,1) with h = 1: 3 <= 3.79122 <= 4.18684, neither attained).
 - The audit (764,010 assertions on 32,505 trees and standard families) found no counterexample
   to any Section 5 bound or closed form. No number, table cell or verdict changed.
+
+## v40.28 (2026-10-10): fixes from four independent reviews
+Two mathematical reviews (Sections 2-4; Section 5 and the supplement, including the Lean sources),
+one data/experiment/code review with independent re-implementations, and one referee report. No
+mathematical error and no bug changing a reported number or verdict was found.
+- Theorem 3.3: semiregular example needs Delta > delta. Remark 3.10: the Randic comparison at
+  orders 13-17 holds among all trees (with Delta <= 4 Randic ties Pi at orders 13-15).
+- After Theorem 3.5: Rada 2026 Example 3 assumes distinct exponents for distinct pairs (checked in
+  the paper); part (ii) is the version for q-classes. Remark 3.7: at gamma = 0 the parent's ratio
+  line separates distinct q-histograms at all but finitely many alpha, so the limit belongs to the
+  degree-ratio dependence, not to gamma.
+- New after Proposition 4.1: the in-sample error floor of any function of the count vector (octane
+  T_B: SSE 2.925, RMSE 0.403 degC) and Remark rem:countdim (counts of trees with Delta <= 4 have
+  affine dimension at most 7 at fixed n and 8 across n; ranks 7, 7, 8 on the octanes, measured
+  decanes and pooled alkanes). Script: structural/count_dimension_check.py (fast path).
+- Proposition 5.1: K_{a,b} (q is the imbalance), a, b >= 1. Section 5.3 preamble: Propositions 5.6
+  and 5.7 only for gamma > 0; only inequalities machine-checked. Corollary 5.9 wording.
+- Section 6.2: LO(0,0,1) was singled out from the same octane data. Section 6.4: the interval rule
+  is read as one-sided; the resampling ranges are not confidence intervals; the registered
+  secondary question of Test B answered (IRLA and LO(0,0,1) 0.963 against 0.967; tuned 0.977).
+- Supplement S4 and Table 6: the second NIST boiling point of 3-ethyl-4-methylhexane (407.15 K);
+  excluded 55/60 seeds, ridge 0.679; at 134.0 degC 61/66, 0.647; verdict mixed in every case
+  (external/nonane_tb_conflict.py).
+- external/bp/bp_tests.py press_size: scale-invariant rank test (n_C standardised, singular
+  values). Test B LO2 seed 13 Q2 0.98186 -> 0.98217, seed 32 0.97866 -> 0.98514, median
+  0.97998 -> 0.98001; every other output, Table 5 and the resampling are byte-identical, as the
+  audit on robustness-guards predicted. wide_box_diagnostics D1 max relative error 7.0e-13 -> 2.2e-14.
+- Lean scope: conclusion, Supplement S7 and LEAN_VERIFICATION.md state that log-convexity is of the
+  log-sum-exp form, the ratio and bracket bounds formalise the summation step, and the order-13
+  trees are parent arrays.
+- DATA/boiling_points_structures.csv: InChI for the 100 boiling-point molecules, degree pairs
+  re-derived from the InChI and checked. DATA/README.md lists the quality flags.
+- Not adopted (referee): cutting to about 15 pages, deleting the termwise bounds and most of
+  Section 6, renaming the family; these are editorial choices the authors decline.

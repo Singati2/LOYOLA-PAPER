@@ -3,6 +3,16 @@
 Advik Natarajan, Ganesh Shiwakoti, Michael Arockiaraj: manuscript, supplement,
 data, code, machine-checked proofs and runnable notebooks.
 
+**v40.28 (2026-10-10):** fixes from four independent reviews (two mathematical, one data/code, one
+referee). No mathematical error was found. New: the affine dimension of the degree-pair counts (at most 7
+at fixed order, 8 across orders, attained by the data sets) and the octane boiling-point error floor
+(`structural/count_dimension_check.py`); the nonane 3-ethyl-4-methylhexane boiling-point conflict and
+its sensitivity (`external/nonane_tb_conflict.py`, verdict still mixed); the registered secondary
+question of Test B. The rank test in `press_size` is now scale invariant (no displayed value
+changes). Wording: Theorem 3.3 (Delta > delta), Remark 3.7 (the parent's ratio line reaches the same
+limit), Remark 3.10 (all trees), relation to Rada 2026 Example 3, K_{a,b}, Section 5 preamble and
+Corollary 5.9, Lean scope in the conclusion, Supplement S7 and LEAN_VERIFICATION.md.
+
 **v40.27 (2026-10-10):** Propositions 5.6-5.8 state a nonempty edge set; the remark after
 Proposition 5.8 no longer calls the comparison sharp (its constants are the best edgewise ones,
 and a bound is attained only when every edge attains the extremum).
@@ -14,8 +24,8 @@ interval; the one-sided gain rule in `external/bp/bp_tests.py` now requires a po
 true interval check of the Lemma 3.1 witness; reproduction map and `requirements-extras-lock.txt`.
 Known issue, deferred: the relative-range guard of `fold_select_ols` (`external/baselines.py`) is not
 translation invariant (a candidate x + 1e13 is rejected). It is recorded as an expected failure in
-`external/test_regressions.py`; on the package data correcting it changes no selected fold, and the
-rank-guard audit of the boiling-point tests is on the branch `robustness-guards`.
+`external/test_regressions.py`; on the package data correcting it changes no selected fold (audit on
+the branch `robustness-guards`). The rank guard of the boiling-point tests was fixed in v40.28.
 
 **v40.25 (2026-10-09):** MATCH-style pass: abstract leads with the mathematical results; Section 6
 and the conclusion condensed (no number or verdict changed); reference list strictly

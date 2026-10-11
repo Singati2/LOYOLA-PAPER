@@ -185,10 +185,11 @@
   \end{equation*}
   with $LO(G;\alpha,\beta,0) = M_{\alpha,\beta}(G)$ identically.
   On the ratio plane, where each edge enters only through its degree
-  ratio, the pure-$\gamma$ points at algebraic $\gamma \neq 0$
+  ratio, the points $LO(G;0,0,\gamma)$ at algebraic $\gamma \neq 0$
   separate exactly the imbalance histograms. This limit is shared by
-  every degree-ratio index, including the degree-ratio Sombor index,
-  and it is lost on trees from order thirteen. We also bound the order
+  every degree-ratio index, including the degree-ratio Sombor index.
+  The histogram determines the degree-pair counts of a tree up to order
+  twelve but not from order thirteen (sixteen for chemical trees). We also bound the order
   exchanges along $\gamma$ and determine the extremal trees of the
   pure-$\gamma$ points. Pre-registered tests on measured boiling points
   did not demonstrate a predictive gain from $\gamma$, and a gain on vaporisation
@@ -460,7 +461,7 @@ Equal profiles give equal $q$-histograms. The converse fails
   $\operatorname{Var}_{\theta}(q) = 0$ at some (equivalently, every)
   $\theta$ if and only if $q_{uv}$ is constant over the edges of $G$,
   which covers regular graphs ($q \equiv 0$) and, for example,
-  $(\Delta,\delta)$-semiregular bipartite graphs. A bipartite graph is
+  $(\Delta,\delta)$-semiregular bipartite graphs with $\Delta > \delta$. A bipartite graph is
   $(\Delta,\delta)$-semiregular when every vertex on one side has
   degree $\Delta$ and every vertex on the other side has degree
   $\delta$, so every edge has degree pair $(\delta,\Delta)$. On these every edge carries the
@@ -613,7 +614,7 @@ Equal profiles give equal $q$-histograms. The converse fails
   larger order.
   \end{proof}
 
-  The first sentence of part~(ii) is Rada's Lindemann--Weierstrass argument~\cite{Rada2019ExpVDB}, restated in~\cite[Example~3]{Rada2026LinearVDB}, applied to the edge function $\gamma q_{uv}$: two graphs receive the same value for every algebraic $\gamma \neq 0$ exactly when they have equal $q$-histograms. It is included for completeness. Part~(i) follows directly from the factorisation~\eqref{eq:factor}. The statement for real $\gamma$ applies the standard fact that a nonzero exponential sum has finitely many real zeros. The colliding families of part~(iii) and the corollary below are new. The minimality of orders $13$ and $16$ is computer-assisted. It rests on an exhaustive enumeration of all trees of orders $2$ to $16$ in exact rational arithmetic, reproducible with the code of the repository~\cite{LoyolaRepo}.
+  Part~(ii) rests on Rada's Lindemann--Weierstrass argument~\cite{Rada2019ExpVDB}. Example~3 of~\cite{Rada2026LinearVDB} assumes distinct exponents for distinct degree pairs, whereas the exponents $\gamma q_{ij}$ coincide on pairs of equal ratio, so part~(ii) is the version for $q$-classes: two graphs receive the same value for every algebraic $\gamma \neq 0$ exactly when they have equal $q$-histograms. It is included for completeness. Part~(i) follows directly from the factorisation~\eqref{eq:factor}. The statement for real $\gamma$ applies the standard fact that a nonzero exponential sum has finitely many real zeros. The colliding families of part~(iii) and the corollary below are new. The minimality of orders $13$ and $16$ is computer-assisted. It rests on an exhaustive enumeration of all trees of orders $2$ to $16$ in exact rational arithmetic, reproducible with the code of the repository~\cite{LoyolaRepo}.
 
   \begin{corollary}[Degree-ratio indices]\label{cor:ratioclass}
   Let $\rho_{uv} = \min(d_u,d_v)/\max(d_u,d_v)$ and let
@@ -635,7 +636,12 @@ Equal profiles give equal $q$-histograms. The converse fails
   class it describes, the pure-$\gamma$ points at algebraic
   $\gamma \neq 0$ attain the most possible: by part~(ii) they separate
   every pair of graphs with distinct $q$-histograms. $GA$ does not
-  (Remark~\ref{rem:floor}).
+  (Remark~\ref{rem:floor}). The parent attains it as well: at
+  $\gamma = 0$ part~(i) gives $\sum_q n_q\,((1-q^2)/4)^{\alpha}$, an
+  exponential sum in $\alpha$ with distinct bases, which separates two
+  distinct histograms at all but finitely many $\alpha$. The limit thus
+  belongs to the dependence on the degree ratio, not to $\gamma$, which
+  adds the form valid at every algebraic value.
   \end{remark}
 
   Off $\Pi$ the same transcendence argument gives the following.
@@ -684,7 +690,7 @@ Equal profiles give equal $q$-histograms. The converse fails
   pure-$\gamma$ points at algebraic $\gamma \neq 0$ attain the
   degree-pair floor of Section~\ref{sec:ceiling}, separation of all
   distinct profiles, exactly up to those orders and at no larger
-  order. At orders $13$--$17$ generic points off $\Pi$
+  order. Among all trees, at orders $13$--$17$, generic points off $\Pi$
   (Proposition~\ref{prop:generic}) and the Randi\'c index separate
   more trees than any point of $\Pi$. A point of $\Pi$ can also do
   worse. $GA$ merges two distinct $q$-histograms among trees first at
@@ -892,6 +898,25 @@ distinct values and a \emph{floor} on degeneracy.
   package, and Table~\ref{tab:collisions} lists the common count
   vectors of both collision pairs.
   \end{proof}
+
+  A function of the count vector predicts one value per collision
+  class, so its sum of squared errors is at least the within-class sum
+  of squares. For the octane boiling points this floor is
+  $2.925\,^{\circ}$C$^2$, a root mean square of $0.403\,^{\circ}$C. It
+  bounds a single fixed predictor, not the cross-validated errors of
+  Section~\ref{sec:sensitivity}, where each fold fits its own.
+
+  \begin{remark}[Dimension of the counts]\label{rem:countdim}
+  For a tree of order $n \ge 3$ with $\Delta \le 4$ the ten counts are
+  not free. A $(1,1)$ edge would be a component $K_2$, so $m_{11} = 0$.
+  There are $n - 1$ edges, and since a vertex of degree $d$ lies on $d$
+  edges, $\sum_{i \le j} (1/i + 1/j)\,m_{ij} = n$. The nine remaining
+  counts therefore have affine dimension at most $7$ at fixed $n$ and
+  at most $8$ when $n$ varies. Both bounds are attained by the data
+  sets of Section~\ref{sec:sensitivity}: the centred count matrices of
+  the $18$ octanes and the $34$ measured decanes have rank $7$, and that
+  of the $100$ pooled alkanes has rank $8$.
+  \end{remark}
 
   The ceiling is tight. Distinct count vectors are separated at almost
   every parameter choice.
@@ -1139,7 +1164,7 @@ $LO(0,0,2)$ & $0.1257$ & $0.2745$ & $0.4579$\\
 \subsection{Closed-form values on standard graphs}\label{sec:closedforms}
 The classical graph families used are the complete graph $K_n$, the
 cycle $C_n$, the path $P_n$, the star $S_n$ and the complete bipartite
-graph $K_{p,q}$. Beyond these, the hypercube $Q_k$ has $2^k$ vertices and
+graph $K_{a,b}$. Beyond these, the hypercube $Q_k$ has $2^k$ vertices and
 $k \cdot 2^{k - 1}$ edges and is $k$-regular. The wheel $W_n$ is an
 $(n - 1)$-cycle plus a universal vertex, and the friendship graph $F_p$
 consists of $p$ triangles sharing a common vertex. We also treat $r$-regular graphs.
@@ -1165,9 +1190,9 @@ consists of $p$ triangles sharing a common vertex. We also treat $r$-regular gra
     (n - 1)\,(n - 1)^{\alpha} n^{\beta} \exp\!\left(\gamma\,\dfrac{n -
   2}{n}\right)$
     for $n \ge 2$.
-  \item  $LO(K_{p,q}; \alpha, \beta, \gamma) =
-    pq\,(pq)^{\alpha}(p + q)^{\beta}\exp\!\left(\gamma\,\dfrac{|p - q|}{p +
-  q}\right)$.
+  \item  $LO(K_{a,b}; \alpha, \beta, \gamma) =
+    ab\,(ab)^{\alpha}(a + b)^{\beta}\exp\!\left(\gamma\,\dfrac{|a - b|}{a +
+  b}\right)$ for $a, b \ge 1$.
   \item  $LO(Q_k; \alpha, \beta, \gamma) =
     k \cdot 2^{k - 1} \cdot 2^{\beta} k^{2\alpha + \beta}$ for $k \ge 1$.
   \item  For $n \ge 5$, $W_n$ has $n - 1$ spoke edges with
@@ -1199,7 +1224,7 @@ consists of $p$ triangles sharing a common vertex. We also treat $r$-regular gra
   $(d_u d_v)^{\alpha}(d_u + d_v)^{\beta} = 2^{\beta} r^{2\alpha + \beta}$,
   which gives items (1), (2), (6) and (9). All $n - 1$ edges of $S_n$
   have degree pair $(1, n - 1)$ with $\mathrm{imb} = (n - 2)/n$
-  (item (4)), and all $pq$ edges of $K_{p,q}$ have pair $(p, q)$ (item (5)).
+  (item (4)), and all $ab$ edges of $K_{a,b}$ have pair $(a, b)$ (item (5)).
   For $n \ge 4$, $P_n$ has two pendant edges $(1, 2)$ and $n - 3$ interior
   edges $(2, 2)$, and the cases $n = 2, 3$ are immediate (item (3)).
   Items (7) and (8) follow by summing over the two edge-degree-pair
@@ -1248,9 +1273,11 @@ enumeration in the reproducibility package.
   $1 \le e^{\gamma q_{uv}} \le e^{\gamma(\Delta-1)/(\Delta+1)}$. At
   $\gamma = 0$ bounds of the types below, with their equality cases, are
   known~\cite{MolinaSigarreta2025GM, GranadosJMC2025GM, PortillaJMC2025GM}.
-  The statements below extend them to $\gamma \ne 0$ and track how
-  $\gamma$ changes the equality cases. Several are machine-checked
-  (Supplementary Section~S7).
+  The statements below extend them to $\gamma \ne 0$ (Propositions
+  \ref{thm:upper_Delta} and~\ref{thm:lower_delta} to $\gamma > 0$ only)
+  and track how $\gamma$ changes the equality cases. Their inequalities,
+  not their equality cases, are machine-checked (Supplementary
+  Section~S7).
 
   \begin{definition}[Edge weight]\label{def:psi}
   For real parameters $\alpha, \beta, \gamma$ and positive reals
@@ -1451,8 +1478,9 @@ enumeration in the reproducibility package.
   of the individual graph. Equality on either side holds if and only
   if every edge of $G$ realises a degree pair attaining the
   corresponding extremum over $P_{\Delta}$. The uniform constants are
-  in general strictly worse than the graph-specific ones, since the
-  extrema are taken over a superset.
+  never better than the graph-specific ones, and are strictly worse
+  unless $G$ contains a degree pair attaining the corresponding
+  extremum over $P_{\Delta}$.
   \end{corollary}
 
 \section{QSPR diagnostics}\label{sec:sensitivity}
@@ -1627,7 +1655,9 @@ error, and after this result we made the measured boiling points of
 Section~\ref{sec:bp} the primary predictive evidence.
 
 On both sets the untuned point $LO(0,0,1)$ matches or beats the tuned
-Loyola model ($0.957$ and $0.903$ against medians $0.953$ and $0.900$).
+Loyola model ($0.957$ and $0.903$ against medians $0.953$ and $0.900$);
+on the octanes this point was singled out from the same data
+(Table~\ref{tab:lo_octane}).
 Since $LO(G;0,0,\gamma) = m + \tfrac{\gamma}{2}\,IRLA(G) + O(\gamma^2)$
 as $\gamma \to 0$, it is closely related to $IRLA$; the correlation
 between the two is $0.996$ on both sets, and $IRLA$ comes within
@@ -1662,7 +1692,7 @@ $(\alpha,\beta) \in (-12,12)^2$ for the parent and the same box with
 $\gamma \in (-2,2)$ for the Loyola model, $2000$ candidates and seeds
 $0$--$49$. The pre-registered criterion for a $\gamma$ effect required
 at least $40$ wins in $50$ seeds and a molecule-bootstrap interval
-excluding zero (Table~\ref{tab:bp}). The rule is one-sided.
+excluding zero (Table~\ref{tab:bp}), which we read as one-sided.
 
 \begin{table}[htbp]
 \centering
@@ -1709,10 +1739,12 @@ molecules. On the decanes ($500$ subsamples) the median $\Delta Q^2$ is
 $-0.110$ with central $95\%$ range $[-0.510, +0.312]$. On the pooled set
 ($200$ subsamples) it is $+0.001$ with range $[-0.015, +0.008]$.
 Neither range supports a gain from $\gamma$. The two summaries differ in
-training size and seed averaging and are not directly comparable. Ridge
+training size and seed averaging and are not directly comparable. Nor are the ranges confidence intervals for the full-sample $\Delta Q^2$. Ridge
 regression on the ten degree-pair counts reaches $Q^2 = 0.860$ on the
 decanes, where every single index stays between $0.15$ and $0.51$, and
-$0.991$ on the pooled set. A permutation check on the decanes repeats
+$0.991$ on the pooled set. On the registered secondary question of
+Test~B, $IRLA$ and $LO(0,0,1)$ do not beat size plus the best classical
+index ($0.963$ against $0.967$), while both tuned models do ($0.977$). A permutation check on the decanes repeats
 the whole nested procedure, including the choice of the ridge penalty,
 for $200$ random permutations of the boiling points. The permuted $Q^2$
 has median $-0.09$, $95$th percentile $-0.01$ and maximum $0.20$. None
@@ -1770,8 +1802,12 @@ None on reported numbers\\
 Boiling points, Test~B & All NIST pages of a skeleton pooled; one
 nonane excluded, one heptane value moved by $0.2\,^{\circ}$C &
 Verdict unchanged; both cohorts reported\\
+Nonanes & A second NIST $T_B$ of 3-ethyl-4-methylhexane, $6.4$\,K
+lower, found later & Still mixed if excluded or replaced (Suppl.~S4)\\
 Boiling points, Test~B & Least-squares solver rescaled by columns &
 Verdict unchanged\\
+Boiling points, Test~B & Scale-invariant rank test & No displayed value changes\\
+Boiling points, both & Interval rule read as one-sided & None\\
 Boiling points, both & Selection-aware resampling added
 (Section~\ref{sec:bp}) & Exploratory; no verdict depends on it\\
 \bottomrule
@@ -1812,9 +1848,11 @@ the pure-imbalance points; and the behaviour on other compound classes.
 recompute every tabulated value are in the reproducibility
 package~\cite{LoyolaRepo}, where the nonane and boiling-point
 protocols were committed before the corresponding models were fitted.
-The termwise bounds, the convexity statement, the independence of the
-imbalance direction and the order-thirteen profile collision are
-machine-checked in Lean~4 with Mathlib (Supplementary Section~S7), and
+Lean~4 with Mathlib checks the inequalities of the termwise bounds
+(not their equality cases), the convexity of the log-sum-exp form of
+$\log LO$, the spanning statement of the independence lemma and the
+order-thirteen profile collision. Graphs are encoded there by their
+degree-pair data (Supplementary Section~S7), and
 the file \texttt{LEAN\_VERIFICATION.md} of the repository maps each
 statement of this paper to its Lean theorem.
 
