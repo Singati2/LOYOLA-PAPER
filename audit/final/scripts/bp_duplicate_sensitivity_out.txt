@@ -1,0 +1,6 @@
+registered median 148.20 degC; repeated row counted once 148.35 degC (stored 148.4)
+decanes: ridge Q2 0.8599 as registered, 0.8591 with 148.4 degC
+pooled C6-C10: ridge Q2 0.9911 as registered, 0.9911 with 148.4 degC
+NIST averages quoting more than 3 K: Octane, 3,5-dimethyl-, Pentane, 2,3,3,4-tetramethyl-
+decanes: ridge Q2 0.8599 as registered, 0.8629 without them (n = 33)
+pooled C6-C10: ridge Q2 0.9911 as registered, 0.9909 without them (n = 98)

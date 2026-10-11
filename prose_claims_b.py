@@ -798,14 +798,14 @@ _add(E("ff_R_all_p", "main", r"\$R\$ & \$14\$ \(\$1095/(?P<v>\d+)\$\)", "s1(14, 
 _add(E("ff_R_mol_n", "main", r"\$R\$ & \$14\$ \(\$1095/1100\$\) & n/a\$\^\{b\}\$ & \$(?P<v>\d+)\$ \(\$1191/1194\$\)", "s1_first_below('mol', 'R')", 0, "S1 mol: first order with R below the profile floor"))  # 1
 _add(E("ff_R_mol_v", "main", r"n/a\$\^\{b\}\$ & \$17\$ \(\$(?P<v>\d+)/1194\$\)", "s1(17, 'mol')['R']", 0, "S1 mol n=17 R"))  # 1
 _add(E("ff_R_mol_p", "main", r"n/a\$\^\{b\}\$ & \$17\$ \(\$1191/(?P<v>\d+)\$\)", "s1(17, 'mol')['prof']", 0, "S1 mol n=17 profiles"))  # 1
-_add(E("ff_GA_mol_gt17", "main", r"\$\^\{d\}\$ & \$> (?P<v>\d+)\^\{e\}\$", "max(s1_orders('mol')) if all(s1(n, 'mol')['merge'] == 0 for n in s1_orders('mol')) else None", 0, "S1 mol: GA merges no q-histograms up to the largest order examined"))  # 1
-_add(E("ff_GA_all_n", "main", r"\$GA\$ & \$(?P<v>\d+)\$ \(\$566/570\$\)\$\^\{d\}\$", "s1_first_below('all', 'GA')", 0, "S1"))  # 1
-_add(E("ff_GA_all_v", "main", r"\$GA\$ & \$13\$ \(\$(?P<v>\d+)/570\$\)\$\^\{d\}\$", "s1(13, 'all')['GA']", 0, "S1"))  # 1
-_add(E("ff_GA_all_p", "main", r"\$GA\$ & \$13\$ \(\$566/(?P<v>\d+)\$\)\$\^\{d\}\$", "s1(13, 'all')['prof']", 0, "S1"))  # 1
-_add(E("ff_GA_merge17", "main", r"& \$(?P<v>\d+)\^\{e\}\$ & \$16\$", "s1_first_merge()", 0, "S1 GA_qmerges"))  # 1
-_add(E("ff_GA_mol_n", "main", r"\$17\^\{e\}\$ & \$(?P<v>\d+)\$ \(\$809/810\$\)\$\^\{d\}\$", "s1_first_below('mol', 'GA')", 0, "S1 mol"))  # 1
-_add(E("ff_GA_mol_v", "main", r"\$17\^\{e\}\$ & \$16\$ \(\$(?P<v>\d+)/810\$\)\$\^\{d\}\$", "s1(16, 'mol')['GA']", 0, "S1 mol"))  # 1
-_add(E("ff_GA_mol_p", "main", r"\$17\^\{e\}\$ & \$16\$ \(\$809/(?P<v>\d+)\$\)\$\^\{d\}\$", "s1(16, 'mol')['prof']", 0, "S1 mol"))  # 1
+_add(E("ff_GA_mol_gt17", "main", r"\$\^\{c\}\$ & \$> (?P<v>\d+)\^\{d\}\$", "max(s1_orders('mol')) if all(s1(n, 'mol')['merge'] == 0 for n in s1_orders('mol')) else None", 0, "S1 mol: GA merges no q-histograms up to the largest order examined"))  # 1
+_add(E("ff_GA_all_n", "main", r"\$GA\$ & \$(?P<v>\d+)\$ \(\$566/570\$\)\$\^\{c\}\$", "s1_first_below('all', 'GA')", 0, "S1"))  # 1
+_add(E("ff_GA_all_v", "main", r"\$GA\$ & \$13\$ \(\$(?P<v>\d+)/570\$\)\$\^\{c\}\$", "s1(13, 'all')['GA']", 0, "S1"))  # 1
+_add(E("ff_GA_all_p", "main", r"\$GA\$ & \$13\$ \(\$566/(?P<v>\d+)\$\)\$\^\{c\}\$", "s1(13, 'all')['prof']", 0, "S1"))  # 1
+_add(E("ff_GA_merge17", "main", r"& \$(?P<v>\d+)\^\{d\}\$ & \$16\$", "s1_first_merge()", 0, "S1 GA_qmerges"))  # 1
+_add(E("ff_GA_mol_n", "main", r"\$17\^\{d\}\$ & \$(?P<v>\d+)\$ \(\$809/810\$\)\$\^\{c\}\$", "s1_first_below('mol', 'GA')", 0, "S1 mol"))  # 1
+_add(E("ff_GA_mol_v", "main", r"\$17\^\{d\}\$ & \$16\$ \(\$(?P<v>\d+)/810\$\)\$\^\{c\}\$", "s1(16, 'mol')['GA']", 0, "S1 mol"))  # 1
+_add(E("ff_GA_mol_p", "main", r"\$17\^\{d\}\$ & \$16\$ \(\$809/(?P<v>\d+)\$\)\$\^\{c\}\$", "s1(16, 'mol')['prof']", 0, "S1 mol"))  # 1
 _add(E("ff_fn_mol_upto17", "main", r"merges no \$q\$-histograms up to order \$(?P<v>\d+)\$, the largest examined", "max(s1_orders('mol'))", 0, "S1 mol orders"))  # 1
 _add(E("ff_fn_below17", "main", r"merges no \$q\$-histograms below order \$(?P<v>\d+)\$, so", "s1_first_merge()", 0, "S1"))  # 1
 _add(E("ff_fn_maxdeg5", "main", r"has maximum degree \$(?P<v>\d+)\$;", "ga17_maxdeg()", 0, "max degree in the order-17 GA witness profiles"))  # 1
@@ -859,7 +859,7 @@ _add(E("ss_cap_75", "main", r"ratio on the \$(?P<v>\d+)\$ decane isomers under",
 # ----- Section 6.1 collision-pair property differences (requested explicitly) -----
 _add(E("s6_18", "main", r"The\s+\$(?P<v>\d+)\$\s+isomers\s+have\s+only", "oct_n()", 0, "octane_data"))  # 1
 _add(E("s6_16", "main", r"isomers\s+have\s+only\s+\$(?P<v>\d+)\$\s+distinct\s+count\s+vectors", "oct_nprofiles()", 0, "octane_data"))  # 1
-_add(E("s6_dTB_pair1", "main", r"up\s+to\s+\$(?P<v>[\d.]+)\\,\^\{\\circ\}\$C\s+and", "oct_collision_diff(0, 'T_B')", 0.005, "octane_data / bid_collision_table.csv: |T_B(3-MH) - T_B(4-MH)|"))  # 1
+_add(E("s6_dTB_pair1", "main", r"differ\s+by\s+\$(?P<v>[\d.]+)\\,\^\{\\circ\}\$C\s+and", "oct_collision_diff(0, 'T_B')", 0.005, "octane_data / bid_collision_table.csv: |T_B(3-MH) - T_B(4-MH)|"))  # 1
 _add(E("s6_dTB_pair2", "main", r"and\s+\$(?P<v>[\d.]+)\\,\^\{\\circ\}\$C\s+in\s+\$T_B\$\s+although", "oct_collision_diff(1, 'T_B')", 0.005, "|T_B(3,4-DMH) - T_B(3E2MP)|"))  # 1
 
 # ----- Reproducibility paragraph (main) -----
@@ -900,8 +900,8 @@ _add(E("app_93", "supp", r"\(\$(?P<v>\d+)/100\$ and \$96/100\$ seeds", "tmb_lo_b
 _add(E("app_96", "supp", r"and \$(?P<v>\d+)/100\$ seeds instead", "tmb_lo_better(tmb_budgets()[1])", 0, "dhvap_tmb_exclusion_summary_v36.csv budget 500"))  # 1
 _add(E("app_nseeds", "supp", r"\(\$93/(?P<v>\d+)\$ and", "tmb_nseeds()", 0, "dhvap_tmb_exclusion_summary_v36.csv n_seeds"))  # 1
 _add(E("app_100of100", "supp", r"seeds instead of\s+\$(?P<v>\d+)/100\$\)", "expanded_lo_better('dHvap')", 0, "expanded_robustness_summary_v35.csv dHvap LO_better (both budgets)"))  # 1
-_add(E("app_omega_lo", "supp", r"compilation by\s+\$(?P<v>[\d.]+)\$--\$0\.004\$", "min(prov_omega_diffs())", 0.0005, "provenance notes for 2,2,4-TMP and TMB omega"))  # 1
-_add(E("app_omega_hi", "supp", r"by\s+\$0\.002\$\-\-\$(?P<v>[\d.]+)\$,\s+and", "max(prov_omega_diffs())", 0.0005, "provenance notes"))  # 1
+_add(E("app_omega_lo", "supp", r"from KDB by\s+\$(?P<v>[\d.]+)\$--\$0\.004\$", "min(prov_omega_diffs())", 0.0005, "provenance notes for 2,2,4-TMP and TMB omega"))  # 1
+_add(E("app_omega_hi", "supp", r"by\s+\$0\.002\$\-\-\$(?P<v>[\d.]+)\$\s+\(and", "max(prov_omega_diffs())", 0.0005, "provenance notes"))  # 1
 _add(E("app_overall_0043", "supp", r"by\s+more than \$(?P<v>[\d.]+)\$\. The only bolded entry", "sens_overall_max()", 0.0005, "max |Delta|r|| over the three sensitivity CSVs"))  # 1
 _add(E("app_margin_0001", "supp", r"where \$HM\$ leads \$M_1\$ by \$(?P<v>[\d.]+)\$ with the values used", "oct_S_margin('HM', 'M1')", 0.0005, "recomputed |r(HM,S)| - |r(M1,S)| on octane_data"))  # 1
 

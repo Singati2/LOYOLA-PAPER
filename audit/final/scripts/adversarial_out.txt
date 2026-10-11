@@ -1,0 +1,96 @@
+case                                 levels    old    new  want      relerr_rmse relerr_pred
+jitter c=1e-300 J=1ulp                0.747    REJ    REJ  reject      1.60e-16   2.19e-01
+jitter c=1e-300 J=4ulp                 4.48    REJ    REJ  reject      1.95e-03   6.02e-02
+jitter c=1e-300 J=16ulp                16.4    REJ    REJ  reject      5.60e-04   4.68e-02
+jitter c=1e-300 J=64ulp                64.2    REJ    REJ  reject      5.99e-04   1.73e-03
+jitter c=1e-300 J=512ulp                512    REJ    REJ  reject      9.15e-05   1.59e-04
+jitter c=1e-200 J=1ulp                0.653    REJ    REJ  reject      6.39e-17   6.72e-02
+jitter c=1e-200 J=4ulp                 3.92    REJ    REJ  reject      2.62e-03   1.16e-01
+jitter c=1e-200 J=16ulp                15.7    REJ    REJ  reject      1.13e-03   1.79e-01
+jitter c=1e-200 J=64ulp                  64    REJ    REJ  reject      1.41e-04   7.30e-04
+jitter c=1e-200 J=512ulp                512    REJ    REJ  reject      1.49e-04   5.35e-04
+jitter c=1e-08 J=1ulp                 0.745    REJ    REJ  reject      1.86e-16   1.97e-01
+jitter c=1e-08 J=4ulp                  4.47    REJ    REJ  reject      2.07e-16   1.44e-01
+jitter c=1e-08 J=16ulp                 16.4    REJ    REJ  reject      1.13e-17   1.03e-01
+jitter c=1e-08 J=64ulp                 64.1    REJ    REJ  reject      5.02e-17   1.43e-03
+jitter c=1e-08 J=512ulp                 513    REJ    REJ  reject      1.08e-18   3.12e-04
+jitter c=1 J=1ulp                       0.5    REJ    REJ  reject      1.57e-16   1.24e-01
+jitter c=1 J=4ulp                         4    REJ    REJ  reject      2.15e-17   1.21e-01
+jitter c=1 J=16ulp                       16    REJ    REJ  reject      1.31e-16   1.54e-01
+jitter c=1 J=64ulp                       64    REJ    REJ  reject      1.04e-17   1.65e-03
+jitter c=1 J=512ulp                     512    REJ    REJ  reject      9.52e-17   1.32e-04
+jitter c=7 J=1ulp                     0.571    REJ    REJ  reject      1.23e-16   1.26e-01
+jitter c=7 J=4ulp                      4.57    REJ    REJ  reject      3.17e-17   2.09e-01
+jitter c=7 J=16ulp                       16    REJ    REJ  reject      9.42e-17   1.04e-01
+jitter c=7 J=64ulp                       64    REJ    REJ  reject      5.55e-17   2.01e-03
+jitter c=7 J=512ulp                     512    REJ    REJ  reject      3.87e-17   4.09e-04
+jitter c=1e+08 J=1ulp                 0.671    REJ    REJ  reject      3.06e-17   2.02e-01
+jitter c=1e+08 J=4ulp                  4.03    REJ    REJ  reject      3.60e-17   7.66e-02
+jitter c=1e+08 J=16ulp                 16.1    REJ    REJ  reject      1.09e-16   1.87e-02
+jitter c=1e+08 J=64ulp                 64.4    REJ    REJ  reject      6.08e-17   4.03e-03
+jitter c=1e+08 J=512ulp                 511    REJ    REJ  reject      3.57e-17   4.93e-04
+jitter c=1e+200 J=1ulp                0.765    REJ    REJ  reject      1.17e-16   5.18e-01
+jitter c=1e+200 J=4ulp                 4.59    REJ    REJ  reject      2.78e-03   8.17e-02
+jitter c=1e+200 J=16ulp                15.3    REJ    REJ  reject      2.63e-04   1.62e-01
+jitter c=1e+200 J=64ulp                64.3    REJ    REJ  reject      2.13e-04   1.80e-03
+jitter c=1e+200 J=512ulp                511    REJ    REJ  reject      1.23e-04   4.48e-04
+jitter c=1e+300 J=1ulp                 0.67    REJ    REJ  reject      1.28e-16   2.22e-01
+jitter c=1e+300 J=4ulp                 4.02    REJ    REJ  reject      4.58e-05   1.17e-01
+jitter c=1e+300 J=16ulp                16.1    REJ    REJ  reject      7.63e-04   9.44e-02
+jitter c=1e+300 J=64ulp                64.3    REJ    REJ  reject      5.97e-04   1.74e-03
+jitter c=1e+300 J=512ulp                512    REJ    REJ  reject      1.12e-04   6.69e-04
+permuted-sum constant m=7              1.64    REJ    REJ  reject      9.36e-18   2.58e-01
+permuted-sum constant m=9             0.982    REJ    REJ  reject      2.06e-17   1.38e-01
+permuted-sum constant m=15             1.61    REJ    REJ  reject      3.89e-16   6.91e+00
+permuted-sum constant m=50             1.85    REJ    REJ  reject      1.02e-16   4.75e-02
+permuted-sum constant m=200            4.69    REJ    REJ  reject      5.81e-17   2.14e-01
+octane LO(3.6e-15,3.6e-15,0)           12.6    REJ    REJ  reject      1.42e-15   1.19e-01
+octane LO(1e-13,1e-13,0)                346    REJ    REJ  reject      5.73e-16   3.07e-04
+octane LO(1e-12,1e-12,0)           3.46e+03    REJ    acc  accept?     1.38e-16   3.80e-05
+octane LO(1e-11,1e-11,0)           3.46e+04    REJ    acc  accept?     4.00e-16   2.77e-06
+octane LO(1e-10,1e-10,0)           3.46e+05    REJ    acc  accept?     2.83e-15   1.87e-07
+octane LO(1e-09,1e-09,0)           3.46e+06    REJ    acc  accept?     1.41e-15   2.93e-08
+octane LO(1e-06,1e-06,0)           3.46e+09    acc    acc  accept?     6.75e-16   2.93e-11
+octane LO(0.001,0.001,0)           3.46e+12    acc    acc  accept?     6.19e-16   2.44e-14
+1 + 1e-06*s                        9.98e+09    acc    acc  accept      7.81e-16   1.97e-10
+1 + 1e-09*s                        9.98e+06    acc    acc  accept      4.33e-17   1.47e-07
+1 + 1e-10*s                        9.98e+05    REJ    acc  accept      5.44e-19   2.02e-06
+1 + 1e-12*s                        9.98e+03    REJ    acc  accept      1.92e-16   9.38e-05
+1 + 1e-13*s                             998    REJ    REJ  reject?     1.16e-17   1.89e-03
+1 + 1e-14*s                             100    REJ    REJ  reject?     1.05e-16   1.08e-02
+1e-200*s (pure scale)              3.31e+15    acc    acc  accept      1.26e-16   9.51e-16
+1e-15*s (pure scale)               3.31e+15    acc    acc  accept      4.71e-17   2.88e-16
+1e+15*s (pure scale)               3.31e+15    acc    acc  accept      2.41e-16   5.20e-16
+1e+200*s (pure scale)              3.31e+15    acc    acc  accept      5.46e-16   4.24e-16
+ints + 0                           4.25e+15    acc    acc  accept      4.47e-15   6.94e-16
+ints + 1e+06                       7.66e+10    acc    acc  accept      4.47e-15   8.43e-12
+ints + 1e+10                       7.66e+06    acc    acc  accept      4.47e-15   2.57e-07
+ints + 1e+12                       7.66e+04    REJ    acc  accept      4.47e-15   8.84e-06
+ints + 1e+13                       7.66e+03    REJ    acc  accept      4.47e-15   1.41e-04
+ints + 1e+14                            766    REJ    REJ  boundary    4.47e-15   1.64e-03
+ints + 1e+15                           76.6    REJ    REJ  boundary    4.47e-15   1.65e-02
+ints + 1e+16                           8.11    REJ    REJ  boundary    1.15e-16   6.65e+00
+s + 1e+06                          9.98e+09    acc    acc  accept      8.42e-16   1.52e-10
+s + 1e+10                          9.98e+05    REJ    acc  accept      3.69e-16   1.26e-06
+s + 1e+12                          9.98e+03    REJ    acc  accept      4.99e-16   8.77e-05
+s + 1e+13                               998    REJ    REJ  accept      5.73e-17   2.95e-03
+ones, last +1e-06                   4.5e+09    acc    acc  accept      4.44e-17   9.71e-12
+ones, last +1e-10                   4.5e+05    REJ    acc  accept      4.44e-17   1.94e-07
+ones, last +1e-13                       450    REJ    REJ  reject      4.44e-17   3.89e-04
+ones, last +1e-15                         5    REJ    REJ  reject      4.44e-17   2.19e-02
+
+fold_select_ols(x + c) - fold_select_ols(x), x = 1..10, y = 2x + 3, fold 0:
+  c=1e+10 old: RuntimeError (all degenerate)
+  c=1e+10 new: +0.00e+00
+  c=1e+12 old: RuntimeError (all degenerate)
+  c=1e+12 new: +0.00e+00
+  c=1e+13 old: RuntimeError (all degenerate)
+  c=1e+13 new: +0.00e+00
+  c=1e+14 old: RuntimeError (all degenerate)
+  c=1e+14 new: RuntimeError (all degenerate)
+  c=2e+14 old: RuntimeError (all degenerate)
+  c=2e+14 new: RuntimeError (all degenerate)
+  c=1e+15 old: RuntimeError (all degenerate)
+  c=1e+15 new: RuntimeError (all degenerate)
+
+impossibility: (7 + k ulp(7) - 7)/ulp(7) == k exactly: True

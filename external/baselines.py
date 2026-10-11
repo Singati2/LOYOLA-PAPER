@@ -147,13 +147,24 @@ def inner_loo_rmse_all(Xt, yt):
     return np.sqrt(((pred - yt) ** 2).mean(axis=1))
 
 
+RESOLUTION_LEVELS = 1024   # v40.29: minimum number of representable steps (ulps of max|x|) across the range
+
+
 def degenerate_rows(Xt):
-    """Boolean mask of candidate rows (C x n) that are constant to floating-point resolution or whose relative
-    range is below 1e-9 (quantisation noise); such rows must never be selected (v40.22)."""
+    """Boolean mask of candidate rows (C x n) that must never be selected (v40.29): constant to floating-point
+    resolution (is_constant), or spanning fewer than RESOLUTION_LEVELS units in the last place of their largest
+    magnitude, i.e. relative range at most 1024 machine epsilons (about 2.3e-13). Such a row holds rounding
+    noise, or a signal quantised to a handful of representable values, and its selection would depend on the
+    platform's last-bit rounding. The test counts resolvable steps, so it does not depend on units, and it is
+    unchanged by a translation as long as the translated values keep 1024 steps (x + 1e13 for x = 1..10 keeps
+    about 4000). Exact translation invariance is impossible for any test that rejects rounding noise, because
+    7 + k ulp(7) translates exactly to k ulp(7), an exact rescaling of k = 1, 2, .... The v40.22 floor
+    (relative range at most 1e-9) rejected well-resolved candidates after a large translation."""
     Xt = np.asarray(Xt, float)
     const = np.array([is_constant(Xt[k]) for k in range(Xt.shape[0])], bool)
-    rng_ = Xt.max(axis=1) - Xt.min(axis=1); scale_ = np.maximum(np.abs(Xt).max(axis=1), np.finfo(float).tiny)
-    return const | (rng_ <= 1e-9 * scale_)
+    Xs = _rescale_extreme_rows(Xt)
+    rng_ = Xs.max(axis=1) - Xs.min(axis=1); scale_ = np.abs(Xs).max(axis=1)
+    return const | (rng_ <= RESOLUTION_LEVELS * np.finfo(float).eps * scale_)
 
 
 def fit_predict(xt, yt, xnew):
@@ -189,12 +200,9 @@ def fold_select_ols(X, y, i):
     # v40.21: a candidate that is constant on the training fold (within floating-point resolution, is_constant) carries
     # no information and would be fitted as the training mean; standardising its rounding noise can give it a spuriously
     # small inner RMSE (seen for the dense-grid point (3.6e-15, 3.6e-15) of wide_box_diagnostics D3), so it is never selected.
-    const = np.array([is_constant(Xt[k]) for k in range(Xt.shape[0])], bool)
-    # v40.22: the same guard with a relative-range floor, so that a candidate whose values differ only by
-    # quantisation noise (relative range below 1e-9; genuine 3-decimal candidates have relative range above 1e-4
-    # on these data) is never selected either, whatever the scale of its values
-    rng_ = Xt.max(axis=1) - Xt.min(axis=1); scale_ = np.maximum(np.abs(Xt).max(axis=1), np.finfo(float).tiny)
-    const |= rng_ <= 1e-9 * scale_
+    # v40.29: the shared resolution guard (degenerate_rows) replaces the v40.22 relative-range floor of 1e-9,
+    # which was not translation invariant; genuine 3-decimal candidates have relative range above 1e-4 on these data
+    const = degenerate_rows(Xt)
     rmse = np.where(const, np.inf, rmse)
     if not np.isfinite(rmse).any():      # never reached on the package data; argmin over all-inf would silently pick 0
         raise RuntimeError(f"fold {i}: every candidate descriptor is degenerate on the training set")

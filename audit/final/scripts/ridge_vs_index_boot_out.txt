@@ -1,0 +1,4 @@
+Test A: Q2 ridge 0.8599; ridge - median GM12 = +0.3462, 95% conditional bootstrap [+0.1601, +0.7470]
+Test A: Q2 ridge 0.8599; ridge - median LOh = +0.4540, 95% conditional bootstrap [+0.2691, +0.8230]
+Test B: Q2 ridge 0.9911; ridge - median GM12 = +0.0139, 95% conditional bootstrap [+0.0079, +0.0239]
+Test B: Q2 ridge 0.9911; ridge - median LOh = +0.0145, 95% conditional bootstrap [+0.0083, +0.0242]

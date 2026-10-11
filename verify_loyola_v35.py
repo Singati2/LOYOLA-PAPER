@@ -125,8 +125,8 @@ CSV_SSEN = "entropy_source_sensitivity_v36.csv"
 PROV_HALF = {"T_B":0.05,"dHf":0.005,"dHvap":0.005,"S":0.005,"omega":0.0005}
 PROV_TOL  = {"T_B":0.15,"dHf":0.15,"dHvap":0.04,"S":0.3,"omega":0.003}  # v36: dHvap tightened so a >=0.05 kcal/mol gap cannot pass
 PROV_EXPECT = {"VERIFIED EXACT":3,"VERIFIED AFTER UNIT CONVERSION":29,
- "AGREEMENT WITHIN TOLERANCE":40,"SOURCE VARIATION / EXPLAINED":10,  # v40.13: three entropies within 0.3 of API-44 reclassified
- "CANNOT VERIFY":7,"CONFLICT":1}
+ "AGREEMENT WITHIN TOLERANCE":39,"SOURCE VARIATION / EXPLAINED":10,  # v40.13: three entropies within 0.3 of API-44 reclassified
+ "CANNOT VERIFY":8,"CONFLICT":1}  # v40.29: 2,3-dimethylhexane S reclassified CANNOT VERIFY (secondary match only)
 EXPR_SIGNS = {  # (budget, property): (LO better, LO worse) over seeds 0..99 -- manuscript claims
  ("200","T_B"):(53,47),("200","dHf"):(14,86),("200","dHvap"):(100,0),("200","S"):(34,66),("200","omega"):(26,74),
  ("500","T_B"):(64,36),("500","dHf"):(24,76),("500","dHvap"):(100,0),("500","S"):(31,69),("500","omega"):(28,72)}

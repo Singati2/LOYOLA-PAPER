@@ -1352,3 +1352,44 @@ mathematical error and no bug changing a reported number or verdict was found.
   re-derived from the InChI and checked. DATA/README.md lists the quality flags.
 - Not adopted (referee): cutting to about 15 pages, deleting the termwise bounds and most of
   Section 6, renaming the family; these are editorial choices the authors decline.
+
+## v40.29 (2026-10-11): final adversarial review before submission
+Reports: audit/final/FINAL_DATA_PROVENANCE_AUDIT.md, FINAL_MATHEMATICAL_REFEREE_REPORT.md (with
+the novelty assessment), FINAL_CODE_STATISTICS_AUDIT.md, MATCH_SUBMISSION_READINESS.md; independent
+scripts in audit/final/scripts/. Also a leakage audit and a four-referee panel with anonymous peer
+ranking, an authors' counter-attack and a chair ruling (summarised in the readiness report).
+- Mathematics: no error. Independent recomputation reproduced the collision orders 13 and 16, every
+  count of Table 2 (at 50 to 60 digits), the five crossings (interval arithmetic), the ranks 7/7/8,
+  the floor SSE = 117/40 and the extremal trees. Remark 3.10 gains the missing subset step.
+- Code: the selection guard of external/baselines.py counts resolvable steps
+  (range <= 1024 eps max|x| is degenerate) instead of the relative-range floor 1e-9; the translation
+  defect deferred in v40.26 is repaired (the expected failure is now a passing test) and every caller
+  reproduces its committed output byte for byte. press_size accepts a design only when
+  sv_min > 1e-6 sv_max (was 1e-10): designs nearly collinear with n_C gave a closed-form PRESS wrong
+  by several percent; on the data the smallest accepted ratio is 4.6e-4 and no selection or value
+  changes (20,300 calls compared with a QR evaluation, max relative difference 7e-11).
+- Leakage: none submission-critical; grouped leave-one-out by count vector moves Q2 by at most 0.01.
+  Supplementary Table S8 picked the fixed index on all 18 octanes; nested, T_B is 0.745 (tuned 0.764)
+  and S 0.950, and the caption and text now say so. M_{4.5,-9} and LO(0,0,1) are marked as chosen on
+  the octanes.
+- Data (registered values unchanged): acentric factors described as compiled values of unidentified
+  origin (the KDB attribution was not supported; TMB 0.247 against 0.251 KDB and 0.255 Ediz 2017);
+  TMB dHvap 8.41 lies just below the hypothetical-liquid estimate, and LO(0,0,1) ties LO(0,0,2) with
+  TMB excluded (0.9799 against 0.9795); the second 3-ethyl-4-methylhexane T_B is the d-enantiomer
+  (TRC 2 K against 0.5 K); 25 nonane dHvap values are listed by NIST as Reid 1972; the calorimetric
+  count is scoped to C4-C16; 2,2,6-trimethylheptane duplicate-row sensitivity (0.8599 to 0.8591).
+- New exploratory baseline: Wiener W + p3 on the decanes, Q2 = 0.904 (external/bp/wiener_baseline.py).
+- Wording: novelty (pendant-path device credited to Rada 2026, M-polynomial, Carballosa et al. 2023),
+  contribution list, enumeration-based minimality, interval reading, Test B dQ2 to four decimals,
+  box effect on T_B, Lean scope, in-sample floor, bibliography abbreviations, stale theorem numbers in
+  LEAN_VERIFICATION.md, README, REPRODUCE.md and notebook 02.
+- Independent audit of 0817f35 (nine findings): NIST averages are now stated to bypass the 3 K screen
+  (57 of 100; exploratory variant 0.863); the calorimetric census is described as built from a curated
+  index; fit_pred_size standardises n_C with training statistics (translation invariant; outputs
+  unchanged); the InChI parser rejects repeated atoms and bonds (rebuild unchanged); the standing
+  hypothesis requires an edge; the Lean map points to verify_loyola_v35.py for the closed forms; the
+  2,3-dimethylhexane entropy is reclassified CANNOT VERIFY (secondary match only; API-44 106.11),
+  so seven entropies are unverified and the API-44 sensitivity uses seven substitutions (max shift
+  0.016, M1 ahead of HM by 0.005; was six, 0.018 and 0.004).
+- Not adopted: structural cuts and renaming (declined earlier); the AI-use statement, funding and
+  conflict-of-interest lines and the archive DOI are author decisions (see the readiness report).

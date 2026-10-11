@@ -3,6 +3,24 @@
 Advik Natarajan, Ganesh Shiwakoti, Michael Arockiaraj: manuscript, supplement,
 data, code, machine-checked proofs and runnable notebooks.
 
+**v40.29 (2026-10-11):** final adversarial review before submission. Reports in `audit/final/`:
+data provenance, mathematical referee report (with the novelty assessment), code and statistics audit,
+and `MATCH_SUBMISSION_READINESS.md`; independent check scripts in `audit/final/scripts/`. No
+mathematical error and no change to any registered result. Code: the selection guard of
+`external/baselines.py` now counts resolvable steps instead of a relative-range floor, which repairs
+the translation defect deferred in v40.26 (no output changes; the expected failure is now a passing
+test), and the rank threshold of `press_size` is 1e-6, which rejects nearly collinear designs whose
+closed-form PRESS was inaccurate (smallest ratio on the data 4.6e-4, no output changes). New
+exploratory baselines: Wiener's W + p3 model on the decanes (`external/bp/wiener_baseline.py`,
+Q2 = 0.904) and the 2,2,6-trimethylheptane duplicate-row sensitivity. Wording: acentric-factor
+sources, the TMB enthalpy and its tied ranking, the 3-ethyl-4-methylhexane enantiomer entry, nonane
+enthalpy sources (Reid 1972), the nested best-fixed comparison of Supplementary Table S8, post-selection
+status of LO(0,0,1) and M_{4.5,-9}, interval reading, Lean scope, novelty statements (Rada 2026 device,
+M-polynomial, exponential-index inequalities), enumeration-based minimality, Remark 3.10 proof step.
+An independent audit of v40.28 was also addressed: NIST averages and the 3 K screen, the calorimetric
+census scope, the size refit and InChI parser, and a seventh unverified octane entropy
+(2,3-dimethylhexane; API-44 sensitivity rerun).
+
 **v40.28 (2026-10-10):** fixes from four independent reviews (two mathematical, one data/code, one
 referee). No mathematical error was found. New: the affine dimension of the degree-pair counts (at most 7
 at fixed order, 8 across orders, attained by the data sets) and the octane boiling-point error floor
@@ -22,10 +40,9 @@ and budgets evaluated; the exploratory resampling range no longer compared with 
 interval; the one-sided gain rule in `external/bp/bp_tests.py` now requires a positive lower endpoint
 (verdicts unchanged); m >= 1 in Proposition 3.17; countable-union step for generic discrimination;
 true interval check of the Lemma 3.1 witness; reproduction map and `requirements-extras-lock.txt`.
-Known issue, deferred: the relative-range guard of `fold_select_ols` (`external/baselines.py`) is not
-translation invariant (a candidate x + 1e13 is rejected). It is recorded as an expected failure in
-`external/test_regressions.py`; on the package data correcting it changes no selected fold (audit on
-the branch `robustness-guards`). The rank guard of the boiling-point tests was fixed in v40.28.
+The relative-range guard of `fold_select_ols` was not translation invariant; it was recorded as an
+expected failure here and repaired in v40.29 (no output changes in any caller). The rank guard of the
+boiling-point tests was fixed in v40.28.
 
 **v40.25 (2026-10-09):** MATCH-style pass: abstract leads with the mathematical results; Section 6
 and the conclusion condensed (no number or verdict changed); reference list strictly
@@ -48,7 +65,7 @@ Colab the notebook clones this repository and installs the requirements itself.
 | Notebook | What it checks | Time | Open |
 |---|---|---|---|
 | `notebooks/01_data.ipynb` | the datasets in `DATA/` and their provenance | seconds | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/01_data.ipynb) |
-| `notebooks/02_mathematics.ipynb` | Lemma 3.1, the colliding profiles of Theorem 3.5, Example 4.3, certificates | under a minute | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/02_mathematics.ipynb) |
+| `notebooks/02_mathematics.ipynb` | Lemma 3.1, the colliding profiles of Theorem 3.5, Example 4.4, certificates | under a minute | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/02_mathematics.ipynb) |
 | `notebooks/03_degeneracy.ipynb` | Table 2 and the order-10 and order-16 counts, by enumerating every tree | under a minute | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/03_degeneracy.ipynb) |
 | `notebooks/04_octane_correlations.ipynb` | all 60 correlations of Table 4 and the tetramethylbutane audit | seconds | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/04_octane_correlations.ipynb) |
 | `notebooks/05_boiling_points.ipynb` | Table 5 baselines, the 200-permutation check, the resampling summary | about 5 minutes (`RUN_SLOW = True`: about 1 hour) | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/05_boiling_points.ipynb) |

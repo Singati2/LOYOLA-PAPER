@@ -56,7 +56,8 @@ unchanged in the paper; the alternatives are sensitivity analyses only.
 | hypothetical-liquid estimate | 8.564 | LO(0,0,1) | 0.976 | 0.976 | 0.368 |
 | NIST 298 K, solid → gas | 10.263 | LO(0,0,1) | 0.374 | 0.374 | 0.018 |
 
-The column leader is the same in every variant. The magnitudes survive every
+The column leader is the same in every variant, although with the isomer excluded LO(0,0,2)
+is level with it at three decimals (0.9799 against 0.9795). The magnitudes survive every
 liquid-phase variant and collapse only when a sublimation enthalpy is put in the
 place of a vaporisation enthalpy, which mixes two processes in one column.
 

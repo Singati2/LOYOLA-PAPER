@@ -184,8 +184,7 @@ $\Delta H_{\mathrm{vap}}$, the entropy $S$ and the acentric factor
 $\omega$. The property data were traced to the NIST
 WebBook~\cite{NISTWebBook}, and for each value the provenance file
 records the WebBook entry or, where the WebBook lists no value, the
-compilation consulted. Acentric factors, which NIST does not list, are
-the exception and were taken from KDB-derived compilations.
+compilation consulted. Acentric factors, which NIST does not list, are the exception. They are compiled values whose original source we could not identify, and they agree with the KDB values and with the octane set reproduced in~\cite{Ediz2017Octane} to within $0.005$, except for 2,2,3,3-tetramethylbutane ($0.247$ against $0.251$ and $0.255$).
 The same five properties form the octane benchmark used
 in~\cite{MovahediGutmanRedzepovicFurtula2026}. $T_B$ is in
 $^{\circ}$C, $\Delta H_f$ and $\Delta H_{\mathrm{vap}}$ are in
@@ -203,13 +202,13 @@ exactly half a display unit away counts as agreement at reported
 precision. Of the values, $3$ match exactly, and $29$ match a specific
 recorded determination at reported precision after unit conversion,
 with the gas phase confirmed for formation enthalpies and entropies.
-A further $40$ agree
+A further $39$ agree
 within the audit tolerances, the source's stated uncertainty or the
 span of several determinations without matching any one of them at
 reported precision. $10$ lie within explained variation among
 authoritative determinations, namely 1947 API Project~44 entries
-superseded by later TRC revisions. $7$ could not be verified against a
-reachable authoritative value, six of these being gas-phase entropies
+superseded by later TRC revisions. $8$ could not be verified against a
+reachable authoritative value, seven of these being gas-phase entropies
 absent from the NIST WebBook. For them the 1947 API Project 44 tables
 give values differing by $0.07$--$2.2$ units, as they do for isomers
 whose later revisions were confirmed. The remaining one is the
@@ -222,8 +221,7 @@ $8.41$\,kcal\,mol$^{-1}$ ($35.19$\,kJ\,mol$^{-1}$), is that of the
 standard octane benchmark compilation and matches no listed
 determination. Its physical reference state is therefore unresolved.
 Section~S3 reports the $\Delta H_{\mathrm{vap}}$ analysis with this
-isomer excluded. One value is a marginal conflict, the acentric factor
-of 2,2,3,3-tetramethylbutane ($0.247$ vs.\ compiled $0.251$), while the
+isomer excluded. One value varies between compilations by more than the audit tolerance, the acentric factor of 2,2,3,3-tetramethylbutane ($0.247$ against $0.251$ in KDB and $0.255$ in~\cite{Ediz2017Octane}), while the
 acentric factor of 2,2,4-trimethylpentane ($0.305$ vs.\ compiled
 $0.303$) agrees only within tolerance. Substituting the alternative
 compiled acentric factors changes several of the $\omega$ correlations
@@ -241,7 +239,7 @@ determinations ($8.97$, $9.08$), and two lie within the span or stated
 uncertainty of the NIST determinations. These are $8.83$, which also
 equals the API Project~44 value at the displayed precision, and $8.90$,
 which equals the compiled octane dataset value $8.897$ at the displayed
-precision. Six gas-phase entropies could not be verified against a
+precision. Seven gas-phase entropies could not be verified against a
 primary source (see above). Four entropies ($n$-octane,
 2,2-dimethylhexane, 2,2,4- and 2,3,3-trimethylpentane) differ from
 those of a widely used octane QSPR compilation by $0.04$--$2.29$ units,
@@ -399,13 +397,11 @@ the best fixed index is the pure-$\gamma$ point $LO(0, 0, 1)$ itself.
 There the tuned value exceeds it by $0.001$ in sample ($0.985$ vs
 $0.984$) and falls $0.001$ below it under leave-one-out (both $0.978$
 at three decimals, the differences being those of full-precision
-values). These post-selection differences are negligible. On $T_B$,
-$\Delta H_f$, $S$, and $\omega$ the best fixed reduction is higher
-both in and out of sample.
+values). These post-selection differences are negligible. On $\Delta H_f$, $S$ and $\omega$ the best fixed reduction is higher both in and out of sample. On $T_B$ it is higher in sample, but under nested leave-one-out the tuned value is higher ($0.764$ against $0.745$).
 
 \begin{table}[H]
 \centering
-\caption{Decimal tuning near the pure-$\gamma$ points $LO(0,0,1)$ and $LO(0,0,2)$ versus the best fixed index in the tested comparison set for each octane property. The best fixed index is ranked by in-sample $|r|$. The decimal columns give the best over two pools of $50$ random triples within $\pm 0.3$ of $LO(0,0,1)$ and of $LO(0,0,2)$, in sample and under foldwise nested leave-one-out within the globally selected pools. Here the $LO(0,0,1)$ pool is exactly the pool of Table~\ref{tab:lo_tuning}, and the $LO(0,0,2)$ pool is the next $50$ triples of the same \texttt{default\_rng(42)} stream. Indices are ranked by in-sample $|r|$ rather than $\mathrm{LOO}$, as the latter is inflated by degenerate fits for near-zero-correlation indices. Tuning does not exceed the best fixed index under LOO on any property. In sample it exceeds it only on $\Delta H_{\mathrm{vap}}$, by $0.001$, a negligible post-selection difference that does not establish superiority.}
+\caption{Decimal tuning near the pure-$\gamma$ points $LO(0,0,1)$ and $LO(0,0,2)$ versus the best fixed index in the tested comparison set for each octane property. The best fixed index is ranked by in-sample $|r|$. The decimal columns give the best over two pools of $50$ random triples within $\pm 0.3$ of $LO(0,0,1)$ and of $LO(0,0,2)$, in sample and under foldwise nested leave-one-out within the globally selected pools. Here the $LO(0,0,1)$ pool is exactly the pool of Table~\ref{tab:lo_tuning}, and the $LO(0,0,2)$ pool is the next $50$ triples of the same \texttt{default\_rng(42)} stream. Indices are ranked by in-sample $|r|$ rather than $\mathrm{LOO}$, as the latter is inflated by degenerate fits for near-zero-correlation indices. The $\mathrm{LOO}_{\mathrm{fix}}$ column is not nested. With the fixed choice nested in the folds it becomes $0.745$ for $T_B$ and $0.950$ for $S$, and tuning then exceeds the fixed index only on $T_B$ ($0.764$). In sample it exceeds it only on $\Delta H_{\mathrm{vap}}$, by $0.001$, a negligible post-selection difference that does not establish superiority.}
 \label{tab:lo_tuning_bestfixed}
 \small
 \begin{tabular}{lcrrrr}
@@ -422,9 +418,7 @@ $\omega$ & $M_2$ & $0.988$ & $0.985$ & $0.945$ & $0.926$\\
 \end{table}
 
 Local tuning raised several nested leave-one-out point
-estimates for weak anchors. Except for the $0.001$ in-sample
-$\Delta H_{\mathrm{vap}}$ margin noted above, it did not exceed the
-best fixed benchmark in the tested comparison set. No formal
+estimates for weak anchors. Except for the $0.001$ in-sample $\Delta H_{\mathrm{vap}}$ margin and octane $T_B$ under nested leave-one-out ($0.764$ against $0.745$), it did not exceed the best fixed benchmark in the tested comparison set. No formal
 superiority claim is made. All tabled nested values correspond to
 positive signed prediction--observation correlations with positive
 predictive $Q^{2}$. A constant-descriptor control confirms that
@@ -577,8 +571,7 @@ determinations ($13$ quoted only to $1$\,K). Five are single NIST
 determinations and ten are the most recent primary determination listed
 by NIST (Deviation~D1 of the protocol). All are experimental
 measurements, so the $T_B$ test is experimentally grounded. For
-3-ethyl-4-methylhexane NIST also lists $407.15$\,K (Lukes and
-Langthaler, 1957) under a separate entry, $6.4$\,K below the
+3-ethyl-4-methylhexane NIST also lists $407.15$\,K (Lukes and Langthaler, 1957) under a separate entry for the dextrorotatory enantiomer, with an uncertainty of $2$\,K assigned by TRC against $0.5$\,K for the registered value. Enantiomers share one normal boiling point, so the two values are discrepant measurements. The second value lies $6.4$\,K below the
 registered $413.55$\,K, which is why the molecule is excluded from the
 pooled boiling-point cohort of Section~6.4 of the main paper. With it
 excluded, LO is better than GM in $55/100$ and $60/100$ seeds and ridge
@@ -586,11 +579,9 @@ regression gives $Q^2 = 0.679$. With $134.0\,^{\circ}$C the figures are
 $61/100$, $66/100$ and $0.647$. The verdict stays mixed.
 Of the vaporisation enthalpies, only $4$ of $34$ are calorimetric
 determinations and one is a NIST average. The other $29$ come from two
-compilations. These are the 1961 tabulation of
-Labbauf, Greenshields and Rossini~\cite{LabaufGreenshieldsRossini1961},
-which covers all $35$ nonanes and $75$ decanes and is not a set of
-individual calorimetric measurements, and a 1971 vapour-pressure
-handbook~\cite{WilhoitZwolinski1971}. Such tabulations may rest
+compilations. The first is the 1961 tabulation of
+Labbauf, Greenshields and Rossini~\cite{LabaufGreenshieldsRossini1961}.
+It covers all $35$ nonanes and $75$ decanes in one short paper and, as far as we could determine, does not report individual calorimetric measurements. The second is a 1971 vapour-pressure handbook~\cite{WilhoitZwolinski1971}, under which NIST lists $25$ values as Reid (1972), a review of that handbook~\cite{Reid1972}. Such tabulations may rest
 partly on structural-increment estimates, so agreement with them
 measures consistency with the compiled values rather than independent
 experimental validation. A degree-pair-based predictor may also be
@@ -629,8 +620,7 @@ $Q^2 = 0.853$--$0.888$. Models with a term linear in $q$ or with
 unrestricted counts ($IRLA$, ridge, $LO(0,0,1)$, LO) reach
 $Q^2 = 0.897$--$0.957$. This split holds only inside the narrow box. In
 the box of half-width $12$ the parent alone reaches $0.942$ and $0.892$
-(Table~\ref{tab:box}). The fixed point $LO(0,0,1)$ involves no tuning
-at all, and it matches or beats the tuned Loyola model on both
+(Table~\ref{tab:box}). The fixed point $LO(0,0,1)$ involves no tuning on the nonanes but was singled out on the octanes, and it matches or beats the tuned Loyola model on both
 sets ($0.957$ and $0.903$ against medians $0.953$ and $0.900$). It is
 also the index selected in every fold for $\Delta H_{\mathrm{vap}}$
 when admitted to the fixed-index comparison. It is closely related to
@@ -908,16 +898,15 @@ open are listed here so that they can be read in one place.
   3,3-dimethylhexane, 3-ethylhexane, 2,2,3- and 2,2,4-trimethylpentane)
   agree, within tolerance or as documented revisions between editions,
   with the 1947 API Research Project~44 tables or a compiled octane
-  dataset. The remaining six (4-methylheptane, 2,2-dimethylhexane,
-  3,4-dimethylhexane, 3-ethyl-2-methylpentane, 3-ethyl-3-methylpentane,
+  dataset. The remaining seven (4-methylheptane, 2,2-dimethylhexane,
+  2,3-dimethylhexane, 3,4-dimethylhexane, 3-ethyl-2-methylpentane, 3-ethyl-3-methylpentane,
   2,3,3-trimethylpentane) could not be matched to any primary source. The 1947 API Research Project 44
-  tables~\cite{APIProject44Circ461} list gas-phase entropies for all six.
+  tables~\cite{APIProject44Circ461} list gas-phase entropies for all seven.
   These differ from the values used by $0.07$--$2.2$\,cal\,mol$^{-1}$\,K$^{-1}$,
-  as that edition does for isomers whose later revisions we could
-  confirm. No later primary determination was located, so the values used
+  as that edition does for isomers whose later values we could match in a compiled octane dataset or the NIST WebBook. No later primary determination was located, so the values used
   are compiled-dataset values. Substituting the 1947 values changes the
-  $S$ correlations by at most $0.018$ in $|r|$ and puts $M_1$ ahead of
-  $HM$ by $0.004$.
+  $S$ correlations by at most $0.016$ in $|r|$ and puts $M_1$ ahead of
+  $HM$ by $0.005$.
 \item \emph{2,3,3-trimethylpentane $S$.} The value $101.31$ found in our
   earlier compilation is a copy of the 2,2,3-trimethylpentane entry and is
   not used. The value used, $102.06$, is that of the compiled
@@ -943,29 +932,26 @@ open are listed here so that they can be read in one place.
   liquid at the normal boiling point; $8.41$ appears in neither. NIST lists
   $42.94$ and $42.91$~kJ\,mol$^{-1}$ ($10.26$~kcal\,mol$^{-1}$) at $298$~K as
   vaporisation enthalpies, and lists the second determination also as a
-  sublimation enthalpy, so these values describe the crystal. The
-  benchmark value is consistent with a hypothetical supercooled liquid:
-  the sublimation enthalpy $43.37$ minus the fusion enthalpy $7.54$~kJ\,mol$^{-1}$
+  sublimation enthalpy, so these values describe the crystal. The benchmark value lies just below an estimate for a hypothetical supercooled liquid: the sublimation enthalpy $43.37$ minus the fusion enthalpy $7.54$~kJ\,mol$^{-1}$
   gives $8.56$~kcal\,mol$^{-1}$, without a heat-capacity correction. Its
   original source was not located. The sensitivity of Table~4 of the main
   paper is reported for each variant separately: original
   ($|r| = 0.984$ for $LO(0,0,1)$), isomer excluded ($0.980$),
   hypothetical-liquid estimate ($0.976$) and sublimation enthalpy
-  ($0.374$). The column leader is $LO(0,0,1)$ in all four. The matched-budget
+  ($0.374$). $LO(0,0,1)$ has the largest $|r|$ in all four, although with the isomer excluded it is level with $LO(0,0,2)$ at three decimals ($0.9799$ against $0.9795$). The matched-budget
   comparison repeated without the isomer keeps the vaporisation-enthalpy
   gain in the $(-2,2)$ box ($93/100$ and $96/100$ seeds instead of
   $100/100$). The full trace is the file \texttt{TMB\_DHVAP\_AUDIT.md} of
   the repository.
 \item \emph{Acentric factors} of 2,2,4-trimethyl\-pentane and
-  2,2,3,3-tetra\-methyl\-butane differ from an alternative compilation by
-  $0.002$--$0.004$, and these alternative values change several $\omega$
+  2,2,3,3-tetra\-methyl\-butane differ from KDB by $0.002$--$0.004$ (and the latter from the set of~\cite{Ediz2017Octane} by $0.008$), and these alternative values change several $\omega$
   correlations at the third decimal and leave the $\omega$ ranking
   unchanged.
 \end{enumerate}
 Apart from the sublimation-enthalpy substitution in item~(iv), none of these items
 moves a correlation of Table~4 of the main paper by more than $0.043$. The only bolded entry at stake is the $S$ winner,
 where $HM$ leads $M_1$ by $0.001$ with the values used. The 1947
-substitution of item~(i) reverses that order by $0.004$, a margin
+substitution of item~(i) reverses that order by $0.005$, a margin
 without meaning at this resolution. None of the items enters the
 pre-registered nonane and boiling-point tests of Sections~6.3 and~6.4 of the main paper.
 Those tests use no entropy, vaporisation-enthalpy or acentric-factor value of
@@ -1035,7 +1021,7 @@ differ by $6.4$\,K. It also gives $34$ of the $75$ decanes, because
 $31$ of them have no NIST boiling point and $10$ have determinations
 more than $3$\,K apart. For $14$ of the $34$ included decanes NIST lists
 a single non-compilation determination, so the agreement rule does not
-apply to them. Under this uniform rule the pooled octane boiling points
+apply to them. NIST averages, $57$ of the $100$ values, are used as given: neither their quoted uncertainty (up to $6$\,K) nor the spread of their constituent points is screened. Without the two averages quoting more than $3$\,K the decane ridge gives $Q^2 = 0.863$ (exploratory). Under this uniform rule the pooled octane boiling points
 can differ from those of Table~\ref{tab:octane-data} by up to
 $0.5\,^{\circ}$C, for example 2,4-dimethylhexane at $108.9$ against
 $109.4\,^{\circ}$C, a documented source variation. Seven pooled nonane boiling points differ from the replication-set values of
@@ -1162,6 +1148,10 @@ non. $\Delta H_{\mathrm{vap}}$ & $-0.062$ & $0.857$ & $0.897$ & $0.927$ & $0.903
   J. P. Ebert, J. E. Kilpatrick, C. W. Beckett, M. G. Williams, H. G. Werner,
   \textit{Selected Values of Properties of Hydrocarbons\/}, Natl. Bur.
   Stand. Circ. 461, U.S. Government Printing Office, Washington, 1947.
+
+  \bibitem{Reid1972} R. C. Reid, Review of R. C. Wilhoit, B. J. Zwolinski, Handbook
+  of Vapor Pressures and Heats of Vaporization of Hydrocarbons and Related
+  Compounds, \textit{AIChE J.\/} \textbf{18} (1972) 1278.
 
   \bibitem{WilhoitZwolinski1971} R. C. Wilhoit, B. J. Zwolinski,
   \textit{Handbook of Vapor Pressures and Heats of Vaporization of

@@ -63,18 +63,68 @@ class RegressionTests(unittest.TestCase):
             self.assertAlmostEqual(BP.press_size((x * scale)[None, :], z, y)[0], score)
             self.assertAlmostEqual(BP.fit_pred_size(x * scale, z, y, 5. * scale, 12.), prediction)
 
-    @unittest.expectedFailure
     def test_selection_translation_invariance(self):
-        """Known defect, deferred (v40.26): the relative-range floor of fold_select_ols
-        rejects a well-resolved candidate after a large constant is added, although OLS
-        with an intercept is translation invariant. On the package data correcting it
-        changes no selected fold (audit/GUARD_ROBUSTNESS_AUDIT.md, branch
-        robustness-guards). Remove the decorator when the guard is repaired."""
+        """OLS with an intercept is translation invariant; the selection guard must not reject a
+        well-resolved candidate after a large constant is added (v40.29; formerly an expected failure)."""
         x = np.arange(1., 11.)
         y = 2 * x + 3
         p0 = B.fold_select_ols(x[None, :], y, 0)[0]
-        p1 = B.fold_select_ols((x + 1e13)[None, :], y, 0)[0]
-        self.assertAlmostEqual(p0, p1, places=6)
+        for c in (1e6, 1e10, 1e12, 1e13):
+            with self.subTest(offset=c):
+                self.assertAlmostEqual(B.fold_select_ols((x + c)[None, :], y, 0)[0], p0, places=6)
+
+    def test_rounding_noise_rejected(self):
+        """A constant carrying rounding jitter of up to 512 ulps is degenerate at every magnitude,
+        and a candidate with fewer than 1024 resolvable steps after a translation is degenerate too."""
+        k = np.array([-512., 512., 0., 3., -7., 100., -300., 1., 64., -64.])
+        for c in (1e-300, 1e-8, 1., 7., 1e8, 1e300):
+            with self.subTest(c=c):
+                self.assertTrue(B.degenerate_rows((c * (1 + k * np.finfo(float).eps / 2))[None, :])[0])
+        self.assertTrue(B.degenerate_rows((np.arange(1., 11.) + 1e15)[None, :])[0])
+
+    def test_small_relative_range_accepted(self):
+        """Small relative range is not degeneracy when the values are resolved: 1 + 1e-10 s keeps
+        about a million steps and was wrongly rejected by the v40.22 floor of 1e-9."""
+        s = np.log(np.arange(2., 12.))
+        for x in (1 + 1e-10 * s, 1e-200 * s, 1e200 * s, s + 1e10):
+            self.assertFalse(B.degenerate_rows(x[None, :])[0])
+
+    def test_press_size_near_collinear(self):
+        """A candidate nearly collinear with n_C is either rejected or scored accurately: the
+        inner-LOO RMSE agrees with a 60-digit reference to 1e-6 whenever it is finite (v40.29)."""
+        import mpmath as mp
+        mp.mp.dps = 60
+        rng = np.random.default_rng(0)
+        n = 20; z = np.arange(6, 6 + n) % 5 + 6.0; y = rng.normal(size=n) + z
+        for e in (1e-4, 1e-5, 1e-6, 1e-7, 1e-8, 1e-9):
+            x = z + e * rng.normal(size=n)
+            r = BP.press_size(x[None, :], z, y)[0]
+            if not np.isfinite(r):
+                continue
+            X = [[1, zi, xi] for zi, xi in zip(z, x)]; s = 0
+            for i in range(n):
+                A = mp.matrix([X[k] for k in range(n) if k != i]); b = mp.matrix([y[k] for k in range(n) if k != i])
+                beta = mp.lu_solve(A.T * A, A.T * b)
+                s += (sum(beta[j] * X[i][j] for j in range(3)) - y[i]) ** 2
+            with self.subTest(noise=e):
+                self.assertAlmostEqual(r / float(mp.sqrt(s / n)), 1.0, places=6)
+
+    def test_size_refit_translation(self):
+        """The final size-adjusted refit is invariant to translating n_C and the new point together
+        (v40.29; a shift of 1e8 formerly changed the prediction)."""
+        z = np.arange(6.) + 6; x = z + 1e-3 * np.array([0., 1., 4., 2., 8., 3.]); y = np.array([0., 1., 2., 4., 3., 9.])
+        p0 = BP.fit_pred_size(x, z, y, 12 + 1e-3, 12.)
+        for c in (1e4, 1e8):
+            with self.subTest(shift=c):
+                self.assertAlmostEqual(BP.fit_pred_size(x, z + c, y, 12 + 1e-3, 12. + c), p0, places=5)
+
+    def test_inchi_parser_rejects_repeats(self):
+        """The alkane InChI parser rejects repeated atoms and bonds (v40.29)."""
+        sys.path.insert(0, str(Path(__file__).resolve().parent / "bp"))
+        import build_bp_data as BB
+        with self.assertRaises(ValueError):
+            BB.inchi_tree("InChI=1S/C3H8/c1-2-1-2-3", 3)
+        self.assertEqual(BB.inchi_tree("InChI=1S/C6H14/c1-5(2)6(3)4", 6).number_of_edges(), 5)
 
     def test_gamma_rule_one_sided(self):
         """The pre-registered rule needs the whole interval above zero; a wholly

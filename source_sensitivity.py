@@ -38,7 +38,7 @@ IDX = [("M1", (0, 1, 0)), ("M2", (1, 0, 0)), ("HM", (0, 2, 0)), ("mM2", (-1, 0, 
 OMEGA_ALT = {"2,2,4-trimethylpentane": 0.303, "2,2,3,3-tetramethylbutane": 0.251}
 S_ALT = {"octane": 111.70, "2,2-dimethylhexane": 103.40,
          "2,2,4-trimethylpentane": 104.10, "2,3,3-trimethylpentane": 102.10}
-S_API44 = {"4-methylheptane": 108.35, "2,2-dimethylhexane": 103.06, "3,4-dimethylhexane": 104.38,
+S_API44 = {"4-methylheptane": 108.35, "2,2-dimethylhexane": 103.06, "2,3-dimethylhexane": 106.11, "3,4-dimethylhexane": 104.38,
            "3-ethyl-2-methylpentane": 105.43, "3-ethyl-3-methylpentane": 103.48, "2,3,3-trimethylpentane": 103.14}
 
 

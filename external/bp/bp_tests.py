@@ -76,7 +76,11 @@ def press_size(Xt, zt, yt):
     zs = np.asarray(zt, float); zs = (zs - zs.mean()) / (zs.std() if zs.std() > 0 else 1.0)
     A = np.stack([np.ones((C, n)), np.broadcast_to(zs, (C, n)), Xt], axis=2)      # C x n x 3
     sv = np.linalg.svd(A, compute_uv=False)
-    ok = sv[:, -1] > 1e-10 * sv[:, 0]
+    # v40.29: the closed form below inverts A'A, whose condition number is the square of A's, so the
+    # threshold is 1e-6 (condition number of A'A at most 1e12, relative error of order 1e-4 at worst).
+    # The former 1e-10 accepted designs nearly collinear with n_C whose PRESS was wrong by several
+    # percent; on the package data the smallest accepted ratio is 4.6e-4, so no output changes.
+    ok = sv[:, -1] > 1e-6 * sv[:, 0]
     S = np.einsum("cni,cnj->cij", A, A)
     S[~ok] = np.eye(3)
     Si = np.linalg.inv(S)
@@ -96,9 +100,14 @@ def fit_pred_size(xt, zt, yt, xn, zn):
         xt, xn = xt / scale, xn / scale
     mu, sd = xt.mean(), xt.std()
     sd = sd if sd > 0 else 1.0
-    A = np.column_stack([np.ones_like(zt), zt, (xt - mu) / sd])
+    # v40.29: n_C is centred and scaled with the training statistics, as in press_size, so that the
+    # refit is invariant to translating the size covariate (the raw n_C made a shift of 1e8 change the
+    # prediction); the fitted values are the same up to rounding.
+    zt = np.asarray(zt, float); zm, zs = zt.mean(), zt.std()
+    zs = zs if zs > 0 else 1.0
+    A = np.column_stack([np.ones_like(zt), (zt - zm) / zs, (xt - mu) / sd])
     coef, *_ = np.linalg.lstsq(A, yt, rcond=None)
-    return coef[0] + coef[1] * zn + coef[2] * (xn - mu) / sd
+    return coef[0] + coef[1] * (zn - zm) / zs + coef[2] * (xn - mu) / sd
 
 
 def nested_size(X, z, y):

@@ -7,6 +7,14 @@ Bm = {}
 for r in csv.DictReader(open(os.path.join(HERE, "bp_baselines.csv"))):
     Bm[(r["test"][0], r["model"])] = float(r["Q2"])
 import numpy as np
+
+
+def dq_fmt(v):
+    """v40.29: a median difference that rounds to zero at three decimals is printed to four
+    decimals, so the table shows no signed zero (Test B: -0.0001)."""
+    return f"{v:+.3f}" if abs(v) >= 0.0005 else f"{v:.4f}"
+
+
 SEED = {}
 for r in csv.DictReader(open(os.path.join(HERE, "bp_results_seeds.csv"))):
     SEED.setdefault(r["test"][0], []).append(float(r["Q2_LOh"]) - float(r["Q2_GM12"]))
@@ -16,7 +24,7 @@ for t, lab, base in (("A", f"decanes ($n = {S['A']['n']}$)", ["mean", "classical
     s = S[t]
     cells = [lab] + [f"${Bm[(t, b)]:.3f}$" for b in base] + [f"${Bm[(t, 'ridge on degree-pair counts')]:.3f}$",
              f"${float(s['median_Q2_GM12']):.3f}$", f"${float(s['median_Q2_LOh']):.3f}$",
-             f"${float(np.median(SEED[t])):+.3f}$", f"${s['LOh_better_of_50']}$"]
+             f"${dq_fmt(float(np.median(SEED[t])))}$", f"${s['LOh_better_of_50']}$"]
     rows.append(" & ".join(cells) + r"\\")
 open(os.path.join(HERE, "bp_table_rows.tex"), "w").write("\n".join(rows) + "\n")
 print("\n".join(rows))

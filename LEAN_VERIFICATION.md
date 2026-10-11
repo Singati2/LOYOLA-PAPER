@@ -30,9 +30,9 @@ pairs, degrees are positive reals, and `LO` is the sum of
 | Proposition 3.13 | per-graph scale-invariant directions | `K13_gamma_absorbed` (illustration only: on K_{1,3} the γ term is absorbed into α) | `Counterexamples.lean` | not formalised as stated (exponential-family minimality); the Δ = 7 exception set is certified by `audit/check_mathematics.py` |
 | Proposition 3.17 | limits along the γ axis | — | — | not formalised |
 | Proposition 4.1 | degree-pair information ceiling on the octanes | — | — | not formalised (data statement); checked by `verify_loyola_v35.py` |
-| Proposition 4.2 | generic discrimination of distinct profiles | — | — | not formalised (real-analytic zero sets) |
-| Example 4.3 | the sum-connectivity pair of Rada, Rodríguez and Sigarreta is separated by the imbalance coordinate | — | — | not formalised; checked from the order-18 trees at 50 digits by `structural/sumconn_pair_check.py` |
-| Proposition 5.1 | closed forms on standard graphs | — | — | not formalised; recomputed by `audit/check_mathematics.py` |
+| Proposition 4.3 | generic discrimination of distinct profiles | — | — | not formalised (real-analytic zero sets) |
+| Example 4.4 | the sum-connectivity pair of Rada, Rodríguez and Sigarreta is separated by the imbalance coordinate | — | — | not formalised; checked from the order-18 trees at 50 digits by `structural/sumconn_pair_check.py` |
+| Proposition 5.1 | closed forms on standard graphs | — | — | not formalised; recomputed by `verify_loyola_v35.py` (section [M]) |
 | Proposition 5.2 | path and star as extremal trees of the pure-γ points | — | — | not formalised; exhaustively checked for orders 4–12 by `structural/extremal_trees_check.py` |
 | Proposition 5.4 (bracket bound) | m ψ_min ≤ LO ≤ m ψ_max | `ratio_bound`, `LO_ratio_bound` | `Bounds.lean` | **partly formalised**: the summation step is `ratio_bound` with h ≡ 1; the per-edge bounds ψ_min ≤ ψ_e ≤ ψ_max, and the extrema over the admissible pairs, enter as hypotheses |
 | Corollary 5.5 (Cauchy–Schwarz interpolation) | LO at the midpoint of two parameter triples ≤ geometric mean | `psi_mul_psi_eq_sq`, `LO_le_sqrt_mul_sqrt`, `LO_le_sqrt_prod` | `CauchySchwarz.lean` | **formalised** (inequality) |
@@ -50,7 +50,7 @@ reproduced by the Python verifiers listed in `REPRODUCE.md`.
 * `Bounds.lean`: the termwise bounds (Propositions 5.4 to 5.8).
 * `CauchySchwarz.lean`: the interpolation inequality and the parent-family identity.
 * `LogConvex.lean`: convexity of `log LO`.
-* `Independence.lean`: the 4×4 determinant behind Lemma 1.
+* `Independence.lean`: the 4×4 determinant behind Lemma 3.1.
 * `Profiles.lean`: the order-13 colliding tree pair of Theorem 3.5(iii).
 * `Counterexamples.lean`: equality cases and the K_{1,3} absorption identity.
 * `AxiomCheck.lean` and `expected_axiom_theorems.txt`: the list of theorems whose axioms are checked.

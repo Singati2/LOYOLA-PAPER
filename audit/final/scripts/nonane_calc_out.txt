@@ -1,0 +1,16 @@
+{np.str_('WilhoitZwolinski1971(Reid1972)'): 29, np.str_('calorimetric'): 4, np.str_('NIST_AVG'): 1}
+ridge-count LOO Q2 all n=34: 0.927 (repo baseline should match)
+  NIST_AVG                         n= 1 mean|res| 0.111 kcal/mol  max 0.111
+  WilhoitZwolinski1971(Reid1972)   n=29 mean|res| 0.059 kcal/mol  max 0.371
+  calorimetric                     n= 4 mean|res| 0.123 kcal/mol  max 0.179
+  measured (AVG+cal) n=5 mean|res| 0.120; compiled n=29 mean|res| 0.059
+    nonane NIST_AVG resid +0.111
+    2,2,5-trimethylhexane calorimetric resid -0.179
+    2,3,5-trimethylhexane calorimetric resid -0.171
+    3,3-diethylpentane calorimetric resid -0.124
+    2,2,4,4-tetramethylpentane calorimetric resid -0.018
+as registered (check vs 95/98): n=34 B200 95/100 med +0.048; B500 98/100 med +0.053; rule -> REPLICATES  (48s)
+compiled values only: n=29 B200 77/100 med +0.021; B500 75/100 med +0.019; rule -> MIXED  (27s)
+Labbauf rows excluded: n=34 B200 95/100 med +0.048; B500 98/100 med +0.053; rule -> REPLICATES  (34s)
+Wilhoit-Zwolinski rows only: n=29 B200 77/100 med +0.021; B500 75/100 med +0.019; rule -> MIXED  (28s)
+done

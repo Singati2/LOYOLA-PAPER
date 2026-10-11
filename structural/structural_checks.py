@@ -243,9 +243,9 @@ def check_tab_firstfail():
     want = {
         "LO row": f"$LO(0,0,\\gamma)$ & ${lo_a[0]}$ (${lo_a[1]}/{lo_a[2]}$) & never$^{{a}}$ & ${lo_m[0]}$ (${lo_m[1]}/{lo_m[2]}$) & never$^{{a}}$",
         "R row": (f"$R$ & ${r_a[0]}$ (${r_a[1]}/{r_a[2]}$) & n/a$^{{b}}$ & ${r_m[0]}$ (${r_m[1]}/{r_m[2]}$) & n/a$^{{b}}$" if r_m
-                  else f"$R$ & ${r_a[0]}$ (${r_a[1]}/{r_a[2]}$) & n/a$^{{b}}$ & $> 17^{{c}}$ & n/a$^{{b}}$"),
-        "GA row": f"$GA$ & ${ga_a[0]}$ (${ga_a[1]}/{ga_a[2]}$)$^{{d}}$ & ${ga_merge}^{{e}}$ & ${ga_m[0]}$ (${ga_m[1]}/{ga_m[2]}$)$^{{d}}$ & "
-                  + ("$> 17^{e}$" if all(RES[(n, "mol")]["merge"] == 0 for n in range(7, 18)) else "MOL-MERGE"),
+                  else f"$R$ & ${r_a[0]}$ (${r_a[1]}/{r_a[2]}$) & n/a$^{{b}}$ & $> 17^{{e}}$ & n/a$^{{b}}$"),  # v40.29: fallback footnote e (c and d now belong to GA)
+        "GA row": f"$GA$ & ${ga_a[0]}$ (${ga_a[1]}/{ga_a[2]}$)$^{{c}}$ & ${ga_merge}^{{d}}$ & ${ga_m[0]}$ (${ga_m[1]}/{ga_m[2]}$)$^{{c}}$ & "
+                  + ("$> 17^{d}$" if all(RES[(n, "mol")]["merge"] == 0 for n in range(7, 18)) else "MOL-MERGE"),
     }
     for k, w in want.items():
         log(f"TAB firstfail {k}: {'OK' if w in blk else 'MISMATCH, expected: ' + w}")

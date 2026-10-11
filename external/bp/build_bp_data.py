@@ -51,8 +51,8 @@ def inchi_tree(inchi, n_expected):
     if depth != 0:
         raise ValueError(f"unbalanced brackets in {layer}")
     atoms = [int(t) for t in re.findall(r"\d+", layer)]
-    if sorted(set(atoms)) != list(range(1, n_expected + 1)):
-        raise ValueError(f"atom numbers of {layer} are not 1..{n_expected}")
+    if sorted(atoms) != list(range(1, n_expected + 1)):   # v40.29: each atom exactly once (was a set test)
+        raise ValueError(f"atom numbers of {layer} are not 1..{n_expected}, each once")
     G = nx.Graph(); stack = []; prev = None; i = 0
     while i < len(layer):
         ch = layer[i]
@@ -62,6 +62,8 @@ def inchi_tree(inchi, n_expected):
                 j += 1
             a = int(layer[i:j]); G.add_node(a)
             if prev is not None:
+                if G.has_edge(prev, a):   # v40.29: a repeated bond is malformed, not collapsed
+                    raise ValueError(f"repeated bond {prev}-{a} in {layer}")
                 G.add_edge(prev, a)
             prev = a; i = j; continue
         if ch == "(":
