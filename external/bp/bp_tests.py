@@ -75,7 +75,7 @@ def press_size(Xt, zt, yt):
     # invariant to this reparametrisation, so only the accept/reject decision changes.
     zs = np.asarray(zt, float); zs = (zs - zs.mean()) / (zs.std() if zs.std() > 0 else 1.0)
     A = np.stack([np.ones((C, n)), np.broadcast_to(zs, (C, n)), Xt], axis=2)      # C x n x 3
-    sv = np.linalg.svd(A, compute_uv=False)
+    U, sv, _ = np.linalg.svd(A, full_matrices=False)
     # v40.29: the closed form below inverts A'A, whose condition number is the square of A's, so the
     # threshold is 1e-6 (condition number of A'A at most 1e12, relative error of order 1e-4 at worst).
     # The former 1e-10 accepted designs nearly collinear with n_C whose PRESS was wrong by several
@@ -87,7 +87,12 @@ def press_size(Xt, zt, yt):
     beta = np.einsum("cij,cnj,n->ci", Si, A, yt)
     res = yt - np.einsum("cni,ci->cn", A, beta)
     h = np.einsum("cni,cij,cnj->cn", A, Si, A)
-    regular = ok & np.all(np.abs(1 - h) > 1e-10, axis=1)   # deletion-induced rank loss -> rejected
+    # v40.30: deletion-induced rank loss is decided on leverages from the orthonormal factor U, which
+    # are accurate to about eps cond(A), not on h from the inverse of A'A, whose error grows with
+    # cond(A)^2: an exact leverage of 1 could come out as 1 - 5e-7 and pass the former test
+    # |1 - h| > 1e-10, giving a finite PRESS for an undefined deleted fit. The PRESS values themselves
+    # still use h, so accepted candidates are unchanged.
+    regular = ok & np.all(1 - (U ** 2).sum(axis=2) > 1e-6, axis=1)
     r = np.full(C, np.inf)
     r[regular] = np.sqrt(((res[regular] / (1 - h[regular])) ** 2).mean(axis=1))
     return r

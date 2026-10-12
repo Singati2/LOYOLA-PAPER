@@ -1396,3 +1396,29 @@ ranking, an authors' counter-attack and a chair ruling (summarised in the readin
   0.016, M1 ahead of HM by 0.005; was six, 0.018 and 0.004).
 - Not adopted: structural cuts and renaming (declined earlier); the AI-use statement, funding and
   conflict-of-interest lines and the archive DOI are author decisions (see the readiness report).
+
+## v40.30 (2026-10-12): follow-up audit fixes and claim provenance
+- external/bp/bp_tests.py press_size: deletion-induced rank loss is now decided on leverages from
+  the SVD factor U (1 - h > 1e-6) instead of |1 - h| > 1e-10 with h from the inverse of A'A. An
+  outside audit gave a five-point design whose deleted fit is rank 2 while the old leverage came out
+  as 1 - 5e-7, so a finite PRESS was returned for an undefined fit. PRESS values still use the old
+  h, so accepted candidates are unchanged: bp_tests.py, selection_resampling.py and
+  wide_box_diagnostics.py were rerun and every committed output is byte-identical.
+  test_press_size_deletion_rank_loss (fails on the old code) also checks an accepted design against
+  explicit leave-one-out fits.
+- constancy_test_check.py: candidates now come from the production generator
+  (baselines.candidate_triples, a fresh rng per seed and budget) and include the paired LO-zero
+  controls; the former version drew budget 500 after budget 200 from one rng and omitted those
+  controls, so it covered about a quarter of the triples the experiments use. It now also applies
+  the current resolution guard, and fails if the sampling code of the generators changes. Result
+  unchanged: 163,487 triples, no flag from any test, smallest relative range 2.432e-4.
+- supplement.tex S-quality item (i): the first entropy list named 2,3-dimethylhexane, which v40.29
+  moved to the unverified list, so 13 entropies were counted as 7 + 7; it now lists six.
+  source_sensitivity.py docstring lists the seventh substitution.
+- main.tex: the single-index decane range is stated exactly (0.149 to 0.514, was 0.15 to 0.51), with
+  three-decimal checks; the Wilhoit-Zwolinski publisher is given identically in both bibliographies.
+- REPRODUCE.md: the regression-test row no longer mentions an expected failure.
+- New audit/final/CLAIM_PROVENANCE_LEDGER.md and audit/final/scripts/claim_provenance.py: every
+  experimental value is classed by the number of independent primary determinations behind it
+  (compilations count as derivative), every literature attribution by its earliest source, and the
+  novelty statements as absence claims that cannot be independently verified. No number changes.

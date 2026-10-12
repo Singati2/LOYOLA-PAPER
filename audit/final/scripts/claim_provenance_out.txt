@@ -1,0 +1,10 @@
+Source-independence ledger (tiers: A independent, A-AGG NIST/TRC average, B single primary, B? single NIST value, primary reference not recorded, C derivative only, D unverified)
+bp      T_B    n=100  A:24  A-AGG:58  B:18
+nonane  T_B    n= 35  A:10  A-AGG:20  B:5
+nonane  dHvap  n= 34  A:4  A-AGG:1  C:29
+octane  S      n= 18  B:2  B?:3  C:6  D:7
+octane  T_B    n= 18  A-AGG:15  B?:3
+octane  dHf    n= 18  A:1  B:15  B?:2
+octane  dHvap  n= 18  A-AGG:3  B:11  B?:3  D:1
+octane  omega  n= 18  C:17  D:1
+all values: A:39  A-AGG:97  B:51  B?:11  C:52  D:9  (n=259)

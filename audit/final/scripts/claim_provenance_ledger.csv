@@ -1,0 +1,260 @@
+dataset,molecule,property,value_used,provenance_label,tier,basis
+octane,octane,T_B,125.6,VERIFIED AFTER UNIT CONVERSION,A-AGG,NIST/TRC average of 75 determinations (constituent papers not archived)
+octane,octane,dHf,-49.82,AGREEMENT WITHIN TOLERANCE,B,single primary determination: Prosen & Rossini 1945
+octane,octane,dHvap,9.92,SOURCE VARIATION / EXPLAINED,A-AGG,NIST/TRC average of 10 determinations (constituent papers not archived); derivative agreement (not counted): KDB
+octane,octane,S,111.55,AGREEMENT WITHIN TOLERANCE,B?,one NIST value whose primary reference is not recorded in the provenance file
+octane,octane,omega,0.398,VERIFIED EXACT,C,acentric factors appear only in compilations (KDB; a compiled octane dataset); their original determination is not identified
+octane,2-methylheptane,T_B,117.6,VERIFIED AFTER UNIT CONVERSION,A-AGG,NIST/TRC average of 37 determinations (constituent papers not archived)
+octane,2-methylheptane,dHf,-51.5,AGREEMENT WITHIN TOLERANCE,B,single primary determination: Prosen & Rossini 1945
+octane,2-methylheptane,dHvap,9.48,AGREEMENT WITHIN TOLERANCE,B?,one NIST value whose primary reference is not recorded in the provenance file
+octane,2-methylheptane,S,109.84,AGREEMENT WITHIN TOLERANCE,B,single primary determination: Messerly 1971
+octane,2-methylheptane,omega,0.378,VERIFIED EXACT,C,acentric factors appear only in compilations (KDB; a compiled octane dataset); their original determination is not identified
+octane,3-methylheptane,T_B,118.9,VERIFIED AFTER UNIT CONVERSION,B?,one NIST value whose primary reference is not recorded in the provenance file
+octane,3-methylheptane,dHf,-50.82,AGREEMENT WITHIN TOLERANCE,B?,one NIST value whose primary reference is not recorded in the provenance file
+octane,3-methylheptane,dHvap,9.52,VERIFIED AFTER UNIT CONVERSION,B,single primary determination: Osborne & Ginnings 1947; derivative agreement (not counted): Majer & Svoboda 1985
+octane,3-methylheptane,S,111.26,AGREEMENT WITHIN TOLERANCE,B?,one NIST value whose primary reference is not recorded in the provenance file
+octane,3-methylheptane,omega,0.371,SOURCE VARIATION / EXPLAINED,C,acentric factors appear only in compilations (KDB; a compiled octane dataset); their original determination is not identified
+octane,4-methylheptane,T_B,117.7 degC,VERIFIED AFTER UNIT CONVERSION,A-AGG,NIST/TRC average of 23 determinations (constituent papers not archived)
+octane,4-methylheptane,dHf,-50.69 kcal/mol,VERIFIED AFTER UNIT CONVERSION,B,single primary determination: Prosen & Rossini 1945
+octane,4-methylheptane,dHvap,9.48 kcal/mol,AGREEMENT WITHIN TOLERANCE,B?,one NIST value whose primary reference is not recorded in the provenance file
+octane,4-methylheptane,S,109.32 cal/(mol K),CANNOT VERIFY,D,cannot verify
+octane,4-methylheptane,omega,0.372,AGREEMENT WITHIN TOLERANCE,C,acentric factors appear only in compilations (KDB; a compiled octane dataset); their original determination is not identified
+octane,"2,2-dimethylhexane",T_B,106.8 degC,VERIFIED AFTER UNIT CONVERSION,A-AGG,NIST/TRC average of 20 determinations (constituent papers not archived); derivative agreement (not counted): Daubert 1996
+octane,"2,2-dimethylhexane",dHf,-53.71 kcal/mol,VERIFIED AFTER UNIT CONVERSION,B,single primary determination: Prosen & Rossini 1945
+octane,"2,2-dimethylhexane",dHvap,8.92 kcal/mol,AGREEMENT WITHIN TOLERANCE,B,single primary determination: Osborne & Ginnings 1947; derivative agreement (not counted): Majer & Svoboda 1985
+octane,"2,2-dimethylhexane",S,103.13 cal/(mol K),CANNOT VERIFY,D,cannot verify
+octane,"2,2-dimethylhexane",omega,0.339,AGREEMENT WITHIN TOLERANCE,C,acentric factors appear only in compilations (KDB; a compiled octane dataset); their original determination is not identified
+octane,"2,3-dimethylhexane",T_B,115.6 degC,SOURCE VARIATION / EXPLAINED,A-AGG,NIST/TRC average of 29 determinations (constituent papers not archived)
+octane,"2,3-dimethylhexane",dHf,-51.13 kcal/mol,AGREEMENT WITHIN TOLERANCE,B,single primary determination: Prosen & Rossini 1945
+octane,"2,3-dimethylhexane",dHvap,9.27 kcal/mol,VERIFIED AFTER UNIT CONVERSION,B,single primary determination: Osborne & Ginnings 1947; derivative agreement (not counted): Majer & Svoboda 1985
+octane,"2,3-dimethylhexane",S,108.02 cal/(mol K),CANNOT VERIFY,D,cannot verify
+octane,"2,3-dimethylhexane",omega,0.348,AGREEMENT WITHIN TOLERANCE,C,acentric factors appear only in compilations (KDB; a compiled octane dataset); their original determination is not identified
+octane,"2,4-dimethylhexane",T_B,109.4,SOURCE VARIATION / EXPLAINED,A-AGG,"NIST/TRC average of 22 determinations (constituent papers not archived); derivative agreement (not counted): API-44 1947 (NBS Circ. 461), KDB"
+octane,"2,4-dimethylhexane",dHf,-52.44,VERIFIED AFTER UNIT CONVERSION,B,single primary determination: Prosen & Rossini 1945; derivative agreement (not counted): API-44 1947 (NBS Circ. 461)
+octane,"2,4-dimethylhexane",dHvap,9.03,VERIFIED AFTER UNIT CONVERSION,B,"single primary determination: Osborne & Ginnings 1947; derivative agreement (not counted): API-44 1947 (NBS Circ. 461), Majer & Svoboda 1985, Reid 1972"
+octane,"2,4-dimethylhexane",S,106.98,SOURCE VARIATION / EXPLAINED,C,compilation values only
+octane,"2,4-dimethylhexane",omega,0.344,SOURCE VARIATION / EXPLAINED,C,acentric factors appear only in compilations (KDB; a compiled octane dataset); their original determination is not identified
+octane,"2,5-dimethylhexane",T_B,109.1,AGREEMENT WITHIN TOLERANCE,A-AGG,"NIST/TRC average of 39 determinations (constituent papers not archived); derivative agreement (not counted): API-44 1947 (NBS Circ. 461), KDB"
+octane,"2,5-dimethylhexane",dHf,-53.21,AGREEMENT WITHIN TOLERANCE,B,single primary determination: Prosen & Rossini 1945; derivative agreement (not counted): API-44 1947 (NBS Circ. 461)
+octane,"2,5-dimethylhexane",dHvap,9.05,VERIFIED AFTER UNIT CONVERSION,B,"single primary determination: Osborne & Ginnings 1947; derivative agreement (not counted): API-44 1947 (NBS Circ. 461), Majer & Svoboda 1985, Reid 1972"
+octane,"2,5-dimethylhexane",S,105.72,SOURCE VARIATION / EXPLAINED,C,compilation values only
+octane,"2,5-dimethylhexane",omega,0.357,SOURCE VARIATION / EXPLAINED,C,acentric factors appear only in compilations (KDB; a compiled octane dataset); their original determination is not identified
+octane,"3,3-dimethylhexane",T_B,111.9,VERIFIED AFTER UNIT CONVERSION,A-AGG,"NIST/TRC average of 16 determinations (constituent papers not archived); derivative agreement (not counted): API-44 1947 (NBS Circ. 461), KDB, Daubert 1996"
+octane,"3,3-dimethylhexane",dHf,-52.61,VERIFIED AFTER UNIT CONVERSION,B,single primary determination: Prosen & Rossini 1945; derivative agreement (not counted): API-44 1947 (NBS Circ. 461)
+octane,"3,3-dimethylhexane",dHvap,8.97,VERIFIED AFTER UNIT CONVERSION,B,"single primary determination: Osborne & Ginnings 1947; derivative agreement (not counted): API-44 1947 (NBS Circ. 461), Majer & Svoboda 1985, compiled octane dataset"
+octane,"3,3-dimethylhexane",S,104.74,AGREEMENT WITHIN TOLERANCE,C,compilation values only
+octane,"3,3-dimethylhexane",omega,0.322,SOURCE VARIATION / EXPLAINED,C,acentric factors appear only in compilations (KDB; a compiled octane dataset); their original determination is not identified
+octane,"3,4-dimethylhexane",T_B,117.7 degC,AGREEMENT WITHIN TOLERANCE,A-AGG,NIST/TRC average of 21 determinations (constituent papers not archived)
+octane,"3,4-dimethylhexane",dHf,-50.91 kcal/mol,VERIFIED AFTER UNIT CONVERSION,B,single primary determination: Prosen & Rossini 1945
+octane,"3,4-dimethylhexane",dHvap,9.32 kcal/mol,VERIFIED AFTER UNIT CONVERSION,B,single primary determination: Osborne & Ginnings 1947
+octane,"3,4-dimethylhexane",S,106.59 cal/(mol K),CANNOT VERIFY,D,cannot verify
+octane,"3,4-dimethylhexane",omega,0.34 (dimensionless),AGREEMENT WITHIN TOLERANCE,C,acentric factors appear only in compilations (KDB; a compiled octane dataset); their original determination is not identified
+octane,3-ethyl-2-methylpentane,T_B,115.6 degC,VERIFIED AFTER UNIT CONVERSION,B?,one NIST value whose primary reference is not recorded in the provenance file; derivative agreement (not counted): KDB
+octane,3-ethyl-2-methylpentane,dHf,-50.48 kcal/mol,VERIFIED AFTER UNIT CONVERSION,B?,one NIST value whose primary reference is not recorded in the provenance file; derivative agreement (not counted): KDB
+octane,3-ethyl-2-methylpentane,dHvap,9.21 kcal/mol,AGREEMENT WITHIN TOLERANCE,B?,one NIST value whose primary reference is not recorded in the provenance file
+octane,3-ethyl-2-methylpentane,S,106.06 cal/(mol K),CANNOT VERIFY,D,cannot verify
+octane,3-ethyl-2-methylpentane,omega,0.33,VERIFIED EXACT,C,acentric factors appear only in compilations (KDB; a compiled octane dataset); their original determination is not identified
+octane,3-ethyl-3-methylpentane,T_B,118.3 degC,VERIFIED AFTER UNIT CONVERSION,A-AGG,NIST/TRC average of 17 determinations (constituent papers not archived)
+octane,3-ethyl-3-methylpentane,dHf,-51.38 kcal/mol,AGREEMENT WITHIN TOLERANCE,B,single primary determination: Prosen & Rossini 1945; derivative agreement (not counted): KDB
+octane,3-ethyl-3-methylpentane,dHvap,9.08 kcal/mol,VERIFIED AFTER UNIT CONVERSION,B,single primary determination: Osborne & Ginnings 1947; derivative agreement (not counted): Majer & Svoboda 1985
+octane,3-ethyl-3-methylpentane,S,101.48 cal/(mol K),CANNOT VERIFY,D,cannot verify
+octane,3-ethyl-3-methylpentane,omega,0.302,AGREEMENT WITHIN TOLERANCE,C,acentric factors appear only in compilations (KDB; a compiled octane dataset); their original determination is not identified
+octane,3-ethylhexane,T_B,118.5,VERIFIED AFTER UNIT CONVERSION,A-AGG,NIST/TRC average of 15 determinations (constituent papers not archived)
+octane,3-ethylhexane,dHf,-50.4,AGREEMENT WITHIN TOLERANCE,B,single primary determination: Prosen & Rossini 1945; derivative agreement (not counted): API-44 1947 (NBS Circ. 461)
+octane,3-ethylhexane,dHvap,9.48,AGREEMENT WITHIN TOLERANCE,B,"single primary determination: Osborne & Ginnings 1947; derivative agreement (not counted): API-44 1947 (NBS Circ. 461), Majer & Svoboda 1985"
+octane,3-ethylhexane,S,109.43,AGREEMENT WITHIN TOLERANCE,C,compilation values only
+octane,3-ethylhexane,omega,0.362,AGREEMENT WITHIN TOLERANCE,C,acentric factors appear only in compilations (KDB; a compiled octane dataset); their original determination is not identified
+octane,"2,2,3-trimethylpentane",T_B,109.8,VERIFIED AFTER UNIT CONVERSION,A-AGG,NIST/TRC average of 19 determinations (constituent papers not archived); derivative agreement (not counted): KDB
+octane,"2,2,3-trimethylpentane",dHf,-52.61,VERIFIED AFTER UNIT CONVERSION,B,single primary determination: Prosen & Rossini 1945; derivative agreement (not counted): API-44 1947 (NBS Circ. 461)
+octane,"2,2,3-trimethylpentane",dHvap,8.83,AGREEMENT WITHIN TOLERANCE,B,"single primary determination: Osborne & Ginnings 1947; derivative agreement (not counted): API-44 1947 (NBS Circ. 461), Majer & Svoboda 1985"
+octane,"2,2,3-trimethylpentane",S,101.31,SOURCE VARIATION / EXPLAINED,C,compilation values only
+octane,"2,2,3-trimethylpentane",omega,0.3,AGREEMENT WITHIN TOLERANCE,C,acentric factors appear only in compilations (KDB; a compiled octane dataset); their original determination is not identified
+octane,"2,2,4-trimethylpentane",T_B,99.2,VERIFIED AFTER UNIT CONVERSION,A-AGG,NIST/TRC average of 49 determinations (constituent papers not archived)
+octane,"2,2,4-trimethylpentane",dHf,-53.57,AGREEMENT WITHIN TOLERANCE,B,single primary determination: Prosen & Rossini 1945; derivative agreement (not counted): API-44 1947 (NBS Circ. 461)
+octane,"2,2,4-trimethylpentane",dHvap,8.4,AGREEMENT WITHIN TOLERANCE,A-AGG,NIST/TRC average of 7 determinations (constituent papers not archived); derivative agreement (not counted): API-44 1947 (NBS Circ. 461)
+octane,"2,2,4-trimethylpentane",S,101.81,AGREEMENT WITHIN TOLERANCE,C,compilation values only
+octane,"2,2,4-trimethylpentane",omega,0.305,AGREEMENT WITHIN TOLERANCE,C,acentric factors appear only in compilations (KDB; a compiled octane dataset); their original determination is not identified
+octane,"2,3,3-trimethylpentane",T_B,114.8 degC,VERIFIED AFTER UNIT CONVERSION,A-AGG,NIST/TRC average of 18 determinations (constituent papers not archived); derivative agreement (not counted): KDB
+octane,"2,3,3-trimethylpentane",dHf,-51.73 kcal/mol,AGREEMENT WITHIN TOLERANCE,B,single primary determination: Prosen & Rossini 1945; derivative agreement (not counted): KDB
+octane,"2,3,3-trimethylpentane",dHvap,8.90 kcal/mol,AGREEMENT WITHIN TOLERANCE,A-AGG,NIST/TRC average of 9 determinations (constituent papers not archived); derivative agreement (not counted): KDB
+octane,"2,3,3-trimethylpentane",S,"102.06 cal/(mol K) (v40.5; was 101.31, a duplicate of the 2,2,3-trimethylpentane row)",CANNOT VERIFY,D,cannot verify
+octane,"2,3,3-trimethylpentane",omega,0.291,AGREEMENT WITHIN TOLERANCE,C,acentric factors appear only in compilations (KDB; a compiled octane dataset); their original determination is not identified
+octane,"2,3,4-trimethylpentane",T_B,113.5 degC,AGREEMENT WITHIN TOLERANCE,A-AGG,NIST/TRC average of 18 determinations (constituent papers not archived); derivative agreement (not counted): KDB
+octane,"2,3,4-trimethylpentane",dHf,-51.97 kcal/mol,AGREEMENT WITHIN TOLERANCE,B,single primary determination: Prosen & Rossini 1945
+octane,"2,3,4-trimethylpentane",dHvap,9.01 kcal/mol,VERIFIED AFTER UNIT CONVERSION,B,single primary determination: Osborne & Ginnings 1947; derivative agreement (not counted): Stephenson & Malanowski 1987
+octane,"2,3,4-trimethylpentane",S,102.39 cal/(mol K),AGREEMENT WITHIN TOLERANCE,B,single primary determination: Pitzer 1941
+octane,"2,3,4-trimethylpentane",omega,0.317,AGREEMENT WITHIN TOLERANCE,C,acentric factors appear only in compilations (KDB; a compiled octane dataset); their original determination is not identified
+octane,"2,2,3,3-tetramethylbutane",T_B,106.5 degC,VERIFIED AFTER UNIT CONVERSION,B?,one NIST value whose primary reference is not recorded in the provenance file
+octane,"2,2,3,3-tetramethylbutane",dHf,-53.99 kcal/mol,VERIFIED AFTER UNIT CONVERSION,A,"independent primary determinations: Prosen & Rossini 1945, Good 1972"
+octane,"2,2,3,3-tetramethylbutane",dHvap,8.41 kcal/mol,CANNOT VERIFY,D,cannot verify
+octane,"2,2,3,3-tetramethylbutane",S,93.06 cal/(mol K),AGREEMENT WITHIN TOLERANCE,B?,one NIST value whose primary reference is not recorded in the provenance file
+octane,"2,2,3,3-tetramethylbutane",omega,0.247,CONFLICT,D,conflict
+nonane,nonane,T_B,150.7,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,nonane,dHvap,11.11,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,2-methyloctane,T_B,143.0,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,2-methyloctane,dHvap,10.73,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,3-methyloctane,T_B,143.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,3-methyloctane,dHvap,10.73,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,4-methyloctane,T_B,141.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,4-methyloctane,dHvap,10.64,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,3-ethylheptane,T_B,143.6,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 3 non-compilation determinations listed
+nonane,3-ethylheptane,dHvap,10.64,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,4-ethylheptane,T_B,141.2,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 3 non-compilation determinations listed
+nonane,4-ethylheptane,dHvap,10.54,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Labbauf, Greenshields, et al. 1961); earliest determination not identifiable"
+nonane,"2,2-dimethylheptane",T_B,131.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,"2,2-dimethylheptane",dHvap,10.11,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"2,3-dimethylheptane",T_B,139.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,"2,3-dimethylheptane",dHvap,10.42,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"2,4-dimethylheptane",T_B,132.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,"2,4-dimethylheptane",dHvap,10.25,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"2,5-dimethylheptane",T_B,134.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,"2,5-dimethylheptane",dHvap,10.35,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"2,6-dimethylheptane",T_B,134.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,"2,6-dimethylheptane",dHvap,10.35,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"3,3-dimethylheptane",T_B,136.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,"3,3-dimethylheptane",dHvap,10.18,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"3,4-dimethylheptane",T_B,140.7,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 2 non-compilation determinations listed
+nonane,"3,4-dimethylheptane",dHvap,10.42,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"3,5-dimethylheptane",T_B,135.5,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 3 non-compilation determinations listed
+nonane,"3,5-dimethylheptane",dHvap,10.35,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"4,4-dimethylheptane",T_B,134.4,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 2 non-compilation determinations listed
+nonane,"4,4-dimethylheptane",dHvap,10.09,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,3-ethyl-2-methylhexane,T_B,138.0,single NIST Tboil determination (no AVG ,B,"single primary determination (Fenske, Braun, et al. 1947)"
+nonane,3-ethyl-2-methylhexane,dHvap,10.33,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Labbauf, Greenshields, et al. 1961); earliest determination not identifiable"
+nonane,3-ethyl-3-methylhexane,T_B,140.6,single NIST Tboil determination (no AVG ,B,"single primary determination (Fenske, Braun, et al. 1947)"
+nonane,3-ethyl-3-methylhexane,dHvap,10.25,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Labbauf, Greenshields, et al. 1961); earliest determination not identifiable"
+nonane,4-ethyl-2-methylhexane,T_B,133.8,single NIST Tboil determination (no AVG ,B,"single primary determination (Fenske, Braun, et al. 1947)"
+nonane,4-ethyl-2-methylhexane,dHvap,10.25,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Labbauf, Greenshields, et al. 1961); earliest determination not identifiable"
+nonane,3-ethyl-4-methylhexane,T_B,140.4,single NIST Tboil determination (no AVG ,B,"single primary determination (Fenske, Braun, et al. 1947)"
+nonane,"2,2,3-trimethylhexane",T_B,134.3,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 3 non-compilation determinations listed
+nonane,"2,2,3-trimethylhexane",dHvap,9.97,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"2,2,4-trimethylhexane",T_B,126.5,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,"2,2,4-trimethylhexane",dHvap,9.73,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"2,2,5-trimethylhexane",T_B,123.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,"2,2,5-trimethylhexane",dHvap,9.60,no NIST AVG; most recent calorimetric (m,A,most recent primary value chosen; 2 non-compilation determinations listed
+nonane,"2,3,3-trimethylhexane",T_B,136.3,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 3 non-compilation determinations listed
+nonane,"2,3,3-trimethylhexane",dHvap,10.06,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"2,3,4-trimethylhexane",T_B,138.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,"2,3,4-trimethylhexane",dHvap,10.21,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"2,3,5-trimethylhexane",T_B,130.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,"2,3,5-trimethylhexane",dHvap,9.90,no NIST AVG; most recent calorimetric (m,A,most recent primary value chosen; 2 non-compilation determinations listed
+nonane,"2,4,4-trimethylhexane",T_B,130.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,"2,4,4-trimethylhexane",dHvap,9.82,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"3,3,4-trimethylhexane",T_B,140.4,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 2 non-compilation determinations listed
+nonane,"3,3,4-trimethylhexane",dHvap,10.09,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"3,3-diethylpentane",T_B,146.2,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,"3,3-diethylpentane",dHvap,10.18,no NIST AVG; most recent calorimetric (m,A,most recent primary value chosen; 2 non-compilation determinations listed
+nonane,"3-ethyl-2,2-dimethylpentane",T_B,133.8,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 3 non-compilation determinations listed
+nonane,"3-ethyl-2,2-dimethylpentane",dHvap,9.97,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"3-ethyl-2,3-dimethylpentane",T_B,141.6,single NIST Tboil determination (no AVG ,B,single primary determination (Kinney and Spliethoff 1949)
+nonane,"3-ethyl-2,3-dimethylpentane",dHvap,10.21,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"3-ethyl-2,4-dimethylpentane",T_B,136.7,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 4 non-compilation determinations listed
+nonane,"3-ethyl-2,4-dimethylpentane",dHvap,10.11,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"2,2,3,3-tetramethylpentane",T_B,140.3,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,"2,2,3,3-tetramethylpentane",dHvap,9.85,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"2,2,3,4-tetramethylpentane",T_B,133.0,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,"2,2,3,4-tetramethylpentane",dHvap,9.75,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+nonane,"2,2,4,4-tetramethylpentane",T_B,122.3,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,"2,2,4,4-tetramethylpentane",dHvap,9.20,no NIST AVG; most recent calorimetric (m,A,most recent primary value chosen; 2 non-compilation determinations listed
+nonane,"2,3,3,4-tetramethylpentane",T_B,139.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
+nonane,"2,3,3,4-tetramethylpentane",dHvap,9.99,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
+bp,"Butane, 2,3-dimethyl-",T_B,58.1,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Pentane, 2-methyl-",T_B,60.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Pentane, 3-methyl-",T_B,63.3,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Butane, 2,2-dimethyl-",T_B,49.8,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,n-Hexane,T_B,68.8,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,Heptane,T_B,98.4,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Hexane, 2-methyl-",T_B,90.1,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Pentane, 2,4-dimethyl-",T_B,80.6,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Pentane, 2,2-dimethyl-",T_B,79.2,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Pentane, 2,3-dimethyl- / pentane, 2,3-dimethyl-, (R)- / (S)-2,3-dimethylpentane",T_B,89.8,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Hexane, 3-methyl- / (S)-(+)-3-methylhexane",T_B,91.7,mean of 2 NIST averages (agreeing within,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Pentane, 3,3-dimethyl-",T_B,86.1,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Butane, 2,2,3-trimethyl-",T_B,81.0,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Pentane, 3-ethyl-",T_B,93.5,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Pentane, 2,2,4-trimethyl-",T_B,99.3,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Heptane, 2-methyl-",T_B,117.6,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Heptane, 3-methyl- / (S)-3-methylheptane",T_B,118.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Pentane, 2,3,4-trimethyl-",T_B,113.7,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Heptane, 4-methyl-",T_B,117.8,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,Octane,T_B,125.6,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Hexane, 2,5-dimethyl-",T_B,109.0,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Hexane, 2,3-dimethyl-",T_B,115.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Hexane, 2,4-dimethyl- / (S)-2,4-dimethylhexane",T_B,108.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Hexane, 3,4-dimethyl- / hexane, 3,4-dimethyl-, (R*,R*)-(.+-.)- / hexane, 3,4-dimethyl-, (R*,S*)-",T_B,117.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Hexane, 2,2-dimethyl-",T_B,106.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Hexane, 3,3-dimethyl-",T_B,112.0,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Pentane, 2,3,3-trimethyl-",T_B,114.7,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Pentane, 3-ethyl-2-methyl-",T_B,115.7,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Hexane, 3-ethyl-",T_B,118.6,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Pentane, 2,2,3-trimethyl-",T_B,110.0,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Pentane, 3-ethyl-3-methyl-",T_B,118.4,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Butane, 2,2,3,3-tetramethyl-",T_B,106.5,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Octane, 2-methyl-",T_B,143.0,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,Nonane,T_B,150.7,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Hexane, 2,2,5-trimethyl-",T_B,123.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Octane, 3-methyl-",T_B,143.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Octane, 4-methyl-",T_B,141.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Heptane, 2,4-dimethyl-",T_B,132.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Heptane, 2,2-dimethyl-",T_B,131.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Pentane, 2,2,4,4-tetramethyl-",T_B,122.3,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Pentane, 3,3-diethyl-",T_B,146.2,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Hexane, 2,3,5-trimethyl-",T_B,130.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Hexane, 2,2,4-trimethyl-",T_B,126.5,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Heptane, 2,3-dimethyl-",T_B,139.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Heptane, 2,5-dimethyl-",T_B,134.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Heptane, 2,6-dimethyl-",T_B,134.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Heptane, 3,3-dimethyl-",T_B,136.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Hexane, 2,2,3-trimethyl-",T_B,133.4,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
+bp,"Pentane, 2,2,3,3-tetramethyl-",T_B,140.3,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Heptane, 3-ethyl-",T_B,143.1,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
+bp,"Pentane, 2,2,3,4-tetramethyl-",T_B,133.0,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Hexane, 2,4,4-trimethyl-",T_B,130.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Heptane, 3,4-dimethyl-",T_B,140.4,median of 2 non-compilation determinatio,A,median of 2 non-compilation determinations from 2 distinct first authors
+bp,"Heptane, 4-ethyl-",T_B,141.2,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
+bp,"Hexane, 2,3,4-trimethyl- / (R*,S*)-(.+-.)-2,3,4-trimethylhexane / (R*,R*)-(.+-.)-2,3,4-trimethylhexane",T_B,138.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Heptane, 3,5-dimethyl-",T_B,135.5,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
+bp,"Heptane, 4,4-dimethyl-",T_B,134.8,median of 2 non-compilation determinatio,A,median of 2 non-compilation determinations from 2 distinct first authors
+bp,"Hexane, 2,3,3-trimethyl-",T_B,136.8,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
+bp,"Pentane, 2,3,3,4-tetramethyl-",T_B,139.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Hexane, 3,3,4-trimethyl-",T_B,140.2,median of 2 non-compilation determinatio,A,median of 2 non-compilation determinations from 2 distinct first authors
+bp,"Pentane, 3-ethyl-2,4-dimethyl-",T_B,136.6,median of 4 non-compilation determinatio,A,median of 4 non-compilation determinations from 4 distinct first authors
+bp,"Pentane, 3-ethyl-2,2-dimethyl-",T_B,133.8,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
+bp,"Hexane, 4-ethyl-2-methyl-",T_B,133.8,median of 1 non-compilation determinatio,B,one non-compilation determination
+bp,"Hexane, 3-ethyl-3-methyl-",T_B,140.6,median of 1 non-compilation determinatio,B,one non-compilation determination
+bp,"Hexane, 3-ethyl-2-methyl-",T_B,138.0,median of 1 non-compilation determinatio,B,one non-compilation determination
+bp,"Pentane, 3-ethyl-2,3-dimethyl-",T_B,141.6,median of 1 non-compilation determinatio,B,one non-compilation determination
+bp,Decane,T_B,174.1,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Nonane, 3-methyl-",T_B,167.8,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Nonane, 2-methyl-",T_B,166.9,median of 2 non-compilation determinatio,A,median of 2 non-compilation determinations from 2 distinct first authors
+bp,"Nonane, 4-methyl-",T_B,166.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Nonane, 5-methyl-",T_B,165.0,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
+bp,"Octane, 2,6-dimethyl-",T_B,158.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Octane, 2,3-dimethyl-",T_B,164.3,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
+bp,"Octane, 2,7-dimethyl-",T_B,160.0,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Octane, 4-ethyl-",T_B,163.4,median of 1 non-compilation determinatio,B,one non-compilation determination
+bp,"Heptane, 2,4,6-trimethyl-",T_B,146.7,median of 2 non-compilation determinatio,A,median of 2 non-compilation determinations from 2 distinct first authors
+bp,"Octane, 3,5-dimethyl-",T_B,158.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
+bp,"Octane, 2,4-dimethyl-",T_B,155.9,median of 1 non-compilation determinatio,B,one non-compilation determination
+bp,"Octane, 2,5-dimethyl-",T_B,156.9,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
+bp,"Hexane, 2,2,5,5-tetramethyl-",T_B,137.0,median of 2 non-compilation determinatio,A,median of 2 non-compilation determinations from 2 distinct first authors
+bp,"Hexane, 3,3,4,4-tetramethyl-",T_B,170.1,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
+bp,"Octane, 4,5-dimethyl- / (R*,R*)-(.+-.)-4,5-dimethyloctane / (R*,S*)-4,5-dimethyloctane",T_B,162.1,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
+bp,3-Ethyl-3-methylheptane,T_B,163.9,median of 2 non-compilation determinatio,A,median of 2 non-compilation determinations from 2 distinct first authors
+bp,"Hexane, 2,2,3,3-tetramethyl-",T_B,159.9,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
+bp,"Heptane, 2,2,6-trimethyl-",T_B,148.2,median of 5 non-compilation determinatio,A,median of 5 non-compilation determinations from 3 distinct first authors
+bp,"Pentane, 2,2,3,3,4-pentamethyl-",T_B,166.1,median of 1 non-compilation determinatio,B,one non-compilation determination
+bp,"Heptane, 2,5,5-trimethyl-",T_B,152.8,median of 1 non-compilation determinatio,B,one non-compilation determination
+bp,"Heptane, 2,4,4-trimethyl-",T_B,149.6,median of 1 non-compilation determinatio,B,one non-compilation determination
+bp,"Hexane, 4-ethyl-2,2-dimethyl-",T_B,147.1,median of 1 non-compilation determinatio,B,one non-compilation determination
+bp,"Heptane, 2,3,4-trimethyl-",T_B,155.9,median of 1 non-compilation determinatio,B,one non-compilation determination
+bp,"Hexane, 2,2,3,5-tetramethyl-",T_B,148.7,median of 2 non-compilation determinatio,A,median of 2 non-compilation determinations from 2 distinct first authors
+bp,"Hexane, 2,3,4,4-tetramethyl-",T_B,162.2,median of 2 non-compilation determinatio,A,median of 2 non-compilation determinations from 2 distinct first authors
+bp,"Pentane, 2,2,3,4,4-pentamethyl-",T_B,159.3,median of 1 non-compilation determinatio,B,one non-compilation determination
+bp,"Hexane, 2,3,4,5-tetramethyl-",T_B,155.4,median of 2 non-compilation determinatio,A,median of 2 non-compilation determinations from 2 distinct first authors
+bp,"Hexane, 2,3,3,4-tetramethyl-",T_B,164.6,median of 1 non-compilation determinatio,B,one non-compilation determination
+bp,"Hexane, 2,3,3,5-tetramethyl-",T_B,152.9,median of 1 non-compilation determinatio,B,one non-compilation determination
+bp,"Pentane, 3-ethyl-2,2,4-trimethyl",T_B,155.3,median of 1 non-compilation determinatio,B,one non-compilation determination
+bp,"Pentane, 2,4-dimethyl-3-(1-methylethyl)-",T_B,157.0,median of 1 non-compilation determinatio,B,one non-compilation determination
+bp,"Pentane, 3-ethyl-2,3,4-trimethyl-",T_B,169.4,median of 1 non-compilation determinatio,B,one non-compilation determination
+bp,"Heptane, 2,3,3-trimethyl-",T_B,160.1,median of 1 non-compilation determinatio,B,one non-compilation determination

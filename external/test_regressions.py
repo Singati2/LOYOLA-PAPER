@@ -89,6 +89,20 @@ class RegressionTests(unittest.TestCase):
         for x in (1 + 1e-10 * s, 1e-200 * s, 1e200 * s, s + 1e10):
             self.assertFalse(B.degenerate_rows(x[None, :])[0])
 
+    def test_press_size_deletion_rank_loss(self):
+        """Deleting row 0 leaves 1, z, x linearly dependent (x = z on rows 1-4), so the deleted fit is
+        undefined; the full design passes the rank guard (ratio 1e-5), and the leverage from the
+        inverse of A'A is 1 - 5e-7. press_size must reject it (v40.30; external audit 2026-10-12)."""
+        z = np.arange(1., 6.); x = z.copy(); x[0] += 1e-4; y = np.array([2., -1., 3., 4., 0.])
+        self.assertEqual(np.linalg.matrix_rank(np.column_stack([np.ones(4), z[1:], x[1:]])), 2)
+        self.assertTrue(np.isinf(BP.press_size(x[None, :], z, y)[0]))
+        # a well-posed design beside it is still accepted and equals explicit leave-one-out fits
+        x2 = np.array([0.3, -1.2, 2.0, 0.7, 1.9, -0.4]); z2 = np.arange(6.); y2 = np.array([1., 0., 2.5, 1.5, 3., 0.2])
+        A = np.column_stack([np.ones(6), z2, x2]); e = []
+        for i in range(6):
+            m = np.arange(6) != i; c, *_ = np.linalg.lstsq(A[m], y2[m], rcond=None); e.append(y2[i] - A[i] @ c)
+        self.assertAlmostEqual(BP.press_size(x2[None, :], z2, y2)[0], float(np.sqrt(np.mean(np.square(e)))), places=10)
+
     def test_press_size_near_collinear(self):
         """A candidate nearly collinear with n_C is either rejected or scored accurately: the
         inner-LOO RMSE agrees with a 60-digit reference to 1e-6 whenever it is finite (v40.29)."""
