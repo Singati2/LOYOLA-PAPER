@@ -1368,7 +1368,9 @@ ranking, an authors' counter-attack and a chair ruling (summarised in the readin
   sv_min > 1e-6 sv_max (was 1e-10): designs nearly collinear with n_C gave a closed-form PRESS wrong
   by several percent; on the data the smallest accepted ratio is 4.6e-4 and no selection or value
   changes (20,300 calls compared with a QR evaluation, max relative difference 7e-11;
-  audit/final/scripts/press_size_probe.py, which also checks that it reproduces the published run).
+  audit/final/scripts/press_size_probe.py, which also checks that it reproduces the published run
+  and exits non-zero on any rejection, selection change, non-finite PRESS or QR value, or QR
+  disagreement above 1e-8; external/test_regressions.py test_press_probe_fails_closed checks that rule).
 - Leakage: none submission-critical; grouped leave-one-out by count vector moves Q2 by at most 0.01.
   Supplementary Table S8 picked the fixed index on all 18 octanes; nested, T_B is 0.745 (tuned 0.764)
   and S 0.950, and the caption and text now say so. M_{4.5,-9} and LO(0,0,1) are marked as chosen on

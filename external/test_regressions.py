@@ -126,6 +126,29 @@ class RegressionTests(unittest.TestCase):
             BB.inchi_tree("InChI=1S/C3H8/c1-2-1-2-3", 3)
         self.assertEqual(BB.inchi_tree("InChI=1S/C6H14/c1-5(2)6(3)4", 6).number_of_edges(), 5)
 
+    def test_press_probe_fails_closed(self):
+        """The press_size probe passes on its committed output and fails on every disallowed
+        diagnostic: rejection, band, selection change, leverage-1, non-finite QR, QR
+        disagreement above 1e-8, non-finite deviation, or an unreproduced published output."""
+        import re
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "audit" / "final" / "scripts"))
+        import press_size_probe as PP
+        out = (Path(PP.__file__).resolve().parent / "press_size_probe_out.txt").read_text()
+        n = lambda pat: float(re.search(pat, out).group(1))
+        S = {"calls": n(r"calls (\d+)"), "candidates": n(r"candidates (\d+)"), "rej_1e6": n(r"at 1e-6: (\d+)"),
+             "rej_1e10": n(r"at 1e-10: (\d+);"), "band": n(r"1e-6\): (\d+)"), "argmin_changes": n(r"argmin: (\d+)"),
+             "argmin_changes_if_1e10": n(r"\(at 1e-10: (\d+)\)"), "rank_reject_leverage": n(r"candidates: (\d+)$"),
+             "max_rel_vs_qr": n(r"relative difference ([\d.e+-]+)"), "max_abs_vs_qr": n(r"max absolute ([\d.e+-]+)"),
+             "nonfinite_qr": 0}
+        rs, rb = "summary.csv: True" in out, "baselines.csv: True" in out
+        self.assertEqual(PP.verdict(S, rs, rb), [])
+        bad = [("rej_1e6", 1), ("rej_1e10", 1), ("band", 1), ("argmin_changes", 1), ("argmin_changes_if_1e10", 1),
+               ("rank_reject_leverage", 1), ("nonfinite_qr", 1), ("max_rel_vs_qr", 2e-8), ("max_rel_vs_qr", float("nan")),
+               ("max_abs_vs_qr", float("inf")), ("calls", 0)]
+        for k, v in bad:
+            self.assertTrue(PP.verdict(dict(S, **{k: v}), rs, rb), k)
+        self.assertTrue(PP.verdict(S, False, rb)); self.assertTrue(PP.verdict(S, rs, False))
+
     def test_gamma_rule_one_sided(self):
         """The pre-registered rule needs the whole interval above zero; a wholly
         negative or zero-crossing interval never gives a gamma effect."""
