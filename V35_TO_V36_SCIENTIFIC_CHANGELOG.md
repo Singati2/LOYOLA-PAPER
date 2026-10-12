@@ -1367,7 +1367,8 @@ ranking, an authors' counter-attack and a chair ruling (summarised in the readin
   reproduces its committed output byte for byte. press_size accepts a design only when
   sv_min > 1e-6 sv_max (was 1e-10): designs nearly collinear with n_C gave a closed-form PRESS wrong
   by several percent; on the data the smallest accepted ratio is 4.6e-4 and no selection or value
-  changes (20,300 calls compared with a QR evaluation, max relative difference 7e-11).
+  changes (20,300 calls compared with a QR evaluation, max relative difference 7e-11;
+  audit/final/scripts/press_size_probe.py, which also checks that it reproduces the published run).
 - Leakage: none submission-critical; grouped leave-one-out by count vector moves Q2 by at most 0.01.
   Supplementary Table S8 picked the fixed index on all 18 octanes; nested, T_B is 0.745 (tuned 0.764)
   and S 0.950, and the caption and text now say so. M_{4.5,-9} and LO(0,0,1) are marked as chosen on
@@ -1389,7 +1390,7 @@ ranking, an authors' counter-attack and a chair ruling (summarised in the readin
   unchanged); the InChI parser rejects repeated atoms and bonds (rebuild unchanged); the standing
   hypothesis requires an edge; the Lean map points to verify_loyola_v35.py for the closed forms; the
   2,3-dimethylhexane entropy is reclassified CANNOT VERIFY (secondary match only; API-44 106.11),
-  so seven entropies are unverified and the API-44 sensitivity uses seven substitutions (max shift
+  so seven entropies are unverified and the API-44 sensitivity is recomputed with seven substitutions (max shift
   0.016, M1 ahead of HM by 0.005; was six, 0.018 and 0.004).
 - Not adopted: structural cuts and renaming (declined earlier); the AI-use statement, funding and
   conflict-of-interest lines and the archive DOI are author decisions (see the readiness report).

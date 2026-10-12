@@ -1,0 +1,9 @@
+press_size threshold probe over the published Tests A and B (external/bp/bp_tests.py)
+reproduces bp_results_summary.csv: True
+reproduces bp_baselines.csv: True
+calls 20300, candidates 40001200
+rejected at 1e-6: 0; at 1e-10: 0; in [1e-10, 1e-6): 0
+smallest sv_min/sv_max: all 4.643e-04, accepted 4.643e-04
+accepted PRESS vs QR: max relative difference 7.34e-11, max absolute 5.13e-10
+selected candidate differs from QR argmin: 0 calls (at 1e-10: 0)
+leverage-1 rejections among rank-accepted candidates: 0
