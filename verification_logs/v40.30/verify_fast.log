@@ -1,0 +1,21 @@
+commit 1d98621a7d3e150cb66a2fd6e4e57abbda18e0a2
+Mon Oct 12 21:28:53 UTC 2026
+Python 3.13.0
+[PASS] core verifier (137 s): scope: FULL PASS covers the executed computations, all 8 numeric tables of main.tex/supplement.tex (exact display strings), and canonical ar
+[PASS] prose numbers (5 s): prose numbers: 733 checked, 0 failures, 20 uncheckable (cited values; see UNCHECKABLE in the registries)
+[PASS] external regression tests (0 s): OK
+[PASS] baseline tests (54 s): 0 failures; 53.5s
+[PASS] constancy test check (25 s): RESULT: the two constancy tests never disagree on these inputs; no fold is affected
+[PASS] auxiliary outputs (6 s): Auxiliary output reproduction PASS
+[PASS] archived-source identities (0 s): Archived source formula/skeleton checks PASS: 154 pages
+[PASS] interval certificates (1 s): Mathematics interval checks PASS
+[PASS] prose style (0 s): prose style check: PASS
+[PASS] extremal trees (0 s): RESULT: extremal-tree proposition holds for all orders 4..12
+[PASS] collision minimality (3 s): RESULT: first order with distinct profiles sharing a q-histogram: 13 (all trees), 16 (maximum degree <= 4)
+[PASS] sum-connectivity pair (3 s): RESULT: Example ex:sumconn confirmed (D(1) = 0.2255, D(1e-6) = 2.4e-7)
+[PASS] count dimension and error floor (0 s): RESULT: affine dimension bounds attained (7, 7, 8); octane T_B floor SSE 2.925, RMSE 0.403
+[PASS] DATA copies (0 s): DATA/ check: every file matches its source
+[PASS] manifest (0 s): manifest OK: 499 files, one hash per path, all match
+[PASS] provenance CSV convention: 91 CRLF rows, field counts [12]
+ALL PASS (fast path)
+exit=0
