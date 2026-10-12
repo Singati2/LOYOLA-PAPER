@@ -94,22 +94,28 @@ def run(name, cmd, cwd):
 def main():
     if "--convention-only" in sys.argv:          # used by audit/attack_checks.py
         return 0 if check_csv_conventions() else 1
-    steps = list(FAST)
+    steps, skipped = list(FAST), []
     if "--full" in sys.argv or "--everything" in sys.argv:
         steps += FULL
     if "--full" in sys.argv or "--everything" in sys.argv:
         if shutil.which("tectonic"):
             steps.append(("labels and references", [PY, os.path.join("audit", "check_labels.py")], HERE))
         else:
-            print("[SKIP] labels and references: no tectonic on PATH")
+            print("[SKIP] labels and references: no tectonic on PATH"); skipped.append("labels and references")
         if shutil.which("lake"):
             steps.append(("Lean proofs", ["bash", "verify.sh"], os.path.join(HERE, "formal")))
         else:
-            print("[SKIP] Lean proofs: no Lean toolchain (lake) on PATH")
+            print("[SKIP] Lean proofs: no Lean toolchain (lake) on PATH"); skipped.append("Lean proofs")
     if "--everything" in sys.argv:
         steps += EVERYTHING
     ok = all([run(*s) for s in steps] + [check_csv_conventions()])
-    print("ALL PASS" if ok else "FAILURES")
+    mode = "everything" if "--everything" in sys.argv else "full" if "--full" in sys.argv else "fast path"
+    if not ok:
+        print("FAILURES")
+    elif skipped:   # v40.30: a run with skipped stages is not a full verification and must not read as one
+        print(f"INCOMPLETE ({mode}): executed steps passed, SKIPPED: {', '.join(skipped)}")
+    else:
+        print(f"ALL PASS ({mode})")
     return 0 if ok else 1
 
 

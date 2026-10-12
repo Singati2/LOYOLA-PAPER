@@ -11,10 +11,11 @@ Table 1) are replaced by the dataset values:
   octane 111.55 -> 111.70; 2,2-dimethylhexane 103.13 -> 103.40;
   2,2,4-trimethylpentane 101.81 -> 104.10; 2,3,3-trimethylpentane 102.06 -> 102.10
   (v40.5: base value corrected from the duplicated 101.31).
-S (1947 edition): the six entropies without a located later primary
+S (1947 edition): the seven entropies without a located later primary
 determination are replaced by the API Research Project 44 values (NBS
 Circular 461, 1947, Table 3p):
   4-methylheptane 109.32 -> 108.35; 2,2-dimethylhexane 103.13 -> 103.06;
+  2,3-dimethylhexane 108.02 -> 106.11 (v40.29);
   3,4-dimethylhexane 106.59 -> 104.38; 3-ethyl-2-methylpentane 106.06 -> 105.43;
   3-ethyl-3-methylpentane 101.48 -> 103.48; 2,3,3-trimethylpentane 102.06 -> 103.14.
 (The primary data are NOT changed; this is a disclosure-only sensitivity.)

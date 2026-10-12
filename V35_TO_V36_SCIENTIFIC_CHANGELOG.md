@@ -1396,3 +1396,56 @@ ranking, an authors' counter-attack and a chair ruling (summarised in the readin
   0.016, M1 ahead of HM by 0.005; was six, 0.018 and 0.004).
 - Not adopted: structural cuts and renaming (declined earlier); the AI-use statement, funding and
   conflict-of-interest lines and the archive DOI are author decisions (see the readiness report).
+
+## v40.30 (2026-10-12): follow-up audit fixes and claim provenance
+- external/bp/bp_tests.py press_size: deletion-induced rank loss is now decided on leverages from
+  the SVD factor U (1 - h > 1e-6) instead of |1 - h| > 1e-10 with h from the inverse of A'A. An
+  outside audit gave a five-point design whose deleted fit is rank 2 while the old leverage came out
+  as 1 - 5e-7, so a finite PRESS was returned for an undefined fit. PRESS values still use the old
+  h, so accepted candidates are unchanged: bp_tests.py, selection_resampling.py and
+  wide_box_diagnostics.py were rerun and every committed output is byte-identical.
+  test_press_size_deletion_rank_loss (fails on the old code) also checks an accepted design against
+  explicit leave-one-out fits.
+- constancy_test_check.py: candidates now come from the production generator
+  (baselines.candidate_triples, a fresh rng per seed and budget) and include the paired LO-zero
+  controls; the former version drew budget 500 after budget 200 from one rng and omitted those
+  controls, so it covered about a quarter of the triples the experiments use. It now also applies
+  the current resolution guard, and fails if the sampling code of the generators changes. Result
+  unchanged: 163,487 triples, no flag from any test, smallest relative range 2.432e-4.
+- supplement.tex S-quality item (i): the first entropy list named 2,3-dimethylhexane, which v40.29
+  moved to the unverified list, so 13 entropies were counted as 7 + 7; it now lists six.
+  source_sensitivity.py docstring lists the seventh substitution.
+- main.tex: the single-index decane range is stated exactly (0.149 to 0.514, was 0.15 to 0.51), with
+  three-decimal checks; the Wilhoit-Zwolinski publisher is given identically in both bibliographies.
+- REPRODUCE.md: the regression-test row no longer mentions an expected failure.
+- New audit/final/CLAIM_PROVENANCE_LEDGER.md and audit/final/scripts/claim_provenance.py: every
+  experimental value is classed by the number of independent primary determinations behind it
+  (compilations count as derivative), every literature attribution by its earliest source, and the
+  novelty statements as absence claims that cannot be independently verified. No number changes.
+- Follow-up after an independent audit brief (same version):
+  - constancy_test_check.py also covers ablation_robustness.py (seeds 12345, 777, 2024; budgets 200
+    and 500) and no longer adds LO-zero controls for seed 12345, which no generator draws; its
+    candidate set (166,478 triples) now equals an independent reconstruction
+    (audit/final/scripts/counterattack_v4030.py). No flag from any test.
+  - verify.py: a --full or --everything run with a skipped stage (no tectonic or no lake) ends with
+    "INCOMPLETE (...): executed steps passed, SKIPPED: ..." instead of "ALL PASS"; complete runs end
+    "ALL PASS (fast path|full|everything)".
+  - supplement.tex Section S1: one sentence stating that agreement with a secondary compilation is
+    not independent confirmation when both derive from the same measurement, with a pointer to the
+    claim provenance ledger. main.tex: the novelty sentence now points to the literature search
+    recorded in the repository (audit/final/NOVELTY_SEARCH_LOG.md).
+  - Citations: the 1972 Zagreb citation covers both M1 and M2 (Gutman and Das, MATCH 50 (2004) 84);
+    IRLA is defined in Reti et al. (2018), p. 516, Proposition 2, exactly as used; the content of
+    Konstantinova (1996) remains unverified (paywalled). No bibliography change.
+  - Notebooks: pinned to the tag v40.30 (clone and Colab links), with a visible REVISION MISMATCH
+    error; Colab installs the lock files; every step is labelled recompute / re-run / compare;
+    01 checks the provenance counts 39 and 8; 05 parses the four-decimal Test B cell (it failed on
+    -0.0001 since v40.29). REVIEWER_START_HERE.md added. REPRODUCE.md: seven entropies, 733 checks.
+  - No reported number, table, figure, theorem statement, data value or pre-registered conclusion
+    changes.
+- Pull-request review of aa17932 (three automated comments, each reproduced): the claim provenance
+  ledger deduplicates determinations by research group (four nonane dHvap values move from tier A to
+  B; totals A 35, B 55); counterattack_v4030.py reads the old press_size from a frozen copy
+  (audit/final/scripts/bp_tests_0c4a4db.py) and is replayed by audit/run_all_scripts.py; the
+  notebooks stop when the pinned revision cannot be confirmed unless LOYOLA_ALLOW_MISMATCH=1.
+  No reported number changes.

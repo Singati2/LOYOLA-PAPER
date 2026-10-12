@@ -5,19 +5,41 @@ import nbformat as nbf
 
 OUT = sys.argv[1] if len(sys.argv) > 1 else "notebooks"
 REPO_URL = "https://github.com/Singati2/LOYOLA-PAPER"
-COLAB = "https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/{}"
+# The notebooks are pinned to one immutable revision (a tag created by the author at submission).
+# Override with the environment variable LOYOLA_REVISION; a mismatch with the checked-out tree stops
+# the notebook unless LOYOLA_ALLOW_MISMATCH=1.
+REVISION = "v40.30"
+COLAB = "https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/" + REVISION + "/notebooks/{}"
 
-SETUP = r'''# Setup: runs inside the repository, or on Google Colab (clones the repository first).
-import os, sys, subprocess
+SETUP = r'''# Setup: runs inside the repository, or on Google Colab (clones the pinned revision first).
+import os, sys, subprocess, platform
+REVISION = os.environ.get("LOYOLA_REVISION", "@@REVISION@@")
 if os.path.exists("../verify.py"):
     os.chdir("..")
 elif not os.path.exists("verify.py"):
     if not os.path.exists("LOYOLA-PAPER"):
-        subprocess.run(["git", "clone", "--depth", "1", "https://github.com/Singati2/LOYOLA-PAPER.git"], check=True)
+        subprocess.run(["git", "clone", "--depth", "1", "--branch", REVISION, "https://github.com/Singati2/LOYOLA-PAPER.git"], check=True)
     os.chdir("LOYOLA-PAPER")
-if "google.colab" in sys.modules:
-    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-r", "requirements.txt", "pandas", "scikit-learn"], check=True)
+if "google.colab" in sys.modules:   # pinned versions, as used for the recorded results
+    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-r", "requirements-lock.txt", "-r", "requirements-extras-lock.txt"], check=True)
 ROOT = os.getcwd()
+git = lambda *a: subprocess.run(["git", *a], capture_output=True, text=True).stdout.strip()
+HEAD, DIRTY = git("rev-parse", "HEAD"), bool(git("status", "--porcelain", "--untracked-files=no"))
+PINNED = git("rev-parse", "--verify", "--quiet", REVISION + "^{commit}")
+if HEAD and not PINNED:   # shallow or local clone without the tag: try to fetch it before comparing
+    subprocess.run(["git", "fetch", "--quiet", "--depth", "1", "origin", "tag", REVISION], capture_output=True)
+    PINNED = git("rev-parse", "--verify", "--quiet", REVISION + "^{commit}")
+print(f"commit {HEAD or 'unknown (no git metadata)'}{' (uncommitted changes)' if DIRTY else ''}; "
+      f"pinned revision {REVISION}: {PINNED or 'could not be resolved'}")
+if (not HEAD or not PINNED or PINNED != HEAD) and os.environ.get("LOYOLA_ALLOW_MISMATCH") != "1":
+    raise RuntimeError(f"REVISION MISMATCH: cannot confirm that the files are {REVISION} "
+                       f"(checked out: {HEAD or 'unknown'}; {REVISION}: {PINNED or 'unresolved'}). "
+                       "Check out the pinned revision, or set LOYOLA_ALLOW_MISMATCH=1 to run anyway.")
+if os.environ.get("LOYOLA_ALLOW_MISMATCH") == "1" and (not PINNED or PINNED != HEAD):
+    print("WARNING: LOYOLA_ALLOW_MISMATCH=1 - these results are NOT tied to the pinned revision")
+import numpy, scipy, networkx, mpmath
+print("python", platform.python_version(), "| numpy", numpy.__version__, "| scipy", scipy.__version__,
+      "| networkx", networkx.__version__, "| mpmath", mpmath.__version__)
 for p in (ROOT, os.path.join(ROOT, "external"), os.path.join(ROOT, "external", "bp"), os.path.join(ROOT, "structural")):
     if p not in sys.path:
         sys.path.insert(0, p)
@@ -62,12 +84,17 @@ def nb(fname, title, intro, cells):
                   "language_info": {"name": "python"}}
     badge = f"[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]({COLAB.format(fname)})"
     n.cells = [nbf.v4.new_markdown_cell(f"# {title}\n\n{badge}\n\n{intro}\n\nEvery check prints the value in the paper "
-                                        "next to the recomputed value. The last cell fails if any of them differ."),
+                                        "next to the recomputed value. The last cell fails if any of them differ.\n\n"
+                                        "Each step is labelled **[recompute from source]** (values derived again from the data "
+                                        "or from first principles), **[re-run an experiment]** (a repository script is executed) or "
+                                        "**[compare against stored output]** (a committed result file is checked against the paper)."),
                nbf.v4.new_code_cell(SETUP), nbf.v4.new_code_cell(HELPERS)]
     for kind, src in cells:
         n.cells.append(nbf.v4.new_markdown_cell(src) if kind == "md" else nbf.v4.new_code_cell(src))
     n.cells.append(nbf.v4.new_markdown_cell("## Summary"))
     n.cells.append(nbf.v4.new_code_cell(SUMMARY))
+    for c in n.cells:
+        c.source = c.source.replace("@@REVISION@@", REVISION)
     os.makedirs(OUT, exist_ok=True)
     nbf.write(n, os.path.join(OUT, fname))
 
@@ -76,12 +103,12 @@ def nb(fname, title, intro, cells):
 nb("01_data.ipynb", "1. The datasets",
    "Loads every dataset in `DATA/` and checks that each file is identical to the file the analyses read.",
    [("code", 'run("python DATA/build_data.py --check")'),
-    ("md", "### Octane isomers (Table 4, Supplementary Table S5)"),
+    ("md", "### Octane isomers (Table 4, Supplementary Table S5) [compare against stored output]"),
     ("code", '''oct = pd.read_csv("DATA/octane_properties.csv")
 display(oct) if "display" in dir() else print(oct)
 check("number of octane isomers", 18, len(oct))
 check("dHvap of 2,2,3,3-tetramethylbutane used (kcal/mol)", 8.41, float(oct.set_index("name").loc["2,2,3,3-tetramethylbutane", "dHvap_kcal_per_mol"]))'''),
-    ("md", "### Nonane isomers (Section 6.3) and measured boiling points (Section 6.4)"),
+    ("md", "### Nonane isomers (Section 6.3) and measured boiling points (Section 6.4) [compare against stored output]"),
     ("code", '''non = pd.read_csv("DATA/nonane_properties.csv")
 bp = pd.read_csv("DATA/boiling_points_C6_C10.csv")
 print(non.head()); print(bp.head())
@@ -89,16 +116,24 @@ check("nonane isomers", 35, len(non))
 check("nonane dHvap values", 34, int(non.dHvap_kcal.notna().sum()))
 check("pooled C6-C10 boiling points", 100, len(bp))
 check("decanes in the boiling-point cohort", 34, int((bp.n_C == 10).sum()))'''),
-    ("md", "### Provenance\n\nEvery value has a source record. The tetramethylbutane audit is in `TMB_DHVAP_AUDIT.md`."),
+    ("md", "### Provenance [compare against stored output]\n\nEvery value has a source record. A label records numerical "
+           "agreement with the source consulted, not that the source is primary or independent: see "
+           "`audit/final/CLAIM_PROVENANCE_LEDGER.md` for the number of independent determinations behind each value. "
+           "The tetramethylbutane audit is in `TMB_DHVAP_AUDIT.md`."),
     ("code", '''prov = pd.read_csv("DATA/octane_provenance.csv")
-print(prov.classification.value_counts().to_string())
+vc = prov.classification.value_counts()
+print(vc.to_string())
+check("records labelled AGREEMENT WITHIN TOLERANCE (Supplementary Section S1)", 39, int(vc.get("AGREEMENT WITHIN TOLERANCE", 0)))
+check("records labelled CANNOT VERIFY (seven entropies and one dHvap)", 8, int(vc.get("CANNOT VERIFY", 0)))
+led = pd.read_csv("audit/final/scripts/claim_provenance_ledger.csv")
+print(led.groupby(["dataset", "property"]).tier.value_counts().unstack(fill_value=0))
 print(open("TMB_DHVAP_AUDIT.md").read()[:1500])'''),
     ])
 
 # ---------------------------------------------------------------- 02 mathematics
 nb("02_mathematics.ipynb", "2. The mathematical results (Sections 3 and 4)",
    "Lemma 3.1, the collision pairs of Theorem 3.5, Example 4.4 and the exhaustive certificates.",
-   [("md", "### Lemma 3.1: the witness determinant without the pair (1,1)"),
+   [("md", "### Lemma 3.1: the witness determinant without the pair (1,1) [recompute from source]"),
     ("code", '''from mpmath import mp, mpf, log, matrix, det, exp, sqrt
 mp.dps = 30
 v = lambda i, j: [1, log(i * j), log(i + j), mpf(abs(i - j)) / (i + j)]
@@ -107,7 +142,7 @@ closed = -log(mpf(3) / 2) * log(mpf(2) ** 13 / mpf(3) ** 8) / 6
 check("det of (1,2),(1,3),(2,2),(3,3)", -0.0150, float(d), 5e-5)
 check("closed form -(1/6) ln(3/2) ln(2^13/3^8)", float(d), float(closed), 1e-20)
 check("3^8 != 2^13", True, 3 ** 8 != 2 ** 13)'''),
-    ("md", "### Theorem 3.5(iii): the colliding profiles of orders 13 and 16"),
+    ("md", "### Theorem 3.5(iii): the colliding profiles of orders 13 and 16 [recompute from source; then re-run an experiment: the exhaustive enumeration]"),
     ("code", '''from fractions import Fraction
 from collections import Counter
 def qhist(profile):
@@ -128,7 +163,7 @@ print("order-13 histogram:", {str(k): v for k, v in sorted(qhist(T1).items())})'
 m = re.search(r"sharing a q-histogram: (\\d+) \\(all trees\\), (\\d+)", out)
 check("first collision order, all trees (orders 2-16 enumerated)", 13, int(m.group(1)))
 check("first collision order, max degree 4", 16, int(m.group(2)))'''),
-    ("md", "### Example 4.4: the sum-connectivity pair of Rada, Rodriguez and Sigarreta (2022)"),
+    ("md", "### Example 4.4: the sum-connectivity pair of Rada, Rodriguez and Sigarreta (2022) [recompute from source; re-run an experiment]"),
     ("code", '''D = lambda g: 3 * (exp(g / 2) - 1) - 4 / sqrt(5) * (exp(3 * g / 5) - exp(g / 5)) + 4 / sqrt(6) * (1 - exp(g / 3))
 check("D(0) = chi(S) - chi(T)", 0.0, float(D(0)), 1e-25)
 check("D(1)", 0.2255, float(D(1)), 5e-5)
@@ -136,7 +171,7 @@ check("D(1e-6)", 2.4e-7, float(D(mpf("1e-6"))), 5e-9)
 out = run("python structural/sumconn_pair_check.py", tail=6)
 check("the order-18 trees themselves give the same D(gamma)", True, "RESULT: Example ex:sumconn confirmed" in out)
 check("K4 and K_{1,3} at gamma = ln 4 (Remark 3.9)", 6.0, float(3 * exp(log(4) / 2)), 1e-20)'''),
-    ("md", "### Proposition 5.2 and the interval certificates"),
+    ("md", "### Proposition 5.2 and the interval certificates [re-run an experiment]"),
     ("code", 'run("python structural/extremal_trees_check.py", tail=3)\nrun("python audit/check_mathematics.py", tail=6)'),
     ])
 
@@ -156,7 +191,7 @@ def profiles(n, chem=False):
     return out
 def distinct(profs, a, b, g):
     return len({f"{od.lo_pairs([p for p, c in P for _ in range(c)], a, b, g):.10e}" for P in profs})'''),
-    ("md", "### The 106 trees of order 10 (Section 4.2)"),
+    ("md", "### The 106 trees of order 10 (Section 4.2) [recompute from source]"),
     ("code", '''trees10 = list(nx.nonisomorphic_trees(10)); P10 = profiles(10)
 def values10(a, b, g):
     vals = set()
@@ -170,7 +205,7 @@ check("LO(0,0,1) degeneracy (%)", 25.5, round(100 * (1 - values10(0, 0, 1) / 106
 check("M1 degeneracy (%)", 83.0, round(100 * (1 - values10(0, 1, 0) / 106), 1))
 check("M2 degeneracy (%)", 67.0, round(100 * (1 - values10(1, 0, 0) / 106), 1))
 check("chi distinct values", 77, values10(0, -0.5, 0))'''),
-    ("md", "### Table 2: first order with fewer values than profiles"),
+    ("md", "### Table 2: first order with fewer values than profiles [recompute from source]"),
     ("code", '''rows = {}
 for n in range(12, 18):
     for chem in (False, True):
@@ -188,7 +223,7 @@ check("R, all trees: order 14 values", 1095, rows[(14, False)][2])
 check("R, all trees: order 14 profiles", 1100, rows[(14, False)][0])
 check("R, max degree 4: order 17 values", 1191, rows[(17, True)][2])
 check("R, max degree 4: order 17 profiles", 1194, rows[(17, True)][0])'''),
-    ("md", "### Section 4.2: what gamma recovers off the ratio plane (all trees of order 16)"),
+    ("md", "### Section 4.2: what gamma recovers off the ratio plane (all trees of order 16) [recompute from source]"),
     ("code", '''P16 = profiles(16)
 check("profiles of order 16", 4069, len(P16))
 for a, b, g, want in ((0, 0.5, 0, 3475), (0, 1/3, 0, 3476), (0, 0.5, 1, 4069), (0, 1/3, 1, 4069),
@@ -227,9 +262,10 @@ for name, want in (("original", 0.984), ("excluded", 0.980), ("hypothetical liqu
 
 # ---------------------------------------------------------------- 05 boiling points
 nb("05_boiling_points.ipynb", "5. Pre-registered boiling-point tests (Section 6.4, Table 5)",
-   "Recomputes the within-fold baselines of Table 5 and the 200-permutation check (about 5 minutes). "
-   "The seed medians come from the committed run; set `RUN_SLOW = True` to recompute them (about 30 minutes) "
-   "and the exploratory selection-aware resampling (about 30 minutes).",
+   "Recomputes the within-fold baselines of Table 5 and the 200-permutation check (about 5 minutes) "
+   "[re-run an experiment]. By default the 50-seed medians and the exploratory resampling are read from the committed "
+   "result files [compare against stored output]; set `RUN_SLOW = True` to regenerate them [re-run an experiment]: "
+   "about 1 hour for `bp_tests.py` and about 3.5 hours for `selection_resampling.py` on a laptop CPU.",
    [("code", "RUN_SLOW = False"),
     ("code", '''import bp_tests as T
 import baselines as B
@@ -240,8 +276,10 @@ got = {(b[0], b[1]): float(b[3]) for b in base}
 tex = open("main.tex").read()
 tab = tex[tex.index(r"\\label{tab:bp}"):]
 lines = [l for l in tab[tab.index(r"\\midrule"):tab.index(r"\\bottomrule")].splitlines() if "&" in l]
-pa = [float(x) for x in re.findall(r"\\$([+-]?\\d+\\.\\d{3})\\$", lines[0])]
-pb = [float(x) for x in re.findall(r"\\$([+-]?\\d+\\.\\d{3})\\$", lines[1])]
+# three decimals, or four when |value| < 0.0005 (make_bp_table.dq_fmt, v40.29)
+num = r"\\$([+-]?\\d+\\.\\d{3,4})\\$"
+pa = [float(x) for x in re.findall(num, lines[0])]
+pb = [float(x) for x in re.findall(num, lines[1])]
 for name, key, i in (("Base", "mean", 0), ("Class.", "classical best", 1), ("IRLA", "IRLA", 2), ("LO_1", "LO(0,0,1) fixed", 3), ("Ridge", "ridge on degree-pair counts", 4)):
     check(f"decanes {name}", pa[i], round(got[("A", key)], 3), 0.0006)
 for name, key, i in (("Base", "size only", 0), ("Class.", "size + classical best", 1), ("IRLA", "size + IRLA", 2), ("LO_1", "size + LO(0,0,1) fixed", 3), ("Ridge", "ridge on degree-pair counts", 4)):
@@ -253,9 +291,10 @@ print(s.T)
 for line, row, lab in ((pa, s.iloc[0], "decanes"), (pb, s.iloc[1], "pooled")):
     check(f"{lab} GM median (wide box)", line[5], round(row.median_Q2_GM12, 3), 0.0006)
     check(f"{lab} LO_h median", line[6], round(row.median_Q2_LOh, 3), 0.0006)
-    check(f"{lab} median dQ2", line[7], round(row.median_dQ2_LOh_GM12, 3), 0.0006)
+    nd = 4 if abs(line[7]) < 0.0005 else 3
+    check(f"{lab} median dQ2", line[7], round(row.median_dQ2_LOh_GM12, nd), 0.6 * 10 ** -nd)
     check(f"{lab} pre-registered verdict", "no evidence that gamma adds value", row.prereg_verdict)'''),
-    ("md", "### The permutation check (selection-aware: the ridge penalty is re-chosen in every fold)"),
+    ("md", "### The permutation check (selection-aware: the ridge penalty is re-chosen in every fold) [re-run an experiment; seed 20261005, 200 permutations]"),
     ("code", '''F = np.array([B.count_vector(Pall[i]) for i in dec], float); yd = y[dec]
 real = B.scores(B.outer_loo(B.fold_ridge, F, yd)[0], yd)[0]
 rng = np.random.default_rng(20261005); q = []
@@ -268,7 +307,7 @@ check("permutation median", -0.09, round(float(np.median(q)), 2), 0.006)
 check("permutation 95th percentile", -0.01, round(float(np.percentile(q, 95)), 2), 0.006)
 check("permutation maximum", 0.20, round(float(q.max()), 2), 0.006)
 check("permutations reaching 0.860", 0, int((q >= real).sum()))'''),
-    ("md", "### Exploratory selection-aware resampling (added after the results; not pre-registered)"),
+    ("md", "### Exploratory selection-aware resampling (added after the results; not pre-registered) [compare against stored output by default; re-run an experiment with RUN_SLOW = True, about 3.5 hours]"),
     ("code", '''if RUN_SLOW:
     run("cd external/bp && python selection_resampling.py 500 200", tail=4)
 sr = pd.read_csv("external/bp/selection_resampling_summary.csv")

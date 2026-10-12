@@ -16,8 +16,8 @@ follow the compiled documents; the LaTeX labels are the stable identifiers.
 | `python3 structural/structural_checks.py` | tree orders 7-17, GA and crossing witnesses, identifiability (Delta<=6), structure sensitivity of IRLA and the gamma sweep, auxiliary Q2 values, ridge permutation check; Table tab:firstfail entry by entry | ~20 min |
 | `formal/verify.sh` | Lean 4 proofs (37 theorems and 1 lemma axiom-checked; no sorry/axioms) | ~1 min after first build |
 | `python3 manifest.py` | SHA-256 of every tracked file, one hash per path (`--write` regenerates it; stage new files with `git add` first, since untracked files are not hashed) | seconds |
-| `python3 external/test_regressions.py` | unit checks of the shared regression core (extreme descriptor scales, large-offset constancy, the one-sided boiling-point rule; one documented expected failure: translation invariance of candidate selection, deferred), the fail-closed CSV comparator, the fail-closed data build (missing archived page) and the structural certificate (empty witness set), without running the external suite | seconds |
-| `python3 prose_numbers_check.py` | every registered numeral of the running prose of both documents (730 checked entries in prose_claims_a.py and prose_claims_b.py; 20 cited values listed as uncheckable) recomputed from the canonical files | seconds |
+| `python3 external/test_regressions.py` | unit checks of the shared regression core (extreme descriptor scales, large-offset constancy, the one-sided boiling-point rule, translation invariance of candidate selection, the press_size rank and deletion-rank guards, the fail-closed press_size probe; no expected failures), the fail-closed CSV comparator, the fail-closed data build (missing archived page) and the structural certificate (empty witness set), without running the external suite | seconds |
+| `python3 prose_numbers_check.py` | every registered numeral of the running prose of both documents (733 checked entries in prose_claims_a.py and prose_claims_b.py; 20 cited values listed as uncheckable) recomputed from the canonical files | seconds |
 | `python3 audit/attack_checks.py` | 13 counter-attacks on the checkers outside the core verifier's self-test (corrupted outputs, data, manuscript numerals, archived records, disabled guards): each must be rejected | ~3 min |
 | `python3 audit/run_all_scripts.py` | every script of the repository re-run in an isolated copy of the tracked tree; every file it writes compared with the committed one (PDFs by canonical form); `python3 verify.py --everything` runs it after the full suite | ~2 h |
 | `python3 audit/check_exploratory_outputs.py` | fractional-point, chi-floor and calorimetric-availability outputs rebuilt in an isolated copy and compared byte-for-byte | seconds |
@@ -68,7 +68,7 @@ Coverage: GitHub CI runs the fast path only. The full suite, including the Lean 
 |---|---|---|
 | 100-seed robustness, paired control | expanded_robustness_v35.py | verify_loyola_v35.py |
 | tetramethylbutane exclusion sweep | tmb_exclusion_sensitivity.py | verify_loyola_v35.py |
-| omega- and entropy-source sensitivity (compiled alternatives; 1947 API-44 edition for the six unverified entropies, entropy_api44_sensitivity_v41.csv) | source_sensitivity.py | verify_loyola_v35.py (the two original outputs); the 1947-edition output by re-running the script |
+| omega- and entropy-source sensitivity (compiled alternatives; 1947 API-44 edition for the seven unverified entropies, entropy_api44_sensitivity_v41.csv) | source_sensitivity.py | verify_loyola_v35.py (the two original outputs); the 1947-edition output by re-running the script |
 | exploratory transfer (octane -> nonane) | external/transfer_exploratory.py | verify_external.py |
 | molecule bootstrap intervals | external/uncertainty_exploratory.py | verify_external.py |
 | pre-registered nonane test | external/nonane_validation.py (PREREG_v37.md) | verify_external.py |
