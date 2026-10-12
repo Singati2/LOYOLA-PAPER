@@ -66,6 +66,31 @@ def octane_rows():
     return out
 
 
+def study_groups(determinations):
+    """Distinct first-author surnames of the non-compilation determinations in a NIST listing
+    ("value (method; Author, A.; ..., YEAR: full reference; ...)"). Two entries of one study (for
+    example two methods, or two temperatures) and two papers of one first author count once."""
+    groups = set()
+    for m in re.finditer(r"(?:\(|;\s*)([A-Z][A-Za-z'\-]+)(?:[^;:()]*?),\s*(\d{4}):", determinations):
+        surname = m.group(1)
+        if not re.search(COMPILATION_AUTHORS, surname) and surname not in ("Anonymous",):
+            groups.add(surname)
+    return groups
+
+
+# First authors who published the same measurements together (Fenske, Braun et al. 1947; Braun,
+# Spooner, Fenske 1950) are one research group.
+SAME_GROUP = [{"Fenske", "Braun"}]
+
+
+def merge_coauthor_groups(groups):
+    out = set(groups)
+    for g in SAME_GROUP:
+        if out & g:
+            out = (out - g) | {"/".join(sorted(g))}
+    return out
+
+
 def nonane_rows():
     out = []
     for r in csv.DictReader(open(os.path.join(ROOT, "external", "nonane_provenance.csv"), newline="")):
@@ -81,9 +106,10 @@ def nonane_rows():
             else:
                 tier, why = "B", f"single primary determination ({who})"
         elif rule.startswith("no NIST AVG"):
-            prim = [e for e in entries if not re.search(COMPILATION_AUTHORS, e)]
-            tier = "A" if len(prim) >= 2 else ("B" if prim else "C")
-            why = f"most recent primary value chosen; {len(prim)} non-compilation determinations listed"
+            groups = merge_coauthor_groups(study_groups(d))
+            tier = "A" if len(groups) >= 2 else ("B" if groups else "C")
+            why = (f"most recent primary value chosen; {len(groups)} distinct research group(s) among the non-compilation "
+                   f"determinations ({', '.join(sorted(groups))})")
         else:
             tier, why = "?", rule[:60]
         out.append(("nonane", r["name"], r["property"], r["value_used"], rule[:40], tier, why))
@@ -101,6 +127,7 @@ def bp_rows():
         elif m and int(m.group(1)) >= 2:
             refs = re.findall(r"\(([^;()]+?),\s*(\d{4});", r["all_determinations"])
             groups = {a.split(",")[0].strip() for a, y in refs if not re.search(COMPILATION_AUTHORS, a)}
+            groups = merge_coauthor_groups(groups)
             tier = "A" if len(groups) >= 2 else "B"
             why = f"median of {m.group(1)} non-compilation determinations from {len(groups) or '?'} distinct first authors"
         elif m:

@@ -3,7 +3,7 @@
 
 T1  press_size. Leave-one-out PRESS for y ~ 1 + z + x is undefined exactly when deleting some row i
     leaves a rank-deficient design, which (for a full-rank full design) is equivalent to h_ii = 1.
-    The old implementation (git 0c4a4db) is loaded from git and compared with the current one on:
+    The old implementation (0c4a4db) is loaded from the frozen copy bp_tests_0c4a4db.py and compared with the current one on:
     (a) the outside audit's five-point design, whose deletion of row 0 is rank 2 for every
         perturbation delta of x[0], so the fit is undefined and inf is correct;
     (b) a family that is valid but nearly singular: x[1] is also perturbed by eps, so every deletion
@@ -32,9 +32,9 @@ out = []
 
 
 def load_old():
-    src = subprocess.run(["git", "show", "0c4a4db:external/bp/bp_tests.py"], cwd=ROOT, capture_output=True, text=True, check=True).stdout
-    f = tempfile.NamedTemporaryFile("w", suffix=".py", delete=False); f.write(src); f.close()
-    spec = importlib.util.spec_from_file_location("bp_old", f.name); m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+    """press_size as of 0c4a4db, from the frozen copy next to this script (no git needed)."""
+    spec = importlib.util.spec_from_file_location("bp_old", os.path.join(HERE, "bp_tests_0c4a4db.py"))
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
     return m
 
 

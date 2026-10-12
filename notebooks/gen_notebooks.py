@@ -26,10 +26,17 @@ ROOT = os.getcwd()
 git = lambda *a: subprocess.run(["git", *a], capture_output=True, text=True).stdout.strip()
 HEAD, DIRTY = git("rev-parse", "HEAD"), bool(git("status", "--porcelain", "--untracked-files=no"))
 PINNED = git("rev-parse", "--verify", "--quiet", REVISION + "^{commit}")
-print(f"commit {HEAD}{' (uncommitted changes)' if DIRTY else ''}; pinned revision {REVISION}: {PINNED or 'not present in this clone'}")
-if PINNED and PINNED != HEAD and os.environ.get("LOYOLA_ALLOW_MISMATCH") != "1":
-    raise RuntimeError(f"REVISION MISMATCH: checked-out {HEAD} is not {REVISION} ({PINNED}); "
-                       "check out the pinned revision or set LOYOLA_ALLOW_MISMATCH=1")
+if HEAD and not PINNED:   # shallow or local clone without the tag: try to fetch it before comparing
+    subprocess.run(["git", "fetch", "--quiet", "--depth", "1", "origin", "tag", REVISION], capture_output=True)
+    PINNED = git("rev-parse", "--verify", "--quiet", REVISION + "^{commit}")
+print(f"commit {HEAD or 'unknown (no git metadata)'}{' (uncommitted changes)' if DIRTY else ''}; "
+      f"pinned revision {REVISION}: {PINNED or 'could not be resolved'}")
+if (not HEAD or not PINNED or PINNED != HEAD) and os.environ.get("LOYOLA_ALLOW_MISMATCH") != "1":
+    raise RuntimeError(f"REVISION MISMATCH: cannot confirm that the files are {REVISION} "
+                       f"(checked out: {HEAD or 'unknown'}; {REVISION}: {PINNED or 'unresolved'}). "
+                       "Check out the pinned revision, or set LOYOLA_ALLOW_MISMATCH=1 to run anyway.")
+if os.environ.get("LOYOLA_ALLOW_MISMATCH") == "1" and (not PINNED or PINNED != HEAD):
+    print("WARNING: LOYOLA_ALLOW_MISMATCH=1 - these results are NOT tied to the pinned revision")
 import numpy, scipy, networkx, mpmath
 print("python", platform.python_version(), "| numpy", numpy.__version__, "| scipy", scipy.__version__,
       "| networkx", networkx.__version__, "| mpmath", mpmath.__version__)

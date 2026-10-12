@@ -1443,3 +1443,9 @@ ranking, an authors' counter-attack and a chair ruling (summarised in the readin
     -0.0001 since v40.29). REVIEWER_START_HERE.md added. REPRODUCE.md: seven entropies, 733 checks.
   - No reported number, table, figure, theorem statement, data value or pre-registered conclusion
     changes.
+- Pull-request review of aa17932 (three automated comments, each reproduced): the claim provenance
+  ledger deduplicates determinations by research group (four nonane dHvap values move from tier A to
+  B; totals A 35, B 55); counterattack_v4030.py reads the old press_size from a frozen copy
+  (audit/final/scripts/bp_tests_0c4a4db.py) and is replayed by audit/run_all_scripts.py; the
+  notebooks stop when the pinned revision cannot be confirmed unless LOYOLA_ALLOW_MISMATCH=1.
+  No reported number changes.

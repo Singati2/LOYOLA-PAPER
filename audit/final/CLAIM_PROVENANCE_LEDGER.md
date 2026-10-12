@@ -28,7 +28,7 @@ Several of these compilations reproduce one another, so agreement *between* them
 
 | Tier | Meaning |
 |---|---|
-| A | Two or more primary determinations from different groups stand behind the value. |
+| A | Two or more primary determinations from different research groups stand behind the value. Entries of one study (two methods, two temperatures) and papers of one first author count once, and the co-authors Fenske and Braun count as one group. |
 | A-AGG | A NIST/TRC average of two or more listed determinations. The constituent papers are not archived in the package, so their mutual independence is not checked. |
 | B | One identifiable primary determination. Every other agreeing source is derivative. |
 | B? | One NIST value whose primary reference was not recorded when the value was traced. |
@@ -45,9 +45,9 @@ Several of these compilations reproduce one another, so agreement *between* them
 | Octanes | S | 18 | – | – | 2 | 3 | 6 | 7 |
 | Octanes | ω | 18 | – | – | – | – | 17 | 1 |
 | Nonanes | T_B | 35 | 10 | 20 | 5 | – | – | – |
-| Nonanes | ΔH_vap | 34 | 4 | 1 | – | – | 29 | – |
+| Nonanes | ΔH_vap | 34 | – | 1 | 4 | – | 29 | – |
 | Boiling-point sets | T_B | 100 | 24 | 58 | 18 | – | – | – |
-| **All** | | **259** | **39** | **97** | **51** | **11** | **52** | **9** |
+| **All** | | **259** | **35** | **97** | **55** | **11** | **52** | **9** |
 
 ### Derivative chains
 

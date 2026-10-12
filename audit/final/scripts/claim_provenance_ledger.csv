@@ -97,9 +97,9 @@ nonane,3-methyloctane,T_B,143.9,NIST average (AVG) value — prereg primar,A-AGG
 nonane,3-methyloctane,dHvap,10.73,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
 nonane,4-methyloctane,T_B,141.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
 nonane,4-methyloctane,dHvap,10.64,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
-nonane,3-ethylheptane,T_B,143.6,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 3 non-compilation determinations listed
+nonane,3-ethylheptane,T_B,143.6,no NIST AVG; most recent primary experim,A,"most recent primary value chosen; 2 distinct research group(s) among the non-compilation determinations (Bazhulin, Whitmore)"
 nonane,3-ethylheptane,dHvap,10.64,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
-nonane,4-ethylheptane,T_B,141.2,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 3 non-compilation determinations listed
+nonane,4-ethylheptane,T_B,141.2,no NIST AVG; most recent primary experim,A,"most recent primary value chosen; 3 distinct research group(s) among the non-compilation determinations (Brooks, Butler, Oberreit)"
 nonane,4-ethylheptane,dHvap,10.54,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Labbauf, Greenshields, et al. 1961); earliest determination not identifiable"
 nonane,"2,2-dimethylheptane",T_B,131.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
 nonane,"2,2-dimethylheptane",dHvap,10.11,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
@@ -113,11 +113,11 @@ nonane,"2,6-dimethylheptane",T_B,134.9,NIST average (AVG) value — prereg prima
 nonane,"2,6-dimethylheptane",dHvap,10.35,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
 nonane,"3,3-dimethylheptane",T_B,136.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
 nonane,"3,3-dimethylheptane",dHvap,10.18,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
-nonane,"3,4-dimethylheptane",T_B,140.7,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 2 non-compilation determinations listed
+nonane,"3,4-dimethylheptane",T_B,140.7,no NIST AVG; most recent primary experim,A,"most recent primary value chosen; 2 distinct research group(s) among the non-compilation determinations (Braun/Fenske, Henne)"
 nonane,"3,4-dimethylheptane",dHvap,10.42,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
-nonane,"3,5-dimethylheptane",T_B,135.5,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 3 non-compilation determinations listed
+nonane,"3,5-dimethylheptane",T_B,135.5,no NIST AVG; most recent primary experim,A,"most recent primary value chosen; 3 distinct research group(s) among the non-compilation determinations (Braun/Fenske, Maurel, Treshchova)"
 nonane,"3,5-dimethylheptane",dHvap,10.35,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
-nonane,"4,4-dimethylheptane",T_B,134.4,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 2 non-compilation determinations listed
+nonane,"4,4-dimethylheptane",T_B,134.4,no NIST AVG; most recent primary experim,A,"most recent primary value chosen; 2 distinct research group(s) among the non-compilation determinations (Braun/Fenske, Levina)"
 nonane,"4,4-dimethylheptane",dHvap,10.09,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
 nonane,3-ethyl-2-methylhexane,T_B,138.0,single NIST Tboil determination (no AVG ,B,"single primary determination (Fenske, Braun, et al. 1947)"
 nonane,3-ethyl-2-methylhexane,dHvap,10.33,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Labbauf, Greenshields, et al. 1961); earliest determination not identifiable"
@@ -126,36 +126,36 @@ nonane,3-ethyl-3-methylhexane,dHvap,10.25,"only one NIST ΔvapH° entry, non-cal
 nonane,4-ethyl-2-methylhexane,T_B,133.8,single NIST Tboil determination (no AVG ,B,"single primary determination (Fenske, Braun, et al. 1947)"
 nonane,4-ethyl-2-methylhexane,dHvap,10.25,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Labbauf, Greenshields, et al. 1961); earliest determination not identifiable"
 nonane,3-ethyl-4-methylhexane,T_B,140.4,single NIST Tboil determination (no AVG ,B,"single primary determination (Fenske, Braun, et al. 1947)"
-nonane,"2,2,3-trimethylhexane",T_B,134.3,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 3 non-compilation determinations listed
+nonane,"2,2,3-trimethylhexane",T_B,134.3,no NIST AVG; most recent primary experim,A,"most recent primary value chosen; 3 distinct research group(s) among the non-compilation determinations (Braun/Fenske, Maretina, Schlesman)"
 nonane,"2,2,3-trimethylhexane",dHvap,9.97,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
 nonane,"2,2,4-trimethylhexane",T_B,126.5,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
 nonane,"2,2,4-trimethylhexane",dHvap,9.73,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
 nonane,"2,2,5-trimethylhexane",T_B,123.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
-nonane,"2,2,5-trimethylhexane",dHvap,9.60,no NIST AVG; most recent calorimetric (m,A,most recent primary value chosen; 2 non-compilation determinations listed
-nonane,"2,3,3-trimethylhexane",T_B,136.3,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 3 non-compilation determinations listed
+nonane,"2,2,5-trimethylhexane",dHvap,9.60,no NIST AVG; most recent calorimetric (m,B,most recent primary value chosen; 1 distinct research group(s) among the non-compilation determinations (Osborne)
+nonane,"2,3,3-trimethylhexane",T_B,136.3,no NIST AVG; most recent primary experim,A,"most recent primary value chosen; 3 distinct research group(s) among the non-compilation determinations (Buck, Cline, Levina)"
 nonane,"2,3,3-trimethylhexane",dHvap,10.06,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
 nonane,"2,3,4-trimethylhexane",T_B,138.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
 nonane,"2,3,4-trimethylhexane",dHvap,10.21,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
 nonane,"2,3,5-trimethylhexane",T_B,130.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
-nonane,"2,3,5-trimethylhexane",dHvap,9.90,no NIST AVG; most recent calorimetric (m,A,most recent primary value chosen; 2 non-compilation determinations listed
+nonane,"2,3,5-trimethylhexane",dHvap,9.90,no NIST AVG; most recent calorimetric (m,B,most recent primary value chosen; 1 distinct research group(s) among the non-compilation determinations (Osborne)
 nonane,"2,4,4-trimethylhexane",T_B,130.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
 nonane,"2,4,4-trimethylhexane",dHvap,9.82,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
-nonane,"3,3,4-trimethylhexane",T_B,140.4,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 2 non-compilation determinations listed
+nonane,"3,3,4-trimethylhexane",T_B,140.4,no NIST AVG; most recent primary experim,A,"most recent primary value chosen; 2 distinct research group(s) among the non-compilation determinations (Braun/Fenske, Pomerantz)"
 nonane,"3,3,4-trimethylhexane",dHvap,10.09,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
 nonane,"3,3-diethylpentane",T_B,146.2,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
-nonane,"3,3-diethylpentane",dHvap,10.18,no NIST AVG; most recent calorimetric (m,A,most recent primary value chosen; 2 non-compilation determinations listed
-nonane,"3-ethyl-2,2-dimethylpentane",T_B,133.8,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 3 non-compilation determinations listed
+nonane,"3,3-diethylpentane",dHvap,10.18,no NIST AVG; most recent calorimetric (m,B,most recent primary value chosen; 1 distinct research group(s) among the non-compilation determinations (Fuchs)
+nonane,"3-ethyl-2,2-dimethylpentane",T_B,133.8,no NIST AVG; most recent primary experim,A,"most recent primary value chosen; 2 distinct research group(s) among the non-compilation determinations (Braun/Fenske, Howard)"
 nonane,"3-ethyl-2,2-dimethylpentane",dHvap,9.97,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
 nonane,"3-ethyl-2,3-dimethylpentane",T_B,141.6,single NIST Tboil determination (no AVG ,B,single primary determination (Kinney and Spliethoff 1949)
 nonane,"3-ethyl-2,3-dimethylpentane",dHvap,10.21,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
-nonane,"3-ethyl-2,4-dimethylpentane",T_B,136.7,no NIST AVG; most recent primary experim,A,most recent primary value chosen; 4 non-compilation determinations listed
+nonane,"3-ethyl-2,4-dimethylpentane",T_B,136.7,no NIST AVG; most recent primary experim,A,"most recent primary value chosen; 3 distinct research group(s) among the non-compilation determinations (Bazhulin, Braun/Fenske, Howard)"
 nonane,"3-ethyl-2,4-dimethylpentane",dHvap,10.11,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
 nonane,"2,2,3,3-tetramethylpentane",T_B,140.3,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
 nonane,"2,2,3,3-tetramethylpentane",dHvap,9.85,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
 nonane,"2,2,3,4-tetramethylpentane",T_B,133.0,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
 nonane,"2,2,3,4-tetramethylpentane",dHvap,9.75,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
 nonane,"2,2,4,4-tetramethylpentane",T_B,122.3,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
-nonane,"2,2,4,4-tetramethylpentane",dHvap,9.20,no NIST AVG; most recent calorimetric (m,A,most recent primary value chosen; 2 non-compilation determinations listed
+nonane,"2,2,4,4-tetramethylpentane",dHvap,9.20,no NIST AVG; most recent calorimetric (m,B,most recent primary value chosen; 1 distinct research group(s) among the non-compilation determinations (Fuchs)
 nonane,"2,3,3,4-tetramethylpentane",T_B,139.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
 nonane,"2,3,3,4-tetramethylpentane",dHvap,9.99,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
 bp,"Butane, 2,3-dimethyl-",T_B,58.1,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"

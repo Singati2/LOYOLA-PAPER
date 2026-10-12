@@ -5,9 +5,12 @@ This repository holds the paper "The Loyola Index Family and the Resolution Limi
 code, tests, notebooks and Lean proofs. Everything stays in one repository.
 
 **Pinned revision.** The notebooks are pinned to the tag `v40.30`. That tag is created by the
-author at submission. Until it exists, the Colab links below do not resolve, and a local run
-prints "pinned revision v40.30: not present in this clone". If the checked-out commit differs from
-the tag, the notebooks stop with `REVISION MISMATCH`. Set `LOYOLA_ALLOW_MISMATCH=1` to override.
+author at submission. Until it exists, the Colab links below do not resolve. A notebook that cannot
+confirm it is running the pinned revision first tries to fetch the tag, then stops with `REVISION
+MISMATCH`. This covers a checkout of another commit, a source archive without git metadata, and a
+clone without the tag. Set `LOYOLA_ALLOW_MISMATCH=1` to run anyway; the notebook then prints a
+warning that its results are not tied to the pinned revision. Before the tag exists, every run needs
+this variable.
 
 ## Two-minute quick start
 

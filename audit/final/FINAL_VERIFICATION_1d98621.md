@@ -115,3 +115,19 @@ No defect changed a reported number, table, figure, theorem statement, data valu
    - funding and conflict-of-interest lines;
    - coauthor approval;
    - the Zenodo DOI, minted only after the tag.
+
+## Addendum: pull-request review of aa17932 (automated reviewer, three comments)
+
+All three comments were reproduced and confirmed before any change.
+
+1. **The ledger counted duplicate entries of one study as independent determinations.**
+   - Affected rows: 2,2,5- and 2,3,5-trimethylhexane (both remaining entries are Osborne and Ginnings 1947), and 3,3-diethylpentane and 2,2,4,4-tetramethylpentane (Fuchs and co-workers).
+   - Fix: the script now deduplicates by research group (first-author surname; the co-authors Fenske and Braun count as one group).
+   - Result: four nonane ΔH_vap values move from tier A to tier B. **Corrected totals: A 35, A-AGG 97, B 55, B? 11, C 52, D 9** (was A 39, B 51). The boiling-point and nonane T_B tiers are unchanged.
+2. **counterattack_v4030.py was not replayed by `audit/run_all_scripts.py`, and it needed git.**
+   - It now reads the old press_size from a frozen copy (`audit/final/scripts/bp_tests_0c4a4db.py`, byte-identical to 0c4a4db apart from a two-line header) and is registered in the replay list.
+   - Run in an isolated copy of the tracked tree without `.git`, it exits 0 and reproduces its committed output byte for byte.
+3. **The notebooks ran unpinned when the tag could not be resolved.**
+   - They now try to fetch the tag. If the revision still cannot be confirmed, they stop with REVISION MISMATCH unless `LOYOLA_ALLOW_MISMATCH=1` is set, in which case they print a warning that the results are not tied to the pinned revision.
+   - Until the author creates the tag `v40.30`, every notebook run needs that variable.
+   - Tested: without the variable, 01 stops; with it, 01 passes 9 checks.
