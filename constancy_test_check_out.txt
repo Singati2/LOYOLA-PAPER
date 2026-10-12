@@ -1,4 +1,4 @@
-distinct candidate triples: 163487
+distinct candidate triples: 166478
 training folds examined: 35 (18 of 17 molecules, 17 of 16 molecules)
 descriptors flagged constant, old test: 0
 descriptors flagged constant, new test: 0

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Does the constancy test matter?  Every candidate triple actually drawn by
-ablation_gm_vs_lo.py (rng 12345, budget 200) and by expanded_robustness_v35.py /
+ablation_gm_vs_lo.py (rng 12345, budget 200), ablation_robustness.py (seeds 12345, 777, 2024;
+budgets 200 and 500) and by expanded_robustness_v35.py /
 tmb_exclusion_sensitivity.py (seeds 0-99, budgets 200 and 500; LO triples and
 gamma-zeroed GM pairs, and the paired LO-zero controls (LO's own alpha, beta with gamma = 0))
 is evaluated on the 18 octanes; on every outer training
@@ -28,6 +29,9 @@ SAMPLING = {
                                    "gm_p = np.round(rng.uniform(-2, 2, (budget, 2)), 3)", "lz_t = np.column_stack([lo_t[:, :2], np.zeros(budget)])"],
     "tmb_exclusion_sensitivity.py": ["rng = np.random.default_rng(seed)", "lo_t = np.round(rng.uniform(-2, 2, (budget, 3)), 3)",
                                      "gm_p = np.round(rng.uniform(-2, 2, (budget, 2)), 3)", "lz_t = np.column_stack([lo_t[:, :2], np.zeros(budget)])"],
+    "ablation_robustness.py": ["for seed in (12345, 777, 2024):", "for budget in (200, 500):", "rng = np.random.default_rng(seed)",
+                               "lo_c = [tuple(v) for v in np.round(rng.uniform(-2, 2, (budget, 3)), 3)]",
+                               "gm_c = [(a, b, 0.0) for a, b in np.round(rng.uniform(-2, 2, (budget, 2)), 3)]"],
     "ablation_gm_vs_lo.py": ["rng = np.random.default_rng(12345)", "LO_TRIPLES = np.round(rng.uniform(-2, 2, size=(200, 3)), 3)",
                              "GM_PAIRS   = np.round(rng.uniform(-2, 2, size=(200, 2)), 3)"],
 }
@@ -36,9 +40,12 @@ for fn, needles in SAMPLING.items():
     missing = [t for t in needles if t not in src]
     assert not missing, f"{fn}: sampling code changed, update this check: {missing}"
 streams = []
-for seed, budget in [(s, b) for s in range(100) for b in (200, 500)] + [(12345, 200)]:
+for seed, budget in [(s, b) for s in range(100) for b in (200, 500)]:           # expanded_robustness, tmb_exclusion
     gm_t, lo_t = B.candidate_triples(seed, budget)
     streams += [lo_t, gm_t, np.column_stack([lo_t[:, :2], np.zeros(budget)])]
+for seed, budget in [(s, b) for s in (12345, 777, 2024) for b in (200, 500)]:   # ablation_gm_vs_lo (12345/200), ablation_robustness
+    gm_t, lo_t = B.candidate_triples(seed, budget)
+    streams += [lo_t, gm_t]
 T = np.unique(np.vstack(streams), axis=0)
 X = np.array([[lo_pairs(P, a, b, g) for P in OP] for a, b, g in T])
 eps, tiny = np.finfo(float).eps, np.finfo(float).tiny

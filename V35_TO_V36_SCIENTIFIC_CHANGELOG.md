@@ -1422,3 +1422,24 @@ ranking, an authors' counter-attack and a chair ruling (summarised in the readin
   experimental value is classed by the number of independent primary determinations behind it
   (compilations count as derivative), every literature attribution by its earliest source, and the
   novelty statements as absence claims that cannot be independently verified. No number changes.
+- Follow-up after an independent audit brief (same version):
+  - constancy_test_check.py also covers ablation_robustness.py (seeds 12345, 777, 2024; budgets 200
+    and 500) and no longer adds LO-zero controls for seed 12345, which no generator draws; its
+    candidate set (166,478 triples) now equals an independent reconstruction
+    (audit/final/scripts/counterattack_v4030.py). No flag from any test.
+  - verify.py: a --full or --everything run with a skipped stage (no tectonic or no lake) ends with
+    "INCOMPLETE (...): executed steps passed, SKIPPED: ..." instead of "ALL PASS"; complete runs end
+    "ALL PASS (fast path|full|everything)".
+  - supplement.tex Section S1: one sentence stating that agreement with a secondary compilation is
+    not independent confirmation when both derive from the same measurement, with a pointer to the
+    claim provenance ledger. main.tex: the novelty sentence now points to the literature search
+    recorded in the repository (audit/final/NOVELTY_SEARCH_LOG.md).
+  - Citations: the 1972 Zagreb citation covers both M1 and M2 (Gutman and Das, MATCH 50 (2004) 84);
+    IRLA is defined in Reti et al. (2018), p. 516, Proposition 2, exactly as used; the content of
+    Konstantinova (1996) remains unverified (paywalled). No bibliography change.
+  - Notebooks: pinned to the tag v40.30 (clone and Colab links), with a visible REVISION MISMATCH
+    error; Colab installs the lock files; every step is labelled recompute / re-run / compare;
+    01 checks the provenance counts 39 and 8; 05 parses the four-decimal Test B cell (it failed on
+    -0.0001 since v40.29). REVIEWER_START_HERE.md added. REPRODUCE.md: seven entropies, 733 checks.
+  - No reported number, table, figure, theorem statement, data value or pre-registered conclusion
+    changes.

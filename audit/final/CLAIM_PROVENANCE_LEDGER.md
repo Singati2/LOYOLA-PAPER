@@ -94,20 +94,20 @@ The "Earliest source" column names the original work where the cited work is sec
 
 | Claim (location) | Cited | Earliest source | Independent confirmation | Check |
 |---|---|---|---|---|
-| Randić index; Zagreb indices (main §1) | Randic1975; GutmanTrinajstic1972 | Randić 1975 (original). The 1972 paper introduces the quantity now called M1. M2 is often credited to Gutman, Ruščić, Trinajstić and Wilcox (1975) | none needed | **to verify** that the 1972 citation covers M2 |
+| Randić index; Zagreb indices (main §1) | Randic1975; GutmanTrinajstic1972 | Randić 1975 (original); Gutman and Trinajstić 1972 (original for both M1 and M2) | Gutman and Das, MATCH 50 (2004) 83–92, p. 84: "in the approximate expressions for total π-electron energy two terms occur", namely M1 and M2; the names came later (Gutman, Ruščić, Trinajstić, Wilcox, J. Chem. Phys. 62 (1975) 3399–3405, DOI 10.1063/1.430994) | **VERIFIED** (secondary account by an author of the original, read from the scanned page) |
 | General Randić; general sum-connectivity (main §1) | BollobasErdos1998; ZhouTrinajstic2010 | the cited works are the originals | – | content not re-verified |
 | Sombor index (main §1) | Gutman2021Sombor | original | – | content not re-verified |
 | GA, HM, sum-connectivity as special cases (main §2) | VukicevicFurtula2009GA; ShirdelRezapourSayadi2013HM; ZhouTrinajstic2009sumconn | originals | the special-case identities follow by substituting the parameters into the definition; the tables compute these indices as LO at the stated points | verified (by definition); attribution content not re-verified |
 | Gutman–Milovanović family (main §2) | GutmanMilovanovic2020AKCE | original | – | content not re-verified |
 | Exponential VDB indices (main §2) | Rada2019ExpVDB | original | – | content not re-verified |
-| The ratio q appears in irregularity and degree-ratio indices (main §2) | Albertson1997; LinZhouWangMiao2022; RetiSharafdini2018IRLA; others | cited as appearances, not as the origin of q. IRLA may predate Réti et al. (2018) | – | **to verify** the earliest IRLA source |
+| The ratio q appears in irregularity and degree-ratio indices (main §2) | Albertson1997; LinZhouWangMiao2022; RetiSharafdini2018IRLA; others | IRLA is defined in Réti, Sharafdini, Drégelyi-Kiss, Haghbin, MATCH 79 (2018) 509–524, p. 516, Proposition 2: IRLA(G) = 2 Σ \|d_v − d_u\| / (d_v + d_u), a lower bound for the IRL index of Vukičević and Gašperov (2010); no earlier source is named there | identical to the manuscript's 2 Σ q_uv | **VERIFIED** (read from the published PDF) |
 | On Δ ≤ 4 every BID index is a linear functional of the ten counts (main §2) | Rada2026LinearVDB | immediate from the definition. The count vector already appears in the M-polynomial (Deutsch and Klavžar 2015) | follows from the definition | verified (by definition) |
 | Rada (2026) shows that no VDB index separates trees with equal profiles; its Example 3 assumes distinct exponents; the pendant-path device (main §3) | Rada2026LinearVDB | the cited work (MATCH 96, 2026) | exhaustive enumeration (`structural/structural_checks.py`, S1) finds collisions at every order 13 to 17, consistent with the propagation, but does not test the device itself | verified (metadata); content not re-verified for this ledger |
 | Lindemann–Weierstrass theorem (main §3) | Baker1975 | Lindemann 1882; Weierstrass 1885. Baker (1975) is a textbook treatment | standard | secondary citation, acceptable |
 | Zero set of a nonzero real-analytic function has measure zero (main §3, §4) | Mityagin2020 | folklore. Mityagin (2020) gives a short proof | standard | secondary citation, acceptable |
 | Laguerre's extension of Descartes' rule (main §5) | Jameson2006 | Laguerre 1883. Jameson (2006) is expository | the five-crossing certificate is checked in interval arithmetic | secondary citation, acceptable |
 | Weak discrimination; Example 2.2 trees with equal sum-connectivity (main §4) | RadaRodriguezSigarreta2022Weak | original | the equal sum-connectivity value is recomputed (`structural/sumconn_pair_check.py`, D(1e-6) = 2.4e-7) | verified (computation) for the value; that the trees are exactly those of the cited example is content not re-verified |
-| Degeneracy (main §5, supp. S2) | Konstantinova1996Degeneracy | the concept is older than 1996 (isomer-discrimination studies of the 1970s and 1980s) | – | **to verify**; cited for the concept, not as its origin |
+| Degeneracy (main §5, supp. S2) | Konstantinova1996Degeneracy | bibliographic record confirmed (J. Chem. Inf. Comput. Sci. 36 (1996) 54–57, DOI 10.1021/ci9502461); the abstract and full text are behind the publisher's paywall | – | **UNVERIFIED (content)**: whether the paper uses "degeneracy" in the sense cited could not be checked; the manuscript cites it for the concept, not as its origin |
 | Structure sensitivity; fingerprint variant (main §5, supp. S6) | FurtulaGutmanDehmer2013SS; RakicFurtula2019SS | originals | the implementation reproduces 11 of 14 published SS/Abr values of Barman and Das (2026) | verified (computation, against a third-party table) |
 | Path and star criteria (main §5) | CruzRada2019PathStar | original | the proposition is proved directly and checked for orders 4 to 12 | verified (computation) |
 | Gutman's survey: new variants hardly ever improve on earlier ones (main §1) | Gutman2026SomborSurvey | the survey | – | content not re-verified (opinion attributed to a source) |
@@ -130,9 +130,6 @@ These state that something was *not* found. No search can establish them, so the
 ## 5. What this changes
 
 - **No numerical result changes.** Every value keeps its registered number, and no conclusion depends on the tier of an individual value. The QSPR verdicts are robust to the documented substitutions (Supplementary Sections S1 and S8).
-- **Disclosure gap (author decision).** The supplement reports numerical agreement with compilations, but it does not say that this agreement is not an independent confirmation. One sentence in Section S1 would close the gap, for example:
-
-  > "Agreement with a compilation is not an independent confirmation: most ΔH_f values rest on one combustion study and most ΔH_vap values on one calorimetric study, while the acentric factors, six entropies and 29 nonane vaporisation enthalpies appear only in compilations."
-
-  The sentence names no new citations. Citing Prosen and Rossini (1945) and Osborne and Ginnings (1947) would require verified bibliographic details first.
-- **Three attributions remain to verify.** M2 in the 1972 citation, the origin of IRLA, and the origin of the degeneracy concept each need a literature lookup that could not be run in this session.
+- **Disclosure gap closed.** See the supplement clarification above. It names no new citations; citing Prosen and Rossini (1945) and Osborne and Ginnings (1947) directly would need their bibliographic records verified first.
+- **Attributions.** The 1972 Zagreb citation (M1 and M2) and the IRLA citation are verified (§3). The content of the Konstantinova (1996) citation remains UNVERIFIED because the paper is paywalled.
+- **Supplement clarification added (v40.30).** Section S1 now states that agreement with a secondary compilation is not independent confirmation when both derive from the same measurement, and points to this ledger.

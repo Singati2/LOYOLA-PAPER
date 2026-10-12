@@ -1,0 +1,20 @@
+T1a delta=0.1: deleted rank 2; old inf; new inf; reference None
+T1a delta=0.0001: deleted rank 2; old 4.6301; new inf; reference None
+T1a delta=1e-07: deleted rank 2; old inf; new inf; reference None
+T1b eps=0.1: min(1-h) 1.79e-02; reference 12.8228; old rel.err 1.5e-12; new rel.err 1.5e-12
+T1b eps=0.01: min(1-h) 1.25e-04; reference 139.532; old rel.err 1.1e-10; new rel.err 1.1e-10
+T1b eps=0.001: min(1-h) 1.20e-06; reference 1414.02; old rel.err 1.3e-09; new rel.err 1.3e-09
+T1b eps=0.0001: min(1-h) 1.20e-08; reference 14159.6; old rel.err 3.5e-07; new rel.err rejected
+T1b eps=1e-05: min(1-h) 1.20e-10; reference 141615; old rel.err 8.1e-05; new rel.err rejected
+T1c 400 random well-posed designs: rejected or old != new in 0; max rel. error vs 40-digit reference 4.8e-16
+T2 distinct triples over all four generators 166478 (current checker: 163487 without ablation_robustness); folds 613 (outer and inner); smallest relative range 2.344e-04; exact-zero std count 0
+T3 first list 6, second list 7, overlap [], total 13; second list == CANNOT VERIFY rows: True; first list classes: ['AGREEMENT WITHIN TOLERANCE', 'SOURCE VARIATION / EXPLAINED']
+T4 octane values re-converted from their first quoted source value: 78; within the audit tolerance 74; notes:
+   octane dHvap: unparsed 'NIST std-conditions 41. ± 4. k' [kJ/mol]
+   2,3-dimethylhexane T_B: |converted first source value - paper| = 0.250 > 0.15 [SOURCE VARIATION / EXPLAINED]
+   2,4-dimethylhexane T_B: |converted first source value - paper| = 0.550 > 0.15 [SOURCE VARIATION / EXPLAINED]
+   2,4-dimethylhexane S: unparsed 'API-44 (1947): 106.51 cal/(deg' [cal/(mol K)]
+   2,5-dimethylhexane S: unparsed 'API-44 (1947): 104.93 cal/(deg' [cal/(mol K)]
+   3,3-dimethylhexane S: unparsed 'API-44 (1947): 104.70 cal/(deg' [cal/(mol K)]
+   2,2,3-trimethylpentane S: |converted first source value - paper| = 0.310 > 0.3 [SOURCE VARIATION / EXPLAINED]
+   2,2,3,3-tetramethylbutane omega: |converted first source value - paper| = 0.004 > 0.003 [CONFLICT]
