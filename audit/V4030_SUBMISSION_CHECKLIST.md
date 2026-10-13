@@ -1,6 +1,6 @@
 # v40.30 submission checklist
 
-Status as of the adversarial audit. The audit branch is `audit/v4030-adversarial` (head `01ad6c6` plus the audit report commit); PR #3 is at `716cd37`; `main` is at `0c4a4db`.
+Status as of the adversarial audit. The code repairs are frozen at `01ad6c6` (branch `audit/v4030-adversarial`), and the manuscript edits and audit evidence are on `audit/v4030-edits`. PR #3 is at `716cd37` and `main` at `0c4a4db`; nothing has been pushed beyond PR #3.
 
 Owner key:
 - **A** = author decision;
@@ -12,7 +12,7 @@ Owner key:
 | # | Task | Owner | Status |
 |---|---|---|---|
 | 1 | Merge the audit fixes into the submission line. Merge `audit/v4030-adversarial` into PR #3, or review it as its own PR. | A | pending author approval |
-| 2 | Run `python3 verify.py --everything` on the exact commit to be tagged, **with Lean**. It needs `lake` on PATH and about 8 GB of free disk for the Mathlib build; this machine had about 5.6 GB. The run must end `ALL PASS (everything)` with exit 0. `INCOMPLETE` (exit 3) does not count. | R | NOT RUN with Lean; see the audit report for the run without Lean |
+| 2 | Run `python3 verify.py --everything` on the exact commit to be tagged, **with Lean**. It needs `lake` on PATH and about 8 GB of free disk for the Mathlib build; this machine had about 5.6 GB. The run must end `ALL PASS (everything)` with exit 0. `INCOMPLETE` (exit 3) does not count. | R | Without Lean, on 01ad6c6: every executed stage PASS, including the replay of all 53 scripts; ended INCOMPLETE, exit 3 (`verification_logs/v40.30/everything_01ad6c6.log`). With Lean: NOT RUN. |
 | 3 | Run `cd formal && bash verify.sh`. It must report 38 theorems with axioms limited to propext, Classical.choice and Quot.sound. | R | NOT RUN at 01ad6c6. Last pass at 3af7f67; `formal/` is unchanged since. |
 | 4 | Run the six notebooks on the final commit in a fresh environment. Before the tag exists they need `LOYOLA_ALLOW_MISMATCH=1`; after tagging, run them without it. | R | done at 1d98621 (153 checks, 0 mismatches); rerun on the final commit after tagging |
 | 5 | GitHub Actions green on the final commit. This covers the fast path only. | C | green on 716cd37 |

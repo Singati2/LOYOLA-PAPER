@@ -30,7 +30,7 @@ MACHINE-READABLE OUTPUT (next to this script)
                             leader and runner-up, difference, 95% CI, reading, subset leader
   sensitivity_bp.csv        per test and scenario: n, excluded identifiers, estimable, count rank, full-data Q2,
                             matched (original predictions on retained molecules), refit Q2, difference, 95% CI
-The commit and the number of modified tracked files are stamped at the start of the text output.
+The commit and the number of modified tracked files are printed to the console (not written to the outputs, so they replay on any commit).
   python3 audit/v4030/uncertain_source_sensitivity.py   -> uncertain_source_sensitivity_out.txt and the CSVs
 """
 import subprocess
@@ -55,7 +55,7 @@ def reading(v):
 def q2(p, y): return 1 - ((y - p) ** 2).sum() / ((y - y.mean()) ** 2).sum()
 rng = np.random.default_rng(20261013)
 _g = lambda *a: subprocess.run(["git", "-C", ROOT, *a], capture_output=True, text=True).stdout.strip()
-say(f"commit {_g('rev-parse', 'HEAD') or 'unknown'}; modified tracked files: {len([l for l in _g('status', '--porcelain', '--untracked-files=no').splitlines() if l])}")
+print(f"commit {_g('rev-parse', 'HEAD') or 'unknown'}; modified tracked files: {len([l for l in _g('status', '--porcelain', '--untracked-files=no').splitlines() if l])}")
 OCT_ROWS, BP_ROWS, FILT_ROWS = [], [], []
 def write(fn, header, rows):
     with open(os.path.join(HERE, fn), "w", newline="") as f:
@@ -152,5 +152,5 @@ write("sensitivity_octane.csv", ["property", "scenario", "n", "excluded", "estim
 write("sensitivity_bp.csv", ["test", "scenario", "n", "excluded", "estimable", "count_rank", "best_single", "full_Q2_ridge",
                              "full_Q2_best_single", "matched_Q2_ridge", "matched_Q2_best_single", "refit_Q2_ridge",
                              "refit_Q2_best_single", "refit_difference_ci95", "reading"], BP_ROWS)
-say(f"end: commit {_g('rev-parse', 'HEAD') or 'unknown'}; modified tracked files: {len([l for l in _g('status', '--porcelain', '--untracked-files=no').splitlines() if l])}")
+print(f"end: commit {_g('rev-parse', 'HEAD') or 'unknown'}; modified tracked files: {len([l for l in _g('status', '--porcelain', '--untracked-files=no').splitlines() if l])}")
 open(os.path.join(HERE, "uncertain_source_sensitivity_out.txt"), "w").write("\n".join(OUT) + "\n")

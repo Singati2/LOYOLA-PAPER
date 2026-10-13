@@ -17,7 +17,9 @@ sys.path[:0] = [ROOT, os.path.join(ROOT, "external"), os.path.join(ROOT, "extern
 import baselines as BL, bp_tests as T
 rows, P, y, z = T.load()
 _g = lambda *a: subprocess.run(["git", "-C", ROOT, *a], capture_output=True, text=True).stdout.strip()
-out = [f"commit {_g('rev-parse', 'HEAD')}; modified tracked files: {len([l for l in _g('status', '--porcelain', '--untracked-files=no').splitlines() if l])}"]
+STAMP = f"commit {_g('rev-parse', 'HEAD')}; modified tracked files: {len([l for l in _g('status', '--porcelain', '--untracked-files=no').splitlines() if l])}"
+print(STAMP)  # freeze stamp: printed, not written, so the output file can be replayed on any commit
+out = []
 def corrupt(v): return v * 1000.0 + 1e6
 for tst, idx in (("decanes", [i for i in range(len(rows)) if rows[i]["n_C"] == "10"]), ("pooled", list(range(len(rows))))):
     Pk, yk, zk = [P[i] for i in idx], y[idx], z[idx]; n = len(idx)
@@ -39,5 +41,5 @@ for tst, idx in (("decanes", [i for i in range(len(rows)) if rows[i]["n_C"] == "
     for k, v in ch.items():
         out.append(f"{tst:8} {k:16}: folds whose chosen model changed when the held-out compound's features were corrupted: {v}/{n}")
         print(out[-1], flush=True)
-out.append(out[0].replace("commit", "end: commit"))
+print("end: " + STAMP)
 open(os.path.join(HERE, "feature_leakage_probe_out.txt"), "w").write("\n".join(out) + "\n")

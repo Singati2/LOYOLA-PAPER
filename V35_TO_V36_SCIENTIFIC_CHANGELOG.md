@@ -1483,3 +1483,7 @@ ranking, an authors' counter-attack and a chair ruling (summarised in the readin
   - audit/v4030/: the scripts, machine-readable tables and outputs of the sensitivity, leakage,
     Table 2, mathematics and gamma checks; audit/V4030_COUNTEREXAMPLES.md and
     V4030_SUBMISSION_CHECKLIST.md; NOVELTY_SEARCH_LOG.md gains the zbMATH and arXiv searches.
+  - Verification of 01ad6c6 (verification_logs/v40.30/everything_01ad6c6.log): verify.py --everything
+    with lake hidden; every executed stage PASS, including the replay of all 53 scripts (6,097 s);
+    INCOMPLETE because Lean was skipped, exit 3. The audit scripts of audit/v4030 are registered in the
+    replay; their freeze stamps are printed rather than written, so their outputs replay on any commit.

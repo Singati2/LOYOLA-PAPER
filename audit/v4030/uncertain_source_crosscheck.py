@@ -77,6 +77,6 @@ pd.DataFrame(rows_cmp, columns=["scenario", "n", "Q2_sklearn", "Q2_audited", "ma
     os.path.join(HERE, "sensitivity_ridge_crosscheck.csv"), index=False)
 import subprocess
 _g = lambda *a: subprocess.run(["git", "-C", ROOT, *a], capture_output=True, text=True).stdout.strip()
-say(f"commit {_g('rev-parse', 'HEAD')}; modified tracked files: {len([l for l in _g('status', '--porcelain', '--untracked-files=no').splitlines() if l])}")
+print(f"commit {_g('rev-parse', 'HEAD')}; modified tracked files: {len([l for l in _g('status', '--porcelain', '--untracked-files=no').splitlines() if l])}")
 say(f"pooled strict n={int(bp.tier.isin(SC['strict']).sum())}, broad n={int(bp.tier.isin(SC['broad']).sum())}")
 open(os.path.join(HERE, "uncertain_source_crosscheck_out.txt"), "w").write("\n".join(OUT) + "\n")

@@ -1,4 +1,3 @@
-commit 01ad6c646583ca0ef0f0d16d39621ffc57681ea5; modified tracked files: 0
 OCTANE TABLE 4: the original column leader and runner-up, |r| on each subset, paired bootstrap of |r|(leader) - |r|(runner-up)
   T_B    original n=18 excluded= 0: mM2 0.855 vs LO(0,0,2) 0.829, difference +0.026, 95% CI [-0.042, +0.162]; NOT RESOLVED (interval includes 0; not equivalence); subset leader mM2
   T_B    broad    n=18 excluded= 0: mM2 0.855 vs LO(0,0,2) 0.829, difference +0.026, 95% CI [-0.041, +0.161]; NOT RESOLVED (interval includes 0; not equivalence); subset leader mM2
@@ -24,4 +23,3 @@ BOILING POINTS: leave-one-out Q2; ridge on degree-pair counts minus the best sin
   B pooled  strict   n= 42 excluded=58 (count rank 8): refit ridge 0.951, best single size+IRLA 0.673, difference +0.278, 95% CI [+0.137, +0.472], difference supported; matched original fit on these molecules: ridge 0.944, size+IRLA 0.666; all: ridge 0.951, size only 0.643, size+classical 0.586, size+IRLA 0.673, size+LO(0,0,1) 0.671
 NOT RUN: the registered gamma test (GM vs LO over 50 seeds) on the restricted subsets (about one hour each; not pre-registered).
 NOT ESTIMABLE by construction: nonane dHvap strict (n = 4); octane S strict and broad (n = 2, 5); octane omega (n = 0); octane T_B strict (n = 0).
-end: commit 01ad6c646583ca0ef0f0d16d39621ffc57681ea5; modified tracked files: 0

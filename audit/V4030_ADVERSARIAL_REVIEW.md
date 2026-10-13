@@ -122,13 +122,19 @@ No abstract, theorem, table value, dataset or pre-registered endpoint was change
 |---|---|
 | `verify.py` fast path | **PASS** (all 16 steps, inside the `--everything` run) |
 | `verify.py --full` stages: external verifier, structural checks, 32-digit recount, self-test, 13 counter-attacks, labels | **PASS** |
-| `verify.py --everything` (replay of every script) | see the run result below |
+| `verify.py --everything` (replay of every script) | **PASS** (6,097 s), within a run that is INCOMPLETE because Lean was skipped (exit 3) |
 | Lean (`formal/verify.sh`) | **NOT RUN** on this commit (about 5.6 GB free; the Mathlib build needs about 7.6 GB). Passed at 3af7f67, and `formal/` is unchanged since. |
 | Notebooks (fresh environment) | **PASS** at 1d98621 (153 checks); the pin logic was re-tested at 01ad6c6 |
 | Google Colab | **NOT RUN** |
 | GitHub Actions | green on 716cd37 (fast path only); not run on 01ad6c6 or 2732099 (not pushed) |
 
-**Run result:** RUN_RESULT_PLACEHOLDER
+**Run result** (`verification_logs/v40.30/everything_01ad6c6.log`): `python3 verify.py --everything` on `01ad6c6` (clean tree, lake hidden from PATH, tectonic present).
+
+- Runtime: 10,236 s.
+- Every executed stage PASSED, including the every-script replay (6,097 s: every script exits 0 and reproduces its committed outputs).
+- The run ended `INCOMPLETE (everything): executed steps passed, SKIPPED: Lean proofs`, with exit status 3.
+
+This is **not** a complete verification: the Lean stage remains to be run on the commit that is tagged.
 
 ## Submission blockers (see the checklist)
 

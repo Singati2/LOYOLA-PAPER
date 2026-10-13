@@ -18,7 +18,9 @@ import bp_tests as T
 tier = {r["molecule"]: r["tier"] for r in csv.DictReader(open(os.path.join(ROOT, "audit", "final", "scripts", "claim_provenance_ledger.csv"))) if r["dataset"] == "bp"}
 rows, P, y, z = T.load()
 _g = lambda *a: subprocess.run(["git", "-C", ROOT, *a], capture_output=True, text=True).stdout.strip()
-out = [f"commit {_g('rev-parse', 'HEAD')}; modified tracked files: {len([l for l in _g('status', '--porcelain', '--untracked-files=no').splitlines() if l])}"]
+STAMP = f"commit {_g('rev-parse', 'HEAD')}; modified tracked files: {len([l for l in _g('status', '--porcelain', '--untracked-files=no').splitlines() if l])}"
+print(STAMP)  # freeze stamp: printed, not written, so the output file can be replayed on any commit
+out = []
 strict = [i for i, r in enumerate(rows) if tier[r["name"]] in ("A", "B")]
 dec = [i for i in strict if rows[i]["n_C"] == "10"]
 allseeds = []
@@ -33,5 +35,5 @@ for label, idx, zz in (("A: decane T_B, strict", dec, None), ("B: pooled T_B (si
     print(out[-1], flush=True)
 with open(os.path.join(HERE, "gamma_strict_seeds.csv"), "w", newline="") as f:
     w = csv.writer(f); w.writerow(["test", "seed", "Q2_GM2", "Q2_LO2", "Q2_GM12", "Q2_LOh"]); w.writerows(allseeds)
-out.append(out[0].replace("commit", "end: commit"))
+print("end: " + STAMP)
 open(os.path.join(HERE, "gamma_strict_out.txt"), "w").write("\n".join(out) + "\n")

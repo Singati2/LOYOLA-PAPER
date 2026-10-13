@@ -1,6 +1,6 @@
 # Source-quality sensitivity audit (v40.30; exploratory, not pre-registered)
 
-Frozen commit `01ad6c6`. Every script output stamps the commit and the count of modified tracked files; each stage recorded 0.
+Frozen commit `01ad6c6`. Each analysis printed the commit and the number of modified tracked files at its start and end; every stage recorded `01ad6c6` with 0 modified tracked files. The stamps are printed rather than written to the output files, so the files replay on any commit.
 
 **Scripts.**
 - `uncertain_source_sensitivity.py` is the analysis.

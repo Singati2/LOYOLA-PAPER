@@ -1,4 +1,3 @@
-commit 01ad6c646583ca0ef0f0d16d39621ffc57681ea5; modified tracked files: 0
 A decanes original vs classical      : 1-100 [+0.345, +1.173] med +0.691; 101-200 [+0.375, +1.052] med +0.686; all [+0.362, +1.117] med +0.690; 95% range of the 2.5% quantile [+0.164, +0.384], of the 97.5% quantile [+1.045, +1.234]; ridge ahead 200/200
 A decanes original vs IRLA           : 1-100 [+0.374, +0.890] med +0.706; 101-200 [+0.423, +0.860] med +0.695; all [+0.396, +0.889] med +0.698; 95% range of the 2.5% quantile [+0.203, +0.433], of the 97.5% quantile [+0.828, +0.925]; ridge ahead 200/200
 A decanes original vs LO(0,0,1)      : 1-100 [+0.382, +0.901] med +0.735; 101-200 [+0.431, +0.879] med +0.716; all [+0.403, +0.908] med +0.719; 95% range of the 2.5% quantile [+0.220, +0.445], of the 97.5% quantile [+0.843, +0.931]; ridge ahead 200/200
@@ -13,4 +12,3 @@ B pooled  strict   vs size+classical : 1-100 [-0.483, +0.510] med +0.296; 101-20
 B pooled  strict   vs size+IRLA      : 1-100 [-0.477, +0.356] med +0.265; 101-200 [-0.497, +0.356] med +0.287; all [-0.489, +0.358] med +0.278; 95% range of the 2.5% quantile [-0.551, -0.460], of the 97.5% quantile [+0.347, +0.398]; ridge ahead 181/200
 B pooled  strict   vs size+LO(0,0,1) : 1-100 [-0.472, +0.361] med +0.265; 101-200 [-0.494, +0.360] med +0.288; all [-0.486, +0.362] med +0.281; 95% range of the 2.5% quantile [-0.550, -0.457], of the 97.5% quantile [+0.351, +0.402]; ridge ahead 181/200
 B pooled  strict   vs size only      : 1-100 [-0.415, +0.386] med +0.303; 101-200 [-0.433, +0.390] med +0.319; all [-0.428, +0.389] med +0.308; 95% range of the 2.5% quantile [-0.504, -0.407], of the 97.5% quantile [+0.382, +0.435]; ridge ahead 181/200
-end: commit 01ad6c646583ca0ef0f0d16d39621ffc57681ea5; modified tracked files: 0

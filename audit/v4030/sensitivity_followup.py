@@ -36,7 +36,7 @@ OUT = []
 def say(s): print(s, flush=True); OUT.append(s)
 _g = lambda *a: subprocess.run(["git", "-C", ROOT, *a], capture_output=True, text=True).stdout.strip()
 stamp = lambda: f"commit {_g('rev-parse', 'HEAD')}; modified tracked files: {len([l for l in _g('status', '--porcelain', '--untracked-files=no').splitlines() if l])}"
-say(stamp())
+print(stamp())
 def q2(p, yy): return 1 - ((yy - p) ** 2).sum() / ((yy - yy.mean()) ** 2).sum()
 
 def predict(idx, pooled):
@@ -93,7 +93,7 @@ for tst, base, pooled in (("A decanes", [i for i in range(len(rows)) if rows[i][
                     f"{lvl:.2f}", f"{lo:+.4f}", f"{hi:+.4f}"])
         say(f"  {tst:9} vs {m:15}: full {f_d:+.3f} (n={len(base)}) -> matched {m_d:+.3f} -> refit {r_d:+.3f} (n={len(sidx)}); "
             f"cohort effect {m_d - f_d:+.3f}, refit effect {r_d - m_d:+.3f}; fixed-prediction {lvl:.2f}% interval [{lo:+.3f}, {hi:+.3f}]")
-say(stamp())
+print(stamp())
 # refit subsampling
 SUB = []
 say("3b. REFIT SUBSAMPLING (200 subsets of 80% without replacement, whole nested pipeline refitted)")
@@ -117,5 +117,5 @@ with open(os.path.join(HERE, "sensitivity_decomposition.csv"), "w", newline="") 
     w.writerow(["test", "comparator", "n_full", "n_strict", "diff_full", "diff_matched", "diff_refit", "cohort_effect", "refit_effect",
                 "fixed_pred_interval_level", "fixed_pred_lo", "fixed_pred_hi"]); w.writerows(DEC)
     w.writerow([]); w.writerow(["test", "scenario", "comparator", "n", "subset_size", "subsample_median", "subsample_p2.5", "subsample_p97.5", "ridge_ahead_of_200"]); w.writerows(SUB)
-say(stamp())
+print(stamp())
 open(os.path.join(HERE, "sensitivity_followup_out.txt"), "w").write("\n".join(OUT) + "\n")

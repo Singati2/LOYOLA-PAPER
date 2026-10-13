@@ -23,7 +23,9 @@ src = src[:src.index("# --------------------------------------------------------
 fu = {"__file__": os.path.join(HERE, "sensitivity_followup.py"), "__name__": "fu"}; exec(compile(src, "sensitivity_followup_defs", "exec"), fu)
 predict, q2, rows, y, tb, STRICT = fu["predict"], fu["q2"], fu["rows"], fu["y"], fu["tb"], fu["STRICT"]
 _g = lambda *a: subprocess.run(["git", "-C", ROOT, *a], capture_output=True, text=True).stdout.strip()
-out = [f"commit {_g('rev-parse', 'HEAD')}; modified tracked files: {len([l for l in _g('status', '--porcelain', '--untracked-files=no').splitlines() if l])}"]
+STAMP = f"commit {_g('rev-parse', 'HEAD')}; modified tracked files: {len([l for l in _g('status', '--porcelain', '--untracked-files=no').splitlines() if l])}"
+print(STAMP)  # freeze stamp: printed, not written, so the output file can be replayed on any commit
+out = []
 def oci(p, n=200, level=0.95):
     """Distribution-free interval (order statistics, 1-based) for the p-quantile from n draws."""
     lo = int(binom.ppf((1 - level) / 2, n, p)); hi = int(binom.ppf(1 - (1 - level) / 2, n, p)) + 1
@@ -50,5 +52,5 @@ for tst, base, pooled in (("A decanes", [i for i in range(len(rows)) if rows[i][
             print(out[-1], flush=True)
 with open(os.path.join(HERE, "refit_subsample_raw.csv"), "w", newline="") as f:
     w = csv.writer(f); w.writerow(["test", "scenario", "comparator", "replicate", "ridge_minus_comparator"]); w.writerows(raw)
-out.append(out[0].replace("commit", "end: commit"))
+print("end: " + STAMP)
 open(os.path.join(HERE, "refit_stability_out.txt"), "w").write("\n".join(out) + "\n")

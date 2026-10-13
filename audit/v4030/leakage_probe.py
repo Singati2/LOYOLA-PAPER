@@ -14,7 +14,9 @@ import baselines as BL, bp_tests as T
 rows, P, y, z = T.load()
 assert len({r["name"] for r in rows}) == len(rows), "duplicate compound names"
 _g = lambda *a: subprocess.run(["git", "-C", ROOT, *a], capture_output=True, text=True).stdout.strip()
-out = [f"commit {_g('rev-parse', 'HEAD')}; modified tracked files: {len([l for l in _g('status', '--porcelain', '--untracked-files=no').splitlines() if l])}"]
+STAMP = f"commit {_g('rev-parse', 'HEAD')}; modified tracked files: {len([l for l in _g('status', '--porcelain', '--untracked-files=no').splitlines() if l])}"
+print(STAMP)  # freeze stamp: printed, not written, so the output file can be replayed on any commit
+out = []
 def fold_pred(model, Pk, yk, zk, i):
     F = np.array([BL.count_vector(p) for p in Pk], float)
     ir = np.array([BL.irla(p) for p in Pk])[None, :]; lo1 = BL.descriptor_matrix(Pk, [(0, 0, 1)]); Xc = BL.descriptor_matrix(Pk, T.CLASSICAL)
@@ -39,5 +41,5 @@ for tst, idx, models in (("decanes", [i for i in range(len(rows)) if rows[i]["n_
         print(out[-1], flush=True)
 rng = np.random.default_rng(20261014); s = rng.choice(np.arange(100), 80, replace=False)
 out.append(f"subsampling draws without replacement: {len(set(s.tolist())) == len(s)} (80 distinct of 80)")
-out.append(out[0].replace("commit", "end: commit"))
+print("end: " + STAMP)
 open(os.path.join(HERE, "leakage_probe_out.txt"), "w").write("\n".join(out) + "\n")

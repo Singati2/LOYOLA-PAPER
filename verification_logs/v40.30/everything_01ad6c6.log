@@ -1,0 +1,31 @@
+commit 01ad6c646583ca0ef0f0d16d39621ffc57681ea5 clean=yes
+Tue Oct 13 01:41:17 UTC 2026
+Python 3.13.0
+PATH without lake: none; tectonic: /opt/homebrew/bin/tectonic
+[SKIP] Lean proofs: no Lean toolchain (lake) on PATH
+[PASS] core verifier (140 s): scope: FULL PASS covers the executed computations, all 8 numeric tables of main.tex/supplement.tex (exact display strings), and canonical ar
+[PASS] prose numbers (6 s): prose numbers: 733 checked, 0 failures, 20 uncheckable (cited values; see UNCHECKABLE in the registries)
+[PASS] external regression tests (1 s): OK
+[PASS] baseline tests (58 s): 0 failures; 58.0s
+[PASS] constancy test check (26 s): RESULT: the two constancy tests never disagree on these inputs; no fold is affected
+[PASS] auxiliary outputs (6 s): Auxiliary output reproduction PASS
+[PASS] archived-source identities (0 s): Archived source formula/skeleton checks PASS: 154 pages
+[PASS] interval certificates (1 s): Mathematics interval checks PASS
+[PASS] prose style (0 s): prose style check: PASS
+[PASS] extremal trees (0 s): RESULT: extremal-tree proposition holds for all orders 4..12
+[PASS] collision minimality (3 s): RESULT: first order with distinct profiles sharing a q-histogram: 13 (all trees), 16 (maximum degree <= 4)
+[PASS] sum-connectivity pair (3 s): RESULT: Example ex:sumconn confirmed (D(1) = 0.2255, D(1e-6) = 2.4e-7)
+[PASS] count dimension and error floor (1 s): RESULT: affine dimension bounds attained (7, 7, 8); octane T_B floor SSE 2.925, RMSE 0.403
+[PASS] DATA copies (0 s): DATA/ check: every file matches its source
+[PASS] manifest (0 s): manifest OK: 511 files, one hash per path, all match
+[PASS] external verifier (2004 s): external verification: PASS (structures, rebuild, baseline validation, fresh re-runs, table)
+[PASS] structural checks (1285 s): TAB firstfail GA row: OK
+[PASS] 32-digit recount (118 s): RESULT: all counts reproduced at 32 significant digits (116 s)
+[PASS] verifier self-test (348 s): PASS  op:missing-artifact
+[PASS] counter-attacks on the checkers (137 s): RESULT: 13 attacks, 13 rejected, 0 false negatives
+[PASS] labels and references (1 s): label/reference/figure/table checks: PASS
+[PASS] every script replayed in isolation (6097 s): RESULT: every script exits 0 and reproduces its committed outputs
+[PASS] provenance CSV convention: 91 CRLF rows, field counts [12]
+INCOMPLETE (everything): executed steps passed, SKIPPED: Lean proofs
+exit=3 runtime=10236s
+Tue Oct 13 04:31:53 UTC 2026
