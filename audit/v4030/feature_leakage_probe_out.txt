@@ -1,0 +1,13 @@
+commit 01ad6c646583ca0ef0f0d16d39621ffc57681ea5; modified tracked files: 0
+decanes  ridge           : folds whose chosen model changed when the held-out compound's features were corrupted: 0/34
+decanes  ols classical   : folds whose chosen model changed when the held-out compound's features were corrupted: 0/34
+decanes  ols IRLA        : folds whose chosen model changed when the held-out compound's features were corrupted: 0/34
+decanes  ols LO(0,0,1)   : folds whose chosen model changed when the held-out compound's features were corrupted: 0/34
+pooled   ridge           : folds whose chosen model changed when the held-out compound's features were corrupted: 0/100
+pooled   ols classical   : folds whose chosen model changed when the held-out compound's features were corrupted: 0/100
+pooled   ols IRLA        : folds whose chosen model changed when the held-out compound's features were corrupted: 0/100
+pooled   ols LO(0,0,1)   : folds whose chosen model changed when the held-out compound's features were corrupted: 0/100
+pooled   size classical  : folds whose chosen model changed when the held-out compound's features were corrupted: 0/100
+pooled   size IRLA       : folds whose chosen model changed when the held-out compound's features were corrupted: 0/100
+pooled   size LO(0,0,1)  : folds whose chosen model changed when the held-out compound's features were corrupted: 0/100
+end: commit 01ad6c646583ca0ef0f0d16d39621ffc57681ea5; modified tracked files: 0

@@ -1,0 +1,12 @@
+commit 01ad6c646583ca0ef0f0d16d39621ffc57681ea5; modified tracked files: 0
+decanes  ridge          : max |prediction change| for the held-out compound when its own y moves by 1000: 0.00e+00
+decanes  classical      : max |prediction change| for the held-out compound when its own y moves by 1000: 0.00e+00
+decanes  IRLA           : max |prediction change| for the held-out compound when its own y moves by 1000: 0.00e+00
+decanes  LO(0,0,1)      : max |prediction change| for the held-out compound when its own y moves by 1000: 0.00e+00
+pooled   ridge          : max |prediction change| for the held-out compound when its own y moves by 1000: 0.00e+00
+pooled   size+classical : max |prediction change| for the held-out compound when its own y moves by 1000: 0.00e+00
+pooled   size+IRLA      : max |prediction change| for the held-out compound when its own y moves by 1000: 0.00e+00
+pooled   size+LO(0,0,1) : max |prediction change| for the held-out compound when its own y moves by 1000: 0.00e+00
+pooled   size only      : max |prediction change| for the held-out compound when its own y moves by 1000: 0.00e+00
+subsampling draws without replacement: True (80 distinct of 80)
+end: commit 01ad6c646583ca0ef0f0d16d39621ffc57681ea5; modified tracked files: 0

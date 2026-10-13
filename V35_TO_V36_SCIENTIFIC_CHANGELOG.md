@@ -1468,3 +1468,18 @@ ranking, an authors' counter-attack and a chair ruling (summarised in the readin
     extremal trees (n = 4 to 14) and the closed forms. All agree with the paper.
   - No reported number, table, figure, theorem statement, data value or pre-registered conclusion
     changes.
+- Manuscript changes after the frozen verification of 01ad6c6 (prepared separately, no registered value
+  changes):
+  - main.tex Table 6: row for the stricter rank threshold and the deletion-rank guard of the
+    size-adjusted scorer (v40.29, v40.30), "No output changes".
+  - main.tex Table 4 caption and supplement Figure S1 caption: the displayed -0.000 (ISI, dHf) is
+    -0.0002 (the number itself and the verifier's phantom-zero rule are unchanged).
+  - main.tex Conclusion: "matched the tuned models" replaced by a statement in point estimate, noting
+    that no equivalence test was made.
+  - supplement.tex Section S8: an exploratory source-quality sensitivity paragraph (strict provenance:
+    decane ridge advantage 0.856 over IRLA, ahead in 200/200 refitted subsamples; pooled restricted set
+    is C9-C10 only, 181/200, not resolved; gamma test 12 and 10 of 50 seeds; Table 4 leaders not
+    resolved; S, omega and nonane dHvap not estimable). Each number is registered in prose_claims_a.py.
+  - audit/v4030/: the scripts, machine-readable tables and outputs of the sensitivity, leakage,
+    Table 2, mathematics and gamma checks; audit/V4030_COUNTEREXAMPLES.md and
+    V4030_SUBMISSION_CHECKLIST.md; NOVELTY_SEARCH_LOG.md gains the zbMATH and arXiv searches.

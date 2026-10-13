@@ -293,7 +293,7 @@ Table~4 of the main paper.
 \begin{figure}[H]
 \centering
 \safefig{fig_lo_prediction_correlation_heatmap_v3.pdf}{0.9}
-\caption{Signed Pearson $r$ between the Loyola reductions, the fixed pure-$\gamma$ benchmark points and the five octane physicochemical properties on the $18$ isomers.}
+\caption{Signed Pearson $r$ between the Loyola reductions, the fixed pure-$\gamma$ benchmark points and the five octane physicochemical properties on the $18$ isomers. The entry $-0.000$ ($ISI$, $\Delta H_f$) is $-0.0002$.}
 \label{fig:octanes}
 \end{figure}
 \section{Local parameter tuning}\label{sec:tuning}
@@ -959,6 +959,19 @@ Table~\ref{tab:octane-data}, and the pooled boiling-point test re-extracts
 the octane boiling points under its own rule. Item~(ii) was a transcription error in our
 earlier data file, corrected here, while the remaining items are limitations
 of the compiled octane benchmark rather than of the analysis.
+
+\emph{Source-quality sensitivity (exploratory).} The repository classes every experimental value by
+the number of independent primary determinations behind it, and agreement with a compilation counts
+for none. Restricted to values resting on one identified primary study or on two or more research
+groups, the comparisons of Section~6 of the main paper change as follows. On the decanes ($28$ of $34$
+values) the ridge model on degree-pair counts stays ahead of every single index, by $0.856$ in $Q^2$
+against $IRLA$, and it is ahead in all $200$ refitted subsamples of $80\%$ of the molecules. The
+restricted pooled set keeps only $42$ boiling points, all of nonanes and decanes, because every C6--C8
+value is a NIST average. There the ridge model is ahead in $181$ of $200$ refitted subsamples, so the
+pooled comparison is not resolved. The registered $\gamma$ test on the restricted decanes and pooled
+set again finds no evidence that $\gamma$ adds value, with LO ahead in $12$ and $10$ of $50$ seeds. No
+column leader of Table~4 of the main paper is resolved, and the entropy, acentric-factor and nonane
+vaporisation-enthalpy comparisons cannot be estimated, since at most five values remain.
 
 
 

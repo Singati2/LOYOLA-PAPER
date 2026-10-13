@@ -1,0 +1,32 @@
+commit 01ad6c646583ca0ef0f0d16d39621ffc57681ea5; modified tracked files: 0
+1. COMPOSITION (strict = tiers A and B; excluded = NIST/TRC averages)
+  strict retained  n= 42 n_C {6: 0, 7: 0, 8: 0, 9: 14, 10: 28} | T_B mean 151.1 sd 11.5 | IRLA mean 5.79 sd 1.52 | LO(0,0,1) mean 12.36 sd 1.33
+  excluded         n= 58 n_C {6: 5, 7: 9, 8: 18, 9: 20, 10: 6} | T_B mean 118.1 sd 28.5 | IRLA mean 4.51 sd 1.63 | LO(0,0,1) mean 10.08 sd 1.72
+  all              n=100 n_C {6: 5, 7: 9, 8: 18, 9: 34, 10: 34} | T_B mean 132.0 sd 28.2 | IRLA mean 5.05 sd 1.71 | LO(0,0,1) mean 11.04 sd 1.93
+  C9: T_B retained mean 137.8 sd 3.2 (n=14) vs excluded 136.2 sd 7.2 (n=20)
+  C10: T_B retained mean 157.7 sd 7.7 (n=28) vs excluded 164.4 sd 5.7 (n=6)
+2-3. DECOMPOSITION and UNCERTAINTY of ridge minus each predefined comparator
+  A decanes vs classical      : full +0.684 (n=34) -> matched +0.803 -> refit +1.216 (n=28); cohort effect +0.119, refit effect +0.413; fixed-prediction 98.33% interval [+0.867, +2.274]
+  A decanes vs IRLA           : full +0.693 (n=34) -> matched +0.844 -> refit +0.856 (n=28); cohort effect +0.151, refit effect +0.012; fixed-prediction 98.33% interval [+0.558, +1.353]
+  A decanes vs LO(0,0,1)      : full +0.711 (n=34) -> matched +0.857 -> refit +0.869 (n=28); cohort effect +0.146, refit effect +0.012; fixed-prediction 98.33% interval [+0.564, +1.389]
+  B pooled  vs size+classical : full +0.024 (n=100) -> matched +0.246 -> refit +0.365 (n=42); cohort effect +0.222, refit effect +0.119; fixed-prediction 98.33% interval [+0.197, +0.618]
+  B pooled  vs size+IRLA      : full +0.028 (n=100) -> matched +0.278 -> refit +0.278 (n=42); cohort effect +0.250, refit effect -0.001; fixed-prediction 98.33% interval [+0.117, +0.519]
+  B pooled  vs size+LO(0,0,1) : full +0.028 (n=100) -> matched +0.280 -> refit +0.280 (n=42); cohort effect +0.252, refit effect -0.000; fixed-prediction 98.33% interval [+0.115, +0.508]
+  B pooled  vs size only      : full +0.053 (n=100) -> matched +0.322 -> refit +0.308 (n=42); cohort effect +0.270, refit effect -0.014; fixed-prediction 95.00% interval [+0.154, +0.541]
+commit 01ad6c646583ca0ef0f0d16d39621ffc57681ea5; modified tracked files: 0
+3b. REFIT SUBSAMPLING (200 subsets of 80% without replacement, whole nested pipeline refitted)
+  A decanes original vs classical      : n=34 subsets of 27: median +0.690, 2.5-97.5% [+0.362, +1.117], ridge ahead in 200/200
+  A decanes original vs IRLA           : n=34 subsets of 27: median +0.698, 2.5-97.5% [+0.396, +0.889], ridge ahead in 200/200
+  A decanes original vs LO(0,0,1)      : n=34 subsets of 27: median +0.719, 2.5-97.5% [+0.403, +0.908], ridge ahead in 200/200
+  A decanes strict   vs classical      : n=28 subsets of 22: median +1.002, 2.5-97.5% [+0.504, +1.414], ridge ahead in 200/200
+  A decanes strict   vs IRLA           : n=28 subsets of 22: median +0.863, 2.5-97.5% [+0.596, +1.001], ridge ahead in 200/200
+  A decanes strict   vs LO(0,0,1)      : n=28 subsets of 22: median +0.882, 2.5-97.5% [+0.600, +1.016], ridge ahead in 200/200
+  B pooled  original vs size+classical : n=100 subsets of 80: median +0.025, 2.5-97.5% [+0.017, +0.031], ridge ahead in 200/200
+  B pooled  original vs size+IRLA      : n=100 subsets of 80: median +0.028, 2.5-97.5% [+0.020, +0.037], ridge ahead in 200/200
+  B pooled  original vs size+LO(0,0,1) : n=100 subsets of 80: median +0.028, 2.5-97.5% [+0.020, +0.037], ridge ahead in 200/200
+  B pooled  original vs size only      : n=100 subsets of 80: median +0.053, 2.5-97.5% [+0.039, +0.065], ridge ahead in 200/200
+  B pooled  strict   vs size+classical : n=42 subsets of 34: median +0.308, 2.5-97.5% [-0.484, +0.503], ridge ahead in 181/200
+  B pooled  strict   vs size+IRLA      : n=42 subsets of 34: median +0.278, 2.5-97.5% [-0.489, +0.358], ridge ahead in 181/200
+  B pooled  strict   vs size+LO(0,0,1) : n=42 subsets of 34: median +0.281, 2.5-97.5% [-0.486, +0.362], ridge ahead in 181/200
+  B pooled  strict   vs size only      : n=42 subsets of 34: median +0.308, 2.5-97.5% [-0.428, +0.389], ridge ahead in 181/200
+commit 01ad6c646583ca0ef0f0d16d39621ffc57681ea5; modified tracked files: 0

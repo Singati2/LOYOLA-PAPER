@@ -135,3 +135,41 @@ P96 | Chonev, Ouaknine, Worrell | 2023 | 3 | J. ACM | https://consensus.app/pape
 P97 | Jameson | 2006 | 88 | Math. Gazette | https://consensus.app/papers/details/f0503a0fa9625b48aa2e01b46dc1afb7/ | 20 | Descartes' rule and Laguerre's extensions for generalised polynomials  ** tool behind crossing bound
 P98 | Haukkanen, Tossavainen | 2011 | 28 | Appl. Math. Comput. | https://consensus.app/papers/details/ec2979dff1835cb19728922d0912c0c3/ | 20 | generalised Descartes rule incl. sums of exponentials
 P99 | Shapiro | 2017 | 1 | unknown | https://consensus.app/papers/details/dad4564a9b655590b1a585f06774749e/ | 20 | exponential sums of order k: >2k-3 real zeros is codimension 1  ** relevant to sharpness of crossings
+
+## Addendum (2026-10-13): mathematics databases
+
+The novelty statement was rechecked in two further databases, querying their public APIs directly.
+Each line gives a query and what it returned.
+
+| Database | Query | Result |
+|---|---|---|
+| zbMATH Open | "geometric-arithmetic index" trees "same" | 2 hits, both extremal (Cruz, Monsalve, Rada 2020; Bermudo 2023) |
+| zbMATH Open | "weakly discriminating" | Rada, Rodriguez, Sigarreta 2022 (cited in the paper); no collision order |
+| zbMATH Open | "degree ratio" index trees | 2 hits, extremal or bounds (Ali et al. 2027, degree-ratio Sombor index; Ali et al. 2027) |
+| zbMATH Open | "topological index" "degeneracy" trees | 2 hits; neither determines a collision order |
+| zbMATH Open | "vertex-degree-based" "discrimination" | Rada 2019 and 2026 (both cited), Das et al. 2021, Azari and Dehgardi 2025, Dehgardi and Azari 2025; none concerns degree-ratio histograms or smallest colliding trees |
+| zbMATH Open | "symmetric division deg" trees | 12 hits, all extremal or bounds |
+| arXiv | degree-based AND trees AND (same value OR degenerate OR discriminat), in abstracts | 0 hits |
+| arXiv | geometric-arithmetic AND (isomers OR degeneracy OR same), in abstracts | 1 hit (Crepnjak and Zigert Pletersek 2019, correlations on octanes); no colliding trees |
+
+**Result.** No work determining the first collision orders 13 and 16, and no explicit colliding trees for degree-ratio indices, was found. As before, this widens the documented search but cannot prove that no such work exists.
+
+### Searches aimed at mathematical priority
+
+These target direct predecessors of the three new statements: the minimum collision orders, identifiability from degree-pair counts, and the crossing bound.
+
+| Database | Query | Result |
+|---|---|---|
+| zbMATH Open | trees "degree sequence" "same" "Zagreb" | Damnjanovic and Stevanovic 2023; Andriantiana, Misanantenaina, Wagner 2021 (Electron. J. Combin. 28, P1.1). Both concern extremal trees for a fixed degree sequence; no collision order |
+| zbMATH Open | "generalized polynomials" zeros Laguerre | 10 hits on orthogonal polynomials; none on the sharpness of the Descartes-Laguerre bound for exponential sums. The bound itself is classical (Jameson, Math. Gaz. 90 (2006), cited) |
+| zbMATH Open | Wiener index trees "same Wiener index" | distance-based precedents only: Dobrynin and Mel'nikov, MATCH 50 (2004) 145-164; Ghebleh, Kanso, Stevanovic, MATCH 76 (2016) 731-744 and Appl. Math. Comput. 281 (2016) 130-136; Ilic and Ilic, Appl. Math. Comput. 296 (2017) 148-152. None concerns degree-pair counts or degree ratios |
+| zbMATH Open | "exponential sums" "real zeros" Descartes; "smallest" "non-isomorphic trees" "index"; "edge-degree" trees isomers "same" | no results (the API returns HTTP 404 for an empty result set) |
+
+**Assessment.**
+- **Laguerre bound:** classical. The paper cites it and does not claim it.
+- **Degree-pair ceiling and Rada's linear framework:** established. The paper cites them as such (Rada 2019, 2026; Deutsch and Klavzar 2015).
+- **New, on present evidence:**
+  - the determination of the first collision orders 13 and 16 for q-histograms, with explicit witnesses;
+  - the attainment of five crossings at Delta = 6 by explicit trees;
+  - the Delta = 7 identifiability exception.
+- **Not resolved by this search:** whether minimal-order results exist for degree-pair collisions under another name, for example in chemical-documentation literature that these databases do not index.

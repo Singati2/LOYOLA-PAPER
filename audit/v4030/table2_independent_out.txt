@@ -1,0 +1,23 @@
+n= 7 all      profiles=11 histograms=11 LO(0,0,1)=11 LO(0,0,2)=11 R=11 GA=11
+n= 7 maxdeg<=4 profiles=9 histograms=9 LO(0,0,1)=9 LO(0,0,2)=9 R=9 GA=9
+n= 8 all      profiles=21 histograms=21 LO(0,0,1)=21 LO(0,0,2)=21 R=21 GA=21
+n= 8 maxdeg<=4 profiles=16 histograms=16 LO(0,0,1)=16 LO(0,0,2)=16 R=16 GA=16
+n= 9 all      profiles=40 histograms=40 LO(0,0,1)=40 LO(0,0,2)=40 R=40 GA=40
+n= 9 maxdeg<=4 profiles=28 histograms=28 LO(0,0,1)=28 LO(0,0,2)=28 R=28 GA=28
+n=10 all      profiles=79 histograms=79 LO(0,0,1)=79 LO(0,0,2)=79 R=79 GA=79
+n=10 maxdeg<=4 profiles=49 histograms=49 LO(0,0,1)=49 LO(0,0,2)=49 R=49 GA=49
+n=11 all      profiles=152 histograms=152 LO(0,0,1)=152 LO(0,0,2)=152 R=152 GA=152
+n=11 maxdeg<=4 profiles=83 histograms=83 LO(0,0,1)=83 LO(0,0,2)=83 R=83 GA=83
+n=12 all      profiles=294 histograms=294 LO(0,0,1)=294 LO(0,0,2)=294 R=294 GA=294
+n=12 maxdeg<=4 profiles=137 histograms=137 LO(0,0,1)=137 LO(0,0,2)=137 R=137 GA=137
+n=13 all      profiles=570 histograms=566 LO(0,0,1)=566 LO(0,0,2)=566 R=570 GA=566
+n=13 maxdeg<=4 profiles=223 histograms=223 LO(0,0,1)=223 LO(0,0,2)=223 R=223 GA=223
+n=14 all      profiles=1100 histograms=1090 LO(0,0,1)=1090 LO(0,0,2)=1090 R=1095 GA=1090
+n=14 maxdeg<=4 profiles=350 histograms=350 LO(0,0,1)=350 LO(0,0,2)=350 R=350 GA=350
+n=15 all      profiles=2119 histograms=2093 LO(0,0,1)=2093 LO(0,0,2)=2093 R=2100 GA=2093
+n=15 maxdeg<=4 profiles=538 histograms=538 LO(0,0,1)=538 LO(0,0,2)=538 R=538 GA=538
+n=16 all      profiles=4069 histograms=3996 LO(0,0,1)=3996 LO(0,0,2)=3996 R=4007 GA=3996
+n=16 maxdeg<=4 profiles=810 histograms=809 LO(0,0,1)=809 LO(0,0,2)=809 R=810 GA=809
+n=17 all      profiles=7778 histograms=7582 LO(0,0,1)=7582 LO(0,0,2)=7582 R=7604 GA=7581
+n=17 maxdeg<=4 profiles=1194 histograms=1189 LO(0,0,1)=1189 LO(0,0,2)=1189 R=1191 GA=1189
+FIRST below floor / merges: GA merges all: (17,); GA all: (13, 566, 570); GA maxdeg<=4: (16, 809, 810); LO(0,0,1) all: (13, 566, 570); LO(0,0,1) maxdeg<=4: (16, 809, 810); LO(0,0,2) all: (13, 566, 570); LO(0,0,2) maxdeg<=4: (16, 809, 810); R all: (14, 1095, 1100); R maxdeg<=4: (17, 1191, 1194)
