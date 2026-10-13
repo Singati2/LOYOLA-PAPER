@@ -1487,3 +1487,8 @@ ranking, an authors' counter-attack and a chair ruling (summarised in the readin
     with lake hidden; every executed stage PASS, including the replay of all 53 scripts (6,097 s);
     INCOMPLETE because Lean was skipped, exit 3. The audit scripts of audit/v4030 are registered in the
     replay; their freeze stamps are printed rather than written, so their outputs replay on any commit.
+  - formal/verify.sh: the source scan also rejects admit, and a second #print axioms pass covers all 52
+    declared theorems and lemmas (the 14 helper lemmas included), failing on sorryAx or any axiom
+    outside propext, Classical.choice and Quot.sound. Not executed on the audit machine (no Lean build
+    for lack of disk); to be run with audit/V4030_LEAN_EXTERNAL_RUN.md. The existing 38-theorem check is
+    unchanged. audit/V4030_SUBMISSION_READINESS.md lists PASS, FAIL or NOT RUN for every step.

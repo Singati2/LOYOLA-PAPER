@@ -10,8 +10,8 @@ lake build 2>&1 | tee "$LOG" | tail -3
 
 status=0
 echo "--- sorry check (source) ---"
-if grep -rn --include='*.lean' -w 'sorry' LoyolaFormal LoyolaFormal.lean; then
-  echo "FAIL: sorry found"; status=1
+if grep -rnwE --include='*.lean' 'sorry|admit' LoyolaFormal LoyolaFormal.lean; then
+  echo "FAIL: sorry or admit found"; status=1
 else echo "OK: no sorry"; fi
 
 echo "--- axiom declarations (source) ---"
@@ -48,5 +48,25 @@ if [ -n "$bad" ] || grep -q "sorryAx" "$AX"; then
   echo "FAIL: unexpected axioms: $bad"; status=1
 elif [ "$status" -eq 0 ]; then echo "OK: all $n expected theorems report only propext / Classical.choice / Quot.sound"; fi
 rm -f "$AX"
+
+echo "--- #print axioms for every declared theorem and lemma (v40.30 audit; stricter than the list above) ---"
+# Covers the helper lemmas as well as the 38 listed theorems. A declaration may report no axioms at all;
+# any sorryAx or axiom outside propext / Classical.choice / Quot.sound fails the check.
+ALL=$(mktemp); ALLSRC=".axiom_all_check.lean"
+{ echo "import LoyolaFormal"; echo;
+  for f in LoyolaFormal/*.lean; do
+    ns=$(grep -m1 -E '^namespace ' "$f" | awk '{print $2}')
+    grep -oE '^(theorem|lemma) [A-Za-z0-9_.'"'"']+' "$f" | awk '{print $2}' | while read -r d; do
+      if [ -n "$ns" ]; then echo "#print axioms $ns.$d"; else echo "#print axioms $d"; fi; done
+  done; } > "$ALLSRC"
+ndecl=$(grep -c '^#print axioms' "$ALLSRC")
+lake env lean "$ALLSRC" > "$ALL" 2>&1 || { echo "FAIL: $ALLSRC did not compile"; cat "$ALL"; status=1; }
+nrep=$(grep -cE "depends on axioms|does not depend on any axioms" "$ALL" || true)
+badall=$(grep "depends on axioms" "$ALL" | sed 's/.*depends on axioms: \[\(.*\)\]/\1/' \
+      | tr ',' '\n' | sed 's/ //g' | grep -vE '^(propext|Classical.choice|Quot.sound)$' || true)
+if [ "$nrep" -ne "$ndecl" ]; then echo "FAIL: $ndecl declarations, $nrep axiom reports"; status=1
+elif [ -n "$badall" ] || grep -q "sorryAx" "$ALL"; then echo "FAIL: unexpected axioms among all declarations: $badall"; status=1
+else echo "OK: all $ndecl declarations report only standard axioms (or none)"; fi
+rm -f "$ALL" "$ALLSRC"
 rm -f "$LOG"
 exit $status
