@@ -32,9 +32,33 @@ SAMPLING = {
     "ablation_robustness.py": ["for seed in (12345, 777, 2024):", "for budget in (200, 500):", "rng = np.random.default_rng(seed)",
                                "lo_c = [tuple(v) for v in np.round(rng.uniform(-2, 2, (budget, 3)), 3)]",
                                "gm_c = [(a, b, 0.0) for a, b in np.round(rng.uniform(-2, 2, (budget, 2)), 3)]"],
+    "verify_loyola_v35.py": ["rng=np.random.default_rng(seed)", "lo=np.round(rng.uniform(-2,2,(budget,3)),3)",
+                             'CMP["ABL"]=ablation_first_principles(OP,Y,12345,200)'],
     "ablation_gm_vs_lo.py": ["rng = np.random.default_rng(12345)", "LO_TRIPLES = np.round(rng.uniform(-2, 2, size=(200, 3)), 3)",
                              "GM_PAIRS   = np.round(rng.uniform(-2, 2, size=(200, 2)), 3)"],
 }
+# v40.30 audit: every script that draws candidate triples must be accounted for, so that a new or
+# forgotten generator cannot leave this check clean. Scripts selecting through
+# external/baselines.fold_select_ols (or bp_tests, which applies baselines.degenerate_rows) carry the
+# current resolution guard at run time; audit copies and checkers do not select for the paper.
+RUNTIME_GUARDED = {"external/baselines.py", "external/box_sensitivity.py", "external/bp/bp_tests.py",
+                   "external/nonane_tb_conflict.py", "external/nonane_validation.py", "external/test_baselines.py",
+                   "external/transfer_exploratory.py", "external/uncertainty_exploratory.py", "external/wide_box_diagnostics.py"}
+NOT_SELECTION = {"constancy_test_check.py", "audit/final/scripts/baselines_old.py", "audit/final/scripts/bp_tests_0c4a4db.py",
+                 "audit/final/scripts/counterattack_v4030.py", "audit/final/scripts/nonane_calc.py"}
+import re as _re
+drawers = set()
+for dp, dns, fns in os.walk(HERE):
+    dns[:] = [d for d in dns if not d.startswith(".") and d not in ("__pycache__", "node_modules")]
+    for fn in fns:
+        if fn.endswith(".py"):
+            path = os.path.join(dp, fn); rel = os.path.relpath(path, HERE).replace(os.sep, "/")
+            if _re.search(r"uniform\(-2, ?2|candidate_triples\(", open(path, encoding="utf-8", errors="ignore").read()):
+                drawers.add(rel)
+unaccounted = sorted(drawers - set(SAMPLING) - RUNTIME_GUARDED - NOT_SELECTION)
+assert not unaccounted, f"candidate generators not covered by this check: {unaccounted}"
+for fn in RUNTIME_GUARDED:
+    assert _re.search(r"fold_select_ols|degenerate_rows", open(os.path.join(HERE, fn)).read()), f"{fn}: no runtime guard"
 for fn, needles in SAMPLING.items():
     src = open(os.path.join(HERE, fn)).read()
     missing = [t for t in needles if t not in src]
@@ -47,6 +71,8 @@ for seed, budget in [(s, b) for s in (12345, 777, 2024) for b in (200, 500)]:   
     gm_t, lo_t = B.candidate_triples(seed, budget)
     streams += [lo_t, gm_t]
 T = np.unique(np.vstack(streams), axis=0)
+EXPECTED_TRIPLES = 166478   # equals the independent reconstruction in audit/final/scripts/counterattack_v4030.py (T2)
+assert len(T) == EXPECTED_TRIPLES, f"candidate set has {len(T)} triples, expected {EXPECTED_TRIPLES}: a stream was added or dropped"
 X = np.array([[lo_pairs(P, a, b, g) for P in OP] for a, b, g in T])
 eps, tiny = np.finfo(float).eps, np.finfo(float).tiny
 folds = [[k for k in range(N) if k != i] for i in range(N)]

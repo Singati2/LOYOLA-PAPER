@@ -1449,3 +1449,22 @@ ranking, an authors' counter-attack and a chair ruling (summarised in the readin
   (audit/final/scripts/bp_tests_0c4a4db.py) and is replayed by audit/run_all_scripts.py; the
   notebooks stop when the pinned revision cannot be confirmed unless LOYOLA_ALLOW_MISMATCH=1.
   No reported number changes.
+- Adversarial audit of 716cd37 (each item reproduced before the change; regression or mutation test
+  added):
+  - verify.py: a --full or --everything run with a skipped stage now exits with status 3 (was 0);
+    --allow-skip accepts the skips explicitly. test_verify_incomplete_exit_status fails on the old
+    code.
+  - constancy_test_check.py: dropping a production stream left the check clean (only the count
+    changed). It now asserts the expected candidate count (166,478) and scans every script that
+    draws candidate triples: each must be mirrored here, select through the runtime-guarded
+    fold_select_ols, or be an audit copy. Both mutations (dropped stream, new unlisted generator)
+    now exit 1. verify_loyola_v35.py's recomputation stream is listed.
+  - Notebooks: a modified working tree no longer passes the pin check (six pinning cases tested).
+  - claim_provenance.py: boiling-point groups use the first surname, ignore Anonymous entries and
+    merge the National Bureau of Standards co-authors (Howard, Mears, Pomerantz); totals unchanged.
+  - audit/v4030/math_independent.py: independent recomputation of the collision orders (complete
+    enumeration checked against OEIS), the GA merge order, the five crossings, the Lemma 3.1
+    determinants, the identifiability bound for Delta <= 7, the count ranks, the error floor, the
+    extremal trees (n = 4 to 14) and the closed forms. All agree with the paper.
+  - No reported number, table, figure, theorem statement, data value or pre-registered conclusion
+    changes.

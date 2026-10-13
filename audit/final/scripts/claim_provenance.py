@@ -78,9 +78,10 @@ def study_groups(determinations):
     return groups
 
 
-# First authors who published the same measurements together (Fenske, Braun et al. 1947; Braun,
-# Spooner, Fenske 1950) are one research group.
-SAME_GROUP = [{"Fenske", "Braun"}]
+# First authors who published together are one research group: Fenske, Braun et al. 1947 and Braun,
+# Spooner, Fenske 1950 (Penn State); Howard, Mears et al. 1947, Pomerantz, Mears et al. 1949 and
+# Mears, Fookson et al. 1950 (National Bureau of Standards). Anonymous entries are not counted.
+SAME_GROUP = [{"Fenske", "Braun"}, {"Howard", "Mears", "Pomerantz"}]
 
 
 def merge_coauthor_groups(groups):
@@ -126,7 +127,7 @@ def bp_rows():
             tier, why = "A-AGG", "NIST average (TRC); constituent points not archived, so their independence cannot be checked"
         elif m and int(m.group(1)) >= 2:
             refs = re.findall(r"\(([^;()]+?),\s*(\d{4});", r["all_determinations"])
-            groups = {a.split(",")[0].strip() for a, y in refs if not re.search(COMPILATION_AUTHORS, a)}
+            groups = {re.split(r"[ ,]", a.strip())[0] for a, y in refs if not re.search(COMPILATION_AUTHORS, a)} - {"Anonymous"}
             groups = merge_coauthor_groups(groups)
             tier = "A" if len(groups) >= 2 else "B"
             why = f"median of {m.group(1)} non-compilation determinations from {len(groups) or '?'} distinct first authors"
