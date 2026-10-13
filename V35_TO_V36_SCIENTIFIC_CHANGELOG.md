@@ -1492,3 +1492,6 @@ ranking, an authors' counter-attack and a chair ruling (summarised in the readin
     outside propext, Classical.choice and Quot.sound. Not executed on the audit machine (no Lean build
     for lack of disk); to be run with audit/V4030_LEAN_EXTERNAL_RUN.md. The existing 38-theorem check is
     unchanged. audit/V4030_SUBMISSION_READINESS.md lists PASS, FAIL or NOT RUN for every step.
+  - audit/run_remaining_checks.sh: one script for the stages not run on the audit machine (Lean, the
+    full suite with Lean, the six notebooks), writing logs and a PASS / FAIL / NOT RUN summary to
+    verification_logs/lab_<commit>/; it commits and pushes nothing. Syntax-checked, not executed here.

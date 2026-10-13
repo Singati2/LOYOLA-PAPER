@@ -9,6 +9,15 @@ The Lean stage of `verify.py --full` was **not run** on the audit machine. A Mat
 - git and bash. On macOS, bash 3.2 is enough.
 - Python 3.13 with `requirements-lock.txt`, only for the full `verify.py` run in step 4. The Lean steps do not need Python.
 
+## One-command alternative
+
+`bash audit/run_remaining_checks.sh` runs, in order:
+- the Lean check;
+- `verify.py --everything` with Lean;
+- the six notebooks in a fresh environment, built outside the repository in `~/.loyola-venv-lab`.
+
+It writes the logs and a PASS / FAIL / NOT RUN summary to `verification_logs/lab_<commit>/`, and commits, pushes and tags nothing. Add `--skip-everything` to omit the roughly 3-hour full suite. The script passes `bash -n` but was not executed on the audit machine.
+
 ## Steps
 
 ```bash
