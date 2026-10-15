@@ -1,0 +1,13 @@
+commit 09ceba8bd43baff4eec440dff1d1b860d563d948
+date   Thu Oct 15 03:54:55 AM UTC 2026
+host   Linux mpcrlab12 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64 x86_64 x86_64 GNU/Linux
+python Python 3.13.16
+disk   /dev/nvme0n1p3  916G  792G   77G  92% /
+tracked-file changes: 0
+1 Lean (formal/verify.sh)            PASS
+2 verify.py --everything             NOT RUN (--skip-everything)
+notebooks run with LOYOLA_ALLOW_MISMATCH=1 (tag v40.30 absent or elsewhere): results tied to 09ceba8, not to the tag
+3 notebooks (6, fresh env)           FAIL (2 failed; see notebooks.log)
+3b notebooks 05, 06 rerun            PASS (rerun after pausing a concurrent job that had the CPU thermally throttled; see notebooks_rerun.log)
+2 verify.py --everything             FAIL (exit 1; see verify_everything.log) (run after the notebooks, 36800 s)
+2b every script replayed (rerun)     FAIL exit 1 (14094 s; direct run of audit/run_all_scripts.py, unchanged, full stderr in run_all_scripts_rerun.log)

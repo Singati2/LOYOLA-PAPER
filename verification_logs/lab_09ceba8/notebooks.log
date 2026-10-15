@@ -1,0 +1,14 @@
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+notebooks/01_data.ipynb: OK | 9 checks, 0 mismatches
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+notebooks/02_mathematics.ipynb: OK | 20 checks, 0 mismatches
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+notebooks/03_degeneracy.ipynb: OK | 25 checks, 0 mismatches
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+notebooks/04_octane_correlations.ipynb: OK | 69 checks, 0 mismatches
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+notebooks/05_boiling_points.ipynb: ERROR CellTimeoutError
+notebooks/05_boiling_points.ipynb: FAILED | OK       pooled pre-registered verdict: paper no evidence that gamma adds value, recomputed no evidence that gamma adds value
+[IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
+notebooks/06_verification_suite.ipynb: ERROR CellExecutionError
+notebooks/06_verification_suite.ipynb: FAILED | 3 checks, 2 mismatches
