@@ -1,0 +1,39 @@
+n=2 all profiles=1 qhist=1 R=1 chi=1 GA=1 GA_qmerges=0
+n=2 mol profiles=1 qhist=1 R=1 chi=1 GA=1 GA_qmerges=0
+n=3 all profiles=1 qhist=1 R=1 chi=1 GA=1 GA_qmerges=0
+n=3 mol profiles=1 qhist=1 R=1 chi=1 GA=1 GA_qmerges=0
+n=4 all profiles=2 qhist=2 R=2 chi=2 GA=2 GA_qmerges=0
+n=4 mol profiles=2 qhist=2 R=2 chi=2 GA=2 GA_qmerges=0
+n=5 all profiles=3 qhist=3 R=3 chi=3 GA=3 GA_qmerges=0
+n=5 mol profiles=3 qhist=3 R=3 chi=3 GA=3 GA_qmerges=0
+n=6 all profiles=6 qhist=6 R=6 chi=6 GA=6 GA_qmerges=0
+n=6 mol profiles=5 qhist=5 R=5 chi=5 GA=5 GA_qmerges=0
+n=7 all profiles=11 qhist=11 R=11 chi=11 GA=11 GA_qmerges=0 | 32-digit counts CERTIFIED | chi CERTIFIED
+n=7 mol profiles=9 qhist=9 R=9 chi=9 GA=9 GA_qmerges=0 | 32-digit counts CERTIFIED
+n=8 all profiles=21 qhist=21 R=21 chi=21 GA=21 GA_qmerges=0 | 32-digit counts CERTIFIED | chi CERTIFIED
+n=8 mol profiles=16 qhist=16 R=16 chi=16 GA=16 GA_qmerges=0 | 32-digit counts CERTIFIED
+n=9 all profiles=40 qhist=40 R=40 chi=40 GA=40 GA_qmerges=0 | 32-digit counts CERTIFIED | chi CERTIFIED
+n=9 mol profiles=28 qhist=28 R=28 chi=28 GA=28 GA_qmerges=0 | 32-digit counts CERTIFIED
+n=10 all profiles=79 qhist=79 R=79 chi=77 GA=79 GA_qmerges=0 | 32-digit counts CERTIFIED | chi CERTIFIED
+n=10 mol profiles=49 qhist=49 R=49 chi=47 GA=49 GA_qmerges=0 | 32-digit counts CERTIFIED
+n=11 all profiles=152 qhist=152 R=152 chi=147 GA=152 GA_qmerges=0 | 32-digit counts CERTIFIED | chi CERTIFIED
+n=11 mol profiles=83 qhist=83 R=83 chi=78 GA=83 GA_qmerges=0 | 32-digit counts CERTIFIED
+n=12 all profiles=294 qhist=294 R=294 chi=281 GA=294 GA_qmerges=0 | 32-digit counts CERTIFIED | chi CERTIFIED
+n=12 mol profiles=137 qhist=137 R=137 chi=124 GA=137 GA_qmerges=0 | 32-digit counts CERTIFIED
+n=12 all fractional points, exact: (0,1/2,0):281 (0,1/2,1):294 (1/2,0,0):294 (1/2,0,1):294 (0,-1/2,0):281 (0,-1/2,1):294 (-1/2,0,0):294 (-1/2,0,1):294 (1/2,-1,0):294 (1/2,-1,1):294 (-1/2,1,0):294 (-1/2,1,1):294 (1/3,0,0):294 (1/3,0,1):294 (0,1/3,0):281 (0,1/3,1):294 (1/6,0,0):294 (1/6,0,1):294
+n=13 all profiles=570 qhist=566 R=570 chi=530 GA=566 GA_qmerges=0 | 32-digit counts CERTIFIED
+n=13 mol profiles=223 qhist=223 R=223 chi=192 GA=223 GA_qmerges=0 | 32-digit counts CERTIFIED
+n=13 all fractional points, exact: (0,1/2,0):530 (0,1/2,1):570 (1/2,0,0):569 (1/2,0,1):570 (0,-1/2,0):530 (0,-1/2,1):570 (-1/2,0,0):570 (-1/2,0,1):570 (1/2,-1,0):566 (1/2,-1,1):566 (-1/2,1,0):566 (-1/2,1,1):566 (1/3,0,0):570 (1/3,0,1):570 (0,1/3,0):530 (0,1/3,1):570 (1/6,0,0):570 (1/6,0,1):570
+n=14 all profiles=1100 qhist=1090 R=1095 chi=1001 GA=1090 GA_qmerges=0 | 32-digit counts CERTIFIED
+n=14 mol profiles=350 qhist=350 R=350 chi=286 GA=350 GA_qmerges=0 | 32-digit counts CERTIFIED
+n=14 all fractional points, exact: (0,1/2,0):1001 (0,1/2,1):1100 (1/2,0,0):1090 (1/2,0,1):1100 (0,-1/2,0):1001 (0,-1/2,1):1100 (-1/2,0,0):1095 (-1/2,0,1):1100 (1/2,-1,0):1090 (1/2,-1,1):1090 (-1/2,1,0):1090 (-1/2,1,1):1090 (1/3,0,0):1095 (1/3,0,1):1100 (0,1/3,0):1001 (0,1/3,1):1100 (1/6,0,0):1095 (1/6,0,1):1100
+n=15 all profiles=2119 qhist=2093 R=2100 chi=1874 GA=2093 GA_qmerges=0 | 32-digit counts CERTIFIED
+n=15 mol profiles=538 qhist=538 R=538 chi=421 GA=538 GA_qmerges=0 | 32-digit counts CERTIFIED
+n=15 all fractional points, exact: (0,1/2,0):1874 (0,1/2,1):2119 (1/2,0,0):2075 (1/2,0,1):2118 (0,-1/2,0):1874 (0,-1/2,1):2119 (-1/2,0,0):2100 (-1/2,0,1):2119 (1/2,-1,0):2093 (1/2,-1,1):2093 (-1/2,1,0):2093 (-1/2,1,1):2093 (1/3,0,0):2100 (1/3,0,1):2119 (0,1/3,0):1874 (0,1/3,1):2119 (1/6,0,0):2100 (1/6,0,1):2119
+n=16 all profiles=4069 qhist=3996 R=4007 chi=3476 GA=3996 GA_qmerges=0 | 32-digit counts CERTIFIED
+n=16 mol profiles=810 qhist=809 R=810 chi=599 GA=809 GA_qmerges=0 | 32-digit counts CERTIFIED
+n=16 all fractional points, exact: (0,1/2,0):3475 (0,1/2,1):4069 (1/2,0,0):3940 (1/2,0,1):4067 (0,-1/2,0):3476 (0,-1/2,1):4069 (-1/2,0,0):4007 (-1/2,0,1):4068 (1/2,-1,0):3996 (1/2,-1,1):3996 (-1/2,1,0):3996 (-1/2,1,1):3996 (1/3,0,0):4009 (1/3,0,1):4069 (0,1/3,0):3476 (0,1/3,1):4069 (1/6,0,0):4009 (1/6,0,1):4069 (3/10,1/5,0):4069
+n=17 all profiles=7778 qhist=7582 R=7604 chi=6434 GA=7581 GA_qmerges=1 | 32-digit counts CERTIFIED
+n=17 mol profiles=1194 qhist=1189 R=1191 chi=838 GA=1189 GA_qmerges=0 | 32-digit counts CERTIFIED
+GA merges two distinct q-histograms first at order 17 (all trees), none up to 17 (max degree <= 4); orders 2-17 examined
+RESULT: all numerical counts certified exactly

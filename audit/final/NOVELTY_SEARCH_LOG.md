@@ -5,7 +5,7 @@ explicit colliding trees for degree-ratio indices, was found. That is an absence
 search cannot prove it. This file records the search so that its scope can be judged.
 
 - Engine: Consensus (consensus.app), 20 results per query; 20 queries; 99 unique papers.
-- Close candidates were read in full: Song et al., MATCH 89 (2023) 343-370 (edge-division vector,
+- Close candidates were read in full: Song and Huang, MATCH 89 (2023) 343-370 (edge-division vector,
   a distance-type invariant; two trees with vector (4,1,1) have M1 = 26 and 28, so it does not
   bound degree-pair collisions), and the Novikov-Shapiro work on exponential sums (it does not
   decide whether five crossings are attained).
@@ -21,12 +21,12 @@ search cannot prove it. This file records the search so that its scope can be ju
 # Papers (key | authors | year | cites | venue | url | seen in searches | note)
 P01 | Furtula, Gutman, Dehmer | 2013 | 218 | Appl. Math. Comput. | https://consensus.app/papers/details/81ea8a9ff3fc51ef81db105eb3a0722e/ | 1,2 | structure sensitivity of 12 degree-based indices on trees
 P02 | Rada | 2026 | 0 | MATCH 96 | https://consensus.app/papers/details/63efc815f5a4572db9d000bea2150653/ | 1,2 | linear framework; edge-type vectors; weak discrimination; polytope
-P03 | Rada et al. | 2021 | 1 | MATCH 87 | https://consensus.app/papers/details/5a4d00e56b6050ab911745df32b28a58/ | 1,2 | weakly discriminating VDB indices on chemical trees; Sombor weakly discriminating
+P03 | Rada et al. | 2022 | 1 | MATCH 87 | https://consensus.app/papers/details/5a4d00e56b6050ab911745df32b28a58/ | 1,2 | weakly discriminating VDB indices on chemical trees; Sombor weakly discriminating
 P04 | Gao et al. | 2024 | 8 | Appl. Math. Comput. | https://consensus.app/papers/details/e24ab163ad6e590b9d421fcc7e721dae/ | 1,2 | extremal trees exponential VDB
 P05 | Das et al. | 2021 | 37 | Discrete Appl. Math. | https://consensus.app/papers/details/690f12cacd9a55f0b300d0646e1f4125/ | 1,2 | open problems exponential VDB; discrimination motivation
 P06 | Dehgardi et al. | 2025 | 1 | Discrete Appl. Math. | https://consensus.app/papers/details/b5515ce732505201b7999a3a832c9d3a/ | 1,2 | minimal trees exponential Zagreb; credits Rada 2019
 P07 | Cruz, Monsalve, Rada | 2020 | 25 | Appl. Math. Comput. | https://consensus.app/papers/details/136c0079186d5c8b83db913dbe06c1e3/ | 1,2 | unified extremal theorem chemical trees, exponential VDB
-P08 | Song et al. | 2022 | 0 | MATCH 89 | https://consensus.app/papers/details/d7b27782955a55038d691e0aab3cf762/ | 2 | trees with same edge division vector; infinite classes; order <=10 completely determined  ** novelty-relevant
+P08 | Song, Huang | 2023 | 0 | MATCH 89 | https://consensus.app/papers/details/d7b27782955a55038d691e0aab3cf762/ | 2 | trees with same edge division vector; infinite classes; order <=10 completely determined  ** novelty-relevant
 P09 | Redzepovic | 2021 | 146 | J. Serb. Chem. Soc. | https://consensus.app/papers/details/1049f647c53e5192b30c1ebfe7b2eb40/ | 1 | Sombor predictive/discriminative potential, isomers
 P10 | Vetrik | 2024 | 6 | J. Appl. Math. Comput. | https://consensus.app/papers/details/533244601b5a5f06a88f6efafb54e881/ | 1 | degree-based function index extremal, general families
 P11 | Su | 2025 | 3 | AIMS Math. | https://consensus.app/papers/details/f834ad5b80da58c397a149c919286908/ | 1,2 | extremal with segment number; diminished Sombor

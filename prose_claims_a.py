@@ -587,6 +587,13 @@ def bps(test_prefix, field):
     return fnum([r for r in BPS if r["test"].startswith(test_prefix)][0][field])
 
 
+def narrow_box(col_a, col_b, what):
+    """v40.31: Test B per-seed comparison of external/bp/bp_results_seeds.csv: number of seeds with
+    col_a > col_b ('wins'), number of seeds ('n') or median paired difference col_a - col_b ('median')."""
+    d = [fnum(r[col_a]) - fnum(r[col_b]) for r in rows("external", "bp", "bp_results_seeds.csv") if r["test"].startswith("B")]
+    return {"wins": sum(x > 0 for x in d), "n": len(d), "median": float(np.median(d))}[what]
+
+
 def bpb(test_prefix, model, field="Q2"):
     return fnum([r for r in BPB if r["test"].startswith(test_prefix) and r["model"] == model][0][field])
 
@@ -881,7 +888,7 @@ REGISTRY = [
     E("ext_tb_avg20", "supp", r"977\-\-996,\s+\\url\{https://doi\.org/10\.1007/s40747\-(?P<v>\d+)\-00262\-0\}\s+\(arXiv:1906\.06660\)\.", "non_tb_rule('NIST average')", 0, "nonane_provenance.csv T_B rows whose selection_rule starts 'NIST average'"),
     E("ext_tb_single5", "main", r"is\s+\$\\\{\(1,7\),\(2,6\),\(3,(?P<v>\d+)\),\(4,4\)\\\}\$,\s+whose", "non_tb_rule('single NIST')", 0, "nonane_provenance.csv T_B rows 'single NIST Tboil determination'"),
     E("ext_dhvap34", "main", r"enthalpies\s+were\s+\$(?P<v>\d+)\$\s+values\s+from", "non_count('dHvap_kcal')", 0, "nonane_data.csv non-blank dHvap"),
-    E("ext_cal4", "main", r"\$\\Delta\s+\\le\s+(?P<v>\d+)\$\.\s+Its", "non_dhvap_rule_count('calorimetric')", 0, "nonane_provenance.csv selection_rule"),
+    E("ext_cal4", "main", r"NIST\s+lists\s+\$(?P<v>\d+)\$\s+under\s+Labbauf", "non_dhvap_rule_count('calorimetric')", 0, "nonane_provenance.csv selection_rule"),
     E("ext_cal_of34", "main", r"enthalpies\s+were\s+\$(?P<v>\d+)\$\s+values\s+from", "non_count('dHvap_kcal')", 0, "nonane_data.csv"),
     E("ext_comp29", "main", r"of\s+which\s+\$(?P<v>\d+)\$\s+are\s+compiled\s+values", "non_dhvap_rule_count('compilation')", 0, "nonane_provenance.csv 'only one NIST entry' rows"),
     E("ext_95", "main", r"in\s+\$(?P<v>\d+)/100\$\s+and\s+\$98/100\$", "nonv('dHvap','primary',200,'LO_better')", 0, "nonane_validation_summary.csv"),
@@ -889,7 +896,7 @@ REGISTRY = [
     E("ext_med048", "main", r"\$\\Delta\s+Q\^2\s+=\s+(?P<v>[+-]?[\d.]+)\$\s+and\s+\$\+0\.053\$,", "nonv('dHvap','primary',200,'median_dQ2')", 0.0005, "median_dQ2"),
     E("ext_med053", "main", r"\+0\.048\$\s+and\s+\$(?P<v>[+-]?[\d.]+)\$,\s+and\s+is", "nonv('dHvap','primary',500,'median_dQ2')", 0.0005, "median_dQ2"),
     E("ext_tb58", "main", r"\$T_B\$\s+\(\$(?P<v>\d+)/100\$\s+and", "nonv('T_B','primary',200,'LO_better')", 0, "nonane_validation_summary.csv"),
-    E("ext_tb63", "main", r"and\s+\$(?P<v>\d+)/100\$\)\.\s+Within\-fold", "nonv('T_B','primary',500,'LO_better')", 0, "nonane_validation_summary.csv"),
+    E("ext_tb63", "main", r"and\s+\$(?P<v>\d+)/100\$\)\.\s+\\emph\{Replicates\}", "nonv('T_B','primary',500,'LO_better')", 0, "nonane_validation_summary.csv"),
     E("ext_hyb002", "main", r"Q\^2\s+=\s+(?P<v>[+-]?[\d.]+)\$\s+under", "box('nonane','dHvap',12,'median_dQ2_hybrid')", 0.0005, "box_sensitivity_summary.csv"),
     E("ext_lo1_957", "main", r"model\s+\(\$(?P<v>[\d.]+)\$\s+and", "base('oct','dHvap','fixed_best')", 0.0005, "baselines_octane.csv fixed_best dHvap (= LO(0,0,1) in all folds)"),
     E("ext_lo1_903", "main", r"\(\$0\.957\$\s+and\s+\$(?P<v>[\d.]+)\$\s+against\s+medians", "base('non','dHvap_kcal','fixed_best')", 0.0005, "baselines_nonane.csv fixed_best dHvap (= LO(0,0,1):34)"),
@@ -935,7 +942,7 @@ REGISTRY = [
     E("bp_24dmh_1089", "supp", r"at\s+\$(?P<v>[\d.]+)\$\s+against", "bp_vs_octane_table()[1]['2,4-dimethylhexane'][0]", 0.05, "bp_data.csv"),
     E("bp_24dmh_1094", "supp", r"against\s+\$(?P<v>[\d.]+)\\,\^\{\\circ\}\$C,\s+a", "OCTANES[IDX['2,4-dimethylhexane']][1]", 0.05, "octane_data"),
     E("bp_p010", "main", r"\$0\.05\$,\s+\$(?P<v>[\d.]+)\$,\s+\$0\.2\$", "math.floor(100*min(float(r['perm_p_two_sided']) for r in COV))/100", 0.005, "coverage_bias.csv min p (0.1033) floored to 2 dp"),
-    E("bp_cov34", "main", r"of\s+\$(?P<v>\d+)\$\.\s+The", "int(COV[0]['n_included'])", 0, "coverage_bias.csv"),
+    E("bp_cov34", "main", r"boundary\s+folds\s+of\s+\$(?P<v>\d+)\$\.\s+The\s+half-width", "non_count('dHvap_kcal')", 0, "v40.31: re-anchored; the old pattern matched this nonane fold count by coincidence (coverage_bias.csv is no longer quoted in main.tex)"),
     E("bp_cov41", "supp", r"and\s+\$(?P<v>\d+)\$\s+molecules", "int(COV[0]['n_excluded'])", 0, "coverage_bias.csv"),
     E("bp_pool100", "main", r"all\s+\$(?P<v>\d+)\$\s+molecules", "len(BPD)", 0, "bp_data.csv"),
     E("bp_box12", "main", r"\$\(\\alpha,\\beta\) \\in \(-12,(?P<v>\d+)\)\^2\$\s+for\s+the\s+parent", "BP_HW_PARENT", 0, "bp_tests.py docstring U(-12,12)"),
@@ -961,7 +968,7 @@ REGISTRY = [
     E("bp_gm2_469", "main", r"level on the decanes \(medians \$(?P<v>[\d.]+)\$\s+and \$0\.465\$\)", "bps('A','median_Q2_GM2')", 0.0005, "bp_results_summary.csv"),
     E("bp_lo2_465", "main", r"and\s+\$(?P<v>[\d.]+)\$\),\s+and\s+the\s+Loyola", "bps('A','median_Q2_LO2')", 0.0005, "bp_results_summary.csv"),
     E("bp_lo2_980", "main", r"marginally ahead on the pooled set\s+\(\$(?P<v>[\d.]+)\$ against \$0\.976\$\)", "bps('B','median_Q2_LO2')", 0.0005, "bp_results_summary.csv"),
-    E("bp_gm2_976", "main", r"\(\$0\.980\$\s+against\s+\$(?P<v>[\d.]+)\$\)\.\s+The\s+pooled", "bps('B','median_Q2_GM2')", 0.0005, "bp_results_summary.csv"),
+    E("bp_gm2_976", "main", r"\(\$0\.980\$\s+against\s+\$(?P<v>[\d.]+)\$\)\.\s+Seed\s+by\s+seed", "bps('B','median_Q2_GM2')", 0.0005, "bp_results_summary.csv"),
     E("bp_hept02", "main", r"one\s+heptane\s+value\s+moved\s+by\s+\$(?P<v>[\d.]+)\\,\^\{\\circ\}\$C", "heptane_shift()", 0.05, "bp_provenance.csv 3-methylhexane: first-page AVG 365.0 K (91.9 C) vs pooled 91.7 C"),
     E("bp_101", "main", r"uncorrected\s+cohort\s+of\s+\$(?P<v>\d+)\$\s+molecules\s+the\s+same\s+test", "len(BPD)+bpp_count(9,'EXCLUDED')", 0, "bp_data rows + the nonane excluded by D5"),
     E("bp_101_dq2", "main", r"gave\s+\$(?P<v>[+-]?[\d.]+)\$,\s+\$24\$", None, 0, "UNCHECKABLE: result of a superseded cohort, recorded only in the changelog"),
@@ -1259,6 +1266,11 @@ REGISTRY = [
     E("s4_ci_tb_hi", "supp", r"wide\s+\(\$\[\-0\.212,\s+(?P<v>[+-]?[\d.]+)\]\$\s+for", "unc('nonane','T_B',200,'ci95_hi')", 0.0005, "uncertainty_exploratory.csv"),
     E("s4_ci_dhf_lo", "supp", r"is worse\s+\(\$\[(?P<v>-?[\d.]+), -0\.044\]\$\)", "unc('octane','dHf',200,'ci95_lo')", 0.0005, "uncertainty_exploratory.csv"),
     E("s4_ci_dhf_hi", "supp", r"\(\$\[-0\.281, (?P<v>-?[\d.]+)\]\$\)\. All these intervals", "unc('octane','dHf',200,'ci95_hi')", 0.0005, "uncertainty_exploratory.csv"),
+    E("bp_nb_38", "main", r"beats\s+the\s+wide-box\s+parent\s+GM\s+in\s+\$(?P<v>\d+)\$\s+of", "narrow_box('Q2_LO2','Q2_GM12','wins')", 0, "bp_results_seeds.csv (v40.31)"),
+    E("bp_nb_50a", "main", r"GM\s+in\s+\$38\$\s+of\s+\$(?P<v>\d+)\$\s+seeds", "narrow_box('Q2_LO2','Q2_GM12','n')", 0, "bp_results_seeds.csv (v40.31)"),
+    E("bp_nb_med", "main", r"difference\s+\$(?P<v>[+-][\d.]+)\$\)\s+and\s+the\s+narrow", "narrow_box('Q2_LO2','Q2_GM12','median')", 0.00005, "bp_results_seeds.csv (v40.31)"),
+    E("bp_nb_40", "main", r"narrow-box\s+parent\s+in\s+\$(?P<v>\d+)\$\s+of\s+\$50\$", "narrow_box('Q2_LO2','Q2_GM2','wins')", 0, "bp_results_seeds.csv (v40.31)"),
+    E("bp_nb_50b", "main", r"parent\s+in\s+\$40\$\s+of\s+\$(?P<v>\d+)\$\.\s+These", "narrow_box('Q2_LO2','Q2_GM2','n')", 0, "bp_results_seeds.csv (v40.31)"),
 ]
 
 UNCHECKABLE = [e["id"] for e in REGISTRY if e["expected"] is None]

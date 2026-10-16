@@ -76,6 +76,7 @@ FULL = [
     ("external verifier", [PY, "verify_external.py"], os.path.join(HERE, "external")),
     ("structural checks", [PY, "structural_checks.py"], os.path.join(HERE, "structural")),
     ("32-digit recount", [PY, "hp_counts.py"], os.path.join(HERE, "structural")),
+    ("exact tie certificate", [PY, "exact_ties.py"], os.path.join(HERE, "structural")),
     ("verifier self-test", [PY, "verify_loyola_v35.py", "--selftest"], HERE),
     ("counter-attacks on the checkers", [PY, os.path.join("audit", "attack_checks.py")], HERE),
 ]

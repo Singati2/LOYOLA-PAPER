@@ -16,6 +16,20 @@ part of `python3 verify.py`, fails if any copy differs from its source.
 | `boiling_points_provenance.csv` | | included and excluded molecules with the rule and all NIST determinations | Section 6.4 |
 | `calorimetric_dHvap298_alkanes.csv` | | alkanes with calorimetric ΔH_vap(298 K) on the NIST WebBook (data-availability check for a future test). Built from the curated index `../external/bp/nist_alkanes_skeletons_audit.csv` (C4 to C16, retrieved 2026-10-03); phase-change pages outside C6 to C10 are not archived, so this census is reproducible from the curated index, not end to end from raw pages | Supplementary Section S9 |
 
+Third-party values and licence
+
+* The MIT licence of the repository covers its code and text. It does not cover the property values
+  taken from third-party sources, which remain under the terms of those sources and are reproduced
+  here value by value, with attribution, for verification of the paper: the NIST Chemistry WebBook
+  (NIST Standard Reference Database 69), the published compilations cited in the paper, and the
+  Korea Thermophysical Properties Data Bank (KDB) as shown on Cheméo (https://www.chemeo.com).
+* Cheméo's terms (https://www.chemeo.com/tos, consulted 2026-10-16) permit value-by-value use with
+  the citation "Cheméo, chemical and physical properties (https://www.chemeo.com)" and forbid bulk
+  download or inclusion of the database as-is. The KDB terms could not be retrieved (the CHERIC site
+  did not serve them on 2026-10-16). The KDB/Cheméo values concern 18 octane acentric factors and
+  comparison values in `octane_provenance.csv`; their redistribution terms are not yet settled, so no
+  archive (Zenodo or other) should be made from this repository until they are.
+
 Notes
 
 * 2,2,3,3-tetramethylbutane: the benchmark ΔH_vap = 8.41 kcal/mol has no stated source

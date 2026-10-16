@@ -10,3 +10,5 @@ nbformat==5.11.1
 nbclient==0.11.0
 ipykernel==7.4.0
 jupyter_client==8.10.0
+# audit/check_labels.py (labels and references; reads the PDF compiled by tectonic, which must be on PATH)
+pymupdf==1.25.1
