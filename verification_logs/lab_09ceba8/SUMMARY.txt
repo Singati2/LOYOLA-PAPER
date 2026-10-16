@@ -11,3 +11,5 @@ notebooks run with LOYOLA_ALLOW_MISMATCH=1 (tag v40.30 absent or elsewhere): res
 3b notebooks 05, 06 rerun            PASS (rerun after pausing a concurrent job that had the CPU thermally throttled; see notebooks_rerun.log)
 2 verify.py --everything             FAIL (exit 1; see verify_everything.log) (run after the notebooks, 36800 s)
 2b every script replayed (rerun)     FAIL exit 1 (14094 s; direct run of audit/run_all_scripts.py, unchanged, full stderr in run_all_scripts_rerun.log)
+2c labels and references             PASS (5 s; audit/check_labels.py, tectonic 0.15.0, PyMuPDF 1.25.1)
+2d replay of remaining 38 scripts    36 OK, 2 PROBLEM (floating-point error magnitudes only; no per-script timeout; see NOTE.md, run_all_scripts_remaining38.log)

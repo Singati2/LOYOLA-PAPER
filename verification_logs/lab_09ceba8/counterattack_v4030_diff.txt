@@ -1,0 +1,24 @@
+diff --git a/audit/final/scripts/counterattack_v4030_out.txt b/audit/final/scripts/counterattack_v4030_out.txt
+index e053349..247a792 100644
+--- a/audit/final/scripts/counterattack_v4030_out.txt
++++ b/audit/final/scripts/counterattack_v4030_out.txt
+@@ -1,12 +1,12 @@
+ T1a delta=0.1: deleted rank 2; old inf; new inf; reference None
+-T1a delta=0.0001: deleted rank 2; old 4.6301; new inf; reference None
++T1a delta=0.0001: deleted rank 2; old 4.60937; new inf; reference None
+ T1a delta=1e-07: deleted rank 2; old inf; new inf; reference None
+-T1b eps=0.1: min(1-h) 1.79e-02; reference 12.8228; old rel.err 1.5e-12; new rel.err 1.5e-12
+-T1b eps=0.01: min(1-h) 1.25e-04; reference 139.532; old rel.err 1.1e-10; new rel.err 1.1e-10
+-T1b eps=0.001: min(1-h) 1.20e-06; reference 1414.02; old rel.err 1.3e-09; new rel.err 1.3e-09
+-T1b eps=0.0001: min(1-h) 1.20e-08; reference 14159.6; old rel.err 3.5e-07; new rel.err rejected
+-T1b eps=1e-05: min(1-h) 1.20e-10; reference 141615; old rel.err 8.1e-05; new rel.err rejected
+-T1c 400 random well-posed designs: rejected or old != new in 0; max rel. error vs 40-digit reference 4.8e-16
++T1b eps=0.1: min(1-h) 1.79e-02; reference 12.8228; old rel.err 9.6e-13; new rel.err 9.6e-13
++T1b eps=0.01: min(1-h) 1.25e-04; reference 139.532; old rel.err 2.4e-11; new rel.err 2.4e-11
++T1b eps=0.001: min(1-h) 1.20e-06; reference 1414.02; old rel.err 1.7e-09; new rel.err 1.7e-09
++T1b eps=0.0001: min(1-h) 1.20e-08; reference 14159.6; old rel.err 5.6e-07; new rel.err rejected
++T1b eps=1e-05: min(1-h) 1.20e-10; reference 141615; old rel.err 7.8e-05; new rel.err rejected
++T1c 400 random well-posed designs: rejected or old != new in 0; max rel. error vs 40-digit reference 3.3e-16
+ T2 distinct triples over all four generators 166478 (current checker: 163487 without ablation_robustness); folds 613 (outer and inner); smallest relative range 2.344e-04; exact-zero std count 0
+ T3 first list 6, second list 7, overlap [], total 13; second list == CANNOT VERIFY rows: True; first list classes: ['AGREEMENT WITHIN TOLERANCE', 'SOURCE VARIATION / EXPLAINED']
+ T4 octane values re-converted from their first quoted source value: 78; within the audit tolerance 74; notes:

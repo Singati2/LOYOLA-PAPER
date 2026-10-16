@@ -1,0 +1,42 @@
+replaying 38 of 60 scripts from external/bp/selection_resampling.py, no per-script timeout
+run_all_scripts at b607b5f: 38 scripts, each in an isolated copy of the 569 tracked files snapshotted before the run; comparison: bytes (PDFs by canonical form)
+[OK] external/bp/selection_resampling.py: exit 0, 8678 s; all 2 rewritten files identical; last line: ['B: pooled C6-C10 T_B (size-adjusted)', 200, 80, '+0.0007', '-0.0146', '+0.0084', 110]
+[OK] external/nonane_tb_conflict.py: exit 0, 637 s; all 1 rewritten files identical; last line: RESULT: verdict MIXED in all three cases, as registered
+[OK] external/bp/make_bp_table.py: exit 0, 0 s; all 1 rewritten files identical; last line: C6--C10, with $n_C$ ($n = 100$) & $0.938$ & $0.967$ & $0.963$ & $0.963$ & $0.991$ & $0.977$ & $0.977$ & $-0.0001$ & $25$
+[OK] external/make_box_table.py: exit 0, 0 s; all 1 rewritten files identical; last line: non. $\Delta H_{\mathrm{vap}}$ & $93\%$ & $0.855$ & $0.895$ & $49$ & $9\%$ & $0.892$ & $0.881$ & $0.889$ & $24$\\
+[OK] external/make_v37_table.py: exit 0, 0 s; all 2 rewritten files identical; last line: non. $\Delta H_{\mathrm{vap}}$ & $-0.062$ & $0.857$ & $0.897$ & $0.927$ & $0.903$ & $0.853$ & $0.900$ & $95/98$\\
+[OK] structural/structural_checks.py: exit 0, 7627 s; all 1 rewritten files identical; last line:   node_labels = _init_node_labels(G, edge_attr, node_attr)
+[OK] structural/hp_counts.py: exit 0, 517 s; all 1 rewritten files identical; last line: RESULT: all counts reproduced at 32 significant digits (515 s)
+[OK] structural/fractional_points.py: exit 0, 19 s; all 1 rewritten files identical; last line: gamma=1 better than gamma=0 at the same fractional (alpha,beta): 52 of 81 cases
+[OK] structural/chi_floor.py: exit 0, 0 s; all 1 rewritten files identical; last line: n=12 profiles=294 chi_distinct=281
+[OK] structural/extremal_trees_check.py: exit 0, 1 s; all 1 rewritten files identical; last line: RESULT: extremal-tree proposition holds for all orders 4..12
+[OK] structural/minimality_check.py: exit 0, 13 s; all 1 rewritten files identical; last line: RESULT: first order with distinct profiles sharing a q-histogram: 13 (all trees), 16 (maximum degree <= 4)
+[OK] structural/sumconn_pair_check.py: exit 0, 15 s; all 1 rewritten files identical; last line: RESULT: Example ex:sumconn confirmed (D(1) = 0.2255, D(1e-6) = 2.4e-7)
+[OK] structural/count_dimension_check.py: exit 0, 2 s; all 1 rewritten files identical; last line: RESULT: affine dimension bounds attained (7, 7, 8); octane T_B floor SSE 2.925, RMSE 0.403
+[OK] external/bp/wiener_baseline.py: exit 0, 1 s; all 1 rewritten files identical; last line: W alone, leave-one-out Q2 = -0.0879
+[OK] audit/final/scripts/bp_duplicate_sensitivity.py: exit 0, 642 s; all 1 rewritten files identical; last line: pooled C6-C10: ridge Q2 0.9911 as registered, 0.9909 without them (n = 98)
+[PROBLEM] audit/final/scripts/press_size_probe.py: exit 0, 14724 s; CHANGED ['audit/final/scripts/press_size_probe_out.txt']; last line: leverage-1 rejections among rank-accepted candidates: 0
+[OK] audit/final/scripts/claim_provenance.py: exit 0, 0 s; all 2 rewritten files identical; last line: all values: A:35  A-AGG:97  B:55  B?:11  C:52  D:9  (n=259)
+[PROBLEM] audit/final/scripts/counterattack_v4030.py: exit 0, 272 s; CHANGED ['audit/final/scripts/counterattack_v4030_out.txt']; last line:    2,2,3,3-tetramethylbutane omega: |converted first source value - paper| = 0.004 > 0.003 [CONFLICT]
+[OK] audit/v4030/math_independent.py: exit 0, 167 s; all 1 rewritten files identical; last line: M7 Example 4.4: D(0) = 0.0, D(1) = 0.225538, D(1e-6) = 2.401e-7
+[OK] audit/v4030/table2_independent.py: exit 0, 44 s; all 1 rewritten files identical; last line: FIRST below floor / merges: GA merges all: (17,); GA all: (13, 566, 570); GA maxdeg<=4: (16, 809, 810); LO(0,0,1) all: (
+[OK] audit/v4030/uncertain_source_sensitivity.py: exit 0, 357 s; all 4 rewritten files identical; last line: end: commit unknown; modified tracked files: 0
+[OK] audit/v4030/leakage_probe.py: exit 0, 241 s; all 1 rewritten files identical; last line: end: commit ; modified tracked files: 0
+[OK] audit/v4030/feature_leakage_probe.py: exit 0, 224 s; all 1 rewritten files identical; last line: end: commit ; modified tracked files: 0
+[OK] audit/v4030/gamma_strict.py: exit 0, 1471 s; all 2 rewritten files identical; last line: end: commit ; modified tracked files: 0
+[OK] audit/v4030/sensitivity_followup.py: exit 0, 15288 s; all 3 rewritten files identical; last line: commit ; modified tracked files: 0
+[OK] audit/v4030/refit_stability.py: exit 0, 14666 s; all 2 rewritten files identical; last line: end: commit ; modified tracked files: 0
+[OK] tmb_dhvap_audit.py: exit 0, 0 s; all 1 rewritten files identical; last line: ['NIST 298 K, solid to gas', '10.263', 'LO(0,0,1)', '0.3736', 'LO(0,0,2)', '0.3317', '0.3736', '0.0183']
+[OK] DATA/build_data.py: exit 0, 0 s; all 8 rewritten files identical; last line: wrote 8 files to DATA/
+[OK] constancy_test_check.py: exit 0, 128 s; all 1 rewritten files identical; last line: RESULT: the two constancy tests never disagree on these inputs; no fold is affected
+[OK] tuning_pool_seed_sweep.py: exit 0, 5 s; all 1 rewritten files identical; last line: seeds 0-99: median nested gain M2/omega = +0.0033, positive in 97 of 100 seeds, min -0.0004, max +0.0063
+[OK] audit/check_exploratory_outputs.py: exit 0, 15 s; check-only script, writes no file; last line: Auxiliary output reproduction PASS
+[OK] audit/check_source_identities.py: exit 0, 0 s; check-only script, writes no file; last line: Archived source formula/skeleton checks PASS: 154 pages
+[OK] audit/check_mathematics.py: exit 0, 4 s; check-only script, writes no file; last line: Mathematics interval checks PASS
+[OK] prose_numbers_check.py: exit 0, 22 s; check-only script, writes no file; last line: prose numbers: 742 checked, 0 failures, 20 uncheckable (cited values; see UNCHECKABLE in the registries)
+[OK] external/test_regressions.py: exit 0, 1 s; check-only script, writes no file; last line: OK
+[OK] external/test_baselines.py: exit 0, 329 s; check-only script, writes no file; last line: 0 failures; 328.3s
+[OK] verify_loyola_v35.py: exit 0, 838 s; all 2 rewritten files identical; last line:   node_labels = _init_node_labels(G, edge_attr, node_attr)
+[OK] manifest.py: exit 0, 0 s; check-only script, writes no file; last line: manifest OK: 545 files, one hash per path, all match (no git checkout: listed files verified, untracked files not detect
+RESULT: 2 PROBLEM(S)
+exit 1
