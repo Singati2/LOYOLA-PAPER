@@ -205,5 +205,20 @@ supplement.tex. The manuscript tables do not use KDB values.
 
 ## 8. Verification at the head of this branch
 
-See the commit that adds this report for the final status lines (fast path, counter-attacks, labels,
-prose numbers, exact ties, manifest, CI).
+Certified commit: `c9fbac2` (fresh clone; Linux, Python 3.13.16). The commit that adds this section
+changes only this report and `SHA256SUMS.txt`; the GitHub Actions fast path runs on it after the push.
+
+| Check | Status | Evidence |
+|---|---|---|
+| `verify.py` fast path, 16 stages (core verifier, prose numbers, regression and baseline tests, constancy, auxiliary outputs, source identities, interval certificates, style, extremal trees, minimality, sum-connectivity pair, count dimension, DATA copies, manifest, CSV convention) | PASS (ALL PASS, 13.5 min) | lab log |
+| Prose numbers | PASS: 756 checked, 0 failures, 22 uncheckable | |
+| Labels and references (`audit/check_labels.py`, tectonic 0.15.0, PyMuPDF 1.25.1) | PASS | |
+| Exact tie certificate (`structural/exact_ties.py`) | PASS: all numerical counts certified exactly | |
+| Counter-attacks on the checkers (`audit/attack_checks.py`) | PASS: 13 attacks, 13 rejected, 0 false negatives | |
+| Replay, fast scripts (41), with one committed output deliberately corrupted | behaves as designed: 37 OK; the corrupted output is detected three ways (exact_ties CHANGED, prose numbers, manifest); `counterattack_v4030.py` differs exactly as recorded on 2026-10-16 (macOS vs Linux precision); both changed outputs retained for diffing | |
+| Replay timeout path (`LOYOLA_SCRIPT_TIMEOUT=2`) | PASS: 20 scripts reported TIMED OUT, replay completed, no traceback, "no changed outputs to keep" | |
+| Lean 4 build | NOT RUN at this head; `formal/` is unchanged since the PASS at 09ceba8 (2026-10-15) | `git diff f109127 -- formal` is empty |
+| Full replay of all 60 scripts and `verify.py --full` | NOT RUN at this head (several hours); last full results at 09ceba8: 56 exact, 4 floating-point discrepancies | lab_09ceba8 |
+| PDFs | rebuilt with tectonic 0.15.0: 42 + 28 A5 pages | |
+| Data added or changed by this branch | none (no CSV, HTML or data file in `git diff f109127`) | |
+
