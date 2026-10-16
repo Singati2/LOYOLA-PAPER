@@ -17,18 +17,29 @@ run here because they only re-run the scripts below.
 
 Output: audit/run_all_scripts_out.txt (committed).
 
-A script that exceeds LOYOLA_SCRIPT_TIMEOUT seconds (default 7200) is reported as a PROBLEM and the
-replay continues; every changed output is copied to the directory named in the RESULT line, so a
-discrepancy can be diffed after the run (v40.31).
+A script that exceeds LOYOLA_SCRIPT_TIMEOUT seconds (default 7200) is reported as a PROBLEM marked
+TIMED OUT (its outputs are not compared) and the replay continues.  Every changed output is copied to
+a loyola_changed_* directory, created only when the first changed file is found; the RESULT line names
+that directory only if it exists and holds files, so a discrepancy can be diffed after the run (v40.31).
 """
-import hashlib, os, shutil, subprocess, sys, tempfile, time
+import hashlib, os, shutil, subprocess, sys, tempfile, threading, time
 from concurrent.futures import ThreadPoolExecutor
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TIMEOUT = int(os.environ.get("LOYOLA_SCRIPT_TIMEOUT", "7200"))   # seconds per script; a timeout is reported, not fatal
-KEEP = tempfile.mkdtemp(prefix="loyola_changed_")                # changed outputs are copied here for diffing
+KEEP = None                                                      # changed outputs are copied here for diffing (created lazily)
+_KEEP_LOCK = threading.Lock()                                    # run_one runs in a ThreadPoolExecutor
 sys.path.insert(0, ROOT)
 from verify_loyola_v35 import _pdf_canonical  # noqa: E402
+
+
+def _keep_dir():
+    """Return the directory for changed outputs, creating it on first use (thread-safe)."""
+    global KEEP
+    with _KEEP_LOCK:
+        if KEEP is None:
+            KEEP = tempfile.mkdtemp(prefix="loyola_changed_")
+        return KEEP
 
 # (script, slow?)  -- slow scripts take more than about two minutes
 SCRIPTS = [
@@ -86,7 +97,7 @@ def run_one(script, files, ref):
         except subprocess.TimeoutExpired:
             # v40.31: a timeout is a PROBLEM of this script, not a crash of the whole replay
             return dict(script=script, exit=f"timeout after {TIMEOUT} s", seconds=time.time() - t0, changed=[], new=[],
-                        tail="(not completed; outputs not compared)", touched=0)
+                        tail="(not completed; outputs not compared)", touched=0, timed_out=True)
         dt = time.time() - t0
         changed, new, touched = [], [], 0
         for dp, _, fns in os.walk(tmp):
@@ -99,7 +110,7 @@ def run_one(script, files, ref):
                         touched += 1                               # v40.22: the script must rewrite something
                     if digest(full) != ref[rel]:
                         changed.append(rel)
-                        keep = os.path.join(KEEP, script.replace(" ", "_").replace("/", "__"), rel)   # v40.31: retained for diffing
+                        keep = os.path.join(_keep_dir(), script.replace(" ", "_").replace("/", "__"), rel)   # v40.31: retained for diffing
                         os.makedirs(os.path.dirname(keep), exist_ok=True); shutil.copy2(full, keep)
                 else:
                     new.append(rel)
@@ -130,14 +141,17 @@ def main():
     with ThreadPoolExecutor(max_workers=3) as ex:
         for res in ex.map(lambda s: run_one(s, files, ref), todo):
             check_only = res["script"] in CHECK_ONLY
-            ok = res["exit"] == 0 and not res["changed"] and (res["touched"] > 0 or check_only)
+            timed_out = res.get("timed_out", False)
+            ok = not timed_out and res["exit"] == 0 and not res["changed"] and (res["touched"] > 0 or check_only)
             bad += not ok
             line = (f"[{'OK' if ok else 'PROBLEM'}] {res['script']}: exit {res['exit']}, {res['seconds']:.0f} s"
-                    + (f"; CHANGED {res['changed']}" if res["changed"] else (f"; all {res['touched']} rewritten files identical" if res["touched"]
+                    + ("; TIMED OUT, outputs not compared" if timed_out else
+                       f"; CHANGED {res['changed']}" if res["changed"] else (f"; all {res['touched']} rewritten files identical" if res["touched"]
                        else ("; check-only script, writes no file" if check_only else "; WROTE NO TRACKED FILE")))
                     + (f"; new files {res['new']}" if res["new"] else "") + f"; last line: {res['tail']}")
             lines.append(line); print(line, flush=True)
-    lines.append(f"RESULT: {'every script exits 0 and reproduces its committed outputs' if bad == 0 else str(bad) + ' PROBLEM(S); changed outputs kept in ' + KEEP}")
+    kept = KEEP is not None and any(fns for _, _, fns in os.walk(KEEP))
+    lines.append(f"RESULT: {'every script exits 0 and reproduces its committed outputs' if bad == 0 else str(bad) + ' PROBLEM(S); ' + ('changed outputs kept in ' + KEEP if kept else 'no changed outputs to keep')}")
     print(lines[-1])
     repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     open(os.path.join(repo, "audit", "run_all_scripts_out.txt"), "w").write("\n".join(lines) + "\n")

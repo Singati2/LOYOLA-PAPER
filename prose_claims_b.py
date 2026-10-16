@@ -245,6 +245,13 @@ def exact_orders():
     return sorted({int(m) for m in _re.findall(r"^n=(\d+) all", open(os.path.join(ROOT, "structural", "exact_ties_out.txt")).read(), _re.M)})
 
 
+def ga_first_qmerge_order():
+    """v40.31: smallest tree order (all trees) at which GA merges two distinct q-histograms, from
+    structural/exact_ties_out.txt."""
+    import re as _re
+    return min(int(n) for n, k in _re.findall(r"^n=(\d+) all .*?GA_qmerges=(\d+)", open(os.path.join(ROOT, "structural", "exact_ties_out.txt")).read(), _re.M) if int(k) > 0)
+
+
 def frac_npoints():
     return len({(a, b) for (n, a, b, g) in _frac()["counts"]})
 
@@ -794,6 +801,7 @@ _add(E("deg_R_570", "main", r"\$13\$\s+\(\$(?P<v>[+-]?[\d.]+)\$\s+values\)", "s1
 _add(E("ff_cap_11", "main", r"at\s+\$(?P<v>\d+)\$\s+significant", "sc_sigdigits()", 0, "structural_checks.py key() format"))  # 1
 _add(E("ff_cap_below7", "main", r"Orders\s+\$(?P<v>\d+)\$\s+to\s+\$17\$\s+were\s+examined", "min(exact_orders())", 0, "structural/exact_ties_out.txt (v40.31)"))
 _add(E("ff_cap_to17", "main", r"Orders\s+\$2\$\s+to\s+\$(?P<v>\d+)\$\s+were\s+examined", "max(exact_orders())", 0, "structural/exact_ties_out.txt (v40.31)"))  # 1
+_add(E("ff_cap_ga17", "main", r"merge\s+of\s+\$GA\$\s+at\s+order\s+\$(?P<v>\d+)\$", "ga_first_qmerge_order()", 0, "structural/exact_ties_out.txt first n with GA_qmerges>0 (v40.31)"))
 _add(E("ff_LO_all_n", "main", r"\\gamma\)\$ & \$(?P<v>\d+)\$ \(\$566/570\$\) & never", "s1_first_below('all', 'LO1')", 0, "S1"))  # 1
 _add(E("ff_LO_all_v", "main", r"\\gamma\)\$ & \$13\$ \(\$(?P<v>\d+)/570\$\) & never", "s1(13, 'all')['LO1']", 0, "S1"))  # 1
 _add(E("ff_LO_all_p", "main", r"\\gamma\)\$ & \$13\$ \(\$566/(?P<v>\d+)\$\) & never", "s1(13, 'all')['prof']", 0, "S1"))  # 1

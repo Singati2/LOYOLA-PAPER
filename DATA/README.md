@@ -19,15 +19,33 @@ part of `python3 verify.py`, fails if any copy differs from its source.
 Third-party values and licence
 
 * The MIT licence of the repository covers its code and text. It does not cover the property values
-  taken from third-party sources, which remain under the terms of those sources and are reproduced
-  here value by value, with attribution, for verification of the paper: the NIST Chemistry WebBook
-  (NIST Standard Reference Database 69), the published compilations cited in the paper, and the
-  Korea Thermophysical Properties Data Bank (KDB) as shown on Cheméo (https://www.chemeo.com).
+  taken from third-party sources, which remain under the terms of those sources and are used here,
+  with attribution, for verification of the paper: the NIST Chemistry WebBook (NIST Standard
+  Reference Database 69), the published compilations cited in the paper, and the Korea
+  Thermophysical Properties Data Bank (KDB) as shown on Cheméo (https://www.chemeo.com).
+* Complete NIST Chemistry WebBook pages (NIST Standard Reference Database 69) are archived in the
+  repository to support the provenance audit: 154 under `../external/bp/nist_raw`, 17 under
+  `../external/bp/nist_hvap_pts` and 91 under `../external/nonane_raw_nist` (262 HTML files in all,
+  counted with `git ls-files`). They remain subject to NIST's terms for SRD 69, which were not
+  reviewed for this revision. Before any archive is made, either those terms must be checked or the
+  pages replaced by the extracted values plus their URLs.
 * Cheméo's terms (https://www.chemeo.com/tos, consulted 2026-10-16) permit value-by-value use with
   the citation "Cheméo, chemical and physical properties (https://www.chemeo.com)" and forbid bulk
   download or inclusion of the database as-is. The KDB terms could not be retrieved (the CHERIC site
-  did not serve them on 2026-10-16). The KDB/Cheméo values concern 18 octane acentric factors and
-  comparison values in `octane_provenance.csv`; their redistribution terms are not yet settled, so no
+  did not serve them on 2026-10-16). The KDB/Cheméo footprint of the repository is:
+  - `octane_provenance.csv` and its byte-identical copy `../octane_property_provenance_v35.csv`:
+    the 18 octane acentric-factor rows (source column: KDB via Cheméo) and 25 further rows
+    (T_B 9, ΔH_f 3, ΔH_vap 4, S 9) that cite KDB or Cheméo as a comparison value or as a source
+    consulted that lacks the value;
+  - `../source_sensitivity.py`: two hard-coded KDB acentric factors (0.303 for
+    2,2,4-trimethylpentane, 0.251 for 2,2,3,3-tetramethylbutane);
+  - `../audit/final/scripts/audit_calc.py`: the KDB critical constants of 2,2,3,3-tetramethylbutane
+    (Tc 567.8 K, Pc 28.7 bar);
+  - `../supplement.tex` (and its copies under `../LOYOLA_SUPPLEMENT_OVERLEAF` and
+    `../LOYOLA_FINAL_PAPER_OVERLEAF`): three KDB comparison numbers (0.251, stated twice, and 0.303),
+    plus the differences from KDB (0.002 to 0.004) derived from them and the statement that the
+    remaining acentric factors agree with KDB to within 0.005.
+* Redistribution terms for the KDB/Cheméo values and the NIST pages are not yet settled, so no
   archive (Zenodo or other) should be made from this repository until they are.
 
 Notes

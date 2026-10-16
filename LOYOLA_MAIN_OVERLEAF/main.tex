@@ -609,7 +609,7 @@ Equal profiles give equal $q$-histograms. The converse fails
   larger order.
   \end{proof}
 
-  Part~(ii) rests on Rada's Lindemann--Weierstrass argument~\cite{Rada2019ExpVDB}. Example~3 of~\cite{Rada2026LinearVDB} assumes distinct exponents for distinct degree pairs, whereas the exponents $\gamma q_{ij}$ coincide on pairs of equal ratio, so part~(ii) is the version for $q$-classes: two graphs receive the same value for every algebraic $\gamma \neq 0$ exactly when they have equal $q$-histograms. Part~(i) follows directly from the factorisation~\eqref{eq:factor}. The statement for real $\gamma$ applies the standard fact that a nonzero exponential sum has finitely many real zeros. The propagation by a pendant path in part~(iii) is the device of~\cite{Rada2026LinearVDB}. A class-wide question of the same kind was studied by Song and Huang~\cite{SongHuang2023EDV} for distance-type invariants. The edge division vector of a tree $T$ counts its edges $e$ by the order $\min\{n_u(e), n_v(e)\}$ of the smaller component of $T - e$. Trees with equal vectors receive equal values of every edge-additive eccentric index $\sum_e f(\min\{n_u(e), n_v(e)\})$, such as the Wiener and Gutman indices, and Song and Huang determine all such trees of order at most $10$. That invariant does not control degrees: the two seven-vertex trees with edge division vector $(4,1,1)$ have different degree-pair profiles and different $q$-histograms, while the two octane pairs of Table~\ref{tab:collisions} have different edge division vectors and different Wiener indices. Their collisions and ours concern disjoint classes of indices. We found no earlier determination of the orders $13$ and $16$, or of explicit colliding trees for degree-ratio indices, in a literature search recorded in the repository~\cite{LoyolaRepo}. The minimality of orders $13$ and $16$ is computer-assisted. It rests on an exhaustive enumeration of all trees of orders $2$ to $16$ in exact rational arithmetic, reproducible with the code of the repository~\cite{LoyolaRepo}.
+  Part~(ii) rests on Rada's Lindemann--Weierstrass argument~\cite{Rada2019ExpVDB}. Example~3 of~\cite{Rada2026LinearVDB} assumes distinct exponents for distinct degree pairs, whereas the exponents $\gamma q_{ij}$ coincide on pairs of equal ratio, so part~(ii) is the version for $q$-classes: two graphs receive the same value for every algebraic $\gamma \neq 0$ exactly when they have equal $q$-histograms. Part~(i) follows directly from the factorisation~\eqref{eq:factor}. The statement for real $\gamma$ applies the standard fact that a nonzero exponential sum has finitely many real zeros. The propagation by a pendant path in part~(iii) is the device of~\cite{Rada2026LinearVDB}. A class-wide question of the same kind was studied by Song and Huang~\cite{SongHuang2023EDV} for distance-type invariants. The edge division vector of a tree $T$ counts its edges $e$ by the order $\min\{n_u(e), n_v(e)\}$ of the smaller component of $T - e$. Trees with equal vectors receive equal values of every edge-additive eccentric index $\sum_e f(\min\{n_u(e), n_v(e)\})$, such as the Wiener and Gutman indices, and Song and Huang determine all such trees of order at most $10$. That invariant does not control degrees: the two seven-vertex trees with edge division vector $(4,1,1)$ have different degree-pair profiles and different $q$-histograms, while the two octane pairs of Table~\ref{tab:collisions} have different edge division vectors and different Wiener indices. Neither partition of trees refines the other, so their collisions and ours are of different kinds. We found no earlier determination of the orders $13$ and $16$, or of explicit colliding trees for degree-ratio indices, in a literature search recorded in the repository~\cite{LoyolaRepo}. The minimality of orders $13$ and $16$ is computer-assisted. It rests on an exhaustive enumeration of all trees of orders $2$ to $16$ in exact rational arithmetic, reproducible with the code of the repository~\cite{LoyolaRepo}.
 
   \begin{corollary}[Degree-ratio indices]\label{cor:ratioclass}
   Let $\rho_{uv} = \min(d_u,d_v)/\max(d_u,d_v)$ and let
@@ -1037,7 +1037,7 @@ at order $14$, where the pure-$\gamma$ points give $1090$ values.
 \begin{table}[htbp]
 \centering
 \caption{First tree order at which discrimination is lost. Values are
-counted as distinct at $11$ significant digits. Recounts at $50$ to $60$ digits agree. Every count, ties included, is also certified exactly. On $\Pi$ this follows from the $q$-histograms. Off $\Pi$ it follows from exact arithmetic in the radicals $(ij)^{a}(i+j)^{b}$, since the $k$-th roots of distinct $k$-th-power-free positive integers are linearly independent over $\mathbb{Q}$~\cite{Besicovitch1940}. ``Below
+counted as distinct at $11$ significant digits. Recounts at $50$ to $60$ digits agree. Every count, ties included, is also certified exactly. For the pure-$\gamma$ points this follows from the $q$-histograms (Theorem~\ref{thm:ratioplane}(ii)). For $R$ and $GA$, including the merge of $GA$ at order $17$, it follows from exact arithmetic in the radicals $(ij)^{a}(i+j)^{b}$. This rests on the linear independence over $\mathbb{Q}$ of the $k$-th roots of distinct $k$-th-power-free positive integers~\cite{Besicovitch1940}. ``Below
 floor'' is the first order with fewer distinct values than distinct
 edge-degree-pair profiles, the floor for every vertex-degree-based
 index. The entry gives (values/profiles) at that order. ``Merges'' is
@@ -1270,7 +1270,7 @@ enumeration in the reproducibility package.
   The statements below extend them to $\gamma \ne 0$ (Propositions
   \ref{thm:upper_Delta} and~\ref{thm:lower_delta} to $\gamma > 0$ only)
   and track how $\gamma$ changes the equality cases. The inequalities
-  of Propositions~\ref{thm:upper_Delta} and~\ref{thm:lower_delta}, not
+  of Corollary~\ref{thm:cs} and Propositions~\ref{thm:upper_Delta} and~\ref{thm:lower_delta}, not
   their equality cases, are machine-checked. For
   Propositions~\ref{thm:bracket} and~\ref{thm:ratio_bound} only the
   summation step is, with the edgewise extrema taken as hypotheses
@@ -1718,11 +1718,12 @@ original box of half-width $2$, reported as the pre-registration
 requires, the two tuned models are level on the decanes (medians $0.469$
 and $0.465$), and the Loyola model is marginally ahead on the pooled set
 ($0.980$ against $0.976$). Seed by seed, that narrow-box Loyola model
-beats the wide-box parent GM in $38$ of $50$ seeds (median paired
-difference $+0.0033$) and the narrow-box parent in $40$ of $50$. These
-comparisons were not registered contrasts and carry no interval, but
-they show that the negative verdict concerns the registered contrast
-LO$_h$ against GM, not every use of $\gamma$. The pooled cohort was corrected after an
+beats the wide-box parent GM in $38$ of $50$ seeds on the pooled set
+(median seed-matched difference $+0.0033$) but in only $22$ of $50$ on
+the decanes (median $-0.037$). Against the narrow-box parent the counts
+are $40$ and $25$ of $50$. These comparisons were not registered, carry
+no interval and count optimiser variance on fixed data, so they do not
+indicate a gain from $\gamma$. The pooled cohort was corrected after an
 external audit (Table~\ref{tab:deviations}). On the uncorrected cohort
 of $101$ molecules the same test gave $-0.0001$, $24$ of $50$,
 $[-0.003, +0.002]$, so the correction changes no conclusion. The
@@ -1732,12 +1733,13 @@ procedure for both models on random subsamples of $80\%$ of the
 molecules. On the decanes ($500$ subsamples) the median $\Delta Q^2$ is
 $-0.110$ with central $95\%$ range $[-0.510, +0.312]$. On the pooled set
 ($200$ subsamples) it is $+0.001$ with range $[-0.015, +0.008]$.
-Neither range supports a gain from $\gamma$. The decane range is so
-wide that Test~A could not have detected an effect of plausible size,
+Neither range supports a gain from $\gamma$. The selection-aware decane
+range is so wide that it neither supports nor excludes gains of
+practical size, the registered interval omits refitting and selection,
 and no smallest effect of interest or equivalence margin was
 registered. The registered contrast also gives LO$_h$ three dimensions
 to search against two for GM with the same candidate budget, which
-handicaps the three-parameter model (Section~\ref{sec:ablation}). The
+may handicap the three-parameter model (Section~\ref{sec:ablation}). The
 negative verdicts therefore mean that no gain was demonstrated under
 these protocols; they do not establish equivalence, and they do not
 show that $\gamma$ never helps. The two summaries differ in
@@ -1830,7 +1832,7 @@ extremal trees of the pure-imbalance points are the path and the star,
 and at rational exponents a nonzero algebraic imbalance parameter never
 destroys a distinction the parent makes.
 
-Under random search at matched budgets, no predictive gain from the imbalance parameter was demonstrated; this does not show that it never helps, and the decane test had little power. A gain on vaporisation enthalpies met the seed-count criterion of a pre-registered protocol, with a bootstrap interval that included zero. It shrank to about zero in an exploratory comparison once the parent was searched over a box that did not truncate it, and pre-registered tests on measured boiling points
+Under random search at matched budgets, no predictive gain from the imbalance parameter was demonstrated; this does not show that it never helps, and the decane intervals were wide. A gain on vaporisation enthalpies met the seed-count criterion of a pre-registered protocol, with a bootstrap interval that included zero. It shrank to about zero in an exploratory comparison once the parent was searched over a box that did not truncate it, and pre-registered tests on measured boiling points
 were negative. There a linear model on the degree-pair counts
 outperformed every single index. The untuned pure-imbalance point, close
 to the irregularity index $IRLA$, was as accurate as the tuned models on vaporisation enthalpy in point estimate, out of sample only on the nonanes, and no equivalence test was made. Three problems remain open: sharp two-sided bounds

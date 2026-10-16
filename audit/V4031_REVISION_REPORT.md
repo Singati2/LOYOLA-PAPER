@@ -5,7 +5,7 @@ Branch `revision/v40.31-scientific`, from `audit/v4030-adversarial` at `f109127`
 output or frozen experimental setting was changed. Every manuscript change is a correction of
 wording, scope or citation, or the exact certification of a number already in the paper.
 
-Read with `audit/PUBLICATION_READINESS_DECISION.md`; Section 7 below corrects three of its points.
+Read with `audit/PUBLICATION_READINESS_DECISION.md`; Section 7 below corrects four of its points.
 
 ## 1. Mathematical novelty: Song and Huang (MATCH 89, 2023)
 
@@ -28,14 +28,19 @@ re-derived here: the two trees of order 7 with vector (4,1,1) have degree-pair p
 {(1,4)^3,(1,2),(2,2),(2,4)} and {(1,3)^3,(1,2),(2,3),(3,3)} and different q-histograms; all three order-8
 pairs also differ in profile and q-histogram; the two octane collision pairs of Table 1 have different
 vectors ((3,2,1,1) vs (3,2,2,0); (4,2,0,1) vs (4,2,1,0)) and different Wiener indices (76/75, 68/67).
-Neither partition refines the other. None of Lemma 3.1, Theorem 3.5, Corollary 3.6, the minimal orders
+Neither partition refines the other. The paper states this as "Neither partition of trees refines the
+other, so their collisions and ours are of different kinds"; an earlier draft of this revision said the
+collisions "concern disjoint classes of indices", which was false, because a constant edge function f
+gives an index in both classes. None of Lemma 3.1, Theorem 3.5, Corollary 3.6, the minimal orders
 13 and 16, Proposition 3.11, Proposition 3.13 or Section 4 is implied or anticipated by Song and Huang.
 The shared element is the type of question (whole classes of indices that cannot separate certain
 trees, with complete small-order counts) and a branch-moving construction similar in spirit to the
 pendant-path propagation.
 
 **Change.** main.tex, after the proof of Theorem 3.5: a paragraph that cites and distinguishes Song and
-Huang, with the order-7 example; bibitem `SongHuang2023EDV` (alphabetical, after Sigarreta).
+Huang, with the order-7 example and the sentence "Neither partition of trees refines the other, so
+their collisions and ours are of different kinds" (replacing "disjoint classes of indices", see above);
+bibitem `SongHuang2023EDV` (alphabetical, after Sigarreta).
 `audit/final/NOVELTY_SEARCH_LOG.md`: "Song et al. 2022" corrected to "Song, Huang 2023"; entry P03 year
 2021 corrected to 2022 (MATCH 87 appeared in 2022, as main.tex already states).
 
@@ -46,9 +51,9 @@ Huang, with the order-7 example; bibitem `SongHuang2023EDV` (alphabetical, after
 | main.tex:281, contribution (ii) | "characterises exactly what the pure-gamma points discriminate" holds only for algebraic gamma != 0 (gamma = ln 4 merges K4 and K1,3, Remark 3.9) | "at algebraic gamma != 0", credits Rada's Lindemann-Weierstrass argument, states that minimality is established by enumeration |
 | main.tex:519-521 | attributed the *first* orders to Theorem 3.5(iii), which proves existence from order 13 on | existence by part (iii); minimality "computer-assisted (Remark 3.10)" |
 | main.tex:666, Remark 3.9 | "only if" needs rational alpha, beta (Lindemann-Weierstrass needs algebraic coefficients) | "At rational alpha, beta" |
-| main.tex:1266-1268 | "Their inequalities ... are machine-checked" covered Props 5.4 and 5.8, for which Lean takes the per-edge extrema as hypotheses (`formal/LoyolaFormal/Bounds.lean:121-148`) | inequalities of Props 5.6/5.7 machine-checked; for 5.4/5.8 only the summation step |
+| main.tex:1266-1268 | "Their inequalities ... are machine-checked" covered Props 5.4 and 5.8, for which Lean takes the per-edge extrema as hypotheses (`formal/LoyolaFormal/Bounds.lean:121-148`) | inequalities of Corollary 5.5 and Props 5.6/5.7 machine-checked (not their equality cases); for 5.4/5.8 only the summation step (an earlier draft of this revision omitted Corollary 5.5, whose inequality is formalised in `formal/LoyolaFormal/CauchySchwarz.lean`) |
 | main.tex:1820-1825 (data availability) | order-13 collision listed as machine-checked without scope | "on the pure-gamma line"; "The transcendence, Laguerre and enumeration arguments are not machine-checked" |
-| Table 2 caption, main.tex:1018, 1037, 1076-1080 | ties off the ratio plane stated as facts but "numerical and not certified"; orders 2-6 not covered for the GA statement | **certified exactly** (below); caption, Remark 3.10 and the order-16 paragraph say so; "Orders 2 to 17 were examined" |
+| Table 2 caption, main.tex:1018, 1037, 1076-1080 | ties off the ratio plane stated as facts but "numerical and not certified"; orders 2-6 not covered for the GA statement | **certified exactly** (below); caption, Remark 3.10 and the order-16 paragraph say so; "Orders 2 to 17 were examined". The caption says the pure-gamma counts follow from the q-histograms (Theorem 3.5(ii)) and the R and GA counts, including GA's merge at order 17, from exact arithmetic in the radicals (Besicovitch). An earlier draft split the certification "on Pi" / "off Pi", which was wrong because GA lies on Pi but needs the radical argument |
 
 **Exact tie certificate** (`structural/exact_ties.py`, new; output `structural/exact_ties_out.txt`; 18 s).
 Every value is a sum of edge weights (ij)^a (i+j)^b e^(g q) with rational a, b and g in {0, 1}. Each
@@ -60,27 +65,36 @@ for all trees and trees with Delta <= 4 of orders 2-17 (tree counts asserted aga
 A000602): every count of R, chi and GA in `hp_counts_out.txt` and `chi_floor_out.txt`, the 18
 fractional-point counts of orders 12-16 in `fractional_points_out.txt` (exponents 1/3, 1/6 taken
 exactly), and LO(3/10,1/5,0) separating all 4069 trees of order 16, agree exactly with the numerical
-counts. GA merges two distinct q-histograms first at order 17 (none for Delta <= 4 up to 17), now with
-orders 2-6 covered. Added to `verify.py --full` and to the replay list.
+counts. The pure-gamma counts follow from the q-histograms alone (Theorem 3.5(ii)); the R and GA counts
+need the radical argument, because GA is a function of the q-histogram but can merge distinct ones. GA
+merges two distinct q-histograms first at order 17 (`n=17 all ... qhist=7582 ... GA=7581 GA_qmerges=1`;
+none for Delta <= 4 up to 17), now with orders 2-6 covered. Added to `verify.py --full` and to the replay list.
 
 Preserved: every theorem, proof, construction and number of Sections 2-5.
 
 ## 3. Statistical interpretation (no registered outcome changed)
 
-- **Narrow-box result now reported** (Section 6.4): on the pooled set the narrow-box Loyola model beats
-  the wide-box parent GM12 in 38 of 50 seeds (median paired difference +0.0033) and the narrow-box parent
-  in 40 of 50 (recomputed from `external/bp/bp_results_seeds.csv`; registered in `prose_claims_a.py`),
-  with the caveat that these were not registered contrasts and carry no interval.
-- **Power and design** (Section 6.4): Test A could not have detected an effect of plausible size, no
-  smallest effect of interest or equivalence margin was registered, and the registered contrast gives
-  the three-parameter model three dimensions against two at the same candidate budget. The negative
-  verdicts "do not establish equivalence, and they do not show that gamma never helps"; the conclusion
-  says the same.
+- **Narrow-box result now reported for both cohorts** (Section 6.4): the narrow-box Loyola model beats
+  the wide-box parent GM12 in 38 of 50 seeds on the pooled set (median seed-matched difference +0.0033)
+  but in only 22 of 50 on the decanes (median -0.037); against the narrow-box parent the counts are 40
+  and 25 of 50 (recomputed from `external/bp/bp_results_seeds.csv`; registered in `prose_claims_a.py`).
+  The text says these were not registered, carry no interval and are descriptive counts of optimiser
+  variance on fixed data, so they do not indicate a gain from gamma. "Seed-matched" replaces "paired",
+  since the candidate streams are drawn sequentially. An earlier draft reported the pooled set only and
+  said the counts show that the negative verdict concerns the registered contrast "not every use of
+  gamma"; that framing was withdrawn.
+- **Power and design** (Section 6.4): the selection-aware decane range is so wide that it neither
+  supports nor excludes gains of practical size, the registered interval omits refitting and selection,
+  and no smallest effect of interest or equivalence margin was registered. The registered contrast gives
+  the three-parameter model three dimensions against two at the same candidate budget, which "may
+  handicap" it. The negative verdicts "do not establish equivalence, and they do not show that gamma
+  never helps"; the conclusion says the same, and its "the decane test had little power" became "the
+  decane intervals were wide".
 - **"Replicates"** is kept as the registered verdict label of PREREG_v37, and the text now says it is
   the name of a seed-count rule that the protocol itself calls non-inferential, whose molecule-bootstrap
   interval includes 0. Conclusion: "met the seed-count criterion ..., with a bootstrap interval that
   included zero" instead of "replicated".
-- **"Disappears"** (abstract, Section 6.3, Table 6, conclusion) -> "shrinks to about zero" (the nonane
+- **"Disappears"** (abstract, Section 6.3, Table 6, conclusion, supplement Section S4) -> "shrinks to about zero" (the nonane
   hybrid median is -0.002; octane best-versus-best still differs by about +0.015).
 - **Wiener sentence**: now presented as a single point estimate without an interval, for descriptors
   historically chosen on alkane boiling points.
@@ -89,22 +103,39 @@ Preserved: every theorem, proof, construction and number of Sections 2-5.
   (964b127 at 15:54, data 6f55119 at 16:05 on 2026-10-03). Collection time is not verifiable from git.
 
 Registered outcomes unchanged: Test A -0.072, 15/50, [-0.156, +0.001]; Test B -0.0001, 25/50,
-[-0.003, +0.002]; nonane dHvap "replicates" (95/100, 98/100), T_B "mixed"; all tables byte-identical.
+[-0.003, +0.002]; nonane dHvap "replicates" (95/100, 98/100), T_B "mixed". No numeric table cell changed; the only table edits are the wording of the Table 6 effect
+cell ("disappears" -> "shrinks to about zero") and the Table 2 (tab:firstfail) caption (orders examined,
+certification scope).
 
 ## 4. Reproducibility and tooling
 
 - **Replay timeouts** (`audit/run_all_scripts.py`): a script exceeding `LOYOLA_SCRIPT_TIMEOUT` seconds
-  (default 7200, unchanged) is reported as a PROBLEM and the replay continues; changed outputs are copied
-  to a directory named in the RESULT line, so a discrepancy can be diffed afterwards (the
-  `press_size_probe.py` diff was lost for this reason). Tested on a clean clone with a 2 s limit: 19
-  scripts reported "timeout after 2 s", the replay finished, no traceback.
+  (default 7200, unchanged) is reported as a PROBLEM with its own status text ("TIMED OUT, outputs not
+  compared") and the replay continues. Changed outputs are copied to a `loyola_changed_*` directory that
+  is created only when the first changed file is found; the RESULT line names it only if it exists and
+  holds files (otherwise "no changed outputs to keep"), so a discrepancy can be diffed afterwards (the
+  `press_size_probe.py` diff was lost for this reason). Tested on a clean clone with a 2 s limit before
+  the lazy directory and the TIMED OUT text were added: 19 scripts reported "timeout after 2 s", the
+  replay finished, no traceback. That test was not repeated after those two changes.
 - **PyMuPDF declared**: `pymupdf==1.25.1` in `requirements-extras-lock.txt` (used by `audit/check_labels.py`;
   1.24.10 has no Python 3.13 wheel).
 - **Two mis-anchored prose registry entries fixed**: `ext_cal4` matched "Delta <= 4. Its" in the
-  introduction instead of "NIST lists 4 under Labbauf"; `bp_cov34` matched an unrelated nonane fold
-  count after the coverage sentence had left main.tex. Both passed only because the numbers coincided.
-  Four entries re-anchored to reworded sentences; seven entries added (five checkable, two cited values
-  of Song and Huang marked UNCHECKABLE). Prose check: 748 checked, 0 failures, 22 uncheckable.
+  introduction instead of "NIST lists 4 under Labbauf". It was re-anchored in v40.31 but still computed
+  the count of calorimetric selection rules (method C), which is also 4, so the coincidence persisted.
+  It now counts the nonane provenance rows whose NIST source is Labbauf et al. (4), and an entry
+  `ext_reid25` checks the 25 under Reid. `bp_cov34` matched an unrelated nonane fold count; v40.31 said
+  the coverage sentence had left main.tex, which was wrong (Section 6.4 still says "with $34$ and $41$
+  molecules"). The fold-count entry is renamed `bp_non_dhvap_bd`, and new entries `bp_cov34_main` and
+  `bp_cov41_main` check the coverage sentence against `coverage_bias.csv`.
+  Registry changes in v40.31: five entries re-anchored to reworded sentences (`ext_tb63`, `bp_gm2_976`,
+  `rp_enum_to17`, `off_orders12`, `off_orders16`), one repurposed (`ff_cap_below7`), eight added (six
+  checkable, two cited values of Song and Huang marked UNCHECKABLE); prose check then 748 checked, 0
+  failures, 22 uncheckable. Further changes after review: `ext_cal4` recomputed as above; `bp_cov34`
+  renamed `bp_non_dhvap_bd`; `bp_nb_med`, `bp_nb_40` and `bp_nb_50b` re-anchored to the two-cohort
+  narrow-box sentence; eight entries added, all checkable (`ext_reid25`, `bp_cov34_main`,
+  `bp_cov41_main`, `bp_nb_dec22`, `bp_nb_dec50`, `bp_nb_dec_med`, `bp_nb_dec25`, `ff_cap_ga17`). Prose
+  check (`prose_numbers_check.py`): registry A 455 entries, 438 checkable, 438 match; registry B 323
+  entries, 318 checkable, 318 match; 756 checked, 0 failures, 22 uncheckable.
 - **Replay discrepancies of the lab run (unchanged status)**: 56 of 60 scripts exact; 4 differ only in
   floating-point digits or error magnitudes (`transfer_exploratory.py`, `wide_box_diagnostics.py`,
   `counterattack_v4030.py`, `press_size_probe.py`). The `press_size_probe.py` difference is bounded by
@@ -141,8 +172,13 @@ downloaded 2026-10-16):
 ## 6. Data rights
 
 The KDB/Cheméo-derived values are the 18 octane acentric factors and comparison values in
-`octane_provenance.csv` (and its copy in DATA/), two hard-coded values in `source_sensitivity.py`, and
-three comparison numbers in supplement.tex. The manuscript tables do not use KDB values.
+`DATA/octane_provenance.csv` (and its root copy `octane_property_provenance_v35.csv`, identical byte for byte), two
+hard-coded values in `source_sensitivity.py`, the KDB critical constants of 2,2,3,3-tetramethylbutane
+(Tc 567.8 K, Pc 28.7 bar) in `audit/final/scripts/audit_calc.py`, and three comparison numbers in
+supplement.tex. The manuscript tables do not use KDB values.
+- The repository also holds 262 complete NIST Chemistry WebBook pages (SRD 69): 154 under
+  `external/bp/nist_raw`, 17 under `external/bp/nist_hvap_pts` and 91 under `external/nonane_raw_nist`
+  (`git ls-files`). Their terms of use were not reviewed for this revision.
 - Cheméo (https://www.chemeo.com/about, /tos, consulted 2026-10-16): value-by-value use is allowed with
   the citation "Cheméo, chemical and physical properties (https://www.chemeo.com)"; bulk download and
   inclusion of the database as-is are not; the content is claimed under copyright and the sui generis
@@ -150,8 +186,9 @@ three comparison numbers in supplement.tex. The manuscript tables do not use KDB
   source.
 - KDB/CHERIC terms could not be retrieved: on 2026-10-16 the CHERIC domain served unrelated content.
   The redistribution terms of the KDB values remain **unresolved**.
-- `DATA/README.md` now states that the MIT licence covers code and text, not third-party values, and
-  that no archive should be made until the KDB/Cheméo terms are settled. No archive was created.
+- `DATA/README.md` now states that the MIT licence covers code and text, not third-party values, lists
+  the KDB/Cheméo footprint above, describes the 262 NIST pages and says their SRD terms were not
+  reviewed, and says that no archive should be made until the KDB/Cheméo and NIST terms are settled. No archive was created.
 - Options for the authors: (a) keep only the cited comparison numbers in the supplement and replace the
   copied KDB strings in the public CSVs by the Cheméo page URL and a status flag; (b) ask Cheméo for
   permission; (c) keep as is with attribution, relying on value-by-value use. (a) removes the question.
