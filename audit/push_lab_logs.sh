@@ -10,6 +10,8 @@ ls -d verification_logs/lab_* >/dev/null 2>&1 || { echo "No verification_logs/la
 echo "=== summary ==="; cat verification_logs/lab_*/SUMMARY.txt 2>/dev/null
 echo "=== Lean log, last lines ==="; tail -8 verification_logs/lab_*/lean_verify.log 2>/dev/null
 git add verification_logs/lab_*
+# every tracked file needs a manifest entry, or manifest.py (and CI) fails on the new logs
+python3 manifest.py --write && git add SHA256SUMS.txt
 if git diff --cached --quiet; then echo "Nothing new to commit (already committed?)."; else
   git commit -q -m "v40.30: lab verification logs (Lean, full suite, notebooks)" && echo "Committed."; fi
 if git push origin HEAD:audit/v4030-adversarial; then echo "PUSHED. Tell Claude: pushed."
