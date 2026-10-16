@@ -1511,7 +1511,7 @@ Sections~\ref{sec:external} and~\ref{sec:bp}.
 
 \begin{table}[htbp]
 \centering
-\caption{Pearson correlation $r$ between the Loyola reductions, the fixed pure-$\gamma$ benchmark points and the five physicochemical properties of the $18$ octane isomers. Bold flags the largest $|r|$ per column, and this is descriptive. Margins to the runner-up are $0.001$--$0.032$, and their paired bootstrap intervals include zero (Supplementary Section~S1). These intervals are post-selection and not adjusted for multiplicity.}
+\caption{Pearson correlation $r$ between the Loyola reductions, the fixed pure-$\gamma$ benchmark points and the five physicochemical properties of the $18$ octane isomers. Bold flags the largest $|r|$ per column, and this is descriptive. Margins to the runner-up are $0.001$--$0.032$, and their paired bootstrap intervals include zero (Supplementary Section~S1). These intervals are post-selection and not adjusted for multiplicity. The entry $-0.000$ ($ISI$, $\Delta H_f$) is $-0.0002$.}
 \label{tab:lo_octane}
 \small
 \begin{tabular}{lrrrrr}
@@ -1780,6 +1780,7 @@ lower, found later & Still mixed if excluded or replaced (Suppl.~S4)\\
 Boiling points, Test~B & Least-squares solver rescaled by columns &
 Verdict unchanged\\
 Boiling points, Test~B & Scale-invariant rank test & No displayed value changes\\
+Boiling points, Test~B & Stricter rank threshold and a deletion-rank guard in the size-adjusted scorer & No output changes\\
 Boiling points, both & Interval rule read as one-sided & None\\
 Boiling points, both & Selection-aware resampling added
 (Section~\ref{sec:bp}) & Exploratory; no verdict depends on it\\
@@ -1805,7 +1806,7 @@ destroys a distinction the parent makes.
 Under random search at matched budgets, no predictive gain from the imbalance parameter was demonstrated. A gain on vaporisation enthalpies replicated under a pre-registered protocol but disappeared in an exploratory comparison once the parent was searched over a box that did not truncate it, and pre-registered tests on measured boiling points
 were negative. There a linear model on the degree-pair counts
 outperformed every single index. The untuned pure-imbalance point, close
-to the irregularity index $IRLA$, matched the tuned models on vaporisation enthalpy, out of sample only on the nonanes. Three problems remain open: sharp two-sided bounds
+to the irregularity index $IRLA$, was as accurate as the tuned models on vaporisation enthalpy in point estimate, out of sample only on the nonanes, and no equivalence test was made. Three problems remain open: sharp two-sided bounds
 in terms of indices outside the family, such as the
 atom-bond-connectivity and Sombor indices; the extremal graphs for
 general parameter triples, beginning with the maximal chemical trees of

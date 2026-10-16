@@ -727,6 +727,28 @@ def non_tb_rule(prefix):
         return sum(1 for r in csv.DictReader(f) if r["property"] == "T_B" and r["selection_rule"].startswith(prefix))
 
 
+# v40.30 source-quality sensitivity (audit/v4030; exploratory)
+def v4030_bp(test, scenario, field):
+    r = [x for x in rows("audit", "v4030", "sensitivity_bp.csv") if x["test"] == test and x["scenario"] == scenario][0]
+    return r[field]
+
+
+def v4030_ahead(test, scenario):
+    """Minimum over the predefined comparators of the refitted subsamples (of 200) with ridge ahead."""
+    t = text("audit", "v4030", "sensitivity_decomposition.csv").split("\n\n")[-1].strip().splitlines()
+    rr = list(csv.DictReader(t))
+    return min(int(x["ridge_ahead_of_200"]) for x in rr if x["test"] == test and x["scenario"] == scenario)
+
+
+def v4030_gamma(k):
+    import re as _re
+    return [int(m) for m in _re.findall(r"LOh better in (\d+)/50 seeds", text("audit", "v4030", "gamma_strict_out.txt"))][k]
+
+
+def isi_dhf_r():
+    x = col(RED["ISI"]); return float(np.corrcoef(x, Y["dHf"])[0, 1])
+
+
 def api44_margin_m1_over_hm():
     """|r_alt(M1)| - |r_alt(HM)| on S after substituting the 1947 API-44 entropies."""
     r = {x["index"]: float(x["r_S_alternative"]) for x in rows("entropy_api44_sensitivity_v41.csv")}
@@ -1058,6 +1080,15 @@ REGISTRY = [
     E("v4029_box_non_tb_w", "main", r"to \$(?P<v>[\d.]+)\$ on the nonanes\.", "box('nonane','T_B',12,'median_Q2_GM')", 0.0005, "box_sensitivity_summary.csv"),
     E("v4029_dense938", "main", r"parent gives \$(?P<v>[\d.]+)\$ to \$0\.942\$", "dense_grid_q2()", 0.0005, "wide_box_diagnostics_out.txt D3"),
     E("v4029_wide942", "main", r"parent gives \$0\.938\$ to \$(?P<v>[\d.]+)\$", "box('octane','dHvap',12,'median_Q2_GM')", 0.0005, "box_sensitivity_summary.csv"),
+    E("v4030_isi_main", "main", r"\(\$ISI\$, \$\\Delta H_f\$\) is \$(?P<v>-[\d.]+)\$", "isi_dhf_r()", 0.00005, "octane ISI vs dHf"),
+    E("v4030_isi_supp", "supp", r"\(\$ISI\$, \$\\Delta H_f\$\) is \$(?P<v>-[\d.]+)\$", "isi_dhf_r()", 0.00005, "octane ISI vs dHf"),
+    E("v4030_dec_n", "supp", r"On the decanes \(\$(?P<v>\d+)\$ of \$34\$", "int(v4030_bp('A decanes', 'strict', 'n'))", 0, "sensitivity_bp.csv"),
+    E("v4030_dec_dq", "supp", r"by \$(?P<v>[\d.]+)\$ in \$Q\^2\$\s+against \$IRLA\$", "float(v4030_bp('A decanes', 'strict', 'refit_Q2_ridge')) - float(v4030_bp('A decanes', 'strict', 'refit_Q2_best_single'))", 0.0005, "sensitivity_bp.csv"),
+    E("v4030_dec_ahead", "supp", r"ahead in all \$(?P<v>\d+)\$ refitted", "v4030_ahead('A decanes', 'strict')", 0, "sensitivity_decomposition.csv"),
+    E("v4030_pool_n", "supp", r"keeps only \$(?P<v>\d+)\$ boiling points", "int(v4030_bp('B pooled', 'strict', 'n'))", 0, "sensitivity_bp.csv"),
+    E("v4030_pool_ahead", "supp", r"ahead in \$(?P<v>\d+)\$ of \$200\$ refitted subsamples", "v4030_ahead('B pooled', 'strict')", 0, "sensitivity_decomposition.csv"),
+    E("v4030_gamma_dec", "supp", r"LO ahead in \$(?P<v>\d+)\$ and \$\d+\$ of \$50\$", "v4030_gamma(0)", 0, "gamma_strict_out.txt"),
+    E("v4030_gamma_pool", "supp", r"LO ahead in \$\d+\$ and \$(?P<v>\d+)\$ of \$50\$", "v4030_gamma(1)", 0, "gamma_strict_out.txt"),
     E("v4029_bpB_dq", "main", r"& \$0\.977\$ & \$0\.977\$ & \$(?P<v>[+-]?[\d.]+)\$ & \$25\$", "bps('B','median_dQ2_LOh_GM12')", 0.00005, "bp_results_summary.csv"),
     E("v4029_avg57", "supp", r"NIST averages, \$(?P<v>\d+)\$ of the \$100\$ values", "bp_avg_stats()[0]", 0, "bp_provenance.csv AVG rows"),
     E("v4029_avg6K", "supp", r"quoted uncertainty \(up to \$(?P<v>\d+)\$\\,K\)", "bp_avg_stats()[1]", 0, "bp_provenance.csv largest AVG uncertainty"),
@@ -1097,7 +1128,7 @@ REGISTRY = [
     E("s1_pc1_903", "supp", r"places \$(?P<v>[\d.]+)\\%\$ of the variance on the first\s+component", "100*pca_cumvar(1)", 0.05, "pca_spectrum.csv component 1"),
     E("s1_pc2_9905", "supp", r"and\s+\$(?P<v>[\d.]+)\\%\$\s+on", "100*pca_cumvar(2)", 0.005, "pca_spectrum.csv"),
     E("s1_effrank", "supp", r"is\s+\$(?P<v>[\d.]+)\$,\s+so", "pca_participation_ratio()", 0.05, "participation ratio of pca_spectrum.csv eigenvalues"),
-    E("s1_figcap18", "supp", r"five octane physicochemical properties on the \$(?P<v>\d+)\$ isomers\.\}", "N_OCT", 0, "octane_data"),
+    E("s1_figcap18", "supp", r"five octane physicochemical properties on the \$(?P<v>\d+)\$ isomers\. The entry", "N_OCT", 0, "octane_data"),
 
     # ======================= supplement.tex : S3 =======================
     E("s3_200cand", "supp", r"\$(?P<v>\d+)\$ candidate parameter vectors are drawn once from\s+\$\\mathrm\{Uniform\}\(-2,2\)\$", "BUDGETS[0]", 0, "budget 200 (ablation_robustness.csv budget)"),

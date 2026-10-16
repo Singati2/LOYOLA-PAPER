@@ -1,0 +1,19 @@
+octane dHf strict: n=16; |r| mM2 0.886, AG 0.855
+octane dHvap strict: n=11; |r| LO(0,0,1) 0.977, LO(0,0,2) 0.978
+octane dHvap broad: n=17; |r| LO(0,0,1) 0.980, LO(0,0,2) 0.980
+octane T_B broad: n=18
+octane T_B strict: n=0
+octane dHf broad: n=18
+octane dHf strict: n=16
+octane dHvap broad: n=17
+octane dHvap strict: n=11
+octane S broad: n=5
+octane S strict: n=2
+octane omega broad: n=0
+octane omega strict: n=0
+nested ridge (original): n=34; Q2 scikit-learn 0.859871, audited 0.859871; max |prediction difference| 2.84e-14 degC; same penalty chosen in 34 of 34 folds
+nested ridge (strict): n=28; Q2 scikit-learn 0.851470, audited 0.851470; max |prediction difference| 2.84e-14 degC; same penalty chosen in 28 of 28 folds
+nested ridge (pooled original): n=100; Q2 scikit-learn 0.991069, audited 0.991069; max |prediction difference| 2.56e-13 degC; same penalty chosen in 100 of 100 folds
+nested ridge (pooled strict): n=42; Q2 scikit-learn 0.950895, audited 0.950895; max |prediction difference| 5.68e-13 degC; same penalty chosen in 42 of 42 folds
+commit 01ad6c646583ca0ef0f0d16d39621ffc57681ea5; modified tracked files: 0
+pooled strict n=42, broad n=100

@@ -1,0 +1,63 @@
+run_all_scripts at 09ceba8: 60 scripts, each in an isolated copy of the 552 tracked files snapshotted before the run; comparison: bytes (PDFs by canonical form)
+[OK] external/build_nonane_data.py: exit 0, 0 s; all 3 rewritten files identical; last line: 2,3,3,4-tetramethylpentane dHvap 9.99 41.8 only one NIST ΔvapH° entry, non-calorimetric (method N/A); p
+[OK] external/check_nonane_structures.py: exit 0, 0 s; check-only script, writes no file; last line: 35 trees enumerated; 35 SMILES parsed strictly; each matches exactly one tree, all covered once; NIST InChI == SMILES fo
+[OK] external/bp/build_bp_data.py: exit 0, 1 s; all 2 rewritten files identical; last line: total included 100
+[OK] external/bp/build_calorimetric_set.py: exit 0, 0 s; all 1 rewritten files identical; last line: 16 Hexadecane | linear
+[OK] ablation_gm_vs_lo.py: exit 0, 0 s; all 2 rewritten files identical; last line:   omega   GM +0.9786  LO +0.9565  dQ2=-0.0221  d|err| mean=+0.0023 med=+0.0016  5/13/0
+[OK] ablation_robustness.py: exit 0, 753 s; all 1 rewritten files identical; last line: wrote ablation_robustness.csv, 30 rows
+[OK] expanded_robustness_v35.py: exit 0, 93 s; all 2 rewritten files identical; last line: wrote expanded_robustness_v35.csv (1000 rows) + summary
+[OK] tmb_exclusion_sensitivity.py: exit 0, 61 s; all 2 rewritten files identical; last line: wrote dhvap_tmb_exclusion_v36.csv and dhvap_tmb_exclusion_summary_v36.csv
+[OK] source_sensitivity.py: exit 0, 0 s; all 3 rewritten files identical; last line: S: 11/12 displayed correlations change; winner HM -> M1; max |shift| = 0.0159
+[OK] multi_order_degeneracy.py: exit 0, 3 s; all 1 rewritten files identical; last line: sanity: no index exceeds BID floor
+[OK] redundancy_collisions.py: exit 0, 0 s; all 3 rewritten files identical; last line:   3,4-dimethylhexane vs 3-ethyl-2-methylpentane: dT_B=+2.100, ddHf=-0.430, ddHvap=+0.110, dS=+0.530, domega=+0.010
+[OK] fgd_structure_sensitivity.py: exit 0, 5 s; all 2 rewritten files identical; last line:   node_labels = _init_node_labels(G, edge_attr, node_attr)
+[OK] generate_loyola_v35_figures.py: exit 0, 4 s; all 5 rewritten files identical; last line: wrote 3 CSVs -> /tmp/loyola_run_0zdd1f_e and 2 manuscript PDFs -> /tmp/loyola_run_0zdd1f_e/figures
+[OK] external/baselines.py: exit 0, 287 s; all 1 rewritten files identical; last line: wrote /tmp/loyola_run_vtyh1_jc/external/baselines_octane.csv  (286.4s)
+[OK] external/baselines.py --dataset nonane: exit 0, 296 s; all 1 rewritten files identical; last line: wrote /tmp/loyola_run_0f_8otp2/external/baselines_nonane.csv  (295.6s)
+[OK] external/nonane_validation.py: exit 0, 803 s; all 2 rewritten files identical; last line: dHvap  primary                                  n=34  verdict: REPLICATES  B=200: LO better 95/100, median dQ2 +0.0482  
+[PROBLEM] external/transfer_exploratory.py: exit 0, 70 s; CHANGED ['external/transfer_exploratory.csv']; last line: dHvap  B=500: refit Q2 median GM +0.8651 LO +0.9161 (LO better 100/100) | frozen Q2 median GM +0.3217 LO -0.7171
+[OK] external/uncertainty_exploratory.py: exit 0, 817 s; all 1 rewritten files identical; last line: nonane dHvap  n=34 B=500: dQ2(LO-GM) +0.053 [-0.005,+0.119]  P(>0)=0.96 | dQ2(LO-ridge) -0.025 [-0.103,+0.042]
+[OK] external/box_sensitivity.py: exit 0, 2681 s; all 2 rewritten files identical; last line: ['nonane', 'dHvap', 34, 12, 50, '0.8924133283', '0.8809100098', '-0.0159460202', 15, '0.0947058824', '0.0194117647', '0.
+[PROBLEM] external/wide_box_diagnostics.py: exit 0, 159 s; CHANGED ['external/wide_box_diagnostics_out.txt']; last line: D2 one-descriptor path: 1158 selected candidates checked; max rel error of inner RMSE 1.29e-14, of prediction 1.14e-15
+[OK] external/bp/bp_tests.py: exit 0, 4626 s; all 3 rewritten files identical; last line: ['B: pooled C6-C10 T_B (size-adjusted)', 'ridge on degree-pair counts', 100, '0.9910686922', '2.6609199580']
+[OK] external/bp/coverage_bias.py: exit 0, 5 s; all 1 rewritten files identical; last line: ['Randic R', 34, 41, '4.540', '4.604', '-0.063', '0.1033']
+Traceback (most recent call last):
+  File "/home/mpcrlab/LOYOLA-PAPER/audit/run_all_scripts.py", line 135, in <module>
+    main()
+    ~~~~^^
+  File "/home/mpcrlab/LOYOLA-PAPER/audit/run_all_scripts.py", line 117, in main
+    for res in ex.map(lambda s: run_one(s, files, ref), todo):
+               ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mpcrlab/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/concurrent/futures/_base.py", line 625, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/home/mpcrlab/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/concurrent/futures/_base.py", line 318, in _result_or_cancel
+    return fut.result(timeout)
+           ~~~~~~~~~~^^^^^^^^^
+  File "/home/mpcrlab/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/concurrent/futures/_base.py", line 460, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/home/mpcrlab/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/concurrent/futures/_base.py", line 402, in __get_result
+    raise self._exception
+  File "/home/mpcrlab/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/mpcrlab/LOYOLA-PAPER/audit/run_all_scripts.py", line 117, in <lambda>
+    for res in ex.map(lambda s: run_one(s, files, ref), todo):
+                                ~~~~~~~^^^^^^^^^^^^^^^
+  File "/home/mpcrlab/LOYOLA-PAPER/audit/run_all_scripts.py", line 77, in run_one
+    parts = script.split(); r = subprocess.run([sys.executable, os.path.basename(parts[0])] + parts[1:], cwd=cwd, capture_output=True, text=True, timeout=7200)
+                                ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mpcrlab/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/subprocess.py", line 557, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mpcrlab/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/subprocess.py", line 1223, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mpcrlab/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/subprocess.py", line 2156, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/mpcrlab/.local/share/uv/python/cpython-3.13.16-linux-x86_64-gnu/lib/python3.13/subprocess.py", line 1270, in _check_timeout
+    raise TimeoutExpired(
+    ...<2 lines>...
+            stderr=b''.join(stderr_seq) if stderr_seq else None)
+subprocess.TimeoutExpired: Command '['/home/mpcrlab/.loyola-venv-lab/bin/python', 'selection_resampling.py']' timed out after 7200 seconds

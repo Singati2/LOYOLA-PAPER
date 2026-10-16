@@ -1,0 +1,25 @@
+OCTANE TABLE 4: the original column leader and runner-up, |r| on each subset, paired bootstrap of |r|(leader) - |r|(runner-up)
+  T_B    original n=18 excluded= 0: mM2 0.855 vs LO(0,0,2) 0.829, difference +0.026, 95% CI [-0.042, +0.162]; NOT RESOLVED (interval includes 0; not equivalence); subset leader mM2
+  T_B    broad    n=18 excluded= 0: mM2 0.855 vs LO(0,0,2) 0.829, difference +0.026, 95% CI [-0.041, +0.161]; NOT RESOLVED (interval includes 0; not equivalence); subset leader mM2
+  T_B    strict   n= 0 excluded=18: NOT ESTIMABLE
+  dHf    original n=18 excluded= 0: mM2 0.891 vs AG 0.859, difference +0.032, 95% CI [-0.018, +0.105]; NOT RESOLVED (interval includes 0; not equivalence); subset leader mM2
+  dHf    broad    n=18 excluded= 0: mM2 0.891 vs AG 0.859, difference +0.032, 95% CI [-0.019, +0.104]; NOT RESOLVED (interval includes 0; not equivalence); subset leader mM2
+  dHf    strict   n=16 excluded= 2: mM2 0.886 vs AG 0.855, difference +0.031, 95% CI [-0.021, +0.132]; NOT RESOLVED (interval includes 0; not equivalence); subset leader mM2; excluded: 3-methylheptane, 3-ethyl-2-methylpentane
+  dHvap  original n=18 excluded= 0: LO(0,0,1) 0.984 vs LO(0,0,2) 0.981, difference +0.003, 95% CI [-0.005, +0.007]; NOT RESOLVED (interval includes 0; not equivalence); subset leader LO(0,0,1)
+  dHvap  broad    n=17 excluded= 1: LO(0,0,1) 0.980 vs LO(0,0,2) 0.980, difference +0.000, 95% CI [-0.007, +0.008]; NOT RESOLVED (interval includes 0; not equivalence); subset leader LO(0,0,1); excluded: 2,2,3,3-tetramethylbutane
+  dHvap  strict   n=11 excluded= 7: LO(0,0,1) 0.977 vs LO(0,0,2) 0.978, difference -0.001, 95% CI [-0.031, +0.013]; NOT RESOLVED (interval includes 0; not equivalence); subset leader LO(0,0,2); excluded: octane, 2-methylheptane, 4-methylheptane, 3-ethyl-2-methylpentane, 2,2,4-trimethylpentane, 2,3,3-trimethylpentane, 2,2,3,3-tetramethylbutane
+  S      original n=18 excluded= 0: HM 0.971 vs M1 0.970, difference +0.001, 95% CI [-0.017, +0.017]; NOT RESOLVED (interval includes 0; not equivalence); subset leader HM
+  S      broad    n= 5 excluded=13: NOT ESTIMABLE
+  S      strict   n= 2 excluded=16: NOT ESTIMABLE
+  omega  original n=18 excluded= 0: M2 0.988 vs HM 0.982, difference +0.005, 95% CI [-0.017, +0.034]; NOT RESOLVED (interval includes 0; not equivalence); subset leader M2
+  omega  broad    n= 0 excluded=18: NOT ESTIMABLE
+  omega  strict   n= 0 excluded=18: NOT ESTIMABLE
+BOILING POINTS: leave-one-out Q2; ridge on degree-pair counts minus the best single-index model, paired bootstrap
+  A decanes original n= 34 excluded= 0 (count rank 7): refit ridge 0.860, best single classical 0.176, difference +0.684, 95% CI [+0.457, +1.110], difference supported; matched original fit on these molecules: ridge 0.860, classical 0.176; all: ridge 0.860, classical 0.176, IRLA 0.167, LO(0,0,1) 0.149
+  A decanes broad    n= 34 excluded= 0 (count rank 7): refit ridge 0.860, best single classical 0.176, difference +0.684, 95% CI [+0.455, +1.130], difference supported; matched original fit on these molecules: ridge 0.860, classical 0.176; all: ridge 0.860, classical 0.176, IRLA 0.167, LO(0,0,1) 0.149
+  A decanes strict   n= 28 excluded= 6 (count rank 7): refit ridge 0.851, best single IRLA -0.005, difference +0.856, 95% CI [+0.630, +1.213], difference supported; matched original fit on these molecules: ridge 0.846, IRLA 0.002; all: ridge 0.851, classical -0.365, IRLA -0.005, LO(0,0,1) -0.017
+  B pooled  original n=100 excluded= 0 (count rank 8): refit ridge 0.991, best single size+classical 0.967, difference +0.024, 95% CI [+0.014, +0.041], difference supported; matched original fit on these molecules: ridge 0.991, size+classical 0.967; all: ridge 0.991, size only 0.938, size+classical 0.967, size+IRLA 0.963, size+LO(0,0,1) 0.963
+  B pooled  broad    n=100 excluded= 0 (count rank 8): refit ridge 0.991, best single size+classical 0.967, difference +0.024, 95% CI [+0.014, +0.042], difference supported; matched original fit on these molecules: ridge 0.991, size+classical 0.967; all: ridge 0.991, size only 0.938, size+classical 0.967, size+IRLA 0.963, size+LO(0,0,1) 0.963
+  B pooled  strict   n= 42 excluded=58 (count rank 8): refit ridge 0.951, best single size+IRLA 0.673, difference +0.278, 95% CI [+0.137, +0.472], difference supported; matched original fit on these molecules: ridge 0.944, size+IRLA 0.666; all: ridge 0.951, size only 0.643, size+classical 0.586, size+IRLA 0.673, size+LO(0,0,1) 0.671
+NOT RUN: the registered gamma test (GM vs LO over 50 seeds) on the restricted subsets (about one hour each; not pre-registered).
+NOT ESTIMABLE by construction: nonane dHvap strict (n = 4); octane S strict and broad (n = 2, 5); octane omega (n = 0); octane T_B strict (n = 0).

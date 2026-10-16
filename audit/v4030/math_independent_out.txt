@@ -1,0 +1,18 @@
+M1 complete enumeration n=2..17 matches OEIS A000055 and A000602; canonical forms distinct
+M1 first order with two distinct profiles sharing a q-histogram: all trees 13, max degree <= 4 16
+   witness (all trees): {(1, 2): 1, (1, 3): 2, (1, 6): 5, (2, 3): 2, (2, 6): 1, (3, 3): 1} | {(1, 3): 3, (1, 6): 5, (2, 2): 1, (2, 3): 2, (3, 6): 1}
+   witness (max deg <= 4): {(1, 2): 2, (1, 4): 8, (2, 4): 2, (4, 4): 3} | {(1, 4): 8, (2, 2): 3, (2, 4): 4}
+   paper's order 13 pair: equal histograms True; both realised by trees of order 13: True
+   paper's order 16 pair: equal histograms True; both realised by trees of order 16: True
+M2 GA: first order at which two distinct q-histograms receive equal GA (40 digits): 17 (1 such adjacent pairs)
+   paper's order-17 GA example: GA difference 0.0; histograms differ True
+M3 crossing pair: orders 12, 12; distinct imbalances 8; V = 5; sign changes of D on [-60, 60] at alpha=-1, beta=0: 5 at gamma = ['-17.17', '-11.96', '-2.026', '2.734', '31.13']
+M4 3x3 det 0.081640979083 vs ln2*ln(9/8) 0.081640979083; 4x4 det -0.0150032252263 vs -(1/6)ln(3/2)ln(2^13/3^8) -0.0150032252263
+M4 Delta=2: q = [ln(i+j)-ln2-ln(ij)/2]/(3ln3-4.5ln2) on (1,1),(1,2),(2,2): ['0.0', '0.3333333333', '0.0']
+M5 subsets of at most four pairs violating A = min(|S|-1, r, 3): Delta=6: 0; Delta=7: [((1, 7), (2, 6), (3, 5), (4, 4))]
+M6 octanes: distinct count vectors 16; shared: [['3-methylheptane', '4-methylheptane'], ['3,4-dimethylhexane', '3-ethyl-2-methylpentane']]
+M6 centred count-matrix ranks: octanes 7, decanes 7, pooled 8 (n = 100); identity sum (1/i+1/j) m_ij = n holds for all: True
+M6 octane T_B within-class SSE 2.9250 (paper 2.925 = 117/40), RMSE 0.4031
+M7 extremal trees of LO(0,0,gamma), n = 4..14, gamma in {1, -1, 0.3}: path/star unique extremisers as stated: True
+M7 closed forms (K_n, C_n, P_n, S_n, W_n, Q_k, F_p, K_ab) at (0.37, -1.3, 0.9): max abs error 1.65e-39
+M7 Example 4.4: D(0) = 0.0, D(1) = 0.225538, D(1e-6) = 2.401e-7

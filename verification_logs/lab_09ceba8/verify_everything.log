@@ -1,0 +1,25 @@
+[SKIP] labels and references: no tectonic on PATH
+[PASS] core verifier (774 s): scope: FULL PASS covers the executed computations, all 8 numeric tables of main.tex/supplement.tex (exact display strings), and canonical ar
+[PASS] prose numbers (27 s): prose numbers: 742 checked, 0 failures, 20 uncheckable (cited values; see UNCHECKABLE in the registries)
+[PASS] external regression tests (1 s): OK
+[PASS] baseline tests (1588 s): 0 failures; 1587.6s
+[PASS] constancy test check (753 s): RESULT: the two constancy tests never disagree on these inputs; no fold is affected
+[PASS] auxiliary outputs (90 s): Auxiliary output reproduction PASS
+[PASS] archived-source identities (3 s): Archived source formula/skeleton checks PASS: 154 pages
+[PASS] interval certificates (32 s): Mathematics interval checks PASS
+[PASS] prose style (2 s): prose style check: PASS
+[PASS] extremal trees (4 s): RESULT: extremal-tree proposition holds for all orders 4..12
+[PASS] collision minimality (73 s): RESULT: first order with distinct profiles sharing a q-histogram: 13 (all trees), 16 (maximum degree <= 4)
+[PASS] sum-connectivity pair (75 s): RESULT: Example ex:sumconn confirmed (D(1) = 0.2255, D(1e-6) = 2.4e-7)
+[PASS] count dimension and error floor (8 s): RESULT: affine dimension bounds attained (7, 7, 8); octane T_B floor SSE 2.925, RMSE 0.403
+[PASS] DATA copies (1 s): DATA/ check: every file matches its source
+[PASS] manifest (1 s): manifest OK: 545 files, one hash per path, all match
+[PASS] external verifier (13621 s): external verification: PASS (structures, rebuild, baseline validation, fresh re-runs, table)
+[PASS] structural checks (3900 s): TAB firstfail GA row: OK
+[PASS] 32-digit recount (272 s): RESULT: all counts reproduced at 32 significant digits (271 s)
+[PASS] verifier self-test (1183 s): PASS  op:missing-artifact
+[PASS] counter-attacks on the checkers (400 s): RESULT: 13 attacks, 13 rejected, 0 false negatives
+[PASS] Lean proofs (24 s): OK: all 52 declarations report only standard axioms (or none)
+[FAIL] every script replayed in isolation (13968 s): [OK] external/bp/coverage_bias.py: exit 0, 5 s; all 1 rewritten files identical; last line: ['Randic R', 34, 41, '4.540', '4.604', '-0.063',
+[PASS] provenance CSV convention: 91 CRLF rows, field counts [12]
+FAILURES

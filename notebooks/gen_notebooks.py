@@ -31,11 +31,12 @@ if HEAD and not PINNED:   # shallow or local clone without the tag: try to fetch
     PINNED = git("rev-parse", "--verify", "--quiet", REVISION + "^{commit}")
 print(f"commit {HEAD or 'unknown (no git metadata)'}{' (uncommitted changes)' if DIRTY else ''}; "
       f"pinned revision {REVISION}: {PINNED or 'could not be resolved'}")
-if (not HEAD or not PINNED or PINNED != HEAD) and os.environ.get("LOYOLA_ALLOW_MISMATCH") != "1":
+if (not HEAD or not PINNED or PINNED != HEAD or DIRTY) and os.environ.get("LOYOLA_ALLOW_MISMATCH") != "1":
     raise RuntimeError(f"REVISION MISMATCH: cannot confirm that the files are {REVISION} "
-                       f"(checked out: {HEAD or 'unknown'}; {REVISION}: {PINNED or 'unresolved'}). "
+                       f"(checked out: {HEAD or 'unknown'}{' with uncommitted changes' if DIRTY else ''}; "
+                       f"{REVISION}: {PINNED or 'unresolved'}). "
                        "Check out the pinned revision, or set LOYOLA_ALLOW_MISMATCH=1 to run anyway.")
-if os.environ.get("LOYOLA_ALLOW_MISMATCH") == "1" and (not PINNED or PINNED != HEAD):
+if os.environ.get("LOYOLA_ALLOW_MISMATCH") == "1" and (not PINNED or PINNED != HEAD or DIRTY):
     print("WARNING: LOYOLA_ALLOW_MISMATCH=1 - these results are NOT tied to the pinned revision")
 import numpy, scipy, networkx, mpmath
 print("python", platform.python_version(), "| numpy", numpy.__version__, "| scipy", scipy.__version__,

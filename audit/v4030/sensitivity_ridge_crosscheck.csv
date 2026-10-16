@@ -1,0 +1,5 @@
+scenario,n,Q2_sklearn,Q2_audited,max_abs_pred_diff_C,same_penalty_folds
+original,34,0.859871,0.859871,2.842e-14,34/34
+strict,28,0.851470,0.851470,2.842e-14,28/28
+pooled original,100,0.991069,0.991069,2.558e-13,100/100
+pooled strict,42,0.950895,0.950895,5.684e-13,42/42

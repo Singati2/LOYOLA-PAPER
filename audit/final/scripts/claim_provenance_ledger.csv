@@ -140,15 +140,15 @@ nonane,"2,3,5-trimethylhexane",T_B,130.9,NIST average (AVG) value — prereg pri
 nonane,"2,3,5-trimethylhexane",dHvap,9.90,no NIST AVG; most recent calorimetric (m,B,most recent primary value chosen; 1 distinct research group(s) among the non-compilation determinations (Osborne)
 nonane,"2,4,4-trimethylhexane",T_B,130.9,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
 nonane,"2,4,4-trimethylhexane",dHvap,9.82,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
-nonane,"3,3,4-trimethylhexane",T_B,140.4,no NIST AVG; most recent primary experim,A,"most recent primary value chosen; 2 distinct research group(s) among the non-compilation determinations (Braun/Fenske, Pomerantz)"
+nonane,"3,3,4-trimethylhexane",T_B,140.4,no NIST AVG; most recent primary experim,A,"most recent primary value chosen; 2 distinct research group(s) among the non-compilation determinations (Braun/Fenske, Howard/Mears/Pomerantz)"
 nonane,"3,3,4-trimethylhexane",dHvap,10.09,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
 nonane,"3,3-diethylpentane",T_B,146.2,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
 nonane,"3,3-diethylpentane",dHvap,10.18,no NIST AVG; most recent calorimetric (m,B,most recent primary value chosen; 1 distinct research group(s) among the non-compilation determinations (Fuchs)
-nonane,"3-ethyl-2,2-dimethylpentane",T_B,133.8,no NIST AVG; most recent primary experim,A,"most recent primary value chosen; 2 distinct research group(s) among the non-compilation determinations (Braun/Fenske, Howard)"
+nonane,"3-ethyl-2,2-dimethylpentane",T_B,133.8,no NIST AVG; most recent primary experim,A,"most recent primary value chosen; 2 distinct research group(s) among the non-compilation determinations (Braun/Fenske, Howard/Mears/Pomerantz)"
 nonane,"3-ethyl-2,2-dimethylpentane",dHvap,9.97,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
 nonane,"3-ethyl-2,3-dimethylpentane",T_B,141.6,single NIST Tboil determination (no AVG ,B,single primary determination (Kinney and Spliethoff 1949)
 nonane,"3-ethyl-2,3-dimethylpentane",dHvap,10.21,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
-nonane,"3-ethyl-2,4-dimethylpentane",T_B,136.7,no NIST AVG; most recent primary experim,A,"most recent primary value chosen; 3 distinct research group(s) among the non-compilation determinations (Bazhulin, Braun/Fenske, Howard)"
+nonane,"3-ethyl-2,4-dimethylpentane",T_B,136.7,no NIST AVG; most recent primary experim,A,"most recent primary value chosen; 3 distinct research group(s) among the non-compilation determinations (Bazhulin, Braun/Fenske, Howard/Mears/Pomerantz)"
 nonane,"3-ethyl-2,4-dimethylpentane",dHvap,10.11,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
 nonane,"2,2,3,3-tetramethylpentane",T_B,140.3,NIST average (AVG) value — prereg primar,A-AGG,NIST average (AVG); constituent determinations listed by NIST but averaged by TRC
 nonane,"2,2,3,3-tetramethylpentane",dHvap,9.85,"only one NIST ΔvapH° entry, non-calorime",C,"single NIST entry, a compilation (Reid 1972); earliest determination not identifiable"
@@ -207,7 +207,7 @@ bp,"Heptane, 2,6-dimethyl-",T_B,134.9,AVG,A-AGG,"NIST average (TRC); constituent
 bp,"Heptane, 3,3-dimethyl-",T_B,136.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
 bp,"Hexane, 2,2,3-trimethyl-",T_B,133.4,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
 bp,"Pentane, 2,2,3,3-tetramethyl-",T_B,140.3,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
-bp,"Heptane, 3-ethyl-",T_B,143.1,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
+bp,"Heptane, 3-ethyl-",T_B,143.1,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 2 distinct first authors
 bp,"Pentane, 2,2,3,4-tetramethyl-",T_B,133.0,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
 bp,"Hexane, 2,4,4-trimethyl-",T_B,130.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
 bp,"Heptane, 3,4-dimethyl-",T_B,140.4,median of 2 non-compilation determinatio,A,median of 2 non-compilation determinations from 2 distinct first authors
@@ -218,8 +218,8 @@ bp,"Heptane, 4,4-dimethyl-",T_B,134.8,median of 2 non-compilation determinatio,A
 bp,"Hexane, 2,3,3-trimethyl-",T_B,136.8,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
 bp,"Pentane, 2,3,3,4-tetramethyl-",T_B,139.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
 bp,"Hexane, 3,3,4-trimethyl-",T_B,140.2,median of 2 non-compilation determinatio,A,median of 2 non-compilation determinations from 2 distinct first authors
-bp,"Pentane, 3-ethyl-2,4-dimethyl-",T_B,136.6,median of 4 non-compilation determinatio,A,median of 4 non-compilation determinations from 4 distinct first authors
-bp,"Pentane, 3-ethyl-2,2-dimethyl-",T_B,133.8,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
+bp,"Pentane, 3-ethyl-2,4-dimethyl-",T_B,136.6,median of 4 non-compilation determinatio,A,median of 4 non-compilation determinations from 3 distinct first authors
+bp,"Pentane, 3-ethyl-2,2-dimethyl-",T_B,133.8,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 2 distinct first authors
 bp,"Hexane, 4-ethyl-2-methyl-",T_B,133.8,median of 1 non-compilation determinatio,B,one non-compilation determination
 bp,"Hexane, 3-ethyl-3-methyl-",T_B,140.6,median of 1 non-compilation determinatio,B,one non-compilation determination
 bp,"Hexane, 3-ethyl-2-methyl-",T_B,138.0,median of 1 non-compilation determinatio,B,one non-compilation determination
@@ -228,7 +228,7 @@ bp,Decane,T_B,174.1,AVG,A-AGG,"NIST average (TRC); constituent points not archiv
 bp,"Nonane, 3-methyl-",T_B,167.8,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
 bp,"Nonane, 2-methyl-",T_B,166.9,median of 2 non-compilation determinatio,A,median of 2 non-compilation determinations from 2 distinct first authors
 bp,"Nonane, 4-methyl-",T_B,166.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
-bp,"Nonane, 5-methyl-",T_B,165.0,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
+bp,"Nonane, 5-methyl-",T_B,165.0,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 2 distinct first authors
 bp,"Octane, 2,6-dimethyl-",T_B,158.9,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
 bp,"Octane, 2,3-dimethyl-",T_B,164.3,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
 bp,"Octane, 2,7-dimethyl-",T_B,160.0,AVG,A-AGG,"NIST average (TRC); constituent points not archived, so their independence cannot be checked"
@@ -239,7 +239,7 @@ bp,"Octane, 2,4-dimethyl-",T_B,155.9,median of 1 non-compilation determinatio,B,
 bp,"Octane, 2,5-dimethyl-",T_B,156.9,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
 bp,"Hexane, 2,2,5,5-tetramethyl-",T_B,137.0,median of 2 non-compilation determinatio,A,median of 2 non-compilation determinations from 2 distinct first authors
 bp,"Hexane, 3,3,4,4-tetramethyl-",T_B,170.1,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
-bp,"Octane, 4,5-dimethyl- / (R*,R*)-(.+-.)-4,5-dimethyloctane / (R*,S*)-4,5-dimethyloctane",T_B,162.1,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
+bp,"Octane, 4,5-dimethyl- / (R*,R*)-(.+-.)-4,5-dimethyloctane / (R*,S*)-4,5-dimethyloctane",T_B,162.1,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 2 distinct first authors
 bp,3-Ethyl-3-methylheptane,T_B,163.9,median of 2 non-compilation determinatio,A,median of 2 non-compilation determinations from 2 distinct first authors
 bp,"Hexane, 2,2,3,3-tetramethyl-",T_B,159.9,median of 3 non-compilation determinatio,A,median of 3 non-compilation determinations from 3 distinct first authors
 bp,"Heptane, 2,2,6-trimethyl-",T_B,148.2,median of 5 non-compilation determinatio,A,median of 5 non-compilation determinations from 3 distinct first authors

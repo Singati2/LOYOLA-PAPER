@@ -1449,3 +1449,49 @@ ranking, an authors' counter-attack and a chair ruling (summarised in the readin
   (audit/final/scripts/bp_tests_0c4a4db.py) and is replayed by audit/run_all_scripts.py; the
   notebooks stop when the pinned revision cannot be confirmed unless LOYOLA_ALLOW_MISMATCH=1.
   No reported number changes.
+- Adversarial audit of 716cd37 (each item reproduced before the change; regression or mutation test
+  added):
+  - verify.py: a --full or --everything run with a skipped stage now exits with status 3 (was 0);
+    --allow-skip accepts the skips explicitly. test_verify_incomplete_exit_status fails on the old
+    code.
+  - constancy_test_check.py: dropping a production stream left the check clean (only the count
+    changed). It now asserts the expected candidate count (166,478) and scans every script that
+    draws candidate triples: each must be mirrored here, select through the runtime-guarded
+    fold_select_ols, or be an audit copy. Both mutations (dropped stream, new unlisted generator)
+    now exit 1. verify_loyola_v35.py's recomputation stream is listed.
+  - Notebooks: a modified working tree no longer passes the pin check (six pinning cases tested).
+  - claim_provenance.py: boiling-point groups use the first surname, ignore Anonymous entries and
+    merge the National Bureau of Standards co-authors (Howard, Mears, Pomerantz); totals unchanged.
+  - audit/v4030/math_independent.py: independent recomputation of the collision orders (complete
+    enumeration checked against OEIS), the GA merge order, the five crossings, the Lemma 3.1
+    determinants, the identifiability bound for Delta <= 7, the count ranks, the error floor, the
+    extremal trees (n = 4 to 14) and the closed forms. All agree with the paper.
+  - No reported number, table, figure, theorem statement, data value or pre-registered conclusion
+    changes.
+- Manuscript changes after the frozen verification of 01ad6c6 (prepared separately, no registered value
+  changes):
+  - main.tex Table 6: row for the stricter rank threshold and the deletion-rank guard of the
+    size-adjusted scorer (v40.29, v40.30), "No output changes".
+  - main.tex Table 4 caption and supplement Figure S1 caption: the displayed -0.000 (ISI, dHf) is
+    -0.0002 (the number itself and the verifier's phantom-zero rule are unchanged).
+  - main.tex Conclusion: "matched the tuned models" replaced by a statement in point estimate, noting
+    that no equivalence test was made.
+  - supplement.tex Section S8: an exploratory source-quality sensitivity paragraph (strict provenance:
+    decane ridge advantage 0.856 over IRLA, ahead in 200/200 refitted subsamples; pooled restricted set
+    is C9-C10 only, 181/200, not resolved; gamma test 12 and 10 of 50 seeds; Table 4 leaders not
+    resolved; S, omega and nonane dHvap not estimable). Each number is registered in prose_claims_a.py.
+  - audit/v4030/: the scripts, machine-readable tables and outputs of the sensitivity, leakage,
+    Table 2, mathematics and gamma checks; audit/V4030_COUNTEREXAMPLES.md and
+    V4030_SUBMISSION_CHECKLIST.md; NOVELTY_SEARCH_LOG.md gains the zbMATH and arXiv searches.
+  - Verification of 01ad6c6 (verification_logs/v40.30/everything_01ad6c6.log): verify.py --everything
+    with lake hidden; every executed stage PASS, including the replay of all 53 scripts (6,097 s);
+    INCOMPLETE because Lean was skipped, exit 3. The audit scripts of audit/v4030 are registered in the
+    replay; their freeze stamps are printed rather than written, so their outputs replay on any commit.
+  - formal/verify.sh: the source scan also rejects admit, and a second #print axioms pass covers all 52
+    declared theorems and lemmas (the 14 helper lemmas included), failing on sorryAx or any axiom
+    outside propext, Classical.choice and Quot.sound. Not executed on the audit machine (no Lean build
+    for lack of disk); to be run with audit/V4030_LEAN_EXTERNAL_RUN.md. The existing 38-theorem check is
+    unchanged. audit/V4030_SUBMISSION_READINESS.md lists PASS, FAIL or NOT RUN for every step.
+  - audit/run_remaining_checks.sh: one script for the stages not run on the audit machine (Lean, the
+    full suite with Lean, the six notebooks), writing logs and a PASS / FAIL / NOT RUN summary to
+    verification_logs/lab_<commit>/; it commits and pushes nothing. Syntax-checked, not executed here.

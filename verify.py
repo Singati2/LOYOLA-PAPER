@@ -26,7 +26,9 @@
                                repository re-run in an isolated copy and every file it
                                writes compared with the committed one (about two hours)
 
-Each step is run as a subprocess; the exit status is 0 iff every step exits 0.
+Each step is run as a subprocess; the exit status is 0 iff every step exits 0 and no stage was
+skipped. With --full or --everything, a missing tectonic or lake skips that stage, the run ends
+"INCOMPLETE" and exits with status 3; --allow-skip accepts the skips (exit 0, still INCOMPLETE).
 See REPRODUCE.md for what each suite covers.
 """
 import os, re, shutil, subprocess, sys, time
@@ -114,6 +116,9 @@ def main():
         print("FAILURES")
     elif skipped:   # v40.30: a run with skipped stages is not a full verification and must not read as one
         print(f"INCOMPLETE ({mode}): executed steps passed, SKIPPED: {', '.join(skipped)}")
+        # exit status 3 unless the caller accepts the skips explicitly (--allow-skip), so that a script
+        # or CI job testing the exit status cannot mistake an incomplete run for a complete one
+        return 0 if "--allow-skip" in sys.argv else 3
     else:
         print(f"ALL PASS ({mode})")
     return 0 if ok else 1

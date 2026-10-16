@@ -163,6 +163,30 @@ class RegressionTests(unittest.TestCase):
             self.assertTrue(PP.verdict(dict(S, **{k: v}), rs, rb), k)
         self.assertTrue(PP.verdict(S, False, rb)); self.assertTrue(PP.verdict(S, rs, False))
 
+    def test_verify_incomplete_exit_status(self):
+        """verify.py --full/--everything with a skipped stage (no lake, no tectonic) must not exit 0
+        unless --allow-skip is given; a complete run and the fast path exit 0 (v40.30 audit)."""
+        import shutil as _sh
+        sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+        import verify as V
+        saved = (V.FAST, V.FULL, V.EVERYTHING, V.check_csv_conventions, V.run, _sh.which, list(sys.argv))
+        try:
+            V.FAST = V.FULL = V.EVERYTHING = []; V.check_csv_conventions = lambda: True; V.run = lambda *a: True
+            out = io.StringIO()
+            def code(argv, tools):
+                _sh.which = lambda n: ("/x/" + n) if n in tools else None
+                sys.argv = argv
+                with contextlib.redirect_stdout(out):
+                    return V.main()
+            self.assertEqual(code(["verify.py", "--full"], set()), 3)
+            self.assertEqual(code(["verify.py", "--everything"], {"tectonic"}), 3)
+            self.assertEqual(code(["verify.py", "--full", "--allow-skip"], set()), 0)
+            self.assertEqual(code(["verify.py", "--full"], {"tectonic", "lake"}), 0)
+            self.assertEqual(code(["verify.py"], set()), 0)
+            self.assertIn("INCOMPLETE (full)", out.getvalue())
+        finally:
+            V.FAST, V.FULL, V.EVERYTHING, V.check_csv_conventions, V.run, _sh.which, sys.argv[:] = saved
+
     def test_gamma_rule_one_sided(self):
         """The pre-registered rule needs the whole interval above zero; a wholly
         negative or zero-crossing interval never gives a gamma effect."""

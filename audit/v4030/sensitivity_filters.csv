@@ -1,0 +1,9 @@
+dataset,property,n_ledger,A,A-AGG,B,B?,C,D,retained_broad,retained_strict,missing_provenance
+octane,T_B,18,0,15,0,3,0,0,18,0,0
+octane,dHf,18,1,0,15,2,0,0,18,16,0
+octane,dHvap,18,0,3,11,3,0,1,17,11,0
+octane,S,18,0,0,2,3,6,7,5,2,0
+octane,omega,18,0,0,0,0,17,1,0,0,0
+bp,T_B,100,24,58,18,0,0,0,100,42,0
+nonane,T_B,35,10,20,5,0,0,0,35,15,0
+nonane,dHvap,34,0,1,4,0,29,0,5,4,0
