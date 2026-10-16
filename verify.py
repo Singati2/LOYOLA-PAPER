@@ -20,14 +20,14 @@
                                structural/structural_checks.py, structural/hp_counts.py
                                verify_loyola_v35.py --selftest
                                audit/attack_checks.py      (13 counter-attacks on the newer checkers)
-                               audit/check_labels.py       (labels, references, captions, cross-document numbering; needs tectonic)
+                               audit/check_labels.py       (labels, references, captions, cross-document numbering; needs pdflatex or tectonic)
                                formal/verify.sh (if a Lean toolchain is installed)
   python3 verify.py --everything   also audit/run_all_scripts.py: every script of the
                                repository re-run in an isolated copy and every file it
                                writes compared with the committed one (about two hours)
 
 Each step is run as a subprocess; the exit status is 0 iff every step exits 0 and no stage was
-skipped. With --full or --everything, a missing tectonic or lake skips that stage, the run ends
+skipped. With --full or --everything, a missing TeX engine (pdflatex or tectonic) or lake skips that stage, the run ends
 "INCOMPLETE" and exits with status 3; --allow-skip accepts the skips (exit 0, still INCOMPLETE).
 See REPRODUCE.md for what each suite covers.
 """
@@ -101,10 +101,10 @@ def main():
     if "--full" in sys.argv or "--everything" in sys.argv:
         steps += FULL
     if "--full" in sys.argv or "--everything" in sys.argv:
-        if shutil.which("tectonic"):
+        if shutil.which("pdflatex") or shutil.which("tectonic"):
             steps.append(("labels and references", [PY, os.path.join("audit", "check_labels.py")], HERE))
         else:
-            print("[SKIP] labels and references: no tectonic on PATH"); skipped.append("labels and references")
+            print("[SKIP] labels and references: neither pdflatex nor tectonic on PATH"); skipped.append("labels and references")
         if shutil.which("lake"):
             steps.append(("Lean proofs", ["bash", "verify.sh"], os.path.join(HERE, "formal")))
         else:

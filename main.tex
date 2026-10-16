@@ -1,5 +1,6 @@
 \documentclass[a5paper, 10pt]{article}
 
+
 \usepackage{cite, amsmath, amssymb, booktabs, lastpage, graphicx, float}
 \usepackage[hidelinks]{hyperref}
 
@@ -8,7 +9,9 @@
 
 \usepackage{setspace}
 
+
 \usepackage{amsthm}
+
 %\usepackage[
 %			type={CC},
 %			modifier={by},
@@ -22,66 +25,70 @@
 %\makeatother
 
 \theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{conjecture}{Conjecture}
 \newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{corollary}{Corollary}
 \renewcommand{\qedsymbol}{\rule{.7em}{.7em}}
 
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-
 \theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
+\newtheorem*{remark}{Remark}
 \newtheorem*{note}{Note}
 \newtheorem{case}{Case}
-\numberwithin{equation}{section}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
 
 %% Changing the title, author, etc.
 \usepackage{graphicx}
 \makeatletter
 \renewcommand{\maketitle}{
-    \begin{center}
+	\begin{center}
     \rule[.2em]{\textwidth}{0.353mm}
-        \begin{minipage}[m]{0.35\textwidth}
-            {\scriptsize
-                \begin{center}
-                    \textsf{\textbf{\huge MATCH}\\
-                        \textit{Communications in Mathematical\\
-                            and in Computer Chemistry}
-                    }
-            \end{center}}
-        \end{minipage}\hfill
-        \begin{minipage}[m]{0.65\textwidth}
-            \begin{flushright}
-                \baselineskip=10pt
-                {\scriptsize\sffamily{\itshape  MATCH Commun. Math. Comput. Chem.}
-                \textbf{\vol{}}
-                (\pubyear)
-                    \thepage--\pageref{LastPage}}\\
-                {\scriptsize\sffamily {\bfseries ISSN:} 0340--6253}\\
-                {\scriptsize\sffamily \textbf{doi:} \doi{10.46793/match.\vol-\num.\id}}
-            \end{flushright}
-        \end{minipage}
-        \rule[1em]{\textwidth}{.353mm}
-        \baselineskip=0.30in
-        {\Large\bfseries \@title} \par
-        \vspace{5mm}
-        \baselineskip=0.2in
-        {\large\bfseries \@author}\par
-        \vspace{1mm}
-        {\it \@address} \par
-        {\small\tt \@email} \par
-        \vspace{3mm}
-        {\small (Received \@date)} \par
-    \end{center}
-    \vspace{3mm}
+		\begin{minipage}[m]{0.35\textwidth}
+			{\scriptsize
+				\begin{center}
+					\textsf{\textbf{\huge MATCH}\\
+						\textit{Communications in Mathematical\\
+							and in Computer Chemistry}
+					}
+			\end{center}}
+		\end{minipage}\hfill
+		\begin{minipage}[m]{0.65\textwidth}
+			\begin{flushright}
+				\baselineskip=10px
+				{\scriptsize\sffamily{\itshape  MATCH Commun. Math. Comput. Chem.}
+				\textbf{\vol{}}
+				(\pubyear)
+					\thepage--\pageref{LastPage}}\\
+				{\scriptsize\sffamily {\bfseries ISSN:} 0340--6253}\\
+				{\scriptsize\sffamily \textbf{doi:} \doi{10.46793/match.\vol-\num.\id}}
+			\end{flushright}
+		\end{minipage}
+		\rule[1em]{\textwidth}{.353mm}
+		\baselineskip=0.30in
+		{\Large\bfseries \@title} \par
+		\vspace{5mm}
+		\baselineskip=0.2in
+		{\large\bfseries \@author}\par
+		\vspace{1mm}
+		{\it \@address} \par
+		{\small\tt \@email} \par
+		\vspace{3mm}
+		{\small (Received \@date)} \par
+	\end{center}
+	\vspace{3mm}
 }
 \newcommand{\address}[1]{\def\@address{#1}}
 \newcommand{\email}[1]{\def\@email{#1}}
 \newcommand{\doi}[1]{\href{https://doi.org/#1}{#1}}
+%\title{}
+%\author{}
+%\address{}
+%\email{}
+
 
 \newcommand{\vol}{00}
 \newcommand{\num}{00}
@@ -90,12 +97,13 @@
 %%setting page-number
 \setcounter{page}{1}
 
+
 \thispagestyle{empty}
 \makeatother
 
 %% Making << \acknowledgment >> command
 \newcommand{\acknowledgment}[1]{\vspace{5mm}\singlespacing
-    {\noindent\textbf{\textit{Acknowledgment\/}:} #1}
+	{\noindent\textbf{\textit{Acknowledgment\/}:} #1}
 }
 
 %% Setting page numbers
@@ -111,13 +119,17 @@
 \renewcommand*{\thefootnote}{\fnsymbol{footnote}}
 
 \usepackage[margin=1cm,%
-            font=footnotesize,%
-            format=hang,%
-            labelsep=period,%
-            labelfont=bf]{caption}
+			font=footnotesize,%
+			format=hang,%
+			labelsep=period,%
+			labelfont=bf]{caption}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLACE ADDITIONAL PACKAGES HERE (if it is needed):
+
+% \usepackage{package}
+% \usepackage[options]{package}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{mathtools}
@@ -128,6 +140,8 @@
 \emergencystretch=3em
 \hbadness=2000
 \setlength{\marginparwidth}{2cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% make the odd pages have the section name on the top right
@@ -137,6 +151,12 @@
 
 %% making page-numbers visible
 \pagestyle{fancy}
+
+
+
+
+% YOU MAY ADD SOME ADDITIONAL LATEX PACKAGES TO THE PREAMBLE, BUT DO NOT MODIFY
+% THE EXISTING CODE ABOVE THIS LINE.
 
 % Custom macros for the Loyola index family
     \newcommand{\Wuzi}{LO(G;\alpha,\beta,\gamma)}
@@ -491,7 +511,8 @@ Equal profiles give equal $q$-histograms. The converse fails
   $z_0 = (2\ln r, \ln 2r, 0)$.
   \end{proof}
 
-  Corollary~\ref{thm:cs} is the midpoint case of the convexity of
+  The Cauchy--Schwarz interpolation corollary of
+  Section~\ref{sec:termwise} is the midpoint case of the convexity of
   $F_G$.
 
   \subsection{The ratio plane, crossings and identifiability}\label{sec:ratioplane}
@@ -520,8 +541,8 @@ Equal profiles give equal $q$-histograms. The converse fails
   coarser loss. On $\Pi$ distinct profiles with equal $q$-histograms
   receive equal values. Part~(iii) shows that such profiles occur among
   trees of every order from $13$ (from $16$ when $\Delta \le 4$); that
-  no smaller tree has them is a computer-assisted result
-  (Remark~\ref{rem:floor}).
+  no smaller tree has them is a computer-assisted result (see the
+  remark on the floor on $\Pi$ later in this subsection).
 
   \begin{theorem}[Ratio plane]\label{thm:ratioplane}
   Let $G$ and $H$ be graphs.
@@ -631,7 +652,7 @@ Equal profiles give equal $q$-histograms. The converse fails
   class it describes, the pure-$\gamma$ points at algebraic
   $\gamma \neq 0$ attain the most possible: by part~(ii) they separate
   every pair of graphs with distinct $q$-histograms. $GA$ does not
-  (Remark~\ref{rem:floor}). The parent attains it as well: at
+  (see the remark on the floor on $\Pi$ below). The parent attains it as well: at
   $\gamma = 0$ part~(i) gives $\sum_q n_q\,((1-q^2)/4)^{\alpha}$, an
   exponential sum in $\alpha$ with distinct bases, which separates two
   distinct histograms at all but finitely many $\alpha$. The limit thus
@@ -1270,7 +1291,8 @@ enumeration in the reproducibility package.
   The statements below extend them to $\gamma \ne 0$ (Propositions
   \ref{thm:upper_Delta} and~\ref{thm:lower_delta} to $\gamma > 0$ only)
   and track how $\gamma$ changes the equality cases. The inequalities
-  of Corollary~\ref{thm:cs} and Propositions~\ref{thm:upper_Delta} and~\ref{thm:lower_delta}, not
+  of the Cauchy--Schwarz interpolation corollary
+  (Section~\ref{sec:termwise}) and of Propositions~\ref{thm:upper_Delta} and~\ref{thm:lower_delta}, not
   their equality cases, are machine-checked. For
   Propositions~\ref{thm:bracket} and~\ref{thm:ratio_bound} only the
   summation step is, with the edgewise extrema taken as hypotheses
@@ -1769,7 +1791,8 @@ Proposition~\ref{prop:identrank}(ii) for $\Delta \le 6$, and the
 recovery of discrimination off $\Pi$ in Section~\ref{sec:degeneracy}
 rest on exhaustive enumeration. No general argument is given.
 \item[(ii)] Whether two graphs with $\Delta \le 4$ can exchange order
-five times along $\gamma$ is open (Remark~\ref{rem:crossings}).
+five times along $\gamma$ is open (see the remark on sharpness in
+Section~\ref{sec:ratioplane}).
 \item[(iii)] The data sets are small and acyclic: $18$ octanes, $35$
 nonanes, $34$ decanes and $100$ pooled C6--C10 alkanes. Seven octane
 entropies and the compiled acentric factors rest on secondary sources,

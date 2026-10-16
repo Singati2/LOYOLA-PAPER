@@ -222,3 +222,44 @@ changes only this report and `SHA256SUMS.txt`; the GitHub Actions fast path runs
 | PDFs | rebuilt with tectonic 0.15.0: 42 + 28 A5 pages | |
 | Data added or changed by this branch | none (no CSV, HTML or data file in `git diff f109127`) | |
 
+
+## 9. MATCH template restored verbatim (after section 8)
+
+The preamble of `main.tex` above the template's line "DO NOT MODIFY THE EXISTING CODE ABOVE THIS LINE" is now
+identical, line for line, to `match_template.tex` from https://match.pmf.kg.ac.rs/template/match_template.zip
+(downloaded 2026-10-16). The only additions are the paper's packages, placed where the template says "PLACE ADDITIONAL
+PACKAGES HERE". The earlier preamble had changed the protected theorem declarations (one counter shared by all
+statements and reset at every section, numbered corollaries and remarks, equations numbered within sections) and
+`\baselineskip=10px` (to `10pt`).
+
+Consequences:
+
+* Numbering follows the template: theorems and propositions share one counter; lemmas, definitions, examples
+  and equations have their own; corollaries and remarks are unnumbered. Section, table and page numbers are
+  unchanged (42 A5 pages, even, as MATCH prefers).
+* The five in-text references to a corollary or remark now name it ("the Cauchy--Schwarz interpolation corollary
+  of Section 5.3", "the remark on the floor on Π", "the remark on sharpness in Section 3.1").
+* The template's `10px` is a pdfTeX unit, so the main paper is now built with pdflatex, the engine the template
+  names. `audit/check_labels.py` uses pdflatex and simulates the counters from the `\newtheorem` declarations
+  instead of assuming section-reset numbering (tectonic remains a fallback, given `10pt` in its temporary copy only).
+* MATCH states no maximum length; its only page rule is that the number of pages should, if possible, be even.
+  The paper has no colour pages, so the colour-figure fee (90 EUR per figure) does not apply.
+
+| Old | New | Old | New |
+|---|---|---|---|
+| Definition 2.1, 2.2, 3.4, 5.3 | Definition 1, 2, 3, 4 | Proposition 4.1, 4.3 | Proposition 7, 8 |
+| Lemma 3.1 | Lemma 1 | Example 4.4 | Example 2 |
+| Theorem 3.3 | Theorem 1 | Proposition 5.1, 5.2 | Proposition 9, 10 |
+| Theorem 3.5 | Theorem 2 | Proposition 5.4 | Proposition 11 |
+| Corollary 3.6, 5.5, 5.9 | unnumbered | Proposition 5.6, 5.7, 5.8 | Proposition 12, 13, 14 |
+| Proposition 3.8, 3.11, 3.13, 3.17 | Proposition 3, 4, 5, 6 | Remarks | unnumbered |
+| Example 3.15 | Example 1 | Equations (2.1)-(5.5) | (1)-(9) |
+
+The supplement, `LEAN_VERIFICATION.md`, `README.md`, `REPRODUCE.md`, `REVIEWER_START_HERE.md`, notebook 02 and its
+generator, and two script docstrings use the new numbers. Earlier audit reports, change logs, verification logs and
+the v40.30 audit scripts keep the numbering of the version they describe; sections 1-8 above use the old numbering.
+
+Verification after this change (lab, 2026-10-16): `verify.py` fast path ALL PASS (16 stages); labels and references
+PASS with pdflatex (a planted stale "Theorem~3.5 of the main paper" in the supplement is rejected); counter-attacks
+13 of 13 rejected; prose numbers 756 checked, 0 failures. Lean, the full replay and `--full` were NOT RUN for this
+change; `formal/` is unchanged.

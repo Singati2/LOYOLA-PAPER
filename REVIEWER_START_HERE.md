@@ -37,7 +37,7 @@ any of them differ. Each step is labelled with one of three kinds:
 | Notebook | Covers | Runtime (laptop CPU) | Colab (after tagging) |
 |---|---|---|---|
 | `01_data.ipynb` | datasets, DATA/ copies, provenance counts (39 agreement, 8 cannot verify) | seconds | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/v40.30/notebooks/01_data.ipynb) |
-| `02_mathematics.ipynb` | Lemma 3.1, the colliding trees of orders 13 and 16, Example 4.4, certificates | under 1 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/v40.30/notebooks/02_mathematics.ipynb) |
+| `02_mathematics.ipynb` | Lemma 1, the colliding trees of orders 13 and 16, Example 2, certificates | under 1 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/v40.30/notebooks/02_mathematics.ipynb) |
 | `03_degeneracy.ipynb` | Table 2 and the degeneracy counts, by full tree enumeration | 1 to 5 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/v40.30/notebooks/03_degeneracy.ipynb) |
 | `04_octane_correlations.ipynb` | all 60 correlations of Table 4; tetramethylbutane audit | seconds | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/v40.30/notebooks/04_octane_correlations.ipynb) |
 | `05_boiling_points.ipynb` | Table 5 baselines and the 200-permutation check. `RUN_SLOW = True` regenerates the 50-seed medians (about 1 h) and the resampling (about 3.5 h) | about 5 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/v40.30/notebooks/05_boiling_points.ipynb) |

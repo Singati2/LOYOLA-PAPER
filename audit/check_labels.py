@@ -11,7 +11,7 @@ Checks (each must hold):
   4. the supplement's cross-document references ("Table~N of the main paper",
      "Theorem~N/Proposition~N/Lemma~N of the main paper", "Section~N.M of the
      main paper") point at numbers the compiled main paper actually assigns
-     (read from the PDF produced by tectonic in a temporary copy), and each
+     (read from the PDF produced by pdflatex, or tectonic if pdflatex is absent, in a temporary copy), and each
      "Table~N of the main paper" is checked against the caption keyword the
      supplement's sentence names, when it names one (TABLE_WORDS below);
   5. figure files referenced by \\includegraphics / \\safefig exist under
@@ -65,28 +65,44 @@ def doc_checks(name):
 def compiled_numbers():
     tmp = tempfile.mkdtemp(prefix="loyola_labels_")
     shutil.copy(os.path.join(ROOT, "main.tex"), tmp); shutil.copytree(os.path.join(ROOT, "figures"), os.path.join(tmp, "figures"))
-    r = subprocess.run(["tectonic", "-k", "main.tex"], cwd=tmp, capture_output=True, text=True)
+    # v40.31: main.tex uses the MATCH template verbatim, which is written for pdflatex ("% !TeX program = pdflatex")
+    # and sets \baselineskip=10px, a pdfTeX-only unit; tectonic (XeTeX) is the fallback, given 10pt in the copy only
+    if shutil.which("pdflatex"):
+        r = subprocess.run(["pdflatex", "-interaction=nonstopmode", "-halt-on-error", "main.tex"], cwd=tmp, capture_output=True, text=True)
+    else:
+        t = open(os.path.join(tmp, "main.tex")).read(); open(os.path.join(tmp, "main.tex"), "w").write(t.replace(r"\baselineskip=10px", r"\baselineskip=10pt"))
+        r = subprocess.run(["tectonic", "-k", "main.tex"], cwd=tmp, capture_output=True, text=True)
     if r.returncode != 0:
-        fail("main.tex does not compile"); return {}, {}
+        fail("main.tex does not compile"); return {}, {}, set()
     import fitz
     txt = "".join(p.get_text() for p in fitz.open(os.path.join(tmp, "main.pdf")))
-    # theorem-type numbering follows source order (shared counter for theorem/proposition/corollary when the
-    # corollary environment is numbered; lemma has its own counter), so it is read from main.tex, not harvested
-    # from the PDF text, where in-text references such as "Theorem 2(ii)" would be mistaken for headings
+    # theorem-type numbering follows source order, so it is read from main.tex, not harvested from the PDF text,
+    # where in-text references such as "Theorem 2(ii)" would be mistaken for headings.  v40.31: the counters are
+    # simulated from the \newtheorem declarations themselves (MATCH template: theorem and proposition share one
+    # counter, lemma, definition and example have their own, starred environments such as corollary and remark are
+    # unnumbered, and no counter is reset by \section), so the check follows whatever the preamble declares
     src = strip_comments(open(os.path.join(ROOT, "main.tex")).read()); body_src = src[src.find(r"\begin{document}"):]
-    # v40.23: one counter shared by every \newtheorem{...}[theorem] environment, reset at each \section
-    # (\newtheorem{theorem}{Theorem}[section]), so numbers read "3.4"
-    shared = set(re.findall(r"\\newtheorem\{(\w+)\}\[theorem\]", src)) | {"theorem"}
-    results = {}; sec = 0; k = 0
+    counter_of, per_section = {}, set()
+    for star, env, shared, _name, within in re.findall(r"\\newtheorem(\*?)\{(\w+)\}(?:\[(\w+)\])?\{([^}]*)\}(?:\[(\w+)\])?", src):
+        if star:
+            continue                                                  # unnumbered
+        counter_of[env] = counter_of.get(shared, shared) if shared else env
+        if within == "section":
+            per_section.add(counter_of[env])
+    results = {}; sec = 0; count = {}
     for m_ in re.finditer(r"\\section\{|\\begin\{(\w+)\}(?:\[([^\]]*)\])?", body_src):
         if m_.group(0).startswith("\\section"):
-            sec += 1; k = 0; continue
-        env, title = m_.group(1), (m_.group(2) or "").strip()
-        if env not in shared:
+            sec += 1
+            for c in per_section:
+                count[c] = 0
             continue
-        k += 1
-        results[(env.capitalize(), f"{sec}.{k}")] = title or "(untitled)"
-    pdf_heads = set(re.findall(r"\n(Theorem|Proposition|Lemma)\s+(\d+\.\d+)\s*[.(]", txt))   # PyMuPDF may break a justified line at every word
+        env, title = m_.group(1), (m_.group(2) or "").strip()
+        if env not in counter_of:
+            continue
+        c = counter_of[env]; count[c] = count.get(c, 0) + 1
+        num = f"{sec}.{count[c]}" if c in per_section else str(count[c])
+        results[(env.capitalize(), num)] = title or "(untitled)"
+    pdf_heads = set(re.findall(r"\n(Theorem|Proposition|Lemma)\s+(\d+(?:\.\d+)?)\s*[.(]", txt))   # PyMuPDF may break a justified line at every word
     for (kind, n), title in results.items():
         if kind in ("Theorem", "Proposition", "Lemma") and (kind, n) not in pdf_heads:
             fail(f"{kind} {n} ({title[:30]}) numbered in the source but not found as a heading in the compiled paper")
