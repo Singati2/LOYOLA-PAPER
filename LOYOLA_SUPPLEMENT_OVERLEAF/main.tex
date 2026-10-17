@@ -628,18 +628,23 @@ $IRLA$. One has
 $LO(G;0,0,\gamma) = m + \tfrac{\gamma}{2}\,IRLA(G) + O(\gamma^2)$ as
 $\gamma \to 0$, and on both sets the correlation between $LO(0,0,1)$
 and $IRLA$ is $0.996$. The baselines, however, also show the limit of
-the claim. Ridge regression on the full degree-pair count vector
-predicts the nonanes better than every index model, for both
+the claim. Ridge regression on the full degree-pair count vector has the
+highest point estimate among the models on the nonanes, for both
 properties ($Q^2 = 0.927$ for $\Delta H_{\mathrm{vap}}$, $0.682$ for
-$T_B$). On the octanes it matches the Loyola model on
-$\Delta H_{\mathrm{vap}}$ and is weaker elsewhere. This is consistent with Proposition~7 of the main paper and the observation preceding it that every vertex-degree-based index is a function of the edge-degree-pair counts. The imbalance coordinate re-weights degree-pair
+$T_B$). The conditional intervals for LO minus ridge include zero for
+both (for $\Delta H_{\mathrm{vap}}$ see the end of this section; the wider
+$T_B$ interval is in \texttt{external/uncertainty\_exploratory.csv}). On the octanes it matches the Loyola
+model on $\Delta H_{\mathrm{vap}}$ and its point estimates are below the
+best index elsewhere. This is consistent with Proposition~7 of the main paper and the observation preceding it that every vertex-degree-based index is a function of the edge-degree-pair counts. The imbalance coordinate re-weights degree-pair
 information rather than adding to it, and one interpretable descriptor
 recovers most of what a model on all ten degree-pair counts achieves
-for the vaporisation enthalpy. It does not outperform such a model. The
+for the vaporisation enthalpy. It does not outperform such a model in
+point estimate. The
 specific exponential form is not essential either, since the
 parameter-free aggregate $IRLA$ comes within $0.003$ of the median
 Loyola model on the nonanes ($0.897$ against $0.900$). For this
-property a term linear in the imbalance accounts for the effect.
+property a term linear in the imbalance suffices in point estimate inside
+the narrow box, but the wide-box parent shows that it is not necessary.
 
 The nested design refits every model on the nonanes, so it tests
 whether the \emph{procedure} replicates rather than whether an
@@ -674,7 +679,7 @@ the nonanes). The one octane interval that excludes zero in the other
 direction is that for $\Delta H_f$, where freeing $\gamma$ is worse
 ($[-0.281, -0.044]$). All these intervals refer to the box of
 half-width $2$. Given the search-box sensitivity of Table~\ref{tab:box}, no $\gamma$ effect
-remains to be established. The intervals are reported for
+is established. The intervals are reported for
 completeness.
 \section{Degeneracy across tree orders}\label{sec:s-degeneracy}
 

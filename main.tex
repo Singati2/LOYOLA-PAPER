@@ -310,13 +310,14 @@
   \item[(iv)] Two octane collision pairs realising the known degree-pair ceiling (Proposition~\ref{prop:collision}), value counts for trees of orders $7$ to $17$, and structure sensitivity
   (Section~\ref{sec:discrimination}).
   \item[(v)] Closed forms on standard graphs, the extremal trees of the
-  pure-$\gamma$ points and termwise bounds (Section~\ref{sec:bounds}).
+  pure-$\gamma$ points, which follow from the criteria of Cruz and
+  Rada~\cite{CruzRada2019PathStar}, and termwise bounds (Section~\ref{sec:bounds}).
   \item[(vi)] A matched-budget QSPR diagnostic and pre-registered tests
   on measured boiling points (Section~\ref{sec:sensitivity}), in which
   freeing $\gamma$ gives no demonstrated gain once the parent's search
-  box does not truncate it (Section~\ref{sec:ablation}), and ridge
-  regression on the degree-pair counts leads every single index
-  evaluated (Section~\ref{sec:bp}).
+  box does not truncate it (Section~\ref{sec:ablation}). On measured
+  boiling points ridge regression on the degree-pair counts leads every
+  single index evaluated in point estimate (Section~\ref{sec:bp}).
   \end{enumerate}
 
 \section{Preliminaries and notation}\label{sec:prelim}\label{sec:notation}\label{sec:def}
@@ -630,7 +631,7 @@ Equal profiles give equal $q$-histograms. The converse fails
   larger order.
   \end{proof}
 
-  Part~(ii) rests on Rada's Lindemann--Weierstrass argument~\cite{Rada2019ExpVDB}. Example~3 of~\cite{Rada2026LinearVDB} assumes distinct exponents for distinct degree pairs, whereas the exponents $\gamma q_{ij}$ coincide on pairs of equal ratio, so part~(ii) is the version for $q$-classes: two graphs receive the same value for every algebraic $\gamma \neq 0$ exactly when they have equal $q$-histograms. Part~(i) follows directly from the factorisation~\eqref{eq:factor}. The statement for real $\gamma$ applies the standard fact that a nonzero exponential sum has finitely many real zeros. The propagation by a pendant path in part~(iii) is the device of~\cite{Rada2026LinearVDB}. A class-wide question of the same kind was studied by Song and Huang~\cite{SongHuang2023EDV} for distance-type invariants. The edge division vector of a tree $T$ counts its edges $e$ by the order $\min\{n_u(e), n_v(e)\}$ of the smaller component of $T - e$. Trees with equal vectors receive equal values of every edge-additive eccentric index $\sum_e f(\min\{n_u(e), n_v(e)\})$, such as the Wiener and Gutman indices, and Song and Huang determine all such trees of order at most $10$. That invariant does not control degrees: the two seven-vertex trees with edge division vector $(4,1,1)$ have different degree-pair profiles and different $q$-histograms, while the two octane pairs of Table~\ref{tab:collisions} have different edge division vectors and different Wiener indices. Neither partition of trees refines the other, so their collisions and ours are of different kinds. We found no earlier determination of the orders $13$ and $16$, or of explicit colliding trees for degree-ratio indices, in a literature search recorded in the repository~\cite{LoyolaRepo}. The minimality of orders $13$ and $16$ is computer-assisted. It rests on an exhaustive enumeration of all trees of orders $2$ to $16$ in exact rational arithmetic, reproducible with the code of the repository~\cite{LoyolaRepo}.
+  Part~(ii) is Theorem~3.4 of~\cite{Rada2019ExpVDB} applied to the algebraic edge weights $\gamma q_{ij}$, whose classes of equal weight are the $q$-classes: two graphs receive the same value for every algebraic $\gamma \neq 0$ exactly when they have equal $q$-histograms. Part~(i) follows directly from the factorisation~\eqref{eq:factor}. The statement for real $\gamma$ applies the standard fact that a nonzero exponential sum has finitely many real zeros. The propagation by a pendant path in part~(iii) is the device of~\cite{Rada2026LinearVDB}. The construction parallels Example~2.2 of~\cite{RadaRodriguezSigarreta2022Weak}, where indices that depend only on the degree sum are defeated by chemical trees whose counts agree on classes of equal sum. Here the classes are those of equal ratio, which for $\Delta \le 4$ are $\{(1,2),(2,4)\}$ and $\{(2,2),(3,3),(4,4)\}$ (ignoring $(1,1)$, which occurs only in $K_2$). A class-wide question of the same kind was studied by Song and Huang~\cite{SongHuang2023EDV} for distance-type invariants. The edge division vector of a tree $T$ counts its edges $e$ by the order $\min\{n_u(e), n_v(e)\}$ of the smaller component of $T - e$. Trees with equal vectors receive equal values of every edge-additive eccentric index $\sum_e f(\min\{n_u(e), n_v(e)\})$, such as the Wiener and Gutman indices, and Song and Huang determine all such trees of order at most $10$. That invariant does not control degrees: the two seven-vertex trees with edge division vector $(4,1,1)$ have different degree-pair profiles and different $q$-histograms, while the two octane pairs of Table~\ref{tab:collisions} have different edge division vectors and different Wiener indices. Neither partition of trees refines the other, so their collisions and ours are of different kinds. We found no earlier determination of the orders $13$ and $16$, or of explicit colliding trees for degree-ratio indices, in a literature search recorded in the repository~\cite{LoyolaRepo}. The minimality of orders $13$ and $16$ is computer-assisted. It rests on an exhaustive enumeration of all trees of orders $2$ to $16$ in exact rational arithmetic, reproducible with the code of the repository~\cite{LoyolaRepo}.
 
   \begin{corollary}[Degree-ratio indices]\label{cor:ratioclass}
   Let $\rho_{uv} = \min(d_u,d_v)/\max(d_u,d_v)$ and let
@@ -648,7 +649,7 @@ Equal profiles give equal $q$-histograms. The converse fails
   \end{corollary}
 
   \begin{remark}\label{rem:ratioclass}
-  The corollary follows from the identity for $\rho_{uv}$. Within the
+  The corollary follows from the identity for $\rho_{uv}$; it is the structure observation of~\cite[Proposition~2.5]{Rada2019ExpVDB} for edge weights that depend only on the degree ratio, and what is new are the explicit witnesses and the orders at which they first occur. Within the
   class it describes, the pure-$\gamma$ points at algebraic
   $\gamma \neq 0$ attain the most possible: by part~(ii) they separate
   every pair of graphs with distinct $q$-histograms. $GA$ does not
@@ -657,7 +658,15 @@ Equal profiles give equal $q$-histograms. The converse fails
   exponential sum in $\alpha$ with distinct bases, which separates two
   distinct histograms at all but finitely many $\alpha$. The limit thus
   belongs to the dependence on the degree ratio, not to $\gamma$, which
-  adds the form valid at every algebraic value.
+  adds the form valid at every algebraic value. The orders $13$ and $16$ are the first at which the $q$-histogram, and
+  hence every degree-ratio index simultaneously, fails to separate
+  distinct profiles. A single index can fail earlier through coincidences
+  among its values. The symmetric division deg index merges two distinct
+  profiles of chemical trees already at order $9$, for instance
+  $\{(1,2), (1,3)^{2}, (2,2)^{4}, (2,3)\}$ and
+  $\{(1,2)^{3}, (1,3), (2,3)^{3}, (3,3)\}$, both with value $58/3$, and the
+  inverse symmetric division deg index does so at order $10$ (exact
+  enumeration in the repository).
   \end{remark}
 
   Off $\Pi$ the same transcendence argument gives the following.
@@ -1274,7 +1283,7 @@ pendant edges are $(1,2)$-edges and its other edges are $(2,2)$-edges.
 For $\gamma < 0$ every inequality reverses.
 \end{proof}
 
-Cruz and Rada~\cite{CruzRada2019PathStar} give general criteria for the path and the star to be extremal among trees; the direct proof above is included because it is short. The star half also follows from the sufficient condition of~\cite[Section~4.2]{Rada2026LinearVDB}, since for $\gamma > 0$ the $(1,n-1)$-edge has the largest weight $e^{\gamma q}$. The path half does not follow from the corresponding condition there, because the $(1,2)$-weight $e^{\gamma/3}$ exceeds the $(2,3)$-weight $e^{\gamma/5}$. The proof uses only the bounds on $q$ and does not extend verbatim to general $(\alpha,\beta)$, where the ordering of trees depends on the
+Proposition~\ref{prop:extremal} is a consequence of the criteria of Cruz and Rada~\cite{CruzRada2019PathStar}; the direct proof above is included because it is short. For the weights $\varphi_{ij} = e^{\gamma q_{ij}}$ and $E = e^{\gamma/3}$, their function $f(i,j) = \tfrac{ij}{i+j}(\varphi_{ij} + 2\varphi_{12} - 3\varphi_{22})$ equals $2(E - 1)$ at $(1,2)$ and $(2,2)$. For $\gamma > 0$ it is larger at every other pair: if $i, j \ge 2$ then $\varphi_{ij} + 2E - 3 \ge 2(E-1) > 0$ and $ij/(i+j) > 1$, and for $(1,j)$, $j \ge 3$, one has $f \ge \tfrac34(e^{\gamma/2} + 2E - 3) > 2(E-1)$, since with $x = e^{\gamma/6} > 1$ this reads $3x^3 - 2x^2 - 1 = (x-1)(3x^2 + x + 1) > 0$. Theorem~2.1 of~\cite{CruzRada2019PathStar} then gives the lower bound with equality only for $P_n$, and their Theorem~3.1 gives the upper bound with equality only for $S_n$, because $e^{\gamma q}$ is largest at the pair $(1,n-1)$. For $\gamma < 0$ every inequality reverses. The star half also follows from the sufficient condition of~\cite[Section~4.2]{Rada2026LinearVDB}; the path half does not follow from the corresponding condition there, because the $(1,2)$-weight $e^{\gamma/3}$ exceeds the $(2,3)$-weight $e^{\gamma/5}$. The proof uses only the bounds on $q$ and does not extend verbatim to general $(\alpha,\beta)$, where the ordering of trees depends on the
 scale exponent $2\alpha + \beta$ as well as on $\gamma$. Among
 chemical trees ($\Delta \le 4$) the termwise bound gives
 $LO(T;0,0,\gamma) \le (n-1)e^{3\gamma/5}$ for $\gamma > 0$, with
@@ -1513,8 +1522,10 @@ the exact reductions $M_1, M_2, HM, {}^{m}\!M_2, R, \chi, H/2, ISI, GA,
 AG$ and the fixed pure-$\gamma$ points $LO(0, 0, 1)$ and $LO(0, 0, 2)$.
 The edge count $m = LO(0, 0, 0)$ is constant on the octanes and is
 omitted. No parameter in the correlation comparison is tuned against
-the property data. An exploratory local-tuning check (Supplementary
-Section~S2) exceeded the best fixed point only by a $0.001$ in-sample $\Delta H_{\mathrm{vap}}$ margin and, under nested leave-one-out, on octane $T_B$ ($0.764$ against $0.745$). The sets are small, so the octane
+the property data. The repository history begins with the octane correlations already
+computed, so it cannot document that the benchmark points $\gamma = 1$ and
+$2$ were fixed before the octane data were seen. An exploratory local-tuning check (Supplementary
+Section~S2) exceeded the best fixed point only by a $0.001$ in-sample $\Delta H_{\mathrm{vap}}$ margin and, under nested leave-one-out, on octane $T_B$ ($0.764$ against $0.745$), a small point-estimate difference without an interval; no superiority is claimed. The sets are small, so the octane
 correlations are descriptive, and the pre-registered tests on measured
 boiling points of Section~\ref{sec:bp} are the primary predictive
 evidence.
@@ -1667,17 +1678,18 @@ error, and after this result we made the measured boiling points of
 Section~\ref{sec:bp} the primary predictive evidence.
 
 On both sets the untuned point $LO(0,0,1)$ matches or beats the tuned
-Loyola model ($0.957$ and $0.903$ against medians $0.953$ and $0.900$);
+Loyola model in point estimate ($0.957$ and $0.903$ against medians $0.953$ and $0.900$);
 on the octanes this point was singled out from the same data
 (Table~\ref{tab:lo_octane}).
 Since $LO(G;0,0,\gamma) = m + \tfrac{\gamma}{2}\,IRLA(G) + O(\gamma^2)$
 as $\gamma \to 0$, it is closely related to $IRLA$; the correlation
 between the two is $0.996$ on both sets, and $IRLA$ comes within
 $0.003$ of the median Loyola model on the nonanes ($0.897$ against
-$0.900$). A term linear in the imbalance is what matters for this
-property. Ridge regression on the degree-pair counts, a reference for
+$0.900$). A term linear in the imbalance suffices for this property in
+point estimate, but it is not necessary: the wide-box parent, which has no
+such term, comes close through $(1-q^2)^{\alpha}$ (Section~\ref{sec:ablation}). Ridge regression on the degree-pair counts, a reference for
 what the counts carry, has a higher point estimate than every index model on the nonanes ($Q^2 = 0.927$ for $\Delta H_{\mathrm{vap}}$, $0.682$ for $T_B$).
-A molecule bootstrap conditional on the fitted predictions gives a
+A post hoc molecule bootstrap conditional on the fitted predictions gives a
 $95\%$ interval for LO minus GM on nonane $\Delta H_{\mathrm{vap}}$ of
 $[-0.006, +0.113]$ at budget $200$ (Supplementary Section~S4).
 
@@ -1709,15 +1721,15 @@ excluding zero (Table~\ref{tab:bp}), which we read as requiring the lower end of
 \centering
 \caption{Measured boiling points (nested leave-one-out $Q^2$). Test A:
 decane cohort, refitted within folds. Test B: pooled C6--C10 with the carbon number
-$n_C$ in every model (Class., $IRLA$,
-LO$_1$: $n_C$ plus that descriptor). Base: training-fold mean (Test A)
+$n_C$ in every index model (Class., $IRLA$,
+LO$_1$: $n_C$ plus that descriptor); Ridge uses the counts alone, whose sum is $n_C - 1$. Base: training-fold mean (Test A)
 or $n_C$ alone (Test B).
 Class.: best classical index chosen in each fold. LO$_1$: fixed
 $LO(0,0,1)$. Ridge: ridge regression on the degree-pair counts. GM,
 LO$_h$: medians over seeds $0$--$49$ in the wide boxes, LO$_h$
 being the hybrid control with $(\alpha,\beta)$ in the wide box and
 $\gamma \in (-2,2)$.
-$\Delta Q^2$: median over seeds of the paired difference LO$_h$ minus GM. The registered intervals are conditional on the fitted predictions and understate the uncertainty several-fold (see below). Last column: seeds (of $50$) in
+$\Delta Q^2$: median over seeds of the paired difference LO$_h$ minus GM. The registered intervals are conditional on the fitted predictions and omit refitting and selection uncertainty (see below). Last column: seeds (of $50$) in
 which LO$_h$ beats GM.}
 \label{tab:bp}
 \scriptsize
@@ -1752,7 +1764,8 @@ $[-0.003, +0.002]$, so the correction changes no conclusion. The
 intervals are conditional on the fitted predictions and omit refitting
 and selection. An exploratory resampling reruns the whole nested
 procedure for both models on random subsamples of $80\%$ of the
-molecules. On the decanes ($500$ subsamples) the median $\Delta Q^2$ is
+molecules. Each replicate uses a single candidate stream, so the ranges
+also contain optimiser variance. On the decanes ($500$ subsamples) the median $\Delta Q^2$ is
 $-0.110$ with central $95\%$ range $[-0.510, +0.312]$. On the pooled set
 ($200$ subsamples) it is $+0.001$ with range $[-0.015, +0.008]$.
 Neither range supports a gain from $\gamma$. The selection-aware decane
@@ -1767,15 +1780,16 @@ these protocols; they do not establish equivalence, and they do not
 show that $\gamma$ never helps. The two summaries differ in
 training size and seed averaging and are not directly comparable. Nor are the ranges confidence intervals for the full-sample $\Delta Q^2$. Ridge
 regression on the ten degree-pair counts reaches $Q^2 = 0.860$ on the
-decanes, where every single index stays between $0.149$ and $0.514$, and
+decanes, where every single index stays between $0.149$ and $0.514$
+(medians over seeds for the tuned models), and
 $0.991$ on the pooled set. On the registered secondary question of
 Test~B, $IRLA$ and $LO(0,0,1)$ do not beat size plus the best classical
-index ($0.963$ against $0.967$), while both tuned models do ($0.977$). A permutation check on the decanes repeats
+index ($0.963$ against $0.967$), while both tuned models have higher point estimates ($0.977$; no interval was registered for this secondary question). A permutation check on the decanes repeats
 the whole nested procedure, including the choice of the ridge penalty,
 for $200$ random permutations of the boiling points. The permuted $Q^2$
-has median $-0.09$, $95$th percentile $-0.01$ and maximum $0.20$. None reaches $0.860$, so the empirical $p$-value is $1/201 \approx 0.005$. Wiener's two-descriptor model~\cite{Wiener1947}, with the path number $W$ and the number $p_3$ of carbon pairs three bonds apart, fitted without tuning, gives $Q^2 = 0.904$ on the decanes. This single point estimate, given without an interval and for descriptors historically chosen on alkane boiling points, suggests that within one carbon number distance information beyond the degree pairs carries much of the remaining signal.
+has median $-0.09$, $95$th percentile $-0.01$ and maximum $0.20$. None reaches $0.860$, so the empirical $p$-value is $1/201 \approx 0.005$. Wiener's two-descriptor model~\cite{Wiener1947}, with the path number $W$ and the number $p_3$ of carbon pairs three bonds apart, fitted without tuning, gives $Q^2 = 0.904$ on the decanes. On trees $p_3 = \sum_{uv}(d_u - 1)(d_v - 1)$, since a path of length three is fixed by its middle edge, so $p_3$ is a linear function of the degree-pair counts and the distance information in this model is $W$. This single point estimate, given without an interval and for descriptors historically chosen on alkane boiling points, suggests that within one carbon number $W$ may add to the degree-pair information; its difference from ridge is not resolved here.
 Under the stated boxes and candidate budgets, ridge regression predicts the boiling points more accurately than every single-index
-model evaluated, with or without $\gamma$. These conclusions
+model evaluated, with or without $\gamma$, in point estimate. The margin is large on the decanes and small on the pooled set, where size alone gives $Q^2 = 0.938$, and no interval for these differences is reported here. These conclusions
 concern acyclic alkanes.
 
 \section{Discussion and limitations}\label{sec:limitations}
@@ -1857,7 +1871,7 @@ destroys a distinction the parent makes.
 
 Under random search at matched budgets, no predictive gain from the imbalance parameter was demonstrated; this does not show that it never helps, and the decane intervals were wide. A gain on vaporisation enthalpies met the seed-count criterion of a pre-registered protocol, with a bootstrap interval that included zero. It shrank to about zero in an exploratory comparison once the parent was searched over a box that did not truncate it, and pre-registered tests on measured boiling points
 were negative. There a linear model on the degree-pair counts
-outperformed every single index. The untuned pure-imbalance point, close
+had higher point estimates than every single index. The untuned pure-imbalance point, close
 to the irregularity index $IRLA$, was as accurate as the tuned models on vaporisation enthalpy in point estimate, out of sample only on the nonanes, and no equivalence test was made. Three problems remain open: sharp two-sided bounds
 in terms of indices outside the family, such as the
 atom-bond-connectivity and Sombor indices; the extremal graphs for
