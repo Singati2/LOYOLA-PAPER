@@ -39,7 +39,7 @@ nor an unlicensed copy of its data set are redistributed.
      as NOT RUN. Without `--offline`, missing pages make the run INCOMPLETE (exit 3).
    * CI runs `verify.py --offline`. The reviewer notebook 06 runs the same command.
    * In the Colab sequence, notebook 01 has one explicit download cell. It saves the pages to a
-     private Drive folder outside the run record. Stages 4 and 8 copy the pages from that folder and
+     private Drive folder outside the run record. Stages 1, 4 and 8 copy the pages from that folder and
      never download them.
    * `test_regressions.py` skips its one page-dependent test when the pages are absent.
    * `attack_checks.py` and `run_all_scripts.py` copy the downloaded pages into their isolated trees.
@@ -85,7 +85,7 @@ Reference for "identical": the files of commit `2158b72`, the last commit with t
 
 | Check | Command | Result |
 |---|---|---|
-| Offline fast path, no network (`unshare -rn`), no pages | `python verify.py --offline` | every step PASS except the core verifier, which failed after 1,334 s while another job held the machine's load average near 20 (the stage summary shows 0 math failures); run alone the same way (no network, no pages), the core verifier gave FULL PASS, exit 0, in 21 min. Pages-dependent steps reported NOT RUN |
+| Offline fast path, no network (`unshare -rn`), no pages | `python verify.py --offline` | every step PASS except the core verifier, which failed after 1,334 s while another job held the machine's load average near 20 (the stage summary shows 0 math failures); overall FAILURES, exit 1. Run alone the same way (no network, no pages), the core verifier gave FULL PASS, exit 0, in 21 min. Pages-dependent steps reported NOT RUN |
 | Missing pages without `--offline` | `python verify.py` (steps stubbed out) | INCOMPLETE, exit 3, as designed |
 | Explicit download | `python3 external/nist_pages.py --download` | 262 retrieved, 262 identical to the archived digests, exit 0; offline re-check exit 0 |
 | Data sets rebuilt from the downloaded pages | the three builders and `DATA/build_data.py`, SHA-256 against `2158b72` | 14 identical, 0 differ |
@@ -95,6 +95,9 @@ Reference for "identical": the files of commit `2158b72`, the last commit with t
 | Notebooks | `nbformat.validate` on `colab/*.ipynb` and `notebooks/06` | valid |
 | PDFs | `pdflatex` x3 (`main.tex`), `tectonic` (`supplement.tex`) | all exit 0; no undefined references; 42 and 28 pages; text identical to the committed PDFs |
 | Tracked pages | `git ls-files` on the three folders | 0 tracked; 262 local copies kept, all ignored |
+| Clean clone of commit `67e36ad`, no network, no pages, low machine load | `python verify.py --offline` | ALL PASS (fast path, offline), exit 0, 19 min 51 s; NOT RUN: auxiliary outputs, archived-source identities, one page-dependent regression test |
+| GitHub Actions on `67e36ad` (PR #5) | `verify.py --offline` | success (run 39066288218) |
+| Tracked tree and artifacts of `67e36ad` | `git ls-tree`, `git grep` for WebBook markup, `unzip -Z1` on the three zips, release and Actions artifact lists | 0 HTML files, no WebBook page markup, zips hold `.tex`, figures and READMEs only, 0 releases, 0 artifacts |
 
 Files changed relative to `2158b72`, other than the 262 removed pages: code and documentation listed
 above, the two wording edits of `main.tex` and `supplement.tex` (and their Overleaf copies), and the
