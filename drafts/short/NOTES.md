@@ -1,6 +1,11 @@
 # Short version of the paper: draft notes (2026-10-17)
 
-`main_short.tex` → `main_short.pdf`: 24 A5 pages (full paper: 42). `python3 build.py` assembles it
+**Superseded in part by `SHORT_VS_FULL_CHANGELOG.md`, which gives the current maps. This file keeps the
+revision history of the draft.** Revision 3: new title; abstract states what is known and what is new;
+SDD/ISDD early-failure caveat; Cruz–Rada corollary with a complete check; γ-choice disclosure;
+`supplement_short.tex` built by `build_supplement.py`.
+
+`main_short.tex` → `main_short.pdf`: 24 A5 pages (full paper: 43). `python3 build.py` assembles it
 from `body.tex`, the preamble and title block of `main.tex` (byte-identical) and the bibliography
 entries it cites. Then run `pdflatex main_short.tex` three times. The full paper and the Supplement
 are unchanged.

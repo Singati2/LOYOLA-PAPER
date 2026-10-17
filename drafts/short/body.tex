@@ -4,31 +4,31 @@
   ratio of its end-degrees, such as the geometric--arithmetic,
   symmetric division deg and degree-ratio Sombor indices, depends on a
   graph only through its histogram of normalised edge imbalances
-  $q_{uv} = |d_u - d_v|/(d_u + d_v)$. By exhaustive enumeration, for
-  trees this histogram determines the degree-pair counts up to order
-  twelve but not from order thirteen (sixteen for chemical trees), and
-  explicit colliding trees exist at every larger order. We study this
-  resolution limit through the \emph{Loyola index family}
+  $q_{uv} = |d_u - d_v|/(d_u + d_v)$, a direct consequence of Rada's
+  structure relation. By exhaustive enumeration we determine when this
+  histogram loses degree-pair information: it determines the degree-pair
+  counts of a tree up to order twelve, and of a chemical tree up to order
+  fifteen, but not from order thirteen (sixteen for chemical trees), where
+  explicit colliding trees exist at every order. These are the first
+  orders at which all degree-ratio indices fail simultaneously; a single
+  index, such as the symmetric division deg index, can fail earlier. As a
+  test case we use the \emph{Loyola index family}
   \begin{equation*}
   LO(G;\alpha,\beta,\gamma)
   \;=\; \sum_{uv \in E(G)}
   (d_u d_v)^{\alpha}\,(d_u + d_v)^{\beta}\,
   e^{\gamma q_{uv}},
   \end{equation*}
-  an exponential extension of the Gutman--Milovanovi\'c family
-  ($\gamma = 0$). Its pure-$\gamma$ points at algebraic $\gamma \neq 0$
-  separate exactly the imbalance histograms, the most any degree-ratio
-  index can do; the parent does the same on $\Pi$, where any two graphs
-  with distinct histograms are separated at all but finitely many
-  $\alpha$. We also bound the order exchanges along $\gamma$ and
-  characterise per-graph identifiability. Pre-registered tests on
-  measured boiling points did not demonstrate a predictive gain from
-  $\gamma$, and there ridge regression on the degree-pair counts had a
-  higher cross-validated $Q^2$ than every single index evaluated, in point
-  estimate. In an
-  exploratory comparison, a gain on vaporisation enthalpies seen in a
-  narrow search box shrinks to about zero once the parent is searched over
-  a box that does not truncate it.
+  an exponential extension of the Gutman--Milovanovi\'c family. By Rada's
+  Lindemann--Weierstrass theorem its pure-imbalance points at algebraic
+  $\gamma \neq 0$ separate exactly the imbalance histograms, and two
+  chemical graphs exchange order at most five times along $\gamma$.
+  Pre-registered tests on measured boiling points did not demonstrate a
+  predictive gain from $\gamma$; on those data ridge regression on the
+  degree-pair counts had a higher cross-validated $Q^2$ than every single
+  index evaluated, in point estimate. In an exploratory comparison, a gain
+  on vaporisation enthalpies seen in a narrow search box shrinks to about
+  zero once the parent is searched over a box that does not truncate it.
 \end{abstract}
 
 \onehalfspacing
@@ -365,7 +365,15 @@ The ceiling is attained at almost every parameter point.
   $\gamma = 0$ part~(i) gives an exponential sum in $\alpha$ with distinct
   bases, which separates two distinct histograms at all but finitely many
   $\alpha$. The limit thus belongs to the dependence on the degree ratio,
-  not to $\gamma$.
+  not to $\gamma$. The orders $13$ and $16$ are the first at which the $q$-histogram, and
+  hence every degree-ratio index simultaneously, fails to separate
+  distinct profiles. A single index can fail earlier through coincidences
+  among its values. The symmetric division deg index merges two distinct
+  profiles of chemical trees already at order $9$, for instance
+  $\{(1,2), (1,3)^{2}, (2,2)^{4}, (2,3)\}$ and
+  $\{(1,2)^{3}, (1,3), (2,3)^{3}, (3,3)\}$, both with value $58/3$, and the
+  inverse symmetric division deg index does so at order $10$ (exact
+  enumeration in the repository).
 
 \subsection{Where the limit binds}\label{sec:degeneracy}
 
@@ -615,9 +623,7 @@ attains the bound with two $(1,2)$-edges and $n-3$ $(2,2)$-edges. For $\gamma < 
 inequality reverses.
 \end{proof}
 
-Both inequalities also follow from Corollaries~2.2 and~3.2 of Cruz and
-Rada~\cite{CruzRada2019PathStar}; the direct proof is included because it
-is short and gives uniqueness. Among chemical trees the bound
+Proposition~\ref{prop:extremal} is a consequence of the criteria of Cruz and Rada~\cite{CruzRada2019PathStar}; the direct proof above is included because it is short. For the weights $\varphi_{ij} = e^{\gamma q_{ij}}$ and $E = e^{\gamma/3}$, their function $f(i,j) = \tfrac{ij}{i+j}(\varphi_{ij} + 2\varphi_{12} - 3\varphi_{22})$ equals $2(E - 1)$ at $(1,2)$ and $(2,2)$. For $\gamma > 0$ it is larger at every other pair: if $i, j \ge 2$ then $\varphi_{ij} + 2E - 3 \ge 2(E-1) > 0$ and $ij/(i+j) > 1$, and for $(1,j)$, $j \ge 3$, one has $f \ge \tfrac34(e^{\gamma/2} + 2E - 3) > 2(E-1)$, since with $x = e^{\gamma/6} > 1$ this reads $3x^3 - 2x^2 - 1 = (x-1)(3x^2 + x + 1) > 0$. Theorem~2.1 of~\cite{CruzRada2019PathStar} then gives the lower bound with equality only for $P_n$, and their Theorem~3.1 gives the upper bound with equality only for $S_n$, because $e^{\gamma q}$ is largest at the pair $(1,n-1)$. For $\gamma < 0$ every inequality reverses. Among chemical trees the bound
 $LO(T;0,0,\gamma) \le (n-1)e^{3\gamma/5}$ for $\gamma > 0$ is attained only
 for $n = 5$, and the maximal chemical trees for $n > 5$ are left open.
 
@@ -627,7 +633,9 @@ We compare the family with the classical indices it reduces to on the
 $18$ octane isomers, following the benchmark of the diminished Sombor
 study~\cite{MovahediGutmanRedzepovicFurtula2026}, and use the $35$ nonane
 isomers as a replication set. No parameter in the correlation comparison
-is tuned against the property data. The sets are small, so the octane
+is tuned against the property data. The repository history begins with the octane correlations already
+computed, so it cannot document that the benchmark points $\gamma = 1$ and
+$2$ were fixed before the octane data were seen. The sets are small, so the octane
 correlations are descriptive. After the nonane result of
 Section~\ref{sec:ablation} we made the pre-registered tests on measured
 boiling points of Section~\ref{sec:bp} the primary predictive evidence.

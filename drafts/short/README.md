@@ -6,19 +6,22 @@ the Supplement (`supplement.tex`, `LOYOLA_supplement.pdf`) are unchanged.
 | File | Content |
 |---|---|
 | `body.tex` | text of the short version (abstract to acknowledgment) |
-| `build.py` | assembles `main_short.tex`: the MATCH preamble and title block of `../../main.tex`, byte for byte, then `body.tex`, then the bibliography entries of `../../main.tex` that `body.tex` cites |
+| `build.py` | assembles `main_short.tex`: the MATCH preamble and title block of `../../main.tex` (only the `\title` line differs), then `body.tex`, then the bibliography entries of `../../main.tex` that `body.tex` cites |
+| `build_supplement.py` | derives `supplement_short.tex` from `../../supplement.tex`: renumbered references into the main paper, the structure-sensitivity table in S6, closed forms and termwise bounds in a new S10 |
+| `supplement_short.tex`, `supplement_short.pdf` | Supplementary Material of the short version (generated) |
+| `SHORT_VS_FULL_CHANGELOG.md` | section, statement, supplement and claim map between the two versions |
 | `main_short.tex` | assembled source (generated; kept so it compiles on its own, e.g. on Overleaf) |
 | `main_short.pdf` | compiled draft |
 | `NOTES.md` | what was cut, what was restored after review, and what must change before it could replace the full paper |
 
-The short version uses no figures and no data files. Every value in it appears in `main.tex` or
+The short main text uses no figures; the short supplement reads the two figures from `../../figures/`. No data files are used. Every value in it appears in `main.tex` or
 `supplement.tex`, which the repository's verifiers check against the computations.
 
 ## Build
 ```bash
 cd drafts/short
-python3 build.py                                   # regenerates main_short.tex
-for i in 1 2 3; do pdflatex -interaction=nonstopmode main_short.tex; done
+python3 build.py && python3 build_supplement.py   # regenerate both .tex files
+for f in main_short supplement_short; do for i in 1 2 3; do pdflatex -interaction=nonstopmode $f.tex; done; done
 ```
 
 ## Checks

@@ -2,6 +2,11 @@
 import re
 src=open("../../main.tex").read()
 k=src.index("\\begin{document}"); k=src.index("\\maketitle",k); pre=src[:k+len("\\maketitle")]+"\n"
+# the short version claims less than the full one: its own title (the only change to the preamble)
+TITLE="\\title{The Loyola Index Family and the Resolution Limit of Degree-Ratio Indices on Trees}"
+import re as _re
+assert len(_re.findall(r"^\\title\{", pre, _re.M))==1
+pre=_re.sub(r"^\\title\{[^\n]*\}", lambda _m: TITLE, pre, flags=_re.M)
 bib=src[src.index("\\singlespacing\n\n \\begin{thebibliography}"):]
 body=open("body.tex").read()
 cited=set(k.strip() for m in re.findall(r"\\cite(?:\[[^\]]*\])?\{([^}]*)\}", body) for k in m.split(","))
