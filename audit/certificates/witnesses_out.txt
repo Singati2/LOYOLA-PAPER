@@ -1,0 +1,6 @@
+order 13 profiles {(1, 2): 1, (1, 3): 2, (1, 6): 5, (2, 3): 2, (2, 6): 1, (3, 3): 1} | {(1, 3): 3, (1, 6): 5, (2, 2): 1, (2, 3): 2, (3, 6): 1}
+   q-histogram {'0': 1, '1/5': 2, '1/3': 1, '1/2': 3, '5/7': 5}
+   OK for every order from 13 to 40 (distinct profiles, equal histograms, same max degree 6 )
+order 16, Delta<=4 profiles {(1, 2): 2, (1, 4): 8, (2, 4): 2, (4, 4): 3} | {(1, 4): 8, (2, 2): 3, (2, 4): 4}
+   q-histogram {'0': 3, '1/3': 4, '3/5': 8}
+   OK for every order from 16 to 43 (distinct profiles, equal histograms, same max degree 4 )
