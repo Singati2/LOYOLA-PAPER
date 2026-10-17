@@ -86,5 +86,5 @@ Coverage: GitHub CI runs the fast path only. The full suite, including the Lean 
 | Dataset | Source | Rebuilt / checked by |
 |---|---|---|
 | 18 octanes (octane_data.py) | NIST WebBook / KDB; per-value provenance in octane_property_provenance_v35.csv | verify_loyola_v35.py (values = appendix = provenance; class rules) |
-| 35 nonanes (external/nonane_data.csv) | archived NIST pages external/nonane_raw_nist/ | external/build_nonane_data.py via verify_external.py |
-| 100 alkanes C6-C10 boiling points (external/bp/bp_data.csv) | archived NIST pages external/bp/nist_raw/ | external/bp/build_bp_data.py via verify_external.py |
+| 35 nonanes (external/nonane_data.csv) | NIST pages external/nonane_raw_nist/, downloaded by external/nist_pages.py | external/build_nonane_data.py via verify_external.py |
+| 100 alkanes C6-C10 boiling points (external/bp/bp_data.csv) | NIST pages external/bp/nist_raw/, downloaded by external/nist_pages.py | external/bp/build_bp_data.py via verify_external.py |

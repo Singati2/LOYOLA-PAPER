@@ -1,7 +1,9 @@
 # v40 boiling-point data (acyclic alkanes C6-C10)
 
 - `nist_raw/`: NIST WebBook phase-change pages (Mask=4) for every C6-C10
-  acyclic alkane, archived 2026-10-03 (154 pages).
+  acyclic alkane, retrieved 2026-10-03 (154 pages). Not redistributed:
+  `../nist_pages.py` downloads them (and `nist_hvap_pts/`) and checks each
+  against the digest of the copy the data set was built from.
 - `nist_alkanes_skeletons_audit.csv`: the audit index (InChI skeleton, NIST ids).
 - `build_bp_data.py`: applies the rule pre-registered in `../PREREG_v40.md`
   (NIST AVG; else median of non-compilation determinations if spread <= 3 K;
@@ -20,5 +22,5 @@
   `nist_hvap_pts/`: data-availability audit behind the statement that NIST
   lists a calorimetric standard-state (298 K) vaporization enthalpy for only
   25 acyclic alkane skeletons outside C8/C9 and for one of the 75 decanes
-  (NIST averaged entries resolved against their individual-measurement pages,
-  archived in `nist_hvap_pts/`).
+  (NIST averaged entries resolved against their individual-measurement pages
+  in `nist_hvap_pts/`, downloaded by `../nist_pages.py`).

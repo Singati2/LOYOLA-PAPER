@@ -69,6 +69,23 @@ def pipeline(*args):
         raise RuntimeError("pipeline.py " + " ".join(args) + " reported a problem (see the output above)")
 '''
 
+NIST_MD = ("## Retrieve the NIST WebBook pages (explicit step)\n\n"
+           "The data sets of this stage are rebuilt from 262 pages of the NIST Chemistry WebBook (NIST Standard "
+           "Reference Database 69). NIST states that its Standard Reference Data are copyrighted and may not be "
+           "reproduced or redistributed without permission (https://www.nist.gov/srd/public-law), so the pages are "
+           "not part of the repository and no other cell or notebook downloads them. The next cell retrieves them "
+           "from the WebBook for your own use, one request per second (about 5 minutes), and checks each against "
+           "the digest of the copy the committed data sets were built from; a changed page stops the run. The pages "
+           "are kept in a private Drive folder, `MyDrive/LOYOLA_nist_pages_private`, so that notebooks 04 and 08 "
+           "can reuse them without downloading again. That folder is not part of the run record: do not share or "
+           "archive it.")
+NIST_CELL = '''# explicit, rate-limited retrieval of the NIST WebBook pages (skips pages already in the private folder)
+sys.path.insert(0, "colab")
+from pipeline import nist_cache
+r = subprocess.run([PY, "external/nist_pages.py", "--download", "--cache", nist_cache()])
+if r.returncode != 0:
+    raise RuntimeError("NIST pages missing or changed since they were archived (see the output above)")'''
+
 RESUME = ("If the session disconnects, open this notebook again and run all cells: finished scripts are "
           "skipped and the run continues with the next one. Keep the browser tab open while it runs.")
 
@@ -104,12 +121,14 @@ def main():
     for n, name, title, scripts in STAGES:
         mins = sum(m for _, m in scripts)
         listing = "\n".join(f"{i}. `{s}` (lab: {m} min)" for i, (s, m) in enumerate(scripts, 1))
+        nist = [new_markdown_cell(NIST_MD), new_code_cell(NIST_CELL)] if n == 1 else []
         write(f"{n:02d}_{name}.ipynb", [
             new_markdown_cell(f"# {n}. {title}\n\n{badge(f'{n:02d}_{name}.ipynb')}\n\n"
                               f"Runs these scripts in this order (about {mins} minutes on the lab machine):\n\n{listing}\n\n"
                               f"Each script rewrites its committed output files; notebook 11 compares them with the commit. "
                               f"{RESUME}"),
             new_code_cell(SETUP),
+            *nist,
             new_code_cell(f'pipeline("--stage", "{n}")'),
         ])
     write("09_lean_proofs.ipynb", [

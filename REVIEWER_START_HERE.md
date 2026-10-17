@@ -19,10 +19,15 @@ git clone https://github.com/Singati2/LOYOLA-PAPER.git && cd LOYOLA-PAPER
 git checkout v40.30        # the submission revision, once tagged
 python3 -m venv .venv && . .venv/bin/activate
 python -m pip install -r requirements-lock.txt          # exact versions behind the committed outputs
-python verify.py                                         # fast path, about 6 to 30 minutes
+python verify.py --offline                               # fast path, about 6 to 30 minutes
 ```
 
-The last line is `ALL PASS (fast path)` or `FAILURES`. The scripts were run on Python 3.13; CI uses
+The 262 NIST WebBook pages that the data builds read are not redistributed (NIST SRD 69 is
+copyrighted). Without them, run `python verify.py --offline`: the checks that read the pages are
+reported as NOT RUN, everything else runs. To run those checks too, retrieve the pages first with
+`python external/nist_pages.py --download` (about 5 minutes, one request per second); each page is
+checked against the digest of the copy the data sets were built from. The last line is
+`ALL PASS (fast path)`, `ALL PASS (fast path, offline: ...)`, `INCOMPLETE` or `FAILURES`. The scripts were run on Python 3.13; CI uses
 Python 3.13 on Ubuntu.
 
 ## Notebooks

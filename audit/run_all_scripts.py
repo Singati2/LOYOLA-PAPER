@@ -67,7 +67,9 @@ CHECK_ONLY = {"external/check_nonane_structures.py", "audit/check_exploratory_ou
 
 def tracked():
     out = subprocess.run(["git", "ls-files"], cwd=ROOT, capture_output=True, text=True, check=True).stdout.split("\n")
-    return [p for p in out if p]   # tracked files only (formal/.lake is untracked); prose_claims_b reads formal/LoyolaFormal/Profiles.lean
+    sys.path.insert(0, os.path.join(ROOT, "external"))
+    from nist_pages import local_paths          # the NIST pages are downloaded, not tracked (external/nist_pages.py)
+    return [p for p in out if p] + local_paths()   # formal/.lake is untracked; prose_claims_b reads formal/LoyolaFormal/Profiles.lean
 
 
 def digest(path):
@@ -134,7 +136,7 @@ def main():
                           capture_output=True, text=True).stdout.strip()
     ref = {p: digest(os.path.join(ROOT, p)) for p in files}
     todo = [s for s, slow in SCRIPTS if not (fast and slow)]
-    lines = [f"run_all_scripts at {head}: {len(todo)} scripts, each in an isolated copy of the {len(files)} tracked files "
+    lines = [f"run_all_scripts at {head}: {len(todo)} scripts, each in an isolated copy of the {len(files)} tracked files and downloaded NIST pages "
              f"snapshotted before the run; comparison: bytes (PDFs by canonical form)"]
     print(lines[0], flush=True)
     bad = 0

@@ -23,12 +23,19 @@ Third-party values and licence
   with attribution, for verification of the paper: the NIST Chemistry WebBook (NIST Standard
   Reference Database 69), the published compilations cited in the paper, and the Korea
   Thermophysical Properties Data Bank (KDB) as shown on Cheméo (https://www.chemeo.com).
-* Complete NIST Chemistry WebBook pages (NIST Standard Reference Database 69) are archived in the
-  repository to support the provenance audit: 154 under `../external/bp/nist_raw`, 17 under
-  `../external/bp/nist_hvap_pts` and 91 under `../external/nonane_raw_nist` (262 HTML files in all,
-  counted with `git ls-files`). They remain subject to NIST's terms for SRD 69, which were not
-  reviewed for this revision. Before any archive is made, either those terms must be checked or the
-  pages replaced by the extracted values plus their URLs.
+* Complete NIST Chemistry WebBook pages (NIST Standard Reference Database 69) are not redistributed.
+  NIST states that its Standard Reference Data are copyrighted by the U.S. Secretary of Commerce and
+  may not be reproduced, stored in a retrieval system or transmitted without prior permission
+  (https://www.nist.gov/srd/public-law, consulted 2026-10-17). The data builds read 262 pages (154
+  under `../external/bp/nist_raw`, 17 under `../external/bp/nist_hvap_pts`, 91 under
+  `../external/nonane_raw_nist`). Nothing downloads them automatically; `verify.py --offline` and CI
+  run without them. `python3 ../external/nist_pages.py --download` retrieves them from the WebBook
+  for the user's own use (one request per second) and checks each against the SHA-256 of the copy
+  from which the committed data sets were built (`../external/nist_pages.csv` lists URL, archive date
+  and digest). The repository keeps the values extracted from those pages, each with its WebBook URL;
+  see `../audit/NIST_REDISTRIBUTION_AUDIT.md` for what they contain and what remains open. The pages
+  were tracked in commits up to v40.31 (`2158b72`) and removed from the tracked tree after it; the
+  history was not rewritten, so the earlier commits still contain them.
 * Cheméo's terms (https://www.chemeo.com/tos, consulted 2026-10-16) permit value-by-value use with
   the citation "Cheméo, chemical and physical properties (https://www.chemeo.com)" and forbid bulk
   download or inclusion of the database as-is. The KDB terms could not be retrieved (the CHERIC site

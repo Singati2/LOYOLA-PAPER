@@ -321,8 +321,10 @@ check("pooled median dQ2", 0.001, round(sr.iloc[1].median_dQ2, 3), 0.0006)'''),
 
 # ---------------------------------------------------------------- 06 verification
 nb("06_verification_suite.ipynb", "6. The repository's own verification suite",
-   "Runs `python verify.py` (the fast path, about 6 minutes plus about 1 minute of installation): table and prose "
-   "recomputation, regression tests, certificates and the file manifest. The core verifier also regenerates the "
+   "Runs `python verify.py --offline` (the fast path, about 6 minutes plus about 1 minute of installation): table and prose "
+   "recomputation, regression tests, certificates and the file manifest. The NIST WebBook pages are not "
+   "redistributed (NIST SRD 69 is copyrighted), so the checks that read them are reported as NOT RUN; "
+   "`python external/nist_pages.py --download` retrieves them for those checks. The core verifier also regenerates the "
    "figures and compares them byte for byte, which needs the exact library versions of `requirements-lock.txt`. "
    "The notebook therefore runs the suite inside a small dedicated environment with those versions, leaving your "
    "own Python installation unchanged. The longer suites are `python verify.py --full` and `--everything`; the "
@@ -334,7 +336,7 @@ if not os.path.exists(py):
     venv.create(env, with_pip=True)
     run(f"{py} -m pip install -q -r requirements-lock.txt", tail=3)
 run(f"{py} -m pip list --format=freeze", tail=20)'''),
-    ("code", '''out = run(f"{py} verify.py", tail=40)
+    ("code", '''out = run(f"{py} verify.py --offline", tail=40)
 check("fast path result", True, "ALL PASS" in out)'''),
     ])
 print("notebooks written to", OUT)

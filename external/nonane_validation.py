@@ -41,6 +41,8 @@ def d4_median():
     quoted in nonane_provenance.csv; a mismatch stops the run."""
     import html as _html, re
     page = os.path.join(HERE, "nonane_raw_nist", "pts_C16747389_TBOIL.html")
+    if not os.path.exists(page):
+        raise SystemExit(f"D4: missing {page} (the NIST pages are not redistributed: python3 external/nist_pages.py --download retrieves them)")
     t = open(page, errors="replace").read()
     m = re.search(r'<table class="data"[^>]*>(.*?)</table>', t, re.S)
     if not m:

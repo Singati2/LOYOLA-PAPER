@@ -17,10 +17,20 @@ each script and restored into a fresh copy of the repository before the next sta
 state folder is LOYOLA_STATE if set, else LOYOLA_colab_run in Google Drive when Drive is mounted,
 else colab_run/ inside the repository. A state folder belongs to one commit; the runner refuses
 to mix results of different commits.
+
+Stages 1, 4 and 8 read the NIST WebBook pages, which are not redistributed. The runner never
+downloads them: notebook 01 has an explicit download cell (external/nist_pages.py --download, one
+request per second) that saves them to a private cache folder (LOYOLA_NIST_CACHE, else
+LOYOLA_nist_pages_private in Google Drive, else .nist_cache/ in the repository), and those stages
+copy them from there. The pages are never copied into the state folder.
 """
 import argparse, datetime, hashlib, json, os, platform, shutil, subprocess, sys, time
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+NIST_DIRS = ("external/bp/nist_raw/", "external/bp/nist_hvap_pts/", "external/nonane_raw_nist/")
+# scripts that read the NIST WebBook pages (traced 2026-10-17)
+NEEDS_NIST = {"external/build_nonane_data.py", "external/bp/build_bp_data.py", "external/bp/build_calorimetric_set.py",
+              "audit/check_source_identities.py", "external/nonane_validation.py", "external/test_regressions.py"}
 
 # (stage number, folder-style name, title, [(script with arguments, lab minutes)])
 # The order was checked against a trace of the files each script opens (2026-10-17): every script
@@ -28,7 +38,7 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Lab minutes: one run on the authors' lab machine (i9-9900K held near 800 MHz by thermal limits,
 # three scripts at a time), so most are upper estimates; a Colab CPU is usually faster per core.
 STAGES = [
-    (1, "build_datasets", "Build the data sets from the archived source records", [
+    (1, "build_datasets", "Build the data sets from the NIST source pages", [
         ("external/build_nonane_data.py", 1), ("external/check_nonane_structures.py", 1),
         ("external/bp/build_bp_data.py", 1), ("external/bp/build_calorimetric_set.py", 1),
         ("DATA/build_data.py", 1), ("audit/check_source_identities.py", 1)]),
@@ -94,6 +104,15 @@ def state_dir():
         d = os.path.join(REPO, "colab_run")
     os.makedirs(os.path.join(d, "logs"), exist_ok=True); os.makedirs(os.path.join(d, "files"), exist_ok=True)
     return d
+
+
+def nist_cache():
+    """Private folder for the NIST pages retrieved by the user (kept outside the state folder, never archived)."""
+    if os.environ.get("LOYOLA_NIST_CACHE"):
+        return os.environ["LOYOLA_NIST_CACHE"]
+    if os.path.isdir("/content/drive/MyDrive"):
+        return "/content/drive/MyDrive/LOYOLA_nist_pages_private"
+    return os.path.join(REPO, ".nist_cache")
 
 
 def check_commit(st):
@@ -163,6 +182,7 @@ def run_script(st, script):
         written += [os.path.relpath(os.path.join(dp, fn), REPO) for fn in fns if os.path.getmtime(os.path.join(dp, fn)) > t0]
     written.sort()
     written = [w for w in written if w in tracked or w.startswith(("external/", "audit/", "structural/", "DATA/"))]
+    written = [w for w in written if not w.startswith(NIST_DIRS)]   # NIST pages are downloaded, never kept in the state folder
     save(st, written)
     ok = code == 0 and (written or script in CHECK_ONLY)
     rec = dict(script=script, exit=code, seconds=round(dt), files_written=written, ok=bool(ok),
@@ -179,6 +199,14 @@ def run_stage(n, redo):
     st = state_dir(); check_commit(st)
     print(f"state folder: {st}; restored {restore(st)} output files of earlier scripts")
     stage = next(s for s in STAGES if s[0] == n)
+    if any(s.split()[0] in NEEDS_NIST for s, _ in stage[3]):
+        # the NIST WebBook pages are not redistributed and this runner never downloads them: it copies them
+        # from the private cache filled by the explicit download cell of notebook 01, then checks them
+        nist = os.path.join(REPO, "external", "nist_pages.py")
+        code = subprocess.run([sys.executable, nist, "--cache", nist_cache()]).returncode
+        if code != 0:
+            sys.exit("This stage reads the NIST WebBook pages. Run the download cell of notebook 01 first "
+                     f"(python3 external/nist_pages.py --download --cache {nist_cache()}), then this stage again.")
     print(f"Stage {n}: {stage[2]}  ({len(stage[3])} scripts, about {sum(m for _, m in stage[3])} lab minutes)")
     bad = 0
     for script, _ in stage[3]:
