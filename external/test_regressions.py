@@ -213,6 +213,8 @@ class RegressionTests(unittest.TestCase):
             B.inner_loo_rmse_all = orig
         self.assertEqual(k, 1); self.assertTrue(np.isfinite(pred))
 
+    @unittest.skipUnless((Path(BD.HERE) / "nist_raw" / "C500006531.html").exists(),
+                         "NIST WebBook pages not downloaded (python3 external/nist_pages.py --download)")
     def test_missing_grouped_archive_fails(self):
         """A missing archived NIST page must stop the boiling-point data build
         (skipping it silently admitted 3-ethyl-4-methylhexane: 101 molecules)."""

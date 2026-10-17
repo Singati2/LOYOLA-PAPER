@@ -16,6 +16,45 @@ part of `python3 verify.py`, fails if any copy differs from its source.
 | `boiling_points_provenance.csv` | | included and excluded molecules with the rule and all NIST determinations | Section 6.4 |
 | `calorimetric_dHvap298_alkanes.csv` | | alkanes with calorimetric ΔH_vap(298 K) on the NIST WebBook (data-availability check for a future test). Built from the curated index `../external/bp/nist_alkanes_skeletons_audit.csv` (C4 to C16, retrieved 2026-10-03); phase-change pages outside C6 to C10 are not archived, so this census is reproducible from the curated index, not end to end from raw pages | Supplementary Section S9 |
 
+Third-party values and licence
+
+* The MIT licence of the repository covers its code and text. It does not cover the property values
+  taken from third-party sources, which remain under the terms of those sources and are used here,
+  with attribution, for verification of the paper: the NIST Chemistry WebBook (NIST Standard
+  Reference Database 69), the published compilations cited in the paper, and the Korea
+  Thermophysical Properties Data Bank (KDB) as shown on Cheméo (https://www.chemeo.com).
+* Complete NIST Chemistry WebBook pages (NIST Standard Reference Database 69) are not redistributed.
+  NIST states that its Standard Reference Data are copyrighted by the U.S. Secretary of Commerce and
+  may not be reproduced, stored in a retrieval system or transmitted without prior permission
+  (https://www.nist.gov/srd/public-law, consulted 2026-10-17). The data builds read 262 pages (154
+  under `../external/bp/nist_raw`, 17 under `../external/bp/nist_hvap_pts`, 91 under
+  `../external/nonane_raw_nist`). Nothing downloads them automatically; `verify.py --offline` and CI
+  run without them. `python3 ../external/nist_pages.py --download` retrieves them from the WebBook
+  for the user's own use (one request per second) and checks each against the SHA-256 of the copy
+  from which the committed data sets were built (`../external/nist_pages.csv` lists URL, archive date
+  and digest). The repository keeps the values extracted from those pages, each with its WebBook URL;
+  see `../audit/NIST_REDISTRIBUTION_AUDIT.md` for what they contain and what remains open. The pages
+  were tracked in commits up to v40.31 (`2158b72`) and removed from the tracked tree after it; the
+  history was not rewritten, so the earlier commits still contain them.
+* Cheméo's terms (https://www.chemeo.com/tos, consulted 2026-10-16) permit value-by-value use with
+  the citation "Cheméo, chemical and physical properties (https://www.chemeo.com)" and forbid bulk
+  download or inclusion of the database as-is. The KDB terms could not be retrieved (the CHERIC site
+  did not serve them on 2026-10-16). The KDB/Cheméo footprint of the repository is:
+  - `octane_provenance.csv` and its byte-identical copy `../octane_property_provenance_v35.csv`:
+    the 18 octane acentric-factor rows (source column: KDB via Cheméo) and 25 further rows
+    (T_B 9, ΔH_f 3, ΔH_vap 4, S 9) that cite KDB or Cheméo as a comparison value or as a source
+    consulted that lacks the value;
+  - `../source_sensitivity.py`: two hard-coded KDB acentric factors (0.303 for
+    2,2,4-trimethylpentane, 0.251 for 2,2,3,3-tetramethylbutane);
+  - `../audit/final/scripts/audit_calc.py`: the KDB critical constants of 2,2,3,3-tetramethylbutane
+    (Tc 567.8 K, Pc 28.7 bar);
+  - `../supplement.tex` (and its copies under `../LOYOLA_SUPPLEMENT_OVERLEAF` and
+    `../LOYOLA_FINAL_PAPER_OVERLEAF`): three KDB comparison numbers (0.251, stated twice, and 0.303),
+    plus the differences from KDB (0.002 to 0.004) derived from them and the statement that the
+    remaining acentric factors agree with KDB to within 0.005.
+* Redistribution terms for the KDB/Cheméo values and the NIST pages are not yet settled, so no
+  archive (Zenodo or other) should be made from this repository until they are.
+
 Notes
 
 * 2,2,3,3-tetramethylbutane: the benchmark ΔH_vap = 8.41 kcal/mol has no stated source

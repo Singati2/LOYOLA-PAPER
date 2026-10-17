@@ -22,7 +22,10 @@ def main():
             continue
         expected = B.inchi_tree(row['skel'], n)
         for cid in row['ids'].split():
-            page = (ROOT / 'external/bp/nist_raw' / f'{cid}.html').read_text(errors='replace')
+            path = ROOT / 'external/bp/nist_raw' / f'{cid}.html'
+            if not path.exists():
+                raise SystemExit(f'missing {path} (the NIST pages are not redistributed: python3 external/nist_pages.py --download retrieves them)')
+            page = path.read_text(errors='replace')
             match = re.search(r'<span class="inchi-text">(.*?)</span>', page, re.S)
             if not match:
                 raise AssertionError(f'{cid}: missing archived InChI')

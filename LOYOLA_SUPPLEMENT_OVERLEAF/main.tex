@@ -184,7 +184,7 @@ $\Delta H_{\mathrm{vap}}$, the entropy $S$ and the acentric factor
 $\omega$. The property data were traced to the NIST
 WebBook~\cite{NISTWebBook}, and for each value the provenance file
 records the WebBook entry or, where the WebBook lists no value, the
-compilation consulted. Acentric factors, which NIST does not list, are the exception. They are compiled values whose original source we could not identify, and they agree with the KDB values and with the octane set reproduced in~\cite{Ediz2017Octane} to within $0.005$, except for 2,2,3,3-tetramethylbutane ($0.247$ against $0.251$ and $0.255$). Agreement with a secondary compilation is not independent experimental confirmation when both sources derive from the same underlying measurement. Most $\Delta H_f$ values rest on one combustion study and most $\Delta H_{\mathrm{vap}}$ values on one calorimetric study, as recorded with the number of independent determinations behind each value in the claim provenance ledger of the reproducibility package.
+compilation consulted. Acentric factors, which NIST does not list, are the exception. They are compiled values whose original source we could not identify. They agree with the values of the Korea Thermophysical Properties Data Bank (KDB)~\cite{KDB}, consulted through Chem\'eo~\cite{Chemeo}, and with the octane set reproduced in~\cite{Ediz2017Octane} to within $0.005$, except for 2,2,3,3-tetramethylbutane ($0.247$ against $0.251$ and $0.255$). Agreement with a secondary compilation is not independent experimental confirmation when both sources derive from the same underlying measurement. Most $\Delta H_f$ values rest on one combustion study and most $\Delta H_{\mathrm{vap}}$ values on one calorimetric study, as recorded with the number of independent determinations behind each value in the claim provenance ledger of the reproducibility package.
 The same five properties form the octane benchmark used
 in~\cite{MovahediGutmanRedzepovicFurtula2026}. $T_B$ is in
 $^{\circ}$C, $\Delta H_f$ and $\Delta H_{\mathrm{vap}}$ are in
@@ -564,8 +564,8 @@ nonane value was collected. The identical nested design was applied to
 the $35$ constitutional nonane isomers. Boiling points ($35$ values) and
 standard vaporisation enthalpies ($34$ values, none being listed for
 3-ethyl-4-methylhexane) were taken from the NIST
-WebBook~\cite{NISTWebBook}, with every value traced to its archived
-source page. The two properties differ in evidential status. Twenty of
+WebBook~\cite{NISTWebBook}, with every value traced to its WebBook
+source page (retrieved on 3 October 2026). The two properties differ in evidential status. Twenty of
 the $35$ boiling points are NIST averages of experimental
 determinations ($13$ quoted only to $1$\,K). Five are single NIST
 determinations and ten are the most recent primary determination listed
@@ -610,7 +610,7 @@ outlier, $414.62$~K. LO is then better in $60/100$ and $66/100$ seeds,
 with median $\Delta Q^2 = +0.041$ and $+0.052$. The pre-registered
 protocol fixed the box of half-width $2$, which, as
 Table~\ref{tab:box} shows, binds the parent. In a box that does not, the nonane gain
-disappears (median $\Delta Q^2 = -0.002$ under the hybrid control), and
+shrinks to about zero (median $\Delta Q^2 = -0.002$ under the hybrid control), and
 the pre-registered verdict is reported as obtained, with this deviation
 recorded. The pattern behind the vaporisation result is the same on
 both sets. Models whose edge weight depends on imbalance only through
@@ -632,7 +632,7 @@ the claim. Ridge regression on the full degree-pair count vector
 predicts the nonanes better than every index model, for both
 properties ($Q^2 = 0.927$ for $\Delta H_{\mathrm{vap}}$, $0.682$ for
 $T_B$). On the octanes it matches the Loyola model on
-$\Delta H_{\mathrm{vap}}$ and is weaker elsewhere. This is consistent with Proposition~4.1 of the main paper and the observation preceding it that every vertex-degree-based index is a function of the edge-degree-pair counts. The imbalance coordinate re-weights degree-pair
+$\Delta H_{\mathrm{vap}}$ and is weaker elsewhere. This is consistent with Proposition~7 of the main paper and the observation preceding it that every vertex-degree-based index is a function of the edge-degree-pair counts. The imbalance coordinate re-weights degree-pair
 information rather than adding to it, and one interpretable descriptor
 recovers most of what a model on all ten degree-pair counts achieves
 for the vaporisation enthalpy. It does not outperform such a model. The
@@ -696,7 +696,7 @@ among the lowest of all compared indices and tied with $R$, $GA$
 and $AG$. The $106$ trees realise only $79$ distinct
 edge-degree-pair count vectors, so $25.5\%$ is the minimum degeneracy
 attainable by \emph{any} degree-pair-based index on this set, and the
-pure-$\gamma$ points attain this floor. Theorem~3.5 of the main paper
+pure-$\gamma$ points attain this floor. Theorem~2 of the main paper
 gives the reason and the order at which this stops. The first
 Zagreb index $LO(0, 1, 0)$ ($83.0\%$) and the second Zagreb index
 $LO(1, 0, 0)$ ($67.0\%$) are the most degenerate
@@ -717,7 +717,7 @@ pure-$\gamma$ points attain the degree-pair-profile floor at
 \emph{every} order in both sets. The Randi\'c index also attains the
 floor at every order in this range, while $\chi$ falls off the floor
 from order $10$. Floor attainment therefore distinguishes the pure-$\gamma$ points from the most degenerate classical indices ($M_1$, $M_2$) but not from $R$.
-Theorem~3.5 of the main paper turns this into an exact statement. The
+Theorem~2 of the main paper turns this into an exact statement. The
 pure-$\gamma$ points separate precisely the $q$-histograms, which
 coincide with the degree-pair profiles up to order $12$ (order $15$ for
 $\Delta \le 4$) and not beyond. Among the trees of order $13$ the
@@ -861,7 +861,7 @@ bounds, the Cauchy--Schwarz interpolation bound, and the summation step
 of the ratio and bracket bounds, with the per-edge bounds as
 hypotheses. They also include the convexity of log-sum-exp for any
 nonempty index set (via H\"older), which is $\log LO(G;\theta)$ by
-Eq.~(3.1) of the main paper (that rewriting is not formalised), and the
+Eq.~(3) of the main paper (that rewriting is not formalised), and the
 spanning statement of the independence lemma for
 every $\Delta \ge 3$ (via $\det W = \tfrac16\ln 2\,(8\ln 3 - 13\ln 2)
 \neq 0$, using $3^8 \neq 2^{13}$). The identity
@@ -882,7 +882,7 @@ exponential-family theory, none of which is in Mathlib. All
 statistical and chemometric results are outside the formalisation, as
 are the closed forms, the extremal-tree proposition and the
 ceiling and generic-discrimination propositions. The identifiability
-consequence of Lemma~3.1 together with its $\Delta = 1, 2$ cases is
+consequence of Lemma~1 together with its $\Delta = 1, 2$ cases is
 also not formalised. A statement-by-statement map is the file
 \texttt{LEAN\_VERIFICATION.md} of the repository (the encoding is
 described in \texttt{formal/README.md}).
@@ -1120,6 +1120,9 @@ non. $\Delta H_{\mathrm{vap}}$ & $-0.062$ & $0.857$ & $0.897$ & $0.927$ & $0.903
   degree-based topological index: Hyperbolic Sombor index, \textit{MATCH
   Commun. Math. Comput. Chem.\/} \textbf{95} (2026) 63--94.
 
+  \bibitem{Chemeo} Chem\'eo, chemical and physical properties,
+  \url{https://www.chemeo.com}.
+
   \bibitem{Ediz2017Octane}
   S. Ediz, Predicting some physicochemical properties of octane isomers:
   a topological approach using ev-degree and ve-degree Zagreb indices,
@@ -1128,6 +1131,9 @@ non. $\Delta H_{\mathrm{vap}}$ & $-0.062$ & $0.857$ & $0.897$ & $0.927$ & $0.903
   \bibitem{FurtulaGutmanDehmer2013SS} B. Furtula, I. Gutman, M. Dehmer, On
   structure-sensitivity of degree-based topological indices, \textit{Appl.
   Math. Comput.\/} \textbf{219} (2013) 8973--8978.
+
+  \bibitem{KDB} Korea Thermophysical Properties Data Bank (KDB), Chemical
+  Engineering Research Information Center (CHERIC), Korea.
 
   \bibitem{Konstantinova1996Degeneracy} E. V. Konstantinova, The
   discrimination ability of some topological and information distance indices

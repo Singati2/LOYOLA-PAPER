@@ -1,12 +1,12 @@
-[REJECTED] prose: a prose numeral changed: exit 1; prose numbers: 733 checked, 1 failures, 20 uncheckable (cited values; see UNCHECKABLE in the registries)
-[REJECTED] prose: a registered sentence reworded: exit 1; prose numbers: 733 checked, 1 failures, 20 uncheckable (cited values; see UNCHECKABLE in the registries)
+[REJECTED] prose: a prose numeral changed: exit 1; prose numbers: 756 checked, 1 failures, 22 uncheckable (cited values; see UNCHECKABLE in the registries)
+[REJECTED] prose: a registered sentence reworded: exit 1; prose numbers: 756 checked, 1 failures, 22 uncheckable (cited values; see UNCHECKABLE in the registries)
 [REJECTED] auxiliary outputs: fractional-point output corrupted: exit 1; AssertionError: fresh output differs: structural/fractional_points_out.txt
 [REJECTED] auxiliary outputs: calorimetric CSV corrupted: exit 1; AssertionError: fresh output differs: external/bp/calorimetric_dHvap298_alkanes.csv
 [REJECTED] source identities: two decane skeletons swapped: exit 1; AssertionError: C124185: carbon skeleton differs from dataset record
 [REJECTED] 32-digit recount: an S1 count altered: exit 1; RESULT: 1 MISMATCHES
 [REJECTED] manifest: a tracked file modified: exit 1; octane_data.py: hash mismatch
 [REJECTED] coverage bias: a decane provenance row removed: exit 1; coverage_bias: no unique provenance status for Decane (C124185): set()
-[REJECTED] data build: archived page removed: exit 1; FileNotFoundError: missing required archived NIST page: /private/var/folders/mg/gcsbnhm17pbf51dr77g3t9k80000gn
+[REJECTED] data build: archived page removed: exit 1; FileNotFoundError: missing required archived NIST page: /tmp/loyola_attack_c97xeo10/external/bp/nist_raw/C5000
 [REJECTED] constancy check: a constant descriptor injected: exit 1; RESULT: DIFFERENCES FOUND
 [REJECTED] regression tests: silent skip of a missing page restored: exit 1; FAILED (failures=1)
 [REJECTED] regression tests: structural certificate check disabled: exit 1; FAILED (failures=1)

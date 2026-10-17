@@ -20,14 +20,25 @@
                                structural/structural_checks.py, structural/hp_counts.py
                                verify_loyola_v35.py --selftest
                                audit/attack_checks.py      (13 counter-attacks on the newer checkers)
-                               audit/check_labels.py       (labels, references, captions, cross-document numbering; needs tectonic)
+                               audit/check_labels.py       (labels, references, captions, cross-document numbering; needs pdflatex or tectonic)
                                formal/verify.sh (if a Lean toolchain is installed)
   python3 verify.py --everything   also audit/run_all_scripts.py: every script of the
                                repository re-run in an isolated copy and every file it
                                writes compared with the committed one (about two hours)
 
+NIST WebBook pages. The checks marked [NIST] below read the NIST WebBook pages, which are not
+redistributed with the repository and are never downloaded by this script. Retrieve them once with
+`python3 external/nist_pages.py --download` (explicit, one request per second); the script then
+checks each against its archived digest. Without them:
+  python3 verify.py --offline   runs every other check and reports the [NIST] checks as NOT RUN
+                                (exit 0 if everything run passes; this is what CI runs)
+  python3 verify.py             without --offline, missing pages make the run INCOMPLETE (exit 3)
+[NIST] checks: archived-source identities, auxiliary outputs (it rebuilds the calorimetric census),
+external regression tests (one test), external verifier,
+counter-attacks on the checkers, every script replayed in isolation.
+
 Each step is run as a subprocess; the exit status is 0 iff every step exits 0 and no stage was
-skipped. With --full or --everything, a missing tectonic or lake skips that stage, the run ends
+skipped. With --full or --everything, a missing TeX engine (pdflatex or tectonic) or lake skips that stage, the run ends
 "INCOMPLETE" and exits with status 3; --allow-skip accepts the skips (exit 0, still INCOMPLETE).
 See REPRODUCE.md for what each suite covers.
 """
@@ -76,9 +87,13 @@ FULL = [
     ("external verifier", [PY, "verify_external.py"], os.path.join(HERE, "external")),
     ("structural checks", [PY, "structural_checks.py"], os.path.join(HERE, "structural")),
     ("32-digit recount", [PY, "hp_counts.py"], os.path.join(HERE, "structural")),
+    ("exact tie certificate", [PY, "exact_ties.py"], os.path.join(HERE, "structural")),
     ("verifier self-test", [PY, "verify_loyola_v35.py", "--selftest"], HERE),
     ("counter-attacks on the checkers", [PY, os.path.join("audit", "attack_checks.py")], HERE),
 ]
+# steps that read the NIST WebBook pages (see the docstring); test_regressions skips its one page test itself
+NEEDS_NIST = {"archived-source identities", "auxiliary outputs", "external verifier", "counter-attacks on the checkers",
+              "every script replayed in isolation"}
 EVERYTHING = [
     ("every script replayed in isolation", [PY, os.path.join("audit", "run_all_scripts.py")], HERE),
 ]
@@ -100,17 +115,34 @@ def main():
     if "--full" in sys.argv or "--everything" in sys.argv:
         steps += FULL
     if "--full" in sys.argv or "--everything" in sys.argv:
-        if shutil.which("tectonic"):
+        if shutil.which("pdflatex") or shutil.which("tectonic"):
             steps.append(("labels and references", [PY, os.path.join("audit", "check_labels.py")], HERE))
         else:
-            print("[SKIP] labels and references: no tectonic on PATH"); skipped.append("labels and references")
+            print("[SKIP] labels and references: neither pdflatex nor tectonic on PATH"); skipped.append("labels and references")
         if shutil.which("lake"):
             steps.append(("Lean proofs", ["bash", "verify.sh"], os.path.join(HERE, "formal")))
         else:
             print("[SKIP] Lean proofs: no Lean toolchain (lake) on PATH"); skipped.append("Lean proofs")
     if "--everything" in sys.argv:
         steps += EVERYTHING
-    ok = all([run(*s) for s in steps] + [check_csv_conventions()])
+    sys.path.insert(0, os.path.join(HERE, "external"))
+    import nist_pages
+    same, changed, missing = nist_pages.status()
+    pages_ok = True
+    if changed or (missing and same):
+        print(f"[FAIL] NIST WebBook pages: {len(same)} identical, {len(changed)} changed, {len(missing)} missing "
+              "(python3 external/nist_pages.py shows which)"); pages_ok = False
+    elif missing:
+        tag = "NOT RUN" if "--offline" in sys.argv else "SKIP"
+        print(f"[{tag}] NIST WebBook pages not downloaded (not redistributed; python3 external/nist_pages.py --download). "
+              f"Not run: {', '.join(n for n, _, _ in steps if n in NEEDS_NIST)}; external regression tests skip one test")
+        not_run = [s for s in steps if s[0] in NEEDS_NIST]
+        steps = [s for s in steps if s[0] not in NEEDS_NIST]
+        if "--offline" not in sys.argv:
+            skipped += [s[0] for s in not_run]
+    else:
+        print(f"[PASS] NIST WebBook pages: all {len(same)} present and identical to the archived versions")
+    ok = all([run(*s) for s in steps] + [check_csv_conventions()]) and pages_ok
     mode = "everything" if "--everything" in sys.argv else "full" if "--full" in sys.argv else "fast path"
     if not ok:
         print("FAILURES")
@@ -119,6 +151,8 @@ def main():
         # exit status 3 unless the caller accepts the skips explicitly (--allow-skip), so that a script
         # or CI job testing the exit status cannot mistake an incomplete run for a complete one
         return 0 if "--allow-skip" in sys.argv else 3
+    elif missing and "--offline" in sys.argv:
+        print(f"ALL PASS ({mode}, offline: the checks that read the NIST WebBook pages were NOT RUN)")
     else:
         print(f"ALL PASS ({mode})")
     return 0 if ok else 1

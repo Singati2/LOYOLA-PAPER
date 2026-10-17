@@ -19,10 +19,15 @@ git clone https://github.com/Singati2/LOYOLA-PAPER.git && cd LOYOLA-PAPER
 git checkout v40.30        # the submission revision, once tagged
 python3 -m venv .venv && . .venv/bin/activate
 python -m pip install -r requirements-lock.txt          # exact versions behind the committed outputs
-python verify.py                                         # fast path, about 6 to 30 minutes
+python verify.py --offline                               # fast path, about 6 to 30 minutes
 ```
 
-The last line is `ALL PASS (fast path)` or `FAILURES`. The scripts were run on Python 3.13; CI uses
+The 262 NIST WebBook pages that the data builds read are not redistributed (NIST SRD 69 is
+copyrighted). Without them, run `python verify.py --offline`: the checks that read the pages are
+reported as NOT RUN, everything else runs. To run those checks too, retrieve the pages first with
+`python external/nist_pages.py --download` (about 5 minutes, one request per second); each page is
+checked against the digest of the copy the data sets were built from. The last line is
+`ALL PASS (fast path)`, `ALL PASS (fast path, offline: ...)`, `INCOMPLETE` or `FAILURES`. The scripts were run on Python 3.13; CI uses
 Python 3.13 on Ubuntu.
 
 ## Notebooks
@@ -37,7 +42,7 @@ any of them differ. Each step is labelled with one of three kinds:
 | Notebook | Covers | Runtime (laptop CPU) | Colab (after tagging) |
 |---|---|---|---|
 | `01_data.ipynb` | datasets, DATA/ copies, provenance counts (39 agreement, 8 cannot verify) | seconds | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/v40.30/notebooks/01_data.ipynb) |
-| `02_mathematics.ipynb` | Lemma 3.1, the colliding trees of orders 13 and 16, Example 4.4, certificates | under 1 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/v40.30/notebooks/02_mathematics.ipynb) |
+| `02_mathematics.ipynb` | Lemma 1, the colliding trees of orders 13 and 16, Example 2, certificates | under 1 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/v40.30/notebooks/02_mathematics.ipynb) |
 | `03_degeneracy.ipynb` | Table 2 and the degeneracy counts, by full tree enumeration | 1 to 5 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/v40.30/notebooks/03_degeneracy.ipynb) |
 | `04_octane_correlations.ipynb` | all 60 correlations of Table 4; tetramethylbutane audit | seconds | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/v40.30/notebooks/04_octane_correlations.ipynb) |
 | `05_boiling_points.ipynb` | Table 5 baselines and the 200-permutation check. `RUN_SLOW = True` regenerates the 50-seed medians (about 1 h) and the resampling (about 3.5 h) | about 5 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/v40.30/notebooks/05_boiling_points.ipynb) |

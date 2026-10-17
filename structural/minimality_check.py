@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Minimality certificate for Theorem 3.5(iii): exhaustive over ALL tree orders 2-16.
+"""Minimality certificate for Theorem 2(iii): exhaustive over ALL tree orders 2-16.
 
   python3 structural/minimality_check.py   (about one minute)
 

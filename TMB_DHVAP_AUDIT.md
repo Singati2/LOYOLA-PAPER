@@ -8,7 +8,7 @@ unchanged in the paper; the alternatives are sensitivity analyses only.
 
 ## 1. Phase behaviour
 
-* NIST WebBook (archived copy: `external/bp/nist_raw/C594821.html`): triple point
+* NIST WebBook (`external/bp/nist_raw/C594821.html`, downloaded by `external/nist_pages.py`): triple point
   373.97 K (Scott, Douslin et al. 1952), T_boil 379.6 K, T_fus 374 K.
   TMB is therefore crystalline at 298 K. A liquid at 298 K exists only as a
   hypothetical supercooled state.

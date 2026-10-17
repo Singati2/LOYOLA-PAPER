@@ -1,8 +1,9 @@
 """Rebuild nonane_data.csv / nonane_provenance.csv / nonane_identity.csv from the NIST WebBook
-pages archived in nonane_raw_nist/ (fetched 2026-10-03 with curl). No values are typed by hand."""
+pages in nonane_raw_nist/ (fetched 2026-10-03 with curl; not redistributed, downloaded by nist_pages.py). No values are typed by hand."""
 import re,html,json,csv,os
 D=os.path.dirname(os.path.abspath(__file__))+'/'
 RAW=D+'nonane_raw_nist/'
+if not os.path.isdir(RAW): raise SystemExit('missing '+RAW+' (the NIST pages are not redistributed: python3 external/nist_pages.py --download retrieves them)')
 from decimal import Decimal,ROUND_HALF_UP
 def clean(s): return re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]+>','',s))).strip()
 iso=[l.split('\t') for l in '''nonane	CCCCCCCCC

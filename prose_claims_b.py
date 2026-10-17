@@ -238,6 +238,20 @@ def frac_orders():
     return sorted(_frac()["profiles"])
 
 
+
+def exact_orders():
+    """v40.31: tree orders covered by structural/exact_ties_out.txt."""
+    import re as _re
+    return sorted({int(m) for m in _re.findall(r"^n=(\d+) all", open(os.path.join(ROOT, "structural", "exact_ties_out.txt")).read(), _re.M)})
+
+
+def ga_first_qmerge_order():
+    """v40.31: smallest tree order (all trees) at which GA merges two distinct q-histograms, from
+    structural/exact_ties_out.txt."""
+    import re as _re
+    return min(int(n) for n, k in _re.findall(r"^n=(\d+) all .*?GA_qmerges=(\d+)", open(os.path.join(ROOT, "structural", "exact_ties_out.txt")).read(), _re.M) if int(k) > 0)
+
+
 def frac_npoints():
     return len({(a, b) for (n, a, b, g) in _frac()["counts"]})
 
@@ -694,7 +708,7 @@ for _k, (_pair, _slot) in enumerate([((1, 4), 0), ((2, 2), 1), ((2, 4), 2)]):
     _add(E("rp_mol16_B_%d%d" % _pair, "main", _M16B % tuple(_f), "mol16_pair()[1][%r]" % (_pair,), 0,
            "enumeration: order-16 Delta<=4 collision (profile containing (2,2))"))  # 1 each
 _add(E("rp_proof_d4", "main", r"realises\s+\$\(2,(?P<v>\d+)\)\$,\s+\$\(2,2\)\$", "common_leaf_degree(*mol16_pair())", 0, "smallest common leaf-neighbour degree of the order-16 pair"))  # 1
-_add(E("rp_enum_to17", "main", r"orders\s+\$2\$\-\-\$(?P<v>\d+)\$,\s+two", "max(s1_orders('all'))", 0, "S1 orders"))  # 1
+_add(E("rp_enum_to17", "main", r"orders\s+\$2\$\-\-\$(?P<v>\d+)\$\s+in\s+exact", "max(s1_orders('all'))", 0, "S1 orders"))  # 1
 _add(E("rp_coincide_12", "main", r"most\s+\$(?P<v>\d+)\$\s+with", "s1_last_eq('all')", 0, "S1: last n with qhist==profiles (all)"))  # 1
 _add(E("rp_coincide_15", "main", r"of order at most\s+\$(?P<v>\d+)\$\.\s+With part", "s1_last_eq('mol')", 0, "S1: last n with qhist==profiles (mol)"))  # 1
 _add(E("rp_orders13", "main", r"at orders \$(?P<v>\d+)\$--\$17\$, generic points", "s1_first_below('all', 'qh')", 0, "S1"))  # 1
@@ -785,7 +799,9 @@ _add(E("deg_R_order13", "main", r"\$R\$ still\s+attains the floor at order \$(?P
 _add(E("deg_R_570", "main", r"\$13\$\s+\(\$(?P<v>[+-]?[\d.]+)\$\s+values\)", "s1(13, 'all')['R']", 0, "S1 n=13 R"))  # 1
 # Table 2 caption and cells
 _add(E("ff_cap_11", "main", r"at\s+\$(?P<v>\d+)\$\s+significant", "sc_sigdigits()", 0, "structural_checks.py key() format"))  # 1
-_add(E("ff_cap_below7", "main", r"below\s+\$(?P<v>\d+)\$\s+were", "min(s1_orders('all'))", 0, "S1"))  # 1
+_add(E("ff_cap_below7", "main", r"Orders\s+\$(?P<v>\d+)\$\s+to\s+\$17\$\s+were\s+examined", "min(exact_orders())", 0, "structural/exact_ties_out.txt (v40.31)"))
+_add(E("ff_cap_to17", "main", r"Orders\s+\$2\$\s+to\s+\$(?P<v>\d+)\$\s+were\s+examined", "max(exact_orders())", 0, "structural/exact_ties_out.txt (v40.31)"))  # 1
+_add(E("ff_cap_ga17", "main", r"merge\s+of\s+\$GA\$\s+at\s+order\s+\$(?P<v>\d+)\$", "ga_first_qmerge_order()", 0, "structural/exact_ties_out.txt first n with GA_qmerges>0 (v40.31)"))
 _add(E("ff_LO_all_n", "main", r"\\gamma\)\$ & \$(?P<v>\d+)\$ \(\$566/570\$\) & never", "s1_first_below('all', 'LO1')", 0, "S1"))  # 1
 _add(E("ff_LO_all_v", "main", r"\\gamma\)\$ & \$13\$ \(\$(?P<v>\d+)/570\$\) & never", "s1(13, 'all')['LO1']", 0, "S1"))  # 1
 _add(E("ff_LO_all_p", "main", r"\\gamma\)\$ & \$13\$ \(\$566/(?P<v>\d+)\$\) & never", "s1(13, 'all')['prof']", 0, "S1"))  # 1
@@ -822,8 +838,8 @@ _add(E("off_4007", "main", r"from\ \$(?P<v>[+-]?[\d.]+)\$\ to\ \$4068\$\ as\ \$\
 _add(E("off_4068", "main", r"\$4007\$\s+to\s+\$(?P<v>[+-]?[\d.]+)\$\s+as\s+\$\\gamma\$", "frac_count(16, -0.5, 0, 1)", 0, "fractional_points_out.txt"))  # 1
 _add(E("off_3996", "main", r"unaffected\s+\(\$(?P<v>\d+)\$\s+in", "frac_ratio_plane_count(16)", 0, "fractional_points_out.txt (0.5,-1) and (-0.5,1), both gammas"))  # 1
 _add(E("off_generic_4069", "main", r"all\s+\$(?P<v>\d+)\$\s+profiles", "distinct_count(16, 0.3, 0.2, 0)", 0, "enumeration of order-16 trees, 11 significant digits"))  # 1
-_add(E("off_orders12", "main", r"orders\s+\$(?P<v>\d+)\$\-\-\$16\$\s+but", "min(frac_orders())", 0, "fractional_points_out.txt"))  # 1
-_add(E("off_orders16", "main", r"orders\s+\$12\$\-\-\$(?P<v>\d+)\$\s+but", "max(frac_orders())", 0, "fractional_points_out.txt"))  # 1
+_add(E("off_orders12", "main", r"orders\s+\$(?P<v>\d+)\$\-\-\$16\$\s+\(at", "min(frac_orders())", 0, "fractional_points_out.txt"))  # 1
+_add(E("off_orders16", "main", r"orders\s+\$12\$\-\-\$(?P<v>\d+)\$\s+\(at", "max(frac_orders())", 0, "fractional_points_out.txt"))  # 1
 # structure sensitivity (main)
 _add(E("ss_75", "main", r"published protocol on the \$(?P<v>\d+)\$ decane isomer", "mod(10, 'molecular')['N_trees']", 0, "multi_order_degeneracy.csv n=10 molecular"))  # 1
 _add(E("ss_eleven", "main", r"Das\~\\cite\{BarmanDas2026HSO\},\s+with\s+(?P<v>[a-z]+)\s+of\s+fourteen", "word(control_count('exact_at_4dp'))", 0, "fgd_published_control.csv"))  # 1
@@ -992,6 +1008,8 @@ _add(E("cr_root2r", "main", r"\\approx\s+-17\.2\$,\s+\$(?P<v>-?\d+\.\d)\$,", "ro
 _add(E("cr_root3r", "main", r"\$-12\.0\$, \$(?P<v>-?\d+\.\d)\$, \$2\.7\$", "round(s3()['roots'][2], 1)", 0.05, "S3 certificate roots, 1 dp"))
 _add(E("cr_root4r", "main", r"\$-2\.0\$, \$(?P<v>-?\d+\.\d)\$ and \$31\.1\$", "round(s3()['roots'][3], 1)", 0.05, "S3 certificate roots, 1 dp"))
 _add(E("cr_root5r", "main", r"and\s+\$(?P<v>-?\d+\.\d)\$,\s+which\s+are", "round(s3()['roots'][4], 1)", 0.05, "S3 certificate roots, 1 dp"))
+_add(E("sh_edv_411", "main", r"vector\s+\$\((?P<v>4),1,1\)\$\s+have", None, 0, "UNCHECKABLE here: example from Song and Huang (2023), Prop. 5.2; independently re-derived for the v40.31 change report"))
+_add(E("sh_order10", "main", r"all\s+such\s+trees\s+of\s+order\s+at\s+most\s+\$(?P<v>\d+)\$", None, 0, "UNCHECKABLE: cited result of Song and Huang (2023), Remark 5.1"))
 UNCHECKABLE = [e["id"] for e in REGISTRY if e["expected"] is None]
 # app_oct_S_ediz, app_22DMH_S_ediz, app_224TMP_S_ediz: values of the Ediz (2017) compilation, cited, not held in the repository.
 

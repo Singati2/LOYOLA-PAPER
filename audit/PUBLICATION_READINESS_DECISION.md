@@ -1,5 +1,10 @@
 # Publication readiness decision: v40.30 (branch `audit/v4030-adversarial`)
 
+> **Superseded in part (v40.31).** Four points below were corrected after a full reading of the sources:
+> Song and Huang (2023) is a distance-type result and no novelty threat; `\date{\today}` is the MATCH
+> template's own setting; retitling is not needed; the Table 2 ties are now certified exactly. See
+> `audit/V4031_REVISION_REPORT.md`, Section 7, on branch `revision/v40.31-scientific`.
+
 Date: 2026-10-16. Manuscript as of `2732099` (unchanged through `36ab0d5`). Target: MATCH Commun. Math.
 Comput. Chem. Sources: the lab run in `verification_logs/lab_09ceba8/`, three independent read-only
 reviews written for this report (mathematics, statistics, novelty and journal fit), and spot checks of

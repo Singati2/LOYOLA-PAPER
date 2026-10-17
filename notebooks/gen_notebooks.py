@@ -133,8 +133,8 @@ print(open("TMB_DHVAP_AUDIT.md").read()[:1500])'''),
 
 # ---------------------------------------------------------------- 02 mathematics
 nb("02_mathematics.ipynb", "2. The mathematical results (Sections 3 and 4)",
-   "Lemma 3.1, the collision pairs of Theorem 3.5, Example 4.4 and the exhaustive certificates.",
-   [("md", "### Lemma 3.1: the witness determinant without the pair (1,1) [recompute from source]"),
+   "Lemma 1, the collision pairs of Theorem 2, Example 2 and the exhaustive certificates.",
+   [("md", "### Lemma 1: the witness determinant without the pair (1,1) [recompute from source]"),
     ("code", '''from mpmath import mp, mpf, log, matrix, det, exp, sqrt
 mp.dps = 30
 v = lambda i, j: [1, log(i * j), log(i + j), mpf(abs(i - j)) / (i + j)]
@@ -143,7 +143,7 @@ closed = -log(mpf(3) / 2) * log(mpf(2) ** 13 / mpf(3) ** 8) / 6
 check("det of (1,2),(1,3),(2,2),(3,3)", -0.0150, float(d), 5e-5)
 check("closed form -(1/6) ln(3/2) ln(2^13/3^8)", float(d), float(closed), 1e-20)
 check("3^8 != 2^13", True, 3 ** 8 != 2 ** 13)'''),
-    ("md", "### Theorem 3.5(iii): the colliding profiles of orders 13 and 16 [recompute from source; then re-run an experiment: the exhaustive enumeration]"),
+    ("md", "### Theorem 2(iii): the colliding profiles of orders 13 and 16 [recompute from source; then re-run an experiment: the exhaustive enumeration]"),
     ("code", '''from fractions import Fraction
 from collections import Counter
 def qhist(profile):
@@ -164,15 +164,15 @@ print("order-13 histogram:", {str(k): v for k, v in sorted(qhist(T1).items())})'
 m = re.search(r"sharing a q-histogram: (\\d+) \\(all trees\\), (\\d+)", out)
 check("first collision order, all trees (orders 2-16 enumerated)", 13, int(m.group(1)))
 check("first collision order, max degree 4", 16, int(m.group(2)))'''),
-    ("md", "### Example 4.4: the sum-connectivity pair of Rada, Rodriguez and Sigarreta (2022) [recompute from source; re-run an experiment]"),
+    ("md", "### Example 2: the sum-connectivity pair of Rada, Rodriguez and Sigarreta (2022) [recompute from source; re-run an experiment]"),
     ("code", '''D = lambda g: 3 * (exp(g / 2) - 1) - 4 / sqrt(5) * (exp(3 * g / 5) - exp(g / 5)) + 4 / sqrt(6) * (1 - exp(g / 3))
 check("D(0) = chi(S) - chi(T)", 0.0, float(D(0)), 1e-25)
 check("D(1)", 0.2255, float(D(1)), 5e-5)
 check("D(1e-6)", 2.4e-7, float(D(mpf("1e-6"))), 5e-9)
 out = run("python structural/sumconn_pair_check.py", tail=6)
 check("the order-18 trees themselves give the same D(gamma)", True, "RESULT: Example ex:sumconn confirmed" in out)
-check("K4 and K_{1,3} at gamma = ln 4 (Remark 3.9)", 6.0, float(3 * exp(log(4) / 2)), 1e-20)'''),
-    ("md", "### Proposition 5.2 and the interval certificates [re-run an experiment]"),
+check("K4 and K_{1,3} at gamma = ln 4 (remark after Proposition 3)", 6.0, float(3 * exp(log(4) / 2)), 1e-20)'''),
+    ("md", "### Proposition 10 and the interval certificates [re-run an experiment]"),
     ("code", 'run("python structural/extremal_trees_check.py", tail=3)\nrun("python audit/check_mathematics.py", tail=6)'),
     ])
 
@@ -321,8 +321,10 @@ check("pooled median dQ2", 0.001, round(sr.iloc[1].median_dQ2, 3), 0.0006)'''),
 
 # ---------------------------------------------------------------- 06 verification
 nb("06_verification_suite.ipynb", "6. The repository's own verification suite",
-   "Runs `python verify.py` (the fast path, about 6 minutes plus about 1 minute of installation): table and prose "
-   "recomputation, regression tests, certificates and the file manifest. The core verifier also regenerates the "
+   "Runs `python verify.py --offline` (the fast path, about 6 minutes plus about 1 minute of installation): table and prose "
+   "recomputation, regression tests, certificates and the file manifest. The NIST WebBook pages are not "
+   "redistributed (NIST SRD 69 is copyrighted), so the checks that read them are reported as NOT RUN; "
+   "`python external/nist_pages.py --download` retrieves them for those checks. The core verifier also regenerates the "
    "figures and compares them byte for byte, which needs the exact library versions of `requirements-lock.txt`. "
    "The notebook therefore runs the suite inside a small dedicated environment with those versions, leaving your "
    "own Python installation unchanged. The longer suites are `python verify.py --full` and `--everything`; the "
@@ -334,7 +336,7 @@ if not os.path.exists(py):
     venv.create(env, with_pip=True)
     run(f"{py} -m pip install -q -r requirements-lock.txt", tail=3)
 run(f"{py} -m pip list --format=freeze", tail=20)'''),
-    ("code", '''out = run(f"{py} verify.py", tail=40)
+    ("code", '''out = run(f"{py} verify.py --offline", tail=40)
 check("fast path result", True, "ALL PASS" in out)'''),
     ])
 print("notebooks written to", OUT)

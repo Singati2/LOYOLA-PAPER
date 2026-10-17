@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Build the v40 boiling-point dataset (acyclic alkanes C6-C10) from the
-archived NIST WebBook pages in nist_raw/, applying the rule fixed in
+NIST WebBook pages in nist_raw/ (downloaded by ../nist_pages.py), applying the rule fixed in
 ../PREREG_v40.md:
   1. NIST average (AVG) if given;
   2. else median of non-compilation determinations if their spread <= 3 K;
@@ -113,7 +113,7 @@ def main():
         for cid in a["ids"].split():
             p = os.path.join(HERE, "nist_raw", cid + ".html")
             if not os.path.isfile(p):   # v40.11: a missing archived page must stop the build (silently skipping it changed the cohort from 100 to 101)
-                raise FileNotFoundError(f"missing required archived NIST page: {p}")
+                raise FileNotFoundError(f"missing required archived NIST page: {p} (the NIST pages are not redistributed: python3 external/nist_pages.py --download retrieves them)")
             rows_ = tboil(p)
             if rows_:
                 tb += [r + [cid] for r in rows_]; cids.append(cid)

@@ -1,5 +1,6 @@
 \documentclass[a5paper, 10pt]{article}
 
+
 \usepackage{cite, amsmath, amssymb, booktabs, lastpage, graphicx, float}
 \usepackage[hidelinks]{hyperref}
 
@@ -8,7 +9,9 @@
 
 \usepackage{setspace}
 
+
 \usepackage{amsthm}
+
 %\usepackage[
 %			type={CC},
 %			modifier={by},
@@ -22,66 +25,70 @@
 %\makeatother
 
 \theoremstyle{plain}
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{lemma}[theorem]{Lemma}
-\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{conjecture}{Conjecture}
 \newtheorem{proposition}[theorem]{Proposition}
-\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem*{corollary}{Corollary}
 \renewcommand{\qedsymbol}{\rule{.7em}{.7em}}
 
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
-\newtheorem{example}[theorem]{Example}
-
 \theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
+\newtheorem*{remark}{Remark}
 \newtheorem*{note}{Note}
 \newtheorem{case}{Case}
-\numberwithin{equation}{section}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
 
 %% Changing the title, author, etc.
 \usepackage{graphicx}
 \makeatletter
 \renewcommand{\maketitle}{
-    \begin{center}
+	\begin{center}
     \rule[.2em]{\textwidth}{0.353mm}
-        \begin{minipage}[m]{0.35\textwidth}
-            {\scriptsize
-                \begin{center}
-                    \textsf{\textbf{\huge MATCH}\\
-                        \textit{Communications in Mathematical\\
-                            and in Computer Chemistry}
-                    }
-            \end{center}}
-        \end{minipage}\hfill
-        \begin{minipage}[m]{0.65\textwidth}
-            \begin{flushright}
-                \baselineskip=10pt
-                {\scriptsize\sffamily{\itshape  MATCH Commun. Math. Comput. Chem.}
-                \textbf{\vol{}}
-                (\pubyear)
-                    \thepage--\pageref{LastPage}}\\
-                {\scriptsize\sffamily {\bfseries ISSN:} 0340--6253}\\
-                {\scriptsize\sffamily \textbf{doi:} \doi{10.46793/match.\vol-\num.\id}}
-            \end{flushright}
-        \end{minipage}
-        \rule[1em]{\textwidth}{.353mm}
-        \baselineskip=0.30in
-        {\Large\bfseries \@title} \par
-        \vspace{5mm}
-        \baselineskip=0.2in
-        {\large\bfseries \@author}\par
-        \vspace{1mm}
-        {\it \@address} \par
-        {\small\tt \@email} \par
-        \vspace{3mm}
-        {\small (Received \@date)} \par
-    \end{center}
-    \vspace{3mm}
+		\begin{minipage}[m]{0.35\textwidth}
+			{\scriptsize
+				\begin{center}
+					\textsf{\textbf{\huge MATCH}\\
+						\textit{Communications in Mathematical\\
+							and in Computer Chemistry}
+					}
+			\end{center}}
+		\end{minipage}\hfill
+		\begin{minipage}[m]{0.65\textwidth}
+			\begin{flushright}
+				\baselineskip=10px
+				{\scriptsize\sffamily{\itshape  MATCH Commun. Math. Comput. Chem.}
+				\textbf{\vol{}}
+				(\pubyear)
+					\thepage--\pageref{LastPage}}\\
+				{\scriptsize\sffamily {\bfseries ISSN:} 0340--6253}\\
+				{\scriptsize\sffamily \textbf{doi:} \doi{10.46793/match.\vol-\num.\id}}
+			\end{flushright}
+		\end{minipage}
+		\rule[1em]{\textwidth}{.353mm}
+		\baselineskip=0.30in
+		{\Large\bfseries \@title} \par
+		\vspace{5mm}
+		\baselineskip=0.2in
+		{\large\bfseries \@author}\par
+		\vspace{1mm}
+		{\it \@address} \par
+		{\small\tt \@email} \par
+		\vspace{3mm}
+		{\small (Received \@date)} \par
+	\end{center}
+	\vspace{3mm}
 }
 \newcommand{\address}[1]{\def\@address{#1}}
 \newcommand{\email}[1]{\def\@email{#1}}
 \newcommand{\doi}[1]{\href{https://doi.org/#1}{#1}}
+%\title{}
+%\author{}
+%\address{}
+%\email{}
+
 
 \newcommand{\vol}{00}
 \newcommand{\num}{00}
@@ -90,12 +97,13 @@
 %%setting page-number
 \setcounter{page}{1}
 
+
 \thispagestyle{empty}
 \makeatother
 
 %% Making << \acknowledgment >> command
 \newcommand{\acknowledgment}[1]{\vspace{5mm}\singlespacing
-    {\noindent\textbf{\textit{Acknowledgment\/}:} #1}
+	{\noindent\textbf{\textit{Acknowledgment\/}:} #1}
 }
 
 %% Setting page numbers
@@ -111,13 +119,17 @@
 \renewcommand*{\thefootnote}{\fnsymbol{footnote}}
 
 \usepackage[margin=1cm,%
-            font=footnotesize,%
-            format=hang,%
-            labelsep=period,%
-            labelfont=bf]{caption}
+			font=footnotesize,%
+			format=hang,%
+			labelsep=period,%
+			labelfont=bf]{caption}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PLACE ADDITIONAL PACKAGES HERE (if it is needed):
+
+% \usepackage{package}
+% \usepackage[options]{package}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 \usepackage{mathtools}
@@ -128,6 +140,8 @@
 \emergencystretch=3em
 \hbadness=2000
 \setlength{\marginparwidth}{2cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% make the odd pages have the section name on the top right
@@ -137,6 +151,12 @@
 
 %% making page-numbers visible
 \pagestyle{fancy}
+
+
+
+
+% YOU MAY ADD SOME ADDITIONAL LATEX PACKAGES TO THE PREAMBLE, BUT DO NOT MODIFY
+% THE EXISTING CODE ABOVE THIS LINE.
 
 % Custom macros for the Loyola index family
     \newcommand{\Wuzi}{LO(G;\alpha,\beta,\gamma)}
@@ -191,7 +211,7 @@
   By exhaustive enumeration, the histogram determines the degree-pair counts of a tree up to order twelve, but not from order thirteen (sixteen for chemical trees). We also bound the order
   exchanges along $\gamma$ and determine the extremal trees of the
   pure-$\gamma$ points. Pre-registered tests on measured boiling points
-  did not demonstrate a predictive gain from $\gamma$, and in an exploratory comparison a gain on vaporisation enthalpies seen in a narrow search box disappears once the parent is searched over a box that does not truncate it.
+  did not demonstrate a predictive gain from $\gamma$. In an exploratory comparison, a gain on vaporisation enthalpies seen in a narrow search box shrinks to about zero once the parent is searched over a box that does not truncate it.
 \end{abstract}
 
 \onehalfspacing
@@ -258,9 +278,9 @@
   $IRLA(G) = 2\sum_{uv} q_{uv}$~\cite{RetiSharafdini2018IRLA}. The
   pure-$\gamma$ point $LO(G;0,0,\gamma) = \sum_{uv} e^{\gamma q_{uv}}$
   is the exponential index, in the sense of~\cite{Rada2019ExpVDB}, of
-  the edge function $\gamma q_{uv}$. What
-  is new is a coordinate linear in $q_{uv}$ in the exponent, coupled
-  with its own parameter to the Gutman--Milovanovi\'c family. It makes
+  the edge function $\gamma q_{uv}$. The
+  coordinate added here is linear in $q_{uv}$ in the exponent and is
+  coupled with its own parameter to the Gutman--Milovanovi\'c family. It makes
   every edge weight log-linear in $(\alpha,\beta,\gamma)$, so $LO$ is
   the partition function of an exponential family on the edges of $G$.
 
@@ -278,9 +298,11 @@
   \begin{enumerate}
   \item[(i)] Two elementary facts: the imbalance direction is affinely independent of the parent coordinates once a vertex of degree at least $3$ is admitted (Lemma~\ref{prop:indep}), and $\log LO$ is a log-sum-exp and hence convex (Theorem~\ref{thm:logconvex}).
   \item[(ii)] The ratio-plane theorem (Theorem~\ref{thm:ratioplane})
-  characterises exactly what the pure-$\gamma$ points discriminate,
-  with tree collisions at every order from $13$, and from $16$ for
-  $\Delta \le 4$. Its corollary extends the collisions to every
+  characterises exactly what the pure-$\gamma$ points at algebraic
+  $\gamma \neq 0$ discriminate, by Rada's Lindemann--Weierstrass
+  argument~\cite{Rada2019ExpVDB}, with tree collisions at every order
+  from $13$, and from $16$ for $\Delta \le 4$. That these orders are the
+  first is established by exhaustive enumeration. Its corollary extends the collisions to every
   degree-ratio index, such as $GA$, $AG$ and the diminished Sombor index.
   \item[(iii)] A bound on the number of order exchanges along $\gamma$
   (Proposition~\ref{prop:laguerre}) and per-graph identifiability
@@ -489,7 +511,8 @@ Equal profiles give equal $q$-histograms. The converse fails
   $z_0 = (2\ln r, \ln 2r, 0)$.
   \end{proof}
 
-  Corollary~\ref{thm:cs} is the midpoint case of the convexity of
+  The Cauchy--Schwarz interpolation corollary of
+  Section~\ref{sec:termwise} is the midpoint case of the convexity of
   $F_G$.
 
   \subsection{The ratio plane, crossings and identifiability}\label{sec:ratioplane}
@@ -516,8 +539,10 @@ Equal profiles give equal $q$-histograms. The converse fails
   separates trees with equal profiles, and gives sufficient linear
   criteria for an index to separate all distinct profiles. The theorem below concerns a
   coarser loss. On $\Pi$ distinct profiles with equal $q$-histograms
-  receive equal values, and part~(iii) gives the first tree orders at
-  which such profiles occur.
+  receive equal values. Part~(iii) shows that such profiles occur among
+  trees of every order from $13$ (from $16$ when $\Delta \le 4$); that
+  no smaller tree has them is a computer-assisted result (see the
+  remark on the floor on $\Pi$ later in this subsection).
 
   \begin{theorem}[Ratio plane]\label{thm:ratioplane}
   Let $G$ and $H$ be graphs.
@@ -605,7 +630,7 @@ Equal profiles give equal $q$-histograms. The converse fails
   larger order.
   \end{proof}
 
-  Part~(ii) rests on Rada's Lindemann--Weierstrass argument~\cite{Rada2019ExpVDB}. Example~3 of~\cite{Rada2026LinearVDB} assumes distinct exponents for distinct degree pairs, whereas the exponents $\gamma q_{ij}$ coincide on pairs of equal ratio, so part~(ii) is the version for $q$-classes: two graphs receive the same value for every algebraic $\gamma \neq 0$ exactly when they have equal $q$-histograms. Part~(i) follows directly from the factorisation~\eqref{eq:factor}. The statement for real $\gamma$ applies the standard fact that a nonzero exponential sum has finitely many real zeros. The propagation by a pendant path in part~(iii) is the device of~\cite{Rada2026LinearVDB}. We found no earlier determination of the orders $13$ and $16$, or of explicit colliding trees for degree-ratio indices, in a literature search recorded in the repository~\cite{LoyolaRepo}. The minimality of orders $13$ and $16$ is computer-assisted. It rests on an exhaustive enumeration of all trees of orders $2$ to $16$ in exact rational arithmetic, reproducible with the code of the repository~\cite{LoyolaRepo}.
+  Part~(ii) rests on Rada's Lindemann--Weierstrass argument~\cite{Rada2019ExpVDB}. Example~3 of~\cite{Rada2026LinearVDB} assumes distinct exponents for distinct degree pairs, whereas the exponents $\gamma q_{ij}$ coincide on pairs of equal ratio, so part~(ii) is the version for $q$-classes: two graphs receive the same value for every algebraic $\gamma \neq 0$ exactly when they have equal $q$-histograms. Part~(i) follows directly from the factorisation~\eqref{eq:factor}. The statement for real $\gamma$ applies the standard fact that a nonzero exponential sum has finitely many real zeros. The propagation by a pendant path in part~(iii) is the device of~\cite{Rada2026LinearVDB}. A class-wide question of the same kind was studied by Song and Huang~\cite{SongHuang2023EDV} for distance-type invariants. The edge division vector of a tree $T$ counts its edges $e$ by the order $\min\{n_u(e), n_v(e)\}$ of the smaller component of $T - e$. Trees with equal vectors receive equal values of every edge-additive eccentric index $\sum_e f(\min\{n_u(e), n_v(e)\})$, such as the Wiener and Gutman indices, and Song and Huang determine all such trees of order at most $10$. That invariant does not control degrees: the two seven-vertex trees with edge division vector $(4,1,1)$ have different degree-pair profiles and different $q$-histograms, while the two octane pairs of Table~\ref{tab:collisions} have different edge division vectors and different Wiener indices. Neither partition of trees refines the other, so their collisions and ours are of different kinds. We found no earlier determination of the orders $13$ and $16$, or of explicit colliding trees for degree-ratio indices, in a literature search recorded in the repository~\cite{LoyolaRepo}. The minimality of orders $13$ and $16$ is computer-assisted. It rests on an exhaustive enumeration of all trees of orders $2$ to $16$ in exact rational arithmetic, reproducible with the code of the repository~\cite{LoyolaRepo}.
 
   \begin{corollary}[Degree-ratio indices]\label{cor:ratioclass}
   Let $\rho_{uv} = \min(d_u,d_v)/\max(d_u,d_v)$ and let
@@ -627,7 +652,7 @@ Equal profiles give equal $q$-histograms. The converse fails
   class it describes, the pure-$\gamma$ points at algebraic
   $\gamma \neq 0$ attain the most possible: by part~(ii) they separate
   every pair of graphs with distinct $q$-histograms. $GA$ does not
-  (Remark~\ref{rem:floor}). The parent attains it as well: at
+  (see the remark on the floor on $\Pi$ below). The parent attains it as well: at
   $\gamma = 0$ part~(i) gives $\sum_q n_q\,((1-q^2)/4)^{\alpha}$, an
   exponential sum in $\alpha$ with distinct bases, which separates two
   distinct histograms at all but finitely many $\alpha$. The limit thus
@@ -663,8 +688,8 @@ Equal profiles give equal $q$-histograms. The converse fails
   \end{proof}
 
   \begin{remark}\label{rem:offplane}
-  Two graphs merged by $M_{\alpha,\beta}$ stay merged at an algebraic
-  $\gamma \neq 0$ only if every class sum $c_q(G,H)$ vanishes, which is
+  At rational $\alpha$, $\beta$, two graphs merged by $M_{\alpha,\beta}$
+  stay merged at an algebraic $\gamma \neq 0$ only if every class sum $c_q(G,H)$ vanishes, which is
   stronger than $M_{\alpha,\beta}(G) = M_{\alpha,\beta}(H)$. On the trees
   of order $16$, $\gamma = 1$ recovers the distinctions the parent loses
   at $(0,\tfrac12,0)$ and $(0,\tfrac13,0)$
@@ -674,7 +699,8 @@ Equal profiles give equal $q$-histograms. The converse fails
   \end{remark}
 
   \begin{remark}[The floor on $\Pi$]\label{rem:floor}
-  By exhaustive enumeration of all trees of orders $2$--$17$, two trees
+  By exhaustive enumeration of all trees of orders $2$--$17$ in exact
+  arithmetic (Table~\ref{tab:firstfail}), two trees
   of order at most $12$ with equal $q$-histograms have equal
   degree-pair profiles, and the same holds for trees with
   $\Delta \le 4$ of order at most $15$. With part~(iii), the
@@ -1032,14 +1058,14 @@ at order $14$, where the pure-$\gamma$ points give $1090$ values.
 \begin{table}[htbp]
 \centering
 \caption{First tree order at which discrimination is lost. Values are
-counted as distinct at $11$ significant digits. Recounts at $50$ to $60$ digits agree. Counts on $\Pi$ follow from exact histograms, while ties off $\Pi$ are numerical and not certified. ``Below
+counted as distinct at $11$ significant digits. Recounts at $50$ to $60$ digits agree. Every count, ties included, is also certified exactly. For the pure-$\gamma$ points this follows from the $q$-histograms (Theorem~\ref{thm:ratioplane}(ii)). For $R$ and $GA$, including the merge of $GA$ at order $17$, it follows from exact arithmetic in the radicals $(ij)^{a}(i+j)^{b}$. This rests on the linear independence over $\mathbb{Q}$ of the $k$-th roots of distinct $k$-th-power-free positive integers~\cite{Besicovitch1940}. ``Below
 floor'' is the first order with fewer distinct values than distinct
 edge-degree-pair profiles, the floor for every vertex-degree-based
 index. The entry gives (values/profiles) at that order. ``Merges'' is
 the first order at which an index on $\Pi$ gives equal values to two
 trees with different $q$-histograms. This does not apply to $R$, which
 is not on $\Pi$. $LO(0,0,\gamma)$ denotes the pure-$\gamma$ points
-$\gamma = 1, 2$. Orders below $7$ were not examined for the value counts. Equal $q$-histograms of distinct profiles were sought at every order from $2$ and first found at the orders shown.}
+$\gamma = 1, 2$. Orders $2$ to $17$ were examined. Equal $q$-histograms of distinct profiles were sought at every order from $2$ and first found at the orders shown.}
 \label{tab:firstfail}
 \small
 \setlength{\tabcolsep}{3pt}
@@ -1077,8 +1103,9 @@ point $LO(-\tfrac12,0,\cdot)$ from $4007$ to $4068$ as $\gamma$ goes
 from $0$ to $1$. Points on $\Pi$ such as $GA$ are unaffected ($3996$
 in both cases), consistent with Theorem~\ref{thm:ratioplane}, and generic
 parent points such as $LO(0.3,0.2,0)$ already separate all $4069$
-profiles (Proposition~\ref{prop:generic}). The effect is established
-by enumeration for orders $12$--$16$ but is not proved. It yields
+profiles (Proposition~\ref{prop:generic}). These counts are exact for orders $12$--$16$ (at
+$\gamma = 1$ by Proposition~\ref{prop:offplane} and~\cite{Besicovitch1940}), but the effect is not proved
+for larger orders. It yields
 no predictive gain over a tuned parent in Section~\ref{sec:sensitivity},
 and at fixed fractional exponents the sign of the change depends on the
 property (Supplementary Section~S5).
@@ -1263,9 +1290,13 @@ enumeration in the reproducibility package.
   known~\cite{MolinaSigarreta2025GM, GranadosJMC2025GM, PortillaJMC2025GM}, and inequalities between exponential indices are given in~\cite{CarballosaQuintanaRodriguezSigarreta2023}.
   The statements below extend them to $\gamma \ne 0$ (Propositions
   \ref{thm:upper_Delta} and~\ref{thm:lower_delta} to $\gamma > 0$ only)
-  and track how $\gamma$ changes the equality cases. Their inequalities,
-  not their equality cases, are machine-checked (Supplementary
-  Section~S7).
+  and track how $\gamma$ changes the equality cases. The inequalities
+  of the Cauchy--Schwarz interpolation corollary
+  (Section~\ref{sec:termwise}) and of Propositions~\ref{thm:upper_Delta} and~\ref{thm:lower_delta}, not
+  their equality cases, are machine-checked. For
+  Propositions~\ref{thm:bracket} and~\ref{thm:ratio_bound} only the
+  summation step is, with the edgewise extrema taken as hypotheses
+  (Supplementary Section~S7).
 
   \begin{definition}[Edge weight]\label{def:psi}
   For real parameters $\alpha, \beta, \gamma$ and positive reals
@@ -1611,7 +1642,8 @@ three-parameter model part of the effect sought.
 \subsection{Replication on the nonane isomers}\label{sec:external}
 
 Under a protocol committed to the reproducibility package (commit
-\texttt{964b127}) before any nonane value was collected, the nested
+\texttt{964b127}) before the nonane data were committed and before any
+model was fitted to them, the nested
 design was applied to the $35$ constitutional nonane isomers. Boiling
 points were $35$ values from the NIST WebBook (NIST averages where
 given, otherwise the most recent determination, a deviation recorded in
@@ -1621,10 +1653,14 @@ them measures consistency with compiled values (Supplementary
 Section~S4). The pre-registered verdict is that the $\gamma$ effect
 \emph{replicates} for $\Delta H_{\mathrm{vap}}$, with LO better than GM
 in $95/100$ and $98/100$ seeds and median $\Delta Q^2 = +0.048$ and
-$+0.053$, and is \emph{mixed} for $T_B$ ($58/100$ and $63/100$).
+$+0.053$, and is \emph{mixed} for $T_B$ ($58/100$ and $63/100$). \emph{Replicates}
+is the protocol's name for its seed-count rule, which the protocol
+itself describes as a summary of optimiser variance and not an
+inferential test; the molecule-bootstrap interval reported at the end of
+this subsection includes $0$.
 Within-fold baselines are in Supplementary Table~S7. The protocol fixed
 the box of half-width $2$, which binds the parent, and in the wide box
-the gain disappears (median $\Delta Q^2 = -0.002$ under the hybrid
+the gain shrinks to about zero (median $\Delta Q^2 = -0.002$ under the hybrid
 control). We report the verdict as obtained. Its seed-count criterion
 counts optimiser variance on fixed data, which we regard as a design
 error, and after this result we made the measured boiling points of
@@ -1703,7 +1739,13 @@ the values are $-0.0001$, $25$ of $50$ and $[-0.003, +0.002]$. In the
 original box of half-width $2$, reported as the pre-registration
 requires, the two tuned models are level on the decanes (medians $0.469$
 and $0.465$), and the Loyola model is marginally ahead on the pooled set
-($0.980$ against $0.976$). The pooled cohort was corrected after an
+($0.980$ against $0.976$). Seed by seed, that narrow-box Loyola model
+beats the wide-box parent GM in $38$ of $50$ seeds on the pooled set
+(median seed-matched difference $+0.0033$) but in only $22$ of $50$ on
+the decanes (median $-0.037$). Against the narrow-box parent the counts
+are $40$ and $25$ of $50$. These comparisons were not registered, carry
+no interval and count optimiser variance on fixed data, so they do not
+indicate a gain from $\gamma$. The pooled cohort was corrected after an
 external audit (Table~\ref{tab:deviations}). On the uncorrected cohort
 of $101$ molecules the same test gave $-0.0001$, $24$ of $50$,
 $[-0.003, +0.002]$, so the correction changes no conclusion. The
@@ -1713,7 +1755,16 @@ procedure for both models on random subsamples of $80\%$ of the
 molecules. On the decanes ($500$ subsamples) the median $\Delta Q^2$ is
 $-0.110$ with central $95\%$ range $[-0.510, +0.312]$. On the pooled set
 ($200$ subsamples) it is $+0.001$ with range $[-0.015, +0.008]$.
-Neither range supports a gain from $\gamma$. The two summaries differ in
+Neither range supports a gain from $\gamma$. The selection-aware decane
+range is so wide that it neither supports nor excludes gains of
+practical size, the registered interval omits refitting and selection,
+and no smallest effect of interest or equivalence margin was
+registered. The registered contrast also gives LO$_h$ three dimensions
+to search against two for GM with the same candidate budget, which
+may handicap the three-parameter model (Section~\ref{sec:ablation}). The
+negative verdicts therefore mean that no gain was demonstrated under
+these protocols; they do not establish equivalence, and they do not
+show that $\gamma$ never helps. The two summaries differ in
 training size and seed averaging and are not directly comparable. Nor are the ranges confidence intervals for the full-sample $\Delta Q^2$. Ridge
 regression on the ten degree-pair counts reaches $Q^2 = 0.860$ on the
 decanes, where every single index stays between $0.149$ and $0.514$, and
@@ -1722,7 +1773,7 @@ Test~B, $IRLA$ and $LO(0,0,1)$ do not beat size plus the best classical
 index ($0.963$ against $0.967$), while both tuned models do ($0.977$). A permutation check on the decanes repeats
 the whole nested procedure, including the choice of the ridge penalty,
 for $200$ random permutations of the boiling points. The permuted $Q^2$
-has median $-0.09$, $95$th percentile $-0.01$ and maximum $0.20$. None reaches $0.860$, so the empirical $p$-value is $1/201 \approx 0.005$. Wiener's two-descriptor model~\cite{Wiener1947}, with the path number $W$ and the number $p_3$ of carbon pairs three bonds apart, fitted without tuning, gives $Q^2 = 0.904$ on the decanes. Within one carbon number, distance information beyond the degree pairs matters most.
+has median $-0.09$, $95$th percentile $-0.01$ and maximum $0.20$. None reaches $0.860$, so the empirical $p$-value is $1/201 \approx 0.005$. Wiener's two-descriptor model~\cite{Wiener1947}, with the path number $W$ and the number $p_3$ of carbon pairs three bonds apart, fitted without tuning, gives $Q^2 = 0.904$ on the decanes. This single point estimate, given without an interval and for descriptors historically chosen on alkane boiling points, suggests that within one carbon number distance information beyond the degree pairs carries much of the remaining signal.
 Under the stated boxes and candidate budgets, ridge regression predicts the boiling points more accurately than every single-index
 model evaluated, with or without $\gamma$. These conclusions
 concern acyclic alkanes.
@@ -1740,7 +1791,8 @@ Proposition~\ref{prop:identrank}(ii) for $\Delta \le 6$, and the
 recovery of discrimination off $\Pi$ in Section~\ref{sec:degeneracy}
 rest on exhaustive enumeration. No general argument is given.
 \item[(ii)] Whether two graphs with $\Delta \le 4$ can exchange order
-five times along $\gamma$ is open (Remark~\ref{rem:crossings}).
+five times along $\gamma$ is open (see the remark on sharpness in
+Section~\ref{sec:ratioplane}).
 \item[(iii)] The data sets are small and acyclic: $18$ octanes, $35$
 nonanes, $34$ decanes and $100$ pooled C6--C10 alkanes. Seven octane
 entropies and the compiled acentric factors rest on secondary sources,
@@ -1766,8 +1818,8 @@ Test & Change after outcomes & Effect\\
 \midrule
 Nonanes (Section~\ref{sec:external}) & Parent box widened from half-width
 $2$ to $12$, chosen after inspecting the $\Delta H_{\mathrm{vap}}$ curves &
-Registered verdict reported as obtained; the gain disappears in the
-wide box\\
+Registered verdict reported as obtained; the gain shrinks to about
+zero in the wide box\\
 Nonanes & Seed-count criterion judged to count optimiser variance &
 None on reported numbers\\
 Nonanes & Measured boiling points made the primary predictive evidence &
@@ -1803,7 +1855,7 @@ extremal trees of the pure-imbalance points are the path and the star,
 and at rational exponents a nonzero algebraic imbalance parameter never
 destroys a distinction the parent makes.
 
-Under random search at matched budgets, no predictive gain from the imbalance parameter was demonstrated. A gain on vaporisation enthalpies replicated under a pre-registered protocol but disappeared in an exploratory comparison once the parent was searched over a box that did not truncate it, and pre-registered tests on measured boiling points
+Under random search at matched budgets, no predictive gain from the imbalance parameter was demonstrated; this does not show that it never helps, and the decane intervals were wide. A gain on vaporisation enthalpies met the seed-count criterion of a pre-registered protocol, with a bootstrap interval that included zero. It shrank to about zero in an exploratory comparison once the parent was searched over a box that did not truncate it, and pre-registered tests on measured boiling points
 were negative. There a linear model on the degree-pair counts
 outperformed every single index. The untuned pure-imbalance point, close
 to the irregularity index $IRLA$, was as accurate as the tuned models on vaporisation enthalpy in point estimate, out of sample only on the nonanes, and no equivalence test was made. Three problems remain open: sharp two-sided bounds
@@ -1817,9 +1869,15 @@ the pure-imbalance points; and the behaviour on other compound classes.
 recompute every tabulated value are in the reproducibility
 package~\cite{LoyolaRepo}, where the nonane and boiling-point
 protocols were committed before the corresponding models were fitted.
-Lean~4 with Mathlib checks the termwise bounds (not their equality cases), taking the edgewise extrema of the bracket and ratio bounds as hypotheses, the convexity of the log-sum-exp form of
+The NIST WebBook pages from which the experimental values were
+extracted are not redistributed; a script of the package downloads
+them and checks each against the copy from which the data sets were
+built.
+Lean~4 with Mathlib checks the termwise bounds, not their equality cases, and takes the edgewise extrema of the bracket and ratio bounds as hypotheses. It also checks the convexity of the log-sum-exp form of
 $\log LO$, the spanning statement of the independence lemma and the
-order-thirteen profile collision. Graphs are encoded there by their
+order-thirteen profile collision on the pure-$\gamma$ line. The
+transcendence, Laguerre and enumeration arguments are not
+machine-checked. Graphs are encoded there by their
 degree-pair data (Supplementary Section~S7), and
 the file \texttt{LEAN\_VERIFICATION.md} of the repository maps each
 statement of this paper to its Lean theorem.
@@ -1852,6 +1910,10 @@ statement of this paper to its Lean theorem.
   \bibitem{BarmanDas2026HSO} J. Barman, S. Das, Geometric approach to
   degree-based topological index: Hyperbolic Sombor index, \textit{MATCH
   Commun. Math. Comput. Chem.\/} \textbf{95} (2026) 63--94.
+
+  \bibitem{Besicovitch1940} A. S. Besicovitch, On the linear independence
+  of fractional powers of integers, \textit{J. London Math. Soc.\/}
+  \textbf{15} (1940) 3--6.
 
   \bibitem{BollobasErdos1998}
   B. Bollob\'as, P. Erd\H{o}s, Graphs of extremal weights, \textit{Ars Combin.\/}
@@ -2029,6 +2091,10 @@ statement of this paper to its Lean theorem.
 \bibitem{Sigarreta2022ExpVDB} J. M. Sigarreta, Extremal problems on
   exponential vertex-degree-based topological indices, \textit{Math.
   Biosci. Eng.\/} \textbf{19} (2022) 6985--6995.
+
+  \bibitem{SongHuang2023EDV} R. Song, Q. Huang, A relation on trees and the
+  topological indices based on subgraph, \textit{MATCH Commun. Math.
+  Comput. Chem.\/} \textbf{89} (2023) 343--370.
 
   \bibitem{VukicevicFurtula2009GA} D. Vuki\v{c}evi\'c, B. Furtula, Topological
   index based on the ratios of geometrical and arithmetical means of

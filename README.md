@@ -56,6 +56,13 @@ checked directly from the trees (`structural/sumconn_pair_check.py`).
 tetramethylbutane ΔH_vap source audit; exploratory selection-aware resampling; independent
 permutation audit. Full history in `V35_TO_V36_SCIENTIFIC_CHANGELOG.md`.
 
+## Run the whole computation again (Google Colab)
+
+`colab/` holds numbered notebooks, `00_setup_and_plan.ipynb` to `11_final_report.ipynb`, that re-run every
+script of the paper in dependency order, from the source records to the tables. They keep their
+progress in Google Drive, so a long run can continue after a disconnect. The last notebook compares every
+output with the commit. See `colab/README.md`.
+
 ## Run the checks yourself (Jupyter or Google Colab)
 
 Each notebook recomputes one part of the paper from the data in `DATA/` and prints the
@@ -65,7 +72,7 @@ Colab the notebook clones this repository and installs the requirements itself.
 | Notebook | What it checks | Time | Open |
 |---|---|---|---|
 | `notebooks/01_data.ipynb` | the datasets in `DATA/` and their provenance | seconds | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/01_data.ipynb) |
-| `notebooks/02_mathematics.ipynb` | Lemma 3.1, the colliding profiles of Theorem 3.5, Example 4.4, certificates | under a minute | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/02_mathematics.ipynb) |
+| `notebooks/02_mathematics.ipynb` | Lemma 1, the colliding profiles of Theorem 2, Example 2, certificates | under a minute | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/02_mathematics.ipynb) |
 | `notebooks/03_degeneracy.ipynb` | Table 2 and the order-10 and order-16 counts, by enumerating every tree | under a minute | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/03_degeneracy.ipynb) |
 | `notebooks/04_octane_correlations.ipynb` | all 60 correlations of Table 4 and the tetramethylbutane audit | seconds | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/04_octane_correlations.ipynb) |
 | `notebooks/05_boiling_points.ipynb` | Table 5 baselines, the 200-permutation check, the resampling summary | about 5 minutes (`RUN_SLOW = True`: about 1 hour) | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/main/notebooks/05_boiling_points.ipynb) |
@@ -81,8 +88,8 @@ regenerates them. The Lean proofs need a Lean toolchain and are not run in a not
 ## Current documents
 | File | Content |
 |---|---|
-| `main.tex`, `LOYOLA_paper.pdf` | the paper (38 A5 pages, MATCH template) |
-| `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (26 pages) |
+| `main.tex`, `LOYOLA_paper.pdf` | the paper (42 A5 pages, MATCH template) |
+| `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (28 pages) |
 | `DATA/` | every dataset, byte-identical copies, with a README |
 | `LOYOLA_FINAL_PAPER_OVERLEAF.zip` | Overleaf upload (both documents + figures) |
 
@@ -106,8 +113,10 @@ Quick start:
 python3 -m pip install -r requirements-lock.txt
 # optional, for the scikit-learn audit and the notebooks: -r requirements-extras-lock.txt
 python3 verify.py                       # single entry point: all fast checks (--full for the long suites); run by CI on every push
+                                        # without the NIST WebBook pages (not redistributed) use --offline, as CI does;
+                                        # python3 external/nist_pages.py --download retrieves them (explicit, rate-limited)
 python3 verify_loyola_v35.py            # core tables, figures, analyses
-python3 external/verify_external.py     # nonane and boiling-point tests, rebuilt from raw NIST pages
+python3 external/verify_external.py     # nonane and boiling-point tests, rebuilt from the downloaded NIST pages
 python3 structural/structural_checks.py # structural counts and witnesses
 (cd formal && ./verify.sh)              # Lean 4 proofs
 python3 manifest.py                     # checksums

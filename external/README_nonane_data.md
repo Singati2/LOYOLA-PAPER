@@ -1,9 +1,10 @@
 # Nonane (C9H20) property dataset — sources and rules
 
 Built 2026-10-03 under `PREREG_v37.md` (data rules binding). Every value was read
-from a NIST Chemistry WebBook page fetched with curl on 2026-10-03; raw HTML is
-archived in `nonane_raw_nist/` and `build_nonane_data.py` regenerates the CSVs from
-it byte-for-byte (no hand-typed values). No value was estimated, imputed or recalled.
+from a NIST Chemistry WebBook page fetched with curl on 2026-10-03. The pages are not
+redistributed: `nist_pages.py` downloads them into `nonane_raw_nist/` and checks each
+against the digest of the 2026-10-03 copy, and `build_nonane_data.py` regenerates the
+CSVs from them byte-for-byte (no hand-typed values). No value was estimated, imputed or recalled.
 
 ## Files
 - `nonane_data.csv` — name, cas, smiles, T_B_C, dHvap_kcal (blank = MISSING).
@@ -16,7 +17,7 @@ it byte-for-byte (no hand-typed values). No value was estimated, imputed or reca
   checks each SMILES graph is isomorphic to the carbon skeleton in NIST's InChI for
   that CAS. Passes (exit 0). The 35 NIST InChI graphs are pairwise non-isomorphic.
 - `nonane_crosscheck_secondary.csv` — secondary comparison (not used in data).
-- `build_nonane_data.py`, `nonane_raw_nist/` — reproducibility.
+- `build_nonane_data.py`, `nist_pages.py` (downloads `nonane_raw_nist/`) — reproducibility.
 
 ## Sources
 Identity: NIST name search `cbook.cgi?Name=<name>&Units=SI&Mask=4` (CAS, InChI).
