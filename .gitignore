@@ -6,3 +6,5 @@ __pycache__/
 /main.pdf
 /supplement.pdf
 .venv-verify/
+colab_run/
+.venv-colab/

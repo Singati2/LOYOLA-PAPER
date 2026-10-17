@@ -56,6 +56,13 @@ checked directly from the trees (`structural/sumconn_pair_check.py`).
 tetramethylbutane ΔH_vap source audit; exploratory selection-aware resampling; independent
 permutation audit. Full history in `V35_TO_V36_SCIENTIFIC_CHANGELOG.md`.
 
+## Run the whole computation again (Google Colab)
+
+`colab/` holds numbered notebooks, `00_setup_and_plan.ipynb` to `11_final_report.ipynb`, that re-run every
+script of the paper in dependency order, from the archived source records to the tables. They keep their
+progress in Google Drive, so a long run can continue after a disconnect. The last notebook compares every
+output with the commit. See `colab/README.md`.
+
 ## Run the checks yourself (Jupyter or Google Colab)
 
 Each notebook recomputes one part of the paper from the data in `DATA/` and prints the
