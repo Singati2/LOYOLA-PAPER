@@ -26,7 +26,7 @@ Labels: VERIFIED, PARTIALLY VERIFIED, FAILED, NOT TESTED, RUNNING.
 | Clean clone of `67e36ad`, `verify.py --offline`, no network, low load | `67e36ad` | same | **0** | VERIFIED. NOT RUN by design: auxiliary outputs, archived-source identities, one page-dependent regression test |
 | GitHub Actions run 39066288218 (PR #5) | `67e36ad` | ubuntu-latest, Python 3.13, `requirements-lock` | success | VERIFIED. Covers `verify.py --offline` only, so no page-dependent checks, no `--full`, no Lean |
 | Local checks: manifest, DATA copies, prose style | `a609843` | `.venv-verify` | 0, 0, 0 | VERIFIED. **No CI**: not pushed. The CI status of `67e36ad` does **not** carry over |
-| `verify.py --full`, clean clone plus pages copied locally (no download) | `67e36ad` | `.venv-verify`; `lake` and `pdflatex` present | — | **RUNNING** since 16:26. Fast stages all PASS; at 17:08 it was in the "external verifier" stage. The final exit code will be reported when it ends |
+| `verify.py --full`, clean clone plus pages copied locally (no download) | `67e36ad` | `.venv-verify`; `lake` and `pdflatex` present | **1** | FAILED, 220 min. 23 of 25 stages PASS, including the external verifier, structural checks, 32-digit recount, exact tie certificate, verifier self-test, Lean (52 declarations) and archived-source identities (154 pages). Two failures: (1) *counter-attacks*: 12 of 13 rejected, 1 "false negative". The cause is in the harness, not in a checker: `67e36ad` lengthened the missing-page error message in `external/bp/build_bp_data.py`, and `audit/attack_checks.py` still searched for the old exact string, so that attack could not be applied. The anchor is updated on `review/short-version`; rerun on the `67e36ad` clone with only that file replaced: 13 attacks, 13 rejected, exit 0. (2) *labels and references*: `fitz` (PyMuPDF) is not in `.venv-verify`, an environment gap. Run with a local PyMuPDF: PASS, exit 0, on `67e36ad` and on the review tree. A complete `--full` exit 0 on one commit has **not** been obtained |
 | Colab runner without pages (stages 1 and 4) | `67e36ad` tree | same | 1, 1 | VERIFIED: stops with the download instruction; nothing downloaded |
 | Colab runner from the private cache (stage 1) | same | same | 0 | VERIFIED: outputs identical to `2158b72`; no page in the state folder |
 | Review-branch checks (manuscript corrections) | `review/short-version` | `.venv-verify` | see the final report | see the final report |
@@ -40,7 +40,7 @@ Labels: VERIFIED, PARTIALLY VERIFIED, FAILED, NOT TESTED, RUNNING.
     containing a NEEDS_NIST script);
   * the clean-clone run, CI and the artifact check were added.
 * It distinguishes the offline fast path (CI), the fast path with pages, and the page-dependent checks.
-  It states that `--full` was not run for that commit. That is still true until the RUNNING job ends.
+  It states that `--full` was not run for that commit. It has now been run and exited 1 (see the table above); the audit document should say so when it is next edited.
 
 ## Current exposure (VERIFIED, non-destructive checks on `67e36ad`)
 

@@ -81,7 +81,8 @@ ATTACKS = [
                     "X = np.array([[lo_pairs(P, a, b, g) for P in OP] for a, b, g in T]); X[0, :] = 1.0")),
     ("regression tests: silent skip of a missing page restored", ["external/test_regressions.py"],
      lambda t: edit(t, "external/bp/build_bp_data.py",
-                    'raise FileNotFoundError(f"missing required archived NIST page: {p}")', "continue")),
+                    'raise FileNotFoundError(f"missing required archived NIST page: {p} (the NIST pages are not redistributed: '
+                    'python3 external/nist_pages.py --download retrieves them)")', "continue")),
     ("regression tests: structural certificate check disabled", ["external/test_regressions.py"],
      lambda t: edit(t, "structural/structural_checks.py", "if not witnesses:", "if False:")),
     ("CSV convention: provenance CSV rewritten with LF rows", ["verify.py", "--convention-only"],

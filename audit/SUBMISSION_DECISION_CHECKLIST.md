@@ -9,7 +9,7 @@
 | B3 | Public code and data location without the NIST history. Options: a new public repository from the cleaned tree (recommended); make the original private; or rewrite history (not recommended). See `VERIFICATION_AND_NIST_STATUS.md` | owner of `Singati2/LOYOLA-PAPER` | open; **needs separate explicit approval** |
 | B4 | Provenance CSVs and the C4–C16 skeleton census: keep, regenerate locally, or withdraw | authors | open |
 | B5 | Review and approve the manuscript corrections on `review/short-version` (attribution and statistics), then decide whether they also go onto `revision/v40.31-scientific` | authors | open |
-| B6 | Run `verify.py --full` on the commit to be submitted, and create the immutable tag the notebooks pin (`notebooks/gen_notebooks.py` expects a tag) | maintainer | `--full` on `67e36ad` RUNNING; tag not created |
+| B6 | Run `verify.py --full` on the commit to be submitted, and create the immutable tag the notebooks pin (`notebooks/gen_notebooks.py` expects a tag) | maintainer | `--full` on `67e36ad`: exit 1 (stale attack anchor, fixed on the review branch; `fitz` missing from the environment). Needs a clean rerun on the final commit with PyMuPDF installed; tag not created |
 | B7 | The data-availability sentence must name the final repository and commit or tag | authors | open |
 
 ## Non-blocking (would strengthen the paper)
