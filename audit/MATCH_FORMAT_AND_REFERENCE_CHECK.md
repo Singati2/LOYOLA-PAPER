@@ -14,7 +14,7 @@ Kırgız, MATCH 97 (2027) 121–134).
 | Page size, font size | A5 (419.5 × 595.3 pt), 10 pt, same as the published papers |
 | First page (header box, title, authors, address, e-mail, "Received", abstract, footnote) | same layout as Rada 2026 when rendered side by side |
 | Running page number, section headings, line spacing (page 2) | same as Rada 2026 |
-| Abstract | no citations or cross-references (template rule); fits on page 1 |
+| Abstract | no citations or cross-references (template rule). Since the Oregon State affiliation line was added (2026-10-19) its last three lines run onto page 2, as the short version's abstract already did; MATCH sets no rule on this |
 | Keywords, MSC | none (template: "No keywords! No Mathematics Subject Classification!") |
 | References | alphabetical by first author, as required; format follows the template examples |
 | E-mail line | now lists every author's address in author order, as recent multi-author MATCH papers do: nataraad@oregonstate.edu (Advik Natarajan; Oregon State University mathematics directory, 2026-10-19), gshiwakoti2022@fau.edu (supplied by Ganesh Shiwakoti), marockiaraj@gmail.com |
@@ -67,3 +67,4 @@ Open points for the authors:
   person with ACS access. The in-text "NIST lists 4 under Labbauf et al." quotes NIST's spelling.
 * ShirdelRezapourSayadi2013HM was corrected by Basavanagoud and Patil (Iran. J. Math. Chem. 7 (2016)).
   The paper cites it only for the hyper-Zagreb index name, which the correction does not affect.
+* Affiliations (2026-10-19, on the authors' instruction): Advik Natarajan, Department of Mathematics, Oregon State University (the department directory lists him as a graduate student); Michael Arockiaraj, Loyola College, now affiliation c.
