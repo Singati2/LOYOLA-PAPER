@@ -18,7 +18,7 @@ Kırgız, MATCH 97 (2027) 121–134).
 | Keywords, MSC | none (template: "No keywords! No Mathematics Subject Classification!") |
 | References | alphabetical by first author, as required; format follows the template examples |
 | **E-mail line** | **differs:** only the corresponding author's address is given. Recent multi-author MATCH papers list every author's address (e.g. four in Gutman et al., MATCH 97 (2027) 165–174). The authors must supply the other two addresses |
-| **Acknowledgment** | "The authors thank colleagues for helpful discussions." is generic; the authors should replace it or delete it |
+| Acknowledgment | conforms: uses the template's `\acknowledgment` command. The text is the authors' own (commit `3c3d363`, shortened by the authors in `8d1cd25`), so it was left unchanged |
 | Colour figures (90 EUR each) | `main.tex` has no figures; both figures are in the supplement |
 
 ## Abstract and conclusion against the body
@@ -50,12 +50,20 @@ black-listed. Each reference was checked against an authoritative record:
 | Journal or index pages found by web search | Albertson1997 (DBLP; Ars Combin. 46 (1997)); DeutschKlavzar2015 (SID, DOI 10.22052/ijmc.2015.10106); VukicevicGasperov2010 (Hrčak); GutmanRedzepovicKizilirmakKulli2025EU (DOI 10.30538/oms2025.0249); ShirdelRezapourSayadi2013HM (DOI 10.22052/ijmc.2013.5294) |
 | Library catalogue / DOI resolver | Baker1975, APIProject44Circ461 (Open Library); NISTWebBook (DOI 10.18434/T4D303 resolves to the WebBook); WilhoitZwolinski1971 (the subject of the Reid 1972 review); LoyolaRepo (the repository itself) |
 
+Crossref flags that are not errors in the paper: Crossref's year for DasMondal2024ExpGA (2023),
+ZhouTrinajstic2010 (2009), SongHuang2023EDV (2022), RadaRodriguezSigarreta2022Weak (2021) and the MATCH 97
+papers (2026) is the online-first date; the print year, which the paper cites, matches. For MATCH papers
+Crossref stores the issue number in the volume field (e.g. "3" for Gutman2026SomborSurvey, which is
+volume 96, issue 3) and only the first page; both were checked against MATCH's contents pages above.
+
 Open points for the authors:
 
 * **LabaufGreenshieldsRossini1961**: the article exists (J. Chem. Eng. Data 6 (1961) 261–263,
-  DOI 10.1021/je60010a023), but the publisher's Crossref record spells the first author "Labauf",
-  while the paper writes "Labbauf" (the spelling Crossref uses for the same author's 1961 J. Phys.
-  Chem. paper). The ACS page could not be read automatically. Check the printed article and use its
-  spelling.
+  DOI 10.1021/je60010a023). The publisher's metadata spells the first author "Abbas Labauf"; OpenAlex and
+  Semantic Scholar repeat it, but they copy that same deposit, so this is one source, not three. The
+  same author appears as "Labbauf" on his other papers and in NIST's attribution. The authors chose
+  "Labbauf" in v36 after checking Crossref (V35_TO_V36_SCIENTIFIC_CHANGELOG.md); that choice is kept.
+  The printed byline could not be read (the ACS site refuses automated access); checking it needs a
+  person with ACS access. The in-text "NIST lists 4 under Labbauf et al." quotes NIST's spelling.
 * ShirdelRezapourSayadi2013HM was corrected by Basavanagoud and Patil (Iran. J. Math. Chem. 7 (2016)).
   The paper cites it only for the hyper-Zagreb index name, which the correction does not affect.
