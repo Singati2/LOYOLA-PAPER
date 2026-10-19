@@ -17,7 +17,7 @@ Kırgız, MATCH 97 (2027) 121–134).
 | Abstract | no citations or cross-references (template rule); fits on page 1 |
 | Keywords, MSC | none (template: "No keywords! No Mathematics Subject Classification!") |
 | References | alphabetical by first author, as required; format follows the template examples |
-| **E-mail line** | **differs:** only the corresponding author's address is given. Recent multi-author MATCH papers list every author's address (e.g. four in Gutman et al., MATCH 97 (2027) 165–174). The authors must supply the other two addresses |
+| E-mail line | now lists every author's address in author order, as recent multi-author MATCH papers do: nataraad@oregonstate.edu (Advik Natarajan; Oregon State University mathematics directory, 2026-10-19), gshiwakoti2022@fau.edu (supplied by Ganesh Shiwakoti), marockiaraj@gmail.com |
 | Acknowledgment | conforms: uses the template's `\acknowledgment` command. The text is the authors' own (commit `3c3d363`, shortened by the authors in `8d1cd25`), so it was left unchanged |
 | Colour figures (90 EUR each) | `main.tex` has no figures; both figures are in the supplement |
 
