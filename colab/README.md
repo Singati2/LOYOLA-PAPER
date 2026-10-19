@@ -19,6 +19,10 @@ scripts stay where they are, so the paths used in the paper and in `REPRODUCE.md
 | `09_lean_proofs.ipynb` | optional: the Lean 4 proofs | 10-30 min |
 | `10_compile_paper.ipynb` | optional: compile both documents with pdflatex; label and reference check | 10 min |
 | `11_final_report.ipynb` | compares every rewritten output with the commit; writes `FINAL_REPORT.md` | 2 min |
+| `12_enumeration_certificates.ipynb` | separate from the run above: the independent enumeration certificates of `audit/certificates/` (orders 13 and 16, first order by maximum degree, SDD and ISDD, witness trees); no NIST data, no Drive folder; any order | 1 min |
+
+Notebook 12 runs on its own and needs no setup beyond a Colab session. It fetches `review/short-version`,
+the branch that holds `audit/certificates/`, until that branch is merged.
 
 Lab times come from one run on the authors' machine with throttled CPU, three scripts at a time, so
 they are upper estimates. Notebook 07 is long. If it does not fit in one session, open it again:

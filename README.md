@@ -61,7 +61,8 @@ permutation audit. Full history in `V35_TO_V36_SCIENTIFIC_CHANGELOG.md`.
 `colab/` holds numbered notebooks, `00_setup_and_plan.ipynb` to `11_final_report.ipynb`, that re-run every
 script of the paper in dependency order, from the source records to the tables. They keep their
 progress in Google Drive, so a long run can continue after a disconnect. The last notebook compares every
-output with the commit. See `colab/README.md`.
+output with the commit. `12_enumeration_certificates.ipynb` runs on its own in about a minute and reproduces the
+minimal collision orders 13 and 16 with code independent of the repository's verifiers. See `colab/README.md`.
 
 ## Run the checks yourself (Jupyter or Google Colab)
 

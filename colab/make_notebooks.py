@@ -99,9 +99,47 @@ def write(name, cells):
     print("wrote", os.path.relpath(path, os.path.dirname(HERE)))
 
 
-def badge(name):
+def badge(name, revision=REVISION):
     return (f"[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]"
-            f"(https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/{REVISION}/colab/{name})")
+            f"(https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/{revision}/colab/{name})")
+
+
+# Notebook 12 runs the independent enumeration certificates of audit/certificates/. They exist only on the
+# review branch so far; set CERT_REVISION to REVISION once that branch is merged.
+CERT_REVISION = "review/short-version"
+CERT_SETUP = f'''# Setup: fetch the revision and install networkx at the version that produced the committed outputs
+REVISION = "{CERT_REVISION}"   # a branch or tag that contains audit/certificates/
+import os, sys, subprocess
+if not os.path.exists("minimal.py"):
+    while not os.path.exists("verify.py") and os.getcwd() != "/":   # inside a local checkout: go to its top folder
+        os.chdir("..")
+    if not os.path.exists("verify.py"):                             # on Colab: clone the revision
+        os.chdir("/content" if os.path.isdir("/content") else os.path.expanduser("~"))
+        if not os.path.exists("LOYOLA-PAPER"):
+            subprocess.run(["git", "clone", "--quiet", "--depth", "1", "--branch", REVISION,
+                            "{REPO_URL}"], check=True)
+        os.chdir("LOYOLA-PAPER")
+    os.chdir("audit/certificates")
+if "google.colab" in sys.modules:
+    subprocess.run([sys.executable, "-m", "pip", "install", "--quiet", "networkx==3.6.1"], check=True)
+import networkx
+print("python", sys.version.split()[0], "| networkx", networkx.__version__)
+print("commit", subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip())'''
+CERT_RUN = '''def run(*args):
+    """Run one certificate script, print its last line, return its full output."""
+    out = subprocess.run([sys.executable, *args], capture_output=True, text=True, check=True).stdout
+    print(args[0], "->", out.strip().splitlines()[-1])
+    return out
+
+a = run("minimal.py", "17")
+assert a.strip().splitlines()[-1] == "{'all': 13, 'chem': 16}"
+b = run("by_delta.py", "18")
+assert "'4': 16, '5': 16" in b and "'None': 13" in b and "'3'" not in b.splitlines()[-1]
+c = run("ratio_indices.py")
+assert "('SDD', 'chem'): 9" in c and "('ISDD', 'chem'): 10" in c
+d = run("witnesses.py")
+assert d.count("OK for every order") == 2
+print("ALL CERTIFICATES REPRODUCED")'''
 
 
 def main():
@@ -175,6 +213,19 @@ r = subprocess.run([PY, "audit/check_labels.py"], capture_output=True, text=True
 print(r.stdout[-1500:], r.stderr[-1500:])
 if r.returncode != 0:
     raise RuntimeError("label and reference check failed")'''),
+    ])
+    write("12_enumeration_certificates.ipynb", [
+        new_markdown_cell(f"# 12. Enumeration certificates (independent, about 2 minutes)\n\n"
+                          f"{badge('12_enumeration_certificates.ipynb', CERT_REVISION)}\n\n"
+                          "Re-runs the four scripts of `audit/certificates/`, written independently of the repository's "
+                          "verifiers: the minimal orders 13 (all trees) and 16 (maximum degree at most 4) at which distinct "
+                          "degree-pair profiles share a degree-ratio histogram, the first order for each bound on the maximum "
+                          "degree, the first orders at which SDD and ISDD merge distinct profiles (9 and 10), and the witness "
+                          "trees with the pendant-path construction. Exact rational arithmetic; only `networkx` is needed. "
+                          "No NIST data are used, and no Drive folder or state folder is involved, so this notebook can be "
+                          "run on its own, in any order."),
+        new_code_cell(CERT_SETUP),
+        new_code_cell(CERT_RUN),
     ])
     write("11_final_report.ipynb", [
         new_markdown_cell(f"# 11. Final report\n\n{badge('11_final_report.ipynb')}\n\n"
