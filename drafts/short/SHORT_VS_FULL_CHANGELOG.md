@@ -98,6 +98,9 @@ Result:
 ## Bibliography
 
 * `build.py` keeps exactly the entries `body.tex` cites (49 of the full paper's 56).
+* Both versions now credit Rada 2019, Example 2.6 (explicit order-29 trees with equal Randić index and
+  different class counts) and Gao and Gao 2024 (path/star extremality of exponential indices); both keys
+  were already in the bibliography, so the count is unchanged.
 * `build_supplement.py` adds to the supplement the four entries cited in S10: Carballosa et al. 2023,
   Molina–Sigarreta 2025, Granados 2025 and Portilla 2025.
 * Not cited anywhere yet, and worth adding:

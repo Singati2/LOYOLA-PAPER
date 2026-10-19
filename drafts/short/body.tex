@@ -335,7 +335,7 @@ The ceiling is attained at almost every parameter point.
   Song and Huang~\cite{SongHuang2023EDV} determined the trees of order at
   most $10$ with equal edge division vectors, which receive equal values of
   every edge-additive eccentric index; neither that partition of trees nor
-  ours refines the other. We found no earlier determination of the orders $13$ and
+  ours refines the other. Explicit trees of this kind for a single index were given by Rada~\cite[Example~2.6]{Rada2019ExpVDB}, who exhibits two trees on $29$ vertices that have different class counts and equal Randi\'c index. We found no earlier determination of the orders $13$ and
   $16$, or of explicit colliding trees for degree-ratio indices, in a
   literature search recorded in the repository~\cite{LoyolaRepo}.
 
@@ -623,7 +623,7 @@ attains the bound with two $(1,2)$-edges and $n-3$ $(2,2)$-edges. For $\gamma < 
 inequality reverses.
 \end{proof}
 
-Proposition~\ref{prop:extremal} is a consequence of the criteria of Cruz and Rada~\cite{CruzRada2019PathStar}; the direct proof above is included because it is short. For the weights $\varphi_{ij} = e^{\gamma q_{ij}}$ and $E = e^{\gamma/3}$, their function $f(i,j) = \tfrac{ij}{i+j}(\varphi_{ij} + 2\varphi_{12} - 3\varphi_{22})$ equals $2(E - 1)$ at $(1,2)$ and $(2,2)$. For $\gamma > 0$ it is larger at every other pair: if $i, j \ge 2$ then $\varphi_{ij} + 2E - 3 \ge 2(E-1) > 0$ and $ij/(i+j) > 1$, and for $(1,j)$, $j \ge 3$, one has $f \ge \tfrac34(e^{\gamma/2} + 2E - 3) > 2(E-1)$, since with $x = e^{\gamma/6} > 1$ this reads $3x^3 - 2x^2 - 1 = (x-1)(3x^2 + x + 1) > 0$. Theorem~2.1 of~\cite{CruzRada2019PathStar} then gives the lower bound with equality only for $P_n$, and their Theorem~3.1 gives the upper bound with equality only for $S_n$, because $e^{\gamma q}$ is largest at the pair $(1,n-1)$. For $\gamma < 0$ every inequality reverses. Among chemical trees the bound
+Proposition~\ref{prop:extremal} is a consequence of the criteria of Cruz and Rada~\cite{CruzRada2019PathStar}; the direct proof above is included because it is short. For the weights $\varphi_{ij} = e^{\gamma q_{ij}}$ and $E = e^{\gamma/3}$, their function $f(i,j) = \tfrac{ij}{i+j}(\varphi_{ij} + 2\varphi_{12} - 3\varphi_{22})$ equals $2(E - 1)$ at $(1,2)$ and $(2,2)$. For $\gamma > 0$ it is larger at every other pair: if $i, j \ge 2$ then $\varphi_{ij} + 2E - 3 \ge 2(E-1) > 0$ and $ij/(i+j) > 1$, and for $(1,j)$, $j \ge 3$, one has $f \ge \tfrac34(e^{\gamma/2} + 2E - 3) > 2(E-1)$, since with $x = e^{\gamma/6} > 1$ this reads $3x^3 - 2x^2 - 1 = (x-1)(3x^2 + x + 1) > 0$. Theorem~2.1 of~\cite{CruzRada2019PathStar} then gives the lower bound with equality only for $P_n$, and their Theorem~3.1 gives the upper bound with equality only for $S_n$, because $e^{\gamma q}$ is largest at the pair $(1,n-1)$. For $\gamma < 0$ every inequality reverses. Gao and Gao~\cite{GaoAMC2024} give general sufficient conditions for the path to be the unique minimal tree and the star the unique maximal tree of an exponential vertex-degree-based index, a class to which $LO(\cdot\,;0,0,\gamma) = \sum_{uv} e^{\gamma q_{uv}}$ belongs. Among chemical trees the bound
 $LO(T;0,0,\gamma) \le (n-1)e^{3\gamma/5}$ for $\gamma > 0$ is attained only
 for $n = 5$, and the maximal chemical trees for $n > 5$ are left open.
 
