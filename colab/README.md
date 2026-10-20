@@ -1,7 +1,9 @@
 # Running the whole computation in Google Colab
 
-This folder runs every script of the paper again, from the source records to the final
-tables, and checks that each output matches the committed one. Run the notebooks in their
+This folder runs every script in the plan of `pipeline.py` again, from the source records to the final
+tables (two independent cross-checks, `audit/permutation_pipeline_audit.py` and
+`audit/v4030/uncertain_source_crosscheck.py`, are outside the plan; the final report names them, and their
+committed outputs are separate evidence), and checks that each output matches the committed one. Run the notebooks in their
 numbered order, each in its own Colab session. Only the order of the computation lives here: the
 scripts stay where they are, so the paths used in the paper and in `REPRODUCE.md` stay valid.
 

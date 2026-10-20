@@ -246,7 +246,7 @@ def main():
         new_markdown_cell(f"# 0. Setup and plan of the full run\n\n{badge('00_setup_and_plan.ipynb')}\n\n"
                           "Run the notebooks of this folder in their numbered order, each in its own Colab session. "
                           "This one checks the setup and prints the plan. Notebooks 01 to 08 run every script of the "
-                          f"paper (about {total // 60} hours on the lab machine, most of it in notebooks 02, 04, 05 and 07), "
+                          f"plan (about {total // 60} hours on the lab machine, most of it in notebooks 02, 04, 05 and 07), "
                           "09 and 10 are optional (Lean proofs, compiled PDFs), and 11 compares every output with the commit.\n\n"
                           "While the repository is private, either add a Colab secret `GITHUB_TOKEN` (a GitHub token with "
                           "read access to the repository) or put `LOYOLA-PAPER.bundle` (made with "

@@ -23,7 +23,9 @@ PIN = _git("rev-parse", "--verify", _args.pin + "^{commit}")
 REVISION = _args.revision or _git("rev-parse", "--abbrev-ref", "HEAD")
 if REVISION == "HEAD":
     sys.exit("detached HEAD: give --revision (a branch or tag that contains the pinned commit)")
-COLAB = "https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/" + PIN + "/notebooks/{}"
+# The badge opens the notebook from the branch: the copy committed at PIN itself carries an older pin, while the
+# branch copy carries PIN, and PIN (not the link) fixes the code that runs.
+COLAB = "https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/" + REVISION + "/notebooks/{}"
 
 SETUP = r'''# Setup: runs inside the repository, or on Google Colab (clones the pinned revision first).
 import os, sys, subprocess, platform

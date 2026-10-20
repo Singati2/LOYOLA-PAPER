@@ -88,6 +88,15 @@ STAGES = [
 # scripts whose exit status is their whole result (they write no tracked file)
 CHECK_ONLY = {"external/check_nonane_structures.py", "audit/check_exploratory_outputs.py", "audit/check_source_identities.py",
               "audit/check_mathematics.py", "prose_numbers_check.py", "external/test_regressions.py", "external/test_baselines.py"}
+# Independent cross-checks that neither replay harness runs (each takes its own environment or about an hour).
+# They are listed in every report so that a complete replay is not read as covering them; their committed
+# outputs are the separate evidence and must be rerun on their own before claiming that they reproduce.
+NOT_REPLAYED = {
+    "audit/permutation_pipeline_audit.py": "scikit-learn re-implementation of the 200-permutation check; about 30-60 min; "
+                                           "evidence audit/permutation_pipeline_audit_out.txt",
+    "audit/v4030/uncertain_source_crosscheck.py": "pandas/scikit-learn cross-check of uncertain_source_sensitivity.py; "
+                                                  "evidence audit/v4030/uncertain_source_crosscheck_out.txt",
+}
 # outputs that already differed in the last digits on the lab replay of 09ceba8 (Linux) from the committed
 # outputs (macOS); see verification_logs/lab_09ceba8/NOTE.md. They are still reported as DIFFERS.
 SEEN_BEFORE = {
@@ -369,8 +378,9 @@ def report():
               f"{same} identical to the commit (PDFs by canonical form); {len(differ)} differ.", ""]
     for rel in differ:
         lines.append(f"* DIFFERS `{rel}`" + (f": {SEEN_BEFORE[rel]}" if rel in SEEN_BEFORE else ""))
-    verdict = ("COMPLETE: every script ran and exited 0, every expected output is present and unchanged, "
-               "and every rewritten output is identical"
+    lines += ["", "## Not replayed by this pipeline", ""] + [f"* `{k}`: {v}" for k, v in NOT_REPLAYED.items()]
+    verdict = ("COMPLETE: every script of the plan ran and exited 0, every expected output is present and unchanged, "
+               f"and every rewritten output is identical ({len(NOT_REPLAYED)} independent cross-checks are outside the plan, listed above)"
                if counts["OK"] == len(ORDER) and not differ else
                f"{counts['OK']} scripts OK, {counts['PROBLEM']} PROBLEM, {counts['STALE']} STALE, "
                f"{counts['NOT RUN']} NOT RUN; {len(differ)} outputs differ")

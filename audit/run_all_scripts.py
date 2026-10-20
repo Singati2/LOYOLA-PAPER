@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Run EVERY script of the repository and check that each one reproduces what
+"""Run every script of the repository (except the independent cross-checks in NOT_REPLAYED, which are
+listed in the output) and check that each one reproduces what
 is committed.
 
 Each script runs in its own isolated copy of the git-tracked tree (so scripts
@@ -58,6 +59,15 @@ SCRIPTS = [
     ("prose_numbers_check.py", False), ("external/test_regressions.py", False), ("external/test_baselines.py", False),
     ("verify_loyola_v35.py", True), ("manifest.py", False),
 ]
+# Independent cross-checks that neither replay harness runs (each takes its own environment or about an hour).
+# They are listed in every report so that a complete replay is not read as covering them; their committed
+# outputs are the separate evidence and must be rerun on their own before claiming that they reproduce.
+NOT_REPLAYED = {
+    "audit/permutation_pipeline_audit.py": "scikit-learn re-implementation of the 200-permutation check; about 30-60 min; "
+                                           "evidence audit/permutation_pipeline_audit_out.txt",
+    "audit/v4030/uncertain_source_crosscheck.py": "pandas/scikit-learn cross-check of uncertain_source_sensitivity.py; "
+                                                  "evidence audit/v4030/uncertain_source_crosscheck_out.txt",
+}
 # Scripts that only check (exit status is their result) and write no tracked
 # file; for every other script a run that rewrites nothing is a PROBLEM.
 CHECK_ONLY = {"external/check_nonane_structures.py", "audit/check_exploratory_outputs.py", "audit/check_source_identities.py",
@@ -152,6 +162,7 @@ def main():
                        else ("; check-only script, writes no file" if check_only else "; WROTE NO TRACKED FILE")))
                     + (f"; new files {res['new']}" if res["new"] else "") + f"; last line: {res['tail']}")
             lines.append(line); print(line, flush=True)
+    lines += [f"NOT REPLAYED (independent cross-check, run separately): {k}: {v}" for k, v in NOT_REPLAYED.items()]
     kept = KEEP is not None and any(fns for _, _, fns in os.walk(KEEP))
     lines.append(f"RESULT: {'every script exits 0 and reproduces its committed outputs' if bad == 0 else str(bad) + ' PROBLEM(S); ' + ('changed outputs kept in ' + KEEP if kept else 'no changed outputs to keep')}")
     print(lines[-1])

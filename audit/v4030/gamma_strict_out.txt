@@ -1,4 +1,4 @@
 A: decane T_B, strict: recount from 50 raw seed rows: median dQ2 -0.1294, dQ2 > 0 in 12/50, min -0.4771, max +0.1367
-A: decane T_B, strict: n=28, median Q2 GM12 0.5119, LOh 0.3813, median dQ2 -0.1294, LOh better in 12/50 seeds, seed-bootstrap interval [-0.1858, -0.0292], rule: no evidence that gamma adds value
+A: decane T_B, strict: n=28, median Q2 GM12 0.5119, LOh 0.3813, median dQ2 -0.1294, LOh better in 12/50 seeds, 95% molecule-bootstrap interval (conditional on fitted outer predictions) [-0.1858, -0.0292], rule: no evidence that gamma adds value
 B: pooled T_B (size-adjusted), strict (C9-C10 only): recount from 50 raw seed rows: median dQ2 -0.0397, dQ2 > 0 in 10/50, min -0.1497, max +0.0727
-B: pooled T_B (size-adjusted), strict (C9-C10 only): n=42, median Q2 GM12 0.8353, LOh 0.7870, median dQ2 -0.0397, LOh better in 10/50 seeds, seed-bootstrap interval [-0.0907, -0.0053], rule: no evidence that gamma adds value
+B: pooled T_B (size-adjusted), strict (C9-C10 only): n=42, median Q2 GM12 0.8353, LOh 0.7870, median dQ2 -0.0397, LOh better in 10/50 seeds, 95% molecule-bootstrap interval (conditional on fitted outer predictions) [-0.0907, -0.0053], rule: no evidence that gamma adds value

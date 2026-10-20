@@ -318,6 +318,12 @@ def bp_mean_of_avgs():
                if r["status"] == "INCLUDED" and r["rule_or_reason"].startswith("mean of 2 NIST averages"))
 
 
+def bp_aggregate_tier():
+    """Number of boiling points the quality ledger classifies as A-AGG (derived from NIST averages)."""
+    return sum(1 for r in rows("audit", "final", "scripts", "claim_provenance_ledger.csv")
+               if r["dataset"] == "bp" and r["tier"] == "A-AGG")
+
+
 def bp_quality_q2():
     return float(re.search(r"decanes: ridge Q2 [\d.]+ as registered, ([\d.]+) without them", text("audit", "final", "scripts", "bp_duplicate_sensitivity_out.txt")).group(1))
 
@@ -1116,6 +1122,7 @@ REGISTRY = [
     E("v4029_bpB_dq", "main", r"& \$0\.977\$ & \$0\.977\$ & \$(?P<v>[+-]?[\d.]+)\$ & \$25\$", "bps('B','median_dQ2_LOh_GM12')", 0.00005, "bp_results_summary.csv"),
     E("v4029_avg57", "supp", r"NIST averages, \$(?P<v>\d+)\$ of the \$100\$ values", "bp_avg_stats()[0]", 0, "bp_provenance.csv AVG rows"),
     E("corr_meanavg", "supp", r"and \$(?P<v>\d+)\$ further value is the mean of two NIST averages", "bp_mean_of_avgs()", 0, "bp_provenance.csv 'mean of 2 NIST averages' rows"),
+    E("corr_agg58", "supp", r"so \$(?P<v>\d+)\$ values rest on NIST averages", "bp_aggregate_tier()", 0, "claim_provenance_ledger.csv bp rows of tier A-AGG"),
     E("v4029_avg6K", "supp", r"quoted uncertainty of an average \(up to \$(?P<v>\d+)\$\\,K\)", "bp_avg_stats()[1]", 0, "bp_provenance.csv largest AVG uncertainty"),
     E("v4029_qual863", "supp", r"decane ridge gives \$Q\^2 = (?P<v>[\d.]+)\$ \(exploratory\)", "bp_quality_q2()", 0.0005, "audit/final/scripts/bp_duplicate_sensitivity_out.txt"),
     E("s8_tie_lo1", "supp", r"three decimals \(\$(?P<v>[\d.]+)\$ against", "tmb_excluded_absr(1)", 0.00005, "v40.29: LO(0,0,1), TMB excluded"),
