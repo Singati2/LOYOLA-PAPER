@@ -131,3 +131,26 @@ Not run: any notebook, any pipeline stage, `verify.py`, the NIST download, the t
 ## Integration note (2026-10-20)
 
 Fixed in the candidate after this audit: README notebook-output statement, colab/README NIST download statement, reviewer-guide description of an existing checkout and of the Python used by notebooks/. Still open (test in real Colab before changing code): notebooks/ installs the locked versions into Colab's own Python; notebook 06 venv with ensurepip. Links: the candidate's notebook commit is re-pinned at the end of this review; see 11_VERIFICATION_AND_RELEASE_MATRIX.md for the final commits.
+
+## Simulated clean Colab-style run (2026-10-20) — NOT a real Colab run
+
+Environment: a fresh Python 3.12.15 virtual environment with Colab-era numpy 2.0.2 and pandas 2.2.2
+preinstalled, ipykernel and nbclient; an IPython startup hook that registers a `google.colab` module (so the
+notebooks take their Colab branch) and a `google.colab.drive.mount` that maps to a local folder. Each notebook
+was executed with nbclient from an empty working folder, so its setup cell cloned the pushed branch from
+GitHub and checked out the pin. Pin under test: `0477cdf` (the setup and Drive code are identical in the final
+generator; the final notebooks pin `c48bad0`).
+
+| Notebook | Result | Time |
+|---|---|---|
+| `notebooks/01_data` | 9 checks, 0 mismatches; locked numpy 2.4.4 / scipy 1.17.1 installed into the 3.12 kernel; result table saved to the simulated Drive | 48 s |
+| `notebooks/02_mathematics` | 20 checks, 0 mismatches; saved | 25 s |
+| `notebooks/03_degeneracy` | 25 checks, 0 mismatches; saved | 14 s |
+| `notebooks/04_octane_correlations` | 69 checks, 0 mismatches; saved | 3 s |
+| `notebooks/05_boiling_points` (`RUN_SLOW = False`) | 27 checks, 0 mismatches; saved | 1337 s |
+| `notebooks/06_verification_suite` | environment built with uv: Python 3.13.16; `ALL PASS (fast path, offline: ...)`; 6 checks, 0 mismatches; saved | 964 s |
+| `colab/12_enumeration_certificates` (from GitHub) | `ALL CERTIFICATES REPRODUCED` | — |
+
+Also observed: the pin guard stops with `REVISION MISMATCH` when an existing clone is at another commit.
+What this does not establish: Colab's real image (its Python, preinstalled packages, pip resolver
+behaviour), the real Drive consent flow, Colab time limits. The essential path still needs one real run.

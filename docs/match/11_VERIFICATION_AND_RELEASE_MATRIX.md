@@ -28,6 +28,7 @@ documentation. The runs below were made on `672a5b3` (which contains `b7f50c0` u
 | `verify.py --everything` / Colab stage 7 | — | candidate | **NOT RUN** | many hours; author approval |
 | Lean build | `formal/verify.sh` | candidate | **NOT RUN** (`formal/` unchanged since the last recorded pass at `3af7f67`) | — |
 | Any Google Colab session | — | any | **NOT TESTED IN REAL COLAB** | see `10_COLAB_REPRODUCIBILITY_TEST.md` |
+| Simulated clean Colab-style runtime (Python 3.12, clone from GitHub, fake `google.colab`), notebooks 01-06 and colab/12 | nbclient | pin `0477cdf` (same setup code as `c48bad0`) | PASS: 01 9/0, 02 20/0, 03 25/0, 04 69/0, 05 27/0, 06 ALL PASS on Python 3.13.16 (6/0), colab/12 ALL CERTIFICATES REPRODUCED | about 40 min; `10_COLAB_REPRODUCIBILITY_TEST.md` |
 | Cross-checks outside the replay plan | `audit/permutation_pipeline_audit.py`, `audit/v4030/uncertain_source_crosscheck.py` | candidate | NOT RUN (committed outputs from older commits) | — |
 
 ## Earlier evidence (certifies only its own commit)
