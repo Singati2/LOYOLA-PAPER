@@ -193,26 +193,23 @@
 \maketitle
 
 \begin{abstract}%\blfootnote{\doclicenseThis}
-  The two-parameter Gutman--Milovanovi\'c family
-  $M_{\alpha,\beta}(G) = \sum_{uv \in E(G)} (d_u d_v)^{\alpha} (d_u + d_v)^{\beta}$
-  unifies the Zagreb, Randi\'c, sum-connectivity and related degree-based
-  indices. We study its normalised degree-imbalance exponential
-  extension, the \emph{Loyola index family}
-  \begin{equation*}
-  LO(G;\alpha,\beta,\gamma)
-  \;=\; \sum_{uv \in E(G)}
-  (d_u d_v)^{\alpha}\,(d_u + d_v)^{\beta}\,
-  \exp\!\left(\gamma\,\frac{|d_u - d_v|}{d_u + d_v}\right),
-  \end{equation*}
-  with $LO(G;\alpha,\beta,0) = M_{\alpha,\beta}(G)$ identically.
-  By theorems of Rada, the points $LO(G;0,0,\gamma)$ at algebraic
-  $\gamma \neq 0$ separate exactly the imbalance histograms, and every
-  degree-ratio index, the degree-ratio Sombor index included, carries no more
-  information.
-  By exhaustive enumeration, the histogram determines the degree-pair counts of a tree up to order twelve, but not from order thirteen (sixteen for chemical trees). We also bound the order
-  exchanges along $\gamma$ and determine the extremal trees of the
-  pure-$\gamma$ points. Pre-registered tests on measured boiling points
-  did not demonstrate a predictive gain from $\gamma$. In an exploratory comparison, a gain on vaporisation enthalpies seen in a narrow search box shrinks to about zero once the parent is searched over a box that does not truncate it.
+  The Gutman--Milovanovi\'c index $M_{\alpha,\beta}(G)$, the sum of
+  $(d_u d_v)^{\alpha} (d_u + d_v)^{\beta}$ over the edges $uv$ of $G$, unifies
+  the Zagreb and Randi\'c indices. The \emph{Loyola index family}
+  $LO(G;\alpha,\beta,\gamma)$ multiplies the term of each edge by
+  $e^{\gamma q_{uv}}$, where $q_{uv} = |d_u - d_v|/(d_u + d_v)$ is its
+  normalised degree imbalance, so that $LO(G;\alpha,\beta,0) = M_{\alpha,\beta}(G)$. By theorems of Rada, the
+  points $LO(G;0,0,\gamma)$ at algebraic $\gamma \neq 0$ separate exactly the
+  histograms of edge imbalances, and no degree-ratio index, such as the
+  degree-ratio Sombor index, separates more. By
+  exhaustive enumeration, this histogram determines the degree-pair counts of
+  a tree up to order twelve (fifteen for chemical trees), with explicit
+  counterexamples at every larger order. We also show that two chemical graphs exchange order at most
+  five times along $\gamma$, and that the path and the star are the extremal
+  trees of the pure-$\gamma$ points. Pre-registered tests on measured boiling
+  points did not demonstrate a predictive gain from $\gamma$, and an
+  exploratory gain on vaporisation enthalpies shrinks to about zero once the
+  parent is searched over a box that does not truncate it.
 \end{abstract}
 
 \onehalfspacing

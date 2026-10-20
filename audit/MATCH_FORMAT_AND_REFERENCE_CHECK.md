@@ -14,7 +14,7 @@ Kırgız, MATCH 97 (2027) 121–134).
 | Page size, font size | A5 (419.5 × 595.3 pt), 10 pt, same as the published papers |
 | First page (header box, title, authors, address, e-mail, "Received", abstract, footnote) | same layout as Rada 2026 when rendered side by side |
 | Running page number, section headings, line spacing (page 2) | same as Rada 2026 |
-| Abstract | no citations or cross-references (template rule). Since the Oregon State affiliation line was added (2026-10-19) its last three lines run onto page 2, as the short version's abstract already did; MATCH sets no rule on this |
+| Abstract | rewritten 2026-10-19 to the current MATCH pattern: one paragraph, 182 words (16 abstracts of MATCH 97 (2027): median 167, range 41 to 248), object defined first with short inline formulas, results next, statistics in one closing sentence; no citations or cross-references (template rule); fits on page 1 with no overfull line. Content kept: the family and its reduction to M_{alpha,beta}, Rada's separation theorem, the shared limit of degree-ratio indices, orders 12/15 with counterexamples at every larger order, at most five order exchanges, the extremal trees, both statistical outcomes |
 | Keywords, MSC | none (template: "No keywords! No Mathematics Subject Classification!") |
 | References | alphabetical by first author, as required; format follows the template examples |
 | E-mail line | now lists every author's address in author order, as recent multi-author MATCH papers do: nataraad@oregonstate.edu (Advik Natarajan; Oregon State University mathematics directory, 2026-10-19), gshiwakoti2022@fau.edu (supplied by Ganesh Shiwakoti), marockiaraj@gmail.com |
