@@ -68,13 +68,11 @@ volume 96, issue 3) and only the first page; both were checked against MATCH's c
 
 Open points for the authors:
 
-* **LabaufGreenshieldsRossini1961**: the article exists (J. Chem. Eng. Data 6 (1961) 261–263,
-  DOI 10.1021/je60010a023). The publisher's metadata spells the first author "Abbas Labauf"; OpenAlex and
-  Semantic Scholar repeat it, but they copy that same deposit, so this is one source, not three. The
-  same author appears as "Labbauf" on his other papers and in NIST's attribution. The authors chose
-  "Labbauf" in v36 after checking Crossref (V35_TO_V36_SCIENTIFIC_CHANGELOG.md); that choice is kept.
-  The printed byline could not be read (the ACS site refuses automated access); checking it needs a
-  person with ACS access. The in-text "NIST lists 4 under Labbauf et al." quotes NIST's spelling.
+* **LabaufGreenshieldsRossini1961**: resolved 2026-10-19. Ganesh Shiwakoti checked the printed article
+  (J. Chem. Eng. Data 6 (1961) 261–263, DOI 10.1021/je60010a023): the byline reads "A. Labauf", as in the
+  publisher's metadata. The bibliography entries of the paper, the supplement and the short versions, and the
+  supplement's in-text author list, now read "Labauf". Where the text quotes NIST's attribution ("NIST lists 4
+  under Labbauf et al.") NIST's spelling is kept and "(printed as Labauf)" is added.
 * ShirdelRezapourSayadi2013HM was corrected by Basavanagoud and Patil (Iran. J. Math. Chem. 7 (2016)).
   The paper cites it only for the hyper-Zagreb index name, which the correction does not affect.
 * Affiliations (2026-10-19, on the authors' instruction): Advik Natarajan, Department of Mathematics, Oregon State University (the department directory lists him as a graduate student); Michael Arockiaraj, Loyola College, now affiliation c.
