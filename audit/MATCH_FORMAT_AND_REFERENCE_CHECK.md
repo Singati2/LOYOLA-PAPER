@@ -27,7 +27,8 @@ Kırgız, MATCH 97 (2027) 121–134).
 |---|---|---|
 | Last section | "Conclusion(s)" or "Concluding remarks": summary of results, open problems (Rada, MATCH 96 (2026) 841–863; Nyauli–Buragohain and Gutman et al., MATCH 97 (2027)) | "Conclusion": summary, open problems; same pattern |
 | Table captions | bold "Table N." label, small type, from the template's caption settings; placed above the table in 6 of the 9 MATCH 97(2) papers with tables, below in 3 | bold "Table N.", small type, above; matches the majority practice |
-| Figures | — | none in `main.tex` (both are in the supplement) |
+| Figures | caption below the figure, bold "Figure N." (Rada, MATCH 96 (2026), Figure 1; Gutman et al., MATCH 97 (2027) 165–174, Figures 1–4); colour figures cost 90 EUR each | none in `main.tex` (0 figure environments, 0 graphics calls). The two figures are in the supplement, captions below, bold "Figure N."; both are in colour (56% and 20% coloured pixels), which costs nothing as long as the supplement is not part of the journal's pages |
+| Supplementary material | not mentioned on MATCH's author pages or in any of 16 MATCH 97(2) papers: MATCH publishes the paper only | `main.tex` cites the supplement 17 times; the data-availability paragraph now names the file (`LOYOLA_supplement.pdf` in the repository; `drafts/short/supplement_short.pdf` for the short version) |
 | Data availability | absent in the 12 recent MATCH papers checked; not required or forbidden by MATCH | present, because it states that the NIST pages are not redistributed; kept |
 | Acknowledgment | template's `\acknowledgment` command, as in recent papers | same |
 
