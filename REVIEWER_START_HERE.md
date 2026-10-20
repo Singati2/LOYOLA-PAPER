@@ -5,7 +5,7 @@ This repository holds the paper "The Loyola Index Family and the Resolution Limi
 code, tests, notebooks and Lean proofs. Everything stays in one repository.
 
 **Pinned commit.** Every notebook, in `notebooks/` and in `colab/`, runs one exact commit,
-`549203c8311741f53c67bdc8ce466d22069daae0`, on the branch `review/corrections-impl-2026-10-19`. On Colab the setup cell clones that branch and checks out the
+`13a64e1065febd407aed643172195dacb39b674e`, on the branch `review/corrections-impl-2026-10-19`. On Colab the setup cell clones that branch and checks out the
 pinned commit. An existing checkout is moved to it if it is clean and rejected if it has local
 changes. Locally, a checkout of another commit, or one with local changes, stops the notebook with
 `REVISION MISMATCH` (`notebooks/`; set `LOYOLA_ALLOW_MISMATCH=1` to run anyway, with a printed
@@ -20,7 +20,7 @@ later step and is not needed by the notebooks.
 
 ```bash
 git clone https://github.com/Singati2/LOYOLA-PAPER.git && cd LOYOLA-PAPER
-git checkout 549203c8311741f53c67bdc8ce466d22069daae0   # the pinned commit
+git checkout 13a64e1065febd407aed643172195dacb39b674e   # the pinned commit
 python3 -m venv .venv && . .venv/bin/activate
 python -m pip install -r requirements-lock.txt          # exact versions behind the committed outputs
 python verify.py --offline                               # fast path, about 6 to 30 minutes
@@ -45,12 +45,12 @@ any of them differ. Each step is labelled with one of three kinds:
 
 | Notebook | Covers | Runtime (laptop CPU) | Colab |
 |---|---|---|---|
-| `01_data.ipynb` | datasets, DATA/ copies, provenance counts (39 agreement, 8 cannot verify) | seconds | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/549203c8311741f53c67bdc8ce466d22069daae0/notebooks/01_data.ipynb) |
-| `02_mathematics.ipynb` | Lemma 1, the colliding trees of orders 13 and 16, Example 2, certificates | under 1 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/549203c8311741f53c67bdc8ce466d22069daae0/notebooks/02_mathematics.ipynb) |
-| `03_degeneracy.ipynb` | Table 2 and the degeneracy counts, by full tree enumeration | 1 to 5 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/549203c8311741f53c67bdc8ce466d22069daae0/notebooks/03_degeneracy.ipynb) |
-| `04_octane_correlations.ipynb` | all 60 correlations of Table 4; tetramethylbutane audit | seconds | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/549203c8311741f53c67bdc8ce466d22069daae0/notebooks/04_octane_correlations.ipynb) |
-| `05_boiling_points.ipynb` | Table 5 baselines and the 200-permutation check. `RUN_SLOW = True` regenerates the 50-seed medians (about 1 h) and the resampling (about 3.5 h) | about 5 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/549203c8311741f53c67bdc8ce466d22069daae0/notebooks/05_boiling_points.ipynb) |
-| `06_verification_suite.ipynb` | `verify.py` fast path in a dedicated environment with the pinned versions | about 35 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/549203c8311741f53c67bdc8ce466d22069daae0/notebooks/06_verification_suite.ipynb) |
+| `01_data.ipynb` | datasets, DATA/ copies, provenance counts (39 agreement, 8 cannot verify) | seconds | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/13a64e1065febd407aed643172195dacb39b674e/notebooks/01_data.ipynb) |
+| `02_mathematics.ipynb` | Lemma 1, the colliding trees of orders 13 and 16, Example 2, certificates | under 1 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/13a64e1065febd407aed643172195dacb39b674e/notebooks/02_mathematics.ipynb) |
+| `03_degeneracy.ipynb` | Table 2 and the degeneracy counts, by full tree enumeration | 1 to 5 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/13a64e1065febd407aed643172195dacb39b674e/notebooks/03_degeneracy.ipynb) |
+| `04_octane_correlations.ipynb` | all 60 correlations of Table 4; tetramethylbutane audit | seconds | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/13a64e1065febd407aed643172195dacb39b674e/notebooks/04_octane_correlations.ipynb) |
+| `05_boiling_points.ipynb` | Table 5 baselines and the 200-permutation check. `RUN_SLOW = True` regenerates the 50-seed medians (about 1 h) and the resampling (about 3.5 h) | about 5 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/13a64e1065febd407aed643172195dacb39b674e/notebooks/05_boiling_points.ipynb) |
+| `06_verification_suite.ipynb` | `verify.py` fast path in a dedicated environment with the pinned versions | about 35 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/13a64e1065febd407aed643172195dacb39b674e/notebooks/06_verification_suite.ipynb) |
 
 On Colab the setup cell clones the branch, checks out the pinned commit and installs
 `requirements-lock.txt` and `requirements-extras-lock.txt`. Google Colab is a convenience, not a requirement. The notebooks are
