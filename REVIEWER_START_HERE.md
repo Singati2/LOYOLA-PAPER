@@ -4,8 +4,11 @@ This repository holds the paper "The Loyola Index Family and the Resolution Limi
 (`main.tex`, `supplement.tex`, compiled as `LOYOLA_paper.pdf` and `LOYOLA_supplement.pdf`), its data,
 code, tests, notebooks and Lean proofs. Everything stays in one repository.
 
-**Pinned commit.** Every notebook, in `notebooks/` and in `colab/`, runs one exact commit,
-`13a64e1065febd407aed643172195dacb39b674e`, on the branch `review/corrections-impl-2026-10-19`. On Colab the setup cell clones that branch and checks out the
+**Pinned commit.** The code under review is commit `95c840c857d00413e6a3bf7b83989216d5c79b14` on the branch
+`review/corrections-impl-2026-10-19`. Every notebook, in `notebooks/` and in `colab/`, runs exactly that
+commit (its `PIN`). The notebooks are committed one step later, in `23bfd45baecc1335f2bc075c02743ab2905b60cf`, which changes nothing but
+the notebooks; the Colab links below open them from that commit, so a link always runs the pinned code.
+(A notebook opened from an older commit carries that commit's older pin.) On Colab the setup cell clones that branch and checks out the
 pinned commit. An existing checkout is moved to it if it is clean and rejected if it has local
 changes. Locally, a checkout of another commit, or one with local changes, stops the notebook with
 `REVISION MISMATCH` (`notebooks/`; set `LOYOLA_ALLOW_MISMATCH=1` to run anyway, with a printed
@@ -20,7 +23,7 @@ later step and is not needed by the notebooks.
 
 ```bash
 git clone https://github.com/Singati2/LOYOLA-PAPER.git && cd LOYOLA-PAPER
-git checkout 13a64e1065febd407aed643172195dacb39b674e   # the pinned commit
+git checkout 95c840c857d00413e6a3bf7b83989216d5c79b14   # the pinned commit
 python3 -m venv .venv && . .venv/bin/activate
 python -m pip install -r requirements-lock.txt          # exact versions behind the committed outputs
 python verify.py --offline                               # fast path, about 6 to 30 minutes
@@ -45,12 +48,12 @@ any of them differ. Each step is labelled with one of three kinds:
 
 | Notebook | Covers | Runtime (laptop CPU) | Colab |
 |---|---|---|---|
-| `01_data.ipynb` | datasets, DATA/ copies, provenance counts (39 agreement, 8 cannot verify) | seconds | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/13a64e1065febd407aed643172195dacb39b674e/notebooks/01_data.ipynb) |
-| `02_mathematics.ipynb` | Lemma 1, the colliding trees of orders 13 and 16, Example 2, certificates | under 1 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/13a64e1065febd407aed643172195dacb39b674e/notebooks/02_mathematics.ipynb) |
-| `03_degeneracy.ipynb` | Table 2 and the degeneracy counts, by full tree enumeration | 1 to 5 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/13a64e1065febd407aed643172195dacb39b674e/notebooks/03_degeneracy.ipynb) |
-| `04_octane_correlations.ipynb` | all 60 correlations of Table 4; tetramethylbutane audit | seconds | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/13a64e1065febd407aed643172195dacb39b674e/notebooks/04_octane_correlations.ipynb) |
-| `05_boiling_points.ipynb` | Table 5 baselines and the 200-permutation check. `RUN_SLOW = True` regenerates the 50-seed medians (about 1 h) and the resampling (about 3.5 h) | about 5 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/13a64e1065febd407aed643172195dacb39b674e/notebooks/05_boiling_points.ipynb) |
-| `06_verification_suite.ipynb` | `verify.py` fast path in a dedicated environment with the pinned versions | about 35 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/13a64e1065febd407aed643172195dacb39b674e/notebooks/06_verification_suite.ipynb) |
+| `01_data.ipynb` | datasets, DATA/ copies, provenance counts (39 agreement, 8 cannot verify) | seconds | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/23bfd45baecc1335f2bc075c02743ab2905b60cf/notebooks/01_data.ipynb) |
+| `02_mathematics.ipynb` | Lemma 1, the colliding trees of orders 13 and 16, Example 2, certificates | under 1 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/23bfd45baecc1335f2bc075c02743ab2905b60cf/notebooks/02_mathematics.ipynb) |
+| `03_degeneracy.ipynb` | Table 2 and the degeneracy counts, by full tree enumeration | 1 to 5 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/23bfd45baecc1335f2bc075c02743ab2905b60cf/notebooks/03_degeneracy.ipynb) |
+| `04_octane_correlations.ipynb` | all 60 correlations of Table 4; tetramethylbutane audit | seconds | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/23bfd45baecc1335f2bc075c02743ab2905b60cf/notebooks/04_octane_correlations.ipynb) |
+| `05_boiling_points.ipynb` | Table 5 baselines and the 200-permutation check. `RUN_SLOW = True` regenerates the 50-seed medians (about 1 h) and the resampling (about 3.5 h) | about 5 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/23bfd45baecc1335f2bc075c02743ab2905b60cf/notebooks/05_boiling_points.ipynb) |
+| `06_verification_suite.ipynb` | `verify.py` fast path in a dedicated environment with the pinned versions | about 35 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/23bfd45baecc1335f2bc075c02743ab2905b60cf/notebooks/06_verification_suite.ipynb) |
 
 On Colab the setup cell clones the branch, checks out the pinned commit and installs
 `requirements-lock.txt` and `requirements-extras-lock.txt`. Google Colab is a convenience, not a requirement. The notebooks are
@@ -69,7 +72,7 @@ regenerated by `notebooks/gen_notebooks.py`.
 | Figures S1, S2 | `generate_loyola_v35_figures.py` | `verify_loyola_v35.py` (canonical PDF content) |
 | Tables S1 to S5 | `verify_loyola_v35.py`, `ablation_gm_vs_lo.py`, `expanded_robustness_v35.py`, `multi_order_degeneracy.py`, `octane_data.py` | `verify_loyola_v35.py` |
 | Tables S6, S7 | `external/box_sensitivity.py`, `external/baselines.py`, `external/nonane_validation.py` | `external/verify_external.py` |
-| Numbers in the running text | committed outputs | `prose_numbers_check.py` (733 checked, 20 cited values not checkable) |
+| Numbers in the running text | committed outputs | `prose_numbers_check.py` (758 checked, 22 cited values not checkable, at the pinned commit) |
 
 `REPRODUCE.md` has the complete list, including every exploratory script.
 
@@ -79,8 +82,10 @@ regenerated by `notebooks/gen_notebooks.py`.
 |---|---|---|---|
 | `python verify.py` | core verifier, prose numbers, regression and baseline tests, certificates, manifest | 6 to 35 min | this is the GitHub Actions job (`.github/workflows`); it is the only level CI runs |
 | `python verify.py --full` | adds the external verifier, structural checks, 32-digit recount, verifier self-test, counter-attacks on the checkers, labels (needs `tectonic`) and Lean (needs `lake`) | about 1.5 to 2 h | if `tectonic` or `lake` is missing, the stage is printed as `[SKIP]` and the run ends `INCOMPLETE (full) ... SKIPPED: ...`, never `ALL PASS` |
-| `python verify.py --everything` | adds `audit/run_all_scripts.py`, which reruns every script in an isolated copy and compares every output | several hours | |
-| `formal/verify.sh` | Lean 4 proofs, 38 theorems, axioms limited to propext, Classical.choice and Quot.sound | about 1 min after the first build | the first build downloads and builds Mathlib (several GB of disk) |
+| `python verify.py --everything` | adds `audit/run_all_scripts.py`, which reruns every script of its list in an isolated copy and compares every output; the two independent cross-checks it does not run are named in its output (`NOT_REPLAYED`) and have their own committed outputs | several hours | |
+| `formal/verify.sh` | Lean 4 proofs: the 38 listed theorems, and an axiom check on all 52 declarations, axioms limited to propext, Classical.choice and Quot.sound | about 1 min after the first build | the first build downloads and builds Mathlib (several GB of disk) |
+
+What was and was not run at the pinned commit is recorded in `audit/CORRECTIONS_2026-10-19_STATUS.md`. Older logs describe their own commits only.
 
 ## Data and licences
 
@@ -94,7 +99,7 @@ regenerated by `notebooks/gen_notebooks.py`.
 These are disclosed, not resolved:
 
 - Seven octane gas-phase entropies match no primary source. The ΔH_vap of 2,2,3,3-tetramethylbutane has an unresolved reference state. Its acentric factor conflicts between compilations (0.247, 0.251, 0.255).
-- All 18 acentric factors and 29 of the 34 nonane vaporisation enthalpies appear only in compilations, with no primary determination identified. 57 of the 100 boiling points are direct NIST/TRC averages and one is the mean of two agreeing NIST/TRC averages; the source pages of these averages are not archived.
+- All 18 acentric factors and 29 of the 34 nonane vaporisation enthalpies appear only in compilations, with no primary determination identified. 57 of the 100 boiling points are direct NIST/TRC averages and one is the mean of two agreeing NIST/TRC averages, 58 in all; the source pages of these averages are not archived.
 - One citation's content is unverified: Konstantinova (1996), cited for the concept of degeneracy, is paywalled.
 - The novelty statement (no earlier determination of the orders 13 and 16) is an absence claim. The search behind it is in `audit/final/NOVELTY_SEARCH_LOG.md`.
 - `press_size` rejects a candidate when a leverage comes within 1e-6 of 1, even if the deleted fit is still defined. Such candidates have PRESS amplified by at least 10^6 and are never selected. The published outputs are byte-identical before and after this guard.
