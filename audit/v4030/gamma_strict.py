@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """The registered gamma comparison (Tests A and B of PREREG_v40, external/bp/bp_tests.run_test: GM in
-the wide box vs LO hybrid, 50 seeds, seed-bootstrap interval of the median difference) rerun on the
+the wide box vs LO hybrid, 50 seeds, 95% molecule-bootstrap interval of the median difference, conditional on the fitted outer
+predictions; the seeds are not resampled) rerun on the
 strict provenance subset (tiers A and B) of the boiling-point data (v40.30 audit; exploratory).
 The broad subset equals the full data for the boiling points (every value is A, A-AGG or B), so its
 result is the registered one. The strict pooled subset holds only C9 and C10 compounds (all C6-C8
@@ -31,7 +32,7 @@ for label, idx, zz in (("A: decane T_B, strict", dec, None), ("B: pooled T_B (si
     out.append(f"{label}: recount from 50 raw seed rows: median dQ2 {np.median(d):+.4f}, dQ2 > 0 in {(d > 0).sum()}/50, "
                f"min {d.min():+.4f}, max {d.max():+.4f}")
     out.append(f"{label}: n={sm[1]}, median Q2 GM12 {float(sm[4]):.4f}, LOh {float(sm[5]):.4f}, median dQ2 {float(sm[6]):+.4f}, "
-               f"LOh better in {sm[7]}/50 seeds, seed-bootstrap interval [{float(sm[8]):+.4f}, {float(sm[9]):+.4f}], rule: {sm[10]}")
+               f"LOh better in {sm[7]}/50 seeds, 95% molecule-bootstrap interval (conditional on fitted outer predictions) [{float(sm[8]):+.4f}, {float(sm[9]):+.4f}], rule: {sm[10]}")
     print(out[-1], flush=True)
 with open(os.path.join(HERE, "gamma_strict_seeds.csv"), "w", newline="") as f:
     w = csv.writer(f); w.writerow(["test", "seed", "Q2_GM2", "Q2_LO2", "Q2_GM12", "Q2_LOh"]); w.writerows(allseeds)
