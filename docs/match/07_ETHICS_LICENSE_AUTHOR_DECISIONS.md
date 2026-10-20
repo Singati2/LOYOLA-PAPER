@@ -62,6 +62,17 @@ work (including one's own) must be cited. AUTHOR DECISION:
   degree-pair ceiling, or state the relation in the cover letter;
 * ensure no text is reused between the manuscripts without attribution.
 
+Findings of the overlap check (`16_COMPANION_OVERLAP.md`): the overlap is in subject, not in text or
+results (no shared run of 8 or more words outside the bibliography; no shared data, figures, tables or
+numbers). The companion evaluates the Loyola family itself (MUST DISCLOSE) and builds on the same span fact
+(SHOULD CITE). The present paper began as "Paper 1 (Wuzi)" in the companion repository (May-June 2026,
+moved to LOYOLA-PAPER on 2026-10-05); those drafts are publicly visible in its history. The paper cited the
+companion in v40.5 and removed the citation in v40.10 ("no citation of unpublished work"). A journal-format
+version of the companion (Molecular Informatics style, June 2026) lists a fourth author, P. Chalise; no
+commit records a submission. The cover-letter draft now contains a disclosure paragraph with the facts the
+authors must confirm in brackets; a citation sentence for the paper is proposed in `16_...` as an AUTHOR
+DECISION (it reverses the v40.10 policy).
+
 ## 4. Authors, affiliations, correspondence
 
 As in `main.tex:178-185` and `supplement.tex:150-157` (identical; the short draft also identical):

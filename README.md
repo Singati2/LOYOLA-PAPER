@@ -96,7 +96,7 @@ regenerates them. The Lean proofs need a Lean toolchain and are not run in a not
 ## Current documents
 | File | Content |
 |---|---|
-| `main.tex`, `LOYOLA_paper.pdf` | the paper (44 A5 pages, MATCH template; one figure) |
+| `main.tex`, `LOYOLA_paper.pdf` | the paper (45 A5 pages, MATCH template; one figure) |
 | `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (27 pages) |
 | `DATA/` | every dataset, byte-identical copies, with a README |
 | `LOYOLA_FINAL_PAPER_OVERLEAF.zip` | Overleaf upload (both documents + figures) |

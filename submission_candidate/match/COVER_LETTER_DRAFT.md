@@ -27,9 +27,22 @@ extremal trees of the pure-imbalance points.
 **Relation to earlier work.** The separation statement is Rada's theorem applied to this family, and the
 linear dependence of every bond-incident-degree index on the edge-degree-pair counts is classical (Rada,
 MATCH 96 (2026)); we credit both in the text. The new content is the exact minimal orders 13 and 16 with
-their witnesses, the crossing bound and the extremal trees. [Related manuscript by the same authors:
-"Ten Edge-Degree Counts Are All a Degree-Based Topological Index Can See", in preparation and not
-submitted elsewhere — authors to confirm status and how it is cited.]
+their witnesses, the crossing bound and the extremal trees.
+
+**Related work by the same authors.** The three authors are also preparing a separate manuscript, "Ten
+Edge-Degree Counts Are All a Bond-Incident-Degree Index Can See: An Exact Redundancy Certificate and What It
+Leaves for New Molecular Descriptors" (G. Shiwakoti, A. Natarajan, M. Arockiaraj). It is [not submitted to
+any journal and not posted on a preprint server — authors to confirm, including for the June 2026
+journal-format version]; a draft and its code are public at
+https://github.com/Singati2/topological-index-orthogonality. That manuscript is a chemoinformatics study:
+it turns the known fact that every bond-incident-degree index is a linear combination of the
+edge-degree-pair counts (Rada, MATCH 96 (2026)) into a rank test on MoleculeNet data sets, and it includes
+the Loyola family among the indices it screens. It contains none of the theorems, enumerations, bounds or
+boiling-point and octane analyses of the present submission, and the two manuscripts share no text, data,
+figures or tables. Earlier drafts of the present paper, under the working name "Wuzi index", are visible in
+the public history of that repository and of https://github.com/Singati2/LOYOLA-PAPER; they have not been
+published or submitted elsewhere. [If the companion manuscript is submitted while this one is under review,
+we will inform the editor and cite it.]
 
 **Chemistry.** We test the family on octane properties, a pre-registered replication on nonanes and
 pre-registered tests on measured boiling points of acyclic alkanes. The results are negative or modest and

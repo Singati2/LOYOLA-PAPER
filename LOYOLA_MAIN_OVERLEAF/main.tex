@@ -285,7 +285,9 @@
   the partition function of an exponential family on the edges of $G$.
 
   On graphs with $\Delta \le 4$ every BID index is a linear functional
-  of the ten edge-degree-pair counts~\cite{Rada2026LinearVDB}, so the
+  of the ten edge-degree-pair counts, a representation used
+  in~\cite{Rada2019ExpVDB, RadaRodriguezSigarreta2022Weak} and developed
+  systematically in~\cite{Rada2026LinearVDB}, so the
   whole family lies in a fixed ten-dimensional space. Our questions
   concern a nonlinear family inside that space: which count vectors a
   parameter point separates, and how the index moves along $\gamma$.
@@ -294,20 +296,42 @@
   applications, and our tests agree. The family is not proposed as a
   better predictor, and the QSPR sets used here are small.
 
+  Several facts used below are known. Graphs with equal counts receive
+  equal values of every vertex-degree-based index, and attaching the same
+  pendant path to two such graphs gives examples of every larger
+  order~\cite[Section~3.1]{Rada2026LinearVDB}. An index whose edge weights
+  coincide on a class of degree pairs depends on a graph only through the
+  class sums of its counts~\cite[Proposition~2.5]{Rada2019ExpVDB}, and the
+  exponential of an index with algebraic edge weights separates exactly
+  these class sums~\cite[Theorem~3.4]{Rada2019ExpVDB}. The path and the
+  star are the extremal trees of the pure-$\gamma$ points by the criteria
+  of Cruz and Rada~\cite{CruzRada2019PathStar}. What is new here is where
+  these facts bind for chemical graphs. The $q$-histogram carries the full
+  degree-pair information of an alkane carbon skeleton up to order $15$
+  and not beyond, so no degree-ratio index, such as $GA$, $AG$ or the
+  diminished Sombor index, separates all skeletons of order $16$ or more.
+  At rational $(\alpha,\beta)$ a nonzero algebraic $\gamma$ never merges
+  two molecules that the parent index separates, and the order of two
+  chemical graphs changes at most five times as $\gamma$ varies.
+
   Our contributions are as follows.
   \begin{enumerate}
   \item[(i)] Two elementary facts: the imbalance direction is affinely independent of the parent coordinates once a vertex of degree at least $3$ is admitted (Lemma~\ref{prop:indep}), and $\log LO$ is a log-sum-exp and hence convex (Theorem~\ref{thm:logconvex}).
-  \item[(ii)] The ratio-plane theorem (Theorem~\ref{thm:ratioplane})
-  characterises exactly what the pure-$\gamma$ points at algebraic
-  $\gamma \neq 0$ discriminate, by Rada's Lindemann--Weierstrass
-  argument~\cite{Rada2019ExpVDB}, with tree collisions at every order
-  from $13$, and from $16$ for $\Delta \le 4$. That these orders are the
-  first is established by exhaustive enumeration. Its corollary extends the collisions to every
-  degree-ratio index, such as $GA$, $AG$ and the diminished Sombor index.
+  \item[(ii)] The ratio plane $\Pi$ (Theorem~\ref{thm:ratioplane}), on
+  which the family depends on a graph only through its $q$-histogram.
+  That the pure-$\gamma$ points at algebraic $\gamma \neq 0$ separate
+  exactly the $q$-histograms is Theorem~3.4 of~\cite{Rada2019ExpVDB}
+  applied to the weights $\gamma q_{ij}$, and that no degree-ratio index
+  separates more is Proposition~2.5 there. New are explicit trees with
+  distinct profiles and equal $q$-histograms at every order from $13$, and
+  from $16$ for $\Delta \le 4$, and the computer-assisted result that
+  these orders are the first. The corollary carries the collisions to
+  every degree-ratio index, such as $GA$, $AG$ and the diminished Sombor
+  index.
   \item[(iii)] A bound on the number of order exchanges along $\gamma$
   (Proposition~\ref{prop:laguerre}) and per-graph identifiability
   (Proposition~\ref{prop:identrank}).
-  \item[(iv)] Two octane collision pairs realising the known degree-pair ceiling (Proposition~\ref{prop:collision}), value counts for trees of orders $7$ to $17$, and structure sensitivity
+  \item[(iv)] Two octane collision pairs realising the known degree-pair ceiling~\cite[Section~3.1]{Rada2026LinearVDB} (Proposition~\ref{prop:collision}), value counts for trees of orders $7$ to $17$, and structure sensitivity
   (Section~\ref{sec:discrimination}).
   \item[(v)] Closed forms on standard graphs, the extremal trees of the
   pure-$\gamma$ points, which follow from the criteria of Cruz and
@@ -536,9 +560,11 @@ Equal profiles give equal $q$-histograms. The converse fails
   $AG = \tfrac12 LO(-\tfrac12,1,0)$.
   \end{definition}
 
-  Rada~\cite{Rada2026LinearVDB} shows that no vertex-degree-based index
-  separates trees with equal profiles, and gives sufficient linear
-  criteria for an index to separate all distinct profiles. The theorem below concerns a
+  Graphs with equal profiles receive equal values of every
+  vertex-degree-based index~\cite{Rada2019ExpVDB, Rada2026LinearVDB}, and
+  sufficient linear criteria for an index to separate all distinct
+  profiles within a class of graphs of fixed order are given
+  in~\cite{RadaRodriguezSigarreta2022Weak, Rada2026LinearVDB}. The theorem below concerns a
   coarser loss. On $\Pi$ distinct profiles with equal $q$-histograms
   receive equal values. Part~(iii) shows that such profiles occur among
   trees of every order from $13$ (from $16$ when $\Delta \le 4$); that
@@ -631,7 +657,7 @@ Equal profiles give equal $q$-histograms. The converse fails
   larger order.
   \end{proof}
 
-  Part~(ii) is Theorem~3.4 of~\cite{Rada2019ExpVDB} applied to the algebraic edge weights $\gamma q_{ij}$, whose classes of equal weight are the $q$-classes: two graphs receive the same value for every algebraic $\gamma \neq 0$ exactly when they have equal $q$-histograms. Part~(i) follows directly from the factorisation~\eqref{eq:factor}. The statement for real $\gamma$ applies the standard fact that a nonzero exponential sum has finitely many real zeros. The propagation by a pendant path in part~(iii) is the device of~\cite{Rada2026LinearVDB}. The construction parallels Example~2.2 of~\cite{RadaRodriguezSigarreta2022Weak}, where indices that depend only on the degree sum are defeated by chemical trees whose counts agree on classes of equal sum. Here the classes are those of equal ratio, which for $\Delta \le 4$ are $\{(1,2),(2,4)\}$ and $\{(2,2),(3,3),(4,4)\}$ (ignoring $(1,1)$, which occurs only in $K_2$). A class-wide question of the same kind was studied by Song and Huang~\cite{SongHuang2023EDV} for distance-type invariants. The edge division vector of a tree $T$ counts its edges $e$ by the order $\min\{n_u(e), n_v(e)\}$ of the smaller component of $T - e$. Trees with equal vectors receive equal values of every edge-additive eccentric index $\sum_e f(\min\{n_u(e), n_v(e)\})$, such as the Wiener and Gutman indices, and Song and Huang determine all such trees of order at most $10$. That invariant does not control degrees: the two seven-vertex trees with edge division vector $(4,1,1)$ have different degree-pair profiles and different $q$-histograms, while the two octane pairs of Table~\ref{tab:collisions} have different edge division vectors and different Wiener indices. Neither partition of trees refines the other, so their collisions and ours are of different kinds. Explicit trees of this kind for a single index were given by Rada~\cite[Example~2.6]{Rada2019ExpVDB}, who exhibits two trees on $29$ vertices that have different class counts and equal Randi\'c index. We found no earlier determination of the orders $13$ and $16$, or of explicit colliding trees for degree-ratio indices, in a literature search recorded in the repository~\cite{LoyolaRepo}. The minimality of orders $13$ and $16$ is computer-assisted. It rests on an exhaustive enumeration of all trees of orders $2$ to $16$ in exact rational arithmetic, reproducible with the code of the repository~\cite{LoyolaRepo}.
+  Part~(ii) is Theorem~3.4 of~\cite{Rada2019ExpVDB} applied to the algebraic edge weights $\gamma q_{ij}$, whose classes of equal weight are the $q$-classes: two graphs receive the same value for every algebraic $\gamma \neq 0$ exactly when they have equal $q$-histograms. Part~(i) follows directly from the factorisation~\eqref{eq:factor}. The statement for real $\gamma$ applies the standard fact that a nonzero exponential sum has finitely many real zeros. The propagation by a pendant path in part~(iii) is the device of~\cite{Rada2026LinearVDB}. The construction parallels Example~2.2 of~\cite{RadaRodriguezSigarreta2022Weak}, where indices that depend only on the degree sum are defeated by chemical trees whose counts agree on classes of equal sum. Here the classes are those of equal ratio, which for $\Delta \le 4$ are $\{(1,2),(2,4)\}$ and $\{(2,2),(3,3),(4,4)\}$ (ignoring $(1,1)$, which occurs only in $K_2$). A class-wide question of the same kind was studied by Song and Huang~\cite{SongHuang2023EDV} for distance-type invariants. The edge division vector of a tree $T$ counts its edges $e$ by the order $\min\{n_u(e), n_v(e)\}$ of the smaller component of $T - e$. Trees with equal vectors receive equal values of every edge-additive eccentric index $\sum_e f(\min\{n_u(e), n_v(e)\})$, such as the Wiener and Gutman indices, and Song and Huang determine all such trees of order at most $10$. That invariant does not control degrees: the two seven-vertex trees with edge division vector $(4,1,1)$ have different degree-pair profiles and different $q$-histograms, while the two octane pairs of Table~\ref{tab:collisions} have different edge division vectors and different Wiener indices. Neither partition of trees refines the other, so their collisions and ours are of different kinds. Explicit trees of this kind for a single index were given by Rada~\cite[Example~2.6]{Rada2019ExpVDB}, who exhibits two trees on $29$ vertices that have different class counts and equal Randi\'c index. Rada, Rodr\'{\i}guez and Sigarreta~\cite[Example~2.1]{RadaRodriguezSigarreta2022Weak} give an infinite family of chemical trees with equal Randi\'c index and different counts. We found no earlier determination of the orders $13$ and $16$, or of explicit colliding trees for degree-ratio indices, in a literature search recorded in the repository~\cite{LoyolaRepo}. The minimality of orders $13$ and $16$ is computer-assisted. It rests on an exhaustive enumeration of all trees of orders $2$ to $16$ in exact rational arithmetic, reproducible with the code of the repository~\cite{LoyolaRepo}.
 
   \begin{corollary}[Degree-ratio indices]\label{cor:ratioclass}
   Let $\rho_{uv} = \min(d_u,d_v)/\max(d_u,d_v)$ and let
@@ -933,7 +959,7 @@ distinct values and a \emph{floor} on degeneracy.
   For a tree of order $n \ge 3$ with $\Delta \le 4$ the ten counts are
   not free. A $(1,1)$ edge would be a component $K_2$, so $m_{11} = 0$.
   There are $n - 1$ edges, and since a vertex of degree $d$ lies on $d$
-  edges, $\sum_{i \le j} (1/i + 1/j)\,m_{ij} = n$. The nine remaining
+  edges, $\sum_{i \le j} (1/i + 1/j)\,m_{ij} = n$ (see~\cite[eqs.~(3)--(4)]{CruzRada2019PathStar}). The nine remaining
   counts therefore have affine dimension at most $7$ at fixed $n$ and
   at most $8$ when $n$ varies. Both bounds are attained by the data
   sets of Section~\ref{sec:sensitivity}: the centred count matrices of
@@ -973,7 +999,7 @@ distinct values and a \emph{floor} on degeneracy.
   function has Lebesgue measure zero.
   \end{proof}
 
-  In the terminology of Rada, Rodr\'{\i}guez and Sigarreta~\cite{RadaRodriguezSigarreta2022Weak}, an index is weakly discriminating over a class when equal values force equal count vectors; they showed that several classical indices fail this over chemical trees while the Sombor index satisfies it. As there are countably many pairs of count vectors, Proposition~\ref{prop:generic} gives that almost every point of the family is weakly discriminating over every class at once.
+  In the terminology of Rada, Rodr\'{\i}guez and Sigarreta~\cite{RadaRodriguezSigarreta2022Weak}, an index is weakly discriminating over a class when equal values force equal count vectors; they showed that several classical indices fail this over chemical trees while the Sombor index satisfies it. They also showed that weights linearly independent over $\mathbb{Z}$, for instance exponentials of distinct algebraic numbers, give weakly discriminating indices~\cite[Theorems~3.1 and~3.8]{RadaRodriguezSigarreta2022Weak}, and support restrictions of this criterion are given in~\cite[Theorem~3, Corollary~2]{Rada2026LinearVDB}. As there are countably many pairs of count vectors, Proposition~\ref{prop:generic} gives that almost every point of the family is weakly discriminating over every class at once.
 
   The proof uses only the injectivity of
   $(i,j) \mapsto (\ln(ij), \ln(i+j))$ and therefore applies to the parent

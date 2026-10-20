@@ -3,7 +3,7 @@ LOYOLA final paper -- Overleaf project
 Upload: Overleaf > New Project > Upload Project > choose LOYOLA_FINAL_PAPER_OVERLEAF.zip
 Compiler: pdfLaTeX (Overleaf default).
 Documents (compile each as the main document in turn):
-  main.tex        -- the paper (44 A5 pages), bibliography embedded
+  main.tex        -- the paper (45 A5 pages), bibliography embedded
   supplement.tex  -- Supplementary Material (27 A5 pages), own bibliography
 figures/          -- figure PDFs (Figure 1 of main.tex, Figure S1 of supplement.tex)
 

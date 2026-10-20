@@ -9,7 +9,7 @@ local branch `review/match-figure-2026-10-20`; the manuscript sources are those 
 | File | What it is |
 |---|---|
 | `main.tex` | the manuscript, MATCH template (A5, 10 pt), bibliography embedded (56 references, alphabetical) |
-| `LOYOLA_paper.pdf` | compiled manuscript, 44 A5 pages, one figure (Figure 1, degeneracy on the trees of order 10) |
+| `LOYOLA_paper.pdf` | compiled manuscript, 45 A5 pages, one figure (Figure 1, degeneracy on the trees of order 10) |
 | `supplement.tex` | Supplementary Material, own bibliography (14 references, alphabetical) |
 | `LOYOLA_supplement.pdf` | compiled supplement, 27 A5 pages, Figure S1 |
 | `figures/fig_lo_degeneracy_order10_trees_v2.pdf` | Figure 1 (used by `main.tex`) |

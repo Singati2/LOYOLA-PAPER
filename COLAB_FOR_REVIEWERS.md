@@ -10,6 +10,17 @@ The links open the notebooks of commit `6f8ac717209fc414b6fa1747d9f3b5d165ecd4eb
 commit. **The links work only once that branch is on GitHub.** Open each notebook in a fresh runtime
 (a new tab), choose Runtime > Run all, and check the last line.
 
+## Google Drive
+
+* The essential notebooks (below) need no Drive. At the end of each run they offer to save the result table
+  (CSV and a JSON record with commit, Python and package versions, checks and mismatches) to
+  `MyDrive/LOYOLA_colab_checks/<commit>/`. Colab shows "Permit this notebook to access your Google Drive
+  files?": click **Connect to Google Drive**, choose the account, **Allow**. Declining only skips the save.
+  To switch it off, run `import os; os.environ["LOYOLA_SAVE_TO_DRIVE"] = "0"` first.
+* The full-reproduction notebooks (`colab/`) require Drive: progress in `MyDrive/LOYOLA_colab_run`, the
+  private NIST page cache in `MyDrive/LOYOLA_nist_pages_private` (never share this folder).
+* Access lasts for the runtime session only; Colab asks again in each new session.
+
 ## RUN THESE FIRST: essential reviewer verification (about 1 to 1.5 h in total; no NIST pages, no Drive)
 
 | # | Notebook | Checks | Pass when the last line reads |

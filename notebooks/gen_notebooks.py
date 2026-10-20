@@ -104,6 +104,24 @@ SUMMARY = r'''summary = pd.DataFrame(RESULTS)
 display(summary) if "display" in dir() else print(summary.to_string())
 n_bad = int((summary.status != "OK").sum())
 print(f"{len(summary)} checks, {n_bad} mismatches")
+# On Colab, keep this run's result table in Google Drive (MyDrive/LOYOLA_colab_checks/<commit>/), so it
+# survives the runtime. Declining the Drive prompt, or LOYOLA_SAVE_TO_DRIVE=0, skips this; the checks stand.
+if "google.colab" in sys.modules and os.environ.get("LOYOLA_SAVE_TO_DRIVE", "1") == "1":
+    try:
+        import json, datetime
+        from google.colab import drive
+        drive.mount("/content/drive")
+        _dir = f"/content/drive/MyDrive/LOYOLA_colab_checks/{(HEAD or 'unknown')[:12]}"
+        os.makedirs(_dir, exist_ok=True)
+        summary.to_csv(f"{_dir}/@@NAME@@.csv", index=False)
+        with open(f"{_dir}/@@NAME@@.json", "w") as _f:
+            json.dump({"notebook": "@@NAME@@", "commit": HEAD, "pinned_commit": PIN, "uncommitted_changes": DIRTY,
+                       "python": platform.python_version(), "numpy": numpy.__version__, "scipy": scipy.__version__,
+                       "finished_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
+                       "checks": len(summary), "mismatches": n_bad}, _f, indent=1)
+        print("result table saved to", _dir)
+    except Exception as _e:
+        print("result table not saved to Google Drive:", _e)
 assert n_bad == 0, "some recomputed values differ from the paper"'''
 
 
@@ -121,7 +139,7 @@ def nb(fname, title, intro, cells):
     for kind, src in cells:
         n.cells.append(nbf.v4.new_markdown_cell(src) if kind == "md" else nbf.v4.new_code_cell(src))
     n.cells.append(nbf.v4.new_markdown_cell("## Summary"))
-    n.cells.append(nbf.v4.new_code_cell(SUMMARY))
+    n.cells.append(nbf.v4.new_code_cell(SUMMARY.replace("@@NAME@@", fname[:-len(".ipynb")])))
     for c in n.cells:
         c.source = c.source.replace("@@REVISION@@", REVISION).replace("@@PIN@@", PIN)
     os.makedirs(OUT, exist_ok=True)
