@@ -68,10 +68,10 @@ def compiled_numbers():
     # v40.31: main.tex uses the MATCH template verbatim, which is written for pdflatex ("% !TeX program = pdflatex")
     # and sets \baselineskip=10px, a pdfTeX-only unit; tectonic (XeTeX) is the fallback, given 10pt in the copy only
     if shutil.which("pdflatex"):
-        r = subprocess.run(["pdflatex", "-interaction=nonstopmode", "-halt-on-error", "main.tex"], cwd=tmp, capture_output=True, text=True)
+        r = subprocess.run(["pdflatex", "-interaction=nonstopmode", "-halt-on-error", "main.tex"], cwd=tmp, capture_output=True, text=True, errors="replace")  # TeX logs are not UTF-8 (T1 glyphs)
     else:
         t = open(os.path.join(tmp, "main.tex")).read(); open(os.path.join(tmp, "main.tex"), "w").write(t.replace(r"\baselineskip=10px", r"\baselineskip=10pt"))
-        r = subprocess.run(["tectonic", "-k", "main.tex"], cwd=tmp, capture_output=True, text=True)
+        r = subprocess.run(["tectonic", "-k", "main.tex"], cwd=tmp, capture_output=True, text=True, errors="replace")  # TeX logs are not UTF-8 (T1 glyphs)
     if r.returncode != 0:
         fail("main.tex does not compile"); return {}, {}, set()
     import fitz

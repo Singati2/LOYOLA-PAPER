@@ -201,7 +201,7 @@ shutil.copytree("figures", os.path.join(build, "figures"))
 for doc in ("main", "supplement"):
     for _ in range(3):
         r = subprocess.run(["pdflatex", "-interaction=nonstopmode", "-halt-on-error", doc + ".tex"], cwd=build,
-                           capture_output=True, text=True)
+                           capture_output=True, text=True, errors="replace")   # TeX logs are not UTF-8
     print(doc, "exit", r.returncode, "|", r.stdout.strip().splitlines()[-1])
     if r.returncode != 0:
         raise RuntimeError(doc + ".tex did not compile")
