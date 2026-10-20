@@ -4,9 +4,9 @@ This repository holds the paper "The Loyola Index Family and the Resolution Limi
 (`main.tex`, `supplement.tex`, compiled as `LOYOLA_paper.pdf` and `LOYOLA_supplement.pdf`), its data,
 code, tests, notebooks and Lean proofs. Everything stays in one repository.
 
-**Pinned commit.** The code under review is commit `95c840c857d00413e6a3bf7b83989216d5c79b14` on the branch
-`review/corrections-impl-2026-10-19`. Every notebook, in `notebooks/` and in `colab/`, runs exactly that
-commit (its `PIN`). The notebooks are committed one step later, in `23bfd45baecc1335f2bc075c02743ab2905b60cf`, which changes nothing but
+**Pinned commit.** The code under review is commit `5d5d16abe45e0cccd182209b2b7c9048eccbb289` on the branch
+`review/match-figure-2026-10-20`. Every notebook, in `notebooks/` and in `colab/`, runs exactly that
+commit (its `PIN`). The notebooks are committed one step later, in `0a36902e5b6ed7a56b0534641cb12431616c2066`, which changes nothing but
 the notebooks; the Colab links below open them from that commit, so a link always runs the pinned code.
 (A notebook opened from an older commit carries that commit's older pin.) On Colab the setup cell clones that branch and checks out the
 pinned commit. An existing checkout is moved to it if it is clean and rejected if it has local
@@ -23,7 +23,7 @@ later step and is not needed by the notebooks.
 
 ```bash
 git clone https://github.com/Singati2/LOYOLA-PAPER.git && cd LOYOLA-PAPER
-git checkout 95c840c857d00413e6a3bf7b83989216d5c79b14   # the pinned commit
+git checkout 5d5d16abe45e0cccd182209b2b7c9048eccbb289   # the pinned commit
 python3 -m venv .venv && . .venv/bin/activate
 python -m pip install -r requirements-lock.txt          # exact versions behind the committed outputs
 python verify.py --offline                               # fast path, about 6 to 30 minutes
@@ -48,12 +48,12 @@ any of them differ. Each step is labelled with one of three kinds:
 
 | Notebook | Covers | Runtime (laptop CPU) | Colab |
 |---|---|---|---|
-| `01_data.ipynb` | datasets, DATA/ copies, provenance counts (39 agreement, 8 cannot verify) | seconds | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/23bfd45baecc1335f2bc075c02743ab2905b60cf/notebooks/01_data.ipynb) |
-| `02_mathematics.ipynb` | Lemma 1, the colliding trees of orders 13 and 16, Example 2, certificates | under 1 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/23bfd45baecc1335f2bc075c02743ab2905b60cf/notebooks/02_mathematics.ipynb) |
-| `03_degeneracy.ipynb` | Table 2 and the degeneracy counts, by full tree enumeration | 1 to 5 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/23bfd45baecc1335f2bc075c02743ab2905b60cf/notebooks/03_degeneracy.ipynb) |
-| `04_octane_correlations.ipynb` | all 60 correlations of Table 4; tetramethylbutane audit | seconds | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/23bfd45baecc1335f2bc075c02743ab2905b60cf/notebooks/04_octane_correlations.ipynb) |
-| `05_boiling_points.ipynb` | Table 5 baselines and the 200-permutation check. `RUN_SLOW = True` regenerates the 50-seed medians (about 1 h) and the resampling (about 3.5 h) | about 5 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/23bfd45baecc1335f2bc075c02743ab2905b60cf/notebooks/05_boiling_points.ipynb) |
-| `06_verification_suite.ipynb` | `verify.py` fast path in a dedicated environment with the pinned versions | about 35 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/23bfd45baecc1335f2bc075c02743ab2905b60cf/notebooks/06_verification_suite.ipynb) |
+| `01_data.ipynb` | datasets, DATA/ copies, provenance counts (39 agreement, 8 cannot verify) | seconds | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/0a36902e5b6ed7a56b0534641cb12431616c2066/notebooks/01_data.ipynb) |
+| `02_mathematics.ipynb` | Lemma 1, the colliding trees of orders 13 and 16, Example 2, certificates | under 1 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/0a36902e5b6ed7a56b0534641cb12431616c2066/notebooks/02_mathematics.ipynb) |
+| `03_degeneracy.ipynb` | Table 2 and the degeneracy counts, by full tree enumeration | 1 to 5 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/0a36902e5b6ed7a56b0534641cb12431616c2066/notebooks/03_degeneracy.ipynb) |
+| `04_octane_correlations.ipynb` | all 60 correlations of Table 4; tetramethylbutane audit | seconds | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/0a36902e5b6ed7a56b0534641cb12431616c2066/notebooks/04_octane_correlations.ipynb) |
+| `05_boiling_points.ipynb` | Table 5 baselines and the 200-permutation check. `RUN_SLOW = True` regenerates the 50-seed medians (about 1 h) and the resampling (about 3.5 h) | about 5 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/0a36902e5b6ed7a56b0534641cb12431616c2066/notebooks/05_boiling_points.ipynb) |
+| `06_verification_suite.ipynb` | `verify.py` fast path in a dedicated environment with the pinned versions | about 35 min | [open](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/0a36902e5b6ed7a56b0534641cb12431616c2066/notebooks/06_verification_suite.ipynb) |
 
 On Colab the setup cell clones the branch, checks out the pinned commit and installs
 `requirements-lock.txt` and `requirements-extras-lock.txt`. Google Colab is a convenience, not a requirement. The notebooks are
@@ -85,7 +85,7 @@ regenerated by `notebooks/gen_notebooks.py`.
 | `python verify.py --everything` | adds `audit/run_all_scripts.py`, which reruns every script of its list in an isolated copy and compares every output; the two independent cross-checks it does not run are named in its output (`NOT_REPLAYED`) and have their own committed outputs | several hours | |
 | `formal/verify.sh` | Lean 4 proofs: the 38 listed theorems, and an axiom check on all 52 declarations, axioms limited to propext, Classical.choice and Quot.sound | about 1 min after the first build | the first build downloads and builds Mathlib (several GB of disk) |
 
-What was and was not run at the pinned commit is recorded in `audit/CORRECTIONS_2026-10-19_STATUS.md`. Older logs describe their own commits only.
+What was and was not run at the pinned commit is recorded in `audit/MATCH_FIGURE_2026-10-20.md` (earlier steps: `audit/REVIEW_2026-10-20_STATUS.md`, `audit/CORRECTIONS_2026-10-19_STATUS.md`). Older logs describe their own commits only.
 
 ## Data and licences
 

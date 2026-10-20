@@ -5,9 +5,10 @@ data, code, machine-checked proofs and runnable notebooks.
 
 ## Revision under review
 
-The revision under review is on the branch `review/corrections-impl-2026-10-19`, at commit `95c840c857d00413e6a3bf7b83989216d5c79b14`,
+The revision under review is on the branch `review/match-figure-2026-10-20`, at commit `5d5d16abe45e0cccd182209b2b7c9048eccbb289`,
 not on `main`. Start with `REVIEWER_START_HERE.md`. The change notes below stop at v40.29; later changes
-are recorded in `audit/V4031_REVISION_REPORT.md` and `audit/CORRECTIONS_2026-10-19_STATUS.md`.
+are recorded in `audit/V4031_REVISION_REPORT.md`, `audit/CORRECTIONS_2026-10-19_STATUS.md`,
+`audit/REVIEW_2026-10-20_STATUS.md` and `audit/MATCH_FIGURE_2026-10-20.md`.
 
 **v40.29 (2026-10-11):** final adversarial review before submission. Reports in `audit/final/`:
 data provenance, mathematical referee report (with the novelty assessment), code and statistics audit,
@@ -78,12 +79,12 @@ Colab the notebook clones this repository and installs the requirements itself.
 
 | Notebook | What it checks | Time | Open |
 |---|---|---|---|
-| `notebooks/01_data.ipynb` | the datasets in `DATA/` and their provenance | seconds | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/23bfd45baecc1335f2bc075c02743ab2905b60cf/notebooks/01_data.ipynb) |
-| `notebooks/02_mathematics.ipynb` | Lemma 1, the colliding profiles of Theorem 2, Example 2, certificates | under a minute | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/23bfd45baecc1335f2bc075c02743ab2905b60cf/notebooks/02_mathematics.ipynb) |
-| `notebooks/03_degeneracy.ipynb` | Table 2 and the order-10 and order-16 counts, by enumerating every tree | under a minute | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/23bfd45baecc1335f2bc075c02743ab2905b60cf/notebooks/03_degeneracy.ipynb) |
-| `notebooks/04_octane_correlations.ipynb` | all 60 correlations of Table 4 and the tetramethylbutane audit | seconds | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/23bfd45baecc1335f2bc075c02743ab2905b60cf/notebooks/04_octane_correlations.ipynb) |
-| `notebooks/05_boiling_points.ipynb` | Table 5 baselines, the 200-permutation check, the resampling summary | about 5 minutes (`RUN_SLOW = True`: about 1 hour) | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/23bfd45baecc1335f2bc075c02743ab2905b60cf/notebooks/05_boiling_points.ipynb) |
-| `notebooks/06_verification_suite.ipynb` | the repository's own fast verification suite, in an environment with the pinned versions | about 7 minutes | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/23bfd45baecc1335f2bc075c02743ab2905b60cf/notebooks/06_verification_suite.ipynb) |
+| `notebooks/01_data.ipynb` | the datasets in `DATA/` and their provenance | seconds | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/0a36902e5b6ed7a56b0534641cb12431616c2066/notebooks/01_data.ipynb) |
+| `notebooks/02_mathematics.ipynb` | Lemma 1, the colliding profiles of Theorem 2, Example 2, certificates | under a minute | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/0a36902e5b6ed7a56b0534641cb12431616c2066/notebooks/02_mathematics.ipynb) |
+| `notebooks/03_degeneracy.ipynb` | Table 2 and the order-10 and order-16 counts, by enumerating every tree | under a minute | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/0a36902e5b6ed7a56b0534641cb12431616c2066/notebooks/03_degeneracy.ipynb) |
+| `notebooks/04_octane_correlations.ipynb` | all 60 correlations of Table 4 and the tetramethylbutane audit | seconds | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/0a36902e5b6ed7a56b0534641cb12431616c2066/notebooks/04_octane_correlations.ipynb) |
+| `notebooks/05_boiling_points.ipynb` | Table 5 baselines, the 200-permutation check, the resampling summary | about 5 minutes (`RUN_SLOW = True`: about 1 hour) | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/0a36902e5b6ed7a56b0534641cb12431616c2066/notebooks/05_boiling_points.ipynb) |
+| `notebooks/06_verification_suite.ipynb` | the repository's own fast verification suite, in an environment with the pinned versions | about 7 minutes | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/0a36902e5b6ed7a56b0534641cb12431616c2066/notebooks/06_verification_suite.ipynb) |
 
 The notebooks are committed with their outputs from a local run. `notebooks/gen_notebooks.py`
 regenerates them. The Lean proofs need a Lean toolchain and are not run in a notebook.
