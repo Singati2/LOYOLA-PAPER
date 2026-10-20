@@ -72,7 +72,7 @@ These are cases where agreement looks like confirmation but is a repeat of one s
    - The compound is crystalline at 298 K. The reference state is therefore unresolved (tier D), and the paper says so.
 7. **Entropy 102.06 for 2,3,3-trimethylpentane.** The value used comes from a reproduction of a reproduction: the compiled dataset as reproduced by Mondal et al. (2019). Its earliest source is not identified (tier D).
 8. **Boiling-point averages.**
-   - 57 of the 100 included values are NIST/TRC averages, which are tier A-AGG. The averages do list their constituent determinations, but the source pages behind those determinations are not archived.
+   - 57 of the 100 included values are direct NIST/TRC averages and one is the mean of two agreeing NIST/TRC averages (3-methylhexane), all tier A-AGG. The averages do list their constituent determinations, but the source pages behind those determinations are not archived.
    - The 1 "mean of two NIST averages" is also A-AGG.
    - Of the 42 medians of non-compilation determinations, 24 draw on two or more distinct first authors (tier A) and 18 on a single determination (tier B).
 

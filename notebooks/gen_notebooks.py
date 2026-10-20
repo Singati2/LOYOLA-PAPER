@@ -1,41 +1,53 @@
 #!/usr/bin/env python3
-"""Generate the verification notebooks in notebooks/ (run from the repository root)."""
-import os, sys
+"""Generate the verification notebooks in notebooks/ (run from the repository root).
+
+  python notebooks/gen_notebooks.py [OUT] [--pin <commit>] [--revision <branch or tag>]
+
+The notebooks are pinned to one exact commit (--pin, default HEAD), the same commit as the notebooks of
+colab/ (colab/make_notebooks.py). On Colab they clone --revision (default: the current branch), which must
+contain that commit, and check it out. A checkout of any other commit, or with local changes, stops the
+notebook unless LOYOLA_ALLOW_MISMATCH=1. Creating a public tag is a separate, later step.
+"""
+import argparse, os, subprocess, sys
 import nbformat as nbf
 
-OUT = sys.argv[1] if len(sys.argv) > 1 else "notebooks"
+_ap = argparse.ArgumentParser()
+_ap.add_argument("out", nargs="?", default="notebooks")
+_ap.add_argument("--pin", default="HEAD")
+_ap.add_argument("--revision", default=None)
+_args = _ap.parse_args()
+_git = lambda *a: subprocess.run(["git", *a], capture_output=True, text=True, check=True).stdout.strip()
+OUT = _args.out
 REPO_URL = "https://github.com/Singati2/LOYOLA-PAPER"
-# The notebooks are pinned to one immutable revision (a tag created by the author at submission).
-# Override with the environment variable LOYOLA_REVISION; a mismatch with the checked-out tree stops
-# the notebook unless LOYOLA_ALLOW_MISMATCH=1.
-REVISION = "v40.30"
-COLAB = "https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/" + REVISION + "/notebooks/{}"
+PIN = _git("rev-parse", "--verify", _args.pin + "^{commit}")
+REVISION = _args.revision or _git("rev-parse", "--abbrev-ref", "HEAD")
+if REVISION == "HEAD":
+    sys.exit("detached HEAD: give --revision (a branch or tag that contains the pinned commit)")
+COLAB = "https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/" + PIN + "/notebooks/{}"
 
 SETUP = r'''# Setup: runs inside the repository, or on Google Colab (clones the pinned revision first).
 import os, sys, subprocess, platform
-REVISION = os.environ.get("LOYOLA_REVISION", "@@REVISION@@")
+REVISION = os.environ.get("LOYOLA_REVISION", "@@REVISION@@")   # branch or tag cloned on Colab; it contains PIN
+PIN = os.environ.get("LOYOLA_PIN", "@@PIN@@")                  # the exact commit these notebooks check
 if os.path.exists("../verify.py"):
     os.chdir("..")
 elif not os.path.exists("verify.py"):
     if not os.path.exists("LOYOLA-PAPER"):
-        subprocess.run(["git", "clone", "--depth", "1", "--branch", REVISION, "https://github.com/Singati2/LOYOLA-PAPER.git"], check=True)
+        subprocess.run(["git", "clone", "--quiet", "--branch", REVISION, "https://github.com/Singati2/LOYOLA-PAPER.git"], check=True)
+        subprocess.run(["git", "-C", "LOYOLA-PAPER", "checkout", "--quiet", "--detach", PIN], check=True)
     os.chdir("LOYOLA-PAPER")
 if "google.colab" in sys.modules:   # pinned versions, as used for the recorded results
     subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-r", "requirements-lock.txt", "-r", "requirements-extras-lock.txt"], check=True)
 ROOT = os.getcwd()
 git = lambda *a: subprocess.run(["git", *a], capture_output=True, text=True).stdout.strip()
 HEAD, DIRTY = git("rev-parse", "HEAD"), bool(git("status", "--porcelain", "--untracked-files=no"))
-PINNED = git("rev-parse", "--verify", "--quiet", REVISION + "^{commit}")
-if HEAD and not PINNED:   # shallow or local clone without the tag: try to fetch it before comparing
-    subprocess.run(["git", "fetch", "--quiet", "--depth", "1", "origin", "tag", REVISION], capture_output=True)
-    PINNED = git("rev-parse", "--verify", "--quiet", REVISION + "^{commit}")
+PINNED = PIN if HEAD else ""
 print(f"commit {HEAD or 'unknown (no git metadata)'}{' (uncommitted changes)' if DIRTY else ''}; "
-      f"pinned revision {REVISION}: {PINNED or 'could not be resolved'}")
-if (not HEAD or not PINNED or PINNED != HEAD or DIRTY) and os.environ.get("LOYOLA_ALLOW_MISMATCH") != "1":
-    raise RuntimeError(f"REVISION MISMATCH: cannot confirm that the files are {REVISION} "
-                       f"(checked out: {HEAD or 'unknown'}{' with uncommitted changes' if DIRTY else ''}; "
-                       f"{REVISION}: {PINNED or 'unresolved'}). "
-                       "Check out the pinned revision, or set LOYOLA_ALLOW_MISMATCH=1 to run anyway.")
+      f"pinned commit {PIN}")
+if (not HEAD or PINNED != HEAD or DIRTY) and os.environ.get("LOYOLA_ALLOW_MISMATCH") != "1":
+    raise RuntimeError(f"REVISION MISMATCH: cannot confirm that the files are the pinned commit {PIN} "
+                       f"(checked out: {HEAD or 'unknown'}{' with uncommitted changes' if DIRTY else ''}). "
+                       "Check out the pinned commit, or set LOYOLA_ALLOW_MISMATCH=1 to run anyway.")
 if os.environ.get("LOYOLA_ALLOW_MISMATCH") == "1" and (not PINNED or PINNED != HEAD or DIRTY):
     print("WARNING: LOYOLA_ALLOW_MISMATCH=1 - these results are NOT tied to the pinned revision")
 import numpy, scipy, networkx, mpmath
@@ -95,7 +107,7 @@ def nb(fname, title, intro, cells):
     n.cells.append(nbf.v4.new_markdown_cell("## Summary"))
     n.cells.append(nbf.v4.new_code_cell(SUMMARY))
     for c in n.cells:
-        c.source = c.source.replace("@@REVISION@@", REVISION)
+        c.source = c.source.replace("@@REVISION@@", REVISION).replace("@@PIN@@", PIN)
     os.makedirs(OUT, exist_ok=True)
     nbf.write(n, os.path.join(OUT, fname))
 

@@ -36,4 +36,5 @@ n=16 all fractional points, exact: (0,1/2,0):3475 (0,1/2,1):4069 (1/2,0,0):3940 
 n=17 all profiles=7778 qhist=7582 R=7604 chi=6434 GA=7581 GA_qmerges=1 | 32-digit counts CERTIFIED
 n=17 mol profiles=1194 qhist=1189 R=1191 chi=838 GA=1189 GA_qmerges=0 | 32-digit counts CERTIFIED
 GA merges two distinct q-histograms first at order 17 (all trees), none up to 17 (max degree <= 4); orders 2-17 examined
+reference comparisons completed: 32-digit 22/22, chi 6/6, fractional 90/90
 RESULT: all numerical counts certified exactly

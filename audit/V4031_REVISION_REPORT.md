@@ -64,7 +64,7 @@ added to the bibliography), for g = 1 additionally by Lindemann-Weierstrass (Pro
 for all trees and trees with Delta <= 4 of orders 2-17 (tree counts asserted against OEIS A000055,
 A000602): every count of R, chi and GA in `hp_counts_out.txt` and `chi_floor_out.txt`, the 18
 fractional-point counts of orders 12-16 in `fractional_points_out.txt` (exponents 1/3, 1/6 taken
-exactly), and LO(3/10,1/5,0) separating all 4069 trees of order 16, agree exactly with the numerical
+exactly), and LO(3/10,1/5,0) separating all 4069 degree-pair profiles of the 19320 trees of order 16, agree exactly with the numerical
 counts. The pure-gamma counts follow from the q-histograms alone (Theorem 3.5(ii)); the R and GA counts
 need the radical argument, because GA is a function of the q-histogram but can merge distinct ones. GA
 merges two distinct q-histograms first at order 17 (`n=17 all ... qhist=7582 ... GA=7581 GA_qmerges=1`;

@@ -312,6 +312,12 @@ def bp_avg_stats():
     return len(pr), max(float(re.search(r"\u00b1 ([\d.]+)", r["all_determinations"]).group(1)) for r in pr)
 
 
+def bp_mean_of_avgs():
+    """Number of included values that are the mean of two NIST averages (not counted by bp_avg_stats)."""
+    return sum(1 for r in rows("external", "bp", "bp_provenance.csv")
+               if r["status"] == "INCLUDED" and r["rule_or_reason"].startswith("mean of 2 NIST averages"))
+
+
 def bp_quality_q2():
     return float(re.search(r"decanes: ridge Q2 [\d.]+ as registered, ([\d.]+) without them", text("audit", "final", "scripts", "bp_duplicate_sensitivity_out.txt")).group(1))
 
@@ -1109,7 +1115,8 @@ REGISTRY = [
     E("v4030_gamma_pool", "supp", r"LO ahead in \$\d+\$ and \$(?P<v>\d+)\$ of \$50\$", "v4030_gamma(1)", 0, "gamma_strict_out.txt"),
     E("v4029_bpB_dq", "main", r"& \$0\.977\$ & \$0\.977\$ & \$(?P<v>[+-]?[\d.]+)\$ & \$25\$", "bps('B','median_dQ2_LOh_GM12')", 0.00005, "bp_results_summary.csv"),
     E("v4029_avg57", "supp", r"NIST averages, \$(?P<v>\d+)\$ of the \$100\$ values", "bp_avg_stats()[0]", 0, "bp_provenance.csv AVG rows"),
-    E("v4029_avg6K", "supp", r"quoted uncertainty \(up to \$(?P<v>\d+)\$\\,K\)", "bp_avg_stats()[1]", 0, "bp_provenance.csv largest AVG uncertainty"),
+    E("corr_meanavg", "supp", r"and \$(?P<v>\d+)\$ further value is the mean of two NIST averages", "bp_mean_of_avgs()", 0, "bp_provenance.csv 'mean of 2 NIST averages' rows"),
+    E("v4029_avg6K", "supp", r"quoted uncertainty of an average \(up to \$(?P<v>\d+)\$\\,K\)", "bp_avg_stats()[1]", 0, "bp_provenance.csv largest AVG uncertainty"),
     E("v4029_qual863", "supp", r"decane ridge gives \$Q\^2 = (?P<v>[\d.]+)\$ \(exploratory\)", "bp_quality_q2()", 0.0005, "audit/final/scripts/bp_duplicate_sensitivity_out.txt"),
     E("s8_tie_lo1", "supp", r"three decimals \(\$(?P<v>[\d.]+)\$ against", "tmb_excluded_absr(1)", 0.00005, "v40.29: LO(0,0,1), TMB excluded"),
     E("s8_tie_lo2", "supp", r"three decimals \(\$0\.9799\$ against \$(?P<v>[\d.]+)\$\)", "tmb_excluded_absr(2)", 0.00005, "v40.29: LO(0,0,2), TMB excluded"),

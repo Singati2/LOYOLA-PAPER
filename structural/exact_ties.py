@@ -73,29 +73,69 @@ FRAC = [(F(0), HALF), (HALF, F(0)), (F(0), -HALF), (-HALF, F(0)), (HALF, F(-1)),
         (THIRD, F(0)), (F(0), THIRD), (SIXTH, F(0))]                  # the points of fractional_points.py
 
 
-def committed():
-    """Numerical counts committed by the other scripts."""
+# The reference rows every run must find: a missing, duplicated or unparsable row stops the script
+# (exit 2) instead of silently skipping that comparison.
+EXPECTED_HP = {(n, sub) for n in range(7, 18) for sub in ("all", "mol")}
+EXPECTED_CHI = set(range(7, 13))
+EXPECTED_PROF = set(range(12, 17))
+EXPECTED_FRAC = {(n, round(float(a), 3), round(float(b), 3), g) for n in EXPECTED_PROF for a, b in FRAC for g in (0, 1)}
+
+
+class ReferenceError_(Exception):
+    pass
+
+
+def _put(d, key, val, src):
+    if key in d:
+        raise ReferenceError_(f"{src}: duplicate reference row for {key}")
+    d[key] = val
+
+
+def _require(d, expected, src):
+    missing = sorted(expected - set(d))
+    if missing:
+        raise ReferenceError_(f"{src}: {len(missing)} expected reference rows missing, e.g. {missing[:3]}")
+
+
+def committed(here=None):
+    """Numerical counts committed by the other scripts. Every expected row must be present exactly once."""
+    here = here or HERE
     hp, chi, frac, prof = {}, {}, {}, {}
-    for line in open(os.path.join(HERE, "hp_counts_out.txt")):
+    for line in open(os.path.join(here, "hp_counts_out.txt")):
         m = re.match(r"n=(\d+) (all|mol) N=\d+ qhist=(\d+) GA_qmerges=\d+ R=(\d+) GA=(\d+)", line)
         if m:
-            hp[(int(m[1]), m[2])] = dict(qhist=int(m[3]), R=int(m[4]), GA=int(m[5]))
-    for line in open(os.path.join(HERE, "chi_floor_out.txt")):
+            _put(hp, (int(m[1]), m[2]), dict(qhist=int(m[3]), R=int(m[4]), GA=int(m[5])), "hp_counts_out.txt")
+        elif re.match(r"n=\d+ (all|mol) ", line):
+            raise ReferenceError_(f"hp_counts_out.txt: unparsable row {line.strip()[:80]!r}")
+    for line in open(os.path.join(here, "chi_floor_out.txt")):
         m = re.match(r"n=(\d+) profiles=(\d+) chi_distinct=(\d+)", line)
         if m:
-            chi[int(m[1])] = int(m[3])
-    for line in open(os.path.join(HERE, "fractional_points_out.txt")):
+            _put(chi, int(m[1]), int(m[3]), "chi_floor_out.txt")
+        elif re.match(r"n=\d+ ", line):
+            raise ReferenceError_(f"chi_floor_out.txt: unparsable row {line.strip()[:80]!r}")
+    for line in open(os.path.join(here, "fractional_points_out.txt")):
         m = re.match(r"\s*n=(\d+) profiles=(\d+) (.*)", line)
         if m:
-            prof[int(m[1])] = int(m[2])
+            _put(prof, int(m[1]), int(m[2]), "fractional_points_out.txt")
             for a, b, g, c in re.findall(r"\((-?[\d.]+),(-?[\d.]+),([01])\):(\d+)", m[3]):
-                frac[(int(m[1]), float(a), float(b), int(g))] = int(c)
+                _put(frac, (int(m[1]), float(a), float(b), int(g)), int(c), "fractional_points_out.txt")
+        elif re.match(r"\s*n=\d+ ", line):
+            raise ReferenceError_(f"fractional_points_out.txt: unparsable row {line.strip()[:80]!r}")
+    _require(hp, EXPECTED_HP, "hp_counts_out.txt")
+    _require(chi, EXPECTED_CHI, "chi_floor_out.txt")
+    _require(prof, EXPECTED_PROF, "fractional_points_out.txt")
+    _require(frac, EXPECTED_FRAC, "fractional_points_out.txt")
     return hp, chi, frac, prof
 
 
 def main():
-    hp, chi_ref, frac_ref, prof_ref = committed()
+    try:
+        hp, chi_ref, frac_ref, prof_ref = committed()
+    except ReferenceError_ as e:
+        print("REFERENCE ERROR:", e)
+        sys.exit(2)
     out, bad = [], []
+    done = {"hp": 0, "chi": 0, "frac": 0}
     first_ga_merge = {}
     for n in range(2, 18):
         trees = list(nx.nonisomorphic_trees(n)) if n > 2 else [nx.path_graph(2)]
@@ -117,10 +157,12 @@ def main():
             line = f"n={n} {sub} profiles={len(P)} qhist={len(qh)} R={cnt['R']} chi={cnt['chi']} GA={cnt['GA']} GA_qmerges={merges}"
             ref = hp.get((n, sub))
             if ref:
+                done["hp"] += 1
                 ok = ref["qhist"] == len(qh) and ref["R"] == cnt["R"] and ref["GA"] == cnt["GA"]
                 line += f" | 32-digit counts {'CERTIFIED' if ok else 'DIFFER'}"
                 if not ok: bad.append(line)
             if sub == "all" and n in chi_ref:
+                done["chi"] += 1
                 ok = chi_ref[n] == cnt["chi"]
                 line += f" | chi {'CERTIFIED' if ok else 'DIFFERS'}"
                 if not ok: bad.append(line)
@@ -134,6 +176,7 @@ def main():
                     cache = {}
                     c = len({value_key(p, a, b, g, cache) for p in P})
                     r = frac_ref[(n, round(float(a), 3), round(float(b), 3), g)]
+                    done["frac"] += 1
                     parts.append(f"({a},{b},{g}):{c}{'' if c == r else '!=' + str(r)}")
                     if c != r: bad.append(f"n={n} fractional ({a},{b},{g}): exact {c}, committed {r}")
             if n == 16:
@@ -145,8 +188,12 @@ def main():
             out.append(line); print(line, flush=True)
     out.append(f"GA merges two distinct q-histograms first at order {first_ga_merge.get('all', 'none <= 17')} (all trees), "
                f"{first_ga_merge.get('mol', 'none up to 17')} (max degree <= 4); orders 2-17 examined")
+    cov = (done["hp"], len(EXPECTED_HP), done["chi"], len(EXPECTED_CHI), done["frac"], len(EXPECTED_FRAC))
+    out.append("reference comparisons completed: 32-digit %d/%d, chi %d/%d, fractional %d/%d" % cov)
+    if (cov[0], cov[2], cov[4]) != (cov[1], cov[3], cov[5]):
+        bad.append("reference comparisons incomplete")
     out.append("RESULT: " + ("all numerical counts certified exactly" if not bad else f"{len(bad)} DIFFERENCES: " + "; ".join(bad)))
-    print("\n".join(out[-2:]))
+    print("\n".join(out[-3:]))
     open(os.path.join(HERE, "exact_ties_out.txt"), "w").write("\n".join(out) + "\n")
     sys.exit(1 if bad else 0)
 

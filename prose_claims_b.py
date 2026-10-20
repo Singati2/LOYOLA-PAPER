@@ -830,14 +830,14 @@ _add(E("off_order16", "main", r"order\s+\$(?P<v>\d+)\$\s+\(\$4069\$", "max(frac_
 _add(E("off_4069_prof", "main", r"\s+\(\$(?P<v>\d+)\$ profiles\), \$LO\(0,\\tfrac12,0\)\$", "frac_profiles(16)", 0, "fractional_points_out.txt n=16"))  # 1
 _add(E("off_3475", "main", r"only\ \$(?P<v>[+-]?[\d.]+)\$\ and\ \$3476\$\ distinct\ valu", "frac_count(16, 0, 0.5, 0)", 0, "fractional_points_out.txt"))  # 1
 _add(E("off_3476", "main", r"and\s+\$(?P<v>[+-]?[\d.]+)\$\s+distinct", "frac_count(16, 0, 1/3, 0)", 0, "fractional_points_out.txt"))  # 1
-_add(E("off_4069_sep", "main", r"all\s+\$(?P<v>\d+)\$\.\s+\$LO\(\\tfrac12,0,\\cdot\)\$",
+_add(E("off_4069_sep", "main", r"all\s+\$(?P<v>\d+)\$\s+profiles\.\s+\$LO\(\\tfrac12,0,\\cdot\)\$",
        "frac_count(16, 0, 0.5, 1) if frac_count(16, 0, 0.5, 1) == frac_count(16, 0, 1/3, 1) == frac_profiles(16) else None", 0, "fractional_points_out.txt"))  # 1
 _add(E("off_3940", "main", r"from\ \$(?P<v>[+-]?[\d.]+)\$\ to\ \$4067\$\ and\ the\ Randi\\", "frac_count(16, 0.5, 0, 0)", 0, "fractional_points_out.txt"))  # 1
 _add(E("off_4067", "main", r"to\s+\$(?P<v>[+-]?[\d.]+)\$\s+and", "frac_count(16, 0.5, 0, 1)", 0, "fractional_points_out.txt"))  # 1
 _add(E("off_4007", "main", r"from\ \$(?P<v>[+-]?[\d.]+)\$\ to\ \$4068\$\ as\ \$\\gamma\$\ go", "frac_count(16, -0.5, 0, 0)", 0, "fractional_points_out.txt"))  # 1
 _add(E("off_4068", "main", r"\$4007\$\s+to\s+\$(?P<v>[+-]?[\d.]+)\$\s+as\s+\$\\gamma\$", "frac_count(16, -0.5, 0, 1)", 0, "fractional_points_out.txt"))  # 1
 _add(E("off_3996", "main", r"unaffected\s+\(\$(?P<v>\d+)\$\s+in", "frac_ratio_plane_count(16)", 0, "fractional_points_out.txt (0.5,-1) and (-0.5,1), both gammas"))  # 1
-_add(E("off_generic_4069", "main", r"all\s+\$(?P<v>\d+)\$\s+profiles", "distinct_count(16, 0.3, 0.2, 0)", 0, "enumeration of order-16 trees, 11 significant digits"))  # 1
+_add(E("off_generic_4069", "main", r"already\s+separate\s+all\s+\$(?P<v>\d+)\$\s+profiles", "distinct_count(16, 0.3, 0.2, 0)", 0, "enumeration of order-16 trees, 11 significant digits"))  # 1
 _add(E("off_orders12", "main", r"orders\s+\$(?P<v>\d+)\$\-\-\$16\$\s+\(at", "min(frac_orders())", 0, "fractional_points_out.txt"))  # 1
 _add(E("off_orders16", "main", r"orders\s+\$12\$\-\-\$(?P<v>\d+)\$\s+\(at", "max(frac_orders())", 0, "fractional_points_out.txt"))  # 1
 # structure sensitivity (main)
@@ -972,7 +972,7 @@ _add(E("sup_g1_0_m05", "supp", r"\$4067\$,\s+\$(?P<v>\d+)\$,\s+\$4068\$,", "frac
 _add(E("sup_g1_m05_0", "supp", r"\$4069\$,\s+\$4067\$,\s+\$4069\$,\s+\$(?P<v>\d+)\$,\s+\$4069\$ and", "frac_count(16, -0.5, 0, 1)", 0, "fractional_points_out.txt"))  # 1
 _add(E("sup_g1_13_0", "supp", r"\$4068\$,\s+\$(?P<v>\d+)\$\s+and", "frac_count(16, 1/3, 0, 1)", 0, "fractional_points_out.txt"))  # 1
 _add(E("sup_g1_0_13", "supp", r"\$4069\$\s+and\s+\$(?P<v>\d+)\$\s+of\s+\$4069\$", "frac_count(16, 0, 1/3, 1)", 0, "fractional_points_out.txt"))  # 1
-_add(E("sup_of_4069", "supp", r"and \$4069\$ of \$(?P<v>\d+)\$ for", "frac_profiles(16)", 0, "fractional_points_out.txt"))  # 1
+_add(E("sup_of_4069", "supp", r"and \$4069\$ of \$(?P<v>\d+)\$ profiles for", "frac_profiles(16)", 0, "fractional_points_out.txt"))  # 1
 _add(E("sup_g0_0_05", "supp", r"give \$(?P<v>\d+)\$, \$3940\$, \$3476\$, \$4007\$", "frac_count(16, 0, 0.5, 0)", 0, "fractional_points_out.txt"))  # 1
 _add(E("sup_g0_05_0", "supp", r"give \$3475\$, \$(?P<v>\d+)\$, \$3476\$", "frac_count(16, 0.5, 0, 0)", 0, "fractional_points_out.txt"))  # 1
 _add(E("sup_g0_0_m05", "supp", r"\$3940\$, \$(?P<v>\d+)\$, \$4007\$", "frac_count(16, 0, -0.5, 0)", 0, "fractional_points_out.txt"))  # 1

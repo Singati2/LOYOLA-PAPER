@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 """Write the numbered Colab notebooks of this folder (run after editing STAGES in pipeline.py).
 
-  python colab/make_notebooks.py
+  python colab/make_notebooks.py --pin <commit> [--revision <branch or tag>]
+
+Every notebook runs exactly the commit given by --pin (default: the current HEAD). Commit the code first,
+then regenerate the notebooks pinned to that commit and commit them; the notebook commit changes only
+colab/*.ipynb, so the pinned commit holds the same code. --revision is the branch or tag that is cloned
+and must contain the pinned commit (default: the current branch).
 """
-import os, sys
+import argparse, os, subprocess, sys
 import nbformat
 from nbformat.v4 import new_code_cell, new_markdown_cell, new_notebook
 
@@ -11,51 +16,107 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from pipeline import STAGES  # noqa: E402
 
-REVISION = "revision/v40.31-scientific"
 REPO_URL = "https://github.com/Singati2/LOYOLA-PAPER.git"
+REVISION = SETUP = CERT_SETUP = None   # set in main() from --revision and --pin
 
-SETUP = f'''# Setup (the same cell in every notebook of colab/; about 2 minutes the first time in a session)
-REVISION = "{REVISION}"   # the branch or tag to run; every notebook of one run must use the same commit
+# Git helpers shared by every setup cell. A GitHub token is passed to git only through environment
+# variables of that one git process (an HTTP header set via GIT_CONFIG_*): it never appears in a command
+# line, a URL, an exception, the notebook output or .git/config.
+GIT_HELPERS = '''import base64, hashlib, json, os, shutil, subprocess, sys
+
+
+def git_net(args, token=None, cwd=None):
+    """Run a git command that may need the network; on failure raise with the token redacted."""
+    env = dict(os.environ, GIT_TERMINAL_PROMPT="0")
+    secrets = []
+    if token:
+        auth = base64.b64encode(("x-access-token:" + token).encode()).decode()
+        secrets = [token, auth]
+        env.update(GIT_CONFIG_COUNT="1", GIT_CONFIG_KEY_0="http.extraHeader",
+                   GIT_CONFIG_VALUE_0="Authorization: Basic " + auth)
+    try:
+        r = subprocess.run(["git", *args], cwd=cwd, env=env, capture_output=True, text=True)
+        msg = (r.stdout + r.stderr).strip()
+        for s in secrets:
+            msg = msg.replace(s, "***")
+    finally:
+        env = secrets = auth = None
+    if r.returncode != 0:
+        raise RuntimeError("git " + args[0] + " failed: " + msg[-800:])
+
+
+def at_pin(work, pin, fetch_args, token=None):
+    """Make the checkout at work be exactly the commit pin, with no local changes, or stop."""
+    git = lambda *a: subprocess.run(["git", "-C", work, *a], capture_output=True, text=True)
+    if git("status", "--porcelain", "--untracked-files=no").stdout.strip():
+        raise RuntimeError(work + " has local changes to tracked files; delete that folder and run this cell again")
+    if git("rev-parse", "HEAD").stdout.strip() != pin:
+        if git("cat-file", "-e", pin + "^{commit}").returncode != 0:
+            git_net(["fetch", "--quiet", *fetch_args], token, cwd=work)
+        r = git("checkout", "--quiet", "--detach", pin)
+        if r.returncode != 0:
+            raise RuntimeError("cannot check out the pinned commit " + pin + ": " + r.stderr.strip())
+    head = git("rev-parse", "HEAD").stdout.strip()
+    if head != pin:
+        raise RuntimeError("checkout is at " + head + ", not the pinned commit " + pin)
+    return head'''
+
+
+def setup_cell(revision, pin):
+    return f'''# Setup (the same cell in every notebook of colab/; about 2 minutes the first time in a session)
+{GIT_HELPERS}
+
+REVISION = "{revision}"   # the branch or tag that is cloned; it must contain PIN
+PIN = os.environ.get("LOYOLA_PIN", "{pin}")   # the exact commit every notebook of a run executes
 REPO_URL = "{REPO_URL}"
-import os, sys, shutil, subprocess
+
 IN_COLAB = "google.colab" in sys.modules
-if IN_COLAB:
-    from google.colab import drive
-    drive.mount("/content/drive")             # progress and outputs are kept in MyDrive/LOYOLA_colab_run
-    WORK = "/content/LOYOLA-PAPER"
-    if not os.path.exists(WORK):
-        token = None
+token = None
+try:
+    if IN_COLAB:
+        from google.colab import drive
+        drive.mount("/content/drive")             # progress and outputs are kept in MyDrive/LOYOLA_colab_run
+        WORK = "/content/LOYOLA-PAPER"
         try:
             from google.colab import userdata
             token = userdata.get("GITHUB_TOKEN")  # Colab secret (key icon on the left), needed while the repository is private
         except Exception:
             pass
         bundle = "/content/drive/MyDrive/LOYOLA-PAPER.bundle"
-        if token:
-            url = REPO_URL.replace("https://", "https://x-access-token:" + token + "@")
-            subprocess.run(["git", "clone", "--quiet", "--branch", REVISION, url, WORK], check=True)
-            subprocess.run(["git", "-C", WORK, "remote", "set-url", "origin", REPO_URL], check=True)   # token not kept on disk
-        elif os.path.exists(bundle):
-            subprocess.run(["git", "clone", "--quiet", "--branch", REVISION, bundle, WORK], check=True)
-        else:
-            subprocess.run(["git", "clone", "--quiet", "--branch", REVISION, REPO_URL, WORK], check=True)
-    os.chdir(WORK)
-    ENV = "/content/loyola-env"
-else:                                         # run locally from inside the repository
-    while not os.path.exists("verify.py") and os.getcwd() != "/":
-        os.chdir("..")
-    ENV = os.path.join(os.getcwd(), ".venv-colab")
+        source = REPO_URL if token or not os.path.exists(bundle) else bundle
+        if not os.path.exists(WORK):
+            git_net(["clone", "--quiet", "--branch", REVISION, source, WORK], token)
+        at_pin(WORK, PIN, [source, REVISION], token)   # an existing checkout is checked, and moved to PIN if clean
+        os.chdir(WORK)
+        ENV = "/content/loyola-env"
+    else:                                         # run locally from inside the repository
+        while not os.path.exists("verify.py") and os.getcwd() != "/":
+            os.chdir("..")
+        head = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip()
+        if head != PIN or subprocess.run(["git", "status", "--porcelain", "--untracked-files=no"],
+                                         capture_output=True, text=True).stdout.strip():
+            raise RuntimeError("this checkout is " + head[:9] + (" with local changes" if head == PIN else "")
+                               + ", not the pinned commit " + PIN[:9] + "; check out the pinned commit, or set LOYOLA_PIN")
+        ENV = os.path.join(os.getcwd(), ".venv-colab")
+finally:
+    token = None                                  # the token is not kept in the notebook's variables
+
+# Python 3.13 and exactly the locked package versions that produced the committed outputs. An environment
+# with another Python is rebuilt; uv pip sync installs what is missing and removes what is not locked, so a
+# partly installed or modified environment is repaired. Its fingerprint is printed and checked by pipeline.py.
 PY = os.path.join(ENV, "bin", "python")
-if not os.path.exists(PY):                    # Python 3.13 and the pinned versions that produced the committed outputs
-    if shutil.which("uv") is None:
-        subprocess.run([sys.executable, "-m", "pip", "install", "--quiet", "uv"], check=True)
-    UV = ["uv"] if shutil.which("uv") else [sys.executable, "-m", "uv"]
+if os.path.exists(PY) and not subprocess.run([PY, "-c", "import sys; sys.exit(sys.version_info[:2] != (3, 13))"]).returncode == 0:
+    shutil.rmtree(ENV)
+if shutil.which("uv") is None:
+    subprocess.run([sys.executable, "-m", "pip", "install", "--quiet", "uv"], check=True)
+UV = ["uv"] if shutil.which("uv") else [sys.executable, "-m", "uv"]
+if not os.path.exists(PY):
     subprocess.run(UV + ["venv", "--quiet", "--python", "3.13", ENV], check=True)
-    subprocess.run(UV + ["pip", "install", "--quiet", "--python", PY, "-r", "requirements-lock.txt",
-                         "-r", "requirements-extras-lock.txt"], check=True)
+subprocess.run(UV + ["pip", "sync", "--quiet", "--python", PY, "requirements-lock.txt", "requirements-extras-lock.txt"], check=True)
+locks = hashlib.sha256(b"".join(open(f, "rb").read() for f in ("requirements-lock.txt", "requirements-extras-lock.txt"))).hexdigest()
 print(subprocess.run([PY, "-c", "import sys, numpy, scipy; print('python', sys.version.split()[0], '| numpy', "
                       "numpy.__version__, '| scipy', scipy.__version__)"], capture_output=True, text=True).stdout.strip())
-print("commit", subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip())
+print("commit", subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip(), "| lock files", locks[:12])
 STATE = os.environ.get("LOYOLA_STATE") or ("/content/drive/MyDrive/LOYOLA_colab_run" if IN_COLAB
                                            else os.path.join(os.getcwd(), "colab_run"))   # as in pipeline.py
 
@@ -99,32 +160,36 @@ def write(name, cells):
     print("wrote", os.path.relpath(path, os.path.dirname(HERE)))
 
 
-def badge(name, revision=REVISION):
+def badge(name, revision=None):
+    revision = revision or REVISION
     return (f"[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)]"
             f"(https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/{revision}/colab/{name})")
 
 
-# Notebook 12 runs the independent enumeration certificates of audit/certificates/. They exist only on the
-# review branch so far; set CERT_REVISION to REVISION once that branch is merged.
-CERT_REVISION = "review/short-version"
-CERT_SETUP = f'''# Setup: fetch the revision and install networkx at the version that produced the committed outputs
-REVISION = "{CERT_REVISION}"   # a branch or tag that contains audit/certificates/
-import os, sys, subprocess
+def cert_setup_cell(revision, pin):
+    """Notebook 12: the same pinned checkout, and networkx at the version that produced the committed outputs."""
+    return f'''# Setup: check out the pinned commit and install networkx at the version that produced the committed outputs
+{GIT_HELPERS}
+
+REVISION = "{revision}"   # the branch or tag that is cloned; it must contain PIN
+PIN = os.environ.get("LOYOLA_PIN", "{pin}")   # the exact commit this notebook runs
 if not os.path.exists("minimal.py"):
     while not os.path.exists("verify.py") and os.getcwd() != "/":   # inside a local checkout: go to its top folder
         os.chdir("..")
     if not os.path.exists("verify.py"):                             # on Colab: clone the revision
         os.chdir("/content" if os.path.isdir("/content") else os.path.expanduser("~"))
         if not os.path.exists("LOYOLA-PAPER"):
-            subprocess.run(["git", "clone", "--quiet", "--depth", "1", "--branch", REVISION,
-                            "{REPO_URL}"], check=True)
+            git_net(["clone", "--quiet", "--branch", REVISION, "{REPO_URL}", "LOYOLA-PAPER"])
         os.chdir("LOYOLA-PAPER")
+    at_pin(os.getcwd(), PIN, ["{REPO_URL}", REVISION])
     os.chdir("audit/certificates")
 if "google.colab" in sys.modules:
     subprocess.run([sys.executable, "-m", "pip", "install", "--quiet", "networkx==3.6.1"], check=True)
 import networkx
 print("python", sys.version.split()[0], "| networkx", networkx.__version__)
 print("commit", subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip())'''
+
+
 CERT_RUN = '''def run(*args):
     """Run one certificate script, print its last line, return its full output."""
     out = subprocess.run([sys.executable, *args], capture_output=True, text=True, check=True).stdout
@@ -143,6 +208,18 @@ print("ALL CERTIFICATES REPRODUCED")'''
 
 
 def main():
+    global REVISION, SETUP, CERT_SETUP
+    here_git = lambda *a: subprocess.run(["git", "-C", HERE, *a], capture_output=True, text=True, check=True).stdout.strip()
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--pin", default="HEAD", help="commit every notebook runs (default: HEAD)")
+    ap.add_argument("--revision", default=None, help="branch or tag to clone (default: the current branch)")
+    a = ap.parse_args()
+    pin = here_git("rev-parse", "--verify", a.pin + "^{commit}")
+    REVISION = a.revision or here_git("rev-parse", "--abbrev-ref", "HEAD")
+    if REVISION == "HEAD":
+        sys.exit("detached HEAD: give --revision (a branch or tag that contains the pinned commit)")
+    SETUP, CERT_SETUP = setup_cell(REVISION, pin), cert_setup_cell(REVISION, pin)
+    print("notebooks pinned to", pin, "on", REVISION)
     total = sum(m for s in STAGES for _, m in s[3])
     write("00_setup_and_plan.ipynb", [
         new_markdown_cell(f"# 0. Setup and plan of the full run\n\n{badge('00_setup_and_plan.ipynb')}\n\n"
@@ -216,7 +293,7 @@ if r.returncode != 0:
     ])
     write("12_enumeration_certificates.ipynb", [
         new_markdown_cell(f"# 12. Enumeration certificates (independent, about 2 minutes)\n\n"
-                          f"{badge('12_enumeration_certificates.ipynb', CERT_REVISION)}\n\n"
+                          f"{badge('12_enumeration_certificates.ipynb')}\n\n"
                           "Re-runs the four scripts of `audit/certificates/`, written independently of the repository's "
                           "verifiers: the minimal orders 13 (all trees) and 16 (maximum degree at most 4) at which distinct "
                           "degree-pair profiles share a degree-ratio histogram, the first order for each bound on the maximum "

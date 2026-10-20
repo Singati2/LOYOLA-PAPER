@@ -21,8 +21,8 @@ scripts stay where they are, so the paths used in the paper and in `REPRODUCE.md
 | `11_final_report.ipynb` | compares every rewritten output with the commit; writes `FINAL_REPORT.md` | 2 min |
 | `12_enumeration_certificates.ipynb` | separate from the run above: the independent enumeration certificates of `audit/certificates/` (orders 13 and 16, first order by maximum degree, SDD and ISDD, witness trees); no NIST data, no Drive folder; any order | 1 min |
 
-Notebook 12 runs on its own and needs no setup beyond a Colab session. It fetches `review/short-version`,
-the branch that holds `audit/certificates/`, until that branch is merged.
+Notebook 12 runs on its own and needs no setup beyond a Colab session. Like every notebook here, it runs
+the pinned commit (see below).
 
 Lab times come from one run on the authors' machine with throttled CPU, three scripts at a time, so
 they are upper estimates. Notebook 07 is long. If it does not fit in one session, open it again:
@@ -31,7 +31,9 @@ the run continues with the next unfinished script.
 ## Before the first notebook
 1. Repository access. While the repository is private, do one of the following:
    * add a Colab secret named `GITHUB_TOKEN` (key icon in Colab's left bar) holding a GitHub token
-     with read access to `Singati2/LOYOLA-PAPER`, and allow the notebook to use it; or
+     with read access to `Singati2/LOYOLA-PAPER`, and allow the notebook to use it. The token reaches
+     git only through the environment of the clone or fetch command; it is not put into a URL, a
+     command line, an error message, the notebook's variables or `.git/config`; or
    * make a bundle on your computer, `git bundle create LOYOLA-PAPER.bundle --all`, and upload it
      to the top folder of your Google Drive.
 
@@ -40,10 +42,15 @@ the run continues with the next unfinished script.
    `MyDrive/LOYOLA_colab_run`.
 
 ## How a run works
-* Every notebook starts with the same setup cell. It fetches the revision named in `REVISION`,
-  and installs Python 3.13 with the exact package versions of `requirements-lock.txt` and
-  `requirements-extras-lock.txt` in a separate environment. The committed outputs were produced
-  with these versions.
+* Every notebook starts with the same setup cell. It clones the branch named in `REVISION` and
+  checks out the exact commit named in `PIN`; every notebook of the folder names the same commit.
+  An existing checkout is moved to that commit if it has no local changes and is rejected if it
+  has. Run locally, the cell stops unless the checkout is that commit without local changes. The
+  cell then synchronises a Python 3.13 environment to the exact package versions of
+  `requirements-lock.txt` and `requirements-extras-lock.txt`: missing packages are installed,
+  others removed, and an environment with another Python is rebuilt. The committed outputs were
+  produced with these versions. The notebooks are regenerated with
+  `python colab/make_notebooks.py --pin <commit>`.
 * Notebook 01 has an explicit cell that retrieves the 262 NIST WebBook pages from the WebBook
   (one request per second, about 5 minutes). NIST SRD 69 is copyrighted, so the pages are not in the
   repository and no other cell downloads them. They are saved in a private Drive folder,
@@ -53,11 +60,19 @@ the run continues with the next unfinished script.
 * `colab/pipeline.py` runs the scripts of a stage one after another, each from its own directory.
   Each script runs after every script whose output it reads. This order was checked against a
   trace of the files each script opens. After each script it saves the
-  script's log, its exit status and every file it wrote to the state folder. The next notebook
-  restores those files first, so each stage sees the outputs of the earlier ones.
+  script's log, its exit status and every file it wrote to the state folder, with the SHA-256 of
+  each file, the SHA-256 of every output of earlier scripts present when it ran, and a fingerprint
+  of the commit, the script, its arguments, the Python version, the installed package versions and
+  the lock files. The next notebook restores those files first, so each stage sees the outputs of
+  the earlier ones.
+* A finished script is skipped only if its fingerprint is unchanged, every output it wrote is
+  present and unaltered, and no output of an earlier script has changed since it ran. Otherwise it
+  runs again. The runner refuses to run on tracked files that differ from the commit (other than
+  restored outputs). State files are written atomically.
 * A state folder belongs to one commit. The runner refuses to continue a run with a different
   commit. To start again, delete or rename `MyDrive/LOYOLA_colab_run`.
-* Notebook 11 lists every script as OK, PROBLEM or NOT RUN. It lists every output that differs
+* Notebook 11 lists every script as OK, PROBLEM, STALE (finished, but its record no longer
+  validates: an output is missing or altered, or an input or the environment changed) or NOT RUN. It lists every output that differs
   from the committed file and does not hide floating-point differences. Four outputs already
   differed in their last digits between the authors' macOS run and a Linux run (see
   `verification_logs/lab_09ceba8/NOTE.md`). If they differ again, the report notes it next to the file.
