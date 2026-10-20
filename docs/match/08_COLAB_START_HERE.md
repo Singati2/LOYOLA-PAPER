@@ -10,11 +10,11 @@ There are two pin chains. Use the one whose branch is on GitHub.
 
 | Chain | Code commit (PIN) | Notebook commit (links) | Branch | On public GitHub now? |
 |---|---|---|---|---|
-| A, figure moved into the main paper (current) | `b7f50c094c815e25cbce356f878de89814a0395a` | `6f8ac717209fc414b6fa1747d9f3b5d165ecd4eb` | `review/match-figure-2026-10-20` | **No.** Local only. All links 404 until the branch is pushed |
+| A, figure moved into the main paper (current) | `c48bad05f8e95805d4f0f700f5324d1071b903cd` | `afafe6c44bd66e0d90e7b5e723010e41e1236ec2` | `review/match-figure-2026-10-20` | **No.** Local only. All links 404 until the branch is pushed |
 | B, previous review state | `95c840c857d00413e6a3bf7b83989216d5c79b14` | `23bfd45baecc1335f2bc075c02743ab2905b60cf` | `review/corrections-impl-2026-10-19` (head `9212441`) | Yes. Every link checked returns HTTP 200 |
 
 In the links below, `<NB_COMMIT>` stands for the notebook commit. For chain A it is
-`6f8ac717209fc414b6fa1747d9f3b5d165ecd4eb`, and the links work only after
+`afafe6c44bd66e0d90e7b5e723010e41e1236ec2`, and the links work only after
 `review/match-figure-2026-10-20` is pushed. For chain B it is `23bfd45baecc1335f2bc075c02743ab2905b60cf`,
 which works now but runs the code from before the figure move.
 
@@ -42,7 +42,7 @@ chain A those badges also 404 until the branch is pushed. The branch names conta
 GitHub loader resolves such branch URLs was not tested. The commit-SHA links above avoid the question.
 
 What actually runs is decided by `PIN` inside the notebook, not by the link. Every notebook at
-`6f8ac71` has `PIN = b7f50c0…`, and every notebook at `23bfd45` has `PIN = 95c840c…` (checked with
+`afafe6c` has `PIN = c48bad0…`, and every notebook at `23bfd45` has `PIN = 95c840c…` (checked with
 `git show`).
 
 ## 1. Before you start (all tiers)

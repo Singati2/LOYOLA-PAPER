@@ -1,8 +1,8 @@
 # MATCH submission candidate — NOT SUBMITTED
 
 Candidate for **coauthor review** only. Nothing here has been sent to MATCH. Prepared 2026-10-20 on the
-local branch `review/match-figure-2026-10-20`; the manuscript sources are those of commit
-`b7f50c094c815e25cbce356f878de89814a0395a` (unchanged in the later documentation commits).
+branch `review/match-figure-2026-10-20` (pushed to GitHub, not merged); the manuscript sources are those of
+commit `c48bad05f8e95805d4f0f700f5324d1071b903cd` (unchanged in the later documentation commits).
 
 ## Contents
 
