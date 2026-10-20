@@ -10,16 +10,16 @@ the locked versions, and Colab's Python is assumed to differ.
 
 | # | Check | Command (abridged) | Result |
 |---|---|---|---|
-| 1 | PIN, REVISION and badge in every committed notebook, for both chains | `git show <c>:<path>` for c = `0a36902` and `23bfd45`, then a regex for `LOYOLA_PIN`, `REVISION`, `blob/` and output counts (`scratchpad/match_audit_pins.py`) | 19/19 notebooks at `0a36902`: PIN `5d5d16abe45e…`, REVISION `review/match-figure-2026-10-20`. 19/19 at `23bfd45`: PIN `95c840c857d0…`, REVISION `review/corrections-impl-2026-10-19`. 0 stored outputs in every notebook. No `/home`, `mpcrlab` or `FAU` string |
-| 2 | Pin chain scope | `git diff --stat 5d5d16a 0a36902`; `git diff --stat 0a36902 325bd05`; `git merge-base --is-ancestor 5d5d16a 0a36902` | `0a36902` changes 19 notebooks plus `SHA256SUMS.txt` only. `325bd05` changes README, guide and `SHA256SUMS.txt` only. The pin is an ancestor of the notebook commit |
-| 3 | The generators reproduce the committed notebooks | scratch clone (`git clone` of the worktree into `scratchpad/regen_clone`), then `colab/make_notebooks.py --pin 5d5d16a --revision review/match-figure-2026-10-20` and the same for `notebooks/gen_notebooks.py` | 19 files changed, and the only changed lines are the random nbformat cell `id`s. Content is identical |
+| 1 | PIN, REVISION and badge in every committed notebook, for both chains | `git show <c>:<path>` for c = `6f8ac71` and `23bfd45`, then a regex for `LOYOLA_PIN`, `REVISION`, `blob/` and output counts (`scratchpad/match_audit_pins.py`) | 19/19 notebooks at `6f8ac71`: PIN `b7f50c0be45e…`, REVISION `review/match-figure-2026-10-20`. 19/19 at `23bfd45`: PIN `95c840c857d0…`, REVISION `review/corrections-impl-2026-10-19`. 0 stored outputs in every notebook. No `/home`, `mpcrlab` or `FAU` string |
+| 2 | Pin chain scope | `git diff --stat b7f50c0 6f8ac71`; `git diff --stat 6f8ac71 325bd05`; `git merge-base --is-ancestor b7f50c0 6f8ac71` | `6f8ac71` changes 19 notebooks plus `SHA256SUMS.txt` only. `325bd05` changes README, guide and `SHA256SUMS.txt` only. The pin is an ancestor of the notebook commit |
+| 3 | The generators reproduce the committed notebooks | scratch clone (`git clone` of the worktree into `scratchpad/regen_clone`), then `colab/make_notebooks.py --pin b7f50c0 --revision review/match-figure-2026-10-20` and the same for `notebooks/gen_notebooks.py` | 19 files changed, and the only changed lines are the random nbformat cell `id`s. Content is identical |
 | 4 | Notebook validity | `nbformat.validate` plus `ast.parse` of every code cell | 19/19 valid, 0 syntax errors |
 | 5 | Plan consistency | import `colab/pipeline.py`; compare `ORDER` with `audit/run_all_scripts.py` `SCRIPTS` | 60 scripts in both, no duplicates, every file exists; `run_all` adds only `manifest.py`. Stage minutes: 6/147/40/101/226/60/745/9, total 1334 |
 | 6 | `pipeline.py --list` runs | `python colab/pipeline.py --list` in the scratch clone | OK |
-| 7 | Reviewer links | `grep` of the colab URLs in `REVIEWER_START_HERE.md` and `README.md` at `325bd05` and `9212441`; `curl -s -o /dev/null -w '%{http_code}'` on the raw.githubusercontent.com equivalent | `325bd05`: 12 links (6 per document), all to `blob/0a36902…/notebooks/0N_*.ipynb`, all **404** (unpushed). `9212441`: 6 distinct links to `blob/23bfd45…/notebooks/…`, all **200**. All 13 `colab/*.ipynb` at `23bfd45`: 200. Commit `95c840c` page: 200. `5d5d16a` and branch `review/match-figure-2026-10-20`: 404. Repository root: 200 (public). `git ls-remote`: `review/corrections-impl-2026-10-19` = `9212441` |
+| 7 | Reviewer links | `grep` of the colab URLs in `REVIEWER_START_HERE.md` and `README.md` at `325bd05` and `9212441`; `curl -s -o /dev/null -w '%{http_code}'` on the raw.githubusercontent.com equivalent | `325bd05`: 12 links (6 per document), all to `blob/6f8ac71…/notebooks/0N_*.ipynb`, all **404** (unpushed). `9212441`: 6 distinct links to `blob/23bfd45…/notebooks/…`, all **200**. All 13 `colab/*.ipynb` at `23bfd45`: 200. Commit `95c840c` page: 200. `b7f50c0` and branch `review/match-figure-2026-10-20`: 404. Repository root: 200 (public). `git ls-remote`: `review/corrections-impl-2026-10-19` = `9212441` |
 | 8 | Notebook 12 assertions against the committed certificate outputs | `grep` of `audit/certificates/*_out.txt` | consistent: `{'all': 13, 'chem': 16}`, by-Δ dictionary, SDD/ISDD 9/10, two "OK for every order" |
 | 9 | Hard-coded local paths | `grep -rnE '/home/|mpcrlab|FAU|/Users/' notebooks/ colab/ audit/run_all_scripts.py …` | none in notebooks, generators, pipeline or docs. Present only in the committed lab logs (`verification_logs/lab_09ceba8/notebooks/*.ipynb`, `run_all_scripts_rerun.log`: `/home/mpcrlab/LOYOLA-PAPER`, uv Python path). No token-like string |
-| 10 | Cross-check evidence age | `git log eed7d03..5d5d16a -- <inputs>` | the permutation audit output (eed7d03) predates a change to `external/baselines.py` (3af7f67), which it imports. The cross-check output records commit 01ad6c6 |
+| 10 | Cross-check evidence age | `git log eed7d03..b7f50c0 -- <inputs>` | the permutation audit output (eed7d03) predates a change to `external/baselines.py` (3af7f67), which it imports. The cross-check output records commit 01ad6c6 |
 | 11 | Observed runtimes | `grep` of the per-script times in `verification_logs/lab_09ceba8/*` | match the `pipeline.py` lab minutes. Notebook 05 permutation cell took 2855 s; notebook 06 verifier took 1222 s |
 
 Not run: any notebook, any pipeline stage, `verify.py`, the NIST download, the two cross-checks, Lean, TeX.
@@ -40,7 +40,7 @@ Not run: any notebook, any pipeline stage, `verify.py`, the NIST download, the t
    which this audit did not establish. Older Colab images lacked it. The venv is not Python 3.13 either.
    If it fails, use the uv cell of `08_COLAB_START_HERE.md` step 6b.
 3. **README.md:89 is false.** It says "The notebooks are committed with their outputs from a local run".
-   All 19 notebooks at `0a36902` (and at `23bfd45`) have 0 outputs. The executed lab copies are
+   All 19 notebooks at `6f8ac71` (and at `23bfd45`) have 0 outputs. The executed lab copies are
    under `verification_logs/lab_09ceba8/notebooks/` and belong to commit 09ceba8.
 4. **colab/README.md:92-93 contradicts the runner.** It says "every stage downloads them into the Colab copy
    of the repository". The runner never downloads (`colab/pipeline.py` docstring and `run_stage`). Only
@@ -64,7 +64,7 @@ Not run: any notebook, any pipeline stage, `verify.py`, the NIST download, the t
    - Full replay: about 25 h (REPRODUCE.md:36) against a 1334-minute (22.2 h) plan sum.
 8. **The cross-check evidence is not at the pin.** `audit/permutation_pipeline_audit_out.txt` was last
    written at eed7d03, before `external/baselines.py` changed in 3af7f67. The crosscheck output records
-   01ad6c6. Neither has been rerun at `5d5d16a` or `95c840c`. The `NOT_REPLAYED` notes in the docs are
+   01ad6c6. Neither has been rerun at `b7f50c0` or `95c840c`. The `NOT_REPLAYED` notes in the docs are
    accurate about this ("must be rerun on their own before claiming that they reproduce").
 
 ### Consistency and security observations (no defect)
@@ -110,9 +110,9 @@ Not run: any notebook, any pipeline stage, `verify.py`, the NIST download, the t
 
 ## 4. What the user should execute manually next in Colab (short list)
 
-1. Push `review/match-figure-2026-10-20` (it holds `5d5d16a`, `0a36902` and `325bd05`). Then confirm in a
+1. Push `review/match-figure-2026-10-20` (it holds `b7f50c0`, `6f8ac71` and `325bd05`). Then confirm in a
    private window that
-   `https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/0a36902e5b6ed7a56b0534641cb12431616c2066/notebooks/01_data.ipynb`
+   `https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/6f8ac717209fc414b6fa1747d9f3b5d165ecd4eb/notebooks/01_data.ipynb`
    opens. Until then, test with the `23bfd45` links (they run `95c840c`).
 2. In a fresh Colab runtime run `!python --version`, and record it.
 3. Tier 1: `notebooks/01`–`05` (Run all, default `RUN_SLOW=False`). Record the first-cell version line
