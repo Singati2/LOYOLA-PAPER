@@ -39,7 +39,21 @@ elif not os.path.exists("verify.py"):
         subprocess.run(["git", "-C", "LOYOLA-PAPER", "checkout", "--quiet", "--detach", PIN], check=True)
     os.chdir("LOYOLA-PAPER")
 if "google.colab" in sys.modules:   # pinned versions, as used for the recorded results
-    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-r", "requirements-lock.txt", "-r", "requirements-extras-lock.txt"], check=True)
+    # Only what these notebooks import: the core lock plus pandas. The kernel's own packages (ipykernel,
+    # jupyter_client) are left alone, because replacing them in a running Colab kernel can break it.
+    import re as _re
+    _lock = lambda f: dict(_re.findall(r"^([A-Za-z0-9_.-]+)==(\S+)", open(f).read(), _re.M))
+    _pins = {**_lock("requirements-lock.txt"), "pandas": _lock("requirements-extras-lock.txt")["pandas"]}
+    subprocess.run([sys.executable, "-m", "pip", "install", "-q", *[f"{k}=={v}" for k, v in _pins.items()]], check=True)
+    from importlib.metadata import version as _version
+    _bad = [f"{k} {_version(k)} (locked {_pins[k]})" for k in ("numpy", "scipy", "networkx", "matplotlib", "sympy", "mpmath", "pandas")
+            if _version(k) != _pins[k]]
+    _stale = [k for k in ("numpy", "scipy", "networkx", "matplotlib", "pandas")
+              if k in sys.modules and getattr(sys.modules[k], "__version__", _pins[k]) != _pins[k]]
+    if _bad:
+        raise RuntimeError("the installed versions differ from the lock files: " + ", ".join(_bad))
+    if _stale:
+        raise RuntimeError(f"{_stale} were already imported at other versions: choose Runtime > Restart session, then Run all again")
 ROOT = os.getcwd()
 git = lambda *a: subprocess.run(["git", *a], capture_output=True, text=True).stdout.strip()
 HEAD, DIRTY = git("rev-parse", "HEAD"), bool(git("status", "--porcelain", "--untracked-files=no"))
@@ -343,13 +357,20 @@ nb("06_verification_suite.ipynb", "6. The repository's own verification suite",
    "The notebook therefore runs the suite inside a small dedicated environment with those versions, leaving your "
    "own Python installation unchanged. The longer suites are `python verify.py --full` and `--everything`; the "
    "Lean proofs need a Lean toolchain (see `LEAN_VERIFICATION.md`).",
-   [("code", '''import venv
+   [("code", '''import shutil, venv
 env = os.path.join(ROOT, ".venv-verify")
 py = os.path.join(env, "bin", "python")
 if not os.path.exists(py):
-    venv.create(env, with_pip=True)
-    run(f"{py} -m pip install -q -r requirements-lock.txt", tail=3)
-run(f"{py} -m pip list --format=freeze", tail=20)'''),
+    if "google.colab" in sys.modules and not shutil.which("uv"):
+        run(f"{sys.executable} -m pip install -q uv", tail=3)
+    if shutil.which("uv"):   # Python 3.13, as in CI; uv fetches it if the machine has none
+        run(f"uv venv --quiet --python 3.13 {env}", tail=3)
+        run(f"uv pip install --quiet --python {py} -r requirements-lock.txt", tail=3)
+    else:                    # local fallback: the current Python, with pip
+        venv.create(env, with_pip=True)
+        run(f"{py} -m pip install -q -r requirements-lock.txt", tail=3)
+run(f"{py} --version", tail=1)
+run(f"{py} -m pip list --format=freeze 2>/dev/null || uv pip list --python {py}", tail=20)'''),
     ("code", '''out = run(f"{py} verify.py --offline", tail=40)
 check("fast path result", True, "ALL PASS" in out)'''),
     ])
