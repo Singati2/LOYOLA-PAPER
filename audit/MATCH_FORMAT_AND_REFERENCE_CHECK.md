@@ -21,6 +21,16 @@ Kırgız, MATCH 97 (2027) 121–134).
 | Acknowledgment | conforms: uses the template's `\acknowledgment` command. The text is the authors' own (commit `3c3d363`, shortened by the authors in `8d1cd25`), so it was left unchanged |
 | Colour figures (90 EUR each) | `main.tex` has no figures; both figures are in the supplement |
 
+## Conclusion, tables and figures against recent MATCH papers (2026-10-19)
+
+| Item | Recent MATCH practice | `main.tex` |
+|---|---|---|
+| Last section | "Conclusion(s)" or "Concluding remarks": summary of results, open problems (Rada, MATCH 96 (2026) 841–863; Nyauli–Buragohain and Gutman et al., MATCH 97 (2027)) | "Conclusion": summary, open problems; same pattern |
+| Table captions | bold "Table N." label, small type, from the template's caption settings; placed above the table in 6 of the 9 MATCH 97(2) papers with tables, below in 3 | bold "Table N.", small type, above; matches the majority practice |
+| Figures | — | none in `main.tex` (both are in the supplement) |
+| Data availability | absent in the 12 recent MATCH papers checked; not required or forbidden by MATCH | present, because it states that the NIST pages are not redistributed; kept |
+| Acknowledgment | template's `\acknowledgment` command, as in recent papers | same |
+
 ## Abstract and conclusion against the body
 
 * All numbers agree with the body: orders 12/13 and 16, at most five exchanges, the boiling-point and
