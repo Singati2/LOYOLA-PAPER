@@ -84,9 +84,9 @@ Colab the notebook clones this repository and installs the requirements itself.
 | `notebooks/03_degeneracy.ipynb` | Table 2 and the order-10 and order-16 counts, by enumerating every tree | under a minute | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/0a36902e5b6ed7a56b0534641cb12431616c2066/notebooks/03_degeneracy.ipynb) |
 | `notebooks/04_octane_correlations.ipynb` | all 60 correlations of Table 4 and the tetramethylbutane audit | seconds | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/0a36902e5b6ed7a56b0534641cb12431616c2066/notebooks/04_octane_correlations.ipynb) |
 | `notebooks/05_boiling_points.ipynb` | Table 5 baselines, the 200-permutation check, the resampling summary | about 5 minutes (`RUN_SLOW = True`: about 1 hour) | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/0a36902e5b6ed7a56b0534641cb12431616c2066/notebooks/05_boiling_points.ipynb) |
-| `notebooks/06_verification_suite.ipynb` | the repository's own fast verification suite, in an environment with the pinned versions | about 7 minutes | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/0a36902e5b6ed7a56b0534641cb12431616c2066/notebooks/06_verification_suite.ipynb) |
+| `notebooks/06_verification_suite.ipynb` | the repository's own fast verification suite, in an environment with the pinned versions | about 35 minutes on Colab (12.5 min observed locally) | [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Singati2/LOYOLA-PAPER/blob/0a36902e5b6ed7a56b0534641cb12431616c2066/notebooks/06_verification_suite.ipynb) |
 
-The notebooks are committed with their outputs from a local run. `notebooks/gen_notebooks.py`
+The notebooks are committed without outputs; each prints its comparisons when run. `notebooks/gen_notebooks.py`
 regenerates them. The Lean proofs need a Lean toolchain and are not run in a notebook.
 
 ## Lean verification
@@ -97,7 +97,7 @@ regenerates them. The Lean proofs need a Lean toolchain and are not run in a not
 | File | Content |
 |---|---|
 | `main.tex`, `LOYOLA_paper.pdf` | the paper (44 A5 pages, MATCH template; one figure) |
-| `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (28 pages) |
+| `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (27 pages) |
 | `DATA/` | every dataset, byte-identical copies, with a README |
 | `LOYOLA_FINAL_PAPER_OVERLEAF.zip` | Overleaf upload (both documents + figures) |
 
@@ -120,7 +120,7 @@ Quick start:
 ```bash
 python3 -m pip install -r requirements-lock.txt
 # optional, for the scikit-learn audit and the notebooks: -r requirements-extras-lock.txt
-python3 verify.py                       # single entry point: all fast checks (--full for the long suites); run by CI on every push
+python3 verify.py                       # single entry point: all fast checks (--full for the long suites); run by CI on pushes to main and on pull requests
                                         # without the NIST WebBook pages (not redistributed) use --offline, as CI does;
                                         # python3 external/nist_pages.py --download retrieves them (explicit, rate-limited)
 python3 verify_loyola_v35.py            # core tables, figures, analyses
@@ -135,7 +135,8 @@ python3 manifest.py                     # checksums
 tests), each committed before the corresponding models were fitted.
 
 ## History
-`V35_TO_V36_SCIENTIFIC_CHANGELOG.md` records every revision; earlier
+`V35_TO_V36_SCIENTIFIC_CHANGELOG.md` records the revisions up to v40.30; later changes are in
+`audit/V4031_REVISION_REPORT.md` and the October 2026 status files named at the top. Earlier
 version notes and logs are kept only in the git history.
 
 License: MIT (see `LICENSE`).

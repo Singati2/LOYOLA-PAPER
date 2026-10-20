@@ -1,0 +1,13 @@
+{
+ "rows": 100,
+ "inchi_vs_file_profile_mismatches": 0,
+ "vertex_identity_holds": true,
+ "decanes": {
+  "N": 34,
+  "centred_rank": 7
+ },
+ "pooled": {
+  "N": 100,
+  "centred_rank": 8
+ }
+}

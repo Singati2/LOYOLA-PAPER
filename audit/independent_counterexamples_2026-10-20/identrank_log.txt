@@ -1,0 +1,7 @@
+1 {'subsets': 1, 'violations': 0, 'min_nonzero_sv': inf, 'max_zero_sv': 0.0}
+2 {'subsets': 7, 'violations': 0, 'min_nonzero_sv': 0.2985659267714958, 'max_zero_sv': 0.0}
+3 {'subsets': 63, 'violations': 0, 'min_nonzero_sv': 0.008588936054786523, 'max_zero_sv': 1.8784844918739373e-16}
+4 {'subsets': 1023, 'violations': 0, 'min_nonzero_sv': 1.3251650666632672e-05, 'max_zero_sv': 6.856186276826607e-16}
+5 {'subsets': 32767, 'violations': 0, 'min_nonzero_sv': 1.3251650666632672e-05, 'max_zero_sv': 1.4285370539491184e-15}
+6 {'subsets': 2097151, 'violations': 0, 'min_nonzero_sv': 7.863879619925892e-08, 'max_zero_sv': 1.690788911859575e-15}
+{'subsets': 499177, 'violations_total': 1, 'violations_le4': ['([(1, 7), (2, 6), (3, 5), (4, 4)], 2, 3)'], 'all_violations_contain_the_sum8_set': True, 'min_nonzero_sv': 7.863879619925892e-08, 'max_zero_sv': 1.5882023225683895e-15}

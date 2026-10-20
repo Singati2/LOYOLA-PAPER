@@ -748,7 +748,7 @@ _add(E("ceil_proof_18", "main", r"The counts for the \$(?P<v>\d+)\$ octane\s+iso
 _add(E("tabcoll_18", "main", r"collision pairs among the \$(?P<v>\d+)\$ octane", "oct_n()", 0, "octane_data (table caption)"))  # 1
 _add(E("deg_106", "main", r"\$N\s+=\s+(?P<v>\d+)\$\s+trees", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1
 _add(E("deg_order10", "main", r"of\s+order\s+\$(?P<v>\d+)\$\s+the\s+pure\-\$\\gamma\$", "mod_order_with_N(106)", 0, "multi_order_degeneracy.csv"))  # 1
-_add(E("deg_N106", "main", r"the\s+\$(?P<v>\d+)\$\s+trees", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1
+_add(E("deg_N106", "main", r"On\s+the\s+\$(?P<v>\d+)\$\s+trees\s+of\s+order", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1
 _add(E("deg_255_pct", "main", r"attain \$(?P<v>[\d.]+)\\%\$\s+\(\$79\$ distinct values\)", "pct(mod(10,'all_trees')['LO001'], mod(10,'all_trees')['N_trees'])", 0.05, "100(1-79/106)"))  # 1
 _add(E("deg_M1_830_pct", "main", r"while \$M_1\$\s+\(\$(?P<v>[\d.]+)\\%\$\) and\s+\$M_2\$", "pct(mod(10,'all_trees')['M1'], mod(10,'all_trees')['N_trees'])", 0.05, "100(1-18/106)"))  # 1
 _add(E("deg_79", "main", r"attain \$25\.5\\%\$\s+\(\$(?P<v>\d+)\$ distinct values\), tied", "mod(10, 'all_trees')['LO001']", 0, "multi_order_degeneracy.csv LO001"))  # 1
@@ -928,6 +928,8 @@ _add(E("sup_N106", "supp", r"values\}\\\},\\ N = (?P<v>\d+),", "mod(10, 'all_tre
 _add(E("sup_45", "supp", r"set,\s+\$(?P<v>\d+)\$\s+of", "shared_count(10, 0, 0, 1)", 0, "enumeration: order-10 trees sharing their LO(0,0,1) value"))  # 1
 _add(E("sup_45_106", "supp", r"the\s+\$(?P<v>\d+)\$\s+trees", "len(trees(10))", 0, "enumeration"))  # 1
 _add(E("sup_425", "supp", r"trees\s+\(\$(?P<v>[\d.]+)\\%\$\)\s+share", "round(100.0 * shared_count(10, 0, 0, 1) / len(trees(10)), 1)", 0.05, "100*45/106"))  # 1
+_add(E("main_45share", "main", r"for\s+\$LO\(0,0,1\)\$,\s+\$(?P<v>\d+)\$\s+of\s+the\s+\$106\$\s+trees", "shared_count(10, 0, 0, 1)", 0, "trees of order 10 sharing their LO(0,0,1) value"))  # 1
+_add(E("main_425", "main", r"trees\s+\(\$(?P<v>[\d.]+)\\%\$\)\.\s+On", "round(100.0 * shared_count(10, 0, 0, 1) / len(trees(10)), 1)", 0.05, "100*45/106"))  # 1
 _add(E("sup_255", "supp", r"attain degeneracy \$(?P<v>[\d.]+)\\%\$ \(\$79\$ distinct values\),\s+among", "pct(mod(10,'all_trees')['LO001'], mod(10,'all_trees')['N_trees'])", 0.05, "multi_order_degeneracy.csv"))  # 1
 _add(E("sup_79", "supp", r"attain degeneracy \$25\.5\\%\$ \(\$(?P<v>\d+)\$ distinct values\),\s+among", "mod(10, 'all_trees')['LO001']", 0, "multi_order_degeneracy.csv"))  # 1
 _add(E("sup_106b", "supp", r"\$AG\$\.\s+The\s+\$(?P<v>\d+)\$\s+trees\s+realise", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1

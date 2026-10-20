@@ -946,9 +946,9 @@ REGISTRY = [
     # ======================= main.tex : sec:bp =======================
     E("bp_298", "main", r"standard-state\s+\$(?P<v>\d+)\$\\,K\s+determination\.\s+Two\s+tests", None, 0, "UNCHECKABLE: condition constant"),
     E("bp_cal25", "main", r"only\s+\$(?P<v>\d+)\$\s+skeletons\s+outside", "cal_count('outside_c8_c9')", 0, "calorimetric_dHvap298_alkanes.csv rows with n not in {8,9}"),
-    E("bp_cal_one", "main", r"\$C_9\$,\s+and\s+(?P<v>one)\s+of\s+the", "word(cal_count('decanes'))", 0, "calorimetric_dHvap298_alkanes.csv n=10 rows"),
+    E("bp_cal_one", "main", r"\$C_9\$,\s+among\s+them\s+(?P<v>one)\s+of\s+the", "word(cal_count('decanes'))", 0, "calorimetric_dHvap298_alkanes.csv n=10 rows"),
     E("bp_75decanes_a", "main", r"of\s+the\s+\$(?P<v>\d+)\$\s+decanes,\s+with", "bpp_count(10)", 0, "bp_provenance.csv decane rows (= 75 molecular trees of order 10)"),
-    E("bp_3K_a", "main", r"\\headsep\s+=\s+(?P<v>\d+)pt\s+\\renewcommand\*\{\\thefootnote\}\{\\fnsymbol\{footnote\}\}", "bpp_spread_threshold()", 0, "bp_provenance.csv exclusion reasons 'spread X K > 3 K'"),
+    # bp_3K_a removed 2026-10-20: its pattern matched the preamble line "\\headsep = 3pt", not a claim; main.tex states no 3 K threshold.
     E("bp_34non", "main", r"decanes\s+\(\$n\s+=\s+(?P<v>\d+)\$\)\s+\&\s+\$\-0\.062\$", "bpp_count(9,'INCLUDED')", 0, "bp_provenance.csv"),
     E("bp_35non", "main", r"the\s+\$(?P<v>\d+)\$\s+nonanes", "bpp_count(9)", 0, "bp_provenance.csv nonane rows"),
     E("bp_64K", "supp", r"differ by \$(?P<v>[\d.]+)\$\\,K", "bpp_excluded_nonane_spread()", 0.05, "bp_provenance.csv excluded nonane spread"),
@@ -1285,6 +1285,11 @@ REGISTRY = [
     E("s4_ci_non500_lo", "supp", r"\(\$\[(?P<v>-?[\d.]+), \+0\.119\]\$ at\s+\$500\$\)", "unc('nonane','dHvap',500,'ci95_lo')", 0.0005, "uncertainty_exploratory.csv"),
     E("s4_ci_non500_hi", "supp", r"\$\[-0\.005, (?P<v>[+-]?[\d.]+)\]\$ at\s+\$500\$\)", "unc('nonane','dHvap',500,'ci95_hi')", 0.0005, "uncertainty_exploratory.csv"),
     E("s4_ci_b500", "supp", r"\+0\.119\]\$ at\s+\$(?P<v>\d+)\$\)", "BUDGETS[1]", 0, "budget"),
+    E("main_ci_ridge_lo", "main", r"LO minus ridge on nonane \$\\Delta H_\{\\mathrm\{vap\}\}\$, \$\[(?P<v>-?[\d.]+), \+0\.032\]\$, includes zero", "unc('nonane','dHvap',200,'ci95_lo_ridge')", 0.0005, "uncertainty_exploratory.csv"),
+    E("main_ci_ridge_hi", "main", r"\$\[-0\.101, (?P<v>[+-]?[\d.]+)\]\$, includes zero", "unc('nonane','dHvap',200,'ci95_hi_ridge')", 0.0005, "uncertainty_exploratory.csv"),
+    E("main_oct_ridge_n", "main", r"below the best index model for (?P<v>\w+) of the five", "word(sum(1 for p in ('T_B','dHf','dHvap','S','omega') if base('oct',p,'ridge_counts') < max(base('oct',p,m) for m in ('IRLA','fixed_best','GM_b200','LO_b200')) - 0.005))", 0, "baselines_octane.csv: ridge more than 0.005 below the best index model"),
+    E("main_oct_ridge_dh", "main", r"\(\$(?P<v>[\d.]+)\$ against \$0\.957\$ for \$LO\(0,0,1\)\$", "base('oct','dHvap','ridge_counts')", 0.0005, "baselines_octane.csv ridge dHvap"),
+    E("main_oct_lo1_dh", "main", r"against \$(?P<v>[\d.]+)\$ for \$LO\(0,0,1\)\$; Supplementary", "base('oct','dHvap','fixed_best')", 0.0005, "baselines_octane.csv fixed_best dHvap = LO(0,0,1)"),
     E("s4_ci_ridge_lo", "supp", r"LO minus ridge on the\s+nonanes, \$\[(?P<v>-?[\d.]+), \+0\.032\]\$", "unc('nonane','dHvap',200,'ci95_lo_ridge')", 0.0005, "uncertainty_exploratory.csv"),
     E("s4_ci_ridge_hi", "supp", r"nonanes,\s+\$\[\-0\.101,\s+(?P<v>[+-]?[\d.]+)\]\$\.\s+For", "unc('nonane','dHvap',200,'ci95_hi_ridge')", 0.0005, "uncertainty_exploratory.csv"),
     E("s4_ci_tb_lo", "supp", r"intervals are wide \(\$\[(?P<v>-?[\d.]+), \+0\.222\]\$ for LO minus GM", "unc('nonane','T_B',200,'ci95_lo')", 0.0005, "uncertainty_exploratory.csv"),

@@ -1,0 +1,1 @@
+{'f(1,2)=f(2,2)=2(E-1)': True, 'factorisation': True, 'reduction_identity': True, 'f_larger_elsewhere_scan': True, 'IRLA_first_order': True}

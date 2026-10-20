@@ -89,8 +89,9 @@ Keep the state folder (`logs/`, `files/`, `run.json`, `FINAL_REPORT.md`, and `pa
 `lean_verify.log` from notebooks 09 and 10). It records which commit was run, with which Python, and
 what each script printed. It can be archived next to the repository, for example on Zenodo. That
 archive also contains the rebuilt data sets (extracted values with their sources, as in `DATA/`;
-see `DATA/README.md`). It does not contain the NIST WebBook pages: every stage downloads them into
-the Colab copy of the repository and they are never saved in the state folder.
+see `DATA/README.md`). It does not contain the NIST WebBook pages: the runner never downloads them. Notebook 01 has an
+explicit download cell that saves them to a private cache folder, and stages 1, 4 and 8 copy them from
+that cache into the Colab copy of the repository; they are never saved in the state folder.
 
 To regenerate the notebooks after editing the stage list in `pipeline.py`, run
 `python colab/make_notebooks.py`.

@@ -22,6 +22,15 @@ Reasons:
   rules; they require camera-ready LaTeX in the MATCH template (A5) and state no article processing charge.
   The cost is one page (43 to 44); the supplement drops from 28 to 27 pages.
 
+## Does the figure add to the main text or repeat a table?
+
+It adds. No main-text table gives the degeneracy of each index at order 10: Table 2 lists first-failure
+orders, and the per-order counts are only in Supplementary Table S4. The figure shows in one view the floor,
+the twelve indices against it, and the tie of the pure-gamma points with R, GA and AG, which the text
+otherwise states in one sentence. At A5 size (rendered at 200 dpi) every label, symbol, bar value and the
+floor note are legible. The caption also explains the darker bars (indices on the floor), and the main text
+now states that the 25.5 % measure is not the share of trees that share a value (45 of 106, 42.5 %).
+
 ## Accuracy of the figure
 
 Independently recounted (script outside the repository, networkx enumeration): 106 trees, 79 distinct

@@ -9,8 +9,10 @@ code, tests, notebooks and Lean proofs. Everything stays in one repository.
 commit (its `PIN`). The notebooks are committed one step later, in `0a36902e5b6ed7a56b0534641cb12431616c2066`, which changes nothing but
 the notebooks; the Colab links below open them from that commit, so a link always runs the pinned code.
 (A notebook opened from an older commit carries that commit's older pin.) On Colab the setup cell clones that branch and checks out the
-pinned commit. An existing checkout is moved to it if it is clean and rejected if it has local
-changes. Locally, a checkout of another commit, or one with local changes, stops the notebook with
+pinned commit. In `colab/`, an existing checkout is moved to it if it is clean and rejected if it has
+local changes; in `notebooks/`, an existing checkout of another commit stops with `REVISION MISMATCH`
+(start a fresh runtime). The `notebooks/` setup installs the locked versions into Colab's own Python,
+which is not 3.13; only the `colab/` setup builds a Python 3.13 environment. Locally, a checkout of another commit, or one with local changes, stops the notebook with
 `REVISION MISMATCH` (`notebooks/`; set `LOYOLA_ALLOW_MISMATCH=1` to run anyway, with a printed
 warning that the results are not tied to the pinned commit) or with an error naming both commits
 (`colab/`). On every run the `colab/` setup installs the locked package versions, so a partly installed

@@ -1,0 +1,21 @@
+PASS A_order13_pair :: {'T1': '(((1, 2), 1), ((1, 3), 2), ((1, 6), 5), ((2, 3), 2), ((2, 6), 1), ((3, 3), 1))', 'T2': '(((1, 3), 3), ((1, 6), 5), ((2, 2), 1), ((2, 3), 2), ((3, 6), 1))', 'qhist': '((Fraction(0, 1), 1), (Fraction(1, 5), 2), (Fraction(1, 3), 1), (Fraction(1, 2), 3), (Fraction(5, 7), 5))', 'Delta': (6, 6), 'leaf_adj_deg3': True}
+PASS B_order16_pair_Delta4 :: {'U1': '(((1, 2), 2), ((1, 4), 8), ((2, 4), 2), ((4, 4), 3))', 'U2': '(((1, 4), 8), ((2, 2), 3), ((2, 4), 4))', 'qhist': '((Fraction(0, 1), 3), (Fraction(1, 3), 4), (Fraction(3, 5), 8))'}
+PASS C_pendant_propagation_n13-60_all_n16-60_Delta4 :: attach path L=n-base at leaf adj. to deg d; distinct profiles, equal q-hist, Delta unchanged (6 resp. 4)
+PASS D_GA_merge_order17 :: {'GA1': '2*sqrt(10)/7 + 2*sqrt(2)/3 + 4 + 10*sqrt(5)/3', 'GA2': '2*sqrt(10)/7 + 2*sqrt(2)/3 + 4 + 10*sqrt(5)/3', 'qh1': '((Fraction(0, 1), 4), (Fraction(1, 3), 1), (Fraction(3, 7), 1), (Fraction(2, 3), 10))', 'qh2': '((Fraction(1, 9), 3), (Fraction(1, 3), 1), (Fraction(3, 7), 1), (Fraction(3, 5), 5), (Fraction(2, 3), 6))', 'Delta': (5, 5)}
+PASS E_five_crossings_order12 :: {'n_imbalances': 8, 'V': 5, 'roots': ['-17.170899', '-11.960559', '-2.0260122', '2.7344635', '31.133294'], 'signs': ['-', '+', '+', '-', '+', '+', '-', '+']}
+PASS F_sumconn_example :: {'chi_diff': '0', 'D(1)': '0.2255379027', 'D(1e-6)': '2.40127e-7', 'formula_matches': True}
+PASS F2_sumconn_pair_realisable_order18_chemical :: {'S': '(((1, 2), 2), ((1, 3), 6), ((2, 2), 1), ((2, 3), 4), ((3, 3), 4))', 'T': '(((1, 2), 2), ((1, 4), 4), ((2, 2), 7), ((2, 4), 4))'}
+PASS G_SDD_order9 :: {'SDD': ('58/3', '58/3'), 'p1': '(((1, 2), 1), ((1, 3), 2), ((2, 2), 4), ((2, 3), 1))', 'p2': '(((1, 2), 3), ((1, 3), 1), ((2, 3), 3), ((3, 3), 1))'}
+PASS H_K4_K13_ln4 :: {'K4': '6.0', 'K13': '6.0'}
+PASS I_spider :: {'profile': '(((1, 2), 4), ((2, 2), 4), ((2, 4), 4))', 'nodes': 13, 'rescaling_ratio_t1,t2': ['0.25', '0.0625']}
+PASS J_Delta4_imbalances :: ['0', '1/7', '1/5', '1/3', '1/2', '3/5']
+PASS K_closed_forms :: {'failures': [], 'families': 'K_n,P_n,S_n(n=2..8),C_n,W_n(n>=5),K_ab,Q_k,F_p,Petersen,C9(1,2); 6 random (a,b,g)'}
+PASS L_EDV_411_order7 :: {'count': 2, 'profiles': ['(((1, 2), 1), ((1, 4), 3), ((2, 2), 1), ((2, 4), 1))', '(((1, 2), 1), ((1, 3), 3), ((2, 3), 1), ((3, 3), 1))']}
+PASS M1_octane_18_isomers_16_vectors_2_pairs :: {'distinct_vectors': 16, 'collision_classes': [['3-methylheptane', '4-methylheptane'], ['3,4-dimethylhexane', '3-ethyl-2-methylpentane']], 'vecA': '(((1, 2), 2), ((1, 3), 1), ((2, 2), 2), ((2, 3), 2))', 'vecB': '(((1, 2), 2), ((1, 3), 2), ((2, 3), 2), ((3, 3), 1))'}
+PASS M2_octane_pairs_EDV_Wiener_differ :: {'3-methylheptane/4-methylheptane': ((3, 2, 1, 1), (3, 2, 2, 0), 76.0, 75.0), '3,4-dimethylhexane/3-ethyl-2-methylpentane': ((4, 2, 0, 1), (4, 2, 1, 0), 68.0, 67.0)}
+PASS M3_octane_union_9_of_10_affdim3 :: {'union': [(1, 2), (1, 3), (1, 4), (2, 2), (2, 3), (2, 4), (3, 3), (3, 4), (4, 4)], 'affine_dim': 3}
+PASS M4_octane_centred_count_rank7 :: {'rank': 7, 'sum(1/i+1/j)m_ij == n': True}
+PASS M5_octane_SSE_floor :: {'SSE': 2.925, 'RMS': 0.4031, 'diffs': [1.2, 2.1]}
+PASS N_p3_identity_trees_4-12 :: p3 == sum (du-1)(dv-1) for all 1104 trees of orders 4..12
+PASS O_determinants :: {'det3': 0.0816409790830137, 'ln2*ln(9/8)': 0.0816409790830137, 'det4': -0.015003225226285728, 'paper_det4': -0.015003225226285728, 'detW': -0.025648182931024437, 'paper_detW': -0.025648182931024437, 'Delta2_qformula': True}
+PASS P_semiregular_constant_q :: ((Fraction(1, 5), 6),)
