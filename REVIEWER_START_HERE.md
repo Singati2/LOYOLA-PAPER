@@ -10,9 +10,9 @@ pinned commit. An existing checkout is moved to it if it is clean and rejected i
 changes. Locally, a checkout of another commit, or one with local changes, stops the notebook with
 `REVISION MISMATCH` (`notebooks/`; set `LOYOLA_ALLOW_MISMATCH=1` to run anyway, with a printed
 warning that the results are not tied to the pinned commit) or with an error naming both commits
-(`colab/`). The Python environment of `colab/` is synchronised to the lock files on every run, so
-a partly installed or modified environment is repaired, and an environment with another Python is
-rebuilt. The notebooks are regenerated, pinned to a commit, by `python notebooks/gen_notebooks.py
+(`colab/`). On every run the `colab/` setup installs the locked package versions, so a partly installed
+or modified environment is repaired, rebuilds an environment with another Python, and stops unless
+every locked package is at its locked version. The notebooks are regenerated, pinned to a commit, by `python notebooks/gen_notebooks.py
 --pin <commit>` and `python colab/make_notebooks.py --pin <commit>`. A public tag is a separate,
 later step and is not needed by the notebooks.
 

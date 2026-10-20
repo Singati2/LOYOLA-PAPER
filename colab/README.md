@@ -46,9 +46,11 @@ the run continues with the next unfinished script.
   checks out the exact commit named in `PIN`; every notebook of the folder names the same commit.
   An existing checkout is moved to that commit if it has no local changes and is rejected if it
   has. Run locally, the cell stops unless the checkout is that commit without local changes. The
-  cell then synchronises a Python 3.13 environment to the exact package versions of
-  `requirements-lock.txt` and `requirements-extras-lock.txt`: missing packages are installed,
-  others removed, and an environment with another Python is rebuilt. The committed outputs were
+  cell then installs, in a Python 3.13 environment, the exact package versions of
+  `requirements-lock.txt` and `requirements-extras-lock.txt` (with their dependencies, which the
+  lock files do not list): a missing package or one at another version is (re)installed, an
+  environment with another Python is rebuilt, and the cell stops unless every locked package is at
+  its locked version and `uv pip check` finds no broken dependency. The committed outputs were
   produced with these versions. The notebooks are regenerated with
   `python colab/make_notebooks.py --pin <commit>`.
 * Notebook 01 has an explicit cell that retrieves the 262 NIST WebBook pages from the WebBook

@@ -62,6 +62,25 @@ def at_pin(work, pin, fetch_args, token=None):
     return head'''
 
 
+# installs the locked versions and stops unless each is installed exactly (plain string: it contains braces)
+ENV_CHECK = '''LOCKS = ("requirements-lock.txt", "requirements-extras-lock.txt")
+subprocess.run(UV + ["pip", "install", "--quiet", "--python", PY, "-r", LOCKS[0], "-r", LOCKS[1]], check=True)
+pins = {}
+for f in LOCKS:
+    for line in open(f):
+        line = line.split("#")[0].strip()
+        if "==" in line:
+            name, ver = line.split("==", 1)
+            pins[name.strip().lower().replace("_", "-")] = ver.strip()
+have = json.loads(subprocess.run([PY, "-c", "import json; from importlib import metadata; print(json.dumps({d.metadata['Name'].lower()"
+                                  ".replace('_', '-'): d.version for d in metadata.distributions() if d.metadata['Name']}))"],
+                                 capture_output=True, text=True, check=True).stdout)
+wrong = sorted(f"{k} {have.get(k, 'missing')} (locked {v})" for k, v in pins.items() if have.get(k) != v)
+broken = subprocess.run(UV + ["pip", "check", "--python", PY], capture_output=True, text=True)
+if wrong or broken.returncode != 0:
+    raise RuntimeError("the environment does not match the lock files: " + "; ".join(wrong) + " " + broken.stdout + broken.stderr)'''
+
+
 def setup_cell(revision, pin):
     return f'''# Setup (the same cell in every notebook of colab/; about 2 minutes the first time in a session)
 {GIT_HELPERS}
@@ -102,8 +121,10 @@ finally:
     token = None                                  # the token is not kept in the notebook's variables
 
 # Python 3.13 and exactly the locked package versions that produced the committed outputs. An environment
-# with another Python is rebuilt; uv pip sync installs what is missing and removes what is not locked, so a
-# partly installed or modified environment is repaired. Its fingerprint is printed and checked by pipeline.py.
+# with another Python is rebuilt. The lock files pin the packages the scripts import, not every dependency,
+# so they are installed with dependency resolution: a missing package or one at another version is
+# (re)installed. The cell then stops unless every locked package is at its locked version and no installed
+# package has a broken dependency. pipeline.py records the fingerprint of the environment for every script.
 PY = os.path.join(ENV, "bin", "python")
 if os.path.exists(PY) and not subprocess.run([PY, "-c", "import sys; sys.exit(sys.version_info[:2] != (3, 13))"]).returncode == 0:
     shutil.rmtree(ENV)
@@ -112,7 +133,7 @@ if shutil.which("uv") is None:
 UV = ["uv"] if shutil.which("uv") else [sys.executable, "-m", "uv"]
 if not os.path.exists(PY):
     subprocess.run(UV + ["venv", "--quiet", "--python", "3.13", ENV], check=True)
-subprocess.run(UV + ["pip", "sync", "--quiet", "--python", PY, "requirements-lock.txt", "requirements-extras-lock.txt"], check=True)
+{ENV_CHECK}
 locks = hashlib.sha256(b"".join(open(f, "rb").read() for f in ("requirements-lock.txt", "requirements-extras-lock.txt"))).hexdigest()
 print(subprocess.run([PY, "-c", "import sys, numpy, scipy; print('python', sys.version.split()[0], '| numpy', "
                       "numpy.__version__, '| scipy', scipy.__version__)"], capture_output=True, text=True).stdout.strip())

@@ -196,8 +196,9 @@ def item3(tmp):
     check("3f a checkout with local changes is rejected", rejected)
     setup = json.load(open(os.path.join(ROOT, "colab", "01_build_datasets.ipynb")))["cells"][1]["source"]
     setup = "".join(setup)
-    check("3g the environment is synchronised to the lock files on every run (partial installs repaired)",
-          '"pip", "sync"' in setup and "requirements-lock.txt" in setup)
+    check("3g every run installs the locked versions and stops unless each is installed exactly (partial installs repaired)",
+          '"pip", "install"' in setup and "requirements-lock.txt" in setup and "have.get(k) != v" in setup
+          and '"pip", "check"' in setup and "the environment does not match the lock files" in setup)
     check("3h an environment with another Python is rebuilt", "sys.version_info[:2] != (3, 13)" in setup and "shutil.rmtree(ENV)" in setup)
 
 
