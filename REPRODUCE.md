@@ -56,7 +56,7 @@ Coverage: GitHub CI runs the fast path only. The full suite, including the Lean 
 | Table 5 tab:bp | main | external/bp/bp_tests.py, make_bp_table.py | verify_external.py |
 | Table 6 tab:deviations | main | (protocol deviations, written by hand) | audit/check_labels.py (labels only) |
 | Figure S1 fig:octanes | supplement | generate_loyola_v35_figures.py | verify_loyola_v35.py (regeneration, decompressed-content compare) |
-| Figure S2 fig:degeneracy | supplement | generate_loyola_v35_figures.py | verify_loyola_v35.py |
+| Figure 1 fig:degeneracy | main | generate_loyola_v35_figures.py | verify_loyola_v35.py (regeneration, decompressed-content compare) |
 | Tables S1-S2 tab:lo_tuning(_bestfixed) | supplement | verify_loyola_v35.py | verify_loyola_v35.py |
 | Table S3 tab:ablation | supplement | ablation_gm_vs_lo.py, expanded_robustness_v35.py | verify_loyola_v35.py |
 | Table S4 tab:multiorder | supplement | multi_order_degeneracy.py | verify_loyola_v35.py |

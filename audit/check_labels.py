@@ -10,7 +10,7 @@ Checks (each must hold):
      is cited;
   4. the supplement's cross-document references ("Table~N of the main paper",
      "Theorem~N/Proposition~N/Lemma~N of the main paper", "Section~N.M of the
-     main paper") point at numbers the compiled main paper actually assigns
+     main paper", "Figure~N of the main paper") point at numbers the compiled main paper actually assigns
      (read from the PDF produced by pdflatex, or tectonic if pdflatex is absent, in a temporary copy), and each
      "Table~N of the main paper" is checked against the caption keyword the
      supplement's sentence names, when it names one (TABLE_WORDS below);
@@ -120,12 +120,17 @@ def compiled_numbers():
     pdf_tables = {int(n) for n in re.findall(r"\nTable (\d+)\. ", txt)}
     if set(tables) - pdf_tables:
         fail(f"tables numbered in the source but absent from the compiled paper: {sorted(set(tables) - pdf_tables)}")
-    return results, tables, sections
+    figures = {i + 1: re.search(r"\\caption\{(.{0,80})", body).group(1)
+               for i, body in enumerate(re.findall(r"\\begin\{figure\}(.*?)\\end\{figure\}", src, re.S))}
+    pdf_figures = {int(n) for n in re.findall(r"\nFigure (\d+)\. ", txt)}
+    if set(figures) - pdf_figures:
+        fail(f"figures numbered in the source but absent from the compiled paper: {sorted(set(figures) - pdf_figures)}")
+    return results, tables, sections, figures
 
 
 def main():
     figs_main = doc_checks("main.tex"); figs_supp = doc_checks("supplement.tex")
-    results, tables, sections = compiled_numbers()
+    results, tables, sections, figures = compiled_numbers()
     su = re.sub(r"\s+", " ", strip_comments(open(os.path.join(ROOT, "supplement.tex")).read()))
     for m in re.finditer(r"Sections?~(\d(?:\.\d)?)(?:(?:,| and)~(\d(?:\.\d)?))*(?: and Table~\d+)? of the main paper", su):
       for n in re.findall(r"\d(?:\.\d)?", m.group(0)):
@@ -144,8 +149,15 @@ def main():
     for n in [x or y for x, y in re.findall(r"Table~(\d+) of the main paper|main paper, Table~(\d+)", su)]:
         if int(n) not in tables:
             fail(f"supplement cites Table~{n} of the main paper, not present")
+    for m in re.finditer(r"Figure~(\d+) of the main paper", su):     # a main-paper figure must exist and match its topic
+        num = int(m.group(1)); ctx = su[max(0, m.start() - 160):m.start()].lower()
+        if num not in figures:
+            fail(f"supplement cites Figure~{num} of the main paper, not present")
+        elif "degenera" in ctx and "degeneracy" not in figures[num].lower():
+            fail(f"supplement cites Figure~{num} of the main paper for degeneracy but its caption is '{figures[num][:40]}'")
     print("compiled main-paper numbering:", {f"{k[0]} {k[1]}": v[:30] for k, v in sorted(results.items())})
-    print("tables:", {k: v[:40] for k, v in sorted(tables.items())}); print("sections:", sorted(sections))
+    print("tables:", {k: v[:40] for k, v in sorted(tables.items())}); print("figures:", {k: v[:40] for k, v in sorted(figures.items())})
+    print("sections:", sorted(sections))
     for bundle, figs in (("LOYOLA_MAIN_OVERLEAF", figs_main), ("LOYOLA_SUPPLEMENT_OVERLEAF", figs_supp), ("LOYOLA_FINAL_PAPER_OVERLEAF", figs_main + figs_supp)):
         for f in figs:
             cands = [f, f + ".pdf"] if not f.endswith(".pdf") else [f]

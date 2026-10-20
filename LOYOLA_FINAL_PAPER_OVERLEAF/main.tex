@@ -1045,7 +1045,7 @@ and $LO(0, 0, 2)$ attain $25.5\%$ ($79$ distinct values), tied with
 $R$, $GA$ and $AG$. The $106$ trees realise only $79$ distinct
 edge-degree-pair count vectors, so $25.5\%$ is the floor for
 \emph{any} degree-pair-based index, while $M_1$ ($83.0\%$) and
-$M_2$ ($67.0\%$) are the most degenerate (Supplementary Figure~S2).
+$M_2$ ($67.0\%$) are the most degenerate (Figure~\ref{fig:degeneracy}).
 For orders $7$ through $12$, on all trees and on those with
 $\Delta \le 4$ (Supplementary Table~S4), the pure-$\gamma$ points and
 $R$ attain the floor at every order. The index $\chi$ leaves it from
@@ -1061,6 +1061,13 @@ $\{0^{1}, \tfrac15^{2}, \tfrac13^{1}, \tfrac12^{3}, \tfrac57^{5}\}$.
 Table~\ref{tab:firstfail} collects the first failures, and the index
 $R$ still attains the floor at order $13$ ($570$ values) and leaves it
 at order $14$, where the pure-$\gamma$ points give $1090$ values.
+
+\begin{figure}[!htb]
+\centering
+\safefig{fig_lo_degeneracy_order10_trees_v2.pdf}{0.97}
+\caption{Degeneracy percentage of the compared indices on the $106$ non-isomorphic trees of order $10$. The dashed line marks the degree-pair-profile floor, $25.5\% = 100(1 - 79/106)$. The $106$ trees realise only $79$ distinct edge-degree-pair count vectors, so no vertex-degree-based index can fall below it. An index on the floor separates every pair of trees with distinct profiles at this order; it carries no information beyond the profile, and the pure-$\gamma$ points share the floor with $R$, $GA$ and $AG$.}
+\label{fig:degeneracy}
+\end{figure}
 
 \begin{table}[htbp]
 \centering
@@ -1879,7 +1886,7 @@ general parameter triples, beginning with the maximal chemical trees of
 the pure-imbalance points; and the behaviour on other compound classes.
 
 \medskip
-\noindent\textbf{Data availability.} The supplementary sections, figures and
+\noindent\textbf{Data availability.} The supplementary sections and
 tables cited here are in the file \texttt{LOYOLA\_supplement.pdf} of the
 reproducibility package~\cite{LoyolaRepo}. Data, scripts and verifiers that
 recompute every tabulated value are in the reproducibility

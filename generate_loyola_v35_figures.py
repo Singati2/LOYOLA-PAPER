@@ -79,14 +79,17 @@ def main():
     fig.colorbar(im,label="signed Pearson $r$");ax.set_title("Index-property correlations, 18 octane isomers",fontsize=10)
     fig.tight_layout();fig.savefig(os.path.join(figs,"fig_lo_prediction_correlation_heatmap_v3.pdf"),metadata={"CreationDate":None});plt.close(fig)
     # --- fig 2: degeneracy bars ---
-    fig,ax=plt.subplots(figsize=(6.5,3.6))
+    # sized for the A5 text block of the MATCH template (about 11 cm), so that the printed text is 7-8 pt;
+    # the caption carries the title
+    fig,ax=plt.subplots(figsize=(4.4,2.9))
     vals=[100*(1-deg[nm]/NT) for nm in names]
     ax.bar(range(12),vals,color=["#66aadd" if v>floor+1e-9 else "#2c7fb8" for v in vals])
     ax.axhline(floor,ls="--",lw=1,color="gray")
-    ax.text(11.45,72,f"dashed line: degree-pair-profile floor {floor:.1f}%",fontsize=7,ha="right",color="dimgray")
+    ax.text(11.45,74,f"dashed line: degree-pair-profile floor {floor:.1f}%",fontsize=7,ha="right",color="dimgray")
     ax.set_xticks(range(12),dlab,rotation=45,ha="right",fontsize=8)
-    ax.set_ylabel("degeneracy (%)");ax.set_title("Degeneracy on the 106 trees of order 10",fontsize=10)
-    for i,v in enumerate(vals):ax.text(i,v+1,f"{v:.1f}",ha="center",fontsize=6.5)
+    ax.tick_params(axis="y",labelsize=7.5);ax.set_ylim(0,92)
+    ax.set_ylabel("degeneracy (%)",fontsize=8)
+    for i,v in enumerate(vals):ax.text(i,v+1.2,f"{v:.1f}",ha="center",fontsize=6.5)
     fig.tight_layout();fig.savefig(os.path.join(figs,"fig_lo_degeneracy_order10_trees_v2.pdf"),metadata={"CreationDate":None});plt.close(fig)
     # (retired) the sigma/mu proxy figure is no longer generated: those
     # quantities are legacy normalized-dispersion diagnostics, NOT the

@@ -752,8 +752,8 @@ _add(E("deg_N106", "main", r"the\s+\$(?P<v>\d+)\$\s+trees", "mod(10, 'all_trees'
 _add(E("deg_255_pct", "main", r"attain \$(?P<v>[\d.]+)\\%\$\s+\(\$79\$ distinct values\)", "pct(mod(10,'all_trees')['LO001'], mod(10,'all_trees')['N_trees'])", 0.05, "100(1-79/106)"))  # 1
 _add(E("deg_M1_830_pct", "main", r"while \$M_1\$\s+\(\$(?P<v>[\d.]+)\\%\$\) and\s+\$M_2\$", "pct(mod(10,'all_trees')['M1'], mod(10,'all_trees')['N_trees'])", 0.05, "100(1-18/106)"))  # 1
 _add(E("deg_79", "main", r"attain \$25\.5\\%\$\s+\(\$(?P<v>\d+)\$ distinct values\), tied", "mod(10, 'all_trees')['LO001']", 0, "multi_order_degeneracy.csv LO001"))  # 1
-_add(E("deg_106b", "main", r"The\s+\$(?P<v>\d+)\$\s+trees", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1
-_add(E("deg_79b", "main", r"trees\s+realise\s+only\s+\$(?P<v>\d+)\$\s+distinct\s+edge\-degree\-pair\s+count", "mod(10, 'all_trees')['distinct_BID_profiles']", 0, "multi_order_degeneracy.csv profiles"))  # 1
+_add(E("deg_106b", "main", r"\$AG\$\.\s+The\s+\$(?P<v>\d+)\$\s+trees", "mod(10, 'all_trees')['N_trees']", 0, "multi_order_degeneracy.csv"))  # 1
+_add(E("deg_79b", "main", r"trees\s+realise\s+only\s+\$(?P<v>\d+)\$\s+distinct\s+edge\-degree\-pair\s+count\s+vectors,\s+so\s+\$25", "mod(10, 'all_trees')['distinct_BID_profiles']", 0, "multi_order_degeneracy.csv profiles"))  # 1
 _add(E("deg_M2_67", "main", r"\$M_2\$\s+\(\$(?P<v>[\d.]+)\\%\$\)\s+are", "pct(mod(10,'all_trees')['M2'], mod(10,'all_trees')['N_trees'])", 0.05, "100(1-35/106)"))  # 1
 _add(E("deg_orders7", "main", r"For orders \$(?P<v>\d+)\$ through \$12\$, on all trees", "min(mod_orders())", 0, "multi_order_degeneracy.csv"))  # 1
 _add(E("deg_orders12", "main", r"For orders \$7\$ through \$(?P<v>\d+)\$, on all trees", "max(mod_orders())", 0, "multi_order_degeneracy.csv"))  # 1
@@ -935,13 +935,13 @@ _add(E("sup_79b", "supp", r"\$AG\$\.\s+The\s+\$106\$\s+trees\s+realise\s+only\s+
 _add(E("sup_255b", "supp", r"count vectors, so \$(?P<v>[\d.]+)\\%\$ is the minimum degeneracy", "pct(mod(10,'all_trees')['distinct_BID_profiles'], mod(10,'all_trees')['N_trees'])", 0.05, "floor"))  # 1
 _add(E("sup_M1_83", "supp", r"\$LO\(0, 1, 0\)\$ \(\$(?P<v>[\d.]+)\\%\$\)", "pct(mod(10,'all_trees')['M1'], mod(10,'all_trees')['N_trees'])", 0.05, "multi_order_degeneracy.csv M1"))  # 1
 _add(E("sup_M2_67", "supp", r"\$LO\(1, 0, 0\)\$ \(\$(?P<v>[\d.]+)\\%\$\)", "pct(mod(10,'all_trees')['M2'], mod(10,'all_trees')['N_trees'])", 0.05, "multi_order_degeneracy.csv M2"))  # 1
-_add(E("sup_fig_106", "supp", r"on the \$(?P<v>\d+)\$ non-isomorphic trees of order \$10\$\. The dashed", "mod(10, 'all_trees')['N_trees']", 0, "figure caption"))  # 1
-_add(E("sup_fig_order10", "supp", r"non-isomorphic trees of order \$(?P<v>\d+)\$\. The dashed", "mod_order_with_N(106)", 0, "figure caption"))  # 1
-_add(E("sup_fig_255", "supp", r"floor, \$(?P<v>[\d.]+)\\% = 100\(1 - 79/106\)\$", "pct(mod(10,'all_trees')['distinct_BID_profiles'], mod(10,'all_trees')['N_trees'])", 0.05, "figure caption"))  # 1
-_add(E("sup_fig_79", "supp", r"= 100\(1 - (?P<v>\d+)/106\)\$", "mod(10, 'all_trees')['distinct_BID_profiles']", 0, "figure caption"))  # 1
-_add(E("sup_fig_106b", "supp", r"= 100\(1 - 79/(?P<v>\d+)\)\$", "mod(10, 'all_trees')['N_trees']", 0, "figure caption"))  # 1
-_add(E("sup_fig_106c", "supp", r"79/106\)\$\.\s+The\s+\$(?P<v>\d+)\$\s+trees\s+realise", "mod(10, 'all_trees')['N_trees']", 0, "figure caption"))  # 1
-_add(E("sup_fig_79b", "supp", r"79/106\)\$\.\s+The\s+\$106\$\s+trees\s+realise\s+only\s+\$(?P<v>\d+)\$\s+distinct\s+edge\-degree\-pair\s+count\s+vectors,\s+so\s+no", "mod(10, 'all_trees')['distinct_BID_profiles']", 0, "figure caption"))  # 1
+_add(E("sup_fig_106", "main", r"on the \$(?P<v>\d+)\$ non-isomorphic trees of order \$10\$\. The dashed", "mod(10, 'all_trees')['N_trees']", 0, "figure caption"))  # 1
+_add(E("sup_fig_order10", "main", r"non-isomorphic trees of order \$(?P<v>\d+)\$\. The dashed", "mod_order_with_N(106)", 0, "figure caption"))  # 1
+_add(E("sup_fig_255", "main", r"floor, \$(?P<v>[\d.]+)\\% = 100\(1 - 79/106\)\$", "pct(mod(10,'all_trees')['distinct_BID_profiles'], mod(10,'all_trees')['N_trees'])", 0.05, "figure caption"))  # 1
+_add(E("sup_fig_79", "main", r"= 100\(1 - (?P<v>\d+)/106\)\$", "mod(10, 'all_trees')['distinct_BID_profiles']", 0, "figure caption"))  # 1
+_add(E("sup_fig_106b", "main", r"= 100\(1 - 79/(?P<v>\d+)\)\$", "mod(10, 'all_trees')['N_trees']", 0, "figure caption"))  # 1
+_add(E("sup_fig_106c", "main", r"79/106\)\$\.\s+The\s+\$(?P<v>\d+)\$\s+trees\s+realise", "mod(10, 'all_trees')['N_trees']", 0, "figure caption"))  # 1
+_add(E("sup_fig_79b", "main", r"79/106\)\$\.\s+The\s+\$106\$\s+trees\s+realise\s+only\s+\$(?P<v>\d+)\$\s+distinct\s+edge\-degree\-pair\s+count\s+vectors,\s+so\s+no", "mod(10, 'all_trees')['distinct_BID_profiles']", 0, "figure caption"))  # 1
 _add(E("sup_orders7", "supp", r"orders\s+\$(?P<v>\d+)\$\s+through", "min(mod_orders())", 0, "multi_order_degeneracy.csv"))  # 1
 _add(E("sup_orders12", "supp", r"through\s+\$(?P<v>\d+)\$\.\s+It", "max(mod_orders())", 0, "multi_order_degeneracy.csv"))  # 1
 _add(E("sup_chi_10", "supp", r"order\s+\$(?P<v>\d+)\$\.\s+Floor", "chi_first_below()", 0, "chi_floor_out.txt"))  # 1
