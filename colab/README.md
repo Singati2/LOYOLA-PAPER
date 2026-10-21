@@ -69,14 +69,28 @@ the run continues with the next unfinished script.
   of the commit, the script, its arguments, the Python version, the installed package versions and
   the lock files. The next notebook restores those files first, so each stage sees the outputs of
   the earlier ones.
+* What each script must write is fixed in advance in `colab/expected_outputs.py` (reviewed by hand,
+  2026-10-21), not taken from what a run happens to write. A script is OK only if it exits 0,
+  rewrites every file listed for it (present and not empty) and rewrites no other tracked file; a
+  check-only script must rewrite no tracked file. Untracked scratch files are listed in the record but
+  never saved as outputs. Only listed outputs are saved to the state folder. On this branch the
+  notebooks are still pinned to `c48bad0`, whose runner predates this rule; the pins are regenerated
+  once the authors settle the final code commit.
 * A finished script is skipped only if its fingerprint is unchanged, every output it wrote is
   present and unaltered, and no output of an earlier script has changed since it ran. Otherwise it
-  runs again. The runner refuses to run on tracked files that differ from the commit (other than
-  restored outputs). State files are written atomically.
+  runs again. The runner refuses to run on tracked files that differ from the commit (modified,
+  deleted or renamed, staged or not), unless the file is a listed output of the script named in the
+  index and both the index and that script's record hold its current SHA-256. An unreadable state
+  file, an index entry that is not a listed output, or a path outside the repository stops the runner.
+  State files are written atomically. `python3 audit/test_replay_contract_2026_10_21.py` runs these
+  attacks on small synthetic repositories.
 * A state folder belongs to one commit. The runner refuses to continue a run with a different
   commit. To start again, delete or rename `MyDrive/LOYOLA_colab_run`.
-* Notebook 11 lists every script as OK, PROBLEM, STALE (finished, but its record no longer
-  validates: an output is missing or altered, or an input or the environment changed) or NOT RUN. It lists every output that differs
+* Notebook 11 lists every script as OK, PROBLEM (non-zero exit, a listed output missing or empty, or
+  an unlisted tracked file rewritten), STALE (finished, but its record no longer validates: an output
+  is missing or altered, the record is unreadable, or an input, the environment, the runner or the
+  output list changed) or NOT RUN. It reports COMPLETE only for the replay plan, and says that the two
+  independent cross-checks outside the plan were not run. It lists every output that differs
   from the committed file and does not hide floating-point differences. Four outputs already
   differed in their last digits between the authors' macOS run and a Linux run (see
   `verification_logs/lab_09ceba8/NOTE.md`). If they differ again, the report notes it next to the file.

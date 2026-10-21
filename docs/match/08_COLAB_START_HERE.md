@@ -10,7 +10,7 @@ There are two pin chains. Use the one whose branch is on GitHub.
 
 | Chain | Code commit (PIN) | Notebook commit (links) | Branch | On public GitHub now? |
 |---|---|---|---|---|
-| A, figure moved into the main paper (current) | `c48bad05f8e95805d4f0f700f5324d1071b903cd` | `afafe6c44bd66e0d90e7b5e723010e41e1236ec2` | `review/match-figure-2026-10-20` | **No.** Local only. All links 404 until the branch is pushed |
+| A, figure moved into the main paper (current) | `c48bad05f8e95805d4f0f700f5324d1071b903cd` | `afafe6c44bd66e0d90e7b5e723010e41e1236ec2` | `review/match-figure-2026-10-20` | Yes (pushed 2026-10-20). On 2026-10-21 every chain-A link of the reviewer documents returned HTTP 200 from raw.githubusercontent.com without signing in |
 | B, previous review state | `95c840c857d00413e6a3bf7b83989216d5c79b14` | `23bfd45baecc1335f2bc075c02743ab2905b60cf` | `review/corrections-impl-2026-10-19` (head `9212441`) | Yes. Every link checked returns HTTP 200 |
 
 In the links below, `<NB_COMMIT>` stands for the notebook commit. For chain A it is
@@ -38,7 +38,7 @@ Chain B links that work today (checked with `curl` on raw.githubusercontent.com,
   (all 13 return 200).
 
 The Colab badge inside each notebook opens the branch copy (`blob/<branch>/...`), not the commit. For
-chain A those badges also 404 until the branch is pushed. The branch names contain `/`. Whether Colab's
+chain A the branch is now on GitHub, but a branch tip moves, so it is not a reproducible pin. The branch names contain `/`. Whether Colab's
 GitHub loader resolves such branch URLs was not tested. The commit-SHA links above avoid the question.
 
 What actually runs is decided by `PIN` inside the notebook, not by the link. Every notebook at

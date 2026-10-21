@@ -16,7 +16,7 @@ the locked versions, and Colab's Python is assumed to differ.
 | 4 | Notebook validity | `nbformat.validate` plus `ast.parse` of every code cell | 19/19 valid, 0 syntax errors |
 | 5 | Plan consistency | import `colab/pipeline.py`; compare `ORDER` with `audit/run_all_scripts.py` `SCRIPTS` | 60 scripts in both, no duplicates, every file exists; `run_all` adds only `manifest.py`. Stage minutes: 6/147/40/101/226/60/745/9, total 1334 |
 | 6 | `pipeline.py --list` runs | `python colab/pipeline.py --list` in the scratch clone | OK |
-| 7 | Reviewer links | `grep` of the colab URLs in `REVIEWER_START_HERE.md` and `README.md` at `325bd05` and `9212441`; `curl -s -o /dev/null -w '%{http_code}'` on the raw.githubusercontent.com equivalent | `325bd05`: 12 links (6 per document), all to `blob/afafe6c…/notebooks/0N_*.ipynb`, all **404** (unpushed). `9212441`: 6 distinct links to `blob/23bfd45…/notebooks/…`, all **200**. All 13 `colab/*.ipynb` at `23bfd45`: 200. Commit `95c840c` page: 200. `c48bad0` and branch `review/match-figure-2026-10-20`: 404. Repository root: 200 (public). `git ls-remote`: `review/corrections-impl-2026-10-19` = `9212441` |
+| 7 | Reviewer links | `grep` of the colab URLs in `REVIEWER_START_HERE.md` and `README.md` at `325bd05` and `9212441`; `curl -s -o /dev/null -w '%{http_code}'` on the raw.githubusercontent.com equivalent | `325bd05`: 12 links (6 per document), all to `blob/afafe6c…/notebooks/0N_*.ipynb`, all **404** (unpushed). `9212441`: 6 distinct links to `blob/23bfd45…/notebooks/…`, all **200**. All 13 `colab/*.ipynb` at `23bfd45`: 200. Commit `95c840c` page: 200. `c48bad0` and branch `review/match-figure-2026-10-20`: 404. Repository root: 200 (public). `git ls-remote`: `review/corrections-impl-2026-10-19` = `9212441`. **Update 2026-10-21:** after the push, the 7 chain-A links (`blob/afafe6c…`, notebooks 01-06 and colab/12) and the 7 chain-B links all return 200 |
 | 8 | Notebook 12 assertions against the committed certificate outputs | `grep` of `audit/certificates/*_out.txt` | consistent: `{'all': 13, 'chem': 16}`, by-Δ dictionary, SDD/ISDD 9/10, two "OK for every order" |
 | 9 | Hard-coded local paths | `grep -rnE '/home/|mpcrlab|FAU|/Users/' notebooks/ colab/ audit/run_all_scripts.py …` | none in notebooks, generators, pipeline or docs. Present only in the committed lab logs (`verification_logs/lab_09ceba8/notebooks/*.ipynb`, `run_all_scripts_rerun.log`: `<local checkout>`, uv Python path). No token-like string |
 | 10 | Cross-check evidence age | `git log eed7d03..c48bad0 -- <inputs>` | the permutation audit output (eed7d03) predates a change to `external/baselines.py` (3af7f67), which it imports. The cross-check output records commit 01ad6c6 |
@@ -96,7 +96,7 @@ Not run: any notebook, any pipeline stage, `verify.py`, the NIST download, the t
 
 | Symptom | Action |
 |---|---|
-| Link opens "Notebook not found" / 404 | chain A is not pushed. Push the branch, or use the chain B links |
+| Link opens "Notebook not found" / 404 | the commit in the link is not on GitHub (or the repository is not public). Use a link whose commit is on a pushed branch |
 | `REVISION MISMATCH` (`notebooks/`) | Runtime > Disconnect and delete runtime, then reopen the link. Never set `LOYOLA_ALLOW_MISMATCH=1` for evidence |
 | `cannot check out the pinned commit` / clone failed | the branch does not contain the PIN, or the repository is private: see 08 §5 |
 | `the environment does not match the lock files: …` (`colab/`) | rerun the setup cell once. If it repeats, save the message: it names the package and version |

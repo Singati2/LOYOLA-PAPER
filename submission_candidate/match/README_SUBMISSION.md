@@ -15,7 +15,7 @@ commit `c48bad05f8e95805d4f0f700f5324d1071b903cd` (unchanged in the later docume
 | `figures/fig_lo_degeneracy_order10_trees_v2.pdf` | Figure 1 (used by `main.tex`) |
 | `figures/fig_lo_prediction_correlation_heatmap_v3.pdf` | Figure S1 (used by `supplement.tex`) |
 | `MATCH_OVERLEAF_CANDIDATE.zip` | the two `.tex` files and the two figures, nothing else |
-| `COVER_LETTER_DRAFT.md` | unsent draft with author placeholders |
+| `COVER_LETTER_DRAFT.md` | unsent draft with author placeholders (novelty and attribution corrected 2026-10-21: the path/star extremal trees are credited to Cruz and Rada, not listed as new) |
 | `CLEAN_SUBMISSION_MANIFEST.md` | sizes and SHA-256 of every file here |
 
 ## Compile
@@ -25,9 +25,11 @@ pdflatex main.tex       # three times
 pdflatex supplement.tex # three times
 ```
 
-Tested from a clean extraction of `MATCH_OVERLEAF_CANDIDATE.zip` with TeX Live (pdflatex): 44 and 27
-pages, no undefined references or citations, no missing figure, and the extracted text identical to the
-included PDFs. On Overleaf: upload the zip, compile with pdfLaTeX, select `main.tex` or `supplement.tex`.
+Tested from a clean extraction of `MATCH_OVERLEAF_CANDIDATE.zip` with TeX Live (pdflatex): 45 and 27
+pages (Figure 1 on page 22 of the paper), no undefined references or citations, no overfull boxes, no
+missing figure, and the extracted text identical to the included PDFs except the "Received" line, which
+the template fills with the compile date (`\today`; rebuilt 2026-10-21). An earlier note said 44 pages; that
+was the count before the novelty paragraph of `c48bad0` and is superseded. On Overleaf: upload the zip, compile with pdfLaTeX, select `main.tex` or `supplement.tex`.
 
 ## Relation between the documents
 

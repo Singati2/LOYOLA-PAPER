@@ -1,6 +1,6 @@
 # 01 — MATCH requirements and gaps
 
-Candidate: branch `review/match-figure-2026-10-20` (local, not pushed). Sources read on 2026-10-20.
+Candidate: branch `review/match-figure-2026-10-20` (pushed to GitHub on 2026-10-20, not merged; this note was first written before the push). Sources read on 2026-10-20.
 
 | Source | URL | Accessed |
 |---|---|---|
