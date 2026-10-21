@@ -24,7 +24,7 @@ documentation. The runs below were made on `672a5b3` (which contains `b7f50c0` u
 | Clean-extraction build of `MATCH_OVERLEAF_CANDIDATE.zip` | unzip + pdflatex x3 | `b7f50c0` sources | PASS: 44 / 27 pp; text identical to the included PDFs | `scratchpad/build_package.sh` |
 | Independent counterexample verification (41 claims) | `audit/independent_counterexamples_2026-10-20/*.py` | `325bd05` text (claims unchanged since) | 38 CONFIRMED, 0 REFUTED, 3 NOT CHECKABLE | about 8 min, one core |
 | Reference audit (56 + 14 references) | manual + Crossref | `325bd05` | 84 supported, 7 partial (wording fixed in `b7f50c0`), 0 unsupported, 6 not verifiable | `13_REFERENCE_AUDIT.md` |
-| `verify.py --full` | — | candidate | **NOT RUN** | about 2-4 h; needs approval; the run on `9212441` does not certify the candidate |
+| `verify.py --full`, clean detached worktree, NIST pages present, Lean cache | `python verify.py --full` | `390728b` (code and manuscript of `c48bad0`; later commits change only docs and this log) | **PASS**: ALL PASS (full), exit 0; 25 stages PASS, 0 FAIL, 0 SKIP, incl. external verifier (5216 s), structural checks (3286 s), 32-digit recount, exact tie certificate, self-test, 13/13 counter-attacks rejected, labels, Lean (52 declarations, standard axioms only) | 180 min; `scratchpad/verify_full_390728b.log`. The only file rewritten is the counter-attack log `audit/attack_checks_out.txt` (its committed copy quoted 756 checked; refreshed to 764; it also contains a random temporary-folder name, so it differs on every run) |
 | `verify.py --everything` / Colab stage 7 | — | candidate | **NOT RUN** | many hours; author approval |
 | Lean build | `formal/verify.sh` | candidate | **NOT RUN** (`formal/` unchanged since the last recorded pass at `3af7f67`) | — |
 | Any Google Colab session | — | any | **NOT TESTED IN REAL COLAB** | see `10_COLAB_REPRODUCIBILITY_TEST.md` |
@@ -35,7 +35,7 @@ documentation. The runs below were made on `672a5b3` (which contains `b7f50c0` u
 
 | Run | Commit | Status |
 |---|---|---|
-| `verify.py --full`, clean worktree, NIST pages present | `9212441` (pushed head of `review/corrections-impl-2026-10-19`) | **IN PROGRESS** when this file was written: 16 stages PASS, 0 FAIL, then the long stages (external verifier and later). Log `scratchpad/verify_full_9212441.log`. It does not cover the candidate: the manuscript, registry and label checker changed after `9212441` |
+| `verify.py --full`, clean worktree, NIST pages present | `9212441` (pushed head of `review/corrections-impl-2026-10-19`) | **PASS**: ALL PASS (full), exit 0, all stages incl. Lean; 190 min; first complete full pass of the project. It certifies `9212441` only |
 | `verify.py` fast | `9212441`, `f6bbb49` | PASS (earlier reports) |
 | `verify.py --full` | `67e36ad` | FAILED, two harness/environment causes, both since fixed (see `audit/VERIFICATION_AND_NIST_STATUS.md`) |
 
@@ -57,8 +57,8 @@ evidence for the computations but not a certification of this commit.
 | 3 | NIST pages in public history and the default branch; KDB/Chemeo redistribution | authors / legal |
 | 4 | Repository citation without an exact commit or DOI | authors |
 | 5 | Push of `review/match-figure-2026-10-20` (Colab links 404 until then) | user |
-| 6 | Full verification of the final commit, or an explicit decision that the fast path plus the `9212441` full run suffices | user |
+| 6 | ~~Full verification of the final commit~~ done: PASS at `390728b` | — |
 | 7 | One real Colab session of the essential reviewer path | user |
 | 8 | Acknowledgment text; title confirmation; optional condensation | authors |
 
-Status label of the candidate: **PENDING FULL VERIFICATION**; fast path PASS.
+Status of the candidate: **full verification PASS** at `390728b`; essential notebooks PASS in a simulated Colab-style runtime; **NOT TESTED IN REAL COLAB**.
