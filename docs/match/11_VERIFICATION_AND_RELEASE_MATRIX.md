@@ -52,6 +52,9 @@ commit `69b9538`), so `390728b`'s full pass does not cover the harness change it
 | New runner on real scripts: `run_all_scripts.py --fast` | `python audit/run_all_scripts.py --fast`, clean detached worktree, NIST pages present | `69b9538` | 41 scripts: 40 OK (8 check-only, every other script rewrote exactly its listed outputs, identical), 1 PROBLEM: `counterattack_v4030.py`, whose output differs in the same lines as on the lab replay of `09ceba8` (deliberately near-singular designs; `SEEN_BEFORE`). No false PROBLEM from the new rule | about 40 min; `scratchpad/inv/runall_fast.log` |
 | New runner on real scripts: pipeline stages 1 and 8, then `--report` | `colab/pipeline.py --stage 1`, `--stage 8`, `--report` (state folder in scratch, private NIST cache) | `69b9538` | 10/10 scripts OK, 14 outputs identical to the commit; report correctly not COMPLETE ("10 scripts OK, 0 PROBLEM, 0 STALE, 50 NOT RUN; 0 outputs differ"); stages 2-7 NOT RUN | about 5 min; `scratchpad/inv/report.log` |
 | Real Google Colab | — | any | **NOT TESTED** | — |
+| Figure 1 in black and white (MATCH colour-figure fee): fresh regeneration vs committed figure and CSVs | generator into a temp dir + `_pdf_canonical` | this commit | **PASS**: both figures equal in canonical form, 3 CSVs identical; rendered bar chart has 0 chromatic pixels; the heatmap is unchanged byte for byte | — |
+| Rebuild of `LOYOLA_paper.pdf` and clean-extraction build of the zip after the figure change | pdflatex x3; `scratchpad/build_package.sh` | this commit (sources of `c48bad0`) | **PASS**: 45 + 27 pp, 0 undefined, 0 overfull; text of the paper identical to the previous PDF except the `\today` date (now October 21, 2026); supplement PDF not rebuilt (it does not use Figure 1) | — |
+| Tests after the figure change | `test_review_2026_10_20`, `test_corrections_2026_10_19`, `test_replay_contract_2026_10_21`, `check_labels`, `check_style` | this commit | **PASS**, all exit 0 | — |
 
 ### Release set (what belongs together)
 
@@ -61,7 +64,7 @@ commit `69b9538`), so `390728b`'s full pass does not cover the harness change it
 | Notebooks and their PIN | notebooks at `afafe6c44bd66e0d90e7b5e723010e41e1236ec2`, pinned to `c48bad0`; not re-pinned (the checklist says to re-pin only once the final code commit is settled) |
 | Last full verification | `390728b` (code and manuscript of `c48bad0`); ALL PASS (full), 25/25 |
 | Replay harness with the expected-output contract | `69b9538` (descendant of `390728b`; not covered by its full run; covered by the contract tests and the fast run above) |
-| Submission package | `submission_candidate/match/` at the head of `review/match-final-adjustments-2026-10-21`; PDFs and zip unchanged from `c48bad0` (SHA-256 in `CLEAN_SUBMISSION_MANIFEST.md`) |
+| Submission package | `submission_candidate/match/` at the head of `review/match-final-adjustments-2026-10-21`; Figure 1, `LOYOLA_paper.pdf` and the zip regenerated after Figure 1 was made black and white; the supplement PDF is unchanged from `c48bad0` (SHA-256 in `CLEAN_SUBMISSION_MANIFEST.md`). The notebooks are pinned to `c48bad0` and so still regenerate the blue version of Figure 1 until they are re-pinned |
 
 ## Earlier evidence (certifies only its own commit)
 

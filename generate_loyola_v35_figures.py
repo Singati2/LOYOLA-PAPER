@@ -83,9 +83,10 @@ def main():
     # the caption carries the title
     fig,ax=plt.subplots(figsize=(4.4,2.9))
     vals=[100*(1-deg[nm]/NT) for nm in names]
-    ax.bar(range(12),vals,color=["#66aadd" if v>floor+1e-9 else "#2c7fb8" for v in vals])
-    ax.axhline(floor,ls="--",lw=1,color="gray")
-    ax.text(11.45,74,f"dashed line: degree-pair-profile floor {floor:.1f}%",fontsize=7,ha="right",color="dimgray")
+    # black and white (MATCH: coloured figures are not printed free of charge); dark grey = on the floor
+    ax.bar(range(12),vals,color=["#d0d0d0" if v>floor+1e-9 else "#505050" for v in vals],edgecolor="black",linewidth=0.5)
+    ax.axhline(floor,ls="--",lw=1,color="black")
+    ax.text(11.45,74,f"dashed line: degree-pair-profile floor {floor:.1f}%",fontsize=7,ha="right",color="black")
     ax.set_xticks(range(12),dlab,rotation=45,ha="right",fontsize=8)
     ax.tick_params(axis="y",labelsize=7.5);ax.set_ylim(0,92)
     ax.set_ylabel("degeneracy (%)",fontsize=8)

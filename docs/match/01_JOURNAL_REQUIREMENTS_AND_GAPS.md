@@ -19,11 +19,23 @@ wording should be rechecked by an author on the live page before sending.
 | 1 | Written in English | `main.tex`, `supplement.tex` | COMPLIANT | none |
 | 2 | Submit by e-mail to match@pmf.kg.ac.rs | not a source item | AUTHOR ACTION | corresponding author sends; nothing is sent from here |
 | 3 | "Papers must be composed in the LaTeX typesetting system" and "the MATCH template must be used" | `main.tex:1-110` keeps the template preamble and title macro | COMPLIANT in structure (A5, 10 pt, the template's title macro and journal header kept). The page geometry `margin=1.5cm,a5paper,twoside,inner=2cm` was not compared line by line with the live template source | AUTHOR CHECK: diff the preamble against the downloaded template once |
-| 4 | "Manuscripts should be in camera-ready form ... not in appropriate camera-ready form will not be considered" | `LOYOLA_paper.pdf` (44 A5 pages) | COMPLIANT on build checks (no undefined references, no overfull boxes, no `??`); see `06_LAYOUT_AND_FIGURE_REVIEW.md` | none |
+| 4 | "Manuscripts should be in camera-ready form ... not in appropriate camera-ready form will not be considered" | `LOYOLA_paper.pdf` (45 A5 pages) | COMPLIANT on build checks (no undefined references, no overfull boxes, no `??`); see `06_LAYOUT_AND_FIGURE_REVIEW.md` | none |
 | 5 | References "prepared according to the examples" and "listed in alphabetical order" | `main.tex` bibliography, 56 entries | COMPLIANT on order (checked by first-author surname, 0 inversions); entry format and content: see `13_REFERENCE_AUDIT.md` | fixes listed there, if any |
 | 6 | Non-trivial mathematics or non-routine computer-based procedures, and a clear connection to chemistry | Sections 3-5 (theorems, exact enumeration), Section 6 (octane, nonane, boiling points) | PLAUSIBLY MET; judged in `04_REFEREE_RISK_MATRIX.md` | referee judgement |
 | 7 | "All papers are refereed" | — | information | none |
 | 8 | No article processing charge; priority publication on request costs 750 EUR | — | information | AUTHOR DECISION only if priority publication is wanted |
+
+## Colour figures (rechecked 2026-10-21)
+
+The live `prepare.html` holds, inside an HTML comment (so not displayed), a "Color figures fee" paragraph:
+"Colored figures cannot be published free of charge. Therefore, please re-arrange your figures to be
+black-and-white ... If, however, you prefer to keep the colored figures, then you are requested to pay 90 Euro
+per colored figure". The template says nothing about colour. Eleven published MATCH papers checked as page
+images (vols 82, 87, 88, 96, 97, including Gutman et al., MATCH 97 (2027) 165-174 with four figures) have no
+coloured page. Figure 1 of the main paper (moved there on 2026-10-20) was in two shades of blue; it is now
+black and white (light grey bars, dark grey bars on the floor, black outlines and dashed line), with the
+same data and caption. The supplement's colour heatmap is unchanged: the supplement is not part of the
+journal's pages.
 
 ## Ethics page (https://match.pmf.kg.ac.rs/ethics.htm)
 

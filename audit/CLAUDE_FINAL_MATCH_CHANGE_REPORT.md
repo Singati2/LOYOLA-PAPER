@@ -29,6 +29,7 @@ Kinds: **confirmed defect**, **stale documentation**, **not yet tested**, **auth
 | P2 repository citation | `\bibitem{LoyolaRepo}` gives only the URL | author decision | **UNCHANGED**: a commit or DOI can only be cited once the authors fix the final commit. Placeholder in the cover letter. |
 | P2 short manuscript | the 24-page draft | — | **UNCHANGED**: already labelled as not part of the package (`README_SUBMISSION.md`, "Not included"). |
 | P2 real Colab | — | not yet tested | **NOT TESTED**. Manual steps are in `docs/match/08_COLAB_START_HERE.md` and `COLAB_FOR_REVIEWERS.md`. Stage 7 and `--everything` were not started. |
+| MATCH colour-figure fee | Figure 1 (moved into the main paper on 2026-10-20) was in colour; the fee paragraph of `prepare.html` (90 EUR per coloured figure, or redraw in black and white) is in an HTML comment, and published MATCH papers checked have no colour | found 2026-10-21 | **FIXED** on the authors' instruction: `generate_loyola_v35_figures.py` draws the bars in greys with black outlines and a black dashed line; data, caption and size unchanged; figure copies, `LOYOLA_paper.pdf`, zip and manifests regenerated. Notebooks still pinned to `c48bad0` (blue version) until re-pinned |
 | P2 data disclosure | 58 aggregate-derived boiling points | — | **UNCHANGED**, already disclosed: `supplement.tex:1036` (57 direct averages + 1 mean of two). |
 | P2 NIST/KDB/Chemeo, approvals, title, acknowledgment, companion status | — | author/legal decision | **UNCHANGED**; see the table below. |
 

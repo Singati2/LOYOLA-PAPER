@@ -21,6 +21,10 @@ The chart was redrawn at 4.4 x 2.9 in (previously 6.5 x 3.6 in) so that, at 0.97
 width, its text prints at about 7-8 pt (previously 4-5 pt). Data and colours are unchanged; a fresh
 regeneration matches the committed file in the verifier's canonical form.
 
+Update 2026-10-21: the chart is now black and white (light grey bars, dark grey bars on the floor, black
+outlines and dashed line) because of MATCH's colour-figure fee; see `01_JOURNAL_REQUIREMENTS_AND_GAPS.md`.
+Data, size and caption are unchanged.
+
 ## Cross-references changed
 
 | Where | Before | After |
