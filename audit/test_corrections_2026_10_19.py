@@ -55,6 +55,9 @@ def item1(tmp):
         "open('out_b.txt', 'w').write('b from ' + open('out_a.txt').read())\n")
     for f in ("requirements-lock.txt", "requirements-extras-lock.txt"):
         open(os.path.join(repo, f), "w").write("numpy==2.0\n")
+    # 2026-10-21: outputs are tracked files listed in advance (colab/expected_outputs.py), so the fixture commits them
+    open(os.path.join(repo, "external", "out_a.txt"), "w").write("a 1\n")
+    open(os.path.join(repo, "external", "out_b.txt"), "w").write("b from a 1\n")
     sh("git", "add", "-A", cwd=repo); sh("git", "commit", "--quiet", "-m", "fixture", cwd=repo)
 
     os.environ.update(LOYOLA_STATE=state, RUNLOG=runlog, VAL="1")
@@ -63,6 +66,8 @@ def item1(tmp):
     P.STAGES = [(1, "s", "fixture", [("external/a.py", 1), ("external/b.py", 1)])]
     P.ORDER = {"external/a.py": 0, "external/b.py": 1}
     P.CHECK_ONLY, P.NEEDS_NIST = set(), set()
+    P.EXPECTED = {"external/a.py": ["external/out_a.txt"], "external/b.py": ["external/out_b.txt"]}
+    P.INCIDENTAL = {}
     head = sh("git", "rev-parse", "HEAD", cwd=repo)
 
     def runs():

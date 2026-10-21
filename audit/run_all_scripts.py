@@ -22,8 +22,12 @@ A script that exceeds LOYOLA_SCRIPT_TIMEOUT seconds (default 7200) is reported a
 TIMED OUT (its outputs are not compared) and the replay continues.  Every changed output is copied to
 a loyola_changed_* directory, created only when the first changed file is found; the RESULT line names
 that directory only if it exists and holds files, so a discrepancy can be diffed after the run (v40.31).
+
+A script is OK only if it exits 0, rewrites every file listed for it in colab/expected_outputs.py, rewrites
+no other tracked file, and every tracked file of its copy is identical to the commit (2026-10-21). The list
+is fixed in advance and reviewed, so a script that exits 0 without producing its outputs is a PROBLEM.
 """
-import hashlib, os, shutil, subprocess, sys, tempfile, threading, time
+import hashlib, importlib.util, os, shutil, subprocess, sys, tempfile, threading, time
 from concurrent.futures import ThreadPoolExecutor
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -32,6 +36,9 @@ KEEP = None                                                      # changed outpu
 _KEEP_LOCK = threading.Lock()                                    # run_one runs in a ThreadPoolExecutor
 sys.path.insert(0, ROOT)
 from verify_loyola_v35 import _pdf_canonical  # noqa: E402
+_spec = importlib.util.spec_from_file_location("loyola_expected_outputs", os.path.join(ROOT, "colab", "expected_outputs.py"))
+_inv = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_inv)
+EXPECTED, INCIDENTAL = _inv.EXPECTED, _inv.INCIDENTAL
 
 
 def _keep_dir():
@@ -109,9 +116,9 @@ def run_one(script, files, ref):
         except subprocess.TimeoutExpired:
             # v40.31: a timeout is a PROBLEM of this script, not a crash of the whole replay
             return dict(script=script, exit=f"timeout after {TIMEOUT} s", seconds=time.time() - t0, changed=[], new=[],
-                        tail="(not completed; outputs not compared)", touched=0, timed_out=True)
+                        tail="(not completed; outputs not compared)", touched=0, touched_files=[], timed_out=True)
         dt = time.time() - t0
-        changed, new, touched = [], [], 0
+        changed, new, touched, touched_files = [], [], 0, []
         for dp, _, fns in os.walk(tmp):
             for fn in fns:
                 full = os.path.join(dp, fn); rel = os.path.relpath(full, tmp)
@@ -120,6 +127,7 @@ def run_one(script, files, ref):
                 if rel in ref:
                     if os.path.getmtime(full) > t0:
                         touched += 1                               # v40.22: the script must rewrite something
+                        touched_files.append(rel)
                     if digest(full) != ref[rel]:
                         changed.append(rel)
                         keep = os.path.join(_keep_dir(), script.replace(" ", "_").replace("/", "__"), rel)   # v40.31: retained for diffing
@@ -129,9 +137,31 @@ def run_one(script, files, ref):
         present = {os.path.relpath(os.path.join(dp, fn), tmp) for dp, _, fns in os.walk(tmp) for fn in fns}
         changed += sorted(f"{p} (DELETED)" for p in ref if p not in present and p != "SHA256SUMS.txt")
         tail = (r.stdout + r.stderr).strip().splitlines()[-1:] or [""]
-        return dict(script=script, exit=r.returncode, seconds=dt, changed=sorted(changed), new=sorted(new), tail=tail[0][:120], touched=touched)
+        return dict(script=script, exit=r.returncode, seconds=dt, changed=sorted(changed), new=sorted(new), tail=tail[0][:120],
+                    touched=touched, touched_files=sorted(touched_files))
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
+
+
+def judge(res):
+    """(ok, detail): exit 0, no committed file changed, every expected output rewritten, no unlisted tracked rewrite."""
+    script = res["script"]
+    if res.get("timed_out"):
+        return False, "TIMED OUT, outputs not compared"
+    expected = EXPECTED.get(script, [] if script in CHECK_ONLY else None)
+    if expected is None:
+        return False, "not in colab/expected_outputs.py"
+    touched = set(res["touched_files"])
+    missing = [f for f in expected if f not in touched]
+    unlisted = sorted(touched - set(expected) - set(INCIDENTAL.get(script, ())))
+    detail = "; ".join(x for x in (f"CHANGED {res['changed']}" if res["changed"] else "",
+                                   f"expected output missing or not rewritten: {missing}" if missing else "",
+                                   f"unlisted tracked file rewritten: {unlisted}" if unlisted else "") if x)
+    ok = res["exit"] == 0 and not detail
+    if ok:
+        detail = (f"all {len(expected)} expected outputs rewritten and identical" if expected
+                  else "check-only script, writes no file")
+    return ok, detail
 
 
 def main():
@@ -152,14 +182,9 @@ def main():
     bad = 0
     with ThreadPoolExecutor(max_workers=3) as ex:
         for res in ex.map(lambda s: run_one(s, files, ref), todo):
-            check_only = res["script"] in CHECK_ONLY
-            timed_out = res.get("timed_out", False)
-            ok = not timed_out and res["exit"] == 0 and not res["changed"] and (res["touched"] > 0 or check_only)
+            ok, detail = judge(res)
             bad += not ok
-            line = (f"[{'OK' if ok else 'PROBLEM'}] {res['script']}: exit {res['exit']}, {res['seconds']:.0f} s"
-                    + ("; TIMED OUT, outputs not compared" if timed_out else
-                       f"; CHANGED {res['changed']}" if res["changed"] else (f"; all {res['touched']} rewritten files identical" if res["touched"]
-                       else ("; check-only script, writes no file" if check_only else "; WROTE NO TRACKED FILE")))
+            line = (f"[{'OK' if ok else 'PROBLEM'}] {res['script']}: exit {res['exit']}, {res['seconds']:.0f} s; {detail}"
                     + (f"; new files {res['new']}" if res["new"] else "") + f"; last line: {res['tail']}")
             lines.append(line); print(line, flush=True)
     lines += [f"NOT REPLAYED (independent cross-check, run separately): {k}: {v}" for k, v in NOT_REPLAYED.items()]

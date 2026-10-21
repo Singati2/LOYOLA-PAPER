@@ -24,13 +24,20 @@ SHA-256 of every output it wrote and of every output of earlier scripts present 
 fingerprint differs, if a saved output is missing or altered, or if an earlier script's output has
 changed since (for example after --redo), the script runs again. State files are written atomically.
 
+What a script must write is fixed in advance by colab/expected_outputs.py, not taken from what the run
+happened to write. A script is OK only if it exits 0, rewrites every file listed for it (present and not
+empty), and rewrites no other tracked file; a check-only script must rewrite no tracked file. Untracked
+scratch files a script leaves behind are listed in its record but are never outputs. A state file that
+cannot be read, an index entry for a path that is not an expected output of the script named in it, and a
+path outside the repository stop the runner instead of being trusted.
+
 Stages 1, 4 and 8 read the NIST WebBook pages, which are not redistributed. The runner never
 downloads them: notebook 01 has an explicit download cell (external/nist_pages.py --download, one
 request per second) that saves them to a private cache folder (LOYOLA_NIST_CACHE, else
 LOYOLA_nist_pages_private in Google Drive, else .nist_cache/ in the repository), and those stages
 copy them from there. The pages are never copied into the state folder.
 """
-import argparse, datetime, hashlib, json, os, platform, shutil, subprocess, sys, tempfile, time
+import argparse, datetime, hashlib, importlib.util, json, os, platform, re, shutil, subprocess, sys, tempfile, time
 from importlib import metadata
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -132,6 +139,12 @@ def nist_cache():
 
 
 ORDER = {script: i for i, script in enumerate(s for _, _, _, scripts in STAGES for s, _ in scripts)}
+INVENTORY = os.path.join(os.path.dirname(os.path.abspath(__file__)), "expected_outputs.py")
+_spec = importlib.util.spec_from_file_location("loyola_expected_outputs", INVENTORY)
+_inv = importlib.util.module_from_spec(_spec); _spec.loader.exec_module(_inv)
+EXPECTED, INCIDENTAL = _inv.EXPECTED, _inv.INCIDENTAL
+assert set(EXPECTED) == set(ORDER) and {s for s, v in EXPECTED.items() if not v} == CHECK_ONLY, \
+    "colab/expected_outputs.py does not cover exactly the scripts of the plan"
 LOCKS = ("requirements-lock.txt", "requirements-extras-lock.txt")
 
 
@@ -168,17 +181,54 @@ def env_fingerprint():
 
 def fingerprint(head, script):
     path = os.path.join(REPO, script.split()[0])
-    return dict(commit=head, script=script, script_sha=sha256(path) if os.path.exists(path) else None, env=env_fingerprint())
+    return dict(commit=head, script=script, script_sha=sha256(path) if os.path.exists(path) else None, env=env_fingerprint(),
+                runner=sha256(os.path.abspath(__file__)), inventory=sha256(INVENTORY))
+
+
+def allowed(script):
+    """Tracked files the script may rewrite: its expected outputs and its listed incidental rewrites."""
+    return set(EXPECTED.get(script, ())) | set(INCIDENTAL.get(script, ()))
+
+
+def safe_rel(rel):
+    """A plain relative path inside the repository, not in .git and not a NIST page."""
+    return (isinstance(rel, str) and rel != "" and not os.path.isabs(rel) and os.path.normpath(rel) == rel
+            and not rel.startswith(("../", ".git/")) and rel != ".." and not rel.startswith(NIST_DIRS))
+
+
+def read_json(path):
+    """The parsed file, or None if it cannot be read or parsed."""
+    try:
+        with open(path) as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return None
 
 
 def load_index(st):
     """{relative path: {"sha": SHA-256 of the saved copy, "by": script that wrote it}}. An index in the old
-    format (a plain list, no digests) cannot validate reuse, so it is treated as empty."""
+    format (a plain list, no digests) cannot validate reuse, so it is treated as empty. An unreadable index, or
+    an entry that is not an expected output of the script it names, stops the runner (it is never trusted)."""
     idx = os.path.join(st, "files.json")
     if not os.path.exists(idx):
         return {}
-    data = json.load(open(idx))
-    return data if isinstance(data, dict) else {}
+    data = read_json(idx)
+    if isinstance(data, list):
+        return {}
+    bad = None if isinstance(data, dict) else "not a JSON object"
+    for rel, info in (data.items() if isinstance(data, dict) else ()):
+        if not safe_rel(rel):
+            bad = f"unsafe path {rel!r}"
+        elif not (isinstance(info, dict) and isinstance(info.get("sha"), str) and re.fullmatch(r"[0-9a-f]{64}", info["sha"])):
+            bad = f"entry {rel!r} has no valid digest"
+        elif rel not in allowed(info.get("by")):
+            bad = f"{rel!r} is not an expected output of {info.get('by')!r}"
+        if bad:
+            break
+    if bad:
+        sys.exit(f"The state index {idx} cannot be trusted ({bad}). Move the state folder aside, or point LOYOLA_STATE "
+                 "at a new folder, and run again.")
+    return data
 
 
 def check_commit(st):
@@ -187,7 +237,10 @@ def check_commit(st):
         sys.exit("No git metadata: clone the repository (or a git bundle of it) instead of unpacking an archive.")
     meta = os.path.join(st, "run.json")
     if os.path.exists(meta):
-        rec = json.load(open(meta))
+        rec = read_json(meta)
+        if not isinstance(rec, dict) or not isinstance(rec.get("commit"), str):
+            sys.exit(f"The state file {meta} is unreadable or corrupted. Move the state folder aside, or point LOYOLA_STATE "
+                     "at a new folder, and run again.")
         if rec["commit"] != head:
             sys.exit(f"The state folder {st} belongs to commit {rec['commit'][:9]}, but this copy is {head[:9]}. "
                      "Use the same commit, or point LOYOLA_STATE at a new folder.")
@@ -200,11 +253,22 @@ def check_commit(st):
 def check_clean(st):
     """Refuse to run if a tracked file differs from the commit, other than the saved outputs of finished
     scripts (restored from the state folder). Uncommitted source changes do not change HEAD, so without
-    this check they would be run, and reported, as the commit."""
+    this check they would be run, and reported, as the commit. A changed file is accepted only if it is an
+    expected output of the script named in the index, its digest equals the index entry, and that script's
+    record lists the same digest; modified, deleted and renamed files (both paths) are all considered."""
     index = load_index(st)
-    changed = [l[3:].split(" -> ")[-1] for l in git("status", "--porcelain", "--untracked-files=no").split("\n") if l]
-    dirty = sorted(rel for rel in changed if rel not in index
-                   or not os.path.exists(os.path.join(REPO, rel)) or sha256(os.path.join(REPO, rel)) != index[rel]["sha"])
+    out = subprocess.run(["git", "diff", "--no-renames", "--name-only", "-z", "HEAD"], cwd=REPO, capture_output=True, text=True)
+    if out.returncode != 0:
+        sys.exit("git diff failed; cannot check that the tracked files match the commit.")
+    changed = [rel for rel in out.stdout.split("\0") if rel]
+
+    def saved_output(rel):
+        info, path = index.get(rel), os.path.join(REPO, rel)
+        if info is None or rel not in allowed(info["by"]) or not os.path.isfile(path) or sha256(path) != info["sha"]:
+            return False
+        rec = read_json(marker(st, info["by"]))
+        return isinstance(rec, dict) and isinstance(rec.get("outputs"), dict) and rec["outputs"].get(rel) == info["sha"]
+    dirty = sorted(rel for rel in changed if not saved_output(rel))
     if dirty:
         sys.exit("Tracked files differ from the commit and are not saved outputs of this run: " + ", ".join(dirty[:10])
                  + (" ..." if len(dirty) > 10 else "") + ". Commit them, or restore them with git checkout, then run again.")
@@ -250,18 +314,25 @@ def validate(st, script, head, index=None):
     m = marker(st, script)
     if not os.path.exists(m):
         return False, "not run"
-    rec = json.load(open(m))
+    rec = read_json(m)
+    if not isinstance(rec, dict) or rec.get("script") != script:
+        return False, "record unreadable, corrupted or of another script"
     if not rec.get("ok"):
         return False, f"exit {rec.get('exit')}"
     if "fingerprint" not in rec or rec["fingerprint"] != fingerprint(head, script):
-        return False, "commit, script, arguments or environment changed"
+        return False, "commit, script, arguments, environment, runner or output inventory changed"
+    outs = rec.get("outputs")
+    if script not in EXPECTED or not isinstance(outs, dict) or not set(EXPECTED[script]) <= set(outs) <= allowed(script):
+        return False, "recorded outputs do not match the expected-output inventory"
     index = load_index(st) if index is None else index
-    for rel, h in rec.get("outputs", {}).items():
+    for rel, h in outs.items():
         src = os.path.join(st, "files", rel)
         if index.get(rel, {}).get("sha") != h or not os.path.exists(src) or sha256(src) != h:
             return False, f"saved output missing or altered: {rel}"
         if not os.path.exists(os.path.join(REPO, rel)) or sha256(os.path.join(REPO, rel)) != h:
             return False, f"output in the repository missing or altered: {rel}"
+        if os.path.getsize(src) == 0:
+            return False, f"saved output is empty: {rel}"
     if rec.get("inputs") != upstream(index, script):
         return False, "an output of an earlier script changed"
     return True, ""
@@ -289,16 +360,24 @@ def run_script(st, script, head):
                   and not (d == "formal" and dp == REPO)]   # Lean build trees are large and written by no script
         written += [os.path.relpath(os.path.join(dp, fn), REPO) for fn in fns if os.path.getmtime(os.path.join(dp, fn)) > t0]
     written.sort()
-    written = [w for w in written if w in tracked or w.startswith(("external/", "audit/", "structural/", "DATA/"))]
     written = [w for w in written if not w.startswith(NIST_DIRS)]   # NIST pages are downloaded, never kept in the state folder
-    outputs = save(st, script, written)
-    ok = code == 0 and (written or script in CHECK_ONLY)
+    expected = EXPECTED.get(script)
+    scratch = [w for w in written if w not in tracked]                # untracked files are never outputs
+    missing = [f for f in (expected or []) if f not in written or not os.path.isfile(os.path.join(REPO, f))
+               or os.path.getsize(os.path.join(REPO, f)) == 0]
+    unexpected = [w for w in written if w in tracked and w not in allowed(script)]
+    outputs = save(st, script, [w for w in written if w in tracked and w in allowed(script)])
+    ok = code == 0 and expected is not None and not missing and not unexpected
     rec = dict(script=script, exit=code, seconds=round(dt), files_written=written, ok=bool(ok),
                finished=datetime.datetime.now().isoformat(timespec="seconds"), last_lines=last,
-               fingerprint=fingerprint(head, script), outputs=outputs, inputs=inputs)
+               fingerprint=fingerprint(head, script), outputs=outputs, inputs=inputs,
+               expected=expected, missing=missing, unexpected=unexpected, scratch=scratch)
     write_json(marker(st, script), rec)
-    print(f"--- {script}: exit {code}, {dt/60:.1f} min, {len(written)} files written"
-          + ("" if ok else "  <-- PROBLEM (see " + log + ")"), flush=True)
+    why = ("not in colab/expected_outputs.py" if expected is None else
+           "; ".join(x for x in (f"expected output not written or empty: {', '.join(missing)}" if missing else "",
+                                 f"unlisted tracked file rewritten: {', '.join(unexpected)}" if unexpected else "") if x))
+    print(f"--- {script}: exit {code}, {dt/60:.1f} min, {len(written) - len(scratch)} tracked files written"
+          + ("" if ok else f"  <-- PROBLEM{' (' + why + ')' if why else ''} (see " + log + ")"), flush=True)
     for l in last:
         print("    " + l)
     return ok
@@ -354,14 +433,20 @@ def report():
             if not os.path.exists(m):
                 res = "NOT RUN"; lines.append(f"| {n} | `{script}` | NOT RUN | |")
             else:
-                r = json.load(open(m)); ok, why = validate(st, script, head, index)
+                r = read_json(m); ok, why = validate(st, script, head, index)
+                if not isinstance(r, dict):
+                    r = {}
                 if ok:
                     res, shown = "OK", "OK"
-                elif not r["ok"]:
-                    res, shown = "PROBLEM", f"PROBLEM (exit {r['exit']})"
+                elif r.get("ok") is False:
+                    res, shown = "PROBLEM", (f"PROBLEM (exit {r.get('exit')}"
+                                             + (f"; missing {', '.join(r['missing'])}" if r.get("missing") else "")
+                                             + (f"; unlisted {', '.join(r['unexpected'])}" if r.get("unexpected") else "") + ")")
                 else:
                     res, shown = "STALE", f"STALE ({why})"
-                lines.append(f"| {n} | `{script}` | {shown} | {r['seconds']/60:.1f} |")
+                secs = r.get("seconds")
+                lines.append(f"| {n} | `{script}` | {shown} | {secs/60:.1f} |" if isinstance(secs, (int, float))
+                             else f"| {n} | `{script}` | {shown} | |")
             counts[res] += 1
     same, differ = 0, []
     for rel in sorted(index):
@@ -379,9 +464,11 @@ def report():
     for rel in differ:
         lines.append(f"* DIFFERS `{rel}`" + (f": {SEEN_BEFORE[rel]}" if rel in SEEN_BEFORE else ""))
     lines += ["", "## Not replayed by this pipeline", ""] + [f"* `{k}`: {v}" for k, v in NOT_REPLAYED.items()]
-    verdict = ("COMPLETE: every script of the plan ran and exited 0, every expected output is present and unchanged, "
-               f"and every rewritten output is identical ({len(NOT_REPLAYED)} independent cross-checks are outside the plan, listed above)"
-               if counts["OK"] == len(ORDER) and not differ else
+    verdict = ("COMPLETE (replay plan only): every script of the plan ran and exited 0, wrote every file listed for it in "
+               "colab/expected_outputs.py (present, not empty, unchanged since) and no other tracked file, and every output "
+               f"is identical to the commit. The {len(NOT_REPLAYED)} independent cross-checks listed above are outside the plan "
+               "and were not run, so this is not a replay of every script of the repository"
+               if counts["OK"] == len(ORDER) == len(EXPECTED) and not differ else
                f"{counts['OK']} scripts OK, {counts['PROBLEM']} PROBLEM, {counts['STALE']} STALE, "
                f"{counts['NOT RUN']} NOT RUN; {len(differ)} outputs differ")
     lines += ["", f"**Result: {verdict}.**", "",
