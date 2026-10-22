@@ -9,7 +9,7 @@ commit `c48bad05f8e95805d4f0f700f5324d1071b903cd` (unchanged in the later docume
 | File | What it is |
 |---|---|
 | `main.tex` | the manuscript, MATCH template (A5, 10 pt), bibliography embedded (56 references, alphabetical) |
-| `LOYOLA_paper.pdf` | compiled manuscript, 45 A5 pages, one figure (Figure 1, degeneracy on the trees of order 10) |
+| `LOYOLA_paper.pdf` | compiled manuscript, 46 A5 pages, one figure (Figure 1, degeneracy on the trees of order 10) |
 | `supplement.tex` | Supplementary Material, own bibliography (14 references, alphabetical) |
 | `LOYOLA_supplement.pdf` | compiled supplement, 27 A5 pages, Figure S1 |
 | `figures/fig_lo_degeneracy_order10_trees_v2.pdf` | Figure 1 (used by `main.tex`) |
@@ -25,8 +25,8 @@ pdflatex main.tex       # three times
 pdflatex supplement.tex # three times
 ```
 
-Tested from a clean extraction of `MATCH_OVERLEAF_CANDIDATE.zip` with TeX Live (pdflatex): 45 and 27
-pages (Figure 1 on page 22 of the paper), no undefined references or citations, no overfull boxes, no
+Tested from a clean extraction of `MATCH_OVERLEAF_CANDIDATE.zip` with TeX Live (pdflatex): 46 and 27
+pages (Figure 1 on page 21 of the paper), no undefined references or citations, no overfull boxes, no
 missing figure, and the extracted text identical to the included PDFs except the "Received" line, which
 the template fills with the compile date (`\today`; rebuilt 2026-10-21). An earlier note said 44 pages; that
 was the count before the novelty paragraph of `c48bad0` and is superseded. On Overleaf: upload the zip, compile with pdfLaTeX, select `main.tex` or `supplement.tex`.
