@@ -2,7 +2,8 @@
 
 This file maps every numbered mathematical statement of the paper
 *The Loyola Index Family and the Resolution Limit of Degree Imbalance*
-(`main.tex`) to the Lean 4 theorems of `formal/` and says, for each one,
+(`main.tex`, and Section S10 of `supplement.tex`, which holds the statements moved there on 2026-10-23;
+S-numbers refer to the supplement) to the Lean 4 theorems of `formal/` and says, for each one,
 what is machine-checked and what is not. Build and check everything with
 
 ```
@@ -27,18 +28,18 @@ pairs, degrees are positive reals, and `LO` is the sum of
 | Corollary (degree-ratio indices) | every index of the form Σ f(min/max) depends only on the q-histogram | `one_sub_q_sq`, `q_only_direction` | `CauchySchwarz.lean` | identity `1 − q² = 4xy/(x+y)²` formalised; the corollary itself is a one-line consequence, not formalised |
 | Proposition 3 | at rational exponents a nonzero algebraic γ never destroys a parent distinction | — | — | not formalised (Lindemann–Weierstrass is not in Mathlib) |
 | Proposition 4 | γ-crossing bound by Laguerre's rule of signs | — | — | not formalised; the five-crossing witness is certified in 50-digit interval arithmetic by `structural/structural_checks.py` (block S3 of `structural_checks_out.txt`) and `audit/check_mathematics.py` |
-| Proposition 5 | per-graph scale-invariant directions | `K13_gamma_absorbed` (illustration only: on K_{1,3} the γ term is absorbed into α) | `Counterexamples.lean` | not formalised as stated (exponential-family minimality); the Δ = 7 exception set is certified by `audit/check_mathematics.py` |
-| Proposition 6 | limits along the γ axis | — | — | not formalised |
-| Proposition 7 | degree-pair information ceiling on the octanes | — | — | not formalised (data statement); checked by `verify_loyola_v35.py` |
-| Proposition 8 | generic discrimination of distinct profiles | — | — | not formalised (real-analytic zero sets) |
-| Example 2 | the sum-connectivity pair of Rada, Rodríguez and Sigarreta is separated by the imbalance coordinate | — | — | not formalised; checked from the order-18 trees at 50 digits by `structural/sumconn_pair_check.py` |
-| Proposition 9 | closed forms on standard graphs | — | — | not formalised; recomputed by `verify_loyola_v35.py` (section [M]) |
-| Proposition 10 | path and star as extremal trees of the pure-γ points | — | — | not formalised; exhaustively checked for orders 4–12 by `structural/extremal_trees_check.py` |
-| Proposition 11 (bracket bound) | m ψ_min ≤ LO ≤ m ψ_max | `ratio_bound`, `LO_ratio_bound` | `Bounds.lean` | **partly formalised**: the summation step is `ratio_bound` with h ≡ 1; the per-edge bounds ψ_min ≤ ψ_e ≤ ψ_max, and the extrema over the admissible pairs, enter as hypotheses |
-| Corollary (Cauchy–Schwarz interpolation) | LO at the midpoint of two parameter triples ≤ geometric mean | `psi_mul_psi_eq_sq`, `LO_le_sqrt_mul_sqrt`, `LO_le_sqrt_prod` | `CauchySchwarz.lean` | **formalised** (inequality) |
-| Proposition 12 ((m, Δ) upper bound) | LO ≤ m Δ^{2α} (2Δ)^β e^{γ(Δ−1)/(Δ+1)} | `q_le_imbalance_max`, `psi_le_upper`, `LO_le_upper`, `LOm_le_upper` | `Bounds.lean` | **formalised** (inequality); equality case K_{1,Δ}: `K13_upper_attained`, `K13_degrees_in_range` for Δ = 3 |
-| Proposition 13 ((m, δ) lower bound) | m δ^{2α} (2δ)^β ≤ LO | `lower_le_psi`, `lower_le_LO`, `lower_le_LOm` | `Bounds.lean` | **formalised** (inequality); `K2K3_lower_attained` shows the equality clause needs connectivity |
-| Proposition 14 (ratio bound) and the uniform-ratio-bound corollary | c_min Σh ≤ LO ≤ c_max Σh | `ratio_bound`, `LO_ratio_bound` | `Bounds.lean` | **partly formalised**: the summation step, with the per-edge bounds c_min ≤ ψ_e/h_e ≤ c_max as hypotheses; the extrema over the appearing pairs or over P_Δ and the equality cases are not |
+| Supplementary Proposition S1 | per-graph scale-invariant directions | `K13_gamma_absorbed` (illustration only: on K_{1,3} the γ term is absorbed into α) | `Counterexamples.lean` | not formalised as stated (exponential-family minimality); the Δ = 7 exception set is certified by `audit/check_mathematics.py` |
+| Supplementary Proposition S2 | limits along the γ axis | — | — | not formalised |
+| Proposition 5 | degree-pair information ceiling on the octanes | — | — | not formalised (data statement); checked by `verify_loyola_v35.py` |
+| Proposition 6 | generic discrimination of distinct profiles | — | — | not formalised (real-analytic zero sets) |
+| Example 1 | the sum-connectivity pair of Rada, Rodríguez and Sigarreta is separated by the imbalance coordinate | — | — | not formalised; checked from the order-18 trees at 50 digits by `structural/sumconn_pair_check.py` |
+| Supplementary Proposition S3 | closed forms on standard graphs | — | — | not formalised; recomputed by `verify_loyola_v35.py` (section [M]) |
+| Proposition 7 | path and star as extremal trees of the pure-γ points | — | — | not formalised; exhaustively checked for orders 4–12 by `structural/extremal_trees_check.py` |
+| Supplementary Proposition S4 (bracket bound) | m ψ_min ≤ LO ≤ m ψ_max | `ratio_bound`, `LO_ratio_bound` | `Bounds.lean` | **partly formalised**: the summation step is `ratio_bound` with h ≡ 1; the per-edge bounds ψ_min ≤ ψ_e ≤ ψ_max, and the extrema over the admissible pairs, enter as hypotheses |
+| Supplementary corollary (Cauchy–Schwarz interpolation) | LO at the midpoint of two parameter triples ≤ geometric mean | `psi_mul_psi_eq_sq`, `LO_le_sqrt_mul_sqrt`, `LO_le_sqrt_prod` | `CauchySchwarz.lean` | **formalised** (inequality) |
+| Supplementary Proposition S5 ((m, Δ) upper bound) | LO ≤ m Δ^{2α} (2Δ)^β e^{γ(Δ−1)/(Δ+1)} | `q_le_imbalance_max`, `psi_le_upper`, `LO_le_upper`, `LOm_le_upper` | `Bounds.lean` | **formalised** (inequality); equality case K_{1,Δ}: `K13_upper_attained`, `K13_degrees_in_range` for Δ = 3 |
+| Supplementary Proposition S6 ((m, δ) lower bound) | m δ^{2α} (2δ)^β ≤ LO | `lower_le_psi`, `lower_le_LO`, `lower_le_LOm` | `Bounds.lean` | **formalised** (inequality); `K2K3_lower_attained` shows the equality clause needs connectivity |
+| Supplementary Proposition S7 (ratio bound) and the uniform-ratio-bound corollary | c_min Σh ≤ LO ≤ c_max Σh | `ratio_bound`, `LO_ratio_bound` | `Bounds.lean` | **partly formalised**: the summation step, with the per-edge bounds c_min ≤ ψ_e/h_e ≤ c_max as hypotheses; the extrema over the appearing pairs or over P_Δ and the equality cases are not |
 
 Everything in Sections 4 and 6 (degeneracy counts, structure sensitivity,
 the chemometric comparisons) is outside the Lean development and is
@@ -47,7 +48,7 @@ reproduced by the Python verifiers listed in `REPRODUCE.md`.
 ## Reading the Lean sources
 
 * `Basic.lean`: definitions of `q`, `psi`, `LO`, `LOm`, `LOn`.
-* `Bounds.lean`: the termwise bounds (Propositions 11 to 14 and the Cauchy–Schwarz corollary).
+* `Bounds.lean`: the termwise bounds (Supplementary Propositions S4 to S7 and the Cauchy–Schwarz corollary).
 * `CauchySchwarz.lean`: the interpolation inequality and the parent-family identity.
 * `LogConvex.lean`: convexity of `log LO`.
 * `Independence.lean`: the 4×4 determinant behind Lemma 1.

@@ -10,7 +10,7 @@ Dear Editors,
 
 We submit the manuscript "[The Loyola Index Family and the Resolution Limit of Degree Imbalance —
 final title to be confirmed by the authors]" by Advik Natarajan, Ganesh Shiwakoti and Michael Arockiaraj
-for consideration in MATCH Communications in Mathematical and in Computer Chemistry. The manuscript is
+for consideration in MATCH Communications in Mathematical and in Computer Chemistry. The manuscript (35 A5 pages) is
 prepared with the MATCH LaTeX template; [a Supplementary Material PDF is attached / is available on
 request — confirm with the editorial office whether a separate supplement may be sent].
 
@@ -26,18 +26,18 @@ concern where the known degree-ratio ceiling binds for trees and chemical trees:
   certification of the ties; it is not a pen-and-paper proof;
 * as a consequence, no degree-ratio index (for example $GA$, $AG$ or the diminished Sombor index)
   separates all alkane carbon skeletons of order 16 or more;
-* two chemical graphs exchange order at most five times as $\gamma$ varies, and at rational
-  $(\alpha,\beta)$ a nonzero algebraic $\gamma$ never merges two molecules that the parent index
-  separates.
+* two chemical graphs exchange order at most five times as $\gamma$ varies.
 
 **Relation to earlier work.** Several facts the paper uses are known, and the text credits them. That every
 vertex-degree-based index depends on a graph only through its edge-degree-pair counts, and the pendant-path
 construction that carries equal counts to every larger order, are standard; the paper cites them from
 Rada (MATCH 96 (2026), Section 3.1). That the pure-imbalance points at algebraic $\gamma \neq 0$ separate exactly the imbalance
 histograms, and that no degree-ratio index separates more, is Theorem 3.4 and Proposition 2.5 of Rada
-(2019) applied to this family. That the path and the star are the extremal trees of the pure-imbalance
-points follows from the criteria of Cruz and Rada (MATCH 82 (2019)); the paper gives a short direct proof
-but does not claim the result as new. The affine independence of the imbalance direction and the
+(2019) applied to this family. The same Lindemann--Weierstrass argument, with algebraic coefficients,
+shows that at rational $(\alpha,\beta)$ a nonzero algebraic $\gamma$ never merges two molecules that the
+parent index separates; the paper states this as a direct consequence, not as a new theorem. That the path and the star are the extremal trees of the pure-imbalance
+points follows from the criteria of Cruz and Rada (MATCH 82 (2019)): their Corollaries 2.2 and 3.2 give
+the bounds, and the paper's short direct proof gives the uniqueness; the result is not claimed as new. The affine independence of the imbalance direction and the
 log-convexity of the family are stated in the paper as elementary facts.
 
 **Related work by the same authors.** The three authors are also preparing a separate manuscript, "Ten
@@ -58,7 +58,8 @@ we will inform the editor and cite it.]
 
 **Chemistry.** We test the family on octane properties, a pre-registered replication on nonanes and
 pre-registered tests on measured boiling points of acyclic alkanes. The results are negative or modest and
-are reported as such: the boiling-point tests did not demonstrate a predictive gain from $\gamma$, and a gain
+are reported as such: the boiling-point tests did not demonstrate a predictive gain from $\gamma$ (on the
+decanes the point estimate favoured the parent, with an interval that included zero), and a gain
 on vaporisation enthalpies that met a pre-registered seed-count rule shrinks to about zero in an
 exploratory comparison with a wider search box. These results do not show that $\gamma$ can never help,
 nor that the family is equivalent to its parent; the family is not proposed as a better predictor. Source limitations of the experimental values are stated

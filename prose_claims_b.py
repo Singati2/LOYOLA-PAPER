@@ -707,7 +707,7 @@ for _k, (_pair, _slot) in enumerate([((1, 4), 0), ((2, 2), 1), ((2, 4), 2)]):
     _f = ["8", "3", "4"]; _f[_slot] = r"(?P<v>\d+)"
     _add(E("rp_mol16_B_%d%d" % _pair, "main", _M16B % tuple(_f), "mol16_pair()[1][%r]" % (_pair,), 0,
            "enumeration: order-16 Delta<=4 collision (profile containing (2,2))"))  # 1 each
-_add(E("rp_proof_d4", "main", r"realises\s+\$\(2,(?P<v>\d+)\)\$,\s+\$\(2,2\)\$", "common_leaf_degree(*mol16_pair())", 0, "smallest common leaf-neighbour degree of the order-16 pair"))  # 1
+_add(E("rp_proof_d4", "supp", r"realises\s+\$\(2,(?P<v>\d+)\)\$,\s+\$\(2,2\)\$", "common_leaf_degree(*mol16_pair())", 0, "smallest common leaf-neighbour degree of the order-16 pair"))  # 1
 _add(E("rp_enum_to17", "main", r"orders\s+\$2\$\-\-\$(?P<v>\d+)\$\s+in\s+exact", "max(s1_orders('all'))", 0, "S1 orders"))  # 1
 _add(E("rp_coincide_12", "main", r"most\s+\$(?P<v>\d+)\$\s+with", "s1_last_eq('all')", 0, "S1: last n with qhist==profiles (all)"))  # 1
 _add(E("rp_coincide_15", "main", r"of order at most\s+\$(?P<v>\d+)\$\.\s+With part", "s1_last_eq('mol')", 0, "S1: last n with qhist==profiles (mol)"))  # 1
@@ -732,10 +732,10 @@ _add(E("cr_five_times", "main", r"Whether\s+(?P<v>[a-z]+)\s+crossings\s+are", "w
 _add(E("cr_alpha", "main", r"\$\(\\alpha,\\beta\)\s+=\s+\((?P<v>-?\d+),0\)\$\s+they\s+cross", "s3()['alpha']", 0, "S3 header (alpha,beta)"))  # 1
 _add(E("cr_beta", "main", r"=\s+\(\-1,(?P<v>-?\d+)\)\$\s+they\s+cross", "s3()['beta']", 0, "S3 header (alpha,beta)"))  # 1
 # identifiability
-_add(E("id_delta6", "main", r"admissible pairs with\s+\$\\Delta \\le (?P<v>\d+)\$ \(by exhaustive enumeration", "s4_max_ok()", 0, "S4 Delta=6: 0 violations"))  # 1
-_add(E("id_delta7", "main", r"\$\\Delta\s+=\s+(?P<v>\d+)\$:\s+among", "s4_first_fail()", 0, "S4 Delta=7: 1 violation"))  # 1
-_add(E("id_fail_set", "main", r"the only one violating equality is\s+\$\\\{(?P<v>[0-9(),]+)\\\}\$,\s+whose", "s4_fail_set_str()", 0, "S4 Delta=7 violating set"))  # 1
-_add(E("id_degree_sum8", "main", r"whose\s+degree sums all equal \$(?P<v>\d+)\$", "(lambda s: s.pop() if len(s) == 1 else None)({i + j for i, j in s4_fail_set()})", 0, "sum of each pair in the S4 set"))  # 1
+_add(E("id_delta6", "supp", r"admissible pairs with\s+\$\\Delta \\le (?P<v>\d+)\$ \(by exhaustive enumeration", "s4_max_ok()", 0, "S4 Delta=6: 0 violations"))  # 1
+_add(E("id_delta7", "supp", r"\$\\Delta\s+=\s+(?P<v>\d+)\$:\s+among", "s4_first_fail()", 0, "S4 Delta=7: 1 violation"))  # 1
+_add(E("id_fail_set", "supp", r"the only one violating equality is\s+\$\\\{(?P<v>[0-9(),]+)\\\}\$,\s+whose", "s4_fail_set_str()", 0, "S4 Delta=7 violating set"))  # 1
+_add(E("id_degree_sum8", "supp", r"whose\s+degree sums all equal \$(?P<v>\d+)\$", "(lambda s: s.pop() if len(s) == 1 else None)({i + j for i, j in s4_fail_set()})", 0, "sum of each pair in the S4 set"))  # 1
 _add(E("id_nine_pairs", "main", r"union\s+contains\s+(?P<v>nine)\s+of\s+the", "word(len(oct_union_pairs()))", 0, "octane_data: union of realised degree pairs"))  # 1
 _add(E("id_affdim3", "main", r"its affine\s+dimension is \$(?P<v>\d+)\$, so", "oct_affine_dim()", 0, "rank of z_ij differences over the octane pair union"))  # 1
 
@@ -847,7 +847,13 @@ _add(E("ss_fourteen", "main", r"eleven\s+of\s+(?P<v>[a-z]+)\s+\$SS\$/\$Abr\$\s+v
 _add(E("ss_three", "main", r"the\s+other\s+(?P<v>[a-z]+)\s+agrees\s+within", "word(control_count('within_1_unit_4th_dp'))", 0, "fgd_published_control.csv"))  # 1
 
 
-def _ss_common(file_, prefix):
+def _ss_common(file_, prefix, only=None):
+    """only: the entry suffixes to register (2026-10-23: the gamma trend and the IRLA values of Section 4.3 were
+    left to Supplementary Section S6, which already states them and is checked by the "sup_ss" entries)."""
+    return [e for e in _ss_entries(file_, prefix) if only is None or e["id"][len(prefix) + 1:] in only]
+
+
+def _ss_entries(file_, prefix):
     return [
         E(prefix + "_LO2_SS", file_, r"\(\$(?P<v>[\d.]+)\$ against \$0\.1256\$\)", "fgd('LO(0,0,2)')[0]", 0.00005, "fgd_structure_sensitivity_decanes.csv"),
         E(prefix + "_HM_SS", file_, r"\(\$0\.1257\$ against \$(?P<v>[\d.]+)\$\)", "fgd('HM')[0]", 0.00005, "fgd_structure_sensitivity_decanes.csv"),
@@ -869,7 +875,7 @@ def _ss_common(file_, prefix):
     ]
 
 
-REGISTRY.extend(_ss_common("main", "ss"))  # 17 entries, 1 match each
+REGISTRY.extend(_ss_common("main", "ss", only={"LO2_SS", "HM_SS", "LO2_Abr", "HM_Abr", "LO2_ratio", "LO1_ratio", "range_lo", "range_hi"}))  # 8 entries, 1 match each
 _add(E("ss_cap_75", "main", r"ratio on the \$(?P<v>\d+)\$ decane isomers under", "mod(10, 'molecular')['N_trees']", 0, "multi_order_degeneracy.csv (table caption)"))  # 1
 
 # ----- Section 6.1 collision-pair property differences (requested explicitly) -----
@@ -1022,22 +1028,22 @@ def _norm(s):
 
 
 # dense-grid box curve (Section 6.2), from external/wide_box_diagnostics_out.txt
-_add(E("d3_oct_q2_2", "main", r"is\s+\$(?P<v>[\d.]+)\$,\s+\$0\.9156\$,\s+\$0\.9525\$\s+and\s+\$0\.9383\$", "d3('octane', 2, 'q2')", 0, "D3 octane hw2"))
-_add(E("d3_oct_q2_4", "main", r"\$0\.8873\$,\s+\$(?P<v>[\d.]+)\$,\s+\$0\.9525\$\s+and", "d3('octane', 4, 'q2')", 0, "D3 octane hw4"))
-_add(E("d3_oct_q2_8", "main", r"\$0\.9156\$,\s+\$(?P<v>[\d.]+)\$\s+and\s+\$0\.9383\$", "d3('octane', 8, 'q2')", 0, "D3 octane hw8"))
-_add(E("d3_oct_q2_12", "main", r"\$0\.9525\$ and \$(?P<v>[\d.]+)\$\s+at half-widths", "d3('octane', 12, 'q2')", 0, "D3 octane hw12"))
-_add(E("d3_oct_bd_2", "main", r"boundary\s+in\s+\$(?P<v>\d+)\$,\s+\$18\$,\s+\$18\$\s+and\s+\$0\$\s+of\s+the\s+\$18\$\s+folds", "d3('octane', 2, 'bd')", 0, "D3 octane boundary folds hw2"))
-_add(E("d3_oct_bd_4", "main", r"boundary\s+in\s+\$18\$,\s+\$(?P<v>\d+)\$,\s+\$18\$\s+and\s+\$0\$\s+of\s+the\s+\$18\$\s+folds", "d3('octane', 4, 'bd')", 0, "D3 octane boundary folds hw4"))
-_add(E("d3_oct_bd_8", "main", r"boundary\s+in\s+\$18\$,\s+\$18\$,\s+\$(?P<v>\d+)\$\s+and\s+\$0\$\s+of\s+the\s+\$18\$\s+folds", "d3('octane', 8, 'bd')", 0, "D3 octane boundary folds hw8"))
-_add(E("d3_oct_bd_12", "main", r"boundary\s+in\s+\$18\$,\s+\$18\$,\s+\$18\$\s+and\s+\$(?P<v>\d+)\$\s+of\s+the\s+\$18\$\s+folds", "d3('octane', 12, 'bd')", 0, "D3 octane boundary folds hw12"))
-_add(E("d3_non_q2_2", "main", r"the\s+values\s+are\s+\$(?P<v>[\d.]+)\$,\s+\$0\.8779\$,\s+\$0\.8997\$\s+and\s+\$0\.8837\$", "d3('nonane', 2, 'q2')", 0, "D3 nonane hw2"))
-_add(E("d3_non_q2_4", "main", r"\$0\.8532\$,\s+\$(?P<v>[\d.]+)\$,\s+\$0\.8997\$\s+and", "d3('nonane', 4, 'q2')", 0, "D3 nonane hw4"))
-_add(E("d3_non_q2_8", "main", r"\$0\.8779\$, \$(?P<v>[\d.]+)\$ and \$0\.8837\$", "d3('nonane', 8, 'q2')", 0, "D3 nonane hw8"))
-_add(E("d3_non_q2_12", "main", r"\$0\.8997\$ and \$(?P<v>[\d.]+)\$, with \$34\$", "d3('nonane', 12, 'q2')", 0, "D3 nonane hw12"))
-_add(E("d3_non_bd_2", "main", r"with\s+\$(?P<v>\d+)\$,\s+\$34\$,\s+\$34\$\s+and\s+\$0\$\s+boundary\s+folds\s+of\s+\$34\$", "d3('nonane', 2, 'bd')", 0, "D3 nonane boundary folds hw2"))
-_add(E("d3_non_bd_4", "main", r"with\s+\$34\$,\s+\$(?P<v>\d+)\$,\s+\$34\$\s+and\s+\$0\$\s+boundary\s+folds\s+of\s+\$34\$", "d3('nonane', 4, 'bd')", 0, "D3 nonane boundary folds hw4"))
-_add(E("d3_non_bd_8", "main", r"with\s+\$34\$,\s+\$34\$,\s+\$(?P<v>\d+)\$\s+and\s+\$0\$\s+boundary\s+folds\s+of\s+\$34\$", "d3('nonane', 8, 'bd')", 0, "D3 nonane boundary folds hw8"))
-_add(E("d3_non_bd_12", "main", r"with\s+\$34\$,\s+\$34\$,\s+\$34\$\s+and\s+\$(?P<v>\d+)\$\s+boundary\s+folds\s+of\s+\$34\$", "d3('nonane', 12, 'bd')", 0, "D3 nonane boundary folds hw12"))
+_add(E("d3_oct_q2_2", "supp", r"is\s+\$(?P<v>[\d.]+)\$,\s+\$0\.9156\$,\s+\$0\.9525\$\s+and\s+\$0\.9383\$", "d3('octane', 2, 'q2')", 0, "D3 octane hw2"))
+_add(E("d3_oct_q2_4", "supp", r"\$0\.8873\$,\s+\$(?P<v>[\d.]+)\$,\s+\$0\.9525\$\s+and", "d3('octane', 4, 'q2')", 0, "D3 octane hw4"))
+_add(E("d3_oct_q2_8", "supp", r"\$0\.9156\$,\s+\$(?P<v>[\d.]+)\$\s+and\s+\$0\.9383\$", "d3('octane', 8, 'q2')", 0, "D3 octane hw8"))
+_add(E("d3_oct_q2_12", "supp", r"\$0\.9525\$ and \$(?P<v>[\d.]+)\$\s+at half-widths", "d3('octane', 12, 'q2')", 0, "D3 octane hw12"))
+_add(E("d3_oct_bd_2", "supp", r"boundary\s+in\s+\$(?P<v>\d+)\$,\s+\$18\$,\s+\$18\$\s+and\s+\$0\$\s+of\s+the\s+\$18\$\s+folds", "d3('octane', 2, 'bd')", 0, "D3 octane boundary folds hw2"))
+_add(E("d3_oct_bd_4", "supp", r"boundary\s+in\s+\$18\$,\s+\$(?P<v>\d+)\$,\s+\$18\$\s+and\s+\$0\$\s+of\s+the\s+\$18\$\s+folds", "d3('octane', 4, 'bd')", 0, "D3 octane boundary folds hw4"))
+_add(E("d3_oct_bd_8", "supp", r"boundary\s+in\s+\$18\$,\s+\$18\$,\s+\$(?P<v>\d+)\$\s+and\s+\$0\$\s+of\s+the\s+\$18\$\s+folds", "d3('octane', 8, 'bd')", 0, "D3 octane boundary folds hw8"))
+_add(E("d3_oct_bd_12", "supp", r"boundary\s+in\s+\$18\$,\s+\$18\$,\s+\$18\$\s+and\s+\$(?P<v>\d+)\$\s+of\s+the\s+\$18\$\s+folds", "d3('octane', 12, 'bd')", 0, "D3 octane boundary folds hw12"))
+_add(E("d3_non_q2_2", "supp", r"the\s+values\s+are\s+\$(?P<v>[\d.]+)\$,\s+\$0\.8779\$,\s+\$0\.8997\$\s+and\s+\$0\.8837\$", "d3('nonane', 2, 'q2')", 0, "D3 nonane hw2"))
+_add(E("d3_non_q2_4", "supp", r"\$0\.8532\$,\s+\$(?P<v>[\d.]+)\$,\s+\$0\.8997\$\s+and", "d3('nonane', 4, 'q2')", 0, "D3 nonane hw4"))
+_add(E("d3_non_q2_8", "supp", r"\$0\.8779\$, \$(?P<v>[\d.]+)\$ and \$0\.8837\$", "d3('nonane', 8, 'q2')", 0, "D3 nonane hw8"))
+_add(E("d3_non_q2_12", "supp", r"\$0\.8997\$ and \$(?P<v>[\d.]+)\$, with \$34\$", "d3('nonane', 12, 'q2')", 0, "D3 nonane hw12"))
+_add(E("d3_non_bd_2", "supp", r"with\s+\$(?P<v>\d+)\$,\s+\$34\$,\s+\$34\$\s+and\s+\$0\$\s+boundary\s+folds\s+of\s+\$34\$", "d3('nonane', 2, 'bd')", 0, "D3 nonane boundary folds hw2"))
+_add(E("d3_non_bd_4", "supp", r"with\s+\$34\$,\s+\$(?P<v>\d+)\$,\s+\$34\$\s+and\s+\$0\$\s+boundary\s+folds\s+of\s+\$34\$", "d3('nonane', 4, 'bd')", 0, "D3 nonane boundary folds hw4"))
+_add(E("d3_non_bd_8", "supp", r"with\s+\$34\$,\s+\$34\$,\s+\$(?P<v>\d+)\$\s+and\s+\$0\$\s+boundary\s+folds\s+of\s+\$34\$", "d3('nonane', 8, 'bd')", 0, "D3 nonane boundary folds hw8"))
+_add(E("d3_non_bd_12", "supp", r"with\s+\$34\$,\s+\$34\$,\s+\$34\$\s+and\s+\$(?P<v>\d+)\$\s+boundary\s+folds\s+of\s+\$34\$", "d3('nonane', 12, 'bd')", 0, "D3 nonane boundary folds hw12"))
 
 
 def nc(case, field):

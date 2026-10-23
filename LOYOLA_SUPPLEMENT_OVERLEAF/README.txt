@@ -7,4 +7,7 @@ S3 matched comparison in the box (-2,2) (Table S3), S4 nonane protocol,
 transfer and bootstrap, S5 tree orders (Table S4; the degeneracy figure is Figure 1 of the main paper) and fixed
 fractional exponents, S6 structure-sensitivity protocol, S7 Lean scope,
 S8 open provenance items and the octane property data (Table S5),
-S9 additional tables for Section 6 (S6 search-box sensitivity, S7 nonane baselines).
+S9 additional tables for Section 6 (S6 search-box sensitivity, S7 nonane baselines),
+S10 further results moved from the main paper (proofs of Lemma 1 and Theorem 1, per-graph
+identifiability, limits along gamma, closed forms, termwise bounds), S11 supporting analyses for
+Sections 6.2-6.4 and the protocol-deviation table (Table S8).

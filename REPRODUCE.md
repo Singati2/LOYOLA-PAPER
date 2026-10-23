@@ -28,7 +28,7 @@ follow the compiled documents; the LaTeX labels are the stable identifiers.
 | `python3 external/bp/wiener_baseline.py` | exploratory: Wiener's W + p3 boiling-point model on the 34 decanes, rebuilt from the InChI skeletons (Q2 = 0.904) | seconds |
 | `python3 audit/final/scripts/bp_duplicate_sensitivity.py` | exploratory: 2,2,6-trimethylheptane with the repeated NIST row counted once (decane ridge 0.8599 to 0.8591) | seconds |
 | `python3 audit/final/scripts/ref_trees.py` and `ref_misc.py` | independent referee recomputation (own SMILES parser and tree enumeration): collision orders, counts, ranks, floor, five crossings | minutes |
-| `python3 structural/sumconn_pair_check.py` | Example 2 from the trees themselves: the order-18 chemical-tree pair with the stated profile difference, equal sum-connectivity index, and D(gamma) from the profiles against the closed form at 50 digits | about 5 s |
+| `python3 structural/sumconn_pair_check.py` | Example 1 (Example 2 before 2026-10-23) from the trees themselves: the order-18 chemical-tree pair with the stated profile difference, equal sum-connectivity index, and D(gamma) from the profiles against the closed form at 50 digits | about 5 s |
 | `python3 structural/count_dimension_check.py` | Remark rem:countdim and the error floor after Proposition prop:collision: the count identities on all trees of orders 3-12 (Delta <= 4), exact ranks 7 / 7 / 8 of the centred count matrices of the octanes, measured decanes and pooled alkanes, and the octane T_B floor (SSE 2.925, RMSE 0.403) | about 10 s |
 | `python3 external/nonane_tb_conflict.py` | exploratory: nonane T_B test and ridge with 3-ethyl-4-methylhexane as registered, excluded, or at the second NIST value (Supplementary S4, Table tab:deviations); case 1 must reproduce the committed summaries | about 12 minutes |
 | `python3 tmb_dhvap_audit.py` | Table 4 dHvap column under four labelled values for 2,2,3,3-tetramethylbutane (original, excluded, hypothetical-liquid estimate, NIST 298 K solid-to-gas); source trace in TMB_DHVAP_AUDIT.md | seconds |
@@ -54,7 +54,7 @@ Coverage: GitHub CI runs the fast path only. The full suite, including the Lean 
 | Table 3 tab:fgdss | main | fgd_structure_sensitivity.py | verify_loyola_v35.py (first-principles recomputation) |
 | Table 4 tab:lo_octane | main | verify_loyola_v35.py | verify_loyola_v35.py |
 | Table 5 tab:bp | main | external/bp/bp_tests.py, make_bp_table.py | verify_external.py |
-| Table 6 tab:deviations | main | (protocol deviations, written by hand) | audit/check_labels.py (labels only) |
+| Table S8 tab:deviations (Table 6 before 2026-10-23) | supplement | (protocol deviations, written by hand) | audit/check_labels.py (labels only) |
 | Figure S1 fig:octanes | supplement | generate_loyola_v35_figures.py | verify_loyola_v35.py (regeneration, decompressed-content compare) |
 | Figure 1 fig:degeneracy | main | generate_loyola_v35_figures.py | verify_loyola_v35.py (regeneration, decompressed-content compare) |
 | Tables S1-S2 tab:lo_tuning(_bestfixed) | supplement | verify_loyola_v35.py | verify_loyola_v35.py |
