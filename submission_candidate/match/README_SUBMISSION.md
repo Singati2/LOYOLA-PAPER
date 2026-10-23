@@ -25,8 +25,9 @@ pdflatex main.tex       # three times
 pdflatex supplement.tex # three times
 ```
 
-Tested from a clean extraction of `MATCH_OVERLEAF_CANDIDATE.zip` with TeX Live (pdflatex): 35 and 39
-pages (Figure 1 on page 19 of the paper; shortened 2026-10-23, see `audit/MATCH_SHORTENING_REPORT_2026-10-23.md`;
+Tested from a clean extraction of `MATCH_OVERLEAF_CANDIDATE.zip` with TeX Live (pdflatex): 37 and 39
+pages (Figure 1 on page 18 of the paper; shortened to 35 pages on 2026-10-23, see `audit/MATCH_SHORTENING_REPORT_2026-10-23.md`,
+then 37 after the audit corrections of the same day, see `audit/MATCH_FINAL_PATCHLOG_2026-10-23.md`;
 the 46-page version is kept in `drafts/full_46pp_2026-10-23/`), no undefined references or citations, no overfull boxes, no
 missing figure, and the extracted text identical to the included PDFs except the "Received" line, which
 the template fills with the compile date (`\today`; rebuilt 2026-10-21). An earlier note said 44 pages; that

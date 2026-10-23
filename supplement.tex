@@ -114,6 +114,7 @@
 \usepackage{mathtools}
 \usepackage{array}
 \usepackage{enumitem}
+\usepackage{placeins}
 \setlist[itemize]{topsep=2pt,itemsep=2pt}
 \setlist[enumerate]{topsep=2pt,itemsep=2pt}
 \emergencystretch=3em
@@ -1118,48 +1119,15 @@ non. $\Delta H_{\mathrm{vap}}$ & $-0.062$ & $0.857$ & $0.897$ & $0.927$ & $0.903
 \end{tabular}
 \end{table}
 
+\FloatBarrier
 \section{Further results on the Loyola family}\label{sec:s-math}
 
-This section holds material moved from the main paper to shorten it: the proofs of Lemma~1 and
+This section holds material moved from the main paper to shorten it: the proof of
 Theorem~1 of the main paper, per-graph identifiability, the limits along the $\gamma$ axis, closed forms
 on standard graphs and termwise bounds. Statements and proofs are unchanged apart from
 cross-references. Numbers with the prefix S refer to this supplement.
 
-\subsection{Proofs of Lemma~1 and Theorem~1 of the main paper}\label{sec:s-proofs}
-
-  \begin{proof}[Proof of Lemma~1 of the main paper]
-  The vectors $(1, \ln(ij), \ln(i+j))$ on the pairs $(1,1), (2,2),
-  (1,2)$ have rank $3$, since the corresponding $3 \times 3$ determinant
-  equals $\ln 2 \cdot \ln(9/8) \ne 0$, so it suffices to show that
-  $q_{ij}$ is not an affine function of $\bigl(\ln(ij), \ln(i+j)\bigr)$
-  on $P_{\Delta}$. The four pairs $(1,1), (2,2), (1,2), (1,3)$, all admissible once $\Delta \ge 3$, witness this. The pair $(1,1)$ occurs only in $K_2$, and the conclusion persists without it, since the augmented vectors of $(1,2), (1,3), (2,2), (3,3)$, namely $(1, \ln 2, \ln 3, \tfrac13)$, $(1, \ln 3, \ln 4, \tfrac12)$, $(1, \ln 4, \ln 4, 0)$ and $(1, \ln 9, \ln 6, 0)$, have determinant $-\tfrac16 \ln\tfrac32 \,\ln\bigl(2^{13}/3^{8}\bigr) \approx -0.0150 \ne 0$. Suppose
-  $q_{ij} = a + b \ln(ij) + c \ln(i+j)$ on these pairs. The pairs
-  $(1,1)$ and $(2,2)$ have $q = 0$, so they give $a + c \ln 2 = 0$ and
-  $a + (2b + 2c) \ln 2 = 0$, hence $a = -c \ln 2$ and $b = -c/2$.
-  Substituting into the $(1,2)$ and $(1,3)$ equations gives
-  $\tfrac13 = c\,(\ln 3 - \tfrac32 \ln 2)$ and
-  $\tfrac12 = c\,(\ln 2 - \tfrac12 \ln 3)$. In particular $c \neq 0$,
-  since the left side $\tfrac13$ is nonzero.
-  Three times the first minus twice the second gives
-  $0 = c\,(4 \ln 3 - \tfrac{13}{2} \ln 2)$, hence $8 \ln 3 = 13 \ln 2$,
-  i.e.\ $3^{8} = 2^{13}$. This is false ($6561 \neq 8192$). Hence the
-  augmented vectors have rank $4$. Indeed, a linear relation among the
-  four coordinates on $P_{\Delta}$ with a nonzero coefficient on
-  $q_{ij}$ would express $q_{ij}$ as an affine function of $\ln(ij)$
-  and $\ln(i+j)$, which we have just excluded. A relation with zero
-  coefficient on $q_{ij}$ is excluded by the rank-$3$ determinant. If
-  $e^{\theta^{\top} z} = c\, e^{\theta'^{\top} z}$ on $P_{\Delta}$,
-  then $(\theta - \theta')^{\top} z_{ij} = \ln c$ for all admissible
-  pairs, so $(\ln c, \theta' - \theta)$ is orthogonal to every
-  augmented vector. Since the augmented vectors span $\mathbb{R}^4$,
-  the only vector orthogonal to all of them is $0$, so
-  $\theta = \theta'$ and $c = 1$. For
-  $\Delta = 2$ only the pairs $(1,1), (1,2), (2,2)$ exist. The
-  $3 \times 3$ determinant computed at the start of the proof shows
-  that their three augmented vectors have rank $3$, and three vectors
-  cannot have more. For
-  $\Delta = 1$ the single augmented vector has rank $1$.
-  \end{proof}
+\subsection{Proof of Theorem~1 of the main paper}\label{sec:s-proofs}
 
   \begin{proof}[Proof of Theorem~1 of the main paper]
   Direct differentiation of
@@ -1637,8 +1605,8 @@ beats the wide-box parent GM in $38$ of $50$ seeds on the pooled set
 (median seed-matched difference $+0.0033$) but in only $22$ of $50$ on
 the decanes (median $-0.037$). Against the narrow-box parent the counts
 are $40$ and $25$ of $50$. These comparisons were not registered, carry
-no interval and count optimiser variance on fixed data, so they do not
-indicate a gain from $\gamma$.
+no interval and count optimiser variance on fixed data, so they are
+inconclusive: they neither establish nor exclude a gain from $\gamma$.
 
 The pooled cohort was corrected after an
 external audit (Table~\ref{tab:deviations}). On the uncorrected cohort
@@ -1659,7 +1627,7 @@ reproducibility package~\cite{LoyolaRepo}.}
 \label{tab:deviations}
 \scriptsize
 \setlength{\tabcolsep}{3pt}
-\begin{tabular}{p{0.2\linewidth}p{0.42\linewidth}p{0.3\linewidth}}
+\begin{tabular}{>{\raggedright\arraybackslash}p{0.2\linewidth}>{\raggedright\arraybackslash}p{0.42\linewidth}>{\raggedright\arraybackslash}p{0.3\linewidth}}
 \toprule
 Test & Change after outcomes & Effect\\
 \midrule

@@ -830,7 +830,7 @@ REGISTRY = [
     # ======================= main.tex : sec:sensitivity intro =======================
     E("s6_n_oct", "main", r"reduces\s+to\s+on\s+the\s+\$(?P<v>\d+)\$\s+octane\s+isomers,\s+following", "N_OCT", 0, "octane_data.OCTANES"),
     E("s6_n_non", "main", r"use\s+the\s+\$(?P<v>\d+)\$\s+nonane\s+isomers", "len(NON_DATA)", 0, "external/nonane_data.csv rows"),
-    E("s6_tuning_margin", "main", r"a\s+\$(?P<v>[\d.]+)\$\s+in\-sample", "tuning_margin_dhvap()", 0.0005,
+    E("s6_tuning_margin", "main", r"only by\s+\$(?P<v>[\d.]+)\$\s+in\s+sample", "tuning_margin_dhvap()", 0.0005,
       "S2 recipe (default_rng(42) pools): best tuned in-sample |r| on dHvap minus best fixed |r|, at display rounding"),
 
     # ======================= main.tex : sec:octanes =======================
@@ -1102,7 +1102,7 @@ REGISTRY = [
     E("s1_3519", "supp", r"\$8\.41\$\\,kcal\\,mol\$\^\{\-1\}\$\s+\(\$(?P<v>[\d.]+)\$\\,kJ\\,mol\$\^\{\-1\}\$\),\s+is", "OCTANES[IDX[TMB]][3]*4.184", 0.005, "8.41 x 4.184"),
     E("s1_tmb_omega247", "supp", r"2,2,3,3-tetramethylbutane \(\$(?P<v>[\d.]+)\$ against \$0\.251\$ in KDB", "OCTANES[IDX[TMB]][5]", 0.0005, "octane_data"),
     E("v4029_wiener", "supp", r"apart, fitted without tuning, gives \$Q\^2 = (?P<v>[\d.]+)\$", "wiener_q2()", 0.0005, "external/bp/wiener_baseline_out.txt"),
-    E("v4029_nfix_tb_main", "main", r"octane \$T_B\$ \(\$0\.764\$ against \$(?P<v>[\d.]+)\$\)", "nested_fixed_loo('T_B')", 0.0005, "nested best-fixed LOO, T_B"),
+    E("v4029_nfix_tb_main", "main", r"octane \$T_B\$ \(\$0\.764\$ against \$(?P<v>[\d.]+)\$ for", "nested_fixed_loo('T_B')", 0.0005, "nested best-fixed LOO, T_B"),
     E("v4029_nfix_tb_s", "supp", r"it becomes \$(?P<v>[\d.]+)\$ for \$T_B\$", "nested_fixed_loo('T_B')", 0.0005, "nested best-fixed LOO, T_B"),
     E("v4029_nfix_s_s", "supp", r"for \$T_B\$ and \$(?P<v>[\d.]+)\$ for \$S\$", "nested_fixed_loo('S')", 0.0005, "nested best-fixed LOO, S"),
     E("v4029_box_oct_tb_n", "supp", r"nested \$Q\^2\$ from \$(?P<v>[\d.]+)\$ to \$0\.606\$", "box('octane','T_B',2,'median_Q2_GM')", 0.0005, "box_sensitivity_summary.csv"),
