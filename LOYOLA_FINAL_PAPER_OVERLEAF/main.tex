@@ -200,15 +200,15 @@
   $LO(G;\alpha,\beta,\gamma)$ multiplies the edge term
   $(d_u d_v)^{\alpha} (d_u + d_v)^{\beta}$ of the Gutman--Milovanovi\'c
   index by $e^{\gamma q_{uv}}$, where $q_{uv} = |d_u - d_v|/(d_u + d_v)$
-  is the normalised degree imbalance of the edge. By theorems of Rada, the
+  is the normalised degree imbalance of the edge. By an argument of Rada, the
   points $LO(G;0,0,\gamma)$ at algebraic $\gamma \neq 0$ separate exactly the
   histograms of edge imbalances, and no degree-ratio index, such as the
   geometric--arithmetic or degree-ratio Sombor index, separates more. By
   exhaustive enumeration, this histogram determines the degree-pair counts
   of every tree up to order twelve and of every chemical tree, the carbon
   skeleton of an alkane, up to order fifteen. Explicit counterexamples
-  exist at every larger order. At fixed $(\alpha,\beta)$, two chemical
-  graphs exchange order at most five times as $\gamma$ varies. Pre-registered tests on measured alkane
+  exist at every larger order. At fixed $(\alpha,\beta)$, the values of two chemical
+  graphs cross at most five times as $\gamma$ varies. Pre-registered tests on measured alkane
   boiling points did not demonstrate a predictive gain from $\gamma$. A
   vaporisation-enthalpy gain that met a pre-registered seed-count rule
   shrank to about zero in an exploratory rerun with a search box that did
@@ -312,7 +312,7 @@
   degree-pair information of an alkane carbon skeleton up to order $15$
   and not beyond, so no degree-ratio index, such as $GA$, $AG$ or the
   diminished Sombor index, separates all skeletons of order $16$ or more.
-  At fixed $(\alpha,\beta)$ the order of two chemical graphs changes at
+  At fixed $(\alpha,\beta)$ the values of two chemical graphs cross at
   most five times along $\gamma$.
 
   The results below differ in status, and we group them accordingly.
@@ -335,7 +335,7 @@
   profiles and equal $q$-histograms at every order from $13$, and
   from $16$ for $\Delta \le 4$ (Theorem~\ref{thm:ratioplane}(iii)), carried
   by the corollary to every degree-ratio index. A bound on the number of
-  order exchanges along $\gamma$ (Proposition~\ref{prop:laguerre}), an
+  crossings along $\gamma$ (Proposition~\ref{prop:laguerre}), an
   application of Laguerre's rule of signs, and per-graph identifiability,
   stated and proved in Supplementary Section~S10. Two elementary facts: the imbalance
   direction is affinely independent of the parent coordinates once a
@@ -365,6 +365,10 @@ minimum degrees are denoted $\Delta = \Delta(G)$ and
 $\delta = \delta(G)$. The chemometric sections use hydrogen-suppressed
 molecular graphs of alkane carbon skeletons, for which $\Delta \le 4$,
 while the mathematical results do not assume this bound unless stated.
+Graphs with $\Delta \le 4$ are called \emph{chemical graphs}, and trees
+with $\Delta \le 4$ \emph{chemical trees}; the chemical trees of order
+$n$ are the carbon skeletons of the acyclic alkanes
+$\mathrm{C}_n\mathrm{H}_{2n+2}$.
 
 For an edge $e = uv \in E(G)$ we write $(d_u, d_v)$ for its
 \emph{degree pair}, understood as an unordered multiset
@@ -633,7 +637,7 @@ Equal profiles give equal $q$-histograms. The converse fails
 
   Song and Huang~\cite{SongHuang2023EDV} studied a class-wide question of the same kind for the edge division vector of a tree. It counts the edges $e$ of a tree $T$ by the order $\min\{n_u(e), n_v(e)\}$ of the smaller component of $T - e$ and so controls every edge-additive eccentric index, such as the Wiener index. They determine all such trees of order at most $10$. Neither partition of trees refines the other: the two seven-vertex trees with edge division vector $(4,1,1)$ have different degree-pair profiles and different $q$-histograms, while the two octane pairs of Table~\ref{tab:collisions} have different edge division vectors and different Wiener indices. Explicit trees with equal Randi\'c index and different class counts were given by Rada~\cite[Example~2.6]{Rada2019ExpVDB}, on $29$ vertices, and as an infinite family of chemical trees by Rada, Rodr\'{\i}guez and Sigarreta~\cite[Example~2.1]{RadaRodriguezSigarreta2022Weak}.
 
-  We found no earlier determination of the orders $13$ and $16$, or of explicit colliding trees for degree-ratio indices, in a literature search recorded in the repository~\cite{LoyolaRepo}. The minimality of orders $13$ and $16$ is computer-assisted. It rests on an exhaustive enumeration of all trees of orders $2$ to $17$ in exact rational arithmetic, reproducible with the code of the repository~\cite{LoyolaRepo}.
+  In a literature search recorded in the repository~\cite{LoyolaRepo} we found no earlier determination of the orders $13$ and $16$, and no earlier pair of trees with distinct degree-pair profiles and equal $q$-histograms, which collide for every degree-ratio index at once. The minimality of orders $13$ and $16$ is computer-assisted. It rests on an exhaustive enumeration of all trees of orders $2$ to $17$ in exact rational arithmetic, reproducible with the code of the repository~\cite{LoyolaRepo}.
 
   \begin{corollary}[Degree-ratio indices]\label{cor:ratioclass}
   Let $\rho_{uv} = \min(d_u,d_v)/\max(d_u,d_v)$ and let
@@ -654,7 +658,7 @@ Equal profiles give equal $q$-histograms. The converse fails
   The corollary follows from the identity for $\rho_{uv}$; it is the structure observation of~\cite[Proposition~2.5]{Rada2019ExpVDB} for edge weights that depend only on the degree ratio, and what is new are the explicit witnesses and the orders at which they first occur. Within the
   class it describes, the pure-$\gamma$ points at algebraic
   $\gamma \neq 0$ attain the most possible: by part~(ii) they separate
-  every pair of graphs with distinct $q$-histograms. $GA$ does not
+  every pair of graphs with distinct $q$-histograms. For graphs of equal order the exponential $GA$ index does the same, by~\cite[Corollary~3.5]{Rada2019ExpVDB}, since its weight $\sqrt{1-q^2}$ is algebraic and injective in $q$. $GA$ itself does not
   (see the remark on the floor on $\Pi$ below). The parent comes close:
   at $\gamma = 0$ part~(i) gives $\sum_q n_q\,((1-q^2)/4)^{\alpha}$, an
   exponential sum in $\alpha$ with distinct bases, which separates any
@@ -734,7 +738,7 @@ Equal profiles give equal $q$-histograms. The converse fails
   equal $GA$ and different $q$-histograms.
   \end{remark}
 
-  \begin{proposition}[Order exchanges along $\gamma$]\label{prop:laguerre}
+  \begin{proposition}[Crossings along $\gamma$]\label{prop:laguerre}
   Fix $(\alpha,\beta)$ and graphs $G$, $H$, let
   $q_1 < \dots < q_r$ be the distinct imbalances of the degree pairs
   occurring in $G$ or $H$, and write
@@ -746,7 +750,7 @@ Equal profiles give equal $q$-histograms. The converse fails
   $V \le r - 1$ real zeros counted with multiplicity, and their number
   has the parity of $V$. In particular, for graphs with $\Delta \le 4$
   the possible imbalances are $0, \tfrac17, \tfrac15, \tfrac13,
-  \tfrac12, \tfrac35$, and two such graphs exchange order at most five times as
+  \tfrac12, \tfrac35$, and the values of two such graphs cross at most five times as
   $\gamma$ ranges over $\mathbb{R}$, for every $(\alpha,\beta)$.
   \end{proposition}
 
@@ -913,7 +917,7 @@ distinct values and a \emph{floor} on degeneracy.
 isomers. Each pair shares its complete edge-degree-pair count vector,
 shown as multiplicities of the unordered pairs, and is therefore
 indistinguishable by every vertex-degree-based index for all
-parameter values. The two members differ in the measured properties. Units: $T_B$ in
+parameter values. The two members differ in every tabulated property, including the measured boiling point. Units: $T_B$ in
 $^{\circ}$C, $\Delta H_f$ and $\Delta H_{\mathrm{vap}}$ in
 kcal\,mol$^{-1}$, $S$ in cal\,mol$^{-1}$\,K$^{-1}$; $\omega$ is
 dimensionless.}
@@ -1158,7 +1162,7 @@ therefore optimistic.
 The repository history begins with the octane correlations already
 computed, so it cannot document that the benchmark points $\gamma = 1$ and
 $2$ were fixed before the octane data were seen. An exploratory local-tuning check (Supplementary
-Section~S2) exceeded the best fixed index only by $0.001$ in sample on $\Delta H_{\mathrm{vap}}$ and, in a leave-one-out correlation nested within globally chosen candidate pools, on octane $T_B$ ($0.764$ against $0.745$ for ${}^{m}\!M_2$). This is a small point-estimate difference without an interval, and no superiority is claimed.
+Section~S2) exceeded the best fixed index only by $0.001$ in sample on $\Delta H_{\mathrm{vap}}$ and, in a leave-one-out correlation nested within globally chosen candidate pools, on octane $T_B$ ($0.764$ against $0.745$ for the best fixed index chosen within each fold). This is a small point-estimate difference without an interval, and no superiority is claimed.
 
 \subsection{Correlations on the octane isomers}\label{sec:octanes}
 
@@ -1166,14 +1170,14 @@ Table~\ref{tab:lo_octane} reports the Pearson correlation $r$ between
 each index and the boiling point $T_B$, the enthalpy of formation
 $\Delta H_f$, the enthalpy of vaporisation $\Delta H_{\mathrm{vap}}$, the
 entropy $S$ and the acentric factor $\omega$ of the $18$ octane isomers.
-The property values are the standard benchmark compilation, audited
+The property values are the octane benchmark compilation used in earlier QSPR studies~\cite{Ediz2017Octane, MondalDePal2019QSPR}, audited
 against the NIST WebBook~\cite{NISTWebBook} and the 1947 API Research
 Project~44 tables~\cite{APIProject44Circ461} (Supplementary Table~S5
 and Section~S1).
 
 The open items are seven entropies, the compiled
 acentric factors and the vaporisation enthalpy of
-2,2,3,3-tetramethylbutane, which is crystalline at $298$~K. The benchmark value $8.41$~kcal\,mol$^{-1}$ has no stated source and lies just below the estimate for a hypothetical supercooled liquid from sublimation minus fusion enthalpy ($8.56$). The NIST value of $10.26$ at $298$~K
+2,2,3,3-tetramethylbutane, which is crystalline at $298$~K. The benchmark value $8.41$~kcal\,mol$^{-1}$ has no stated source and lies just below the estimate for a hypothetical supercooled liquid from sublimation minus fusion enthalpy ($8.56$). The NIST value of $10.263$~kcal\,mol$^{-1}$ at $298$~K
 describes sublimation (Supplementary Section~S8). In the
 $\Delta H_{\mathrm{vap}}$ column $LO(0,0,1)$ stays first with the isomer excluded ($|r| = 0.980$), level at three decimals with $LO(0,0,2)$, and with the hypothetical-liquid estimate
 ($|r| = 0.976$), where $LO(0,0,2)$ follows at $0.970$, while the sublimation enthalpy lowers every $|r|$ to
@@ -1297,7 +1301,9 @@ in $95/100$ and $98/100$ seeds and median $\Delta Q^2 = +0.048$ and
 $+0.053$, and is \emph{mixed} for $T_B$ ($58/100$ and $63/100$). \emph{Replicates}
 is the protocol's name for its seed-count rule, which the protocol
 itself describes as a summary of optimiser variance and not an
-inferential test.
+inferential test. The design refits every model on the nonanes, so it
+tests whether the procedure replicates, not whether a model fitted on
+the octanes transfers.
 A post hoc molecule bootstrap conditional on the fitted predictions gives a
 $95\%$ interval for LO minus GM on nonane $\Delta H_{\mathrm{vap}}$ of
 $[-0.006, +0.113]$ at budget $200$ (Supplementary Section~S4), and this
@@ -1312,7 +1318,7 @@ regard as a design error. After this result we made the measured boiling points 
 Section~\ref{sec:bp} the primary predictive evidence, and their protocol
 keeps a seed count only together with a molecule-level interval.
 
-Ridge regression on the degree-pair counts has higher point estimates than every index model on the nonanes, although its conditional interval against the Loyola model on $\Delta H_{\mathrm{vap}}$ includes zero. The untuned point $LO(0,0,1)$ matches the tuned Loyola model on nonane $\Delta H_{\mathrm{vap}}$ in point estimate, so tuning $\gamma$ adds nothing there over $\gamma = 1$. These comparisons and that with the parameter-free $IRLA$ are in Supplementary Section~S11.
+Ridge regression on the degree-pair counts has higher point estimates than every index model on the nonanes, although its conditional interval against the Loyola model on $\Delta H_{\mathrm{vap}}$ includes zero. The untuned point $LO(0,0,1)$ matches the tuned Loyola model on nonane $\Delta H_{\mathrm{vap}}$ in point estimate, so in point estimate tuning $\gamma$ shows no gain there over $\gamma = 1$. These comparisons and that with the parameter-free $IRLA$ are in Supplementary Section~S11.
 
 \subsection{Measured boiling points}\label{sec:bp}
 
@@ -1355,8 +1361,8 @@ or $n_C$ alone (Test B).
 Class.: best classical index chosen in each fold. LO$_1$: fixed
 $LO(0,0,1)$. Ridge: ridge regression on the degree-pair counts. GM,
 LO$_h$: medians over seeds $0$--$49$ in the wide boxes, LO$_h$
-being the hybrid control with $(\alpha,\beta)$ in the wide box and
-$\gamma \in (-2,2)$.
+being the registered Loyola model, searched in the box of the hybrid control of Section~\ref{sec:ablation}: $(\alpha,\beta) \in (-12,12)^2$ and
+$\gamma \in (-2,2)$, $2000$ candidates per seed.
 $\Delta Q^2$: median over seeds of the paired difference LO$_h$ minus GM. The registered intervals are conditional on the fitted predictions and omit refitting and selection uncertainty (see below). Wins: seeds (of $50$) in
 which LO$_h$ beats GM.}
 \label{tab:bp}
@@ -1440,7 +1446,7 @@ full degree-pair information up to order twelve and loses it at order
 thirteen, and for chemical trees at sixteen, with explicit colliding
 families at every larger order. The minimality of these orders rests on
 exhaustive enumeration. Along the imbalance
-axis two chemical graphs exchange order at most five times. Off the ratio
+axis the values of two chemical graphs cross at most five times. Off the ratio
 plane $\gamma$ only reweights the same counts, which can restore
 distinctions that the parent loses at particular rational exponents
 (Section~\ref{sec:degeneracy}) and never destroys one at algebraic
@@ -1468,7 +1474,7 @@ Theorem~\ref{thm:ratioplane}(iii), equality in the identifiability
 bound of Supplementary Section~S10 for $\Delta \le 6$, and the
 recovery of discrimination off $\Pi$ in Section~\ref{sec:degeneracy}
 rest on exhaustive enumeration. No general argument is given.
-\item[(ii)] \emph{Theoretical scope.} Whether two graphs with $\Delta \le 4$ can exchange order
+\item[(ii)] \emph{Theoretical scope.} Whether the values of two graphs with $\Delta \le 4$ can cross
 five times along $\gamma$ is open (Section~\ref{sec:ratioplane}).
 \item[(iii)] \emph{Data quality.} The data sets are small and acyclic: $18$ octanes, $35$
 nonanes ($34$ for $\Delta H_{\mathrm{vap}}$), $34$ decanes and $100$ pooled C6--C10 alkanes. Seven octane
@@ -1494,8 +1500,8 @@ tables cited here are in the file \texttt{LOYOLA\_supplement.pdf} of the
 reproducibility package~\cite{LoyolaRepo}, which also holds the data, the
 scripts and verifiers that recompute every tabulated value, and the
 nonane and boiling-point protocols, committed before the corresponding
-models were fitted. The NIST WebBook pages used are not redistributed; a
-script of the package downloads them and checks each against the copy
+models were fitted. The release of the package cited here does not include the NIST
+WebBook pages used; a script of the package downloads them and checks each against the copy
 from which the data sets were built.
 
 Only part of the mathematics is machine-checked. Lean~4 with Mathlib
@@ -1562,6 +1568,11 @@ each statement to its Lean theorem).
   \bibitem{DeutschKlavzar2015} E. Deutsch, S. Klav\v{z}ar, M-polynomial and
   degree-based topological indices, \textit{Iran. J. Math. Chem.\/} \textbf{6}
   (2015) 93--102.
+
+  \bibitem{Ediz2017Octane}
+  S. Ediz, Predicting some physicochemical properties of octane isomers:
+  a topological approach using ev-degree and ve-degree Zagreb indices,
+  arXiv:1701.02859 (2017), \url{https://arxiv.org/abs/1701.02859}.
 
   \bibitem{FurtulaGutmanDehmer2013SS} B. Furtula, I. Gutman, M. Dehmer, On
   structure-sensitivity of degree-based topological indices, \textit{Appl.
@@ -1639,6 +1650,12 @@ each statement to its Lean theorem).
   Rodr\'iguez-Garc\'ia, J. M. Sigarreta, S. J. Torralbas Fitz, On the
   Gutman--Milovanovi\'c index and chemical applications, \textit{AIMS
   Math.\/} \textbf{10} (2025) 1998--2020.
+
+  \bibitem{MondalDePal2019QSPR}
+  S. Mondal, A. Dey, N. De, A. Pal, QSPR analysis of some novel
+  neighbourhood degree-based topological descriptors, \textit{Complex
+  Intell. Syst.\/} \textbf{7} (2021) 977--996,
+  \url{https://doi.org/10.1007/s40747-020-00262-0} (arXiv:1906.06660).
 
   \bibitem{MovahediGutmanRedzepovicFurtula2026} F. Movahedi, I. Gutman, I.
   Red\v{z}epovi\'c, B. Furtula, Diminished Sombor index, \textit{MATCH Commun.

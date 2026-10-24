@@ -45,7 +45,9 @@ RUNTIME_GUARDED = {"external/baselines.py", "external/box_sensitivity.py", "exte
                    "external/nonane_tb_conflict.py", "external/nonane_validation.py", "external/test_baselines.py",
                    "external/transfer_exploratory.py", "external/uncertainty_exploratory.py", "external/wide_box_diagnostics.py"}
 NOT_SELECTION = {"constancy_test_check.py", "audit/final/scripts/baselines_old.py", "audit/final/scripts/bp_tests_0c4a4db.py",
-                 "audit/final/scripts/counterattack_v4030.py", "audit/final/scripts/nonane_calc.py"}
+                 "audit/final/scripts/counterattack_v4030.py", "audit/final/scripts/nonane_calc.py",
+                 # 2026-10-23 literature audit: independent re-computations, not used for selection
+                 "audit/independent_recompute_2026-10-23/pooled_indep.py", "audit/independent_recompute_2026-10-23/decane_indep.py"}
 import re as _re
 drawers = set()
 for dp, dns, fns in os.walk(HERE):

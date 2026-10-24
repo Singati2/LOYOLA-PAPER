@@ -26,7 +26,7 @@ concern where the known degree-ratio ceiling binds for trees and chemical trees:
   certification of the ties; it is not a pen-and-paper proof;
 * as a consequence, no degree-ratio index (for example $GA$, $AG$ or the diminished Sombor index)
   separates all alkane carbon skeletons of order 16 or more;
-* at fixed $(\alpha,\beta)$, two chemical graphs exchange order at most five times as $\gamma$ varies.
+* at fixed $(\alpha,\beta)$, the values of two chemical graphs cross at most five times as $\gamma$ varies.
 
 **Relation to earlier work.** Several facts the paper uses are known, and the text credits them. That every
 vertex-degree-based index depends on a graph only through its edge-degree-pair counts, and the pendant-path

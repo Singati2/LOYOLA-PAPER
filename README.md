@@ -96,8 +96,8 @@ regenerates them. The Lean proofs need a Lean toolchain and are not run in a not
 ## Current documents
 | File | Content |
 |---|---|
-| `main.tex`, `LOYOLA_paper.pdf` | the paper (45 A5 pages, MATCH template; one figure) |
-| `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (27 pages) |
+| `main.tex`, `LOYOLA_paper.pdf` | the paper (37 A5 pages, MATCH template; one figure) |
+| `supplement.tex`, `LOYOLA_supplement.pdf` | Supplementary Material (39 pages) |
 | `DATA/` | every dataset, byte-identical copies, with a README |
 | `LOYOLA_FINAL_PAPER_OVERLEAF.zip` | Overleaf upload (both documents + figures) |
 
@@ -105,13 +105,17 @@ regenerates them. The Lean proofs need a Lean toolchain and are not run in a not
 The Loyola index LO(G; α, β, γ) = Σ_uv (d_u d_v)^α (d_u + d_v)^β exp(γ |d_u − d_v|/(d_u + d_v))
 extends the Gutman–Milovanović family (γ = 0).
 - **Structure:** a size–shape factorisation; a ratio-plane theorem stating exactly what
-  the pure-γ line can discriminate (edge-imbalance histograms), with colliding trees at
-  every order ≥ 13; a bound on γ-crossings; per-graph identifiability.
-- **Prediction (negative, under the stated protocols):** an apparent vaporization-enthalpy
-  gain was an artefact of a search box that truncated the parent family; pre-registered
+  the pure-γ line can discriminate (edge-imbalance histograms; for graphs of equal order
+  this follows from Rada's Theorem 3.4), with colliding trees at every order ≥ 13
+  (≥ 16 for chemical trees) and computer-assisted minimality of 13 and 16; a bound on
+  γ-crossings; per-graph identifiability.
+- **Prediction (negative, under the stated protocols):** a vaporization-enthalpy gain that
+  met a pre-registered seed-count rule shrank to about zero in an exploratory rerun with a
+  search box that did not truncate the parent family; pre-registered
   tests on measured boiling points (34 decanes; 100 alkanes C6–C10) show no demonstrated
-  benefit from γ; ridge regression on the degree-pair counts is far stronger than any
-  single index.
+  benefit from γ; ridge regression on the degree-pair counts has higher point
+  estimates than every single index evaluated (no interval), though not higher than
+  Wiener's two-descriptor model on the decanes.
 
 ## Reproducing everything
 See **[REPRODUCE.md](REPRODUCE.md)**: every table, figure, experiment and dataset is
