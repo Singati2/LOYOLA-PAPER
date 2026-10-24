@@ -83,7 +83,7 @@ def rnd(x, d):
 
 WORDS = {1: "one", 2: "two", 3: "three", 4: "four", 5: "five", 6: "six",
          7: "seven", 8: "eight", 9: "nine", 10: "ten", 11: "eleven",
-         12: "twelve", 13: "thirteen", 14: "fourteen", 100: "one hundred"}
+         12: "twelve", 13: "thirteen", 14: "fourteen", 20: "twenty", 100: "one hundred"}
 
 
 def word(n, cap=False):
@@ -836,7 +836,7 @@ REGISTRY = [
     # ======================= main.tex : sec:octanes =======================
     E("oct_n18_a", "main", r"properties\s+of\s+the\s+\$(?P<v>\d+)\$\s+octane\s+isomers\.\s+Bold",
       "N_OCT", 0, "octane_data.OCTANES"),
-    E("oct_90values", "main", r"Gaz\.\\/\}\s+\\textbf\{(?P<v>\d+)\}\s+\(2006\)", "len(PROV)", 0, "octane_property_provenance_v35.csv rows"),
+    E("oct_90values", "supp", r"attributed\s+to\s+the\s+NIST\s+WebBook\.\s+All\s+\$(?P<v>\d+)\$", "len(PROV)", 0, "octane_property_provenance_v35.csv rows (re-anchored 2026-10-23; previously matched a journal volume)"),
     E("oct_four_S", "supp", r"at\s+most\s+(?P<v>four)\s+pairs,\s+the", "word(len(S_ALT))", 0, "S_ALT (4 alternative entropies)"),
     E("oct_twelve_S", "main", r"largest\s+of\s+(?P<v>twelve)\s+correlations", "word(len(S_SENS))", 0, "entropy_source_sensitivity_v36.csv rows"),
     E("oct_S_margin001", "main", r"the\s+\$(?P<v>[\d.]+)\$\s+margin", "s_margin()", 0.0005,
@@ -905,8 +905,9 @@ REGISTRY = [
     E("ext_n35", "main", r"the\s+\$(?P<v>\d+)\$\s+constitutional", "len(NON_DATA)", 0, "nonane_data.csv"),
     E("ext_tb35", "main", r"points\s+were\s+\$(?P<v>\d+)\$\s+values\s+from", "non_count('T_B_C')", 0,
       "nonane_data.csv non-blank T_B (NOTE: README_nonane_data.md says only 20 of the 35 are NIST averages; 5 single determinations, 10 'most recent' picks)"),
-    E("ext_tb_avg20", "supp", r"977\-\-996,\s+\\url\{https://doi\.org/10\.1007/s40747\-(?P<v>\d+)\-00262\-0\}\s+\(arXiv:1906\.06660\)\.", "non_tb_rule('NIST average')", 0, "nonane_provenance.csv T_B rows whose selection_rule starts 'NIST average'"),
-    E("ext_tb_single5", "supp", r"is\s+\$\\\{\(1,7\),\(2,6\),\(3,(?P<v>\d+)\),\(4,4\)\\\}\$,\s+whose", "non_tb_rule('single NIST')", 0, "nonane_provenance.csv T_B rows 'single NIST Tboil determination'"),
+    E("ext_tb_avg20", "supp", r"differ in evidential status\.\s+(?P<v>Twenty)\s+of\s+the\s+\$35\$\s+boiling\s+points\s+are\s+NIST\s+averages", "word(non_tb_rule('NIST average'), True)", 0, "nonane_provenance.csv T_B rows whose selection_rule starts 'NIST average' (re-anchored 2026-10-23; previously matched a DOI fragment)"),
+    E("ext_tb_single5", "supp", r"\(\$13\$\s+quoted\s+only\s+to\s+\$1\$\\,K\)\.\s+(?P<v>Five)\s+are\s+single\s+NIST\s+determinations", "word(non_tb_rule('single NIST'), True)", 0, "nonane_provenance.csv T_B rows 'single NIST Tboil determination' (re-anchored 2026-10-23; previously matched a degree pair)"),
+    E("ext_tb_recent10", "supp", r"single\s+NIST\s+determinations\s+and\s+(?P<v>ten)\s+are\s+the\s+most\s+recent\s+primary\s+determination", "word(non_tb_rule('no NIST AVG'))", 0, "nonane_provenance.csv T_B rows 'no NIST AVG; most recent primary experimental' (added 2026-10-23)"),
     E("ext_dhvap34", "main", r"enthalpies\s+were\s+\$(?P<v>\d+)\$\s+values\s+from", "non_count('dHvap_kcal')", 0, "nonane_data.csv non-blank dHvap"),
     E("ext_cal4", "main", r"NIST\s+lists\s+\$(?P<v>\d+)\$\s+under\s+Labbauf", "non_dhvap_compilation_source('Labbauf, Greenshields, et al., 1961')", 0, "nonane_provenance.csv verbatim_snippet source field (v40.31)"),
     E("ext_reid25", "main", r"and\s+\$(?P<v>\d+)\$\s+under\s+Reid", "non_dhvap_compilation_source('Reid, 1972')", 0, "nonane_provenance.csv verbatim_snippet source field (v40.31)"),

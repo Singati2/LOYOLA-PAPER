@@ -1,5 +1,7 @@
 # MATCH final scientific audit, 2026-10-23
 
+> **Correction (2026-10-23, `review/match-final-four-fixes-2026-10-23`).** This report cites the pair $K_4$, $K_{1,3}$ as evidence that the proof of Theorem 2(ii) does not need equal order. That is wrong: both graphs have four vertices. The manuscript sentence now reads "The proof above does not require the graphs to have equal order." The pair is kept only in its valid role, the non-algebraic $\gamma = \ln 4$ example. The text below is preserved as it was written.
+
 - **Baseline audited:** `e25d790c51c6fa591d9b6c78b9dad20819d249d1`. On 2026-10-23 the remote tip of `review/match-editorial-clarity-2026-10-22` was fetched and confirmed equal to it, and `git status` was clean.
 - **Archive check:** the archive `drafts/full_46pp_2026-10-23/` was compared with `0877aa0`. `main.tex`, `supplement.tex` and both PDFs are byte-identical.
 - **Fixes:** made on the local branch `review/match-final-scientific-audit-2026-10-23` (see `MATCH_FINAL_PATCHLOG_2026-10-23.md`). Nothing was pushed or merged.

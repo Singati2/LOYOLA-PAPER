@@ -4,13 +4,13 @@ Generated 2026-10-20 from the sources of commit c48bad0 (branch review/match-fig
 
 | File | Bytes | SHA-256 |
 |---|---:|---|
-| `main.tex` | 101154 | `ffdc6282c2e3f2325baa90c74ecd0330da2319a9d343d524660d98fdf248038f` |
-| `supplement.tex` | 99763 | `4818940d7735bd81948531e421680dd9133e8940773343bdacf93c06c64e2c3d` |
-| `LOYOLA_paper.pdf` | 699653 | `7b10235b014cbedd63812442b616d69c5787a3457549cbc9a93d754890d2bbd3` |
-| `LOYOLA_supplement.pdf` | 724783 | `805772aa836c510e2062801908d67f1dbe2e837530ec417a7ea441ce4ed2874c` |
+| `main.tex` | 101072 | `7225b373a4837b650942ac5abae5bb9f0820d87bffd543ab2c618c0272b37f56` |
+| `supplement.tex` | 99777 | `3295096bc64ae6d75505475f2422f1f203d71bf0c80971ce14d1bde30f29620a` |
+| `LOYOLA_paper.pdf` | 699562 | `5a6d4ece7da0415939ca547ac6954ec42acffe191b3e4a4ebe1f216d80130e84` |
+| `LOYOLA_supplement.pdf` | 724723 | `ac6585c6a0d29729e0bd3fce817077bee353e8002e94951f89595427be2e53b7` |
 | `figures/fig_lo_degeneracy_order10_trees_v2.pdf` | 19464 | `1a5adc671ca4833d1ba42937df221396251661a6a17f79e340b172ff6786dcba` |
 | `figures/fig_lo_prediction_correlation_heatmap_v3.pdf` | 31214 | `04c800e2a59028e044bccfb80e0160556959d7a932cfa9354a0202c52bf66631` |
-| `MATCH_OVERLEAF_CANDIDATE.zip` | 100927 | `a26d830bd5f09abfec2b4f520322c00f59de5b6c6a1e22a23f59fd10d5326c73` |
+| `MATCH_OVERLEAF_CANDIDATE.zip` | 100903 | `14bd2a9a1f61d55798ca05ae0ce40a21c565e6709a6f310991b7c25555598436` |
 | `README_SUBMISSION.md` | 3340 | `f38fc1c352861a61c508dd81a13911a3f924a5e4720dfe11dc534b4f2ec68dd5` |
 | `COVER_LETTER_DRAFT.md` | 6523 | `0a6a3b4860bd08925d67870ec70afbbad2761ca02cce36d921a269c3e2e6721e` |
 

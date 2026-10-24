@@ -707,7 +707,7 @@ for _k, (_pair, _slot) in enumerate([((1, 4), 0), ((2, 2), 1), ((2, 4), 2)]):
     _f = ["8", "3", "4"]; _f[_slot] = r"(?P<v>\d+)"
     _add(E("rp_mol16_B_%d%d" % _pair, "main", _M16B % tuple(_f), "mol16_pair()[1][%r]" % (_pair,), 0,
            "enumeration: order-16 Delta<=4 collision (profile containing (2,2))"))  # 1 each
-_add(E("rp_proof_d4", "supp", r"realises\s+\$\(2,(?P<v>\d+)\)\$,\s+\$\(2,2\)\$", "common_leaf_degree(*mol16_pair())", 0, "smallest common leaf-neighbour degree of the order-16 pair"))  # 1
+_add(E("rp_proof_d4", "main", r"\(4,4\)\$\s+have\s+\$q\s+=\s+0\$\.\s+Both\s+also\s+have\s+a\s+leaf\s+adjacent\s+to\s+a\s+vertex\s+of\s+degree\s+\$d\s+=\s+(?P<v>\d+)\$", "common_leaf_degree(*mol16_pair())", 0, "smallest common leaf-neighbour degree of the order-16 pair (re-anchored 2026-10-23; previously matched the spider example)"))  # 1
 _add(E("rp_enum_to17", "main", r"orders\s+\$2\$\-\-\$(?P<v>\d+)\$\s+in\s+exact", "max(s1_orders('all'))", 0, "S1 orders"))  # 1
 _add(E("rp_coincide_12", "main", r"most\s+\$(?P<v>\d+)\$\s+with", "s1_last_eq('all')", 0, "S1: last n with qhist==profiles (all)"))  # 1
 _add(E("rp_coincide_15", "main", r"of order at most\s+\$(?P<v>\d+)\$\.\s+With part", "s1_last_eq('mol')", 0, "S1: last n with qhist==profiles (mol)"))  # 1

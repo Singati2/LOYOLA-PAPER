@@ -1,5 +1,7 @@
 # Rada 2019 and the q-histogram: formal mapping, 2026-10-23
 
+> **Correction (2026-10-23, `review/match-final-four-fixes-2026-10-23`).** This report cites the pair $K_4$, $K_{1,3}$ as evidence that the proof of Theorem 2(ii) does not need equal order. That is wrong: both graphs have four vertices. The manuscript sentence now reads "The proof above does not require the graphs to have equal order." The pair is kept only in its valid role, the non-algebraic $\gamma = \ln 4$ example. The text below is preserved as it was written.
+
 **Question.** Does Rada's index-induced equivalence give exactly the manuscript's q-histogram equivalence, or only a related relation? The answer decides the wording of the Corollary 3.5 credit (patch L3 of `3a5f061`).
 
 **Source.** J. Rada, *Exponential vertex-degree-based topological indices and discrimination*, MATCH 82 (2019) 29–41. The full text was read in a private local copy, which is not in the repository. The parts used:
