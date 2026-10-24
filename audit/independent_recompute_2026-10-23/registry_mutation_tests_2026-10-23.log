@@ -1,0 +1,31 @@
+### M1 Twenty->Nineteen
+[FAIL] A:ext_tb_avg20: pattern matched 0 times
+prose numbers: 757 checked, 1 failures, 22 uncheckable (cited values; see UNCHECKABLE in the registries)
+### M2 Five->Four
+[FAIL] A:ext_tb_single5: pattern matched 0 times
+prose numbers: 757 checked, 1 failures, 22 uncheckable (cited values; see UNCHECKABLE in the registries)
+### M3 DOI 020->021
+prose numbers: 757 checked, 0 failures, 22 uncheckable (cited values; see UNCHECKABLE in the registries)
+### M3b DOI 020->021 (main)
+prose numbers: 757 checked, 0 failures, 22 uncheckable (cited values; see UNCHECKABLE in the registries)
+### M4 degree pair (3,5)->(3,6)
+[FAIL] B:id_fail_set: MISMATCH tex='(1,7),(2,6),(3,6),(4,4)' expected='(1,7),(2,6),(3,5),(4,4)' 
+prose numbers: 757 checked, 1 failures, 22 uncheckable (cited values; see UNCHECKABLE in the registries)
+### M5 delete Five sentence
+[FAIL] A:ext_tb_single5: pattern matched 0 times
+[FAIL] A:ext_tb_recent10: pattern matched 0 times
+prose numbers: 757 checked, 2 failures, 22 uncheckable (cited values; see UNCHECKABLE in the registries)
+### M6 duplicate Twenty sentence
+prose numbers: 757 checked, 0 failures, 22 uncheckable (cited values; see UNCHECKABLE in the registries)
+### M7 Math.Gaz 90->91
+prose numbers: 757 checked, 0 failures, 22 uncheckable (cited values; see UNCHECKABLE in the registries)
+### M8 All 90->89
+[FAIL] A:oct_90values: tex says '89', source gives 90; octane_property_provenance_v35.csv rows (re-anchored 2026-10-23; 
+[FAIL] A:s1_90: tex says '89', source gives 90; provenance rows
+prose numbers: 757 checked, 2 failures, 22 uncheckable (cited values; see UNCHECKABLE in the registries)
+### M9 d = 4 -> d = 5 (order-16 witness)
+[FAIL] B:rp_proof_d4: MISMATCH tex='5' expected=4 
+prose numbers: 757 checked, 1 failures, 22 uncheckable (cited values; see UNCHECKABLE in the registries)
+### M6' duplicate anchored sentence (corrected test)
+[FAIL] A:ext_tb_avg20: pattern matched 2 times
+prose numbers: 757 checked, 1 failures, 22 uncheckable (cited values; see UNCHECKABLE in the registries)

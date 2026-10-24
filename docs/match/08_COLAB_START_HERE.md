@@ -1,5 +1,7 @@
 # Colab start here (draft, 2026-10-20)
 
+> **Latest status (2026-10-23).** Reviewer pins are now source commit `e3fc8810c066420354c96eb8c38a0b9190dfa663` and notebook commit `e90b5bfcb1a46937cb4f20a6b3420007b69caad1` on branch `review/match-final-four-fixes-2026-10-23`. That branch is local until the authors approve a push, so the links resolve only after the push. A local fresh-clone execution of `notebooks/01_data` and `notebooks/02_mathematics` at the source commit passed (9 and 20 checks, 0 mismatches). A non-pinned checkout was refused with REVISION MISMATCH. **No run in real Google Colab has been recorded.** The text below is historical and refers to the commits it names. Details: `audit/MATCH_REVIEWER_PINS_AND_REPLAY_2026-10-23.md`.
+
 Status of this draft: written from a static audit only. No step below has been run in Google Colab by
 the author of this draft. Expected outputs come from the notebook code and from local lab runs at older
 commits (listed in `09_COLAB_RUN_MATRIX.md`). Treat every runtime as an estimate.

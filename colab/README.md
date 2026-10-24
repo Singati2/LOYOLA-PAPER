@@ -74,8 +74,8 @@ the run continues with the next unfinished script.
   rewrites every file listed for it (present and not empty) and rewrites no other tracked file; a
   check-only script must rewrite no tracked file. Untracked scratch files are listed in the record but
   never saved as outputs. Only listed outputs are saved to the state folder. On this branch the
-  notebooks are still pinned to `c48bad0`, whose runner predates this rule; the pins are regenerated
-  once the authors settle the final code commit.
+  notebooks are pinned (2026-10-23) to the source commit of `review/match-final-four-fixes-2026-10-23`,
+  whose runner includes this rule (`69b9538`); see `audit/MATCH_REVIEWER_PINS_AND_REPLAY_2026-10-23.md`.
 * A finished script is skipped only if its fingerprint is unchanged, every output it wrote is
   present and unaltered, and no output of an earlier script has changed since it ran. Otherwise it
   runs again. The runner refuses to run on tracked files that differ from the commit (modified,
