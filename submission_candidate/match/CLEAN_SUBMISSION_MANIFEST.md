@@ -4,14 +4,14 @@ Generated 2026-10-20 from the sources of commit c48bad0 (branch review/match-fig
 
 | File | Bytes | SHA-256 |
 |---|---:|---|
-| `main.tex` | 101337 | `fb69a3da7a89cca36ce9df16e5ef7a970f7e514379ec82e5293f67a620ac8607` |
+| `main.tex` | 101154 | `ffdc6282c2e3f2325baa90c74ecd0330da2319a9d343d524660d98fdf248038f` |
 | `supplement.tex` | 99763 | `4818940d7735bd81948531e421680dd9133e8940773343bdacf93c06c64e2c3d` |
-| `LOYOLA_paper.pdf` | 699817 | `870d312a0eb5956a8e9b33a395e170bd683b7956103abc11bf83d3ada66e0ba3` |
-| `LOYOLA_supplement.pdf` | 724783 | `c7f4ee6bacf3cc7de38660c579d5184e9e5b86641adac5765381d5890624afe0` |
+| `LOYOLA_paper.pdf` | 699653 | `7b10235b014cbedd63812442b616d69c5787a3457549cbc9a93d754890d2bbd3` |
+| `LOYOLA_supplement.pdf` | 724783 | `805772aa836c510e2062801908d67f1dbe2e837530ec417a7ea441ce4ed2874c` |
 | `figures/fig_lo_degeneracy_order10_trees_v2.pdf` | 19464 | `1a5adc671ca4833d1ba42937df221396251661a6a17f79e340b172ff6786dcba` |
 | `figures/fig_lo_prediction_correlation_heatmap_v3.pdf` | 31214 | `04c800e2a59028e044bccfb80e0160556959d7a932cfa9354a0202c52bf66631` |
-| `MATCH_OVERLEAF_CANDIDATE.zip` | 100994 | `cc27175eb8ac25d28df29f912e842df460f90af2241ac82eb7aef1d67eb40734` |
+| `MATCH_OVERLEAF_CANDIDATE.zip` | 100927 | `a26d830bd5f09abfec2b4f520322c00f59de5b6c6a1e22a23f59fd10d5326c73` |
 | `README_SUBMISSION.md` | 3340 | `f38fc1c352861a61c508dd81a13911a3f924a5e4720dfe11dc534b4f2ec68dd5` |
-| `COVER_LETTER_DRAFT.md` | 6383 | `930a6504dd956fd55730a8aad21fe70b82d1d599878271544efa6ac5a13962d4` |
+| `COVER_LETTER_DRAFT.md` | 6523 | `0a6a3b4860bd08925d67870ec70afbbad2761ca02cce36d921a269c3e2e6721e` |
 
 The manifest does not list itself.

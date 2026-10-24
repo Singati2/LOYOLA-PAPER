@@ -20,7 +20,7 @@ for k,G in enumerate(T):
                 if j!=k: S.add(j)
     nb.append(S)
 print("sizes",min(map(len,nb)),max(map(len,nb)))
-for nm,(a,b,g,c) in {"M1":(0,1,0,1),"HM":(0,2,0,1),"R":(-.5,0,0,1),"GA":(.5,-1,0,2),"LO001":(0,0,1,1),"LO002":(0,0,2,1),"IRLA":None}.items():
+for nm,(a,b,g,c) in {"M1":(0,1,0,1),"HM":(0,2,0,1),"R":(-.5,0,0,1),"GA":(.5,-1,0,2),"LO001":(0,0,1,1),"LO002":(0,0,2,1),"IRLA":(0,0,0,0)}.items():
     if nm=="IRLA": v=[2*sum(abs(G.degree(u)-G.degree(w))/(G.degree(u)+G.degree(w)) for u,w in G.edges()) for G in T]
     else: v=[c*LO(G,a,b,g) for G in T]
     ss=[sum(abs(v[j]-v[k])/v[k] for j in nb[k])/len(nb[k]) for k in range(len(T))]

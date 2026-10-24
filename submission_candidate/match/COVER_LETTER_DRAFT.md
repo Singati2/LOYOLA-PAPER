@@ -67,8 +67,9 @@ in the paper and the supplement.
 
 **Reproducibility.** Data, scripts, verifiers and Lean proofs of the stated scope are in
 https://github.com/Singati2/LOYOLA-PAPER [cite the exact commit or archive DOI once fixed; the manuscript's
-reference currently gives only the repository address]. The NIST
-WebBook source pages are not redistributed.
+reference currently gives only the repository address]. [NIST sentence withheld: the
+repository's default branch still serves the WebBook pages; restore a statement only after the
+authors' decision in audit/MATCH_NIST_RELEASE_RIGHTS_2026-10-23.md.]
 
 This manuscript is original, has not been published, and is not under consideration elsewhere. All
 authors have approved the final version and agree to its submission. [Corresponding author to confirm

@@ -1362,7 +1362,7 @@ Class.: best classical index chosen in each fold. LO$_1$: fixed
 $LO(0,0,1)$. Ridge: ridge regression on the degree-pair counts. GM,
 LO$_h$: medians over seeds $0$--$49$ in the wide boxes, LO$_h$
 being the registered Loyola model, searched in the box of the hybrid control of Section~\ref{sec:ablation}: $(\alpha,\beta) \in (-12,12)^2$ and
-$\gamma \in (-2,2)$, $2000$ candidates per seed.
+$\gamma \in (-2,2)$, $2000$ candidates per model and seed.
 $\Delta Q^2$: median over seeds of the paired difference LO$_h$ minus GM. The registered intervals are conditional on the fitted predictions and omit refitting and selection uncertainty (see below). Wins: seeds (of $50$) in
 which LO$_h$ beats GM.}
 \label{tab:bp}
@@ -1500,9 +1500,7 @@ tables cited here are in the file \texttt{LOYOLA\_supplement.pdf} of the
 reproducibility package~\cite{LoyolaRepo}, which also holds the data, the
 scripts and verifiers that recompute every tabulated value, and the
 nonane and boiling-point protocols, committed before the corresponding
-models were fitted. The release of the package cited here does not include the NIST
-WebBook pages used; a script of the package downloads them and checks each against the copy
-from which the data sets were built.
+models were fitted.
 
 Only part of the mathematics is machine-checked. Lean~4 with Mathlib
 checks the termwise bounds of Supplementary Section~S10 but not their
